@@ -324,6 +324,58 @@ public class Metis extends Thread {
                 span_max_freq, //frequency at last pixel value
                 max_w //max samples to hold in input ring buffers
         );
+        
+        wdsp.SetAnalyzer(Display.TX,
+                spur_elimination_ffts, //number of LO frequencies = number of ffts used in elimination
+                data_type, //0 for real input data (I only); 1 for complex input data (I & Q)
+                flp, //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
+                fft_size, //size of the fft, i.e., number of input samples
+                configuration.buffersize, //number of samples transferred for each OpenBuffer()/CloseBuffer()
+                window_type, //integer specifying which window function to use
+                kaiser_pi, //PiAlpha parameter for Kaiser window
+                overlap, //number of samples each fft (other than the first) is to re-use from the previous
+                clip, //number of fft output bins to be clipped from EACH side of each sub-span
+                span_clip_l, //number of bins to clip from low end of entire span
+                span_clip_h, //number of bins to clip from high end of entire span
+                pixels, //number of pixel values to return.  may be either <= or > number of bins
+                stitches, //number of sub-spans to concatenate to form a complete span
+                avm, //averaging mode
+                display_average, //number of spans to (moving) average for pixel result
+                avb, //back multiplier for weighted averaging
+                calibration_data_set, //identifier of which set of calibration data to use
+                span_min_freq, //frequency at first pixel value8192
+                span_max_freq, //frequency at last pixel value
+                max_w //max samples to hold in input ring buffers
+        );
+
+    }
+    
+    public synchronized void setBandscopePixels(int pixels) {
+        int flp[] = {0};
+        double KEEP_TIME = 0.1;
+        int spur_elimination_ffts = 1;
+        int data_type = 1;
+        int fft_size = 8192;
+        int window_type = 4;
+        double kaiser_pi = 14.0;
+        int overlap = 2048;
+        int clip = 0;
+        int span_clip_l = 0;
+        int span_clip_h = 0;
+        //int pixels=1280;
+        int stitches = 1;
+        int avm = 0;
+        double tau = 0.001 * 120.0;
+        int MAX_AV_FRAMES = 60;
+        int display_average = Math.max(2, (int) Math.min((double) MAX_AV_FRAMES, (double) configuration.fps * tau));
+        double avb = Math.exp(-1.0 / (configuration.fps * tau));
+        int calibration_data_set = 0;
+        double span_min_freq = 0.0;
+        double span_max_freq = 0.0;
+
+        this.pixels = pixels;
+
+        int max_w = fft_size + (int) Math.min(KEEP_TIME * (double) configuration.fps, KEEP_TIME * (double) fft_size * (double) configuration.fps);
 
         wdsp.SetAnalyzer(Display.BS,
                 spur_elimination_ffts, //number of LO frequencies = number of ffts used in elimination
@@ -1227,7 +1279,7 @@ public class Metis extends Thread {
         this.dbg = true;
     }
 
-    public synchronized boolean Process_Panadapter(int channel, float[] samples) {
+    public synchronized boolean getDisplaySamples(int channel, float[] samples) {
         int[] result = new int[1];
 
         if (samples.length != pixels) {

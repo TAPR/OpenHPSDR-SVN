@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.image.BufferedImage;
 
 import org.g0orx.openhpsdr.discovery.Discovered;
 
@@ -28,15 +29,15 @@ public class BandscopePanel extends javax.swing.JPanel {
     }
 
     public void paintComponent(Graphics g) {
-        if (this.getWidth() == 0 || this.getHeight() == 0) {
-            return;
-        }
 
         this.configuration = Configuration.getInstance();
-
-        final Graphics2D g2d = (Graphics2D) g.create();
-        try {
-
+        
+        if(image==null || (image.getWidth()!=this.getWidth()) || (image.getHeight()!=this.getHeight())) {
+            
+            image=new BufferedImage(this.getWidth(),this.getHeight(),BufferedImage.TYPE_INT_ARGB);
+            
+            Graphics2D g2d=image.createGraphics();
+            
             // fill in the background
             //g2d.setTextSize(16.0F);
             g2d.setColor(Color.BLUE);
@@ -104,6 +105,14 @@ public class BandscopePanel extends javax.swing.JPanel {
             int x=(int)((float)configuration.bands.get().get().getFrequency()/hzPerPixel);
             g2d.drawLine(x, 0, x, this.getHeight());
             
+            g2d.dispose();
+        }
+
+        Graphics2D g2d = (Graphics2D) g.create();
+        try {
+
+            g2d.drawImage(image, 0, 0, this);
+            
             g2d.setColor(Color.YELLOW);
             if (xpoints != null) {
                 g2d.drawPolyline(xpoints, ypoints, xpoints.length);
@@ -156,6 +165,8 @@ public class BandscopePanel extends javax.swing.JPanel {
     private Configuration configuration;
     private Metis metis;
 
+    private BufferedImage image;
+    
     private static final int HIGH = -40;
     private static final int LOW = -160;
 

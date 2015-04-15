@@ -1034,8 +1034,6 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
 
     public void bandChanged(Band band) {
 
-        Log.i("Radio", "bandChanged: " + band.getName());
-
         // update mode and filter
         this.modeJPanel.init();
         this.filterJPanel.init();
