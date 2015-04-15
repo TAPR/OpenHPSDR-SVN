@@ -5,9 +5,11 @@
  */
 package org.g0orx.openhpsdr;
 
+import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.text.DecimalFormat;
 
 import org.g0orx.openhpsdr.discovery.Discovered;
@@ -23,22 +25,21 @@ public class MeterJPanel extends javax.swing.JPanel {
     }
 
     public void paintComponent(Graphics g) {
-
-        //Font font = g.getFont().deriveFont(28f);
-        //g.setFont(font);
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());
-
-        if (receiving) {
-            double radius = (double) getHeight() / 2.0;
+        
+        double radius = (double) getHeight() / 2.0;
             double centerX = (double) getWidth() / 2.0;
             double centerY = (double) getHeight();
+            
+        if(image==null) {
+            image=new BufferedImage(getWidth(),getHeight(),BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2 = image.createGraphics();
+            g2.setColor(Color.WHITE);
+            g2.fillRect(0, 0, this.getWidth(), this.getHeight());
 
-            double startAngle = 213.0;
             // draw the meter
-            Font font = g.getFont().deriveFont(10f);
-            g.setFont(font);
-            g.setColor(Color.BLACK);
+            Font font = g2.getFont().deriveFont(10f);
+            g2.setFont(font);
+            g2.setColor(Color.BLACK);
             for (int i = -127; i < -73; i += 6) {
                 double angle = (double) (i + 127.0) + startAngle;
                 double pX1 = centerX + (radius + 2) * Math.cos(Math.toRadians(angle));
@@ -49,35 +50,35 @@ public class MeterJPanel extends javax.swing.JPanel {
                     // S1
                     double pX = centerX + (radius + 12) * Math.cos(Math.toRadians(angle));
                     double pY = centerY + (radius + 12) * Math.sin(Math.toRadians(angle));
-                    g.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
-                    g.drawString("1", (int) pX - 2, (int) pY);
+                    g2.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
+                    g2.drawString("1", (int) pX - 2, (int) pY);
                 } else if (i == -109) {
                     // S3
                     double pX = centerX + (radius + 12) * Math.cos(Math.toRadians(angle));
                     double pY = centerY + (radius + 12) * Math.sin(Math.toRadians(angle));
-                    g.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
-                    g.drawString("3", (int) pX - 2, (int) pY);
+                    g2.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
+                    g2.drawString("3", (int) pX - 2, (int) pY);
                 } else if (i == -97) {
                     // S5
                     double pX = centerX + (radius + 12) * Math.cos(Math.toRadians(angle));
                     double pY = centerY + (radius + 12) * Math.sin(Math.toRadians(angle));
-                    g.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
-                    g.drawString("5", (int) pX - 2, (int) pY);
+                    g2.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
+                    g2.drawString("5", (int) pX - 2, (int) pY);
                 } else if (i == -85) {
                     // S7
                     double pX = centerX + (radius + 12) * Math.cos(Math.toRadians(angle));
                     double pY = centerY + (radius + 12) * Math.sin(Math.toRadians(angle));
-                    g.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
-                    g.drawString("7", (int) pX - 2, (int) pY);
+                    g2.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
+                    g2.drawString("7", (int) pX - 2, (int) pY);
                 } else {
                     pX1 = centerX + (radius + 2) * Math.cos(Math.toRadians(angle));
                     pY1 = centerY + (radius + 2) * Math.sin(Math.toRadians(angle));
                     pX2 = centerX + (radius + 6) * Math.cos(Math.toRadians(angle));
                     pY2 = centerY + (radius + 6) * Math.sin(Math.toRadians(angle));
-                    g.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
+                    g2.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
                 }
             }
-            g.setColor(Color.RED);
+            g2.setColor(Color.RED);
             for (int i = -73; i <= -13; i += 10) {
                 double angle = (double) (i + 127.0) + startAngle;
                 double pX1 = centerX + (radius + 2) * Math.cos(Math.toRadians(angle));
@@ -88,37 +89,45 @@ public class MeterJPanel extends javax.swing.JPanel {
                     // S9
                     double pX = centerX + (radius + 12) * Math.cos(Math.toRadians(angle));
                     double pY = centerY + (radius + 12) * Math.sin(Math.toRadians(angle));
-                    g.drawString("9", (int) pX - 2, (int) pY);
-                    g.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
+                    g2.drawString("9", (int) pX - 2, (int) pY);
+                    g2.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
                 } else if (i == -53) {
                     // S9+20
                     double pX = centerX + (radius + 12) * Math.cos(Math.toRadians(angle));
                     double pY = centerY + (radius + 12) * Math.sin(Math.toRadians(angle));
-                    g.drawString("+20", (int) pX - 2, (int) pY);
-                    g.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
+                    g2.drawString("+20", (int) pX - 2, (int) pY);
+                    g2.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
                 } else if (i == -33) {
                     // S9+40
                     double pX = centerX + (radius + 12) * Math.cos(Math.toRadians(angle));
                     double pY = centerY + (radius + 12) * Math.sin(Math.toRadians(angle));
-                    g.drawString("+40", (int) pX - 2, (int) pY);
-                    g.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
+                    g2.drawString("+40", (int) pX - 2, (int) pY);
+                    g2.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
                 } else if (i == -13) {
                     // S9+40
                     double pX = centerX + (radius + 12) * Math.cos(Math.toRadians(angle));
                     double pY = centerY + (radius + 12) * Math.sin(Math.toRadians(angle));
-                    g.drawString("+60", (int) pX - 2, (int) pY);
-                    g.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
+                    g2.drawString("+60", (int) pX - 2, (int) pY);
+                    g2.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
                 } else {
                     pX1 = centerX + (radius + 2) * Math.cos(Math.toRadians(angle));
                     pY1 = centerY + (radius + 2) * Math.sin(Math.toRadians(angle));
                     pX2 = centerX + (radius + 6) * Math.cos(Math.toRadians(angle));
                     pY2 = centerY + (radius + 6) * Math.sin(Math.toRadians(angle));
-                    g.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
+                    g2.drawLine((int) pX1, (int) pY1, (int) pX2, (int) pY2);
                 }
             }
+            g2.dispose();
+        }
+
+        //Font font = g.getFont().deriveFont(28f);
+        //g.setFont(font);
+        if (receiving) {
+            
+            g.drawImage(image, 0, 0, this);
 
             g.setColor(Color.BLACK);
-            font = g.getFont().deriveFont(18f);
+            Font font = g.getFont().deriveFont(18f);
             g.setFont(font);
             g.drawString(Integer.toString(meter) + " dBm", 10, 20);
 
@@ -129,6 +138,10 @@ public class MeterJPanel extends javax.swing.JPanel {
             g.setColor(Color.BLACK);
             g.drawLine(this.getWidth() / 2, this.getHeight(), (int) pX, (int) pY);
         } else {
+            
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+
             Font font = g.getFont().deriveFont(18f);
             g.setFont(font);
             g.setColor(Color.BLACK);
@@ -240,6 +253,9 @@ public class MeterJPanel extends javax.swing.JPanel {
 
     private Configuration configuration;
 
+    private BufferedImage image;
+    private double startAngle = 213.0;
+    
     private float density;
 
     private int meter = -127;

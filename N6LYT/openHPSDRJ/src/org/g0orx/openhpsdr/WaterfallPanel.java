@@ -7,6 +7,7 @@ package org.g0orx.openhpsdr;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
@@ -17,11 +18,12 @@ import javax.swing.JPanel;
 public class WaterfallPanel extends JPanel {
 
     public void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g.create();
         if(image==null) {
-            g.setColor(Color.BLACK);
-            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+            g2d.setColor(Color.BLACK);
+            g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
         } else {
-            g.drawImage(image, 0, 0, null);
+            g2d.drawImage(image, 0, 0, this);
         }
     }
 

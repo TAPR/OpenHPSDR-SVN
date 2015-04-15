@@ -26,10 +26,6 @@ public class DisplayUpdate {
         Log.i("DisplayUpdate", "fps=" + configuration.fps);
     }
 
-    public void setPixels(int pixels) {
-        // change number of pixels
-    }
-
     public void startTimer() {
         running = true;
         final Timer timer = new Timer();
@@ -50,23 +46,23 @@ public class DisplayUpdate {
     private void update() {
         if (samples.length != panadapterView.getWidth()) {
             samples = new float[panadapterView.getWidth()];
-            bandscopesamples = new float[bandscopeView.getWidth()];
             metis.setPixels(panadapterView.getWidth());
         }
-        if (firsttime) {
-            //if(frequencyView.update() && vfoView.update()) {
-            firsttime = false;
-            //}
+        
+        if(bandscopesamples.length!=bandscopeView.getWidth()) {
+            bandscopesamples = new float[bandscopeView.getWidth()];
+            metis.setBandscopePixels(bandscopeView.getWidth());
         }
+        
         if (metis.isTransmitting()) {
-            if (metis.Process_Panadapter(Display.TX, samples)) {
+            if (metis.getDisplaySamples(Display.TX, samples)) {
                 if (panadapterView != null) {
                     panadapterView.plotSpectrum(samples);
                 }
                 meterView.setPower(metis.getPenelopeForwardPower(), metis.getAlexForwardPower(), metis.getAlexReversePower());
             }
         } else {
-            if (metis.Process_Panadapter(Display.RX, samples)) {
+            if (metis.getDisplaySamples(Display.RX, samples)) {
                 if (panadapterView != null) {
                     panadapterView.plotSpectrum(samples);
                 }
@@ -78,7 +74,7 @@ public class DisplayUpdate {
             }
 
             if (bandscopeView != null) {
-                if (metis.Process_Panadapter(Display.BS, bandscopesamples)) {
+                if (metis.getDisplaySamples(Display.BS, bandscopesamples)) {
                     bandscopeView.update(bandscopesamples);
                 }
             }
@@ -118,5 +114,4 @@ public class DisplayUpdate {
 
     private long time;
 
-    private boolean firsttime = true;
 }
