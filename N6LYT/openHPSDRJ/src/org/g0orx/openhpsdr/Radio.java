@@ -93,6 +93,9 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.jCheckBoxNB2.setEnabled(false);
         this.jCheckBoxANF.setEnabled(false);
         this.jCheckBoxNR.setEnabled(false);
+        
+        this.jCheckBoxRandom.setEnabled(false);
+        this.jCheckBoxDither.setEnabled(false);
 
         panadapterPanel.addMouseListener(this);
         panadapterPanel.addMouseMotionListener(this);
@@ -237,7 +240,12 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.jLabelAGCGain.setText("AGC Gain: " + (int) configuration.bands.get().getAGCGain());
         this.jComboBoxAGC.setSelectedIndex(configuration.bands.get().getAGC());
         this.jSliderAttenuation.setValue(configuration.attenuation);
-        this.jLabelAttenuation.setText("Attenuation: " + configuration.attenuation + " dBm");
+        if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES_LITE) {
+            this.jLabelAttenuation.setText("LNA Gain: " + configuration.attenuation + " dBm");
+            this.jCheckBoxRandom.setText("ADC-wide hardware AGC");
+        } else {
+            this.jLabelAttenuation.setText("Attenuation: " + configuration.attenuation + " dBm");
+        }
         this.jSliderDrive.setValue((int) (configuration.drive * 255.0));
         this.jLabelDrive.setText("Drive: " + (int) (configuration.drive * 100.0) + "%");
         this.jSliderMicGain.setValue((int) (configuration.micgain * 100.0F));
@@ -248,7 +256,13 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.jCheckBoxANF.setSelected(configuration.ANF);
 
         this.jComboBoxStep.setSelectedIndex(configuration.step);
-    }
+        
+        
+        
+        
+       
+        
+    }                                               
 
     public void start() {
 
@@ -283,6 +297,20 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.vfoPanel.setMetis(metis);
         this.panadapterPanel.setMetis(metis);
         this.frequencyPanel.setMetis(metis);
+        
+         if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES_LITE) {
+            this.jCheckBoxDither.setEnabled(false);
+            this.jCheckBoxRandom.setSelected(configuration.random==Metis.LT2208_RANDOM_ON);
+            this.jCheckBoxRandom.setEnabled(true);
+            if(configuration.random==Metis.LT2208_RANDOM_ON) {
+                this.jSliderAttenuation.setEnabled(false);
+            }
+        } else {
+            this.jCheckBoxRandom.setSelected(configuration.random==Metis.LT2208_RANDOM_ON);
+            this.jCheckBoxRandom.setEnabled(true);
+            this.jCheckBoxDither.setSelected(configuration.dither==Metis.LT2208_DITHER_ON);
+            this.jCheckBoxDither.setEnabled(true);
+        }
 
         this.setTitle(title + ": Initializing WDSP - Please wait ...");
         Log.i("Radio", "load WDSP");
@@ -497,6 +525,8 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         jComboBoxStep = new javax.swing.JComboBox();
         meterJPanel = new org.g0orx.openhpsdr.MeterJPanel();
         bandscopePanel = new org.g0orx.openhpsdr.BandscopePanel();
+        jCheckBoxRandom = new javax.swing.JCheckBox();
+        jCheckBoxDither = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 1024, 400));
@@ -517,11 +547,11 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         waterfallPanel.setLayout(waterfallPanelLayout);
         waterfallPanelLayout.setHorizontalGroup(
             waterfallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1057, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         waterfallPanelLayout.setVerticalGroup(
             waterfallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
+            .addGap(0, 133, Short.MAX_VALUE)
         );
 
         jButtonDiscover.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
@@ -758,6 +788,20 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jCheckBoxRandom.setText("Random");
+        jCheckBoxRandom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxRandomActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxDither.setText("Dither");
+        jCheckBoxDither.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxDitherActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -766,6 +810,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(waterfallPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(vfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bandscopePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -778,12 +823,17 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                             .addComponent(jButtonConfigure))
                         .addGap(28, 28, 28)
                         .addComponent(jButtonStart))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBoxNB2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBoxNR)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBoxANF)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jCheckBoxNB2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jCheckBoxNR)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jCheckBoxANF))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jCheckBoxRandom)
+                            .addGap(18, 18, 18)
+                            .addComponent(jCheckBoxDither))))
                 .addGap(42, 42, 42)
                 .addComponent(bandJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -795,8 +845,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(bandscopePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 126, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -815,16 +864,25 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCheckBoxNB2)
                             .addComponent(jCheckBoxNR)
-                            .addComponent(jCheckBoxANF)))
+                            .addComponent(jCheckBoxANF))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBoxRandom))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBoxDither)
+                                .addGap(3, 3, 3))))
                     .addComponent(bandJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(modeJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(meterJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(vfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                .addComponent(panadapterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(frequencyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -1005,7 +1063,12 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             default:
                 break;
         }
-        this.jLabelAttenuation.setText("Attenuation: " + configuration.attenuation + " dBm");
+        
+        if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES_LITE) {
+            this.jLabelAttenuation.setText("LNA Gain: " + configuration.attenuation + " dBm");
+        } else {
+            this.jLabelAttenuation.setText("Attenuation: " + configuration.attenuation + " dBm");
+        }
     }//GEN-LAST:event_jSliderAttenuationStateChanged
 
     private void jCheckBoxNB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxNB2ActionPerformed
@@ -1031,6 +1094,21 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     private void jComboBoxStepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStepActionPerformed
         configuration.step = this.jComboBoxStep.getSelectedIndex();
     }//GEN-LAST:event_jComboBoxStepActionPerformed
+
+    private void jCheckBoxRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRandomActionPerformed
+        configuration.random=this.jCheckBoxRandom.isSelected()?Metis.LT2208_RANDOM_ON:Metis.LT2208_RANDOM_OFF;
+        if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES_LITE) {
+            if(configuration.random==Metis.LT2208_RANDOM_ON) {
+                this.jSliderAttenuation.setEnabled(false);
+            } else {
+                this.jSliderAttenuation.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_jCheckBoxRandomActionPerformed
+
+    private void jCheckBoxDitherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxDitherActionPerformed
+        configuration.dither=this.jCheckBoxRandom.isSelected()?Metis.LT2208_DITHER_ON:Metis.LT2208_DITHER_OFF;
+    }//GEN-LAST:event_jCheckBoxDitherActionPerformed
 
     public void bandChanged(Band band) {
 
@@ -1388,8 +1466,10 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
     private javax.swing.JButton jButtonStart;
     private javax.swing.JButton jButtonTune;
     private javax.swing.JCheckBox jCheckBoxANF;
+    private javax.swing.JCheckBox jCheckBoxDither;
     private javax.swing.JCheckBox jCheckBoxNB2;
     private javax.swing.JCheckBox jCheckBoxNR;
+    private javax.swing.JCheckBox jCheckBoxRandom;
     private javax.swing.JComboBox jComboBoxAGC;
     private javax.swing.JComboBox jComboBoxStep;
     private javax.swing.JLabel jLabel1;
