@@ -118,12 +118,17 @@ public:
 	bool PTTOnMutesRx;		// PTT On receiver
 	char interface[16];
 
+	char mactarget[18];		// Requested target's MAC address as string
+					// "HH:HH:HH:HH:HH:HH" HH is hexadecimal string.
+	unsigned int metis_entry;	// Index into Metis_card MAC table
+
 
 	HermesProxy(int RxFreq0, int RxFreq1, int TxFreq, bool RxPre,
 			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
 			 unsigned char TxDr, int RxSmp, const char* Intfc, 
 			 const char * ClkS, int AlexRA, int AlexTA,
-			 int AlexHPF, int AlexRPF, int Verbose, int NumRx);	// constructor
+			 int AlexHPF, int AlexRPF, int Verbose, int NumRx,
+			 const char* MACAddr);	// constructor
 
 	~HermesProxy();			// destructor
 

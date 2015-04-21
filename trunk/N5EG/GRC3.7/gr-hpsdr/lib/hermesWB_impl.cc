@@ -41,22 +41,24 @@ namespace gr {
 
     hermesWB::sptr
     hermesWB::make(bool RxPre, const char* Intfc, const char * ClkS,
-		   int AlexRA, int AlexTA, int AlexHPF, int AlexLPF)
+		   int AlexRA, int AlexTA, int AlexHPF, int AlexLPF,
+		   const char* MACAddr)
     {
       return gnuradio::get_initial_sptr
-        (new hermesWB_impl(RxPre, Intfc, ClkS, AlexRA, AlexTA, AlexHPF, AlexLPF));
+        (new hermesWB_impl(RxPre, Intfc, ClkS, AlexRA, AlexTA, AlexHPF, AlexLPF, MACAddr));
     }
 
     /*
      * The private constructor
      */
     hermesWB_impl::hermesWB_impl(bool RxPre, const char* Intfc, const char * ClkS,
-			 int AlexRA, int AlexTA, int AlexHPF, int AlexLPF)
+			 int AlexRA, int AlexTA, int AlexHPF, int AlexLPF,
+			 const char* MACAddr)
       : gr::block("hermesWB",
               gr::io_signature::make(0, 0, 0),				// No inputs to hermesWB block
               gr::io_signature::make(1, 1, 16384 * sizeof(float)) )	// output from hermesWB block
     {
-	HermesW = new HermesProxyW(RxPre, Intfc, ClkS, AlexRA, AlexTA, AlexHPF, AlexLPF);	// Create proxy, do Hermes ethernet discovery
+	HermesW = new HermesProxyW(RxPre, Intfc, ClkS, AlexRA, AlexTA, AlexHPF, AlexLPF, MACAddr);	// Create proxy, do Hermes ethernet discovery
     }
 
     /*

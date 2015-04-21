@@ -44,12 +44,13 @@ namespace gr {
 			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
 			 unsigned char TxDr, int RxSmp, const char* Intfc, 
 			 const char * ClkS, int AlexRA, int AlexTA,
-			 int AlexHPF, int AlexLPF, int Verbose, int NumRx)
+			 int AlexHPF, int AlexLPF, int Verbose, int NumRx,
+			 const char* MACAddr)
     {
       return gnuradio::get_initial_sptr
         (new hermesNB_impl(RxFreq0, RxFreq1, TxFreq, RxPre, PTTModeSel, PTTTxMute,
 			PTTRxMute, TxDr, RxSmp, Intfc, ClkS, AlexRA, AlexTA,
-			AlexHPF, AlexLPF, Verbose, NumRx));
+			AlexHPF, AlexLPF, Verbose, NumRx, MACAddr));
     }
 
     /*
@@ -59,14 +60,15 @@ namespace gr {
 			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
 			 unsigned char TxDr, int RxSmp, const char* Intfc, 
 			 const char * ClkS, int AlexRA, int AlexTA,
-			 int AlexHPF, int AlexLPF, int Verbose, int NumRx)
+			 int AlexHPF, int AlexLPF, int Verbose, int NumRx,
+			 const char* MACAddr)
       : gr::block("hermesNB",
               gr::io_signature::make(1, 1, sizeof(gr_complex)),		// inputs to hermesNB block
               gr::io_signature::make(1, 2, sizeof(gr_complex)) )	// outputs from hermesNB block
     {
 	Hermes = new HermesProxy(RxFreq0, RxFreq1, TxFreq, RxPre, PTTModeSel, PTTTxMute,
 		 PTTRxMute, TxDr, RxSmp, Intfc, ClkS, AlexRA, AlexTA,
-		 AlexHPF, AlexLPF, Verbose, NumRx);	// Create proxy, do Hermes ethernet discovery
+		 AlexHPF, AlexLPF, Verbose, NumRx, MACAddr);	// Create proxy, do Hermes ethernet discovery
 	//Hermes->RxSampleRate = RxSmp;
 	//Hermes->RxPreamp = RxPre;
 

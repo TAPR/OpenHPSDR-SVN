@@ -43,7 +43,8 @@
 
 
 HermesProxyW::HermesProxyW(bool RxPre, const char* Intfc, const char * ClkS,
-			 int AlexRA, int AlexTA, int AlexHPF, int AlexLPF)	// constructor
+			 int AlexRA, int AlexTA, int AlexHPF, int AlexLPF,
+			 const char* MACAddr)	// constructor
 {
 
 	strcpy(interface, Intfc);	// Ethernet interface to use (defaults to eth0)
@@ -58,6 +59,8 @@ HermesProxyW::HermesProxyW(bool RxPre, const char* Intfc, const char * ClkS,
 	AlexRxHPF = AlexHPF;		// Select Alex Receive High Pass Filter
 	AlexTxLPF = AlexLPF;		// Select Alex Transmit Low Pass Filter
 
+        for (int i=0; i<18; i++)
+	  mactarget[i] = toupper(MACAddr[i]);	// Copy the requested MAC target address
 
 	Receive0Frequency = 0;
 	Receive1Frequency = 0; 
@@ -104,10 +107,37 @@ HermesProxyW::HermesProxyW(bool RxPre, const char* Intfc, const char * ClkS,
 
 	metis_discover((const char *)(interface));
 
-	while (!metis_found())
-		;					// wait until Hermes responds
+//
+// If there is no specified MAC address (i.e. wildcard, or anything less than 17 
+// charracters, then just grab the first Hermes/Metis that
+// responds to discovery. If there is a specific MAC address specified, then wait
+// until it appears in the Metis cards table, and set the metis table index to match.
+// The string is HH:HH:HH:HH:HH:HH\0 formated, where HH is a 2-digital Hexidecimal number
+// uppercase, example:    04:7F:3D:0F:28:5A
+//
 
-	metis_receive_stream_control(RxStream_Off);	// turn off Hermes -> PC streams
+	metis_entry = 0;
+	if (strlen(mactarget) != 17)			// Not a fully-qualified MAC address, default to first MAC found
+	{
+	  while (metis_found() == 0)
+		;					// wait until Hermes responds with first discovered MAC
+	}
+	else						// Search the table for the entry matching requested MAC address
+	{
+	  bool found = false;
+	  while(!found)					// Search for MAC address in the metis_table until the cows come home
+	    for(int i=0; i<metis_found(); i++)
+	      {
+		if (strcmp(mactarget, metis_mac_address(i)) == 0)	// Exact match found
+		{
+		  metis_entry = i;					// Select entry in metis_table
+	          found = true;
+		  break;
+		}
+	      }
+	}
+
+	metis_receive_stream_control(RxStream_Off, metis_entry);	// turn off Hermes -> PC streams
 
 	UpdateHermes();					// send specific control registers
 							// and initialize 1st Tx buffer
@@ -122,7 +152,7 @@ HermesProxyW::~HermesProxyW()
 	        LostRxBufCount, TotalRxBufCount, LostTxBufCount,
 		TotalTxBufCount, CorruptRxCount, LostEthernetRx);
 
-	metis_receive_stream_control(RxStream_Off);	// stop Hermes data stream
+	metis_receive_stream_control(RxStream_Off, metis_entry);	// stop Hermes data stream
 	
 	metis_stop_receive_thread();	// stop receive_thread & close socket
 
@@ -136,7 +166,7 @@ HermesProxyW::~HermesProxyW()
 
 void HermesProxyW::Stop()	// stop ethernet I/O
 {
-	metis_receive_stream_control(RxStream_Off);	// stop Hermes Rx data stream
+	metis_receive_stream_control(RxStream_Off, metis_entry);	// stop Hermes Rx data stream
 	TxStop = true;					// stop Tx data to Hermes
 };
 
@@ -144,7 +174,7 @@ void HermesProxyW::Start()	// start rx stream
 {
 	TxStop = false;					// allow Tx data to Hermes
 	// Note: just turning on the WB stream does not work. Have to throw away the NB samples.
-	metis_receive_stream_control(RxStream_NBWB_On);	// start Hermes Wideband Rx data stream
+	metis_receive_stream_control(RxStream_NBWB_On, metis_entry);	// start Hermes Wideband Rx data stream
 };
 
 void HermesProxyW::PrintRawBuf(RawBuf_t inbuf)	// for debugging

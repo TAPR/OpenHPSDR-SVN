@@ -277,7 +277,7 @@ char* metis_mac_address(int entry) {
     return NULL;
 }
 
-void metis_receive_stream_control(unsigned char streamControl) {
+void metis_receive_stream_control(unsigned char streamControl, unsigned int entry) {
     int i;
     int rc;
     struct hostent *h;
@@ -286,7 +286,7 @@ void metis_receive_stream_control(unsigned char streamControl) {
 
     discovering=0;
 
-    h=gethostbyname(metis_cards[0].ip_address);
+    h=gethostbyname(metis_cards[entry].ip_address);
     if(h==NULL) {
         fprintf(stderr,"metis_start_receiver_stream: unknown host %s\n",metis_cards[0].ip_address);
         exit(1);
