@@ -4,7 +4,7 @@
   <key>hpsdr_hermesNB</key>
   <category>hpsdr</category>
   <import>import hpsdr</import>
-  <make>hpsdr.hermesNB($Rx0F, $Rx1F, $TxF, $RxPre, $PTTmode, $PTTTx, $PTTRx, $TxDrive, $RxSmp, $Intfc, $CkS, $AlexRA, $AlexTA, $AlexHPF, $AlexLPF, $Verbose, $num_outputs)</make>
+  <make>hpsdr.hermesNB($Rx0F, $Rx1F, $TxF, $RxPre, $PTTmode, $PTTTx, $PTTRx, $TxDrive, $RxSmp, $Intfc, $CkS, $AlexRA, $AlexTA, $AlexHPF, $AlexLPF, $Verbose, $num_outputs,$MACAddr)</make>
   <callback>set_Receive0Frequency($Rx0F)</callback>
   <callback>set_Receive1Frequency($Rx1F)</callback>
   <callback>set_RxSampRate($RxSmp)</callback>
@@ -243,6 +243,12 @@
       <key>1</key>
     </option>
   </param>
+  <param>
+    <name>MAC Address or *</name>
+    <key>MACAddr</key>
+    <value>"*"</value>
+    <type>string</type>
+  </param>
 
 <check>$num_outputs >= 1</check> 
 <check>2 >= $num_outputs</check>   
@@ -291,6 +297,9 @@
   *Alex Tx LPF = selects transmit Low Pass Filter. Auto tracks the Transmit Frequency.
   *Alex Rx HPF = selects receive High Pass filter. Auto tracks Receiver 0 Frequency.
   *Verbose = if =1 then prints Hermes/Metis FPGA rev, Fwd and Rev log voltage from Alex
+  *MACAddr = "HH:HH:HH:HH:HH:HH" with HH being the MAC Address hex values, or "*" to
+    select the first detected Metis/Hermes regardless of it's MAC Address.
+    MACAddr is a string (and must be enclosed in quotes).
   Update: 03-13-2014: Reverse transmit I and Q samples (FPGA reverses them).
   </doc>
 </block>

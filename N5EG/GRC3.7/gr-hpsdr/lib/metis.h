@@ -22,7 +22,7 @@ void metis_discover(const char* interface);
 int metis_found();
 char* metis_ip_address(int entry);
 char* metis_mac_address(int entry);
-void metis_receive_stream_control(unsigned char);
+void metis_receive_stream_control(unsigned char, unsigned int);
 void metis_stop_receive_thread();
 
 int metis_write(unsigned char ep,unsigned char* buffer,int length);

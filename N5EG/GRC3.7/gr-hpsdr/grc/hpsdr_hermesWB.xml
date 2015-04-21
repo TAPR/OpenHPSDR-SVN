@@ -4,7 +4,7 @@
   <key>hpsdr_hermesWB</key>
   <category>hpsdr</category>
   <import>import hpsdr</import>
-  <make>hpsdr.hermesWB($RxPre, $Intfc, $CkS, $AlexRA, $AlexTA, $AlexHPF, $AlexLPF)</make>
+  <make>hpsdr.hermesWB($RxPre, $Intfc, $CkS, $AlexRA, $AlexTA, $AlexHPF, $AlexLPF, $MACAddr)</make>
   <callback>set_RxPreamp($RxPre)</callback>
   <callback>set_ClockSource($CkS)</callback>
   <callback>set_AlexRxAntenna($AlexRA)</callback>
@@ -142,6 +142,12 @@
       <key>0x10</key>
     </option>
   </param>
+  <param>
+    <name>MAC Address or *</name>
+    <key>MACAddr</key>
+    <value>"*"</value>
+    <type>string</type>
+  </param>
 
 
   <!-- Make one 'sink' node per input. Sub-nodes:
@@ -183,5 +189,8 @@
   *Alex Rx ant = selects receive antenna connector, or Tx antenna via T/R relay.
   *Alex Tx LPF = selects Low Pass Filter.
   *Alex Rx HPF = selects receive High Pass Filter.
+  *MACAddr = "HH:HH:HH:HH:HH:HH" with HH being the MAC Address hex values, or "*" to
+    select the first detected Metis/Hermes regardless of it's MAC Address.
+    MACAddr is a string (and must be enclosed in quotes).
   </doc>
 </block>

@@ -50,7 +50,8 @@ namespace gr {
 			 int PTTModeSel, bool PTTTxMute, bool PTTRxMute,
 			 unsigned char TxDr, int RxSmp, const char* Intfc, 
 			 const char * ClkS, int AlexRA, int AlexTA,
-			 int AlexHPF, int AlexLPF, int Verbose, int NumRx);
+			 int AlexHPF, int AlexLPF, int Verbose, int NumRx,
+			 const char* MACAddr);
 
       void set_Receive0Frequency(float);	// callback
       void set_Receive1Frequency(float);	// callback

@@ -44,7 +44,8 @@ namespace gr {
  *
  */
       hermesWB_impl(bool RxPre, const char* Intfc, const char * ClkS,
-			 int AlexRA, int AlexTA, int AlexHPF, int AlexLPF);
+			 int AlexRA, int AlexTA, int AlexHPF, int AlexLPF,
+			 const char* MACAddr);
       ~hermesWB_impl();
 
       // Where all the action really happens
