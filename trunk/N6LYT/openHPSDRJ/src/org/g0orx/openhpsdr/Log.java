@@ -11,6 +11,10 @@ package org.g0orx.openhpsdr;
  */
 public class Log {
     
+    public static void i(Object obj,String message) {
+        Log.i(obj.getClass().getName(),message);
+    }
+    
     public static void i(String app,String message) {
         System.err.println(app+": "+message);
     }

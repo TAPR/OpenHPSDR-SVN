@@ -954,6 +954,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
             case Discovered.DEVICE_GRIFFIN:
             case Discovered.DEVICE_ANGELIA:
             case Discovered.DEVICE_ORION:
+            case Discovered.DEVICE_HERMES_LITE:
                 cantransmit = true;
                 break;
         }
@@ -1226,6 +1227,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
                 case Discovered.DEVICE_GRIFFIN:
                 case Discovered.DEVICE_ANGELIA:
                 case Discovered.DEVICE_ORION:
+                case Discovered.DEVICE_HERMES_LITE:
                     cantransmit = true;
                     break;
             }

@@ -825,7 +825,7 @@ public class Metis extends Thread {
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
         float rfgain = 1.0F;  // for PENNYLANE
-        if (configuration.radio == Configuration.METIS_PENELOPE || configuration.radio == Configuration.METIS_PENELOPE_ALEX) {
+        if (configuration.radio == Configuration.METIS_PENELOPE || configuration.radio == Configuration.METIS_PENELOPE_ALEX || configuration.radio==Configuration.HERMES_LITE_ONLY) {
             rfgain = configuration.drive;
             if (tuning) {
                 rfgain = configuration.tunegain;
@@ -971,11 +971,14 @@ public class Metis extends Thread {
                     case 1: {
                         sendbuffer[11] = 0x12;
                         sendbuffer[12] = 0x00;
+                        byte drive=0x00;
                         if (tuning) {
-                            sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getDrive() * configuration.tunegain);
+                            drive = (byte) (255.0F * configuration.bands.get().getDrive() * configuration.tunegain);
                         } else if (transmit) {
-                            sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getDrive() * configuration.drive);
+                            drive = (byte) (255.0F * configuration.bands.get().getDrive() * configuration.drive);
                         }
+                        Log.i(this,"drive="+(drive&0xFF));
+                        sendbuffer[12]=drive;
                         byte c2 = 0x00;
                         if (configuration.micboost) {
                             c2 |= 0x01;

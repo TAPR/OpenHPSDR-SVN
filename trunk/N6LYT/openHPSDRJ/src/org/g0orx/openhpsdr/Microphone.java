@@ -37,7 +37,7 @@ public class Microphone extends Thread {
         configuration = Configuration.getInstance();
         wdsp = WDSP.getInstance();
         
-        mAudioBuffer=new byte[configuration.buffersize*2];
+        audiobuffer=new byte[configuration.buffersize*2];
 
         inlsamples = new float[configuration.buffersize];
         inrsamples = new float[configuration.buffersize];
@@ -48,11 +48,11 @@ public class Microphone extends Thread {
 
     public void run() {
 
-        wdsp.SetAllRates(txchannel,48000,48000,48000);
+        wdsp.SetAllRates(txchannel,SAMPLE_RATE,SAMPLE_RATE,SAMPLE_RATE);
         
         try {
             //audioformat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 48000F, 16, 1, 2, 48000F, true);
-            audioformat = new AudioFormat(48000F, 16, 1, true, true);
+            audioformat = new AudioFormat((float)SAMPLE_RATE, 16, 1, true, true);
             microphoneline = AudioSystem.getTargetDataLine(audioformat);
             microphoneline.open(audioformat, configuration.buffersize*2);
             microphoneline.start();
@@ -65,24 +65,23 @@ public class Microphone extends Thread {
         time = System.currentTimeMillis();
 
         while (metis.isTransmitting() && !metis.isTuning()) {
-            int bytes = microphoneline.read(mAudioBuffer, 0, mAudioBuffer.length);
+            int bytes = microphoneline.read(audiobuffer, 0, audiobuffer.length);
 
-            if (bytes != mAudioBuffer.length) {
-                Log.i("Microphone", "expected:" + mAudioBuffer.length + " got:" + bytes);
+            if (bytes != audiobuffer.length) {
+                Log.i("Microphone", "expected:" + audiobuffer.length + " got:" + bytes);
             }
 
             for (int i = 0; i < bytes; i+=2) {
-                short sample=(short)(((mAudioBuffer[i]<<8)&0xFF00)| (mAudioBuffer[i+1]&0xFF));
+                short sample=(short)(((audiobuffer[i]<<8)&0xFF00)| (audiobuffer[i+1]&0xFF));
                 inlsamples[index] = (float)sample / 32767.0F * configuration.micgain; // convert 16 bit samples to -1.0 .. +1.0
                 inrsamples[index++] = 0.0F; /*sample/32767.0F*configuration.micgain;*/ // convert 16 bit samples to -1.0 .. +1.0
-                if (index == configuration.buffersize) {
+                if (index == inlsamples.length) {
                     // process the microphone buffer
                     int[] error = new int[1];
                     wdsp.fexchange2(txchannel, inlsamples, inrsamples, outlsamples, outrsamples, error);
                     if (error[0] != 0) {
                         Log.i("Microphone", "fechange2 returned " + error[0]);
                     }
-
                     // send to Metis
                     metis.sendSamples(outlsamples, outrsamples);
                     wdsp.Spectrum(txchannel, 0, 0, outrsamples, outlsamples);
@@ -92,23 +91,16 @@ public class Microphone extends Thread {
         }
         microphoneline.flush();
         microphoneline.close();
+        microphoneline=null;
         
-        wdsp.SetAllRates(txchannel,(int)configuration.samplerate,(int)configuration.dsprate,48000);
+        wdsp.SetAllRates(txchannel,(int)configuration.samplerate,(int)configuration.dsprate,SAMPLE_RATE);
         Log.i("Microphone", "thread ended");
     }
 
     
     public static final int SAMPLE_RATE = 48000;
 
-    public float[] getLeftSamples() {
-        return outlsamples;
-    }
-
-    public float[] getRightSamples() {
-        return outrsamples;
-    }
-
-    private byte[] mAudioBuffer;
+    private byte[] audiobuffer;
 
     private float[] inlsamples;
     private float[] inrsamples;
