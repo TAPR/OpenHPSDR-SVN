@@ -25,10 +25,11 @@ import org.g0orx.openhpsdr.wdsp.WDSP;
 
 public class Metis extends Thread {
 
-    public Metis(int pixels) {
+    public Metis(int pixels,boolean bandscope) {
 
         Log.i("Metis", "pixels=" + pixels);
         this.pixels = pixels;
+        this.bandscope=bandscope;
 
         configuration = Configuration.getInstance();
 
@@ -421,10 +422,11 @@ public class Metis extends Thread {
             InetSocketAddress socketaddress = new InetSocketAddress(myaddress, myport);
 
             //Log.i("Metis","run: socketaddress: "+socketaddress.toString());
-            socket = new DatagramSocket(socketaddress);
+            socket = new DatagramSocket(null);
             socket.setReuseAddress(true);
             socket.setBroadcast(true);
             socket.setSoTimeout(0);
+            socket.bind(socketaddress);
             InetAddress address = InetAddress.getByName(configuration.discovered.getAddress());
             rxdatagram = new DatagramPacket(rxbuffer, rxbuffer.length, address, toport);
 
@@ -489,6 +491,9 @@ public class Metis extends Thread {
         for (int i = 4; i < 64; i++) {
             commandbuffer[i] = (byte) 0x00;
         }
+        
+        
+        
         sendCommand();
 
         socket.close();
@@ -977,7 +982,6 @@ public class Metis extends Thread {
                         } else if (transmit) {
                             drive = (byte) (255.0F * configuration.bands.get().getDrive() * configuration.drive);
                         }
-                        Log.i(this,"drive="+(drive&0xFF));
                         sendbuffer[12]=drive;
                         byte c2 = 0x00;
                         if (configuration.micboost) {
@@ -1170,57 +1174,30 @@ public class Metis extends Thread {
     }
 
     private synchronized void prime() {
-        // prime the device so it starts sending samples to us
-        sendbuffer[0] = (byte) 0xEF;
-        sendbuffer[1] = (byte) 0xFE;
-        sendbuffer[2] = (byte) 0x01;
-        sendbuffer[3] = (byte) 0x02;  // to EP2
-
-        sendbuffer[4] = (byte) ((txsequence >> 24) & 0xF);
-        sendbuffer[5] = (byte) ((txsequence >> 16) & 0xF);
-        sendbuffer[6] = (byte) ((txsequence >> 8) & 0xF);
-        sendbuffer[7] = (byte) (txsequence & 0xF);
-
-        for (int i = 0; i < 2; i++) {
-            sendbuffer[(i * 512) + 8] = SYNC;
-            sendbuffer[(i * 512) + 9] = SYNC;
-            sendbuffer[(i * 512) + 10] = SYNC;
-            sendbuffer[(i * 512) + 11] = txcontrol0;
-            sendbuffer[(i * 512) + 12] = txcontrol1;
-            sendbuffer[(i * 512) + 13] = txcontrol2;
-            sendbuffer[(i * 512) + 14] = txcontrol3;
-            sendbuffer[(i * 512) + 15] = txcontrol4;
-            for (int j = 0; j < 504; j++) {
-                sendbuffer[(i * 512) + 16 + j] = 0;
-            }
+        for (int i = 0; i < outlsamples.length; i++) {
+            outlsamples[i] = 0.0F;
+            outrsamples[i] = 0.0F;
         }
-
-        send();
-
-        sendbuffer[4] = (byte) ((txsequence >> 24) & 0xF);
-        sendbuffer[5] = (byte) ((txsequence >> 16) & 0xF);
-        sendbuffer[6] = (byte) ((txsequence >> 8) & 0xF);
-        sendbuffer[7] = (byte) (txsequence & 0xF);
-
-        send();
+        do {
+            sendSamples(outlsamples, outrsamples);
+        } while (command != 0);
 
         // send start command
         commandbuffer[0] = (byte) 0xEF;
         commandbuffer[1] = (byte) 0xFE;
         commandbuffer[2] = (byte) 0x04;
-        //if (bandscope) {
-        commandbuffer[3] = (byte) 0x03;
-        //} else {
-        //    commandbuffer[3] = (byte) 0x01;
-        //}
+        if (bandscope) {
+            commandbuffer[3] = (byte) 0x03;
+        } else {
+            commandbuffer[3] = (byte) 0x01;
+        }
         for (int i = 4; i < 64; i++) {
             commandbuffer[i] = (byte) 0x00;
         }
 
         sendCommand();
-
     }
-
+    
     private String getLocalIpAddress() {
         String result = "";
         try {
@@ -1312,6 +1289,7 @@ public class Metis extends Thread {
     }
 
     private int pixels;
+    private boolean bandscope=false;
     private int bandscopepixels;
 
     private PTTListener pttListener;

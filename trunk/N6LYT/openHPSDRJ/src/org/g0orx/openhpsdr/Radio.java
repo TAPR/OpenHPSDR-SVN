@@ -292,7 +292,7 @@ public class Radio extends javax.swing.JFrame implements Discover, BandChanged, 
         this.modeJPanel.setEnabled(true);
         this.filterJPanel.setEnabled(true);
 
-        this.metis = new Metis(this.panadapterPanel.getWidth());
+        this.metis = new Metis(this.panadapterPanel.getWidth(),true);
 
         this.vfoPanel.setMetis(metis);
         this.panadapterPanel.setMetis(metis);
