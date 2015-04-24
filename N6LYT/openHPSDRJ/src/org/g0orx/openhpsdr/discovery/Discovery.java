@@ -47,11 +47,12 @@ public class Discovery extends Thread {
     public void openSocket(InetAddress myaddress, String name) {
         Log.i("Discovery", "openSocket: "+myaddress.getHostAddress()+" "+name);
         try {
-            //InetSocketAddress socketaddress = new InetSocketAddress(myaddress, myport);
-            socket = new DatagramSocket(myport,myaddress);
+            InetSocketAddress socketaddress = new InetSocketAddress(myaddress, myport);
+            socket = new DatagramSocket(null);
             socket.setReuseAddress(true);
             socket.setBroadcast(true);
             socket.setSoTimeout(0);
+            socket.bind(socketaddress);
             running=true;
         } catch (Exception e) {
             Log.i("Discovery", "openSocket: exception:" + e.toString());
