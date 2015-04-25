@@ -1,7 +1,0 @@
-﻿  pthread.c
-c:\users\doug\desktop\openhpsdr\w5wc\powersdr_hpsdr_mrx_ps\lib\pthread\ptw32_relmillisecs.c(97): warning C4996: '_ftime64': This function or variable may be unsafe. Consider using _ftime64_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\sys/timeb.h(124) : see declaration of '_ftime64'
-C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\pthread.dll) does not match the Linker's OutputFile property value (C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\bin\Release\pthreadVC.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
-C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(992,5): warning MSB8012: TargetName(pthread) does not match the Linker's OutputFile property value (pthreadVC). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
-     Creating library Win32\Release\temp\pthreadVC.lib and object Win32\Release\temp\pthreadVC.exp
-  pthread.vcxproj -> C:\Users\Doug\Desktop\OpenHPSDR\W5WC\PowerSDR_HPSDR_mRX_PS\lib\pthread\Win32\Release\pthread.dll
