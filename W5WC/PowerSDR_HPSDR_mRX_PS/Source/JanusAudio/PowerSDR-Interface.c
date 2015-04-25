@@ -659,7 +659,7 @@ KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_only_ant, int trx_ant, int rx_o
 	
 
 	trx_ant = (trx_ant - 1) & 0x3;
-	if ( trx_ant >= 3 ) {
+	if ( trx_ant >= 4 ) {
 		AlexTxAnt = 0;  
 	}
 	else {
@@ -1577,4 +1577,19 @@ KD5TFDVK6APHAUDIO_API void SetIQ_RotateB(double a, double b) {
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API int GetAndResetAmpProtect()
+{
+	int apw = amp_protect_warning;
+	amp_protect_warning = 0;
+	return apw;
+}
 
+KD5TFDVK6APHAUDIO_API void SetAmpProtectRun(int run)
+{
+	amp_protect_on = run;
+}
+
+KD5TFDVK6APHAUDIO_API void SetAIN4Voltage(int v)
+{
+	ain4_voltage = v;
+}

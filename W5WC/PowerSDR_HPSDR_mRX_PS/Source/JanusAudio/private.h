@@ -398,6 +398,10 @@ int CandCFwdPowerBit = 0x8;
 int DotDashMask = 0x7;
 #endif
 
+extern int amp_protect_warning;
+extern int amp_protect_on;
+extern int ain4_voltage;
+
 /* Metis stuff */
 extern int isMetis;
 extern SOCKET listenSock;

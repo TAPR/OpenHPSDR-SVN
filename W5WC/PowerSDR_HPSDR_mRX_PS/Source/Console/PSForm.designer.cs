@@ -73,6 +73,8 @@
             this.labelTS140 = new System.Windows.Forms.LabelTS();
             this.udPSCalWait = new System.Windows.Forms.NumericUpDownTS();
             this.btnPSAmpView = new System.Windows.Forms.ButtonTS();
+            this.chkPSAutoAttenuate = new System.Windows.Forms.CheckBoxTS();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.grpLincorSave.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udPSMoxDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPSPhnum)).BeginInit();
@@ -629,12 +631,34 @@
             this.btnPSAmpView.UseVisualStyleBackColor = false;
             this.btnPSAmpView.Click += new System.EventHandler(this.btnPSAmpView_Click);
             // 
+            // chkPSAutoAttenuate
+            // 
+            this.chkPSAutoAttenuate.AutoSize = true;
+            this.chkPSAutoAttenuate.Checked = true;
+            this.chkPSAutoAttenuate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPSAutoAttenuate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkPSAutoAttenuate.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.chkPSAutoAttenuate.Image = null;
+            this.chkPSAutoAttenuate.Location = new System.Drawing.Point(38, 328);
+            this.chkPSAutoAttenuate.Name = "chkPSAutoAttenuate";
+            this.chkPSAutoAttenuate.Size = new System.Drawing.Size(97, 17);
+            this.chkPSAutoAttenuate.TabIndex = 41;
+            this.chkPSAutoAttenuate.Text = "Auto-Attenuate";
+            this.chkPSAutoAttenuate.UseVisualStyleBackColor = true;
+            this.chkPSAutoAttenuate.CheckedChanged += new System.EventHandler(this.chkPSAutoAttenuate_CheckedChanged);
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // PSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(627, 397);
+            this.Controls.Add(this.chkPSAutoAttenuate);
             this.Controls.Add(this.btnPSAmpView);
             this.Controls.Add(this.chkPSRelaxPtol);
             this.Controls.Add(this.lblDisabled);
@@ -720,5 +744,7 @@
         private System.Windows.Forms.LabelTS labelTS6;
         private System.Windows.Forms.CheckBoxTS chkPSRelaxPtol;
         private System.Windows.Forms.ButtonTS btnPSAmpView;
+        private System.Windows.Forms.CheckBoxTS chkPSAutoAttenuate;
+        private System.Windows.Forms.Timer timer2;
     }
 }
