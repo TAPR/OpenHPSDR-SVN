@@ -103,7 +103,7 @@ void xanr (ANR a, int position)
 			inv_sigp = 1.0 / (sigma + 1e-10);
 			error = a->d[a->in_idx] - y;
 
-			a->out_buff[2 * i + 0] = 2.0 * y;
+			a->out_buff[2 * i + 0] = y;
 			a->out_buff[2 * i + 1] = 0.0;
 
 			if((nel = error * (1.0 - a->two_mu * sigma * inv_sigp)) < 0.0) nel = -nel;

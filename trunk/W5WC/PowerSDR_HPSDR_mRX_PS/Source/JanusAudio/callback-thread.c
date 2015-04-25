@@ -181,32 +181,31 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 		fprintf(stderr, "Mayday Mayday - bad sample rate in callback-thread.c"); 
 	} 
 	xeerEXTF(0, OUTpointer[2], OUTpointer[3], OUTpointer[2], OUTpointer[3], OUTpointer[0], OUTpointer[1], XmitBit, BlockSize/out_sample_incr);
-	//** ptn = 1.0f / pow (10.0f, (float)AIN4 / 2730.0f);
-	for ( i = 0, outidx = 0 ; i < BlockSize; i += out_sample_incr, outidx++ ) { 
-		//** OUTpointer[2][outidx] *= ptn;
-		//** OUTpointer[3][outidx] *= ptn;
+	if (amp_protect_on)
+	{
+		if (AIN4 > 0) amp_protect_warning = 1;
+		switch (ain4_voltage)
+		{
+		case 33:
+			ptn = (float)(1.0 / pow(10.0, (double)AIN4 / 2730.0));
+			break;
+		case 50:
+			ptn = (float)(1.0 / pow(10.0, (double)AIN4 / 1802.0));
+			break;
+		default:
+			ptn = 0.0f;
+			break;
+		}
+	}
+	for (i = 0, outidx = 0; i < BlockSize; i += out_sample_incr, outidx++) 
+	{
+		if (amp_protect_on)
+		{
+			OUTpointer[2][outidx] *= ptn;
+			OUTpointer[3][outidx] *= ptn;
+		}
 		for (j = 0; j < 4; j++)
-
-	/*	LIMIT_SAMPLE(CallbackMonOutLbufp[i]);
-		LIMIT_SAMPLE(CallbackMonOutLbufp[i]);
-		LIMIT_SAMPLE(CallbackMonOutRbufp[i]); 
-		LIMIT_SAMPLE(CallbackMonOutRbufp[i]); 
-
-		LIMIT_SAMPLE(CallbackOutLbufp[i]);
-		LIMIT_SAMPLE(CallbackOutLbufp[i]); 
-		LIMIT_SAMPLE(CallbackOutRbufp[i]);
-		LIMIT_SAMPLE(CallbackOutRbufp[i]); */
-
-		//for ( k = 0; k < 2; k++)
-		//LIMIT_SAMPLE((OUTpointer[j])[i]);
-
-		CBSampleOutBufp[(4*outidx)+j] = (short)((OUTpointer[j])[outidx] * 32767.0);
-
-	//	CBSampleOutBufp[4*outidx] = (short)(CallbackMonOutLbufp[i] * 32767.0); 
-	//	CBSampleOutBufp[(4*outidx)+1] = (short)(CallbackMonOutRbufp[i] * 32767.0); 
-
-	//	CBSampleOutBufp[(4*outidx)+2] = (short)(CallbackOutLbufp[i] * 32767.0); 
-	//	CBSampleOutBufp[(4*outidx)+3] = (short)(CallbackOutRbufp[i] * 32767.0); 
+			CBSampleOutBufp[(4*outidx)+j] = (short)((OUTpointer[j])[outidx] * 32767.0);
 	}
 
 	// ok buf is built - put it in the outbound fifo 

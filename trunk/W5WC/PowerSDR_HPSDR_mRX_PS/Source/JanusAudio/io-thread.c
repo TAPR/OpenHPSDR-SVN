@@ -1062,7 +1062,7 @@ void IOThreadMainLoop(void) {
 						break;
 					case 0x18:
 						ain4 |=  (((int)(ControlBytesIn[2])) & 0xff); // bits 7-0 of AIN4
-						AIN4 = ain4;
+						if ((AIN4 = ain4 - 20) < 0) AIN4 = 0;
 						break;
 					case 0x20:
 						Mercury2FWVersion =  (int)(ControlBytesIn[2] >> 1);										                 

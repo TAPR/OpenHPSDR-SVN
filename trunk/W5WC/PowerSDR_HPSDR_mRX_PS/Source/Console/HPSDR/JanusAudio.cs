@@ -1248,5 +1248,13 @@ namespace PowerSDR
         //			/* else */ 
         //			return false; 									 									 
         //		} 
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe extern public static int GetAndResetAmpProtect();
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe extern public static void SetAmpProtectRun(int run);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe extern public static void SetAIN4Voltage(int v);
     }
 }

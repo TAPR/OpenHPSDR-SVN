@@ -34,11 +34,17 @@ namespace PowerSDR
         private int oldCalCount = 0;
         private int alpha, red, green, blue;
         private int splashcount = 0;
+        private int aastate = 0;
         private static double PShwpeak;
         private static double GetPSpeakval;
 
         public static AmpView ampv = null;
         public static Thread ampvThread = null;
+
+        private int oldCalCount2 = 0;
+        private int save_autoON = 0;
+        private int save_singlecalON = 0;
+        private int deltadB = 0;
 
         #endregion
 
@@ -64,6 +70,16 @@ namespace PowerSDR
                 if (!psenabled) ResetPureSignal();
                 fixFreqs();
                 ChangeDispRcvr();
+            }
+        }
+
+        private static bool autoattenuate = true;
+        public bool AutoAttenuate
+        {
+            get { return autoattenuate; }
+            set
+            {
+                autoattenuate = value;
             }
         }
 
@@ -358,7 +374,7 @@ namespace PowerSDR
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)    // display loop
         {
             splashtrans(splashcount, 0, 10, 255, 255, 255, 255, 255, 255, 220, 0);
             splashtrans(splashcount, 10, 20, 255, 255, 220, 0, 255, 255, 20, 0);
@@ -422,6 +438,50 @@ namespace PowerSDR
             GetPSpeak.Text = GetPSpeakval.ToString();
         }
 
+        private void timer2_Tick(object sender, EventArgs e)    // auto-attenuate loop
+        {
+            bool newcal = (puresignal.Info[5] != oldCalCount2);
+            oldCalCount2 = puresignal.Info[5];
+            if (autoattenuate && !console.ATTOnTX) console.ATTOnTX = true;
+            switch (aastate)
+            {
+                case 0: // monitor
+                    if (autoattenuate && newcal 
+                        && (puresignal.Info[4] > 181 || (puresignal.Info[4] <= 128 && console.SetupForm.ATTOnTX > 0)))
+                    {
+                        aastate = 1;
+                        double ddB;
+                        if (puresignal.Info[4] <= 256)
+                        {
+                            ddB = 20.0 * Math.Log10((double)puresignal.Info[4] / 152.293);
+                            if (Double.IsNaN(ddB)) ddB = 31.1;
+                            if (ddB < -100.0) ddB = -100.0;
+                            if (ddB > +100.0) ddB = +100.0;
+                        }
+                        else
+                            ddB = 31.1;
+                        deltadB = Convert.ToInt32(ddB);
+                        if (autoON) save_autoON = 1;
+                        else        save_autoON = 0;
+                        if (singlecalON) save_singlecalON = 1;
+                        else             save_singlecalON = 0;
+                        puresignal.SetPSControl(txachannel, 1, 0, 0, 0);
+                    }
+                    break;
+                case 1: // set new value
+                    aastate = 2;
+                    if ((console.SetupForm.ATTOnTX + deltadB) > 0)
+                        console.SetupForm.ATTOnTX += deltadB;
+                    else
+                        console.SetupForm.ATTOnTX = 0;
+                    break;
+                case 2: // restore operation
+                    aastate = 0;
+                    puresignal.SetPSControl(txachannel, 0, save_singlecalON, save_autoON, 0);
+                    break;
+            }
+        }
+
         private void PS_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             if (e.Control == true && e.Alt == true)
@@ -468,6 +528,11 @@ namespace PowerSDR
                 puresignal.SetPSPtol(txachannel, 0.900);
         }
 
+        private void chkPSAutoAttenuate_CheckedChanged(object sender, EventArgs e)
+        {
+            autoattenuate = chkPSAutoAttenuate.Checked;
+        }
+
         #endregion
 
         #region methods
@@ -491,6 +556,7 @@ namespace PowerSDR
             udPSMoxDelay_ValueChanged(this, e);
             SetPSReceivers(console.CurrentHPSDRModel);
             chkPSRelaxPtol_CheckedChanged(this, e);
+            chkPSAutoAttenuate_CheckedChanged(this, e);
         }
 
         public void ResetPureSignal()
@@ -689,9 +755,8 @@ namespace PowerSDR
                     break;
             }
         }
-
-        #endregion
     }
+        #endregion
 
     unsafe static class puresignal
     {

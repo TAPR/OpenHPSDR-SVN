@@ -419,6 +419,7 @@
     <Compile Include="xvtr.cs">
       <SubType>Form</SubType>
     </Compile>
+    <EmbeddedResource Include="Resources\digital7.ttf" />
     <None Include="Resources\grabbing.cur" />
     <None Include="Resources\grab.cur" />
     <EmbeddedResource Include="alphawarnform.resx">

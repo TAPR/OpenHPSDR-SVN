@@ -2805,6 +2805,7 @@ namespace PowerSDR
             udMicGainMin_ValueChanged(this, e);
             udLineInBoost_ValueChanged(this, e);
             udTXAMCarrierLevel_ValueChanged(this, e);
+            chkLimitExtAmpOnOverload_CheckedChanged(this, e);
             // Keyboard Tab
             comboKBTuneUp1_SelectedIndexChanged(this, e);
             comboKBTuneUp2_SelectedIndexChanged(this, e);
@@ -3052,7 +3053,7 @@ namespace PowerSDR
             dr["Tune_Power"] = (int)udTXTunePower.Value;
             dr["Tune_Meter_Type"] = (string)comboTXTUNMeter.Text;
 
-            dr["TX_Limit_Slew"] = (bool)chkTXLimitSlew.Checked;
+            // dr["TX_Limit_Slew"] = (bool)chkTXLimitSlew.Checked;
 
             dr["TX_AF_Level"] = console.TXAF;
 
@@ -6400,11 +6401,11 @@ namespace PowerSDR
 
                 if (radGenModelSDR1000.Focused || force_model)
                 {
-                    chkGeneralRXOnly.Checked = false;
+                    //chkGeneralRXOnly.Checked = false;
                     chkGeneralDisablePTT.Checked = false;
                     force_model = false;
                 }
-                chkGeneralRXOnly.Enabled = true;
+                //chkGeneralRXOnly.Enabled = true;
 
                 //string key = comboKeyerConnPrimary.Text;
                 //if (comboKeyerConnPrimary.Items.Contains("Radio"))
@@ -6452,7 +6453,7 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-                chkGeneralRXOnly.Visible = true;
+                //chkGeneralRXOnly.Visible = true;
                 // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
@@ -6478,6 +6479,7 @@ namespace PowerSDR
                 // console.RX2PreampPresent = false;
                 groupBoxHPSDRHW.Visible = false;
                 console.RX2PreampPresent = false;
+                JanusAudio.SetAIN4Voltage(33);
             }
 
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -6556,7 +6558,7 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-                chkGeneralRXOnly.Visible = true;
+               // chkGeneralRXOnly.Visible = true;
                 // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
@@ -6582,6 +6584,7 @@ namespace PowerSDR
                 // console.RX2PreampPresent = false;
                 groupBoxHPSDRHW.Visible = false;
                 console.RX2PreampPresent = false;
+                JanusAudio.SetAIN4Voltage(33);
             }
 
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -6665,7 +6668,7 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-                chkGeneralRXOnly.Visible = true;
+                //chkGeneralRXOnly.Visible = true;
                 // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
@@ -6694,6 +6697,7 @@ namespace PowerSDR
                 chkEXT1OutOnTx.Text = "Ext 1 on Tx";
                 chkEXT2OutOnTx.Text = "Ext 2 on Tx";
                 groupBoxHPSDRHW.Visible = false;
+                JanusAudio.SetAIN4Voltage(33);
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
@@ -6769,7 +6773,7 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-                chkGeneralRXOnly.Visible = true;
+               // chkGeneralRXOnly.Visible = true;
                 // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
@@ -6798,6 +6802,7 @@ namespace PowerSDR
                 chkEXT1OutOnTx.Text = "Ext 1 on Tx";
                 chkEXT2OutOnTx.Text = "Ext 2 on Tx";
                 groupBoxHPSDRHW.Visible = false;
+                JanusAudio.SetAIN4Voltage(33);
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
@@ -6877,7 +6882,7 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-                chkGeneralRXOnly.Visible = true;
+                //chkGeneralRXOnly.Visible = true;
                 // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
@@ -6912,6 +6917,7 @@ namespace PowerSDR
                 chkEXT1OutOnTx.Text = "Ext 1 on Tx";
                 chkEXT2OutOnTx.Text = "Ext 2 on Tx";
                 groupBoxHPSDRHW.Visible = true;
+                JanusAudio.SetAIN4Voltage(33);
 
                 radRX1ADC3.Enabled = false;
                 radRX2ADC3.Enabled = false;
@@ -7003,7 +7009,7 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-                chkGeneralRXOnly.Visible = true;
+                //chkGeneralRXOnly.Visible = true;
                 // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
@@ -7043,6 +7049,7 @@ namespace PowerSDR
                 chkAlexPresent.Location = new Point(43, 120);
                 chkApolloPresent.Parent = grpGeneralHardwareORION;
                 chkApolloPresent.Location = new Point(43, 140);
+                JanusAudio.SetAIN4Voltage(50);
 
                 radRX1ADC3.Enabled = true;
                 radRX2ADC3.Enabled = true;
@@ -7136,7 +7143,7 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-                chkGeneralRXOnly.Visible = true;
+                //chkGeneralRXOnly.Visible = true;
                 //  chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "Hermes Options";
@@ -7165,6 +7172,7 @@ namespace PowerSDR
                 chkEXT1OutOnTx.Text = "RX 2 IN on Tx";
                 chkEXT2OutOnTx.Text = "RX 1 IN on Tx";
                 groupBoxHPSDRHW.Visible = true;
+                JanusAudio.SetAIN4Voltage(33);
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
@@ -7231,7 +7239,7 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = true;
                 groupBox122MHz.Visible = true;
                 groupBoxMicSource.Visible = true;
-                chkGeneralRXOnly.Visible = true;
+                //chkGeneralRXOnly.Visible = true;
                 chkHermesStepAttenuator.Checked = false;
                 chkHermesStepAttenuator.Enabled = false;
                 chkAlexPresent.Enabled = true;
@@ -7319,11 +7327,11 @@ namespace PowerSDR
                 console.CurrentModel = Model.SOFTROCK40;
                 if (radGenModelSoftRock40.Focused || force_model)
                 {
-                    chkGeneralRXOnly.Checked = true;
+                    //chkGeneralRXOnly.Checked = true;
                     chkGeneralDisablePTT.Checked = true;
                     force_model = false;
                 }
-                chkGeneralRXOnly.Enabled = true; // modif F8CHK
+                //chkGeneralRXOnly.Enabled = true; // modif F8CHK
                 //lblF3KFanTempThresh.Visible = false;
                 // udF3KFanTempThresh.Visible = false;
                 //chkGenTX1Delay.Visible = false;
@@ -7347,7 +7355,7 @@ namespace PowerSDR
                 console.CurrentModel = Model.DEMO;
                 //if(radGenModelDemoNone.Focused || force_model)
                 {
-                    chkGeneralRXOnly.Checked = true;
+                    //chkGeneralRXOnly.Checked = true;
                     chkGeneralDisablePTT.Checked = true;
                     MessageBox.Show("Welcome to the Demo/Test mode of the PowerSDR software.\n" +
                         "\nPlease contact us at support@flex-radio.com or call (512) 250-8595 with any questions.\n" +
@@ -7363,7 +7371,7 @@ namespace PowerSDR
                     //lblGenTX1Delay.Visible = false;
                     //udGenTX1Delay.Visible = false;
                 }
-                chkGeneralRXOnly.Enabled = true;
+                //chkGeneralRXOnly.Enabled = true;
                 //RadioDSP.SetThreadNumber(1);
             }
         }
@@ -7890,24 +7898,24 @@ namespace PowerSDR
 
         private void chkGeneralRXOnly_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (chkGeneralRXOnly.Focused &&
-                comboAudioSoundCard.Text == "Unsupported Card" &&
-                !chkGeneralRXOnly.Checked &&
-                radGenModelSDR1000.Checked)
-            {
-                DialogResult dr = MessageBox.Show(
-                    "Unchecking Receive Only while in Unsupported Card mode may \n" +
-                    "cause damage to your SDR-1000 hardware.  Are you sure you want \n" +
-                    "to enable transmit?",
-                    "Warning: Enable Transmit?",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
-                if (dr == DialogResult.No)
-                {
-                    chkGeneralRXOnly.Checked = true;
-                    return;
-                }
-            }
+            //if (chkGeneralRXOnly.Focused &&
+            //    comboAudioSoundCard.Text == "Unsupported Card" &&
+            //    !chkGeneralRXOnly.Checked &&
+            //    radGenModelSDR1000.Checked)
+            //{
+            //    DialogResult dr = MessageBox.Show(
+            //        "Unchecking Receive Only while in Unsupported Card mode may \n" +
+            //        "cause damage to your SDR-1000 hardware.  Are you sure you want \n" +
+            //        "to enable transmit?",
+            //        "Warning: Enable Transmit?",
+            //        MessageBoxButtons.YesNo,
+            //        MessageBoxIcon.Warning);
+            //    if (dr == DialogResult.No)
+            //    {
+            //        chkGeneralRXOnly.Checked = true;
+            //        return;
+            //    }
+            //}
             console.RXOnly = chkGeneralRXOnly.Checked;
             tpTransmit.Enabled = !chkGeneralRXOnly.Checked;
             tpPowerAmplifier.Enabled = !chkGeneralRXOnly.Checked;
@@ -11381,7 +11389,7 @@ namespace PowerSDR
             udTXTunePower.Value = (int)dr["Tune_Power"];
             comboTXTUNMeter.Text = (string)dr["Tune_Meter_Type"];
 
-            chkTXLimitSlew.Checked = (bool)dr["TX_Limit_Slew"];
+            // chkTXLimitSlew.Checked = (bool)dr["TX_Limit_Slew"];
 
             console.TXAF = (int)dr["TX_AF_Level"];
 
@@ -11510,7 +11518,7 @@ namespace PowerSDR
             dr["Tune_Power"] = (int)udTXTunePower.Value;
             dr["Tune_Meter_Type"] = (string)comboTXTUNMeter.Text;
 
-            dr["TX_Limit_Slew"] = (bool)chkTXLimitSlew.Checked;
+            // dr["TX_Limit_Slew"] = (bool)chkTXLimitSlew.Checked;
 
             dr["TX_AF_Level"] = console.TXAF;
 
@@ -14851,6 +14859,10 @@ namespace PowerSDR
                     case Keys.V:
                         grpDisplayDriverEngine.Visible = true;
                         break;
+                    case Keys.T:
+                        chkGeneralRXOnly.Visible = !chkGeneralRXOnly.Visible;
+                        break;
+
                 }
             }
         }
@@ -15015,7 +15027,7 @@ namespace PowerSDR
                 }
                 console.PennyPresent = false;
                 //console.PennyLanePresent = true;
-                chkGeneralRXOnly.Enabled = true;
+               // chkGeneralRXOnly.Enabled = true;
                 // chkGeneralRXOnly.Enabled = false;
 
                 JanusAudio.EnableHermesPower(1);
@@ -15104,16 +15116,16 @@ namespace PowerSDR
                 radMercury12288MHz_CheckedChanged(sender, e);
             }
 
-            if (!chkPennyPresent.Checked && !chkPennyLane.Checked)
-            {
-                chkGeneralRXOnly.Checked = true;
-                // chkGeneralRXOnly.Enabled = false;
-            }
-            else
-            {
-                // chkGeneralRXOnly.Enabled = true;
-                chkGeneralRXOnly.Checked = false;
-            }
+            //if (!chkPennyPresent.Checked && !chkPennyLane.Checked)
+            //{
+            //    //chkGeneralRXOnly.Checked = true;
+            //    // chkGeneralRXOnly.Enabled = false;
+            //}
+            //else
+            //{
+            //    // chkGeneralRXOnly.Enabled = true;
+            //    //chkGeneralRXOnly.Checked = false;
+            //}
             return;
         }
 
@@ -17178,11 +17190,6 @@ namespace PowerSDR
             console.ATTOnTX = chkATTOnTX.Checked;
         }
 
-        private void chkTXLimitSlew_CheckedChanged(object sender, EventArgs e)
-        {
-            console.LimitSlew = chkTXLimitSlew.Checked;
-        }
-
         private void chkAlex1_5BPHPF_CheckedChanged(object sender, EventArgs e)
         {
             console.Alex1_5BPHPFBypass = chkAlex1_5BPHPF.Checked;
@@ -18743,8 +18750,9 @@ namespace PowerSDR
 
         private void udATTOnTX_ValueChanged(object sender, EventArgs e)
         {
-            if (chkATTOnTX.Checked)
-                JanusAudio.SetTxAttenData((int)udATTOnTX.Value);
+            // if (chkATTOnTX.Checked)
+                 //JanusAudio.SetTxAttenData((int)udATTOnTX.Value);
+            console.TxAttenData = (int)udATTOnTX.Value;
         }
 
         private void ud6mLNAGainOffset_ValueChanged(object sender, EventArgs e)
@@ -18929,7 +18937,36 @@ namespace PowerSDR
             console.radio.GetDSPRX(1, 1).RXANR2AERun = run;
         }
 
+        private void chkLimitExtAmpOnOverload_CheckedChanged(object sender, EventArgs e)
+        {
+            console.AmpProtect = chkLimitExtAmpOnOverload.Checked;
+            if (chkLimitExtAmpOnOverload.Checked)
+                JanusAudio.SetAmpProtectRun (1);
+            else
+                JanusAudio.SetAmpProtectRun (0);
+        }
 
+        private void radDSPNR2Gamma_CheckedChanged(object sender, EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).RXANR2GainMethod = 2;
+            console.radio.GetDSPRX(0, 1).RXANR2GainMethod = 2;
+        }
+
+        private void radDSPNR2GammaRX2_CheckedChanged(object sender, EventArgs e)
+        {
+            console.radio.GetDSPRX(1, 0).RXANR2GainMethod = 2;
+            console.radio.GetDSPRX(1, 1).RXANR2GainMethod = 2;
+        }
+
+		private void chkDisableRXOut_CheckedChanged(object sender, EventArgs e)
+        {
+            console.RxOutOverride = chkDisableRXOut.Checked;
+        }
+
+        private void chkEnableLEDFont_CheckedChanged(object sender, EventArgs e)
+        {
+            console.EnableLEDFont = chkEnableLEDFont.Checked;
+        }
     }
 
     #region PADeviceInfo Helper Class

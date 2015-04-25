@@ -1686,8 +1686,8 @@ namespace PowerSDR
             }
         }
 
-        private int rx_nr2_gain_method = 1;
-        private int rx_nr2_gain_method_dsp = 1;
+        private int rx_nr2_gain_method = 2;
+        private int rx_nr2_gain_method_dsp = 2;
         public int RXANR2GainMethod
         {
             get { return rx_nr2_gain_method; }

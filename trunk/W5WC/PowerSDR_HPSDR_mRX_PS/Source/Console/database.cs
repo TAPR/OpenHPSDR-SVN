@@ -2,7 +2,7 @@
 // database.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2012  FlexRadio Systems Copyright (C) 2010-2014  Doug Wigley
+// Copyright (C) 2004-2012  FlexRadio Systems Copyright (C) 2010-2015  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -2692,7 +2692,7 @@ namespace PowerSDR
             t.Columns.Add("VOX_HangTime", typeof(int));
             t.Columns.Add("Tune_Power", typeof(int));
             t.Columns.Add("Tune_Meter_Type", typeof(string));
-            t.Columns.Add("TX_Limit_Slew", typeof(bool));
+            //t.Columns.Add("TX_Limit_Slew", typeof(bool));
             t.Columns.Add("TX_AF_Level", typeof(int));
             t.Columns.Add("AM_Carrier_Level", typeof(int));
             t.Columns.Add("Show_TX_Filter", typeof(bool));
@@ -2782,7 +2782,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -2876,7 +2876,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -2973,7 +2973,7 @@ namespace PowerSDR
             t.Columns.Add("VOX_HangTime", typeof(int));
             t.Columns.Add("Tune_Power", typeof(int));
             t.Columns.Add("Tune_Meter_Type", typeof(string));
-            t.Columns.Add("TX_Limit_Slew", typeof(bool));
+            //t.Columns.Add("TX_Limit_Slew", typeof(bool));
             t.Columns.Add("TX_AF_Level", typeof(int));
             t.Columns.Add("AM_Carrier_Level", typeof(int));
             t.Columns.Add("Show_TX_Filter", typeof(bool));
@@ -3063,7 +3063,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3157,7 +3157,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3252,7 +3252,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = true;
@@ -3347,7 +3347,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = true;
@@ -3441,7 +3441,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3535,7 +3535,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3629,7 +3629,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3723,7 +3723,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3817,7 +3817,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3911,7 +3911,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4005,7 +4005,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4099,7 +4099,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4193,7 +4193,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4287,7 +4287,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4381,7 +4381,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4475,7 +4475,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4569,7 +4569,7 @@ namespace PowerSDR
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;

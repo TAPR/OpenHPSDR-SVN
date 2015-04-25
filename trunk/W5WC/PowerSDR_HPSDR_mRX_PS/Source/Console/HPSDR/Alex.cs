@@ -63,6 +63,7 @@ namespace PowerSDR
         public static bool Ext1OutOnTx = false;
         public static bool Ext2OutOnTx = false;
         public static bool init_update = false;
+        public static bool rx_out_override = false;
 
 		public void setRxAnt(Band band, byte ant) 
 		{ 
@@ -227,6 +228,12 @@ namespace PowerSDR
 
                 rx_out = rx_only_ant != 0 ? 1 : 0;
                 trx_ant = RxAnt[idx];
+            }
+
+            if (rx_out_override && rx_out == 1)
+            {
+                if (!tx) trx_ant = 4;
+                rx_out = 0; // disable Rx_Bypass_Out relay
             }
 
             if (init_update)

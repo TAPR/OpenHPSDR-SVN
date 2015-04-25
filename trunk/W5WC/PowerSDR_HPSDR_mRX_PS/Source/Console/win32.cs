@@ -37,7 +37,7 @@ namespace PowerSDR
 
         [DllImport("msvcrt.dll", EntryPoint = "memcpy", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void memcpy(void *destptr, void *srcptr, int n);
-
+        
         [DllImport("kernel32.dll", EntryPoint = "EnterCriticalSection")]
 		public static extern void EnterCriticalSection(void *cs_ptr);
 
@@ -88,6 +88,9 @@ namespace PowerSDR
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
+
+        [DllImport("gdi32.dll")]
+        public static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [In] ref uint pcFonts);
 
         #endregion
 

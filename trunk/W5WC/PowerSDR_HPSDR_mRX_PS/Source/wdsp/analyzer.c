@@ -785,7 +785,7 @@ void __cdecl sendbuf(void *arg)
 					LeaveCriticalSection(&(a->BufferControlSection[a->ss][a->LO]));
 				}
 			}
-			Sleep(1);
+		Sleep(1);
 	}
 	a->dispatcher = 0;
 	_endthread();
