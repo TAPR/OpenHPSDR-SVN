@@ -39,7 +39,7 @@ public class Metis extends Thread {
         this.frames=(512-8)/frame;
         this.data=8+(frames*frame);
 
-        myport = myport + id;
+        myport = myport + id + 1;
 
         Log.i(this, "using: " + this.discovered.toString() + " receivers=" + this.receivers + " myport=" + myport);
 
