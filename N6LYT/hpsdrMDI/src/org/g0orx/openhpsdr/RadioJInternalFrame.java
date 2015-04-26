@@ -228,17 +228,21 @@ public class RadioJInternalFrame extends javax.swing.JInternalFrame implements I
     }
 
     private void stop() {
-        radio.getMetis().terminate();
-        for (int i = 0; i < receivers.length; i++) {
-            Receiver rx = radio.getReceiver(i);
-            if (receivers[i] != null) {
-                receivers[i].terminate();
-                rx.setX(receivers[i].getX());
-                rx.setY(receivers[i].getY());
-                rx.setWidth(receivers[i].getWidth());
-                rx.setHeight(receivers[i].getHeight());
-                receivers[i].dispose();
-                receivers[i] = null;
+        if (radio.getMetis() != null) {
+            radio.getMetis().terminate();
+        }
+        if (receivers != null) {
+            for (int i = 0; i < receivers.length; i++) {
+                Receiver rx = radio.getReceiver(i);
+                if (receivers[i] != null) {
+                    receivers[i].terminate();
+                    rx.setX(receivers[i].getX());
+                    rx.setY(receivers[i].getY());
+                    rx.setWidth(receivers[i].getWidth());
+                    rx.setHeight(receivers[i].getHeight());
+                    receivers[i].dispose();
+                    receivers[i] = null;
+                }
             }
         }
         Bounds b = new Bounds();

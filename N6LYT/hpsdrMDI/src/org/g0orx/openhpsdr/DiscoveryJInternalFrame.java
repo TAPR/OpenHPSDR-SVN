@@ -173,6 +173,7 @@ public class DiscoveryJInternalFrame extends javax.swing.JInternalFrame implemen
                     this.setTitle("Discovery");
                 } else {
                     this.setTitle("Discovery - device is in use");
+                    this.jButtonOpen.setEnabled(false);
                 }
             }
         }

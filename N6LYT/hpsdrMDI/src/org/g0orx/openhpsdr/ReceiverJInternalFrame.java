@@ -60,7 +60,7 @@ public class ReceiverJInternalFrame extends javax.swing.JInternalFrame implement
 
         Log.i(this, "receiver:" + receiver.getId() + " receiverbase:" + receiverbase);
         this.metis = radio.getMetis();
-        this.setTitle("RX" + receiver.getId() + ": " + discovered.getDeviceName() + discovered.getAddress() + " (" + discovered.getMac() + ")");
+        this.setTitle("RX" + receiver.getId() + ": " + discovered.getDeviceName() + " " + discovered.getAddress() + " (" + discovered.getMac() + ")");
 
         filename = discovered.getMac() + ".rad";
         filename = filename.replace(":", "-");
