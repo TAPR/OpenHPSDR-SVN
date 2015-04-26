@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <NonVisualComponents>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jMenuRadio">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Radio"/>
+          </Properties>
+          <Events>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="jMenuRadioMenuSelected"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="if(discovered.getDevice()==Discovered.DEVICE_ANGELIA ||&#xa;   discovered.getDevice()==Discovered.DEVICE_ORION) {&#xa;    javax.swing.ButtonGroup group=new javax.swing.ButtonGroup();&#xa;    javax.swing.JMenu menu=new javax.swing.JMenu(&quot;ADC&quot;);&#xa;    javax.swing.JRadioButtonMenuItem adc1=new javax.swing.JRadioButtonMenuItem(&quot;ADC1&quot;);&#xa;    adc1.addActionListener(new ActionListener() {&#xa;                public void actionPerformed(ActionEvent evt) {&#xa;                    receiver.setADC(Receiver.ADC1);&#xa;                }&#xa;            });&#xa;    menu.add(adc1);&#xa;    group.add(adc1);&#xa;    javax.swing.JRadioButtonMenuItem adc2=new javax.swing.JRadioButtonMenuItem(&quot;ADC2&quot;);&#xa;    adc2.addActionListener(new ActionListener() {&#xa;                public void actionPerformed(ActionEvent evt) {&#xa;                    receiver.setADC(Receiver.ADC2);&#xa;                }&#xa;            });&#xa;    menu.add(adc2);&#xa;    group.add(adc2);&#xa;    javax.swing.JRadioButtonMenuItem adc3=new javax.swing.JRadioButtonMenuItem(&quot;ADC3&quot;);&#xa;    if(discovered.getDevice()==Discovered.DEVICE_ORION) {&#xa;        adc2.addActionListener(new ActionListener() {&#xa;                public void actionPerformed(ActionEvent evt) {&#xa;                    receiver.setADC(Receiver.ADC3);&#xa;                }&#xa;            });&#xa;        menu.add(adc3);&#xa;        group.add(adc3);&#xa;    }&#xa;    switch(receiver.getADC()) {&#xa;        case Receiver.ADC1:&#xa;            adc1.setSelected(true);&#xa;            break;&#xa;        case Receiver.ADC2:&#xa;            adc2.setSelected(true);&#xa;            break;&#xa;        case Receiver.ADC3:&#xa;            adc3.setSelected(true);&#xa;            break;&#xa;    }&#xa;    jMenuRadio.add(menu);&#xa;&#xa;}"/>
+          </AuxValues>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuBand">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Band"/>
+          </Properties>
+          <Events>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="jMenuBandMenuSelected"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuMode">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mode"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="for(int i=0;i&lt;Modes.length();i++) {&#xa;    Mode mode=Modes.getMode(i);&#xa;    javax.swing.JMenuItem item=new javax.swing.JMenuItem(mode.getName());&#xa;    item.addActionListener(new ActionListener() {&#xa;                    public void actionPerformed(ActionEvent evt) {&#xa;                        setMode(Modes.getMode(evt.getActionCommand()).getId());&#xa;                    }&#xa;                });&#xa;    this.jMenuMode.add(item);&#xa;}"/>
+          </AuxValues>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuFilter">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Filter"/>
+          </Properties>
+          <Events>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="jMenuFilterMenuSelected"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuStep">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Step"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_LayoutCodePre" type="java.lang.String" value="this.jMenuStep.removeAll();&#xa;        int steps=Step.length();&#xa;        javax.swing.ButtonGroup group=new javax.swing.ButtonGroup();&#xa;        for(int i=0;i&lt;steps;i++) {&#xa;            String s=Integer.toString(Step.getStep(i));&#xa;            javax.swing.JRadioButtonMenuItem item=new javax.swing.JRadioButtonMenuItem(s);&#xa;            item.setSelected(receiver.getStep()==i);&#xa;            item.addActionListener(new ActionListener() {&#xa;                public void actionPerformed(ActionEvent evt) {&#xa;                    receiver.setStep(evt.getActionCommand());&#xa;                }&#xa;            });&#xa;            this.jMenuStep.add(item);&#xa;            group.add(item);&#xa;        }"/>
+          </AuxValues>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuDisplay">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Display"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuDisplayActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="this.jCheckBoxMenuItemPanadapter.setSelected(receiver.displayPanadapter());&#xa;        this.jCheckBoxMenuItemWaterfall.setSelected(receiver.displayWaterfall());"/>
+          </AuxValues>
+          <SubComponents>
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItemPanadapter">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="Panadapter"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItemPanadapterActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItemWaterfall">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="Waterfall"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItemWaterfallActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="closable" type="boolean" value="true"/>
+    <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="true"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="waterfallPanel" alignment="0" max="32767" attributes="0"/>
+          <Component id="frequencyPanel" alignment="1" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="vfoPanel" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="meterPanel" min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Component id="panadapterPanel" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="vfoPanel" max="32767" attributes="0"/>
+                  <Component id="meterPanel" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="panadapterPanel" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="frequencyPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="waterfallPanel" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="org.g0orx.openhpsdr.FrequencyPanel" name="frequencyPanel">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new FrequencyPanel(radio,receiver)"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="28" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+    <Container class="org.g0orx.openhpsdr.PanadapterPanel" name="panadapterPanel">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new PanadapterPanel(radio,receiver)"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+    <Container class="org.g0orx.openhpsdr.WaterfallPanel" name="waterfallPanel">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new WaterfallPanel(radio,receiver)"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="908" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+    <Container class="org.g0orx.openhpsdr.VFOPanel" name="vfoPanel">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new VFOPanel(radio,receiver)"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+    <Container class="org.g0orx.openhpsdr.MeterPanel" name="meterPanel">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new MeterPanel(radio,receiver)"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="151" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+  </SubComponents>
+</Form>
