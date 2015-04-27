@@ -28,6 +28,8 @@ __declspec (dllexport) void *malloc0 (int size);
 
 extern void print_impulse (const char* filename, int N, double* impulse, int rtype, int pr_mode);
 
+void print_peak_val(const char* filename, int N, double* buff, double thresh);
+
 void print_peak_env (const char* filename, int N, double* buff, double thresh);
 
 extern void print_peak_env_f2 (const char* filename, int N, float* Ibuff, float* Qbuff);

@@ -86,6 +86,24 @@ void print_impulse (const char* filename, int N, double* impulse, int rtype, int
 	fclose (file);
 }
 
+void print_peak_val (const char* filename, int N, double* buff, double thresh)
+{
+	int i;
+	static unsigned int seqnum;
+	double peak = 0.0;
+	FILE* file;
+	for (i = 0; i < N; i++)
+		if (buff[i] > peak) peak = buff[i];
+	if (peak >= thresh)
+	{
+		file = fopen(filename, "a");
+		fprintf(file, "%d\t\t%.17e\n", seqnum, peak);
+		fflush(file);
+		fclose(file);
+	}
+	seqnum++;
+}
+
 void print_peak_env (const char* filename, int N, double* buff, double thresh)
 {
 	int i;

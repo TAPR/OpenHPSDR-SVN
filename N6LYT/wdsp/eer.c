@@ -22,8 +22,6 @@ The author can be reached by email at
 
 warren@wpratt.com
 
-NOTE:  THIS FILE IS CURRENTLY EXPERIMENTAL AND WILL CHANGE LATER.
-
 */
 
 #include "comm.h"
@@ -36,6 +34,7 @@ EER create_eer (int run, int size, double* in, double* out, double* outM, int ra
 	a->size = size;
 	a->in = in;
 	a->out = out;
+	a->outM = outM;
 	a->rate = rate;
 	a->mgain = mgain;
 	a->pgain = pgain;

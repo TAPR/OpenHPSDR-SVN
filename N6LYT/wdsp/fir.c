@@ -42,11 +42,51 @@ double* fftcv_mults (int NM, double* c_impulse)
 	return mults;
 }
 
-double* fir_fsamp_odd (int N, double* A, int rtype, double scale)
+double* get_fsamp_window(int N, int wintype)
+{
+	int i;
+	double arg0, arg1;
+	double* window = (double *) malloc0 (N * sizeof(double));
+	switch (wintype)
+	{
+	case 0:
+		arg0 = 2.0 * PI / ((double)N - 1.0);
+		for (i = 0; i < N; i++)
+		{
+			arg1 = cos(arg0 * (double)i);
+			window[i]  =   +0.21747
+				+ arg1 *  (-0.45325
+				+ arg1 *  (+0.28256
+				+ arg1 *  (-0.04672)));
+		}
+		break;
+	case 1:
+		arg0 = 2.0 * PI / ((double)N - 1.0);
+		for (i = 0; i < N; ++i)
+		{
+			arg1 = cos(arg0 * (double)i);
+			window[i]  =   +6.3964424114390378e-02
+				+ arg1 *  (-2.3993864599352804e-01
+				+ arg1 *  (+3.5015956323820469e-01
+				+ arg1 *  (-2.4774111897080783e-01
+				+ arg1 *  (+8.5438256055858031e-02
+				+ arg1 *  (-1.2320203369293225e-02
+				+ arg1 *  (+4.3778825791773474e-04))))));
+		}
+		break;
+	default:
+		for (i = 0; i < N; i++)
+			window[i] = 1.0;
+	}
+	return window;
+}
+
+double* fir_fsamp_odd (int N, double* A, int rtype, double scale, int wintype)
 {
 	int i, j;
 	int mid = (N - 1) / 2;
 	double mag, phs;
+	double* window;
 	double *fcoef     = (double *) malloc0 (N * sizeof (complex));
 	double *c_impulse = (double *) malloc0 (N * sizeof (complex));
 	fftw_plan ptmp = fftw_plan_dft_1d(N, (fftw_complex *)fcoef, (fftw_complex *)c_impulse, FFTW_BACKWARD, FFTW_PATIENT);
@@ -66,27 +106,30 @@ double* fir_fsamp_odd (int N, double* A, int rtype, double scale)
 	fftw_execute (ptmp);
 	fftw_destroy_plan (ptmp);
 	_aligned_free (fcoef);
+	window = get_fsamp_window(N, wintype);
 	switch (rtype)
 	{
 	case 0:
 		for (i = 0; i < N; i++)
-			c_impulse[i] = scale * c_impulse[2 * i];
+			c_impulse[i] = scale * c_impulse[2 * i] * window[i];
 		break;
 	case 1:
 		for (i = 0; i < N; i++)
 		{
-			c_impulse[2 * i + 0] *= scale;
+			c_impulse[2 * i + 0] *= scale * window[i];
 			c_impulse[2 * i + 1] = 0.0;
 		}
 		break;
 	}
+	_aligned_free (window);
 	return c_impulse;
 }
 
-double* fir_fsamp (int N, double* A, int rtype, double scale)
+double* fir_fsamp (int N, double* A, int rtype, double scale, int wintype)
 {
 	int n, i, j, k;
 	double sum;
+	double* window;
 	double *c_impulse = (double *) malloc0 (N * sizeof (complex));
 
 	if (N & 1)
@@ -123,18 +166,19 @@ double* fir_fsamp (int N, double* A, int rtype, double scale)
 			c_impulse[2 * n + 1] = 0.0;
 		}
 	}
-
+	window = get_fsamp_window (N, wintype);
 	switch (rtype)
 	{
 	case 0:
 		for (i = 0; i < N; i++)
-			c_impulse[i] = scale * c_impulse[2 * i];
+			c_impulse[i] = scale * c_impulse[2 * i] * window[i];
 		break;
 	case 1:
 		for (i = 0; i < N; i += 2)
-			c_impulse[i] *= scale;
+			c_impulse[i] *= scale * window[i];
 		break;
 	}
+	_aligned_free (window);
 	return c_impulse;
 }
 

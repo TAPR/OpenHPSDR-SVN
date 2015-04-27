@@ -801,7 +801,7 @@ void __cdecl sendbuf(void *arg)
 					LeaveCriticalSection(&(a->BufferControlSection[a->ss][a->LO]));
 				}
 			}
-			Sleep(1);
+		Sleep(1);
 	}
 	a->dispatcher = 0;
 	_endthread();
@@ -1052,7 +1052,7 @@ void XCreateAnalyzer(	int disp,
 		for (j = 0; j < a->max_num_fft; j++)
 		{
 #ifdef linux
-			CreateEvent(&a->hSnapEvent[i][j],NULL, FALSE, FALSE, "snap");
+			CreateEvent(&a->hSnapEvent[i][j],NULL, FALSE, FALSE, TEXT("snap"));
 #else
 			a->hSnapEvent[i][j] = CreateEvent(NULL, FALSE, FALSE, TEXT("snap"));
 #endif
