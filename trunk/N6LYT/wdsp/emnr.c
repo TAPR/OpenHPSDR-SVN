@@ -23,7 +23,7 @@ The author can be reached by email at
 warren@wpratt.com
 
 */
-
+#define _CRT_SECURE_NO_WARNINGS
 #include "comm.h"
 
 /********************************************************************************************************
@@ -222,7 +222,7 @@ EMNR create_emnr (int run, int position, int size, double* in, double* out, int 
 	a->incr = a->fsize / a->ovrlp;
 	a->rate = rate;
 	a->wintype = wintype;
-	a->gain = gain;
+	a->gain = gain / fsize / (double)a->ovrlp;
 	if (a->fsize > a->bsize)
 		a->iasize = a->fsize;
 	else
@@ -283,6 +283,15 @@ EMNR create_emnr (int run, int position, int size, double* in, double* out, int 
 		a->g.prev_mask[i]  = 1.0;
 		a->g.prev_gamma[i] = 1.0;
 	}
+	a->g.gmax = 10000.0;
+	//
+	a->g.GG = (double *)malloc0(241 * 241 * sizeof(double));
+	a->g.GGS = (double *)malloc0(241 * 241 * sizeof(double));
+	a->g.fileb = fopen("calculus", "rb");
+	fread(a->g.GG, sizeof(double), 241 * 241, a->g.fileb);
+	fread(a->g.GGS, sizeof(double), 241 * 241, a->g.fileb);
+	fclose(a->g.fileb);
+	//
 
 	a->np.incr = a->incr;
 	a->np.rate = a->rate;
@@ -458,6 +467,8 @@ void destroy_emnr (EMNR a)
 	_aligned_free (a->np.alphaOptHat);
 	_aligned_free (a->np.p);
 
+	_aligned_free (a->g.GGS);
+	_aligned_free (a->g.GG);
 	_aligned_free (a->g.prev_mask);
 	_aligned_free (a->g.prev_gamma);
 	_aligned_free (a->g.lambda_d);
@@ -651,6 +662,52 @@ void aepf(EMNR a)
 	memcpy (a->mask + n, a->ae.nmask, (a->ae.msize - 2 * n) * sizeof (double));
 }
 
+double getKey(double* type, double gamma, double xi)
+{
+	int ngamma1, ngamma2, nxi1, nxi2;
+	double tg, tx, dg, dx;
+	const double dmin = 0.001;
+	const double dmax = 1000.0;
+	if (gamma <= dmin)
+	{
+		ngamma1 = ngamma2 = 0;
+		tg = 0.0;
+	}
+	else if (gamma >= dmax)
+	{
+		ngamma1 = ngamma2 = 240;
+		tg = 60.0;
+	}
+	else
+	{
+		tg = 10.0 * log10(gamma / dmin);
+		ngamma1 = (int)(4.0 * tg);
+		ngamma2 = ngamma1 + 1;
+	}
+	if (xi <= dmin)
+	{
+		nxi1 = nxi2 = 0;
+		tx = 0.0;
+	}
+	else if (xi >= dmax)
+	{
+		nxi1 = nxi2 = 240;
+		tx = 60.0;
+	}
+	else
+	{
+		tx = 10.0 * log10(xi / dmin);
+		nxi1 = (int)(4.0 * tx);
+		nxi2 = nxi1 + 1;
+	}
+	dg = (tg - 0.25 * ngamma1) / 0.25;
+	dx = (tx - 0.25 * nxi1) / 0.25;
+	return (1.0 - dg)  * (1.0 - dx) * type[241 * nxi1 + ngamma1]
+		+  (1.0 - dg)  *        dx  * type[241 * nxi2 + ngamma1]
+		+         dg   * (1.0 - dx) * type[241 * nxi1 + ngamma2]
+		+         dg   *        dx  * type[241 * nxi2 + ngamma2];
+}
+
 void calc_gain (EMNR a)
 {
 	int k;
@@ -687,6 +744,8 @@ void calc_gain (EMNR a)
 					double witchHat = (1.0 - a->g.q) / a->g.q * exp (v2) / (1.0 + eps);
 					a->g.mask[k] *= witchHat / (1.0 + witchHat);
 				}
+				if (a->g.mask[k] > a->g.gmax) a->g.mask[k] = a->g.gmax;
+				if (a->g.mask[k] != a->g.mask[k]) a->g.mask[k] = 0.01;
 				a->g.prev_gamma[k] = gamma;
 				a->g.prev_mask[k] = a->g.mask[k];
 			}
@@ -702,29 +761,38 @@ void calc_gain (EMNR a)
 					+ (1.0 - a->g.alpha) * max (gamma - 1.0, a->g.eps_floor);
 				ehr = eps_hat / (1.0 + eps_hat);
 				v = ehr * gamma;
-				a->g.mask[k] = ehr * exp (0.5 * e1xb(v));
+				if((a->g.mask[k] = ehr * exp (min (700.0, 0.5 * e1xb(v)))) > a->g.gmax) a->g.mask[k] = a->g.gmax;
+				if (a->g.mask[k] != a->g.mask[k])a->g.mask[k] = 0.01;
 				a->g.prev_gamma[k] = gamma;
-				a->g.prev_mask[k] = a->mask[k];
+				a->g.prev_mask[k] = a->g.mask[k];
+			}
+			break;
+		}
+	case 2:
+		{
+			double gamma, eps_hat, eps_p;
+			for (k = 0; k < a->msize; k++)
+			{
+				gamma = min(a->g.lambda_y[k] / a->g.lambda_d[k], a->g.gamma_max);
+				eps_hat = a->g.alpha * a->g.prev_mask[k] * a->g.prev_mask[k] * a->g.prev_gamma[k]
+					+ (1.0 - a->g.alpha) * max(gamma - 1.0, a->g.eps_floor);
+				eps_p = eps_hat / (1.0 - a->g.q);
+				a->g.mask[k] = getKey(a->g.GG, gamma, eps_hat) * getKey(a->g.GGS, gamma, eps_p);
+				a->g.prev_gamma[k] = gamma;
+				a->g.prev_mask[k] = a->g.mask[k];
 			}
 			break;
 		}
 	}
 	if (a->g.ae_run) aepf(a);
-	{
-		double g = a->gain / a->fsize;
-		for (k = 0; k < a->msize; k++)
-			a->mask[k] *= g;
-	}
 }
 
 void xemnr (EMNR a, int pos)
 {
 	if (a->run && pos == a->position)
 	{
-//#ifdef __ANDROID__
-//LOGD(APPNAME,"xemnr");
-//#endif
 		int i, j, k, sbuff, sbegin;
+		double g1;
 		for (i = 0; i < 2 * a->bsize; i += 2)
 		{
 			a->inaccum[a->iainidx] = a->in[i];
@@ -741,8 +809,9 @@ void xemnr (EMNR a, int pos)
 			calc_gain(a);
 			for (i = 0; i < a->msize; i++)
 			{
-				a->revfftin[2 * i + 0] = a->mask[i] * a->forfftout[2 * i + 0];
-				a->revfftin[2 * i + 1] = a->mask[i] * a->forfftout[2 * i + 1];
+				g1 = a->gain * a->mask[i];
+				a->revfftin[2 * i + 0] = g1 * a->forfftout[2 * i + 0];
+				a->revfftin[2 * i + 1] = g1 * a->forfftout[2 * i + 1];
 			}
 			fftw_execute (a->Rrev);
 			for (i = 0; i < a->fsize; i++)
@@ -784,7 +853,6 @@ void SetRXAEMNRRun (int channel, int run)
 {
 	EnterCriticalSection (&ch[channel].csDSP);
 	rxa[channel].emnr.p->run = run;
-	// turn OFF / ON second bandpass as needed
 	RXAbp1Check (channel);
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
@@ -821,3 +889,4 @@ void SetRXAEMNRPosition (int channel, int position)
 	rxa[channel].bp1.p->position  = position;
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
+

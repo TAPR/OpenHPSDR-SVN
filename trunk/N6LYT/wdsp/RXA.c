@@ -264,7 +264,7 @@ void create_rxa (int channel)
 		ch[channel].dsp_rate,							// samplerate
 		0,												// window type
 		1.0,											// gain
-		1,												// gain method
+		2,												// gain method
 		0,												// npe_method
 		1);												// ae_run
 
@@ -468,9 +468,6 @@ void flush_rxa (int channel)
 
 void xrxa (int channel)
 {
-//#ifdef __ANDROID__
-//LOGD(APPNAME,"xrxa");
-//#endif
 	xshift (rxa[channel].shift.p);
 	xresample (rxa[channel].rsmpin.p);
 	xgen (rxa[channel].gen0.p);
@@ -559,5 +556,10 @@ void RXAbp1Check (int channel)
 		(rxa[channel].anf.p->run  == 1) ||
 		(rxa[channel].anr.p->run  == 1))	rxa[channel].bp1.p->run = 1;
 	else									rxa[channel].bp1.p->run = 0;
+	if ((rxa[channel].amd.p->run  == 1) ||
+		(rxa[channel].emnr.p->run == 1) ||
+		(rxa[channel].anf.p->run  == 1) ||
+		(rxa[channel].anr.p->run  == 1))	rxa[channel].bp1.p->gain = 2.0;
+	else									rxa[channel].bp1.p->gain = 1.0;
 	if (!old && rxa[channel].bp1.p->run) flush_bandpass (rxa[channel].bp1.p);
 }

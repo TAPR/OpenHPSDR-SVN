@@ -81,9 +81,10 @@ double* eq_mults (int size, int nfreqs, double* F, double* G, double samplerate,
 		}
 	}
 	if (method == 0)
-		impulse = fir_fsamp(size + 1, A, 1, 1.0);
+		impulse = fir_fsamp(size + 1, A, 1, 1.0, -1);
 	else
-		impulse = fir_fsamp_odd(size + 1, A, 1, 1.0);
+		impulse = fir_fsamp_odd(size + 1, A, 1, 1.0, -1);
+	// print_impulse("eq.txt", size + 1, impulse, 1, 0);
 	mults = fftcv_mults(2 * size, impulse);
 	_aligned_free (impulse);
 	_aligned_free (A);
@@ -135,9 +136,6 @@ void xeq (EQ a)
 	double I, Q;
 	if (a->run)
 	{
-//#ifdef __ANDROID__
-//LOGD(APPNAME,"xeq");
-//#endif
 		memcpy (&(a->infilt[2 * a->size]), a->in, a->size * sizeof (complex));
 		fftw_execute (a->CFor);
 		for (i = 0; i < 2 * a->size; i++)
