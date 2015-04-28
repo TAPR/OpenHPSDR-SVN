@@ -42,7 +42,7 @@ typedef enum _trxmode { RX, TX } TRXMODE;
 * 
 * @return
 */
-extern void Setup_SDR();
+extern void Setup_SDR(char* path);
 
 /* --------------------------------------------------------------------------*/
 /** 
