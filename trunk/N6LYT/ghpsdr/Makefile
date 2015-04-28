@@ -4,13 +4,17 @@
 CC=gcc
 LINK=gcc
 OPTIONS=-g
+GTKINCLUDES=`pkg-config --cflags gtk-2.0`
+GDKINCLUDES=`pkg-config --cflags gdk-2.0`
 INCLUDES=-I. -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include\
          -I/usr/include/gdk-pixbuf-2.0\
          -I/usr/include/atk-1.0 -I/usr/include/cairo\
          -I/usr/include/pango-1.0 -I/usr/include/glib-2.0\
          -I/usr/lib/glib-2.0/include -I/usr/include/pixman-1\
          -I/usr/include/freetype2 -I/usr/include/libpng12 \
-	 -I/usr/local/include/libusb-1.0
+	 -I/usr/local/include/libusb-1.0 \
+	 $(GTKINCLUDES) \
+	 $(GDKINCLUDES)
 
 LIBS=-L. -lDttSP -lpthread -lusb-1.0\
      -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0\

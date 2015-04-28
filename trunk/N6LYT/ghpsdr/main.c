@@ -780,7 +780,7 @@ int main(int argc,char* argv[]) {
     init_cw();
 
     // initialize DttSP
-    Setup_SDR();
+    Setup_SDR("");
     Release_Update();
     SetTRX(0,FALSE); // thread 0 is for receive
     SetTRX(1,TRUE);  // thread 1 is for transmit
