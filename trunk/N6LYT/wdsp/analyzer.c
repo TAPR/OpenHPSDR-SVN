@@ -1052,7 +1052,7 @@ void XCreateAnalyzer(	int disp,
 		for (j = 0; j < a->max_num_fft; j++)
 		{
 #ifdef linux
-			CreateEvent(&a->hSnapEvent[i][j],NULL, FALSE, FALSE, TEXT("snap"));
+			CreateEvent(&a->hSnapEvent[i][j],NULL, FALSE, FALSE, "snap");
 #else
 			a->hSnapEvent[i][j] = CreateEvent(NULL, FALSE, FALSE, TEXT("snap"));
 #endif

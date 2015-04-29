@@ -288,8 +288,8 @@ EMNR create_emnr (int run, int position, int size, double* in, double* out, int 
 	a->g.GG = (double *)malloc0(241 * 241 * sizeof(double));
 	a->g.GGS = (double *)malloc0(241 * 241 * sizeof(double));
 	a->g.fileb = fopen("calculus", "rb");
-	fread(a->g.GG, sizeof(double), 241 * 241, a->g.fileb);
-	fread(a->g.GGS, sizeof(double), 241 * 241, a->g.fileb);
+	int bytes=fread(a->g.GG, sizeof(double), 241 * 241, a->g.fileb);
+	bytes=fread(a->g.GGS, sizeof(double), 241 * 241, a->g.fileb);
 	fclose(a->g.fileb);
 	//
 
