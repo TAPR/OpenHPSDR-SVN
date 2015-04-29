@@ -26,9 +26,16 @@
 */
 
 typedef struct _METIS_CARD {
+    int device;
+    char name[32];
     char ip_address[16];
     char mac_address[18];
 } METIS_CARD;
+
+#define MAX_METIS_CARDS 10
+METIS_CARD metis_cards[MAX_METIS_CARDS];
+
+int metis_selected;
 
 void metis_discover(char* interface);
 int metis_found();

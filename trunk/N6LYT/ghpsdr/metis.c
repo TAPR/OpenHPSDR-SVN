@@ -47,8 +47,9 @@
 #include "metis.h"
 #include "ozy.h"
 
-#define MAX_METIS_CARDS 10
-METIS_CARD metis_cards[MAX_METIS_CARDS];
+//#define MAX_METIS_CARDS 10
+//METIS_CARD metis_cards[MAX_METIS_CARDS];
+//int metis_selected;
 
 #define DISCOVER_IDLE 0
 #define DISCOVER_SENT 1
@@ -220,9 +221,9 @@ void metis_start_receive_thread() {
 
     discovering=0;
 
-    h=gethostbyname(metis_cards[0].ip_address);
+    h=gethostbyname(metis_cards[metis_selected].ip_address);
     if(h==NULL) {
-        fprintf(stderr,"metis_start_receiver_thread: unknown host %s\n",metis_cards[0].ip_address);
+        fprintf(stderr,"metis_start_receiver_thread: unknown host %s\n",metis_cards[metis_selected].ip_address);
         exit(1);
     }
 
@@ -297,6 +298,30 @@ void* metis_receive_thread(void* arg) {
                 case 2:  // response to a discovery packet
                     if(discovering) {
                         if(found<MAX_METIS_CARDS) {
+                            // get the device type from the reply
+                            metis_cards[found].device=buffer[10]&0xFF;
+                            switch(metis_cards[found].device) {
+                                case 0:
+                                    strcpy(metis_cards[found].name,"Metis");
+                                    break;
+                                case 1:
+                                    strcpy(metis_cards[found].name,"Hermes");
+                                    break;
+                                case 2:
+                                    strcpy(metis_cards[found].name,"Griffin");
+                                    break;
+                                case 4:
+                                    strcpy(metis_cards[found].name,"Angelia");
+                                    break;
+                                case 5:
+                                    strcpy(metis_cards[found].name,"Orion");
+                                    break;
+                                case 6:
+                                    strcpy(metis_cards[found].name,"Hermes Lite");
+                                    break;
+                            }
+                            fprintf(stderr, "found device id=%d %s\n", metis_cards[found].device, metis_cards[found].name);
+
                             // get MAC address from reply
                             sprintf(metis_cards[found].mac_address,"%02X:%02X:%02X:%02X:%02X:%02X",
                                        buffer[3]&0xFF,buffer[4]&0xFF,buffer[5]&0xFF,buffer[6]&0xFF,buffer[7]&0xFF,buffer[8]&0xFF);
@@ -309,6 +334,11 @@ void* metis_receive_thread(void* arg) {
                                        (addr.sin_addr.s_addr>>16)&0xFF,
                                        (addr.sin_addr.s_addr>>24)&0xFF);
                             fprintf(stderr,"Metis IP address %s\n",metis_cards[found].ip_address);
+
+                            if(found==0) {
+                                fprintf(stderr,"Will use the above device\n");
+                            }
+
                             found++;
                         } else {
                             fprintf(stderr,"too many metis cards!\n");

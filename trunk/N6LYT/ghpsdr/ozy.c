@@ -164,6 +164,10 @@ void ozy_set_metis() {
     metis=1;
 }
 
+int ozy_get_metis() {
+    return metis;
+}
+
 void ozy_set_interface(char* iface) {
     strcpy(interface,iface);
 }
@@ -939,14 +943,52 @@ int ozy_init() {
         int found;
         long i;
         metis_discover(interface);
-        for(i=0;i<30000;i++) {
+        for(i=0;i<10000000;i++) {
             if(metis_found()>0) {
-fprintf(stderr,"Metis discovered after %ld\n",i);
-                break;
+//fprintf(stderr,"Device discovered after %ld\n",i);
             }
         }
         if(metis_found()<=0) {
             return (-3);
+        } 
+
+        metis_selected = 0;
+        if(metis_found()>1) {
+                GtkWidget* dialog = gtk_message_dialog_new (NULL,
+                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                 GTK_MESSAGE_ERROR,
+                                                 GTK_BUTTONS_OK_CANCEL,
+                                                 "Found multiple devices (d)!",
+                                                 metis_found());
+                gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Select required device");
+                gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
+                GtkWidget* area=gtk_message_dialog_get_message_area (dialog);
+                GSList* group=NULL;
+                char label[128];
+                int i;
+                GtkRadioButton* radioButton[metis_found()];
+                for(i=0;i<metis_found();i++) {
+                   sprintf(label,"%s %s (%s)",metis_cards[i].name,metis_cards[i].ip_address,metis_cards[i].mac_address);
+                   radioButton[i]=gtk_radio_button_new_with_label(group,label);
+                   gtk_toggle_button_set_active((GtkRadioButton*)radioButton[i],(gboolean)(i==0));
+                   gtk_widget_show(radioButton[i]);
+                   gtk_container_add((GtkContainer*)area,(GtkWidget*)radioButton[i]);
+                   group=gtk_radio_button_group (GTK_RADIO_BUTTON (radioButton[i]));
+                }
+                int result = gtk_dialog_run (GTK_DIALOG (dialog));
+                switch (result) {
+                    case GTK_RESPONSE_OK:
+                        for(i=0;i<metis_found();i++) {
+                            if(gtk_toggle_button_get_active((GtkToggleButton *)radioButton[i])) {
+                                metis_selected=i;
+                            }
+                        }
+                        break;
+                    default:
+                        exit(1);
+                        break;
+                }
+                gtk_widget_destroy (dialog);
         }
     } else {
         // open ozy
