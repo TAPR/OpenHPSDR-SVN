@@ -106,6 +106,7 @@ int alexRxOnlyAntenna;
 float vswr;
 
 void ozy_set_metis();
+int ozy_get_metis();
 void ozy_set_interface(char*);
 char* ozy_get_interface();
 void setPennyLane(int);

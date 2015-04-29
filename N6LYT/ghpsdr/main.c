@@ -389,7 +389,14 @@ void buildMainUI() {
     GtkWidget* label;
 
     mainWindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title((GtkWindow*)mainWindow,"Gtk+ GUI for HPSDR");
+
+    char title[128];
+    if(ozy_get_metis()==1) {
+        sprintf(title,"Gtk+ GUI for HPSDR: %s %s (%s)",metis_cards[metis_selected].name, metis_cards[metis_selected].ip_address,metis_cards[metis_selected].mac_address);
+    } else {
+        strcpy(title,"Gtk+ GUI for HPSDR");
+    }
+    gtk_window_set_title((GtkWindow*)mainWindow,title);
     gtk_widget_modify_bg(mainWindow,GTK_STATE_NORMAL,&background);
     g_signal_connect(G_OBJECT(mainWindow),"destroy",G_CALLBACK(quit),NULL);
 
@@ -844,6 +851,7 @@ int main(int argc,char* argv[]) {
                 break;
 
             case -3: // did not find metis
+fprintf(stderr,"did not find metis\n");
                 dialog = gtk_message_dialog_new (NULL,
                                                  GTK_DIALOG_DESTROY_WITH_PARENT,
                                                  GTK_MESSAGE_ERROR,
