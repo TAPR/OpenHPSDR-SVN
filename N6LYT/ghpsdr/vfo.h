@@ -48,7 +48,7 @@ void vfoSaveState();
 void vfoRestoreState();
 
 GtkWidget* buildVfoUI();
-void vfoIncrementFrequency(long increment);
+void vfoIncrementFrequency(long increment,gboolean round);
 void setAFrequency(long long frequency);
 void setBFrequency(long long frequency);
 void setLOFrequency(long long frequency);

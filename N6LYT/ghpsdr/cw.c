@@ -7,6 +7,20 @@
 void init_cw() {
     int i;
 
+    cwinternal=1;
+    cwkeysreversed = 0; // 0=disabled 1=enabled
+    cwkeyerspeed = 12; // 1-60 WPM
+    cwkeyermode = KEYER_STRAIGHT;
+    
+    cwkeyerweight = 30; //0-100
+    cwkeyerspacing = 0; // 0=on 1=off 
+    
+    cwinternal = 1;  // 0=external, 1=internal 
+    cwsidetonevolume = 127; // 0-127
+    cwpttdelay = 20; // 0-255ms 
+    cwhangtime = 10; // ms
+    cwsidetonefrequency = 400; // Hz 
+
     double deltaf = 600.0/(double)sampleRate*2*M_PI;
     //double deltaf = M_PI / 40.0;     // (2 PI f / 48k) gives an 600 Hz note at 48 ksps
     for (i=0;i<240;++i) {

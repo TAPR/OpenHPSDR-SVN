@@ -89,11 +89,15 @@ void moxButtonCallback(GtkWidget* widget,gpointer data) {
 
     if(!fullDuplex) {
         if(mox) {
+#ifdef DTTSP
             SetThreadProcessingMode(0,0);  // MUTE
             //SetRXOutputGain(0,0,0.0);
+#endif
         } else {
+#ifdef DTTSP
             SetThreadProcessingMode(0,2);  // RUN
             //SetRXOutputGain(0,0,volume/100.0);
+#endif
         }
     }
 
@@ -137,25 +141,35 @@ void tuneButtonCallback(GtkWidget* widget,gpointer data) {
             case modeLSB:
             case modeCWL:
             case modeDIGL:
+#ifdef DTTSP
                 SetTXFilter(1,(double)(-cwPitch-100),(double)(-cwPitch+100));
+#endif
                 break;
             case modeUSB:
             case modeCWU:
             case modeDIGU:
+#ifdef DTTSP
                 SetTXFilter(1,(double)(cwPitch-100),(double)(cwPitch+100));
+#endif
                 break;
         }
     } else {
+#ifdef DTTSP
         SetTXFilter(1,(double)filterLow,(double)filterHigh);
+#endif
     }
 
     if(!fullDuplex) {
         if(mox) {
+#ifdef DTTSP
             SetThreadProcessingMode(0,0);  // MUTE
             //SetRXOutputGain(0,0,0.0);
+#endif
         } else {
+#ifdef DTTSP
             SetThreadProcessingMode(0,2);  // RUN
             //SetRXOutputGain(0,0,volume/100.0);
+#endif
         }
     }
 

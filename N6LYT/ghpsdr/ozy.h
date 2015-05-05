@@ -53,6 +53,7 @@ extern "C" {
 #define SPEED_48KHZ               0x00
 #define SPEED_96KHZ               0x01
 #define SPEED_192KHZ              0x02
+#define SPEED_384KHZ              0x03
 
 #define MODE_CLASS_E              0x01
 #define MODE_OTHERS               0x00
@@ -89,6 +90,8 @@ int clock122_88MHz;
 int preamp;
 
 int sampleRate;
+int dspRate;
+int outputRate;
 
 int mox;
 int xmit;
@@ -96,8 +99,14 @@ int xmit;
 int pennyLane;
 
 #define BUFFER_SIZE 1024
-
 int buffer_size;
+#define OUTPUT_BUFFER_SIZE 1024
+int output_buffer_size;
+#define BANDSCOPE_BUFFER_SIZE 2048
+int bandscope_buffer_size;
+
+#define FFT_SIZE 4096;
+int fft_size;
 
 int alexRxAntenna;
 int alexTxAntenna;
@@ -106,7 +115,8 @@ int alexRxOnlyAntenna;
 float vswr;
 
 void ozy_set_metis();
-int ozy_get_metis();
+int ozy_use_metis();
+void ozy_set_usb();
 void ozy_set_interface(char*);
 char* ozy_get_interface();
 void setPennyLane(int);

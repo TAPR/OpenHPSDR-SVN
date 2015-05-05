@@ -37,7 +37,6 @@
 
 #include "screensize.h"
 #include "command.h"
-#include "dttsp.h"
 #include "main.h"
 #include "xvtr.h"
 #include "band.h"
@@ -466,11 +465,15 @@ void vfoCallback(GtkWidget* widget,gpointer data) {
 * 
 * @param increment
 */
-void vfoIncrementFrequency(long increment) {
+void vfoIncrementFrequency(long increment,gboolean round) {
     if(subrx) {
-        subrxIncrementFrequency(increment);
+        subrxIncrementFrequency(increment,round);
     } else {
-        setAFrequency(frequencyA+(long long)increment);
+        if(round) {
+            setAFrequency(((frequencyA+(long long)increment)/(long long)frequencyIncrement)*(long long)frequencyIncrement);
+        } else {
+            setAFrequency(frequencyA+(long long)increment);
+        }
     }
 }
 
@@ -482,8 +485,12 @@ void vfoIncrementFrequency(long increment) {
 * 
 * @param increment
 */
-void vfoIncrementAFrequency(long increment) {
-    setAFrequency(frequencyA+(long long)increment);
+void vfoIncrementAFrequency(long increment,gboolean round) {
+    if(round) {
+        setAFrequency(((frequencyA+(long long)increment)/(long long)frequencyIncrement)*(long long)frequencyIncrement);
+    } else {
+        setAFrequency(frequencyA+(long long)increment);
+    }
 }
 
 /* --------------------------------------------------------------------------*/
@@ -492,8 +499,12 @@ void vfoIncrementAFrequency(long increment) {
 * 
 * @param increment
 */
-void vfoIncrementBFrequency(long increment) {
-    setBFrequency(frequencyB+(long long)increment);
+void vfoIncrementBFrequency(long increment,gboolean round) {
+    if(round) {
+        setBFrequency(((frequencyB+(long long)increment)/(long long)frequencyIncrement)*(long long)frequencyIncrement);
+    } else {
+        setBFrequency(frequencyB+(long long)increment);
+    }
 }
 
 /* --------------------------------------------------------------------------*/
@@ -504,7 +515,7 @@ void vfoIncrementBFrequency(long increment) {
 */
 int vfoStepFrequency(gpointer data) {
     long step=*(long*)data;
-    vfoIncrementFrequency(step*50);
+    vfoIncrementFrequency(step*50,FALSE);
     free(data);
     return 0;
 }
@@ -519,7 +530,7 @@ int vfoStepFrequency(gpointer data) {
 */
 gint frequencyUpTimer(gpointer data) {
     gtk_timeout_remove(vfoTimerId);
-    vfoIncrementFrequency(frequencyIncrement);
+    vfoIncrementFrequency(frequencyIncrement,FALSE);
     vfoTimerId=gtk_timeout_add(50,frequencyUpTimer,NULL);
     return TRUE;
 }
@@ -532,7 +543,7 @@ gint frequencyUpTimer(gpointer data) {
 * @param data
 */
 void frequencyUpCallback(GtkWidget* widget,gpointer data) {
-    vfoIncrementFrequency(frequencyIncrement);
+    vfoIncrementFrequency(frequencyIncrement,FALSE);
     vfoTimerId=gtk_timeout_add(500,frequencyUpTimer,NULL);
 }
 
@@ -546,7 +557,7 @@ void frequencyUpCallback(GtkWidget* widget,gpointer data) {
 */
 gint frequencyDownTimer(gpointer data) {
     gtk_timeout_remove(vfoTimerId);
-    vfoIncrementFrequency(-frequencyIncrement);
+    vfoIncrementFrequency(-frequencyIncrement,FALSE);
     vfoTimerId=gtk_timeout_add(50,frequencyDownTimer,NULL);
     return TRUE;
 }
@@ -559,7 +570,7 @@ gint frequencyDownTimer(gpointer data) {
 * @param data
 */
 void frequencyDownCallback(GtkWidget* widget,gpointer data) {
-    vfoIncrementFrequency(-frequencyIncrement);
+    vfoIncrementFrequency(-frequencyIncrement,FALSE);
     vfoTimerId=gtk_timeout_add(500,frequencyDownTimer,NULL);
 }
 
@@ -593,9 +604,9 @@ gboolean frequency_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
         increment=-frequencyIncrement;
     }
     if(widget==vfoAFrequency) {
-        vfoIncrementAFrequency(increment);
+        vfoIncrementAFrequency(increment,FALSE);
     } else {
-        vfoIncrementBFrequency(increment);
+        vfoIncrementBFrequency(increment,FALSE);
     }
 }
 

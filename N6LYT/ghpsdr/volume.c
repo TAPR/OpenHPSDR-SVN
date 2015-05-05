@@ -38,7 +38,6 @@
 
 #include "screensize.h"
 #include "command.h"
-#include "dttsp.h"
 #include "main.h"
 
 GtkWidget* volumeFrame;
@@ -67,7 +66,9 @@ void selectVolume(GtkWidget* widget) {
 */
 void volumeChanged(GtkWidget* widget,gpointer data) {
     volume=gtk_range_get_value((GtkRange*)volumeScale);
+#ifdef DTTSP
     SetRXOutputGain(0,0,volume/100.0);
+#endif
 }
 
 /* --------------------------------------------------------------------------*/
@@ -101,7 +102,9 @@ GtkWidget* buildVolumeUI() {
 #endif
     gtk_widget_show(volumeFrame);
 
+#ifdef DTTSP
     SetRXOutputGain(0,0,volume/100.0);
+#endif
 
     return volumeFrame;
   

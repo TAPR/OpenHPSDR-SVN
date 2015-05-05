@@ -25,4 +25,4 @@
 * 
 */
 
-#define VERSION "0.9"
+#define VERSION "1.0"

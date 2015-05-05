@@ -44,6 +44,8 @@
 #include "mode.h"
 #include "property.h"
 #include "soundcard.h"
+#include "wdsp.h"
+#include "channel.h"
 
 GtkWidget* modeFrame;
 GtkWidget* modeTable;
@@ -117,13 +119,8 @@ void selectMode(GtkWidget* widget) {
         mode=modeDRM;
     }
 
-
-    // set RX mode
-    //sprintf(temp,"setMode %d",mode);
-    //writeCommand(temp);
-    SetMode(0,0,mode);
-    SetMode(0,1,mode);
-    SetMode(1,0,mode);
+    SetRXAMode(CHANNEL_RX0, mode);
+    SetTXAMode(CHANNEL_TX, mode);
 
     setFilterValues(mode);
     setFilter(filter);

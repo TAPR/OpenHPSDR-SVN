@@ -28,7 +28,8 @@
 #include <gtk/gtk.h>
 
 #include "main.h"
-#include "dttsp.h"
+#include "wdsp.h"
+#include "channel.h"
 #include "spectrum.h"
 #include "spectrum_update.h"
 #include "transmit.h"
@@ -40,7 +41,7 @@ int spectrumUpdatesPerSecond;
 gint spectrumUpdate(gpointer data);
 void updateSamples();
 
-float spectrumBuffer[SPECTRUM_SAMPLES];
+float spectrumBuffer[spectrumWIDTH];
 
 gint spectrumTimerId;
 
@@ -97,35 +98,61 @@ gint spectrumUpdate(gpointer data) {
 void updateSamples() {
     int thread;
     thread=0;
+/*
     if(xmit && !fullDuplex) thread=1;
+*/
 
+    int result;
     switch(spectrumMode) {
         case spectrumSPECTRUM:
-            Process_Spectrum(thread,spectrumBuffer);
+            if(xmit | tuning) {
+                GetPixels(CHANNEL_TX, spectrumBuffer, &result);
+            } else {
+                GetPixels(CHANNEL_RX0, spectrumBuffer, &result);
+            }
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPANADAPTER:
-            Process_Panadapter(thread,spectrumBuffer);
+            if(xmit | tuning) {
+                GetPixels(CHANNEL_TX, spectrumBuffer, &result);
+            } else {
+                GetPixels(CHANNEL_RX0, spectrumBuffer, &result);
+            }
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumSCOPE:
-            Process_Scope(thread,spectrumBuffer,4096);
+            if(xmit | tuning) {
+                TXAGetaSipF(CHANNEL_TX, spectrumBuffer, spectrumWIDTH);
+            } else {
+                RXAGetaSipF(CHANNEL_RX0, spectrumBuffer, spectrumWIDTH);
+            }
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPHASE:
-            Process_Scope(thread,spectrumBuffer,100);
+            if(xmit | tuning) {
+                TXAGetaSipF1(CHANNEL_TX, spectrumBuffer, spectrumWIDTH);
+            } else {
+                RXAGetaSipF(CHANNEL_RX0, spectrumBuffer, spectrumWIDTH);
+            }
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPHASE2:
-            Process_Scope(thread,spectrumBuffer,100);
+            if(xmit | tuning) {
+                TXAGetaSipF1(CHANNEL_TX, spectrumBuffer, spectrumWIDTH);
+            } else {
+                RXAGetaSipF(CHANNEL_RX0, spectrumBuffer, spectrumWIDTH);
+            }
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPANWATER:
-            Process_Panadapter(thread,spectrumBuffer);
+            if(xmit | tuning) {
+                GetPixels(CHANNEL_TX, spectrumBuffer, &result);
+            } else {
+                GetPixels(CHANNEL_RX0, spectrumBuffer, &result);
+            }
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumHISTOGRAM:
-            Process_Panadapter(thread,spectrumBuffer);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumNONE:

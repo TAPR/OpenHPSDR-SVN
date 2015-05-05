@@ -1157,55 +1157,55 @@ void bandSaveState() {
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].mode);
-            sprintf(name,"xvtr.%d.mode",b,stack);
+            sprintf(name,"xvtr.%d.mode",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].filter);
-            sprintf(name,"xvtr.%d.filter",b,stack);
+            sprintf(name,"xvtr.%d.filter",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].var1Low);
-            sprintf(name,"xvtr.%d.var1Low",b,stack);
+            sprintf(name,"xvtr.%d.var1Low",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].var1High);
-            sprintf(name,"xvtr.%d.var1High",b,stack);
+            sprintf(name,"xvtr.%d.var1High",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].var2Low);
-            sprintf(name,"xvtr.%d.var2Low",b,stack);
+            sprintf(name,"xvtr.%d.var2Low",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].var2High);
-            sprintf(name,"xvtr.%d.var2High",b,stack);
+            sprintf(name,"xvtr.%d.var2High",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].step);
-            sprintf(name,"xvtr.%d.step",b,stack);
+            sprintf(name,"xvtr.%d.step",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].preamp);
-            sprintf(name,"xvtr.%d.preamp",b,stack);
+            sprintf(name,"xvtr.%d.preamp",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].spectrumHigh);
-            sprintf(name,"xvtr.%d.spectrumHigh",b,stack);
+            sprintf(name,"xvtr.%d.spectrumHigh",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].spectrumLow);
-            sprintf(name,"xvtr.%d.spectrumLow",b,stack);
+            sprintf(name,"xvtr.%d.spectrumLow",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].spectrumStep);
-            sprintf(name,"xvtr.%d.spectrumStep",b,stack);
+            sprintf(name,"xvtr.%d.spectrumStep",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].waterfallHigh);
-            sprintf(name,"xvtr.%d.waterfallHigh",b,stack);
+            sprintf(name,"xvtr.%d.waterfallHigh",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].waterfallLow);
-            sprintf(name,"xvtr.%d.waterfallLow",b,stack);
+            sprintf(name,"xvtr.%d.waterfallLow",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].alexRxAntenna);

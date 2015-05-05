@@ -27,7 +27,8 @@
 #include <gtk/gtk.h>
 
 #include "main.h"
-#include "dttsp.h"
+#include "wdsp.h"
+#include "channel.h"
 #include "meter.h"
 #include "meter_update.h"
 
@@ -78,6 +79,6 @@ gint meterUpdate(gpointer data) {
 void meterUpdateSamples(char* command) {
     int n;
 
-    float m=CalculateRXMeter(0,0,0);
+    float m=GetRXAMeter(CHANNEL_RX0, 1/*WDSP.S_AV*/);
     updateMeter(m);
 }

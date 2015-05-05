@@ -38,6 +38,8 @@
 #include "main.h"
 #include "property.h"
 #include "mode.h"
+#include "wdsp.h"
+#include "channel.h"
 
 
 int filterLow;
@@ -556,11 +558,8 @@ void selectFilter(GtkWidget* widget) {
             break;
     }
     
-    //fprintf(stderr,"setFilter %d %d\n",filterLow,filterHigh);
-
-    SetRXFilter(0,0,(double)filterLow,(double)filterHigh);
-    SetRXFilter(0,1,(double)filterLow,(double)filterHigh);
-    SetTXFilter(1,(double)filterLow,(double)filterHigh);
+    SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
+    SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
 
     drawFilterHigh(TRUE);
     drawFilterLow(TRUE);
@@ -763,9 +762,8 @@ void updateFilter(GtkWidget* widget) {
     }
     //sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
     //writeCommand(temp);
-    SetRXFilter(0,0,(double)filterLow,(double)filterHigh);
-    SetRXFilter(0,1,(double)filterLow,(double)filterHigh);
-    SetTXFilter(1,(double)filterLow,(double)filterHigh);
+    SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
+    SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -872,11 +870,8 @@ gboolean filter_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
             }
             break;
     }
-    //sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
-    //writeCommand(temp);
-    SetRXFilter(0,0,(double)filterLow,(double)filterHigh);
-    SetRXFilter(0,1,(double)filterLow,(double)filterHigh);
-    SetTXFilter(1,(double)filterLow,(double)filterHigh);
+    SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
+    SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
 }
 
 /* --------------------------------------------------------------------------*/

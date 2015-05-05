@@ -35,7 +35,7 @@
 #define SPEC_MAG 0
 #define SPEC_PWR 1
 
-#define SPECTRUM_SAMPLES 4096
+//#define SPECTRUM_SAMPLES 4096
 #define SPECTRUM_UPDATES_PER_SECOND 15
 
 int spectrumUpdatesPerSecond;
