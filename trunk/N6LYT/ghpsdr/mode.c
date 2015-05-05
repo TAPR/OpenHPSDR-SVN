@@ -120,6 +120,7 @@ void selectMode(GtkWidget* widget) {
     }
 
     SetRXAMode(CHANNEL_RX0, mode);
+    SetRXAMode(CHANNEL_SUBRX, mode);
     SetTXAMode(CHANNEL_TX, mode);
 
     setFilterValues(mode);

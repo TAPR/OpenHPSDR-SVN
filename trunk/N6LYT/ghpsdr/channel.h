@@ -8,3 +8,4 @@
 #define CHANNEL_RX7 7
 #define CHANNEL_TX 8
 #define CHANNEL_BS 9
+#define CHANNEL_SUBRX 10

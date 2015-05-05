@@ -33,6 +33,7 @@
 #include "metis.h"
 #include "cw.h"
 #include "wdsp.h"
+#include "subrx.h"
 #include "channel.h"
 
 //#define OZY_BUFFERS
@@ -96,6 +97,9 @@ float mic_right_buffer[BUFFER_SIZE];
 
 float left_output_buffer[OUTPUT_BUFFER_SIZE];
 float right_output_buffer[OUTPUT_BUFFER_SIZE];
+
+float left_subrx_output_buffer[OUTPUT_BUFFER_SIZE];
+float right_subrx_output_buffer[OUTPUT_BUFFER_SIZE];
 
 float left_tx_buffer[OUTPUT_BUFFER_SIZE];
 float right_tx_buffer[OUTPUT_BUFFER_SIZE];
@@ -537,6 +541,12 @@ if(xmit) {
                 if(error!=0) {
                     fprintf(stderr,"fexchange2 (CHANNEL_RX0) returned error: %d\n", error);
                 }
+                if(subrx) {
+		    fexchange2(CHANNEL_SUBRX, left_input_buffer, right_input_buffer, left_subrx_output_buffer, right_subrx_output_buffer, &error);
+                    if(error!=0) {
+                        fprintf(stderr,"fexchange2 (CHANNEL_SUBRX) returned error: %d\n", error);
+                    }
+                }
                 Spectrum(CHANNEL_RX0, 0, 0, right_input_buffer, left_input_buffer);
 
                 // transmit
@@ -567,6 +577,12 @@ if(xmit) {
                 for(j=0;j<output_buffer_size;j++) {
                     left_rx_sample=(short)(left_output_buffer[j]*32767.0*(volume/100.0));
                     right_rx_sample=(short)(right_output_buffer[j]*32767.0*(volume/100.0));
+                    if(subrx) {
+                        left_rx_sample+=(short)(left_subrx_output_buffer[j]*32767.0*(subrxGain/100.0));
+                        right_rx_sample+=(short)(right_subrx_output_buffer[j]*32767.0*(subrxGain/100.0));
+                        //left_rx_sample/=2;
+                        //right_rx_sample/=2;
+                    }
 
                     if(xmit) {
                         left_tx_sample=(short)(left_tx_buffer[j]*32767.0*gain);
@@ -898,6 +914,7 @@ void setSpeed(int s) {
 fprintf(stderr,"setSpeed s=%d sampleRate=%d\n",s,sampleRate);
 
     SetAllRates(CHANNEL_RX0,sampleRate,dspRate,outputRate);
+    SetAllRates(CHANNEL_SUBRX,sampleRate,dspRate,outputRate);
     SetAllRates(CHANNEL_TX,sampleRate,dspRate,outputRate);
     SetEERSamplerate(0, 48000);
     setFilter(filter);

@@ -38,6 +38,7 @@
 #include "property.h"
 #include "ozy.h"
 #include "vfo.h"
+#include "channel.h"
 
 GtkWidget* subrxFrame;
 GtkWidget* subrxTable;
@@ -241,20 +242,22 @@ void subrxEnabledButtonCallback(GtkWidget* widget,gpointer data) {
 
     if(subrx) {
         subrxFrequencyLO=frequencyALO;
-        long long diff=frequencyA-subrxFrequency;
+        long long diff=subrxFrequency-frequencyA;
         if(diff<0) diff=-diff;
         if(diff>sampleRate/2) {
             setSubrxFrequency(frequencyA);
         } else {
             setSubrxFrequency(subrxFrequency);
         }
-#ifdef DTTSP
-        SetSubRXSt(0,1,TRUE);
-#endif
+fprintf(stderr,"subrx: SetRXAShiftRun 1\n");
+        SetRXAShiftRun(CHANNEL_SUBRX, 1);
+fprintf(stderr,"subrx: SetRXAChannelState 1\n");
+        SetChannelState(CHANNEL_SUBRX, 1, 0);
     } else {
-#ifdef DTTSP
-        SetSubRXSt(0,1,FALSE);
-#endif
+fprintf(stderr,"subrx: SetRXAShiftRun 0\n");
+        SetRXAShiftRun(CHANNEL_SUBRX, 0);
+fprintf(stderr,"subrx: SetRXAChannelState 0\n");
+        SetChannelState(CHANNEL_SUBRX, 0, 0);
     }
     updateSubrxDisplay();
 }
@@ -284,10 +287,8 @@ void subrxGainChanged(GtkWidget* widget,gpointer data) {
 void subrxPanChanged(GtkWidget* widget,gpointer data) {
     char command[80];
     subrxPan=gtk_range_get_value((GtkRange*)subrxPanScale);
-#ifdef DTTSP
-    SetRXPan(0,1,subrxPan);
-#endif
-
+fprintf(stderr,"subrx: SetRXAPanelPan %f\n",1.0-subrxPan);
+    SetRXAPanelPan(CHANNEL_SUBRX, 1.0-subrxPan);
 }
 
 
@@ -392,9 +393,8 @@ GtkWidget* buildSubRxUI() {
     gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxPanFrame,4,8,1,2);
 #endif
 
-#ifdef DTTSP
-    SetRXPan(0,1,subrxPan);
-#endif
+fprintf(stderr,"subrx: SetRXAPanelPan %f\n",1.0-subrxPan);
+    SetRXAPanelPan(CHANNEL_SUBRX, 1.0-subrxPan);
 
     gtk_container_add(GTK_CONTAINER(subrxFrame),subrxTable);
     gtk_widget_show(subrxTable);
@@ -413,7 +413,7 @@ GtkWidget* buildSubRxUI() {
 void setSubrxFrequency(long long f) {
     long long diff;
     if(subrx) {
-        if((f>=(frequencyA-(sampleRate/2)))&& (f<=(frequencyA+(sampleRate/2)))) {
+        if((f>=(frequencyA-(sampleRate/2))) && (f<=(frequencyA+(sampleRate/2)))) {
             subrxFrequency=f;
         }
         subrxFrequencyDsp=0;
@@ -421,10 +421,9 @@ void setSubrxFrequency(long long f) {
         subrxFrequency=f;
         subrxFrequencyDds=f-subrxFrequencyLO;
         updateSubrxDisplay();
-        diff=frequencyA-subrxFrequency;
-#ifdef DTTSP
-        SetRXOsc(0,1,(double)diff);
-#endif
+        diff=subrxFrequency-frequencyA;
+fprintf(stderr,"subrx: SetRXAShiftFreq %ld\n", diff);
+        SetRXAShiftFreq(CHANNEL_SUBRX,(double)diff);
     }
 }
 
@@ -477,9 +476,10 @@ void subrxRestoreState() {
     if(value) subrxFrequency=atol(value); else subrxFrequency=7051000;
 
 #ifdef DTTSP
-    SetRXPan(0,1,subrxPan);
     SetRXOutputGain(0,1,subrxGain/100.0);
 #endif
+fprintf(stderr,"subrx: SetRXAPanelPan %f\n",1.0-subrxPan);
+    SetRXAPanelPan(CHANNEL_SUBRX, 1.0-subrxPan);
 }
 
 void resetSubRx() {

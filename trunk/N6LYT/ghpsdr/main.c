@@ -929,6 +929,23 @@ fprintf(stderr,"    (%02X:%02X:%02X:%02X:%02X:%02X)\n",
 
     initAnalyzer(CHANNEL_TX);
 
+    fprintf(stderr,"OpenChannel CHANNEL_SUBRX buffer_size=%d fft_size=%d sampleRate=%d dspRate=%d outputRate=%d\n",
+                buffer_size,
+                fft_size,
+                sampleRate,
+                dspRate,
+                outputRate);
+    OpenChannel(CHANNEL_SUBRX,
+                buffer_size,
+                fft_size,
+                sampleRate,
+                dspRate,
+                outputRate,
+                0, // receive
+                1, // run
+                0.010, 0.025, 0.0, 0.010, 0);
+
+
     fprintf(stderr,"XCreateAnalyzer CHANNEL_BS\n");
     XCreateAnalyzer(CHANNEL_BS, &success, 262144, 1, 1, "");
         if (success != 0) {
@@ -1085,15 +1102,25 @@ fprintf(stderr,"Did not find any devices!\n");
 
     SetRXABandpassRun(CHANNEL_RX0, 1);
     SetRXAAMDSBMode(CHANNEL_RX0, 0);
-
+    SetRXAShiftRun(CHANNEL_RX0, 0);
     SetRXAEMNRgainMethod(CHANNEL_RX0, 1);
     SetRXAEMNRnpeMethod(CHANNEL_RX0, 0);
     SetRXAEMNRaeRun(CHANNEL_RX0, 1);
     SetRXAEMNRPosition(CHANNEL_RX0, 0);
-
     SetRXAEMNRRun(CHANNEL_RX0, 0);
     SetRXAANRRun(CHANNEL_RX0, 0);
     SetRXAANFRun(CHANNEL_RX0, 0);
+
+    SetRXABandpassRun(CHANNEL_SUBRX, 1);
+    SetRXAAMDSBMode(CHANNEL_SUBRX, 0);
+    SetRXAShiftRun(CHANNEL_SUBRX, 1);
+    SetRXAEMNRgainMethod(CHANNEL_SUBRX, 1);
+    SetRXAEMNRnpeMethod(CHANNEL_SUBRX, 0);
+    SetRXAEMNRaeRun(CHANNEL_SUBRX, 1);
+    SetRXAEMNRPosition(CHANNEL_SUBRX, 0);
+    SetRXAEMNRRun(CHANNEL_SUBRX, 0);
+    SetRXAANRRun(CHANNEL_SUBRX, 0);
+    SetRXAANFRun(CHANNEL_SUBRX, 0);
 
     gtk_main();
 

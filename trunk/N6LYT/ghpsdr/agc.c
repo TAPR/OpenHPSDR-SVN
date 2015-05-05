@@ -96,6 +96,7 @@ void selectAgc(GtkWidget* widget) {
     }
 
     SetRXAAGCMode (CHANNEL_RX0, agc);
+    SetRXAAGCMode (CHANNEL_SUBRX, agc);
 
 }
 
