@@ -161,7 +161,7 @@ wisdom.o
 
 JAVA_OBJS= org_g0orx_openhpsdr_wdsp_WDSP.o
 
-all: $(PROGRAM) $(HEADERS) $(SOURCES) $(JAVA_PROGRAM) $(JAVA_HEADERS) $(JAVA_SOURCES)
+all: $(PROGRAM) $(HEADERS) $(SOURCES)
 
 java: $(JAVA_PROGRAM) $(JAVA_HEADERS) $(JAVA_SOURCES)
 
