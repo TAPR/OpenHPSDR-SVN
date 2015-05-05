@@ -559,6 +559,7 @@ void selectFilter(GtkWidget* widget) {
     }
     
     SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
+    SetRXABandpassFreqs(CHANNEL_SUBRX, (double)filterLow, (double)filterHigh);
     SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
 
     drawFilterHigh(TRUE);
@@ -760,9 +761,9 @@ void updateFilter(GtkWidget* widget) {
             }
             break;
     }
-    //sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
-    //writeCommand(temp);
+
     SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
+    SetRXABandpassFreqs(CHANNEL_SUBRX, (double)filterLow, (double)filterHigh);
     SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
 }
 
@@ -871,6 +872,7 @@ gboolean filter_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
             break;
     }
     SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
+    SetRXABandpassFreqs(CHANNEL_SUBRX, (double)filterLow, (double)filterHigh);
     SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
 }
 

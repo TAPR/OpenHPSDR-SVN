@@ -72,12 +72,14 @@ void audioButtonCallback(GtkWidget* widget,gpointer data) {
         //SetANF(0,0,1);
         //SetNR(0,0,NR);
         SetRXAANRRun(CHANNEL_RX0, NR ? 1 : 0);
+        SetRXAANRRun(CHANNEL_SUBRX, NR ? 1 : 0);
     } else if(widget==buttonANF) {
         ANF=!ANF;
         state=ANF;
         //SetANF(0,0,1);
         //SetANF(0,0,ANF);
         SetRXAANFRun(CHANNEL_RX0, ANF ? 1 : 0);
+        SetRXAANFRun(CHANNEL_SUBRX, ANF ? 1 : 0);
 /*
     } else if(widget==buttonNB) {
         NB=!NB;
@@ -89,6 +91,7 @@ void audioButtonCallback(GtkWidget* widget,gpointer data) {
         state=NB2;
         //SetNB(0,0,NB2);
         SetRXAEMNRRun(CHANNEL_RX0, NB2 ? 1 : 0);
+        SetRXAEMNRRun(CHANNEL_SUBRX, NB2 ? 1 : 0);
     } else if(widget==buttonMUTE) {
         MUTE=!MUTE;
         state=MUTE;
@@ -97,6 +100,7 @@ void audioButtonCallback(GtkWidget* widget,gpointer data) {
         state=BIN;
         //SetBIN(0,0,BIN);
         SetRXAPanelBinaural(CHANNEL_RX0, BIN ? 1 : 0);
+        SetRXAPanelBinaural(CHANNEL_SUBRX, BIN ? 1 : 0);
     }
     label=gtk_bin_get_child((GtkBin*)widget);
     if(state) {

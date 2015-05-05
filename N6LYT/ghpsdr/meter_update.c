@@ -27,6 +27,7 @@
 #include <gtk/gtk.h>
 
 #include "main.h"
+#include "subrx.h"
 #include "wdsp.h"
 #include "channel.h"
 #include "meter.h"
@@ -78,7 +79,6 @@ gint meterUpdate(gpointer data) {
 */
 void meterUpdateSamples(char* command) {
     int n;
-
-    float m=GetRXAMeter(CHANNEL_RX0, 1/*WDSP.S_AV*/);
+    float m=GetRXAMeter(subrx?CHANNEL_SUBRX:CHANNEL_RX0, 1/*WDSP.S_AV*/);
     updateMeter(m);
 }
