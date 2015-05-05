@@ -150,7 +150,7 @@ void WDSPwisdom (char* directory
 		fftw_export_wisdom_to_filename(wisdom_file);
 		_aligned_free (fftout);
 		_aligned_free (fftin);
-#ifndef __ANDROID__
+#ifndef linux
 		FreeConsole();							// dismiss console
 #endif
 	}

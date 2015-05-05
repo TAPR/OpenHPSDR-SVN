@@ -177,6 +177,7 @@ $(JAVA_PROGRAM): $(JAVA_OBJS)
 install: $(PROGRAM)
 	cp $(PROGRAM) /usr/local/lib
 	cp $(JAVA_PROGRAM) /usr/local/lib
+	cp wdsp.h /usr/local/include
 
 clean:
 	-rm -f *.o

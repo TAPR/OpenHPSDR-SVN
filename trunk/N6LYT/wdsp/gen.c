@@ -98,6 +98,7 @@ void calc_pulse (GEN a)
 GEN create_gen (int run, int size, double* in, double* out, int rate, int mode)
 {
 	GEN a = (GEN) malloc0 (sizeof (gen));
+fprintf(stderr,"create_gen %p run=%d size=%d\n", a, run, size);
 	a->run = run;
 	a->size = size;
 	a->in = in;
