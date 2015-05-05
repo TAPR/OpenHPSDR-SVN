@@ -851,6 +851,7 @@ void xemnr (EMNR a, int pos)
 PORT
 void SetRXAEMNRRun (int channel, int run)
 {
+fprintf(stderr,"SetRXAEMNRRun channel=%d run=%d\n",channel,run);
 	EnterCriticalSection (&ch[channel].csDSP);
 	rxa[channel].emnr.p->run = run;
 	RXAbp1Check (channel);
