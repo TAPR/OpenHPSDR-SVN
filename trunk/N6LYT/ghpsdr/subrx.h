@@ -36,5 +36,5 @@ GtkWidget* buildSubRxUI();
 int subrx;
 long long subrxFrequency;
 
-void sibrxIncrementFrequency(long increment);
+void subrxIncrementFrequency(long increment,gboolean round);
 void resetSubRx();

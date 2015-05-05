@@ -37,7 +37,6 @@
 #include "main.h"
 #include "property.h"
 #include "ozy.h"
-#include "dttsp.h"
 #include "vfo.h"
 
 GtkWidget* subrxFrame;
@@ -62,7 +61,7 @@ long long subrxFrequencyDds;
 gboolean subrx=FALSE;
 
 void setSubrxFrequency(long long f); 
-void subrxIncrementFrequency(long increment);
+void subrxIncrementFrequency(long increment,gboolean round);
 
 /* --------------------------------------------------------------------------*/
 /**
@@ -207,7 +206,7 @@ gboolean subrx_frequency_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     } else {
         increment=-frequencyIncrement;
     }
-    subrxIncrementFrequency(increment);
+    subrxIncrementFrequency(increment,FALSE);
 }
 
 
@@ -249,9 +248,13 @@ void subrxEnabledButtonCallback(GtkWidget* widget,gpointer data) {
         } else {
             setSubrxFrequency(subrxFrequency);
         }
+#ifdef DTTSP
         SetSubRXSt(0,1,TRUE);
+#endif
     } else {
+#ifdef DTTSP
         SetSubRXSt(0,1,FALSE);
+#endif
     }
     updateSubrxDisplay();
 }
@@ -266,7 +269,9 @@ void subrxEnabledButtonCallback(GtkWidget* widget,gpointer data) {
 void subrxGainChanged(GtkWidget* widget,gpointer data) {
     char command[80];
     subrxGain=gtk_range_get_value((GtkRange*)subrxGainScale);
+#ifdef DTTSP
     SetRXOutputGain(0,1,subrxGain/100.0);
+#endif
 }
 
 /* --------------------------------------------------------------------------*/
@@ -279,7 +284,9 @@ void subrxGainChanged(GtkWidget* widget,gpointer data) {
 void subrxPanChanged(GtkWidget* widget,gpointer data) {
     char command[80];
     subrxPan=gtk_range_get_value((GtkRange*)subrxPanScale);
+#ifdef DTTSP
     SetRXPan(0,1,subrxPan);
+#endif
 
 }
 
@@ -359,7 +366,9 @@ GtkWidget* buildSubRxUI() {
     gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxGainFrame,0,4,1,2);
 #endif
 
+#ifdef DTTSP
     SetRXOutputGain(0,1,subrxGain/100.0);
+#endif
 
     // subrx pan
     subrxPanFrame=gtk_frame_new("AF Pan");
@@ -383,7 +392,9 @@ GtkWidget* buildSubRxUI() {
     gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxPanFrame,4,8,1,2);
 #endif
 
+#ifdef DTTSP
     SetRXPan(0,1,subrxPan);
+#endif
 
     gtk_container_add(GTK_CONTAINER(subrxFrame),subrxTable);
     gtk_widget_show(subrxTable);
@@ -411,7 +422,9 @@ void setSubrxFrequency(long long f) {
         subrxFrequencyDds=f-subrxFrequencyLO;
         updateSubrxDisplay();
         diff=frequencyA-subrxFrequency;
+#ifdef DTTSP
         SetRXOsc(0,1,(double)diff);
+#endif
     }
 }
 
@@ -421,8 +434,11 @@ void setSubrxFrequency(long long f) {
 *
 * @param increment
 */
-void subrxIncrementFrequency(long increment) {
-     int f=subrxFrequency+(long long)increment;
+void subrxIncrementFrequency(long increment,gboolean round) {
+     long long f=subrxFrequency+(long long)increment;
+     if(round) {
+         f=(f/(long long)frequencyIncrement)*(long long)frequencyIncrement;
+     }
      if((f>=(frequencyA-(sampleRate/2)))&& (f<=(frequencyA+(sampleRate/2)))) {
          setSubrxFrequency(f);
      }
@@ -460,8 +476,10 @@ void subrxRestoreState() {
     value=getProperty("subrxFrequency");
     if(value) subrxFrequency=atol(value); else subrxFrequency=7051000;
 
+#ifdef DTTSP
     SetRXPan(0,1,subrxPan);
     SetRXOutputGain(0,1,subrxGain/100.0);
+#endif
 }
 
 void resetSubRx() {

@@ -4,22 +4,24 @@
 CC=gcc
 LINK=gcc
 OPTIONS=-g
-GTKINCLUDES=`pkg-config --cflags gtk-2.0`
+GTKINCLUDES=`pkg-config --cflags gtk+-2.0`
 GDKINCLUDES=`pkg-config --cflags gdk-2.0`
-INCLUDES=-I. -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include\
-         -I/usr/include/gdk-pixbuf-2.0\
-         -I/usr/include/atk-1.0 -I/usr/include/cairo\
-         -I/usr/include/pango-1.0 -I/usr/include/glib-2.0\
-         -I/usr/lib/glib-2.0/include -I/usr/include/pixman-1\
-         -I/usr/include/freetype2 -I/usr/include/libpng12 \
-	 -I/usr/local/include/libusb-1.0 \
+USBINCLUDES=`pkg-config --cflags libusb-1.0`
+INCLUDES=-I. \
 	 $(GTKINCLUDES) \
-	 $(GDKINCLUDES)
+	 $(GDKINCLUDES) \
+         $(USBINCLUDES) 
+#	 -I/usr/local/include -I/usr/local/include/libusb-1.0
 
-LIBS=-L. -lDttSP -lpthread -lusb-1.0\
-     -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0\
-     -lm -lpangocairo-1.0 -lgio-2.0 -lcairo -lpango-1.0 -lfreetype -lz\
-     -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lfftw3f
+GTKLIBS=`pkg-config --libs gtk+-2.0`
+GDKLIBS=`pkg-config --libs gdk-2.0`
+USBLIBS=`pkg-config --libs libusb-1.0`
+
+LIBS=-lm -lpthread -lusb-1.0\
+     $(GTKLIBS)\
+     $(GDKLIBS)\
+     $(USBLIBS)\
+     -L/usr/local/lib -lwdsp -lfftw3f
 
 COMPILE=$(CC) $(INCLUDES)
 
@@ -36,15 +38,16 @@ SOURCES= agc.c audio.c band.c bandscope.c bandscope_control.c bandscope_update.c
          subrx.c\
          metis.c\
          cw.c\
-         alex_rx_test.c alex_tx_test.c test.c expression.c
+         discovery.c
 
-HEADERS= agc.h alex_rx_test.h alex_setup.h alex_tx_test.h audio.h audiostream.h band.h bandscope_control.h\
+HEADERS= agc.h audio.h audiostream.h band.h bandscope_control.h\
          bandscope.h bandscope_update.h bandstack.h command.h cw.h display.h display_setup.h\
-         dttsp.h filter.h frequency.h hpsdr_setup.h libusbio.h main.h meter.h meter_update.h\
+         filter.h frequency.h hpsdr_setup.h libusbio.h main.h meter.h meter_update.h\
          metis.h mode.h ozy_buffers.h ozy.h ozy_ringbuffer.h preamp.h property.h receiver.h\
          screensize.h setup.h sinewave.h soundcard.h spectrum_buffers.h spectrum.h\
-         spectrum_update.h subrx.h test.h transmit.h util.h version.h vfo.h volume.h\
-         xvtr.h xvtr_setup.h expression.h
+         spectrum_update.h subrx.h transmit.h util.h version.h vfo.h volume.h\
+         xvtr.h xvtr_setup.h \
+         discovered.h discovery.h
 
 OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o command.o\
       display.o filter.o frequency.o libusbio.o main.o meter.o\
@@ -57,7 +60,7 @@ OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o co
       subrx.o\
       metis.o\
       cw.o\
-      alex_rx_test.o alex_tx_test.o test.o expression.o
+      discovery.o
 
 
 all: $(PROGRAM) $(HEADERS) $(SOURCES)

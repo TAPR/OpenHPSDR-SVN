@@ -20,7 +20,6 @@
 #include "ozy_ringbuffer.h"
 #include "property.h"
 #include "spectrum_buffers.h"
-#include "dttsp.h"
 #include "util.h"
 #include "libusbio.h"
 #include "filter.h"
@@ -33,6 +32,8 @@
 #include "vfo.h"
 #include "metis.h"
 #include "cw.h"
+#include "wdsp.h"
+#include "channel.h"
 
 //#define OZY_BUFFERS
 
@@ -68,6 +69,9 @@ static int rxFrequency_changed=1;
 static long txFrequency=7056000;
 static int txFrequency_changed=1;
 
+int command=0;
+int freqcommand=0;
+
 unsigned char output_buffer[OZY_BUFFER_SIZE];
 int output_buffer_index=8;
 
@@ -80,9 +84,9 @@ static unsigned char control_in[5]={0x00,0x00,0x00,0x00,0x00};
 
 unsigned char control_out[5]={0x00,0x00,0x00,0x00,0x00};
 
-int output_sample_increment=2; // 1=48000 2=96000 4=192000
-
 int buffer_size=BUFFER_SIZE;
+int fft_size=FFT_SIZE;
+int output_buffer_size=OUTPUT_BUFFER_SIZE;
 
 float left_input_buffer[BUFFER_SIZE];
 float right_input_buffer[BUFFER_SIZE];
@@ -90,11 +94,14 @@ float right_input_buffer[BUFFER_SIZE];
 float mic_left_buffer[BUFFER_SIZE];
 float mic_right_buffer[BUFFER_SIZE];
 
-float left_output_buffer[BUFFER_SIZE];
-float right_output_buffer[BUFFER_SIZE];
+float left_output_buffer[OUTPUT_BUFFER_SIZE];
+float right_output_buffer[OUTPUT_BUFFER_SIZE];
 
-float left_tx_buffer[BUFFER_SIZE];
-float right_tx_buffer[BUFFER_SIZE];
+float left_tx_buffer[OUTPUT_BUFFER_SIZE];
+float right_tx_buffer[OUTPUT_BUFFER_SIZE];
+
+float bandscope_left_buffer[BANDSCOPE_BUFFER_SIZE];
+float bandscope_right_buffer[BANDSCOPE_BUFFER_SIZE];
 
 int samples=0;
 
@@ -121,7 +128,7 @@ unsigned char spectrum_samples[SPECTRUM_BUFFER_SIZE];
 
 int lt2208ADCOverflow=0;
 
-int speed=1;           // default 96K
+int speed=0;           // default 48K
 int class=0;           // default other
 int lt2208Dither=1;    // default dither on
 int lt2208Random=1;    // default random 0n
@@ -131,7 +138,10 @@ int clock10MHz=2;      // default 10 MHz clock source Mercury
 int clock122_88MHz=1;  // default 122.88 MHz clock source Mercury
 int preamp=0;          // default preamp off
 
-int sampleRate=96000;  // default 48k
+int sampleRate=48000;
+int dspRate=48000;
+int outputRate=48000;
+int outputSamples=OUTPUT_BUFFER_SIZE;
 
 int mox=0;
 int ptt=0;
@@ -149,7 +159,7 @@ static struct timeb start_time;
 static struct timeb end_time;
 static int sample_count=0;
 
-static int metis=0;
+static int metis=1;
 static char interface[128];
 
 int alexRxAntenna=0;
@@ -164,7 +174,11 @@ void ozy_set_metis() {
     metis=1;
 }
 
-int ozy_get_metis() {
+void ozy_set_usb() {
+    metis=0;
+}
+
+int ozy_use_metis() {
     return metis;
 }
 
@@ -185,18 +199,202 @@ char* ozy_get_interface() {
     return interface;
 }
 
+void ozy_send_buffer() {
+                        output_buffer[0]=SYNC;
+                        output_buffer[1]=SYNC;
+                        output_buffer[2]=SYNC;
+
+			switch(command) {
+                            case 0:
+                                output_buffer[3]=control_out[0];
+                                output_buffer[4]=control_out[1];
+                                output_buffer[5]=control_out[2];
+                                output_buffer[6]=control_out[3];
+                                output_buffer[7]=control_out[4];
+                                break;
+                            case 2:
+                                output_buffer[3]=0x12;
+                                output_buffer[4]=driveLevel;
+                                output_buffer[5]=control_out[2];
+                                output_buffer[6]=control_out[3];
+                                output_buffer[7]=control_out[4];
+                                break;
+                            case 4:
+                                // need to add orion tip/ring and bias configuration
+                                output_buffer[3]=0x14;
+                                output_buffer[4]=0x00;
+                                output_buffer[5]=0x00;
+                                output_buffer[6]=0x00;
+                                output_buffer[7]=0x00;
+                                break;
+                            case 6:
+                                // need to add rx attenuation and cw configuration
+                                output_buffer[3]=0x16;
+                                output_buffer[4]=0x00;
+                                output_buffer[5]=0x00;
+                                if(cwkeysreversed!=0) {
+                                    output_buffer[5]|=0x40;
+                                }
+                                output_buffer[6]=cwkeyerspeed | (cwkeyermode<<6);
+                                output_buffer[7]=cwkeyerweight | (cwkeyerspacing<<7);
+                                break;
+                            case 8:
+                                // need to add tx attenuation and rx ADC selection
+                                output_buffer[3]=0x1C;
+                                output_buffer[4]=0x00;
+                                output_buffer[5]=0x00;
+                                output_buffer[6]=0x00;
+                                output_buffer[7]=0x00;
+                                break;
+                            case 10:
+                                // need to add cw configuration
+                                output_buffer[3]=0x1E;
+                                if(cwinternal==1) {
+                                    if(xmit || tuning || (mode!=modeCWU && mode!=modeCWL)) {
+                                        output_buffer[4]=0x00;
+                                    } else {
+                                        output_buffer[4]=0x01;
+                                    }
+                                } else {
+                                    output_buffer[4]=0x00;
+                                }
+                                output_buffer[5]=cwsidetonevolume;
+                                output_buffer[6]=cwpttdelay;
+                                output_buffer[7]=0x00;
+                                break;
+                            case 12:
+                                // need to add cw configuration
+                                output_buffer[3]=0x20;
+                                output_buffer[4]=cwhangtime;
+                                output_buffer[5]=cwhangtime>>8;
+                                output_buffer[6]=cwsidetonefrequency;
+                                output_buffer[7]=cwsidetonefrequency>>8;
+                                break;
+                            default:
+                                switch(freqcommand) {
+                                    case 0:
+                                        // send rx frequency
+                                        output_buffer[3]=control_out[0]|0x04;
+                                        output_buffer[4]=ddsAFrequency>>24;
+                                        output_buffer[5]=ddsAFrequency>>16;
+                                        output_buffer[6]=ddsAFrequency>>8;
+                                        output_buffer[7]=ddsAFrequency;
+                                        freqcommand++;
+                                        break;
+                                    case 1:
+                                        // send tx frequency
+                                        output_buffer[3]=control_out[0]|0x02;
+                                        if(bSplit) {
+                                            output_buffer[3]=control_out[0]|0x02; // Penelope
+                                            output_buffer[4]=ddsBFrequency>>24;
+                                            output_buffer[5]=ddsBFrequency>>16;
+                                            output_buffer[6]=ddsBFrequency>>8;
+                                            output_buffer[7]=ddsBFrequency;
+                                        } else {
+                                            output_buffer[4]=ddsAFrequency>>24;
+                                            output_buffer[5]=ddsAFrequency>>16;
+                                            output_buffer[6]=ddsAFrequency>>8;
+                                            output_buffer[7]=ddsAFrequency;
+                                        }
+                                        freqcommand=0;
+                                        break;
+                                }
+                                break;
+                        }
+                        command++;
+                        if(command>=14) {
+                            command=0;
+                        }
+                        // set mox
+                        output_buffer[3]|=(xmit&0x01);
+
+/*
+                        // set mox
+                        control_out[0]=control_out[0]&0xFE;
+                        control_out[0]=control_out[0]|(xmit&0x01);
+
+if(control_out[1]!=debug_control1) {
+    fprintf(stderr,"control_out[1]=%02X\n",control_out[1]);
+    debug_control1=control_out[1];
+}
+
+                        if(splitChanged) {
+                            output_buffer[3]=control_out[0];
+                            output_buffer[4]=control_out[1];
+                            output_buffer[5]=control_out[2];
+                            output_buffer[6]=control_out[3];
+                            if(bSplit) {
+                                output_buffer[7]=control_out[4]|0x04;
+                            } else {
+                                output_buffer[7]=control_out[4];
+                            }
+                            splitChanged=0;
+                        } else if(frequencyAChanged) {
+                            if(bSplit) {
+                                output_buffer[3]=control_out[0]|0x04; // Mercury (1)
+                            } else {
+                                output_buffer[3]=control_out[0]|0x02; // Mercury and Penelope
+                            }
+                            output_buffer[4]=ddsAFrequency>>24;
+                            output_buffer[5]=ddsAFrequency>>16;
+                            output_buffer[6]=ddsAFrequency>>8;
+                            output_buffer[7]=ddsAFrequency;
+                            frequencyAChanged=0;
+                        } else if(frequencyBChanged) {
+                            if(bSplit) {
+                                output_buffer[3]=control_out[0]|0x02; // Penelope
+                                output_buffer[4]=ddsBFrequency>>24;
+                                output_buffer[5]=ddsBFrequency>>16;
+                                output_buffer[6]=ddsBFrequency>>8;
+                                output_buffer[7]=ddsBFrequency;
+                            }
+                            frequencyBChanged=0;
+                        } else if(driveLevelChanged && pennyLane) { 
+                            output_buffer[3]=0x12|(xmit&0x01);
+                            output_buffer[4]=driveLevel;
+                            output_buffer[5]=0;
+                            output_buffer[6]=0;
+                            output_buffer[7]=0;
+                            driveLevelChanged=0;
+                        } else {
+                            output_buffer[3]=control_out[0];
+                            output_buffer[4]=control_out[1];
+                            output_buffer[5]=control_out[2];
+                            output_buffer[6]=control_out[3];
+                            if(bSplit) {
+                                output_buffer[7]=control_out[4]|0x04;
+                            } else {
+                                output_buffer[7]=control_out[4];
+                            }
+                        }
+
+                        */
+
+                        if(metis) {
+                            metis_write(0x02,output_buffer,OZY_BUFFER_SIZE);
+                        } else {
+                            int bytes;
+                            bytes=libusb_write_ozy(0x02,(void*)(output_buffer),OZY_BUFFER_SIZE);
+                            if(bytes!=OZY_BUFFER_SIZE) {
+                                perror("OzyBulkWrite failed");
+                            }
+                        }
+}
+
 void process_bandscope_buffer(char* buffer) {
+    short sample;
     int i;
-
-    for(i=0;i<512;i++) {
-        bandscope_buffer[bandscope_buffer_index++]=buffer[i];
-    }
-
-    if(bandscope_buffer_index>=SPECTRUM_BUFFER_SIZE) {
-        memcpy(spectrum_samples,bandscope_buffer,SPECTRUM_BUFFER_SIZE);
-        bandscope_buffer_index=0;
+    for (i = 0; i < 512; i += 2) {
+        sample = (short) ((buffer[i + 1] << 8) + (buffer[i] & 0xFF));
+        bandscope_left_buffer[bandscope_buffer_index++]=(float)sample/32767.0F;
+        bandscope_right_buffer[bandscope_buffer_index++]=0.0F;
+        if (bandscope_buffer_index == BANDSCOPE_BUFFER_SIZE) {
+            Spectrum(CHANNEL_BS, 0, 0, bandscope_left_buffer, bandscope_right_buffer);
+            bandscope_buffer_index = 0;
+        }
     }
 }
+
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -331,13 +529,15 @@ if(xmit) {
                 }
             }
 
-            key_thread_process(1.0, dash, dot, TRUE);
-
             // when we have enough samples give them to DttSP and get the results
             if(samples==buffer_size) {
                 // process the input
-                Audio_Callback (left_input_buffer,right_input_buffer,
-                                left_output_buffer,right_output_buffer, buffer_size, 0);
+                int error;
+		fexchange2(CHANNEL_RX0, left_input_buffer, right_input_buffer, left_output_buffer, right_output_buffer, &error);
+                if(error!=0) {
+                    fprintf(stderr,"fexchange2 (CHANNEL_RX0) returned error: %d\n", error);
+                }
+                Spectrum(CHANNEL_RX0, 0, 0, right_input_buffer, left_input_buffer);
 
                 // transmit
                 if(xmit) {
@@ -347,14 +547,15 @@ if(xmit) {
                     } else if(testing) {
                         // leave alone
                     } else if(mode==modeCWU || mode==modeCWL) {
-                        CWtoneExchange(mic_left_buffer, mic_right_buffer, buffer_size);
                     }
+
+                    // process the output
+	            fexchange2(CHANNEL_TX, mic_left_buffer, mic_right_buffer, left_tx_buffer, right_tx_buffer, &error);
+                    if(error!=0) {
+                        fprintf(stderr,"fexchange2 (CHANNEL_TX) returned error: %d\n", error);
+                    }
+                    Spectrum(CHANNEL_TX, 0, 0, right_tx_buffer, left_tx_buffer);
                 }
-
-                // process the output
-                Audio_Callback (mic_left_buffer,mic_right_buffer,
-                                left_tx_buffer,right_tx_buffer, buffer_size, 1);
-
 
                 if(pennyLane) {
                     gain=1.0;
@@ -363,9 +564,9 @@ if(xmit) {
                     gain=rfGain;
                 }
 
-                for(j=0;j<buffer_size;j+=output_sample_increment) {
-                    left_rx_sample=(short)(left_output_buffer[j]*32767.0);
-                    right_rx_sample=(short)(right_output_buffer[j]*32767.0);
+                for(j=0;j<output_buffer_size;j++) {
+                    left_rx_sample=(short)(left_output_buffer[j]*32767.0*(volume/100.0));
+                    right_rx_sample=(short)(right_output_buffer[j]*32767.0*(volume/100.0));
 
                     if(xmit) {
                         left_tx_sample=(short)(left_tx_buffer[j]*32767.0*gain);
@@ -385,77 +586,7 @@ if(xmit) {
                     output_buffer[output_buffer_index++]=right_tx_sample;
 
                     if(output_buffer_index>=OZY_BUFFER_SIZE) {
-                        output_buffer[0]=SYNC;
-                        output_buffer[1]=SYNC;
-                        output_buffer[2]=SYNC;
-
-                        // set mox
-                        control_out[0]=control_out[0]&0xFE;
-                        control_out[0]=control_out[0]|(xmit&0x01);
-
-if(control_out[1]!=debug_control1) {
-    fprintf(stderr,"control_out[1]=%02X\n",control_out[1]);
-    debug_control1=control_out[1];
-}
-
-                        if(splitChanged) {
-                            output_buffer[3]=control_out[0];
-                            output_buffer[4]=control_out[1];
-                            output_buffer[5]=control_out[2];
-                            output_buffer[6]=control_out[3];
-                            if(bSplit) {
-                                output_buffer[7]=control_out[4]|0x04;
-                            } else {
-                                output_buffer[7]=control_out[4];
-                            }
-                            splitChanged=0;
-                        } else if(frequencyAChanged) {
-                            if(bSplit) {
-                                output_buffer[3]=control_out[0]|0x04; // Mercury (1)
-                            } else {
-                                output_buffer[3]=control_out[0]|0x02; // Mercury and Penelope
-                            }
-                            output_buffer[4]=ddsAFrequency>>24;
-                            output_buffer[5]=ddsAFrequency>>16;
-                            output_buffer[6]=ddsAFrequency>>8;
-                            output_buffer[7]=ddsAFrequency;
-                            frequencyAChanged=0;
-                        } else if(frequencyBChanged) {
-                            if(bSplit) {
-                                output_buffer[3]=control_out[0]|0x02; // Penelope
-                                output_buffer[4]=ddsBFrequency>>24;
-                                output_buffer[5]=ddsBFrequency>>16;
-                                output_buffer[6]=ddsBFrequency>>8;
-                                output_buffer[7]=ddsBFrequency;
-                            }
-                            frequencyBChanged=0;
-                        } else if(driveLevelChanged && pennyLane) { 
-                            output_buffer[3]=0x12|(xmit&0x01);
-                            output_buffer[4]=driveLevel;
-                            output_buffer[5]=0;
-                            output_buffer[6]=0;
-                            output_buffer[7]=0;
-                            driveLevelChanged=0;
-                        } else {
-                            output_buffer[3]=control_out[0];
-                            output_buffer[4]=control_out[1];
-                            output_buffer[5]=control_out[2];
-                            output_buffer[6]=control_out[3];
-                            if(bSplit) {
-                                output_buffer[7]=control_out[4]|0x04;
-                            } else {
-                                output_buffer[7]=control_out[4];
-                            }
-                        }
-
-                        if(metis) {
-                            metis_write(0x02,output_buffer,OZY_BUFFER_SIZE);
-                        } else {
-                            bytes=libusb_write_ozy(0x02,(void*)(output_buffer),OZY_BUFFER_SIZE);
-                            if(bytes!=OZY_BUFFER_SIZE) {
-                                perror("OzyBulkWrite failed");
-                            }
-                        }
+                        ozy_send_buffer();
                         output_buffer_index=8;
                     }
 
@@ -483,33 +614,13 @@ void ozy_prime() {
     int i;
     int bytes;
 
-if(control_out[1]!=debug_control1) {
-    fprintf(stderr,"control_out[1]=%02X\n",control_out[1]);
-    debug_control1=control_out[1];
-}
-    output_buffer[0]=SYNC;
-    output_buffer[1]=SYNC;
-    output_buffer[2]=SYNC;
-    output_buffer[3]=control_out[0];
-    output_buffer[4]=control_out[1];
-    output_buffer[5]=control_out[2];
-    output_buffer[6]=control_out[3];
-    output_buffer[7]=control_out[4];
-
     for(i=8;i<OZY_BUFFER_SIZE;i++) {
         output_buffer[i]=0;
     }
 
-    for(i=0;i<2;i++) {
-        if(metis) {
-            metis_write(0x02,output_buffer,OZY_BUFFER_SIZE);
-        } else {
-            bytes=libusb_write_ozy(0x02,(void*)(output_buffer),OZY_BUFFER_SIZE);
-            if(bytes!=OZY_BUFFER_SIZE) {
-                perror("OzyBulkWrite failed");
-            }
-        }
-    }
+    do {
+        ozy_send_buffer();
+    } while (command!=0);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -767,23 +878,30 @@ void setSpeed(int s) {
     control_out[1]=control_out[1]&0xFC;
     control_out[1]=control_out[1]|s;
     if(s==SPEED_48KHZ) {
-        output_sample_increment=1;
+        //output_sample_increment=1;
         sampleRate=48000;
+        output_buffer_size=OUTPUT_BUFFER_SIZE;
     } else if(s==SPEED_96KHZ) {
-        output_sample_increment=2;
+        //output_sample_increment=2;
         sampleRate=96000;
+        output_buffer_size=OUTPUT_BUFFER_SIZE/2;
     } else if(s==SPEED_192KHZ) {
-        output_sample_increment=4;
+        //output_sample_increment=4;
         sampleRate=192000;
+        output_buffer_size=OUTPUT_BUFFER_SIZE/4;
+    } else if(s==SPEED_384KHZ) {
+        //output_sample_increment=4;
+        sampleRate=384000;
+        output_buffer_size=OUTPUT_BUFFER_SIZE/8;
     }
 
-    SetSampleRate((double)sampleRate);
-    SetRXOsc(0,0,0.0);
-    SetTXOsc(1,0.0);
+fprintf(stderr,"setSpeed s=%d sampleRate=%d\n",s,sampleRate);
+
+    SetAllRates(CHANNEL_RX0,sampleRate,dspRate,outputRate);
+    SetAllRates(CHANNEL_TX,sampleRate,dspRate,outputRate);
+    SetEERSamplerate(0, 48000);
     setFilter(filter);
     setMode(mode);
-    SetRXOutputGain(0,0,volume/100.0);
-    SetKeyerSampleRate((float)sampleRate);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -939,58 +1057,7 @@ int ozy_init() {
 
     tuningPhase=0.0;
 
-    if(metis) {
-        int found;
-        long i;
-        metis_discover(interface);
-        for(i=0;i<10000000;i++) {
-            if(metis_found()>0) {
-//fprintf(stderr,"Device discovered after %ld\n",i);
-            }
-        }
-        if(metis_found()<=0) {
-            return (-3);
-        } 
-
-        metis_selected = 0;
-        if(metis_found()>1) {
-                GtkWidget* dialog = gtk_message_dialog_new (NULL,
-                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                 GTK_MESSAGE_ERROR,
-                                                 GTK_BUTTONS_OK_CANCEL,
-                                                 "Found multiple devices (d)!",
-                                                 metis_found());
-                gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Select required device");
-                gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
-                GtkWidget* area=gtk_message_dialog_get_message_area (dialog);
-                GSList* group=NULL;
-                char label[128];
-                int i;
-                GtkRadioButton* radioButton[metis_found()];
-                for(i=0;i<metis_found();i++) {
-                   sprintf(label,"%s %s (%s)",metis_cards[i].name,metis_cards[i].ip_address,metis_cards[i].mac_address);
-                   radioButton[i]=gtk_radio_button_new_with_label(group,label);
-                   gtk_toggle_button_set_active((GtkRadioButton*)radioButton[i],(gboolean)(i==0));
-                   gtk_widget_show(radioButton[i]);
-                   gtk_container_add((GtkContainer*)area,(GtkWidget*)radioButton[i]);
-                   group=gtk_radio_button_group (GTK_RADIO_BUTTON (radioButton[i]));
-                }
-                int result = gtk_dialog_run (GTK_DIALOG (dialog));
-                switch (result) {
-                    case GTK_RESPONSE_OK:
-                        for(i=0;i<metis_found();i++) {
-                            if(gtk_toggle_button_get_active((GtkToggleButton *)radioButton[i])) {
-                                metis_selected=i;
-                            }
-                        }
-                        break;
-                    default:
-                        exit(1);
-                        break;
-                }
-                gtk_widget_destroy (dialog);
-        }
-    } else {
+    if(!metis) {
         // open ozy
         rc = libusb_open_ozy();
         if (rc != 0) {

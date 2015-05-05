@@ -44,6 +44,7 @@ GtkWidget* hpsdrPage;
 GtkWidget* speed48K;
 GtkWidget* speed96K;
 GtkWidget* speed192K;
+GtkWidget* speed384K;
 
 GtkWidget* LT2208Dither;
 GtkWidget* LT2208Random;
@@ -81,6 +82,12 @@ void speed96ButtonCallback(GtkWidget* widget,gpointer data) {
 void speed192ButtonCallback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         setSpeed(2);
+    }
+}
+
+void speed384ButtonCallback(GtkWidget* widget,gpointer data) {
+    if(GTK_TOGGLE_BUTTON(widget)->active) {
+        setSpeed(3);
     }
 }
 
@@ -215,6 +222,10 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(speed192K);
     gtk_box_pack_start(GTK_BOX(box),speed192K,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(speed192K),"clicked",G_CALLBACK(speed192ButtonCallback),NULL);
+    speed384K=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(speed48K),"384K	");
+    gtk_widget_show(speed384K);
+    gtk_box_pack_start(GTK_BOX(box),speed384K,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(speed384K),"clicked",G_CALLBACK(speed384ButtonCallback),NULL);
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
 
@@ -334,6 +345,9 @@ GtkWidget* hpsdrSetupUI() {
             break;
         case 2:
             gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(speed192K),TRUE);
+            break;
+        case 3:
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(speed384K),TRUE);
             break;
     }
 

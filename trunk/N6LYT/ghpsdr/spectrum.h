@@ -42,7 +42,7 @@
 #define spectrumWIDTH 858
 #define spectrumHEIGHT 300
 #else
-#define spectrumWIDTH 960
+#define spectrumWIDTH 1024
 #define spectrumHEIGHT 400
 #endif
 

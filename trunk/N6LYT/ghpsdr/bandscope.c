@@ -27,7 +27,6 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fftw3.h>
 
 #include "bandstack.h"
 #include "main.h"
@@ -43,8 +42,8 @@ GtkAdjustment* horizontalAdjustment;
 GtkAdjustment* verticalAdjustment;
 GtkWidget* bandscope;
 
-int bandscopeMAX=40;
-int bandscopeMIN=-80;
+int bandscopeMAX=0;
+int bandscopeMIN=-100;
 int bandscopeSTEP=10;
 
 int bandscopeLow=0;
@@ -52,14 +51,6 @@ int bandscopeHigh=61440000;
 
 int bandscopeZoom=1;
 int bandscopeOffset=0;
-
-float* blackmanHarris;
-
-//fftwf_complex* timebuf;
-float* timebuf;
-fftwf_complex* freqbuf;
-fftwf_plan plan;
-float* result;
 
 gboolean bandscopeAverage=1;
 int initBandscopeAverage=1;
@@ -77,7 +68,6 @@ gboolean bandscope_button_press_event(GtkWidget* widget,GdkEventButton* event);
 void plotBandscope(float* samples);
 void drawBandscope();
 void bandscopeUpdateOff();
-float *blackmanHarrisFilter(int n);
 
 
 //int dump_samples=1;
@@ -90,15 +80,6 @@ float *blackmanHarrisFilter(int n);
 */
 GtkWidget* buildBandscopeUI() {
     
-    // prepare the fft (time domain to frequency domain)
-    //timebuf=(fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex)*BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
-    timebuf=(float*)fftwf_malloc(sizeof(double)*BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
-    freqbuf=(fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex)*BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
-    //plan=fftwf_plan_dft_1d(BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER,timebuf,freqbuf,FFTW_FORWARD,FFTW_MEASURE);
-    plan=fftwf_plan_dft_r2c_1d(BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER,timebuf,freqbuf,FFTW_MEASURE);
-
-    result=malloc(BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER*sizeof(float));
-
     // allocate space for the plotting bandscopePoints
     bandscopePoints=calloc(bandscopeWIDTH*BANDSCOPE_MULTIPLIER*2,sizeof(GdkPoint));
     int i;
@@ -107,11 +88,7 @@ GtkWidget* buildBandscopeUI() {
         bandscopePoints[i].y=-1;
     }
 
-    // build the BlackmanHarris filter
-    blackmanHarris=blackmanHarrisFilter(BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
-
     // build the UI
-
     horizontalAdjustment=(GtkAdjustment*)gtk_adjustment_new(0.0,0.0,0.0,0.0,0.0,0.0);
     verticalAdjustment=(GtkAdjustment*)gtk_adjustment_new(0.0,0.0,0.0,0.0,0.0,0.0);
 
@@ -207,50 +184,7 @@ gboolean bandscope_button_press_event(GtkWidget* widget,GdkEventButton* event) {
 * @param samples
 */
 void updateBandscope(float* samples) {
-    int i;
-    float average=0.0f;
-
-    // copy samples into time domain array
-    for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
-        if(i<BANDSCOPE_BUFFER_SIZE) {
-            //timebuf[i][0]=samples[i]*blackmanHarris[i];
-            timebuf[i]=samples[i]*blackmanHarris[i];
-            //timebuf[i][0]=samples[i];
-        } else {
-            //timebuf[i][0]=0.0f;
-            timebuf[i]=0.0f;
-        }
-        //timebuf[i][1]=0.0f;
-    }
-
-    // perform the fft
-    fftwf_execute(plan);
-
-    // compute the power levels
-    for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
-        result[i]=(10.0f*log(sqrt(freqbuf[i][0]*freqbuf[i][0] +
-                  freqbuf[i][1]*freqbuf[i][1])));
-    }
-
-    if(bandscopeAverage) {
-        if(initBandscopeAverage) {
-            for(i=0;i<BANDSCOPE_BUFFER_SIZE;i++) {
-                averageBandscope[i]=result[i];
-            }
-            initBandscopeAverage=0;
-        } else {
-            for(i=0;i<BANDSCOPE_BUFFER_SIZE;i++) {
-                averageBandscope[i] = (result[i] * (1 - bandscopeAverageSmoothing)) + (averageBandscope[i] * bandscopeAverageSmoothing);
-            }
-        }
-    } else {
-        for(i=0;i<BANDSCOPE_BUFFER_SIZE;i++) {
-            averageBandscope[i]=result[i];
-        }
-    }
-
-    
-    plotBandscope(averageBandscope);
+    plotBandscope(samples);
     drawBandscope();
 }
 
@@ -355,25 +289,6 @@ void drawBandscope() {
         x=(int)((float)frequencyA/hzPerPixel);
         gdk_draw_line(bandscopePixmap,gc,x,0,x,bandscopeHEIGHT);
 
-/*
-        // draw the horizontal lines
-        int v=bandscopeMAX-bandscopeMIN;
-        int n=v/bandscopeSTEP;
-        int p=bandscopeHEIGHT/n;
-        int i;
-
-        for(i=1;i<n;i++) {
-            int val=bandscopeMAX-i*bandscopeSTEP;
-            int y=(bandscopeMAX-val)*bandscopeHEIGHT/v;
-            gdk_gc_set_rgb_fg_color(gc,&horizontalColor);
-            gdk_draw_line(bandscopePixmap,gc,0,y,bandscopeWIDTH,y);
-            gdk_gc_set_rgb_fg_color(gc,&spectrumTextColor);
-            sprintf(label,"<span font_desc='Sans Regular 8'>%d</span>",val);
-            pango_layout_set_markup (layout, label, -1);
-            gdk_draw_layout (GDK_DRAWABLE (bandscopePixmap), gc, 0, y, layout);
-        }
-*/
-
         // draw the bandscope
         gdk_gc_set_rgb_fg_color(gc,&plotColor);
         gdk_draw_lines(bandscopePixmap,gc,bandscopePoints,bandscopeWIDTH*bandscopeZoom);
@@ -395,25 +310,37 @@ void drawBandscope() {
 * @param samples
 */
 void plotBandscope(float* samples) {
-        //float samplesPerPixel=(float)BANDSCOPE_BUFFER_SIZE/2.0/(float)(bandscopeWIDTH*bandscopeZoom);
-        float samplesPerPixel=(float)BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER/2.0/(float)(bandscopeWIDTH*bandscopeZoom);
-        float max=0.0f;
+        int i;
+        float sample;
         float yRange = (float)(bandscopeMAX - bandscopeMIN);
-
-        int i,j;
-
-        if(samplesPerPixel<1.0f) samplesPerPixel=1.0f;
-        for(i=0;i<bandscopeWIDTH*bandscopeZoom;i++) {
-            int offset=(int)(samplesPerPixel*(float)i);
-            max=-300.0f;
-            for(j=offset;j<offset+samplesPerPixel;j++) {
-                  if(samples[j]>max) max=samples[j];
-            }
-            max = max + displayCalibrationOffset /*+ preampOffset*/;
-            bandscopePoints[i].x=i;
-            bandscopePoints[i].y=(int)(floor((bandscopeMAX - max)*(float)bandscopeHEIGHT/yRange));
+#ifdef INCLUDED
+        switch(bandscopeZoom) {
+            case 0:
+                break;
+            case 1:
+                for(i=0;i<bandscopeWIDTH;i++) {
+                    sample=(samples[i*2]+samples[(i*2)+1])/2.0F;
+                    sample = sample + displayCalibrationOffset /*+ preampOffset*/;
+                    bandscopePoints[i].x=i;
+                    bandscopePoints[i].y=(int)(floor((bandscopeMAX - sample)*(float)bandscopeHEIGHT/yRange));
+                }
+                break;
+            case 2:
+                for(i=0;i<bandscopeWIDTH*2;i++) {
+                    sample=samples[i];
+                    sample = sample + displayCalibrationOffset /*+ preampOffset*/;
+                    bandscopePoints[i].x=i;
+                    bandscopePoints[i].y=(int)(floor((bandscopeMAX - sample)*(float)bandscopeHEIGHT/yRange));
+                }
+                break;
         }
-
+#endif        
+                for(i=0;i<bandscopeWIDTH;i++) {
+                    sample=samples[i];
+                    sample = sample + displayCalibrationOffset /*+ preampOffset*/;
+                    bandscopePoints[i].x=i;
+                    bandscopePoints[i].y=(int)(floor((bandscopeMAX - sample)*(float)bandscopeHEIGHT/yRange));
+                }
 }
 
 /* --------------------------------------------------------------------------*/
@@ -495,36 +422,4 @@ void bandscopeSetZoom(int zoom) {
     } else {
         gtk_widget_set_size_request(GTK_WIDGET(bandscope),bandscopeWIDTH*bandscopeZoom,bandscopeHEIGHT);
     }
-}
-
-/* --------------------------------------------------------------------------*/
-/** 
-* @brief Blackman-Harris filter 
-* 
-* @param n
-* 
-* @return 
-*/
-float *blackmanHarrisFilter(int n) {
-    float* filter;
-    float a0=0.35875F,
-          a1=0.48829F,
-          a2=0.14128F,
-          a3=0.01168F;
-    float twopi=M_PI*2.0F;
-    float fourpi=M_PI*4.0F;
-    float sixpi=M_PI*6.0F;
-    int i;
-
-    filter=malloc(n*sizeof(float));
-
-    for(i = 0;i<n;i++) {
-        filter[i]=a0
-                  - a1 * cos(twopi  * (i + 0.5) / n)
-                  + a2 * cos(fourpi * (i + 0.5) / n)
-                  - a3 * cos(sixpi * (i + 0.5) / n);
-    }
-
-    return filter;
-
 }

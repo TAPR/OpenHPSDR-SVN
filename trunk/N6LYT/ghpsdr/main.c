@@ -11,10 +11,11 @@
 *  \image html ../ghpsdr.png
 *  \image latex ../ghpsdr.png "Screen shot of GHPSDR" width=10cm
 *
-* \section A Linux based, GTK2+, Radio Graphical User Interface to HPSDR boards through DttSP without Jack.  
+* \section A Linux based, GTK2+, Radio Graphical User Interface to HPSDR boards.  
 * \author John Melton, G0ORX/N6LYT
 * \version 0.1
 * \date 2009-04-11
+* \updated 2015-05-01  (changed from DttSP to WDSP and added device selection)
 * 
 * \author Dave Larsen, KV0S, Doxygen comments
 *
@@ -51,11 +52,8 @@
 * requires intiozy to be run again to get the audio back.
 *
 *
-* Development of the system is documented at 
-* http://javaguifordttsp.blogspot.com/
-*
 * This code is available at 
-* svn://206.216.146.154/svn/repos_sdr_hpsdr/trunk/N6LYT/ghpsdr
+* svn://svn.tar.org/svn/repos_sdr_hpsdr/trunk/N6LYT/ghpsdr
 *
 * More information on the HPSDR project is availble at 
 * http://openhpsdr.info
@@ -86,6 +84,7 @@
 // GTK+ 2.0 implementation of Beppe's Main control panel
 // see http://www.radioamatore.it/sdr1000/mypowersdr.html for the original
 
+#include <arpa/inet.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <fcntl.h>
@@ -106,7 +105,8 @@
 #include "command.h"
 #include "cw.h"
 #include "display.h"
-#include "dttsp.h"
+#include "wdsp.h"
+#include "channel.h"
 #include "filter.h"
 #include "main.h"
 #include "meter.h"
@@ -131,9 +131,9 @@
 #include "audiostream.h"
 #include "metis.h"
 #include "cw.h"
-#include "test.h"
-#include "alex_rx_test.h"
-#include "alex_tx_test.h"
+
+#include "discovery.h"
+
 
 GdkColor background;
 GdkColor buttonBackground;
@@ -156,7 +156,7 @@ GtkWidget* mainFixed;
 
 GtkWidget* buttonExit;
 GtkWidget* buttonSetup;
-GtkWidget* buttonTest;
+GtkWidget* buttonStart;
 
 
 GtkWidget* vfoWindow;
@@ -184,6 +184,9 @@ gint mainRootY;
 char propertyPath[128];
 
 extern int timing;
+
+void initAnalyzer(int channel);
+void initBSAnalyzer(int channel);
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -271,14 +274,14 @@ void setupCallback(GtkWidget* widget,gpointer data) {
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Callback when test button is pressed
+* @brief Callback when start button is pressed
 * 
 * @param widget
 * @param data
 */
 /* ----------------------------------------------------------------------------*/
-void testCallback(GtkWidget* widget,gpointer data) {
-    test_setup();
+void startCallback(GtkWidget* widget,gpointer data) {
+    fprintf(stderr,"main: startCallback\n");
 }
 
 /* --------------------------------------------------------------------------*/
@@ -295,46 +298,46 @@ gint keyboardSnooper(GtkWidget* widget,GdkEventKey* event) {
     if(event->type==GDK_KEY_PRESS) {
         switch(event->keyval) {
             case GDK_q:
-                vfoIncrementFrequency(1000000L);
+                vfoIncrementFrequency(1000000L,FALSE);
                 break;
             case GDK_a:
-                vfoIncrementFrequency(-1000000L);
+                vfoIncrementFrequency(-1000000L,FALSE);
                 break;
             case GDK_w:
-                vfoIncrementFrequency(100000L);
+                vfoIncrementFrequency(100000L,FALSE);
                 break;
             case GDK_s:
-                vfoIncrementFrequency(-100000L);
+                vfoIncrementFrequency(-100000L,FALSE);
                 break;
             case GDK_e:
-                vfoIncrementFrequency(10000L);
+                vfoIncrementFrequency(10000L,FALSE);
                 break;
             case GDK_d:
-                vfoIncrementFrequency(-10000L);
+                vfoIncrementFrequency(-10000L,FALSE);
                 break;
             case GDK_r:
-                vfoIncrementFrequency(1000L);
+                vfoIncrementFrequency(1000L,FALSE);
                 break;
             case GDK_f:
-                vfoIncrementFrequency(-1000L);
+                vfoIncrementFrequency(-1000L,FALSE);
                 break;
             case GDK_t:
-                vfoIncrementFrequency(100L);
+                vfoIncrementFrequency(100L,FALSE);
                 break;
             case GDK_g:
-                vfoIncrementFrequency(-100L);
+                vfoIncrementFrequency(-100L,FALSE);
                 break;
             case GDK_y:
-                vfoIncrementFrequency(10L);
+                vfoIncrementFrequency(10L,FALSE);
                 break;
             case GDK_h:
-                vfoIncrementFrequency(-10L);
+                vfoIncrementFrequency(-10L,FALSE);
                 break;
             case GDK_u:
-                vfoIncrementFrequency(1L);
+                vfoIncrementFrequency(1L,FALSE);
                 break;
             case GDK_j:
-                vfoIncrementFrequency(-1L);
+                vfoIncrementFrequency(-1L,FALSE);
                 break;
         }
     }
@@ -391,8 +394,17 @@ void buildMainUI() {
     mainWindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
     char title[128];
-    if(ozy_get_metis()==1) {
-        sprintf(title,"Gtk+ GUI for HPSDR: %s %s (%s)",metis_cards[metis_selected].name, metis_cards[metis_selected].ip_address,metis_cards[metis_selected].mac_address);
+    if(ozy_use_metis()==1) {
+        char *a=inet_ntoa(discovered[selected_device].address.sin_addr);
+        sprintf(title,"Gtk+ GUI for HPSDR: %s %s (%02X:%02X:%02X:%02X:%02X:%02X)\n",
+                            discovered[selected_device].name,
+                            a,
+                            discovered[selected_device].mac_address[0],
+                            discovered[selected_device].mac_address[1],
+                            discovered[selected_device].mac_address[2],
+                            discovered[selected_device].mac_address[3],
+                            discovered[selected_device].mac_address[4],
+                            discovered[selected_device].mac_address[5]);
     } else {
         strcpy(title,"Gtk+ GUI for HPSDR");
     }
@@ -429,19 +441,17 @@ void buildMainUI() {
     gtk_fixed_put((GtkFixed*)mainFixed,buttonSetup,70,0);
 #endif
 
-#ifdef ALEX_TEST
-    buttonTest = gtk_button_new_with_label ("Test");
-    gtk_widget_modify_bg(buttonTest, GTK_STATE_NORMAL, &buttonBackground);
-    label=gtk_bin_get_child((GtkBin*)buttonTest);
+    buttonStart = gtk_button_new_with_label ("Start");
+    gtk_widget_modify_bg(buttonStart, GTK_STATE_NORMAL, &buttonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonStart);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonTest),LARGE_BUTTON_WIDTH,BUTTON_HEIGHT);
-    g_signal_connect(G_OBJECT(buttonTest),"clicked",G_CALLBACK(testCallback),NULL);
-    gtk_widget_show(buttonTest);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonStart),LARGE_BUTTON_WIDTH,BUTTON_HEIGHT);
+    g_signal_connect(G_OBJECT(buttonStart),"clicked",G_CALLBACK(startCallback),NULL);
+    gtk_widget_show(buttonStart);
 #ifdef NETBOOK
-    gtk_fixed_put((GtkFixed*)mainFixed,buttonTest,162,0);
+    gtk_fixed_put((GtkFixed*)mainFixed,buttonStart,162,0);
 #else
-    gtk_fixed_put((GtkFixed*)mainFixed,buttonTest,140,0);
-#endif
+    gtk_fixed_put((GtkFixed*)mainFixed,buttonStart,140,0);
 #endif
 
     // add the vfo window
@@ -533,7 +543,6 @@ void buildMainUI() {
     gtk_fixed_put((GtkFixed*)mainFixed,displayWindow,210,50);
 #endif
 
-
     // add the bandscope display
     gtk_widget_show(bandscopeWindow);
 #ifdef NETBOOK
@@ -567,7 +576,8 @@ void buildMainUI() {
 #ifdef NETBOOK
     gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1024,576);
 #else
-    gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1180,700);
+    //gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1180,700);
+    gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1244,700);
 #endif
     gtk_widget_show(mainFixed);
     gtk_container_add(GTK_CONTAINER(mainWindow), mainFixed);
@@ -696,12 +706,13 @@ static struct option longOptions[] = {
     {"sample-rate",required_argument, NULL, 's'},
     {"property-path",required_argument, NULL, 'p'},
     {"timing",no_argument, NULL, 't'},
+    {"usb",no_argument, NULL, 'u'},
     {"metis",no_argument, NULL, 'm'},
     {"interface",required_argument, NULL, 'i'},
     {0,0,0,0}
 };
 
-static char* shortOptions="c:s:p:tmi:";
+static char* shortOptions="c:s:p:t:u:m:i:";
 
 static int optionIndex=0;
 
@@ -734,12 +745,16 @@ void processCommands(int argc,char* argv[]) {
             case 'm':
                 ozy_set_metis();
                 break;
+            case 'u':
+                ozy_set_usb();
+                break;
             case 'i':
                 ozy_set_interface(optarg);
                 break;
             case '?':
                 fprintf(stderr,"Usage:\n");
                 fprintf(stderr,"    ghpsdr --metis\n");
+                fprintf(stderr,"             --interface if\n");
                 fprintf(stderr,"             --interface if\n");
                 fprintf(stderr,"             --sound-card s\n");
                 fprintf(stderr,"             --property-path path\n");
@@ -773,31 +788,157 @@ int main(int argc,char* argv[]) {
 
     fprintf(stderr,"ghpsdr Version %s\n",VERSION);
 
-    strcpy(propertyPath,".ghpsdr.properties");
     strcpy(soundCardName,"HPSDR");
     ozy_set_interface("eth0");
     processCommands(argc,argv);
-    loadProperties(propertyPath);
 
-#ifdef ALEX_TEST
-    alex_rx_test_load("alex_rx_test.csv");
-    alex_tx_test_load("alex_tx_test.csv");
-#endif
+    if(ozy_use_metis()==1) {
+        discovery();
+
+        if(devices==0) {
+            fprintf(stderr,"No devices found\n");
+        } if(devices==1) {
+            selected_device=0;
+        } else {
+            GtkWidget* dialog = gtk_message_dialog_new (NULL,
+                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                 GTK_MESSAGE_ERROR,
+                                                 GTK_BUTTONS_OK_CANCEL,
+                                                 "Found %d devices!",
+                                                 devices);
+            gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Select required device");
+            gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
+            GtkWidget* area=gtk_message_dialog_get_message_area (dialog);
+            GSList* group=NULL;
+            char label[128];
+            int i;
+            GtkRadioButton* radioButton[devices];
+            for(i=0;i<devices;i++) {
+                DISCOVERED* d=&discovered[i];
+fprintf(stderr,"main:  adding radio button device=%d software_version=%d status=%d\n",
+                            d->device,
+                            d->software_version,
+                            d->status);
+
+fprintf(stderr,"   address=%d\n", d->address.sin_addr.s_addr);
+char* a;
+
+fprintf(stderr,"%s\n", inet_ntoa(d->address.sin_addr));
+
+fprintf(stderr,"    (%02X:%02X:%02X:%02X:%02X:%02X)\n",
+                            d->mac_address[0],
+                            d->mac_address[1],
+                            d->mac_address[2],
+                            d->mac_address[3],
+                            d->mac_address[4],
+                            d->mac_address[5]);
+
+                sprintf(label,"%s %s (%02X:%02X:%02X:%02X:%02X:%02X)\n",
+
+                        d->name,
+                        inet_ntoa(d->address.sin_addr),
+                        d->mac_address[0],
+                        d->mac_address[1],
+                        d->mac_address[2],
+                        d->mac_address[3],
+                        d->mac_address[4],
+                        d->mac_address[5]);
+               radioButton[i]=gtk_radio_button_new_with_label(group,label);
+               gtk_toggle_button_set_active((GtkRadioButton*)radioButton[i],(gboolean)(i==0));
+               gtk_widget_show(radioButton[i]);
+               gtk_container_add((GtkContainer*)area,(GtkWidget*)radioButton[i]);
+               group=gtk_radio_button_group (GTK_RADIO_BUTTON (radioButton[i]));
+            }
+            int result = gtk_dialog_run (GTK_DIALOG (dialog));
+            switch (result) {
+                case GTK_RESPONSE_OK:
+                    for(i=0;i<devices;i++) {
+                        if(gtk_toggle_button_get_active((GtkToggleButton *)radioButton[i])) {
+                            selected_device=i;
+                        }
+                    }
+                    break;
+                default:
+                    exit(1);
+                    break;
+            }
+            gtk_widget_destroy (dialog);
+        }
+
+    }
+
+
+    DISCOVERED* d=&discovered[selected_device];
+    sprintf(propertyPath,"%02X-%02X-%02X-%02X-%02X-%02X.properties",
+                        d->mac_address[0],
+                        d->mac_address[1],
+                        d->mac_address[2],
+                        d->mac_address[3],
+                        d->mac_address[4],
+                        d->mac_address[5]);
+    loadProperties(propertyPath);
 
     init_cw();
 
-    // initialize DttSP
-    Setup_SDR("");
-    Release_Update();
-    SetTRX(0,FALSE); // thread 0 is for receive
-    SetTRX(1,TRUE);  // thread 1 is for transmit
-    SetThreadProcessingMode(0,2); // set thread 0 to RUN
-    SetThreadProcessingMode(1,2); // set thread 1 to RUN
-    SetSubRXSt(0,0,TRUE);
+    fprintf(stderr,"OpenChannel CHANNEL_RX0 buffer_size=%d fft_size=%d sampleRate=%d dspRate=%d outputRate=%d\n",
+                buffer_size,
+                fft_size,
+                sampleRate,
+                dspRate,
+                outputRate);
+    OpenChannel(CHANNEL_RX0,
+                buffer_size,
+                fft_size,
+                sampleRate,
+                dspRate,
+                outputRate,
+                0, // receive
+                1, // run
+                0.010, 0.025, 0.0, 0.010, 0);
 
-    reset_for_buflen(0,buffer_size);
-    reset_for_buflen(1,buffer_size);
+    int success;
+    fprintf(stderr,"XCreateAnalyzer CHANNEL_RX0\n");
+    XCreateAnalyzer(CHANNEL_RX0, &success, 262144, 1, 1, "");
+        if (success != 0) {
+            fprintf(stderr, "XCreateAnalyzer CHANNEL_RX0 failed: %d\n" ,success);
+        }
 
+    initAnalyzer(CHANNEL_RX0);
+
+    fprintf(stderr,"OpenChannel CHANNEL_TX buffer_size=%d fft_size=%d sampleRate=%d dspRate=%d outputRate=%d\n",
+                buffer_size,
+                fft_size,
+                sampleRate,
+                dspRate,
+                outputRate);
+    OpenChannel(CHANNEL_TX,
+                buffer_size,
+                fft_size,
+                sampleRate,
+                dspRate,
+                outputRate,
+                1, // transmit
+                1, // run
+                0.010, 0.025, 0.0, 0.010, 0);
+
+    fprintf(stderr,"XCreateAnalyzer CHANNEL_TX\n");
+    XCreateAnalyzer(CHANNEL_TX, &success, 262144, 1, 1, "");
+        if (success != 0) {
+            fprintf(stderr, "XCreateAnalyzer CHANNEL_TX failed: %d\n" ,success);
+        }
+
+    initAnalyzer(CHANNEL_TX);
+
+    fprintf(stderr,"XCreateAnalyzer CHANNEL_BS\n");
+    XCreateAnalyzer(CHANNEL_BS, &success, 262144, 1, 1, "");
+        if (success != 0) {
+            fprintf(stderr, "XCreateAnalyzer CHANNEL_BS failed: %d\n" ,success);
+        }
+
+    initBSAnalyzer(CHANNEL_BS);
+
+    create_divEXT(0, 0, 2, 1024);
+    create_eerEXT(0, 0, 1024, 48000, 1.0, 1.0, FALSE, 0.0, 0.0, 1);
 
     // initialize ozy (default 48K)
     //ozyRestoreState();
@@ -851,12 +992,12 @@ int main(int argc,char* argv[]) {
                 break;
 
             case -3: // did not find metis
-fprintf(stderr,"did not find metis\n");
+fprintf(stderr,"Did not find any devices!\n");
                 dialog = gtk_message_dialog_new (NULL,
                                                  GTK_DIALOG_DESTROY_WITH_PARENT,
                                                  GTK_MESSAGE_ERROR,
                                                  GTK_BUTTONS_YES_NO,
-                                                 "Cannot locate Metis on interface %s!",
+                                                 "Cannot locate any devices on interface %s!",
                                                  ozy_get_interface());
                 gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Retry?");
                 gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
@@ -883,11 +1024,6 @@ fprintf(stderr,"did not find metis\n");
     cwPitch =600;
 
     restoreInitialState();
-
-    SetKeyerResetSize(4096);
-    NewKeyer(600.0f,TRUE,0.0f,3.0f,25.0f,48000.0f);
-    SetKeyerPerf(FALSE);
-    StartKeyer();
 
     initColors();
     //gtk_key_snooper_install((GtkKeySnoopFunc)keyboardSnooper,NULL);
@@ -947,8 +1083,120 @@ fprintf(stderr,"did not find metis\n");
 
     audio_stream_init();
 
+    SetRXABandpassRun(CHANNEL_RX0, 1);
+    SetRXAAMDSBMode(CHANNEL_RX0, 0);
+
+    SetRXAEMNRgainMethod(CHANNEL_RX0, 1);
+    SetRXAEMNRnpeMethod(CHANNEL_RX0, 0);
+    SetRXAEMNRaeRun(CHANNEL_RX0, 1);
+    SetRXAEMNRPosition(CHANNEL_RX0, 0);
+
+    SetRXAEMNRRun(CHANNEL_RX0, 0);
+    SetRXAANRRun(CHANNEL_RX0, 0);
+    SetRXAANFRun(CHANNEL_RX0, 0);
 
     gtk_main();
 
     return 0;
 }
+
+void initAnalyzer(int channel) {
+    int flp[] = {0};
+    double KEEP_TIME = 0.1;
+    int spur_elimination_ffts = 1;
+    int data_type = 1;
+    int fft_size = 8192;
+    int window_type = 4;
+    double kaiser_pi = 14.0;
+    int overlap = 2048;
+    int clip = 0;
+    int span_clip_l = 0;
+    int span_clip_h = 0;
+    int pixels=spectrumWIDTH;
+    int stitches = 1;
+    int avm = 0;
+    double tau = 0.001 * 120.0;
+    int MAX_AV_FRAMES = 60;
+    int display_average = MAX(2, (int) MIN((double) MAX_AV_FRAMES, (double) SPECTRUM_UPDATES_PER_SECOND * tau));
+    double avb = exp(-1.0 / (SPECTRUM_UPDATES_PER_SECOND * tau));
+    int calibration_data_set = 0;
+    double span_min_freq = 0.0;
+    double span_max_freq = 0.0;
+
+    int max_w = fft_size + (int) MIN(KEEP_TIME * (double) SPECTRUM_UPDATES_PER_SECOND, KEEP_TIME * (double) fft_size * (double) SPECTRUM_UPDATES_PER_SECOND);
+
+    fprintf(stderr,"SetAnalyzer channel=%d\n",channel);
+    SetAnalyzer(channel,
+            spur_elimination_ffts, //number of LO frequencies = number of ffts used in elimination
+            data_type, //0 for real input data (I only); 1 for complex input data (I & Q)
+            flp, //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
+            fft_size, //size of the fft, i.e., number of input samples
+            buffer_size, //number of samples transferred for each OpenBuffer()/CloseBuffer()
+            window_type, //integer specifying which window function to use
+            kaiser_pi, //PiAlpha parameter for Kaiser window
+            overlap, //number of samples each fft (other than the first) is to re-use from the previous
+            clip, //number of fft output bins to be clipped from EACH side of each sub-span
+            span_clip_l, //number of bins to clip from low end of entire span
+            span_clip_h, //number of bins to clip from high end of entire span
+            pixels, //number of pixel values to return.  may be either <= or > number of bins
+            stitches, //number of sub-spans to concatenate to form a complete span
+            avm, //averaging mode
+            display_average, //number of spans to (moving) average for pixel result
+            avb, //back multiplier for weighted averaging
+            calibration_data_set, //identifier of which set of calibration data to use
+            span_min_freq, //frequency at first pixel value8192
+            span_max_freq, //frequency at last pixel value
+            max_w //max samples to hold in input ring buffers
+    );
+}
+
+void initBSAnalyzer(int channel) {
+    int flp[] = {0};
+    double KEEP_TIME = 0.1;
+    int spur_elimination_ffts = 1;
+    int data_type = 1;
+    int fft_size = 16384;
+    int window_type = 1;
+    double kaiser_pi = 14.0;
+    int overlap = 2048;
+    int clip = 0;
+    int span_clip_l = 0;
+    int span_clip_h = 0;
+    int pixels=bandscopeWIDTH*2;
+    int stitches = 1;
+    int avm = 1;
+    double tau = 0.001 * 120.0;
+    int MAX_AV_FRAMES = 60;
+    int display_average = MAX(2, (int) MIN((double) MAX_AV_FRAMES, (double) BANDSCOPE_UPDATES_PER_SECOND * tau));
+    double avb = exp(-1.0 / (BANDSCOPE_UPDATES_PER_SECOND * tau));
+    int calibration_data_set = 0;
+    double span_min_freq = 0.0;
+    double span_max_freq = 0.0;
+
+    int max_w = fft_size + (int) MIN(KEEP_TIME * (double) BANDSCOPE_UPDATES_PER_SECOND, KEEP_TIME * (double) fft_size * (double) BANDSCOPE_UPDATES_PER_SECOND);
+
+
+    SetAnalyzer(channel,
+            spur_elimination_ffts, //number of LO frequencies = number of ffts used in elimination
+            0, //0 for real input data (I only); 1 for complex input data (I & Q)
+            flp, //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
+            fft_size, //size of the fft, i.e., number of input samples
+            2048, //number of samples transferred for each OpenBuffer()/CloseBuffer()
+            1, //integer specifying which window function to use (Blackman-Harris)
+            kaiser_pi, //PiAlpha parameter for Kaiser window
+            overlap, //number of samples each fft (other than the first) is to re-use from the previous
+            clip, //number of fft output bins to be clipped from EACH side of each sub-span
+            span_clip_l, //number of bins to clip from low end of entire span
+            span_clip_h, //number of bins to clip from high end of entire span
+            pixels, //number of pixel values to return.  may be either <= or > number of bins
+            stitches, //number of sub-spans to concatenate to form a complete span
+            0, //averaging mode
+            display_average, //number of spans to (moving) average for pixel result
+            avb, //back multiplier for weighted averaging
+            calibration_data_set, //identifier of which set of calibration data to use
+            span_min_freq, //frequency at first pixel value8192
+            span_max_freq, //frequency at last pixel value
+            max_w //max samples to hold in input ring buffers
+        );
+}
+

@@ -25,22 +25,6 @@
 *
 */
 
-typedef struct _METIS_CARD {
-    int device;
-    char name[32];
-    char ip_address[16];
-    char mac_address[18];
-} METIS_CARD;
-
-#define MAX_METIS_CARDS 10
-METIS_CARD metis_cards[MAX_METIS_CARDS];
-
-int metis_selected;
-
-void metis_discover(char* interface);
-int metis_found();
-char* metis_ip_address(int entry);
-char* metis_mac_address(int entry);
 void metis_start_receive_thread();
 
 int metis_write(unsigned char ep,char* buffer,int length);

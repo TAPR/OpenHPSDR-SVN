@@ -38,8 +38,9 @@
 
 #include "screensize.h"
 #include "command.h"
-#include "dttsp.h"
 #include "main.h"
+#include "wdsp.h"
+#include "channel.h"
 
 GtkWidget* receiverFrame;
 
@@ -69,7 +70,7 @@ void selectReceiver(GtkWidget* widget) {
 */
 void panChanged(GtkWidget* widget,gpointer data) {
     pan=gtk_range_get_value((GtkRange*)panScale);
-    SetRXPan(0,0,pan);
+    SetRXAPanelPan(CHANNEL_RX0, 1.0-pan);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -102,7 +103,7 @@ GtkWidget* buildReceiverUI() {
 #endif
     gtk_widget_show(receiverFrame);
 
-    SetRXPan(0,0,pan);
+    SetRXAPanelPan(CHANNEL_RX0, 1.0-pan);
 
     return receiverFrame;
   

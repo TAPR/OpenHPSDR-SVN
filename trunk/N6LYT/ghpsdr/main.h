@@ -24,9 +24,6 @@
 * 
 */
 
-
-//#define ALEX_TEST
-
 GdkColor background;
 GdkColor buttonBackground;
 GdkColor bandButtonBackground;

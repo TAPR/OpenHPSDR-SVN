@@ -30,7 +30,7 @@
 #define bandscopeWIDTH 857
 #define bandscopeHEIGHT 90
 #else
-#define bandscopeWIDTH 960
+#define bandscopeWIDTH 1024
 #define bandscopeHEIGHT 100
 #endif
 

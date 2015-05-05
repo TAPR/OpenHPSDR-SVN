@@ -25,6 +25,24 @@
 * 
 */
 
+int cwinternal;
+int cwkeysreversed; // 0=disabled 1=enabled
+int cwkeyerspeed; // 1-60 WPM
+#define KEYER_STRAIGHT  0
+#define KEYER_MODE_A  1
+#define KEYER_MODE_B  2
+int cwkeyermode;
+
+int cwkeyerweight; //0-100
+int cwkeyerspacing; // 0=on 1=off
+
+int cwinternal;  // 0=external, 1=internal
+int cwsidetonevolume; // 0-127
+int cwpttdelay; // 0-255ms
+int cwhangtime; // ms
+int cwsidetonefrequency; // Hz
+
+
 int cwPitch;
 
 short cwSin[240];
@@ -32,3 +50,4 @@ short cwCos[240];
 int cwIndex;
 
 void init_cw();
+

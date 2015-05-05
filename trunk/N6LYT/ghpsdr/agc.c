@@ -43,12 +43,16 @@
 #include "command.h"
 #include "main.h"
 #include "property.h"
+#include "wdsp.h"
+#include "channel.h"
 
 GtkWidget* agcFrame;
 GtkWidget* agcTable;
 
 int agc=agcLONG;
-
+/*
+GtkWidget* buttonOFF;
+*/
 GtkWidget* buttonSLOW;
 GtkWidget* buttonMEDIUM;
 GtkWidget* buttonFAST;
@@ -78,7 +82,10 @@ void selectAgc(GtkWidget* widget) {
     gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &buttonSelected);
     currentAgcButton=widget;
 
-    if(widget==buttonSLOW) {
+/*
+    if(widget==buttonOFF) {
+        agc=agcOFF;
+    } else */ if(widget==buttonSLOW) {
         agc=agcSLOW;
     } else if(widget==buttonMEDIUM) {
         agc=agcMEDIUM;
@@ -88,10 +95,7 @@ void selectAgc(GtkWidget* widget) {
         agc=agcLONG;
     }
 
-
-    // set RX agc
-    sprintf(temp,"setRXAGC %d",agc);
-    writeCommand(temp);
+    SetRXAAGCMode (CHANNEL_RX0, agc);
 
 }
 
@@ -104,6 +108,11 @@ void selectAgc(GtkWidget* widget) {
 void setAgc(int agc) {
     GtkWidget* widget;
     switch(agc) {
+/*
+        case agcOFF:
+            widget=buttonOFF;
+            break;
+*/
         case agcSLOW:
             widget=buttonSLOW;
             break;
@@ -147,8 +156,18 @@ GtkWidget* buildAgcUI() {
 
     agcTable=gtk_table_new(1,4,TRUE);
 
-
     // agc buttons
+/*
+    buttonOFF = gtk_button_new_with_label ("OFF");
+    gtk_widget_modify_bg(buttonOFF, GTK_STATE_NORMAL, &buttonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonOFF);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonOFF),BUTTON_WIDTH,BUTTON_HEIGHT);
+    g_signal_connect(G_OBJECT(buttonOFF),"clicked",G_CALLBACK(agcCallback),NULL);
+    gtk_widget_show(buttonOFF);
+    gtk_table_attach_defaults(GTK_TABLE(agcTable),buttonOFF,0,1,0,1);
+*/
+
     buttonSLOW = gtk_button_new_with_label ("SLOW");
     gtk_widget_modify_bg(buttonSLOW, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonSLOW);

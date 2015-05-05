@@ -34,20 +34,22 @@
 #include "audio.h"
 #include "main.h"
 #include "property.h"
+#include "wdsp.h"
+#include "channel.h"
 
 GtkWidget* audioFrame;
 GtkWidget* audioTable;
 
 GtkWidget* buttonNR;
 GtkWidget* buttonANF;
-GtkWidget* buttonNB;
+//GtkWidget* buttonNB;
 GtkWidget* buttonNB2;
 GtkWidget* buttonMUTE;
 GtkWidget* buttonBIN;
 
 gboolean NR=FALSE;
 gboolean ANF=FALSE;
-gboolean NB=FALSE;
+//gboolean NB=FALSE;
 gboolean NB2=FALSE;
 gboolean MUTE=FALSE;
 gboolean BIN=FALSE;
@@ -67,38 +69,34 @@ void audioButtonCallback(GtkWidget* widget,gpointer data) {
     if(widget==buttonNR) {
         NR=!NR;
         state=NR;
-        //writeCommand("setBlkANF 1");
-        SetANF(0,0,1);
-        //sprintf(c,"setNR %d",NR);
-        //writeCommand(c);
-        SetNR(0,0,NR);
+        //SetANF(0,0,1);
+        //SetNR(0,0,NR);
+        SetRXAANRRun(CHANNEL_RX0, NR ? 1 : 0);
     } else if(widget==buttonANF) {
         ANF=!ANF;
         state=ANF;
-        //writeCommand("setBlkANF 1");
-        SetANF(0,0,1);
-        //sprintf(c,"setANF %d",ANF);
-        //writeCommand(c);
-        SetANF(0,0,ANF);
+        //SetANF(0,0,1);
+        //SetANF(0,0,ANF);
+        SetRXAANFRun(CHANNEL_RX0, ANF ? 1 : 0);
+/*
     } else if(widget==buttonNB) {
         NB=!NB;
         state=NB;
-        //sprintf(c,"setNB %d",NB);
-        //writeCommand(c);
-        SetNB(0,0,NB);
+        //SetNB(0,0,NB);
+*/
     } else if(widget==buttonNB2) {
         NB2=!NB2;
         state=NB2;
-        //sprintf(c,"setNB2 %d",NB2);
-        //writeCommand(c);
-        SetNB(0,0,NB2);
+        //SetNB(0,0,NB2);
+        SetRXAEMNRRun(CHANNEL_RX0, NB2 ? 1 : 0);
     } else if(widget==buttonMUTE) {
         MUTE=!MUTE;
         state=MUTE;
     } else if(widget==buttonBIN) {
         BIN=!BIN;
         state=BIN;
-        SetBIN(0,0,BIN);
+        //SetBIN(0,0,BIN);
+        SetRXAPanelBinaural(CHANNEL_RX0, BIN ? 1 : 0);
     }
     label=gtk_bin_get_child((GtkBin*)widget);
     if(state) {
@@ -145,6 +143,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_show(buttonANF);
     gtk_table_attach_defaults(GTK_TABLE(audioTable),buttonANF,1,2,0,1);
 
+/*
     buttonNB = gtk_button_new_with_label ("NB");
     gtk_widget_modify_bg(buttonNB, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonNB);
@@ -153,7 +152,7 @@ GtkWidget* buildAudioUI() {
     g_signal_connect(G_OBJECT(buttonNB),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonNB);
     gtk_table_attach_defaults(GTK_TABLE(audioTable),buttonNB,2,3,0,1);
-
+*/
     buttonNB2 = gtk_button_new_with_label ("NB2");
     gtk_widget_modify_bg(buttonNB2, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonNB2);
@@ -161,7 +160,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonNB2),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonNB2),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonNB2);
-    gtk_table_attach_defaults(GTK_TABLE(audioTable),buttonNB2,3,4,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(audioTable),buttonNB2,2,3,0,1);
 
     buttonMUTE = gtk_button_new_with_label ("MUTE");
     gtk_widget_modify_bg(buttonMUTE, GTK_STATE_NORMAL, &buttonBackground);

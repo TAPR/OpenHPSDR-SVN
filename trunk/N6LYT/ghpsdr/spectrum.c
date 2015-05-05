@@ -44,6 +44,7 @@
 #include "vfo.h"
 #include "subrx.h"
 #include "preamp.h"
+#include "transmit.h"
 
 GtkWidget* spectrum;
 
@@ -117,13 +118,13 @@ void setSpectrumMode(int mode);
 * @return 
 */
 GtkWidget* newSpectrumDisplay() {
+    int i,j;
     
     spectrumLow=-sampleRate/2;
     spectrumHigh=+sampleRate/2;
 
     // allocate space for the plotting spectrumPoints
     spectrumPoints=calloc(spectrumWIDTH,sizeof(GdkPoint));
-    int i;
     for(i=0;i<spectrumWIDTH;i++) {
         spectrumPoints[i].x=i;
         spectrumPoints[i].y=-1;
@@ -135,6 +136,19 @@ GtkWidget* newSpectrumDisplay() {
     waterfallPixels=gdk_pixbuf_get_pixels(waterfallPixbuf);
     nChannels=gdk_pixbuf_get_n_channels(waterfallPixbuf);
     rowStride=gdk_pixbuf_get_rowstride(waterfallPixbuf);
+
+    static guchar *pix;
+
+    // shift down the lines of the waterfall
+    for( i = 0; i < spectrumHEIGHT; i++ ) {
+        pix = waterfallPixels + rowStride * i + nChannels;
+        for( j = 0; j < spectrumWIDTH; j++ ) {
+            pix[0] = 0;
+            pix[1] = 0;
+            pix[2] = 0;
+            pix += nChannels;
+        }
+    }
 
     // build the UI
     spectrum=gtk_drawing_area_new();
@@ -245,7 +259,7 @@ gboolean spectrum_button_press_event(GtkWidget* widget,GdkEventButton* event) {
             } else {
                 increment=(int)((float)spectrumLow+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH));
             }
-            vfoIncrementFrequency(increment);
+            vfoIncrementFrequency(increment,TRUE);
             break;
     }
     return TRUE;
@@ -267,8 +281,17 @@ gboolean spectrum_button_release_event(GtkWidget* widget,GdkEventButton* event) 
             // left button  - click to frequency (centered in filter) if not dragged
             if(!hasMoved) {
                 increment=(int)((float)spectrumLow+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH)-((float)filterLow+((float)filterHigh-(float)filterLow)/2.0));
-                if(!subrx)
-                    vfoIncrementFrequency(increment);
+                if(!subrx) {
+                    vfoIncrementFrequency(increment,TRUE);
+                }
+            } else {
+                int x=event->x;
+                int moved=lastX-x;
+                int f=(int)((float)moved*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH);
+                if(subrx) f=-f;
+                vfoIncrementFrequency(f,TRUE);
+                lastX=x;
+                hasMoved=TRUE;
             }
             break;
         case 2:
@@ -292,12 +315,12 @@ gboolean spectrum_button_release_event(GtkWidget* widget,GdkEventButton* event) 
 */
 gboolean spectrum_motion_notify_event(GtkWidget* widget,GdkEventMotion* event) {
     if(event->state & GDK_BUTTON1_MASK) {
-        int moved=lastX-event->x;
-        //int f=moved*(spectrumHigh-spectrumLow)/spectrumWIDTH;
+        int x=event->x;
+        int moved=lastX-x;
         int f=(int)((float)moved*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH);
         if(subrx) f=-f;
-        vfoIncrementFrequency(f);
-        lastX=event->x;
+        vfoIncrementFrequency(f,FALSE);
+        lastX=x;
         hasMoved=TRUE;
     }
     return TRUE;
@@ -314,9 +337,9 @@ gboolean spectrum_motion_notify_event(GtkWidget* widget,GdkEventMotion* event) {
 */
 gboolean spectrum_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     if(event->direction==GDK_SCROLL_UP) {
-        vfoIncrementFrequency(frequencyIncrement);
+        vfoIncrementFrequency(frequencyIncrement,TRUE);
     } else {
-        vfoIncrementFrequency(-frequencyIncrement);
+        vfoIncrementFrequency(-frequencyIncrement,TRUE);
     }
 }
 
@@ -353,7 +376,9 @@ void updateSpectrum(float* samples) {
             break;
         case spectrumPANWATER:
             plotSpectrum(samples,spectrumHEIGHT/2);
-            drawWaterfall(spectrumHEIGHT/2,spectrumHEIGHT/2);
+            if(!xmit && !tuning) {
+                drawWaterfall(spectrumHEIGHT/2,spectrumHEIGHT/2);
+            }
             drawSpectrum(spectrumHEIGHT/2);
             break;
         case spectrumHISTOGRAM:
@@ -376,7 +401,7 @@ void plotScope(float* samples) {
         int pixels=0;
         int i;
         for(i=0;i<spectrumWIDTH;i++) {
-            pixels=(int)((float)(spectrumHEIGHT/2)*samples[i*2]);
+            pixels=(int)((float)(spectrumHEIGHT/2)*samples[i]);
             y = spectrumHEIGHT/2-pixels;
             spectrumPoints[i].x = i;
             spectrumPoints[i].y = y;
@@ -442,10 +467,25 @@ void drawSpectrum(int height) {
     int filterLeftX;
     int filterRightX;
 
-    minDisplay=f=frequencyA-(sampleRate/2);
-    maxDisplay=frequencyA+(sampleRate/2);
+    int sample_rate=sampleRate;
+    int low=spectrumLow;
+    int high=spectrumHigh;
+    int spectrum_max=spectrumMAX;
+    int spectrum_min=spectrumMIN;
+
+
+    if(xmit || tuning) {
+        sample_rate=48000;
+        low=-sample_rate/2;
+        high=sample_rate/2;
+        spectrum_max=30;
+        spectrum_min=-100;
+    }
+
+    minDisplay=f=frequencyA-(sample_rate/2);
+    maxDisplay=frequencyA+(sample_rate/2);
     
-    hzPerPixel=(float)sampleRate/(float)spectrumWIDTH;
+    hzPerPixel=(float)sample_rate/(float)spectrumWIDTH;
 
     if(spectrum->window) {
 
@@ -459,35 +499,51 @@ void drawSpectrum(int height) {
         pango_layout_set_width(layout,spectrumWIDTH*PANGO_SCALE);
 
         if(subrx) {
-            filterLeftX=(filterLow+(subrxFrequency-frequencyA)-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
-            filterRightX=(filterHigh+(subrxFrequency-frequencyA)-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
+            filterLeftX=(filterLow+(subrxFrequency-frequencyA)-low)*spectrumWIDTH/(high-low);
+            filterRightX=(filterHigh+(subrxFrequency-frequencyA)-low)*spectrumWIDTH/(high-low);
             if(filterLeftX==filterRightX) filterRightX++;
             gdk_gc_set_rgb_fg_color(gc,&subrxFilterColor);
             gdk_draw_rectangle(spectrumPixmap,gc,TRUE,filterLeftX,0,filterRightX-filterLeftX,height);
         }
 
         // draw the filter 
-        filterLeftX=(filterLow-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
-        filterRightX=(filterHigh-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
+        filterLeftX=(filterLow-low)*spectrumWIDTH/(high-low);
+        filterRightX=(filterHigh-low)*spectrumWIDTH/(high-low);
         if(filterLeftX==filterRightX) filterRightX++;
         gdk_gc_set_rgb_fg_color(gc,&filterColor);
         gdk_draw_rectangle(spectrumPixmap,gc,TRUE,filterLeftX,0,filterRightX-filterLeftX,height);
 
         // draw the vertical lines
-        for(i=0;i<spectrumWIDTH;i++) {
-            if(f>0) {
-                if((f%10000)<(long long)hzPerPixel) {
-                    gdk_gc_set_rgb_fg_color(gc,&verticalColor);
-                    gdk_draw_line(spectrumPixmap,gc,i,0,i,height);
-                    gdk_gc_set_rgb_fg_color(gc,&spectrumTextColor);
-                    sprintf(label,"<span font_desc='Sans Regular 8'>%5.3f</span>",(float)f/1000000.0f);
-                    pango_layout_set_markup (layout, label, -1);
-                    gdk_draw_layout (GDK_DRAWABLE (spectrumPixmap), gc, i-17, 0, layout);
-                }
-            }
-            f+=(long long)hzPerPixel;
-        }
 
+        long long increment=10000;
+        switch(sampleRate) {
+            case 48000:
+                increment=10000;
+                break;
+            case 96000:
+                increment=10000;
+                break;
+            case 192000:
+                increment=10000;
+                break;
+            case 384000:
+                increment=20000;
+                break;
+        }
+        f=(f/increment)*increment;
+        do {
+            if(f>=minDisplay) {
+                i=(int)((float)(f-minDisplay)/hzPerPixel);
+                gdk_gc_set_rgb_fg_color(gc,&verticalColor);
+                gdk_draw_line(spectrumPixmap,gc,i,0,i,height);
+                gdk_gc_set_rgb_fg_color(gc,&spectrumTextColor);
+                sprintf(label,"<span font_desc='Sans Regular 8'>%5.2f</span>",(float)f/1000000.0f);
+                pango_layout_set_markup (layout, label, -1);
+                gdk_draw_layout (GDK_DRAWABLE (spectrumPixmap), gc, i-17, 0, layout);
+            }
+            f+=increment;
+        } while(f<maxDisplay);
+        
         // draw band edges
         bandLimits=getBandLimits(minDisplay,maxDisplay);
         if(bandLimits!=NULL) {
@@ -509,14 +565,14 @@ void drawSpectrum(int height) {
         gdk_draw_line(spectrumPixmap,gc,spectrumWIDTH/2,0,spectrumWIDTH/2,height);
 
         // draw the horizontal lines
-        int v=spectrumMAX-spectrumMIN;
+        int v=spectrum_max-spectrum_min;
         int n=v/spectrumSTEP;
         int p=height/n;
         int i;
 
         for(i=1;i<n;i++) {
-            int val=spectrumMAX-i*spectrumSTEP;
-            int y=(spectrumMAX-val)*height/v;
+            int val=spectrum_max-i*spectrumSTEP;
+            int y=(spectrum_max-val)*height/v;
             gdk_gc_set_rgb_fg_color(gc,&horizontalColor);
             gdk_draw_line(spectrumPixmap,gc,0,y,spectrumWIDTH,y);
             gdk_gc_set_rgb_fg_color(gc,&spectrumTextColor);
@@ -567,80 +623,31 @@ void drawSpectrum(int height) {
 void plotSpectrum(float* samples,int height) {
 
     // plot the spectrum
-    int num_samples;
-    int start_sample_index;
-    float slope;
-    int yRange=spectrumMAX-spectrumMIN;
-    long long f;
-    float hzPerPixel;
+    int sample_rate=sampleRate;
+    int high=spectrumMAX;
+    int low=spectrumMIN;
 
-    int average;
-
-    f=frequencyA-(sampleRate/2);
-    hzPerPixel=(float)sampleRate/(float)spectrumWIDTH;
-
-    start_sample_index=(SPECTRUM_SAMPLES>>1)+((spectrumLow*SPECTRUM_SAMPLES)/sampleRate);
-    num_samples=(int)((spectrumHigh-spectrumLow)*SPECTRUM_SAMPLES/sampleRate);
-    if (start_sample_index < 0) start_sample_index = 0;
-    if ((num_samples - start_sample_index) > (SPECTRUM_SAMPLES+1))
-        num_samples = SPECTRUM_SAMPLES-start_sample_index;
-    slope = (float)num_samples/(float)spectrumWIDTH;
-
-    int spectrum_max_x=0;
-    float spectrum_max_y = -1000000.0F;
-    int i;
-
-    if(spectrumAverage) {
-        if(initAverage) {
-            for(i=0;i<SPECTRUM_SAMPLES;i++) {
-                averageSpectrum[i]=samples[i];
-            }
-            initAverage=0;
-        } else {
-            for(i=0;i<SPECTRUM_SAMPLES;i++) {
-                averageSpectrum[i] = (samples[i] * (1 - spectrumAverageSmoothing)) + (averageSpectrum[i] * spectrumAverageSmoothing);
-            }
-        }
-    } else {
-        for(i=0;i<SPECTRUM_SAMPLES;i++) {
-            averageSpectrum[i]=samples[i];
-        }
+    if(xmit || tuning) {
+        sample_rate=48000;
+        high=30;
+        low=-100;
     }
+    int yRange=high-low;
 
-    average=0;
+    int i;
+    float sample;
+    int average=0;
+    int y;
     for(i=0; i<spectrumWIDTH; i++) {
-        float max = -1000000.0F;
-        float dval = i*slope + start_sample_index;
-        int lindex = (int)floorf(dval);
-        int rindex = (int)floorf(dval + slope);
-        if (rindex > SPECTRUM_SAMPLES) rindex = SPECTRUM_SAMPLES;
-
-        if(f>0) {
-            int j;
-            for(j=lindex;j<rindex;j++) {
-                if (averageSpectrum[j] > max) max=averageSpectrum[j];
-            }
-
-            max = max + displayCalibrationOffset + preampOffset;
-        } else {
-            max=-250;
+        sample=samples[i]+displayCalibrationOffset+preampOffset;
+        waterfall[i]=sample;
+        average+=(int)sample;
+        y = (int)(floorf(((float)high - (float)sample)*(float)height/(float)yRange));
+        if(y>height) {
+           y=height;
         }
-
-        // save for waterfall
-        waterfall[i]=max;
-
-        average=average+(int)max;
-
-        if(max > spectrum_max_y)
-        {
-            spectrum_max_y = max;
-            spectrum_max_x = i;
-        }
-
-        spectrumPoints[i].y = (int)(floorf(((float)spectrumMAX - (float)max)*(float)height/(float)yRange));
+        spectrumPoints[i].y = y;
         spectrumPoints[i].x = i;
-        f+=(long long)hzPerPixel;
-
     }
 
     if(waterfallAutomatic) {
