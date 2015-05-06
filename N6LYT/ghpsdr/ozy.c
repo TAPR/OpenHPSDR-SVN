@@ -64,6 +64,7 @@ static pthread_t ep6_ep2_io_thread_id;
 static pthread_t ep4_io_thread_id;
 static pthread_t ozy_input_buffer_thread_id;
 static pthread_t ozy_spectrum_buffer_thread_id;
+int running;
 
 static long rxFrequency=7056000;
 static int rxFrequency_changed=1;
@@ -164,7 +165,7 @@ static struct timeb end_time;
 static int sample_count=0;
 
 static int metis=1;
-static char interface[128];
+//static char interface[128];
 
 int alexRxAntenna=0;
 int alexTxAntenna=0;
@@ -186,9 +187,9 @@ int ozy_use_metis() {
     return metis;
 }
 
-void ozy_set_interface(char* iface) {
-    strcpy(interface,iface);
-}
+//void ozy_set_interface(char* iface) {
+//    strcpy(interface,iface);
+//}
 
 void setPennyLane(int state) {
     pennyLane=state;
@@ -199,9 +200,9 @@ void setDriveLevelChanged(int level) {
     driveLevelChanged=1;
 }
 
-char* ozy_get_interface() {
-    return interface;
-}
+//char* ozy_get_interface() {
+//    return interface;
+//}
 
 void ozy_send_buffer() {
                         output_buffer[0]=SYNC;
@@ -696,7 +697,7 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
     unsigned char input_buffer[OZY_BUFFER_SIZE];
     int bytes;
 
-    while(1) {
+    while(running) {
         // read an input buffer (blocks until all bytes read)
 #ifdef OZY_BUFFERS
         ozy_buffer=get_ozy_free_buffer();
@@ -826,7 +827,7 @@ void* ozy_ep4_io_thread(void* arg) {
     int i;
     unsigned char input_buffer[SPECTRUM_BUFFER_SIZE];
 
-    while(1) {
+    while(running) {
 #ifdef OZY_BUFFERS
         spectrum_buffer=get_spectrum_free_buffer();
         if(spectrum_buffer!=NULL) {
@@ -1053,9 +1054,6 @@ int ozy_init() {
 
     fprintf(stderr,"ozy_init\n");
 
-    //
-    setSpeed(speed);
-
     // setup defaults
     control_out[0] = MOX_DISABLED;
     control_out[1] = CONFIG_BOTH
@@ -1071,6 +1069,8 @@ int ozy_init() {
     control_out[4] = 0;
 
     ozyRestoreState();
+    setSpeed(speed);
+
 
     tuningPhase=0.0;
 
@@ -1099,9 +1099,11 @@ int ozy_init() {
     // create buffers of ozy
     create_ozy_ringbuffer(128*512);
     create_ozy_buffers(128);
-#endif
     create_spectrum_buffers(8);
+#endif
     
+
+    running=1;
 
     if(metis) { 
         metis_start_receive_thread();
@@ -1137,6 +1139,13 @@ int ozy_init() {
     return rc;
 }
 
+void ozy_stop() {
+    if(metis) {
+        metis_stop();
+    } else {
+        running=0;
+    }
+}
 
 /* --------------------------------------------------------------------------*/
 /** 

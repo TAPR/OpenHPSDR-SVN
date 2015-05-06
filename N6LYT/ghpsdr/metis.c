@@ -63,8 +63,12 @@ static unsigned char buffer[70];
 static pthread_t receive_thread_id;
 static int found=0;
 
+int running;
+
 int ep;
 long sequence=-1;
+
+void metis_stop(void);
 
 void* metis_receive_thread(void* arg);
 void metis_send_buffer(char* buffer,int length);
@@ -104,6 +108,11 @@ static int get_addr(int sock, char * ifname) {
   return 0;
 }
 */
+
+void metis_stop() {
+    running=0;
+    close(data_socket);
+}
 
 void metis_start_receive_thread() {
     int i;
@@ -163,8 +172,10 @@ void* metis_receive_thread(void* arg) {
     unsigned char buffer[2048];
     int bytes_read;
 
+    running=1;
+
     length=sizeof(addr);
-    while(1) {
+    while(running) {
    	bytes_read=recvfrom(data_socket,buffer,sizeof(buffer),0,(struct sockaddr*)&addr,&length);
         if(bytes_read<0) {
             perror("recvfrom socket failed for metis_receive_thread");
@@ -254,6 +265,6 @@ void metis_send_buffer(char* buffer,int length) {
 //fprintf(stderr,"metis_send_buffer\n");
     if(sendto(data_socket,buffer,length,0,(struct sockaddr*)&data_addr,data_addr_length)!=length) {
         perror("sendto socket failed for metis_send_data\n");
-        exit(1);
+        //exit(1);
     }
 }

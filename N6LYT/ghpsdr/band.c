@@ -630,6 +630,7 @@ void selectBand(GtkWidget* widget) {
 */
 /* ----------------------------------------------------------------------------*/
 void setBand(int band) {
+fprintf(stderr,"band.c: setBand %d\n",band);
     GtkWidget* widget;
     switch(band) {
         case band160:
@@ -1290,6 +1291,8 @@ void bandRestoreState() {
     BANDSTACK_ENTRY* entry;
     int current;
     //XVTR_ENTRY* xvtr_entry;
+
+    currentBandButton=NULL;
  
     // setup default bandstacks
     bandstack[0].entries=3;

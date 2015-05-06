@@ -154,7 +154,7 @@ GdkColor spectrumTextColor;
 GtkWidget* mainWindow;
 GtkWidget* mainFixed;
 
-GtkWidget* buttonExit;
+GtkWidget* buttonDiscover;
 GtkWidget* buttonSetup;
 GtkWidget* buttonStart;
 
@@ -183,7 +183,14 @@ gint mainRootY;
 
 char propertyPath[128];
 
+gboolean running=FALSE;
+gboolean started=FALSE;
+
 extern int timing;
+
+void saveState(void);
+void restoreInitialState(void);
+void restoreState(void);
 
 void initAnalyzer(int channel);
 void initBSAnalyzer(int channel);
@@ -216,26 +223,30 @@ void mainSaveState() {
 */
 /* ----------------------------------------------------------------------------*/
 void quit() {
+    saveState();
+    exit(0);
+}
+
+void saveState() {
     // save state
     mainSaveState();
-    vfoSaveState();
-    bandSaveState();
-    modeSaveState();
-    displaySaveState();
-    filterSaveState();
-    audioSaveState();
-    bandscopeSaveState();
-    bandscope_controlSaveState();
-    agcSaveState();
-    receiverSaveState();
-    volumeSaveState();
-    ozySaveState();
-    transmitSaveState();
-    subrxSaveState();
-
-    saveProperties(propertyPath);
-
-    exit(0);
+    if(started) {
+        vfoSaveState();
+        bandSaveState();
+        modeSaveState();
+        displaySaveState();
+        filterSaveState();
+        audioSaveState();
+        bandscopeSaveState();
+        bandscope_controlSaveState();
+        agcSaveState();
+        receiverSaveState();
+        volumeSaveState();
+        ozySaveState();
+        transmitSaveState();
+        subrxSaveState();
+        saveProperties(propertyPath);
+    }
 }
 
 /* --------------------------------------------------------------------------*/
@@ -251,15 +262,104 @@ void onCallback(GtkWidget* widget,gpointer data) {
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Callback when exit button is pressed
+* @brief Callback when discover button is pressed
 * 
 * @param widget
 * @param data
 */
 /* ----------------------------------------------------------------------------*/
-void exitCallback(GtkWidget* widget,gpointer data) {
-    quit();
+void discoverCallback(GtkWidget* widget,gpointer data) {
+    char title[128];
+    strcpy(title,"Gtk+ GUI for HPSDR - Discovering devices ...");
+    gtk_window_set_title((GtkWindow*)mainWindow,title);
+        discovery();
+        if(devices==0) {
+            strcpy(title,"Gtk+ GUI for HPSDR - No HPSDR devices found");
+        } if(devices==1) {
+            selected_device=0;
+        } else {
+            GtkWidget* dialog = gtk_message_dialog_new (NULL,
+                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                 GTK_MESSAGE_ERROR,
+                                                 GTK_BUTTONS_OK_CANCEL,
+                                                 "Found %d devices!",
+                                                 devices);
+            gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Select required device");
+            gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
+            GtkWidget* area=gtk_message_dialog_get_message_area (dialog);
+            GSList* group=NULL;
+            char label[128];
+            int i;
+            GtkRadioButton* radioButton[devices];
+            for(i=0;i<devices;i++) {
+                DISCOVERED* d=&discovered[i];
+fprintf(stderr,"main:  adding radio button device=%d software_version=%d status=%d\n",
+                            d->device,
+                            d->software_version,
+                            d->status);
+
+fprintf(stderr,"   address=%d\n", d->address.sin_addr.s_addr);
+char* a;
+
+fprintf(stderr,"%s\n", inet_ntoa(d->address.sin_addr));
+
+fprintf(stderr,"    (%02X:%02X:%02X:%02X:%02X:%02X)\n",
+                            d->mac_address[0],
+                            d->mac_address[1],
+                            d->mac_address[2],
+                            d->mac_address[3],
+                            d->mac_address[4],
+                            d->mac_address[5]);
+
+                sprintf(label,"%s %s (%02X:%02X:%02X:%02X:%02X:%02X) on %s\n",
+
+                        d->name,
+                        inet_ntoa(d->address.sin_addr),
+                        d->mac_address[0],
+                        d->mac_address[1],
+                        d->mac_address[2],
+                        d->mac_address[3],
+                        d->mac_address[4],
+                        d->mac_address[5],
+                        d->interface_name);
+               radioButton[i]=gtk_radio_button_new_with_label(group,label);
+               gtk_toggle_button_set_active((GtkRadioButton*)radioButton[i],(gboolean)(i==0));
+               gtk_widget_show(radioButton[i]);
+               gtk_container_add((GtkContainer*)area,(GtkWidget*)radioButton[i]);
+               group=gtk_radio_button_group (GTK_RADIO_BUTTON (radioButton[i]));
+            }
+            int result = gtk_dialog_run (GTK_DIALOG (dialog));
+            switch (result) {
+                case GTK_RESPONSE_OK:
+                    for(i=0;i<devices;i++) {
+                        if(gtk_toggle_button_get_active((GtkToggleButton *)radioButton[i])) {
+                            selected_device=i;
+                            break;
+                        }
+                    }
+                    break;
+                default:
+                    exit(1);
+                    break;
+            }
+            gtk_widget_hide (dialog);
+            gtk_widget_destroy (dialog);
+        }
+        char *a=inet_ntoa(discovered[selected_device].address.sin_addr);
+        sprintf(title,"Gtk+ GUI for HPSDR: %s %s (%02X:%02X:%02X:%02X:%02X:%02X)\n",
+                            discovered[selected_device].name,
+                            a,
+                            discovered[selected_device].mac_address[0],
+                            discovered[selected_device].mac_address[1],
+                            discovered[selected_device].mac_address[2],
+                            discovered[selected_device].mac_address[3],
+                            discovered[selected_device].mac_address[4],
+                            discovered[selected_device].mac_address[5]);
+        gtk_widget_set_sensitive(buttonSetup, TRUE);
+        gtk_widget_set_sensitive(buttonStart, TRUE);
+    gtk_window_set_title((GtkWindow*)mainWindow,title);
 }
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Callback when setup button is pressed
@@ -281,7 +381,106 @@ void setupCallback(GtkWidget* widget,gpointer data) {
 */
 /* ----------------------------------------------------------------------------*/
 void startCallback(GtkWidget* widget,gpointer data) {
+    gboolean retry;
+    GtkWidget* label;
+    gint result;
+
     fprintf(stderr,"main: startCallback\n");
+    if(running) {
+        // actually the Stop button
+        gtk_button_set_label(GTK_BUTTON(buttonStart), "Start");
+        label=gtk_bin_get_child((GtkBin*)buttonStart);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_set_sensitive(buttonDiscover, TRUE);
+        stopSpectrumUpdate();
+        stopMeterUpdate();
+        stopBandscopeUpdate();
+        ozy_stop();
+        saveState();
+        running=FALSE;
+    } else {
+        gtk_button_set_label(GTK_BUTTON(buttonStart), "Stop");
+        label=gtk_bin_get_child((GtkBin*)buttonStart);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_set_sensitive(buttonDiscover, FALSE);
+        running=TRUE;
+
+    if(ozy_use_metis()==1) {
+        DISCOVERED* d=&discovered[selected_device];
+        sprintf(propertyPath,"%02X-%02X-%02X-%02X-%02X-%02X.properties",
+                        d->mac_address[0],
+                        d->mac_address[1],
+                        d->mac_address[2],
+                        d->mac_address[3],
+                        d->mac_address[4],
+                        d->mac_address[5]);
+    } else {
+        sprintf(propertyPath,"usb.properties");
+    }
+    loadProperties(propertyPath);
+
+    init_cw();
+
+    restoreInitialState();
+
+    bandscopeRestoreState();
+    bandscope_controlRestoreState();
+    meterRestoreState();
+    vfoRestoreState();
+    bandRestoreState();
+    modeRestoreState();
+    filterRestoreState();
+    displayRestoreState();
+    audioRestoreState();
+    agcRestoreState();
+    receiverRestoreState();
+    volumeRestoreState();
+    transmitRestoreState();
+    subrxRestoreState();
+    restoreState();
+    audio_stream_init();
+
+    if(ozy_init()<0) {
+        fprintf(stderr,"GHPSDR: cannot connect to USB device\n");
+        exit(-1);
+    }
+    
+    started=TRUE;
+
+    if(displayHF) {
+        setBand(band);
+    } else {
+        setBand(xvtr_band);
+    }
+
+    SetRXABandpassRun(CHANNEL_RX0, 1);
+    SetRXAAMDSBMode(CHANNEL_RX0, 0);
+    SetRXAShiftRun(CHANNEL_RX0, 0);
+    SetRXAEMNRgainMethod(CHANNEL_RX0, 1);
+    SetRXAEMNRnpeMethod(CHANNEL_RX0, 0);
+    SetRXAEMNRaeRun(CHANNEL_RX0, 1);
+    SetRXAEMNRPosition(CHANNEL_RX0, 0);
+    SetRXAEMNRRun(CHANNEL_RX0, 0);
+    SetRXAANRRun(CHANNEL_RX0, 0);
+    SetRXAANFRun(CHANNEL_RX0, 0);
+
+    SetRXABandpassRun(CHANNEL_SUBRX, 1);
+    SetRXAAMDSBMode(CHANNEL_SUBRX, 0);
+    SetRXAShiftRun(CHANNEL_SUBRX, 1);
+    SetRXAEMNRgainMethod(CHANNEL_SUBRX, 1);
+    SetRXAEMNRnpeMethod(CHANNEL_SUBRX, 0);
+    SetRXAEMNRaeRun(CHANNEL_SUBRX, 1);
+    SetRXAEMNRPosition(CHANNEL_SUBRX, 0);
+    SetRXAEMNRRun(CHANNEL_SUBRX, 0);
+    SetRXAANRRun(CHANNEL_SUBRX, 0);
+    SetRXAANFRun(CHANNEL_SUBRX, 0);
+
+    // get the display and meter running
+    newSpectrumUpdate();
+    newMeterUpdate();
+    newBandscopeUpdate();
+
+    }
 }
 
 /* --------------------------------------------------------------------------*/
@@ -390,24 +589,16 @@ gboolean mainTitle_motion_notify_event(GtkWidget* widget,GdkEventMotion* event) 
 /* ----------------------------------------------------------------------------*/
 void buildMainUI() {
     GtkWidget* label;
+    char title[64];
 
     mainWindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
-    char title[128];
-    if(ozy_use_metis()==1) {
-        char *a=inet_ntoa(discovered[selected_device].address.sin_addr);
-        sprintf(title,"Gtk+ GUI for HPSDR: %s %s (%02X:%02X:%02X:%02X:%02X:%02X)\n",
-                            discovered[selected_device].name,
-                            a,
-                            discovered[selected_device].mac_address[0],
-                            discovered[selected_device].mac_address[1],
-                            discovered[selected_device].mac_address[2],
-                            discovered[selected_device].mac_address[3],
-                            discovered[selected_device].mac_address[4],
-                            discovered[selected_device].mac_address[5]);
+    if(ozy_use_metis()!=1) {
+        strcpy(title,"Gtk+ GUI for HPSDR - USB");
     } else {
         strcpy(title,"Gtk+ GUI for HPSDR");
     }
+
     gtk_window_set_title((GtkWindow*)mainWindow,title);
     gtk_widget_modify_bg(mainWindow,GTK_STATE_NORMAL,&background);
     g_signal_connect(G_OBJECT(mainWindow),"destroy",G_CALLBACK(quit),NULL);
@@ -415,18 +606,21 @@ void buildMainUI() {
     mainFixed=gtk_fixed_new();
     gtk_widget_modify_bg(mainFixed,GTK_STATE_NORMAL,&background);
 
-    buttonExit = gtk_button_new_with_label ("Quit");
-    gtk_widget_modify_bg(buttonExit, GTK_STATE_NORMAL, &buttonBackground);
-    label=gtk_bin_get_child((GtkBin*)buttonExit);
+    buttonDiscover = gtk_button_new_with_label ("Discover");
+    gtk_widget_modify_bg(buttonDiscover, GTK_STATE_NORMAL, &buttonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonDiscover);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonExit),LARGE_BUTTON_WIDTH,BUTTON_HEIGHT);
-    g_signal_connect(G_OBJECT(buttonExit),"clicked",G_CALLBACK(exitCallback),NULL);
-    gtk_widget_show(buttonExit);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonDiscover),LARGE_BUTTON_WIDTH,BUTTON_HEIGHT);
+    g_signal_connect(G_OBJECT(buttonDiscover),"clicked",G_CALLBACK(discoverCallback),NULL);
+    gtk_widget_show(buttonDiscover);
 #ifdef NETBOOK
-    gtk_fixed_put((GtkFixed*)mainFixed,buttonExit,2,0);
+    gtk_fixed_put((GtkFixed*)mainFixed,buttonDiscover,2,0);
 #else
-    gtk_fixed_put((GtkFixed*)mainFixed,buttonExit,5,0);
+    gtk_fixed_put((GtkFixed*)mainFixed,buttonDiscover,5,0);
 #endif
+    if(ozy_use_metis()!=1) {
+        gtk_widget_set_sensitive(buttonDiscover, FALSE);
+    }
 
     buttonSetup = gtk_button_new_with_label ("Setup");
     gtk_widget_modify_bg(buttonSetup, GTK_STATE_NORMAL, &buttonBackground);
@@ -440,6 +634,9 @@ void buildMainUI() {
 #else
     gtk_fixed_put((GtkFixed*)mainFixed,buttonSetup,70,0);
 #endif
+    if(ozy_use_metis()==1) {
+        gtk_widget_set_sensitive(buttonSetup, FALSE);
+    }
 
     buttonStart = gtk_button_new_with_label ("Start");
     gtk_widget_modify_bg(buttonStart, GTK_STATE_NORMAL, &buttonBackground);
@@ -453,6 +650,9 @@ void buildMainUI() {
 #else
     gtk_fixed_put((GtkFixed*)mainFixed,buttonStart,140,0);
 #endif
+    if(ozy_use_metis()) {
+        gtk_widget_set_sensitive(buttonStart, FALSE);
+    }
 
     // add the vfo window
     gtk_widget_show(vfoWindow);
@@ -588,6 +788,7 @@ void buildMainUI() {
     gtk_widget_show(mainWindow);
   
 
+#ifdef RUN_ON_START
     // set the band
     if(displayHF) {
         setBand(band);
@@ -599,6 +800,7 @@ void buildMainUI() {
     newSpectrumUpdate();
     newMeterUpdate();
     newBandscopeUpdate();
+#endif
 }
 
 /* --------------------------------------------------------------------------*/
@@ -749,7 +951,7 @@ void processCommands(int argc,char* argv[]) {
                 ozy_set_usb();
                 break;
             case 'i':
-                ozy_set_interface(optarg);
+                //ozy_set_interface(optarg);
                 break;
             case '?':
                 fprintf(stderr,"Usage:\n");
@@ -789,96 +991,7 @@ int main(int argc,char* argv[]) {
     fprintf(stderr,"ghpsdr Version %s\n",VERSION);
 
     strcpy(soundCardName,"HPSDR");
-    ozy_set_interface("eth0");
     processCommands(argc,argv);
-
-    if(ozy_use_metis()==1) {
-        discovery();
-
-        if(devices==0) {
-            fprintf(stderr,"No devices found\n");
-        } if(devices==1) {
-            selected_device=0;
-        } else {
-            GtkWidget* dialog = gtk_message_dialog_new (NULL,
-                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                 GTK_MESSAGE_ERROR,
-                                                 GTK_BUTTONS_OK_CANCEL,
-                                                 "Found %d devices!",
-                                                 devices);
-            gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Select required device");
-            gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
-            GtkWidget* area=gtk_message_dialog_get_message_area (dialog);
-            GSList* group=NULL;
-            char label[128];
-            int i;
-            GtkRadioButton* radioButton[devices];
-            for(i=0;i<devices;i++) {
-                DISCOVERED* d=&discovered[i];
-fprintf(stderr,"main:  adding radio button device=%d software_version=%d status=%d\n",
-                            d->device,
-                            d->software_version,
-                            d->status);
-
-fprintf(stderr,"   address=%d\n", d->address.sin_addr.s_addr);
-char* a;
-
-fprintf(stderr,"%s\n", inet_ntoa(d->address.sin_addr));
-
-fprintf(stderr,"    (%02X:%02X:%02X:%02X:%02X:%02X)\n",
-                            d->mac_address[0],
-                            d->mac_address[1],
-                            d->mac_address[2],
-                            d->mac_address[3],
-                            d->mac_address[4],
-                            d->mac_address[5]);
-
-                sprintf(label,"%s %s (%02X:%02X:%02X:%02X:%02X:%02X)\n",
-
-                        d->name,
-                        inet_ntoa(d->address.sin_addr),
-                        d->mac_address[0],
-                        d->mac_address[1],
-                        d->mac_address[2],
-                        d->mac_address[3],
-                        d->mac_address[4],
-                        d->mac_address[5]);
-               radioButton[i]=gtk_radio_button_new_with_label(group,label);
-               gtk_toggle_button_set_active((GtkRadioButton*)radioButton[i],(gboolean)(i==0));
-               gtk_widget_show(radioButton[i]);
-               gtk_container_add((GtkContainer*)area,(GtkWidget*)radioButton[i]);
-               group=gtk_radio_button_group (GTK_RADIO_BUTTON (radioButton[i]));
-            }
-            int result = gtk_dialog_run (GTK_DIALOG (dialog));
-            switch (result) {
-                case GTK_RESPONSE_OK:
-                    for(i=0;i<devices;i++) {
-                        if(gtk_toggle_button_get_active((GtkToggleButton *)radioButton[i])) {
-                            selected_device=i;
-                        }
-                    }
-                    break;
-                default:
-                    exit(1);
-                    break;
-            }
-            gtk_widget_destroy (dialog);
-        }
-
-    }
-
-
-    DISCOVERED* d=&discovered[selected_device];
-    sprintf(propertyPath,"%02X-%02X-%02X-%02X-%02X-%02X.properties",
-                        d->mac_address[0],
-                        d->mac_address[1],
-                        d->mac_address[2],
-                        d->mac_address[3],
-                        d->mac_address[4],
-                        d->mac_address[5]);
-    loadProperties(propertyPath);
-
-    init_cw();
 
     fprintf(stderr,"OpenChannel CHANNEL_RX0 buffer_size=%d fft_size=%d sampleRate=%d dspRate=%d outputRate=%d\n",
                 buffer_size,
@@ -957,83 +1070,6 @@ fprintf(stderr,"    (%02X:%02X:%02X:%02X:%02X:%02X)\n",
     create_divEXT(0, 0, 2, 1024);
     create_eerEXT(0, 0, 1024, 48000, 1.0, 1.0, FALSE, 0.0, 0.0, 1);
 
-    // initialize ozy (default 48K)
-    //ozyRestoreState();
-    do {
-        switch(ozy_init()) {
-            case -1: // cannot find ozy
-                dialog = gtk_message_dialog_new (NULL,
-                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                 GTK_MESSAGE_ERROR,
-                                                 GTK_BUTTONS_YES_NO,
-                                                 "Cannot locate Ozy!\n\nIs it powered on and plugged in?");
-                gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Retry?");
-                gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
-                result = gtk_dialog_run (GTK_DIALOG (dialog));
-                switch (result) {
-                    case GTK_RESPONSE_YES:
-                        retry=TRUE;
-                        break;
-                    default:
-                        exit(1);
-                        break;
-                }
-                gtk_widget_destroy (dialog);
-                break;
-            case -2: // found but needs initializing
-                result=fork();
-                if(result==0) {
-                    // child process - exec initozy
-                    fprintf(stderr,"exec initozy\n");
-                    result=execl("initozy",NULL,NULL);
-                    fprintf(stderr,"exec returned %d\n",result);
-                    exit(result);
-                } else if(result>0) {
-                    // wait for the forked process to terminate
-                    dialog = gtk_message_dialog_new (NULL,
-                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                 GTK_MESSAGE_INFO,
-                                                 GTK_BUTTONS_NONE,
-                                                 "Initializing Ozy");
-                    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Please Wait ...");
-                    gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
-                    gtk_widget_show_all (dialog);
-                    while (gtk_events_pending ())
-                        gtk_main_iteration ();
-
-                    wait(&result);
-                    fprintf(stderr,"wait status=%d\n",result);
-                    retry=TRUE;
-                }
-                gtk_widget_destroy (dialog);
-                break;
-
-            case -3: // did not find metis
-fprintf(stderr,"Did not find any devices!\n");
-                dialog = gtk_message_dialog_new (NULL,
-                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                 GTK_MESSAGE_ERROR,
-                                                 GTK_BUTTONS_YES_NO,
-                                                 "Cannot locate any devices on interface %s!",
-                                                 ozy_get_interface());
-                gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Retry?");
-                gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
-                result = gtk_dialog_run (GTK_DIALOG (dialog));
-                switch (result) {
-                    case GTK_RESPONSE_YES:
-                        retry=TRUE;
-                        break;
-                    default:
-                        exit(1);
-                        break;
-                }
-                gtk_widget_destroy (dialog);
-                break;
-            default:
-                retry=FALSE;
-                break;
-        }
-    } while(retry);
 
     mainRootX=0;
     mainRootY=0;
@@ -1045,49 +1081,48 @@ fprintf(stderr,"Did not find any devices!\n");
     initColors();
     //gtk_key_snooper_install((GtkKeySnoopFunc)keyboardSnooper,NULL);
 
-    bandscopeRestoreState();
+    //bandscopeRestoreState();
     bandscopeWindow=buildBandscopeUI();
    
-    bandscope_controlRestoreState();
+    //bandscope_controlRestoreState();
     bandscope_controlWindow=buildBandscope_controlUI();
    
-    meterRestoreState();
+    //meterRestoreState();
     meterWindow=buildMeterUI();
 
-    vfoRestoreState();
+    //vfoRestoreState();
     vfoWindow=buildVfoUI();
 
-    bandRestoreState();
+    //bandRestoreState();
     bandWindow=buildBandUI();
 
-    modeRestoreState();
+    //modeRestoreState();
     modeWindow=buildModeUI();
 
-    filterRestoreState();
+    //filterRestoreState();
     filterWindow=buildFilterUI();
 
-    displayRestoreState();
+    //displayRestoreState();
     displayWindow=buildDisplayUI();
 
-    audioRestoreState();
+    //audioRestoreState();
     audioWindow=buildAudioUI();
 
-
-    agcRestoreState();
+    //agcRestoreState();
     agcWindow=buildAgcUI();
 
     preampWindow=buildPreampUI();
 
-    receiverRestoreState();
+    //receiverRestoreState();
     receiverWindow=buildReceiverUI();
 
-    volumeRestoreState();
+    //volumeRestoreState();
     volumeWindow=buildVolumeUI();
 
-    transmitRestoreState();
+    //transmitRestoreState();
     transmitWindow=buildTransmitUI();
 
-    subrxRestoreState();
+    //subrxRestoreState();
     subrxWindow=buildSubRxUI();
 
     restoreState();
@@ -1097,30 +1132,6 @@ fprintf(stderr,"Did not find any devices!\n");
     buildMainUI();
 
     setSoundcard(getSoundcardId(soundCardName));
-
-    audio_stream_init();
-
-    SetRXABandpassRun(CHANNEL_RX0, 1);
-    SetRXAAMDSBMode(CHANNEL_RX0, 0);
-    SetRXAShiftRun(CHANNEL_RX0, 0);
-    SetRXAEMNRgainMethod(CHANNEL_RX0, 1);
-    SetRXAEMNRnpeMethod(CHANNEL_RX0, 0);
-    SetRXAEMNRaeRun(CHANNEL_RX0, 1);
-    SetRXAEMNRPosition(CHANNEL_RX0, 0);
-    SetRXAEMNRRun(CHANNEL_RX0, 0);
-    SetRXAANRRun(CHANNEL_RX0, 0);
-    SetRXAANFRun(CHANNEL_RX0, 0);
-
-    SetRXABandpassRun(CHANNEL_SUBRX, 1);
-    SetRXAAMDSBMode(CHANNEL_SUBRX, 0);
-    SetRXAShiftRun(CHANNEL_SUBRX, 1);
-    SetRXAEMNRgainMethod(CHANNEL_SUBRX, 1);
-    SetRXAEMNRnpeMethod(CHANNEL_SUBRX, 0);
-    SetRXAEMNRaeRun(CHANNEL_SUBRX, 1);
-    SetRXAEMNRPosition(CHANNEL_SUBRX, 0);
-    SetRXAEMNRRun(CHANNEL_SUBRX, 0);
-    SetRXAANRRun(CHANNEL_SUBRX, 0);
-    SetRXAANFRun(CHANNEL_SUBRX, 0);
 
     gtk_main();
 

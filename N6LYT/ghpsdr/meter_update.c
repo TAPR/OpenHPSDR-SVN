@@ -52,6 +52,14 @@ void newMeterUpdate() {
 }
 
 /* --------------------------------------------------------------------------*/
+/**
+* @brief Stop meter update
+*/
+void stopMeterUpdate() {
+    gtk_timeout_remove(timerId);
+}
+
+/* --------------------------------------------------------------------------*/
 /** 
 * @brief Meter update 
 * 

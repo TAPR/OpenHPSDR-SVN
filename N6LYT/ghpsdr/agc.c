@@ -95,8 +95,10 @@ void selectAgc(GtkWidget* widget) {
         agc=agcLONG;
     }
 
-    SetRXAAGCMode (CHANNEL_RX0, agc);
-    SetRXAAGCMode (CHANNEL_SUBRX, agc);
+    if(running) {
+        SetRXAAGCMode (CHANNEL_RX0, agc);
+        SetRXAAGCMode (CHANNEL_SUBRX, agc);
+    }
 
 }
 
@@ -233,4 +235,5 @@ void agcRestoreState() {
     char* value;
     value=getProperty("agc");
     if(value) agc=atoi(value);
+    setAgc(agc);
 }

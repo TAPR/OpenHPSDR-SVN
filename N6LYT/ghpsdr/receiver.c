@@ -70,7 +70,9 @@ void selectReceiver(GtkWidget* widget) {
 */
 void panChanged(GtkWidget* widget,gpointer data) {
     pan=gtk_range_get_value((GtkRange*)panScale);
-    SetRXAPanelPan(CHANNEL_RX0, 1.0-pan);
+    if(running) {
+        SetRXAPanelPan(CHANNEL_RX0, 1.0-pan);
+    }
 }
 
 /* --------------------------------------------------------------------------*/
@@ -103,7 +105,9 @@ GtkWidget* buildReceiverUI() {
 #endif
     gtk_widget_show(receiverFrame);
 
-    SetRXAPanelPan(CHANNEL_RX0, 1.0-pan);
+    if(running) {
+        SetRXAPanelPan(CHANNEL_RX0, 1.0-pan);
+    }
 
     return receiverFrame;
   

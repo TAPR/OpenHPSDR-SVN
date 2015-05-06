@@ -132,6 +132,10 @@ void setDriveLevelChanged(int);
 extern int ozy_init();
 
 
+
+extern void ozy_stop();
+
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief set frequency
