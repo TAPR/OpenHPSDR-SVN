@@ -272,17 +272,18 @@ void discoverCallback(GtkWidget* widget,gpointer data) {
     char title[128];
     strcpy(title,"Gtk+ GUI for HPSDR - Discovering devices ...");
     gtk_window_set_title((GtkWindow*)mainWindow,title);
-        discovery();
-        if(devices==0) {
-            strcpy(title,"Gtk+ GUI for HPSDR - No HPSDR devices found");
-        } if(devices==1) {
+    discovery();
+    if(devices==0) {
+        strcpy(title,"Gtk+ GUI for HPSDR - No HPSDR devices found");
+    } else {
+        if(devices==1) {
             selected_device=0;
         } else {
             GtkWidget* dialog = gtk_message_dialog_new (NULL,
                                                  GTK_DIALOG_DESTROY_WITH_PARENT,
                                                  GTK_MESSAGE_ERROR,
                                                  GTK_BUTTONS_OK_CANCEL,
-                                                 "Found %d devices!",
+                                                 "Discovery found %d devices!",
                                                  devices);
             gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Select required device");
             gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
@@ -345,19 +346,53 @@ fprintf(stderr,"    (%02X:%02X:%02X:%02X:%02X:%02X)\n",
             gtk_widget_hide (dialog);
             gtk_widget_destroy (dialog);
         }
-        char *a=inet_ntoa(discovered[selected_device].address.sin_addr);
+
+        DISCOVERED* d=&discovered[selected_device];
+        char *a=inet_ntoa(d->address.sin_addr);
         sprintf(title,"Gtk+ GUI for HPSDR: %s %s (%02X:%02X:%02X:%02X:%02X:%02X)\n",
-                            discovered[selected_device].name,
+                            d->name,
                             a,
-                            discovered[selected_device].mac_address[0],
-                            discovered[selected_device].mac_address[1],
-                            discovered[selected_device].mac_address[2],
-                            discovered[selected_device].mac_address[3],
-                            discovered[selected_device].mac_address[4],
-                            discovered[selected_device].mac_address[5]);
+                            d->mac_address[0],
+                            d->mac_address[1],
+                            d->mac_address[2],
+                            d->mac_address[3],
+                            d->mac_address[4],
+                            d->mac_address[5]);
         gtk_widget_set_sensitive(buttonSetup, TRUE);
         gtk_widget_set_sensitive(buttonStart, TRUE);
-    gtk_window_set_title((GtkWindow*)mainWindow,title);
+        gtk_window_set_title((GtkWindow*)mainWindow,title);
+
+        sprintf(propertyPath,"%02X-%02X-%02X-%02X-%02X-%02X.properties",
+                        d->mac_address[0],
+                        d->mac_address[1],
+                        d->mac_address[2],
+                        d->mac_address[3],
+                        d->mac_address[4],
+                        d->mac_address[5]);
+        loadProperties(propertyPath);
+
+        restoreInitialState();
+
+        bandscopeRestoreState();
+        bandscope_controlRestoreState();
+        meterRestoreState();
+        vfoRestoreState();
+        bandRestoreState();
+        modeRestoreState();
+        filterRestoreState();
+        displayRestoreState();
+        audioRestoreState();
+        agcRestoreState();
+        receiverRestoreState();
+        volumeRestoreState();
+        transmitRestoreState();
+        subrxRestoreState();
+        restoreState();
+        audio_stream_init();
+
+        ozyRestoreState();
+    }
+
 }
 
 /* --------------------------------------------------------------------------*/
@@ -405,80 +440,45 @@ void startCallback(GtkWidget* widget,gpointer data) {
         gtk_widget_set_sensitive(buttonDiscover, FALSE);
         running=TRUE;
 
-    if(ozy_use_metis()==1) {
-        DISCOVERED* d=&discovered[selected_device];
-        sprintf(propertyPath,"%02X-%02X-%02X-%02X-%02X-%02X.properties",
-                        d->mac_address[0],
-                        d->mac_address[1],
-                        d->mac_address[2],
-                        d->mac_address[3],
-                        d->mac_address[4],
-                        d->mac_address[5]);
-    } else {
-        sprintf(propertyPath,"usb.properties");
-    }
-    loadProperties(propertyPath);
-
-    init_cw();
-
-    restoreInitialState();
-
-    bandscopeRestoreState();
-    bandscope_controlRestoreState();
-    meterRestoreState();
-    vfoRestoreState();
-    bandRestoreState();
-    modeRestoreState();
-    filterRestoreState();
-    displayRestoreState();
-    audioRestoreState();
-    agcRestoreState();
-    receiverRestoreState();
-    volumeRestoreState();
-    transmitRestoreState();
-    subrxRestoreState();
-    restoreState();
-    audio_stream_init();
-
-    if(ozy_init()<0) {
-        fprintf(stderr,"GHPSDR: cannot connect to USB device\n");
-        exit(-1);
-    }
+        if(ozy_init()<0) {
+            fprintf(stderr,"GHPSDR: cannot connect to USB device\n");
+            exit(-1);
+        }
     
-    started=TRUE;
+        started=TRUE;
 
-    if(displayHF) {
-        setBand(band);
-    } else {
-        setBand(xvtr_band);
-    }
+        if(displayHF) {
+            setBand(band);
+        } else {
+            setBand(xvtr_band);
+        }
 
-    SetRXABandpassRun(CHANNEL_RX0, 1);
-    SetRXAAMDSBMode(CHANNEL_RX0, 0);
-    SetRXAShiftRun(CHANNEL_RX0, 0);
-    SetRXAEMNRgainMethod(CHANNEL_RX0, 1);
-    SetRXAEMNRnpeMethod(CHANNEL_RX0, 0);
-    SetRXAEMNRaeRun(CHANNEL_RX0, 1);
-    SetRXAEMNRPosition(CHANNEL_RX0, 0);
-    SetRXAEMNRRun(CHANNEL_RX0, 0);
-    SetRXAANRRun(CHANNEL_RX0, 0);
-    SetRXAANFRun(CHANNEL_RX0, 0);
+        SetRXABandpassRun(CHANNEL_RX0, 1);
+        SetRXAAMDSBMode(CHANNEL_RX0, 0);
+        SetRXAShiftRun(CHANNEL_RX0, 0);
+        SetRXAEMNRgainMethod(CHANNEL_RX0, 1);
+        SetRXAEMNRnpeMethod(CHANNEL_RX0, 0);
+        SetRXAEMNRaeRun(CHANNEL_RX0, 1);
+        SetRXAEMNRPosition(CHANNEL_RX0, 0);
+        SetRXAEMNRRun(CHANNEL_RX0, 0);
+        SetRXAANRRun(CHANNEL_RX0, 0);
+        SetRXAANFRun(CHANNEL_RX0, 0);
 
-    SetRXABandpassRun(CHANNEL_SUBRX, 1);
-    SetRXAAMDSBMode(CHANNEL_SUBRX, 0);
-    SetRXAShiftRun(CHANNEL_SUBRX, 1);
-    SetRXAEMNRgainMethod(CHANNEL_SUBRX, 1);
-    SetRXAEMNRnpeMethod(CHANNEL_SUBRX, 0);
-    SetRXAEMNRaeRun(CHANNEL_SUBRX, 1);
-    SetRXAEMNRPosition(CHANNEL_SUBRX, 0);
-    SetRXAEMNRRun(CHANNEL_SUBRX, 0);
-    SetRXAANRRun(CHANNEL_SUBRX, 0);
-    SetRXAANFRun(CHANNEL_SUBRX, 0);
+        SetRXABandpassRun(CHANNEL_SUBRX, 1);
+        SetRXAAMDSBMode(CHANNEL_SUBRX, 0);
+        SetRXAShiftRun(CHANNEL_SUBRX, 1);
+        SetRXAEMNRgainMethod(CHANNEL_SUBRX, 1);
+        SetRXAEMNRnpeMethod(CHANNEL_SUBRX, 0);
+        SetRXAEMNRaeRun(CHANNEL_SUBRX, 1);
+        SetRXAEMNRPosition(CHANNEL_SUBRX, 0);
+        SetRXAEMNRRun(CHANNEL_SUBRX, 0);
+        SetRXAANRRun(CHANNEL_SUBRX, 0);
+        SetRXAANFRun(CHANNEL_SUBRX, 0);
 
-    // get the display and meter running
-    newSpectrumUpdate();
-    newMeterUpdate();
-    newBandscopeUpdate();
+        // get the display and meter running
+        newSpectrumUpdate();
+        newMeterUpdate();
+        newBandscopeUpdate();
 
     }
 }
@@ -786,21 +786,7 @@ void buildMainUI() {
     gtk_window_move((GtkWindow*)mainWindow,mainRootX,mainRootY);
 
     gtk_widget_show(mainWindow);
-  
 
-#ifdef RUN_ON_START
-    // set the band
-    if(displayHF) {
-        setBand(band);
-    } else {
-        setBand(xvtr_band);
-    }
-
-    // get the display and meter running
-    newSpectrumUpdate();
-    newMeterUpdate();
-    newBandscopeUpdate();
-#endif
 }
 
 /* --------------------------------------------------------------------------*/
@@ -1132,6 +1118,11 @@ int main(int argc,char* argv[]) {
     buildMainUI();
 
     setSoundcard(getSoundcardId(soundCardName));
+
+    if(ozy_use_metis()!=1) {
+        sprintf(propertyPath,"usb.properties");
+    }
+    loadProperties(propertyPath);
 
     gtk_main();
 
