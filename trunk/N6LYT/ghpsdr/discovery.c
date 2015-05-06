@@ -153,7 +153,7 @@ void* discover_receive_thread(void* arg) {
     struct timeval tv;
     int i;
 
-    tv.tv_sec = 2;
+    tv.tv_sec = 1;
     tv.tv_usec = 0;
 
     setsockopt(discovery_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));

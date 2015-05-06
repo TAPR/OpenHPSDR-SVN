@@ -1068,7 +1068,7 @@ int ozy_init() {
             | LT2208_RANDOM_ON;
     control_out[4] = 0;
 
-    ozyRestoreState();
+    //ozyRestoreState();
     setSpeed(speed);
 
 
