@@ -18,3 +18,6 @@ Once successfully built you can run the following command to install the shared 
 sudo make install
 
 
+To install the Java shared library run the command:
+
+sudo make install_java
