@@ -33,6 +33,8 @@ static pthread_t discover_thread_id;
 void* discover_receive_thread(void* arg);
 
 void discovery() {
+    devices=0;
+    selected_device=0;
     struct ifaddrs *addrs,*ifa;
     getifaddrs(&addrs);
     ifa = addrs;
@@ -151,7 +153,7 @@ void* discover_receive_thread(void* arg) {
     struct timeval tv;
     int i;
 
-    tv.tv_sec = 5;
+    tv.tv_sec = 2;
     tv.tv_usec = 0;
 
     setsockopt(discovery_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));

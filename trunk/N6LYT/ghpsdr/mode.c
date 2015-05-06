@@ -119,9 +119,11 @@ void selectMode(GtkWidget* widget) {
         mode=modeDRM;
     }
 
-    SetRXAMode(CHANNEL_RX0, mode);
-    SetRXAMode(CHANNEL_SUBRX, mode);
-    SetTXAMode(CHANNEL_TX, mode);
+    if(running) {
+        SetRXAMode(CHANNEL_RX0, mode);
+        SetRXAMode(CHANNEL_SUBRX, mode);
+        SetTXAMode(CHANNEL_TX, mode);
+    }
 
     setFilterValues(mode);
     setFilter(filter);
@@ -135,6 +137,7 @@ void selectMode(GtkWidget* widget) {
 * @param mode
 */
 void setMode(int mode) {
+fprintf(stderr,"mode.c: setMode%d\n", mode);
     GtkWidget* widget;
     switch(mode) {
         case modeLSB:

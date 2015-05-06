@@ -45,6 +45,8 @@ GtkWidget* mainWindow;
 
 char propertiesPath[128];
 
+gboolean running;
+
 int cwPitch;
 
 

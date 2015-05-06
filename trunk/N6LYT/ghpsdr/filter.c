@@ -558,9 +558,11 @@ void selectFilter(GtkWidget* widget) {
             break;
     }
     
-    SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
-    SetRXABandpassFreqs(CHANNEL_SUBRX, (double)filterLow, (double)filterHigh);
-    SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
+    if(running) {
+        SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
+        SetRXABandpassFreqs(CHANNEL_SUBRX, (double)filterLow, (double)filterHigh);
+        SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
+    }
 
     drawFilterHigh(TRUE);
     drawFilterLow(TRUE);
@@ -574,6 +576,7 @@ void selectFilter(GtkWidget* widget) {
 * @param f
 */
 void setFilter(int f) {
+fprintf(stderr,"filter.c: setFilter %d\n",f);
     GtkWidget* widget;
         switch(f) {
             case filterF0:
@@ -762,9 +765,11 @@ void updateFilter(GtkWidget* widget) {
             break;
     }
 
-    SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
-    SetRXABandpassFreqs(CHANNEL_SUBRX, (double)filterLow, (double)filterHigh);
-    SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
+    if(running) {
+        SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
+        SetRXABandpassFreqs(CHANNEL_SUBRX, (double)filterLow, (double)filterHigh);
+        SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
+    }
 }
 
 /* --------------------------------------------------------------------------*/
@@ -871,9 +876,11 @@ gboolean filter_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
             }
             break;
     }
-    SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
-    SetRXABandpassFreqs(CHANNEL_SUBRX, (double)filterLow, (double)filterHigh);
-    SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
+    if(running) {
+        SetRXABandpassFreqs(CHANNEL_RX0, (double)filterLow, (double)filterHigh);
+        SetRXABandpassFreqs(CHANNEL_SUBRX, (double)filterLow, (double)filterHigh);
+        SetTXABandpassFreqs(CHANNEL_TX, (double)filterLow, (double)filterHigh);
+    }
 }
 
 /* --------------------------------------------------------------------------*/
