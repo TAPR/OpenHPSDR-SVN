@@ -34,6 +34,8 @@ void print_peak_env (const char* filename, int N, double* buff, double thresh);
 
 extern void print_peak_env_f2 (const char* filename, int N, float* Ibuff, float* Qbuff);
 
+extern void print_iqc_values(const char* file, int state, double env_in, double I, double Q, double ym, double yc, double ys, double thresh);
+
 extern void print_meter (const char* filename, double* meter, int enum_av, int enum_pk, int enum_gain);
 
 extern void print_message (const char* filename, const char* message, int p0, int p1, int p2);

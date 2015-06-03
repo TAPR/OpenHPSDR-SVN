@@ -311,6 +311,7 @@ namespace PowerSDR
         /// <param name="e"></param>
         private void MemoryForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            console.SetFocusMaster(true);
             this.Hide();
             e.Cancel = true;
             Common.SaveForm(this, "MemoryForm");

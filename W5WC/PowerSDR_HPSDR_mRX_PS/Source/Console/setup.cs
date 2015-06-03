@@ -1583,6 +1583,7 @@ namespace PowerSDR
             comboCATdatabits.Text = "8";
             comboCATstopbits.Text = "1";
             comboCATRigType.Text = "TS-2000";
+            comboFocusMasterMode.Text = "None";
 
             if (comboCAT2Port.Items.Count > 0) comboCAT2Port.SelectedIndex = 0;
             // if (comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
@@ -1670,10 +1671,12 @@ namespace PowerSDR
 
             cmboSigGenRXMode.Text = "Radio";
             cmboSigGenTXMode.Text = "Radio";
-
+            
+            /* K5IT - vestigal code throws exception in debug - HPSDR audio is the only allowed option
             if (comboAudioDriver1.SelectedIndex < 0 &&
                 comboAudioDriver1.Items.Count > 0)
                 comboAudioDriver1.SelectedIndex = 0;
+             */
 
             if (comboAudioDriver2.SelectedIndex < 0 &&
                 comboAudioDriver2.Items.Count > 0)
@@ -1683,9 +1686,11 @@ namespace PowerSDR
                 comboAudioDriver3.Items.Count > 0)
                 comboAudioDriver3.SelectedIndex = 0;
 
+            /* K5IT - vestigal code throws exception in debug - HPSDR audio is the only allowed option
             if (comboAudioMixer1.SelectedIndex < 0 &&
                 comboAudioMixer1.Items.Count > 0)
                 comboAudioMixer1.SelectedIndex = 0;
+            */
 
             comboAudioBuffer1_SelectedIndexChanged(this, EventArgs.Empty);
 
@@ -1825,6 +1830,7 @@ namespace PowerSDR
 
         private void InitAudioTab()
         {
+            /* K5IT - vestigal code throws exception in debug - HPSDR audio is the only allowed option
             // set driver type
             if (comboAudioDriver1.SelectedIndex < 0 &&
                 comboAudioDriver1.Items.Count > 0)
@@ -1841,6 +1847,7 @@ namespace PowerSDR
                 if (comboAudioDriver1.Text != "ASIO")
                     comboAudioDriver1.Text = "MME";
             }
+            */
 
             // set Input device
             if (comboAudioInput1.Items.Count > 0)
@@ -2910,6 +2917,8 @@ namespace PowerSDR
             // Alex
             radAlexAutoControl_CheckedChanged(this, e);
             radAlexManualControl_CheckedChanged(this, e);
+            //CAT
+            comboFocusMasterMode_SelectedIndexChanged(this, e);
         }
 
         public string[] GetTXProfileStrings()
@@ -3188,6 +3197,36 @@ namespace PowerSDR
         #endregion
 
         #region Properties
+
+        public FocusMasterMode FocusMasterMode
+        {
+            set
+            {
+                switch (value)
+                {
+                    case FocusMasterMode.None:
+                        comboFocusMasterMode.Text = "None";
+                        break;
+                    case FocusMasterMode.Logger:
+                        comboFocusMasterMode.Text = "N1MM+ Logger";
+                        break;
+                    case FocusMasterMode.Click:
+                        comboFocusMasterMode.Text = "Select by Click";
+                        break;
+                    case FocusMasterMode.Title:
+                        comboFocusMasterMode.Text = "Enter Window Title";
+                        break;
+                }
+            }
+        }
+
+        public string FocusMasterTitle
+        {
+            set
+            {
+                txtFocusMasterWinTitle.Text = value;
+            }
+        }
 
         public bool EnableRX1APFControl
         {
@@ -8465,6 +8504,7 @@ namespace PowerSDR
 
             string new_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
 
+            /* K5IT - Portaudio will do the best it can with the suggested latency. Do not restrict the user.
             if (new_driver_name != "Windows WDM-KS" && udAudioLatency2.Value < 120)
             {
                 MessageBox.Show("The VAC1 Driver type selected does not support a Buffer Latency value less than 120ms.  " +
@@ -8477,6 +8517,7 @@ namespace PowerSDR
 
                 udAudioLatency2.Value = 120;
             }
+            */
 
             console.AudioDriverIndex2 = new_driver;
             Audio.Host2 = new_driver;
@@ -8506,6 +8547,7 @@ namespace PowerSDR
 
             string new_driver_name = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Name;
 
+            /* K5IT - Portaudio will do the best it can with the suggested latency. Do not restrict the user.
             if (new_driver_name != "Windows WDM-KS" && udVAC2Latency.Value < 120)
             {
                 MessageBox.Show("The VAC2 Driver type selected does not support a Buffer Latency value less than 120ms.  " +
@@ -8518,6 +8560,7 @@ namespace PowerSDR
 
                 udVAC2Latency.Value = 120;
             }
+            */
 
             console.AudioDriverIndex3 = new_driver;
             Audio.Host3 = new_driver;
@@ -8809,6 +8852,7 @@ namespace PowerSDR
         {
             string vac_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
 
+            /* K5IT - Portaudio will do the best it can with the suggested latency. Do not restrict the user.
             if (vac_driver_name != "Windows WDM-KS" && udAudioLatency2.Value < 120)
             {
                 MessageBox.Show("The VAC1 Buffer Latency value selected is less than 120ms which is too " +
@@ -8822,6 +8866,7 @@ namespace PowerSDR
 
                 udAudioLatency2.Value = 120;
             }
+            */
 
             bool power = console.PowerOn;
             if (power && chkAudioEnableVAC.Checked)
@@ -8840,6 +8885,7 @@ namespace PowerSDR
         {
             string vac_driver_name = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Name;
 
+            /* K5IT - Portaudio will do the best it can with the suggested latency. Do not restrict the user.
             if (chkVAC2Enable.Checked)
             {
                 if (vac_driver_name != "Windows WDM-KS" && udVAC2Latency.Value < 120)
@@ -8856,6 +8902,7 @@ namespace PowerSDR
                     udVAC2Latency.Value = 120;
                 }
             }
+            */
 
             bool power = console.PowerOn;
             if (power && chkVAC2Enable.Checked)
@@ -13402,6 +13449,8 @@ namespace PowerSDR
 
         private void btnOK_Click(object sender, System.EventArgs e)
         {
+            console.SetFocusMaster(true);
+
             if (saving)
             {
                 this.Hide();
@@ -13420,6 +13469,8 @@ namespace PowerSDR
 
         private void btnCancel_Click(object sender, System.EventArgs e)
         {
+            console.SetFocusMaster(true);
+
             Thread t = new Thread(new ThreadStart(GetOptions));
             t.Name = "Save Options Thread";
             t.IsBackground = true;
@@ -13451,6 +13502,7 @@ namespace PowerSDR
 
         private void Setup_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            console.SetFocusMaster(true);
             this.Hide();
             e.Cancel = true;
         }
@@ -18967,6 +19019,97 @@ namespace PowerSDR
         {
             console.EnableLEDFont = chkEnableLEDFont.Checked;
         }
+
+        private void comboFocusMasterMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboFocusMasterMode.Text)
+            {
+                case "N1MM+ Logger":
+                    txtFocusMasterWinTitle.Enabled = true;
+                    txtFocusMasterWinTitle.Text = "";
+                    txtFocusMasterDelay.Enabled = false;
+                    txtFocusMasterUDPPort.Enabled = false;
+                    txtFocusMasterDelay_TextChanged(this, EventArgs.Empty);
+                    txtFocusMasterUDPPort_TextChanged(this, EventArgs.Empty);
+                    console.FocusMasterMode = FocusMasterMode.Logger;
+                    break;
+
+                case "Select by Click":
+                    txtFocusMasterWinTitle.Enabled = false;
+                    txtFocusMasterWinTitle.Text = "";
+                    txtFocusMasterDelay.Enabled = false;
+                    txtFocusMasterUDPPort.Enabled = true;
+                    console.FocusMasterMode = FocusMasterMode.Click;
+                    break;
+
+                case "Enter Window Title":                   
+                    txtFocusMasterDelay.Enabled = true;
+                    txtFocusMasterUDPPort.Enabled = true;
+                    txtFocusMasterWinTitle.Enabled = true;
+                    txtFocusMasterWinTitle.Text = "Enter Window Title and Press Enter";
+                    txtFocusMasterWinTitle.Focus();
+                   // console.FocusMasterMode = FocusMasterMode.Title;
+                   break;
+
+                case "None":
+                    txtFocusMasterDelay.Enabled = true;
+                    txtFocusMasterUDPPort.Enabled = true;
+                    txtFocusMasterWinTitle.Enabled = true;
+                    txtFocusMasterWinTitle.Text = "";
+                    console.FocusMasterMode = FocusMasterMode.None;
+                    break;
+            }
+
+        }
+
+        private void txtFocusMasterDelay_TextChanged(object sender, EventArgs e)
+        {
+            console.FocusMasterDelay = int.Parse(txtFocusMasterDelay.Text);
+        }
+
+        private void txtFocusMasterUDPPort_TextChanged(object sender, EventArgs e)
+        {
+            console.FocusMasterUDPPort = int.Parse(txtFocusMasterUDPPort.Text);
+        }
+
+        private void txtFocusMasterWinTitle_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txtFocusMasterWinTitle_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                IntPtr hwtemp = IntPtr.Zero;
+                foreach (Process pList in Process.GetProcesses())
+                {
+                    if (pList.MainWindowTitle.Equals(txtFocusMasterWinTitle.Text))
+                    {
+                        hwtemp = pList.MainWindowHandle;
+                    }
+                }
+
+                if (hwtemp != IntPtr.Zero)
+                {
+                    txtFocusMasterDelay.Enabled = false;
+                    txtFocusMasterWinTitle.Enabled = false;
+                    console.FocusMasterWinTitle = txtFocusMasterWinTitle.Text;
+                    console.FocusMasterMode = FocusMasterMode.Title;
+                    console.N1MMHandle = hwtemp;
+                    comboFocusMasterMode.Focus();
+               }
+                else
+                {
+                    txtFocusMasterDelay.Enabled = true;
+                    txtFocusMasterWinTitle.Enabled = true;
+                    txtFocusMasterWinTitle.Text = "Window not found!";
+                    txtFocusMasterWinTitle.Focus();
+                }
+
+            }
+
+        }
+
     }
 
     #region PADeviceInfo Helper Class

@@ -473,6 +473,35 @@ cleanup:
 	_aligned_free (zp);
 }
 
+void scheck(CALCC a)
+{
+	int i, j, k;
+	double v, dx, out;
+	int intm1 = a->ints - 1;
+	a->binfo[6] = 0x0000;
+	if (a->cm[0] != a->cm[0]) a->binfo[6] |= 0x0001;
+	if ((a->cm[4 * intm1 + 0] == 0.0) && (a->cm[4 * intm1 + 1] == 0.0) &&
+		(a->cm[4 * intm1 + 2] == 0.0) && (a->cm[4 * intm1 + 3] == 0.0)) a->binfo[6] |= 0x0002;
+	for (i = 0; i < a->ints; i++)
+	{
+		for (j = 0; j < 4; j++)
+		{
+			k = 4 * i + j;
+			v = (double)k / (4.0 * (double)a->ints);
+			dx = (a->t[i + 1] - a->t[i]) * (double)j / 4.0;
+			out = v * (a->cm[4 * i + 0] + dx * (a->cm[4 * i + 1] + dx * (a->cm[4 * i + 2] + dx * a->cm[4 * i + 3])));
+			if (out > 1.0)
+				a->binfo[6] |= 0x0004;
+			if (out < 0.0) a->binfo[6] |= 0x0010;
+		} 
+	}
+	dx = a->t[a->ints] - a->t[a->ints - 1];
+	out = a->cm[4 * intm1 + 0] + dx * (a->cm[4 * intm1 + 1] + dx * (a->cm[4 * intm1 + 2] + dx * a->cm[4 * intm1 + 3]));
+	if (out > 1.01)	// VALUE
+		a->binfo[6] |= 0x0008;
+	if (out < 0.0) a->binfo[6] |= 0x0020;
+}
+
 void calc (CALCC a)
 {
 	int i;
@@ -483,9 +512,7 @@ void calc (CALCC a)
 	double *ym =		(double *)malloc0(a->nsamps * sizeof(double));
 	double *yc =		(double *)malloc0(a->nsamps * sizeof(double));
 	double *ys =		(double *)malloc0(a->nsamps * sizeof(double));
-	double dx;
 	double rx_scale;
-	int intm1;
 	double norm;
 
 	for (i = 0; i < a->nsamps; i++)
@@ -493,13 +520,16 @@ void calc (CALCC a)
 		env_TX[i] = sqrt (a->txs[2 * i + 0] * a->txs[2 * i + 0] + a->txs[2 * i + 1] * a->txs[2 * i + 1]);
 		env_RX[i] = sqrt (a->rxs[2 * i + 0] * a->rxs[2 * i + 0] + a->rxs[2 * i + 1] * a->rxs[2 * i + 1]);
 	}
-
-	builder (a->nsamps, env_TX, env_RX, a->ints, a->t1, &(a->binfo[0]), txrxcoefs, a->ptol);
-	if (a->binfo[0] != 0)
-		goto cleanup;
-	dx = a->t1[a->ints] - a->t1[a->ints - 1];
-	intm1 = a->ints - 1;
-	rx_scale = 1.0 / (txrxcoefs[4 * intm1 + 0] + dx * (txrxcoefs[4 * intm1 + 1] + dx * (txrxcoefs[4 * intm1 + 2] + dx * txrxcoefs[4 * intm1 + 3])));
+	{
+		int rints = 2;
+		int ix = rints - 1;
+		double tvec[3] = { 0.0, 0.5 / a->hw_scale, 1.0 / a->hw_scale };
+		double dx = tvec[rints] - tvec[rints - 1];
+		builder(a->nsamps, env_TX, env_RX, rints, tvec, &(a->binfo[0]), txrxcoefs, a->ptol);
+		if (a->binfo[0] != 0)
+			goto cleanup;
+		rx_scale = 1.0 / (txrxcoefs[4 * ix + 0] + dx * (txrxcoefs[4 * ix + 1] + dx * (txrxcoefs[4 * ix + 2] + dx * txrxcoefs[4 * ix + 3])));
+	}
 
 	a->binfo[4] = (int)(256.0 * (a->hw_scale / rx_scale));
 	a->binfo[5]++;
@@ -516,15 +546,13 @@ void calc (CALCC a)
 	builder (a->nsamps, x, ym, a->ints, a->t, &(a->binfo[1]), a->cm, a->ptol);
 	builder (a->nsamps, x, yc, a->ints, a->t, &(a->binfo[2]), a->cc, a->ptol);
 	builder (a->nsamps, x, ys, a->ints, a->t, &(a->binfo[3]), a->cs, a->ptol);
-	if (a->cm[0] != a->cm[0]) a->binfo[1] = -999;
-	if ((a->cm[4 * intm1 + 0] == 0.0) && (a->cm[4 * intm1 + 1] == 0.0) && 
-		(a->cm[4 * intm1 + 2] == 0.0) && (a->cm[4 * intm1 + 3] == 0.0)) a->binfo[1] = -997;
+	scheck (a);
 	EnterCriticalSection (&a->disp.cs_disp);
 	memcpy(a->disp.x,  x,  a->nsamps * sizeof (double));
 	memcpy(a->disp.ym, ym, a->nsamps * sizeof (double));
 	memcpy(a->disp.yc, yc, a->nsamps * sizeof (double));
 	memcpy(a->disp.ys, ys, a->nsamps * sizeof (double));
-	if ((a->binfo[0] == 0) && (a->binfo[1] == 0) && (a->binfo[2] == 0) && (a->binfo[3] == 0))
+	if ((a->binfo[0] == 0) && (a->binfo[1] == 0) && (a->binfo[2] == 0) && (a->binfo[3] == 0) && (a->binfo[6] == 0))
 	{
 		memcpy(a->disp.cm, a->cm, a->ints * 4 * sizeof (double));
 		memcpy(a->disp.cc, a->cc, a->ints * 4 * sizeof (double));
@@ -552,15 +580,13 @@ void __cdecl doCalcCorrection (void *arg)
 {
 	CALCC a = (CALCC)arg;
 	calc (a);
-	if ((a->binfo[0] == 0) && (a->binfo[1] == 0) && (a->binfo[2] == 0) && (a->binfo[3] == 0))
+	if ((a->binfo[0] == 0) && (a->binfo[1] == 0) && (a->binfo[2] == 0) && (a->binfo[3] == 0) && (a->binfo[6] == 0))
 	{
 		if (!InterlockedBitTestAndSet (&a->ctrl.running, 0))
 			SetTXAiqcStart (a->channel, a->cm, a->cc, a->cs);
 		else
 			SetTXAiqcSwap  (a->channel, a->cm, a->cc, a->cs);
 	}
-	else if (InterlockedBitTestAndReset (&a->ctrl.running, 0))
-			SetTXAiqcEnd (a->channel);
 	InterlockedBitTestAndSet (&a->ctrl.calcdone, 0);
 	_endthread();
 }
@@ -782,20 +808,19 @@ void pscc (int channel, int size, double* tx, double* rx)
 
 				if (InterlockedBitTestAndReset(&a->ctrl.calcdone, 0))
 				{
-					memcpy (a->info, a->binfo, 6 * sizeof (int));
+					memcpy (a->info, a->binfo, 7 * sizeof (int));
+					a->info[14] = _InterlockedAnd (&a->ctrl.running, 1);
 					a->ctrl.calcinprogress = 0;
 					if (a->ctrl.reset)
 						a->ctrl.state = LRESET;
 					else if (a->ctrl.turnon)
 						a->ctrl.state = LTURNON;
-					else if ((a->info[0] == 0) && (a->info[1] == 0) && (a->info[2] == 0) && (a->info[3] == 0))
+					else if ((a->info[0] == 0) && (a->info[1] == 0) && (a->info[2] == 0) && (a->info[3] == 0) && (a->info[6] == 0))
 					{
-						a->info[14] = 1;
 						a->ctrl.state = LDELAY;
 					}
 					else
 					{
-						a->info[14] = 0;
 						if (a->mox && a->solidmox) a->ctrl.state = LSETUP;
 						else a->ctrl.state = LWAIT;
 					}

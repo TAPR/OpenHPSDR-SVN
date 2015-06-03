@@ -1083,12 +1083,12 @@ namespace PowerSDR
 			t1.Start();
 #endif
 
-            var array_ptr = (int*)input;
-            var in_l_ptr1 = (float*)array_ptr[0];
-            var in_r_ptr1 = (float*)array_ptr[1];
-            array_ptr = (int*)output;
-            var out_l_ptr1 = (float*)array_ptr[0];
-            var out_r_ptr1 = (float*)array_ptr[1];
+            int** array_ptr = (int**)input;
+            float* in_l_ptr1 = (float*)array_ptr[0];
+            float* in_r_ptr1 = (float*)array_ptr[1];
+            array_ptr = (int**)output;
+            float* out_l_ptr1 = (float*)array_ptr[0];
+            float* out_r_ptr1 = (float*)array_ptr[1];
 
             float* in_l = null, in_r = null, out_l = null, out_r = null;
 
@@ -1643,7 +1643,7 @@ namespace PowerSDR
 
             // inputs
             void* ex_input = (int*)input;
-            int* array_ptr_input = (int*)input;
+            int** array_ptr_input = (int**)input;
             float* in_l_ptr1 = (float*)array_ptr_input[0]; //CallbackInLbufp RX1 I
             float* in_r_ptr1 = (float*)array_ptr_input[1]; //CallbackInRbufp RX1 Q
             float* in_l_ptr2 = (float*)array_ptr_input[2]; //CallbackInL2bufp  RX2 I
@@ -1653,12 +1653,12 @@ namespace PowerSDR
             // float* in_l_ptr4 = (float*)array_ptr_input[6]; //CallbackInL3bufp  RX3 I
             //  float* in_r_ptr4 = (float*)array_ptr_input[7]; //CallbackInR3bufp  RX3 Q
 
-            array_ptr_input[0] = (int)in_l_ptr1; // CallbackInLbufp
-            array_ptr_input[1] = (int)in_r_ptr1; // CallbackInRbufp
-            array_ptr_input[2] = (int)in_l_ptr3; // CallbackMicLbufp
-            array_ptr_input[3] = (int)in_r_ptr3; // CallbackMicRbufp
-            array_ptr_input[4] = (int)in_l_ptr2; // CallbackInL2bufp
-            array_ptr_input[5] = (int)in_r_ptr2; // CallbackInR2bufp
+            array_ptr_input[0] = (int*)in_l_ptr1; // CallbackInLbufp
+            array_ptr_input[1] = (int*)in_r_ptr1; // CallbackInRbufp
+            array_ptr_input[2] = (int*)in_l_ptr3; // CallbackMicLbufp
+            array_ptr_input[3] = (int*)in_r_ptr3; // CallbackMicRbufp
+            array_ptr_input[4] = (int*)in_l_ptr2; // CallbackInL2bufp
+            array_ptr_input[5] = (int*)in_r_ptr2; // CallbackInR2bufp
 
             rx1_in_l = (float*)array_ptr_input[0]; //CallbackInLbufp
             rx1_in_r = (float*)array_ptr_input[1]; //CallbackInRbufp
@@ -1669,7 +1669,7 @@ namespace PowerSDR
 
             // outputs
             void* ex_output = (int*)output;
-            int* array_ptr_output = (int*)output;
+            int** array_ptr_output = (int**)output;
             float* out_l_ptr1 = (float*)array_ptr_output[0]; //CallbackMonOutLbufp RX1
             float* out_r_ptr1 = (float*)array_ptr_output[1]; //CallbackMonOutRbufp RX1
             float* out_l_ptr2 = (float*)array_ptr_output[2]; //CallbackOutLbufp TX
@@ -2626,97 +2626,97 @@ namespace PowerSDR
 
             void* ex_input = input;
             void* ex_output = output;
-            var array_ptr_input = (int*)input;
-            var in_l_ptr1 = (float*)array_ptr_input[0];
-            var in_r_ptr1 = (float*)array_ptr_input[1];
-            var in_l_ptr2 = (float*)array_ptr_input[2];
-            var in_r_ptr2 = (float*)array_ptr_input[3];
-            var array_ptr_output = (int*)output;
-            var out_l_ptr1 = (float*)array_ptr_output[0];
-            var out_r_ptr1 = (float*)array_ptr_output[1];
-            var out_l_ptr2 = (float*)array_ptr_output[2];
-            var out_r_ptr2 = (float*)array_ptr_output[3];
+            int** array_ptr_input = (int**)input;
+            float* in_l_ptr1 = (float*)array_ptr_input[0];
+            float* in_r_ptr1 = (float*)array_ptr_input[1];
+            float* in_l_ptr2 = (float*)array_ptr_input[2];
+            float* in_r_ptr2 = (float*)array_ptr_input[3];
+            int** array_ptr_output = (int**)output;
+            float* out_l_ptr1 = (float*)array_ptr_output[0];
+            float* out_r_ptr1 = (float*)array_ptr_output[1];
+            float* out_l_ptr2 = (float*)array_ptr_output[2];
+            float* out_r_ptr2 = (float*)array_ptr_output[3];
 
             // arrange input buffers in the following order:
             // RX1 Left, RX1 Right, TX Left, TX Right, RX2 Left, RX2 Right
-            var array_ptr = (int*)input;
+            int** array_ptr = (int**)input;
             switch (in_rx1_l)
             {
                 case 0:
-                    array_ptr[0] = (int)in_l_ptr1;
+                    array_ptr[0] = (int*)in_l_ptr1;
                     break;
                 case 1:
-                    array_ptr[0] = (int)in_r_ptr1;
+                    array_ptr[0] = (int*)in_r_ptr1;
                     break;
                 case 2:
-                    array_ptr[0] = (int)in_l_ptr2;
+                    array_ptr[0] = (int*)in_l_ptr2;
                     break;
                 case 3:
-                    array_ptr[0] = (int)in_r_ptr2;
+                    array_ptr[0] = (int*)in_r_ptr2;
                     break;
             }
 
             switch (in_rx1_r)
             {
                 case 0:
-                    array_ptr[1] = (int)in_l_ptr1;
+                    array_ptr[1] = (int*)in_l_ptr1;
                     break;
                 case 1:
-                    array_ptr[1] = (int)in_r_ptr1;
+                    array_ptr[1] = (int*)in_r_ptr1;
                     break;
                 case 2:
-                    array_ptr[1] = (int)in_l_ptr2;
+                    array_ptr[1] = (int*)in_l_ptr2;
                     break;
                 case 3:
-                    array_ptr[1] = (int)in_r_ptr2;
+                    array_ptr[1] = (int*)in_r_ptr2;
                     break;
             }
 
             switch (in_tx_l)
             {
                 case 0:
-                    array_ptr[2] = (int)in_l_ptr1;
+                    array_ptr[2] = (int*)in_l_ptr1;
                     break;
                 case 1:
-                    array_ptr[2] = (int)in_r_ptr1;
+                    array_ptr[2] = (int*)in_r_ptr1;
                     break;
                 case 2:
-                    array_ptr[2] = (int)in_l_ptr2;
+                    array_ptr[2] = (int*)in_l_ptr2;
                     break;
                 case 3:
-                    array_ptr[2] = (int)in_r_ptr2;
+                    array_ptr[2] = (int*)in_r_ptr2;
                     break;
             }
 
             switch (in_tx_r)
             {
                 case 0:
-                    array_ptr[3] = (int)in_l_ptr1;
+                    array_ptr[3] = (int*)in_l_ptr1;
                     break;
                 case 1:
-                    array_ptr[3] = (int)in_r_ptr1;
+                    array_ptr[3] = (int*)in_r_ptr1;
                     break;
                 case 2:
-                    array_ptr[3] = (int)in_l_ptr2;
+                    array_ptr[3] = (int*)in_l_ptr2;
                     break;
                 case 3:
-                    array_ptr[3] = (int)in_r_ptr2;
+                    array_ptr[3] = (int*)in_r_ptr2;
                     break;
             }
 
             /*switch(in_rx2_l)
             {
                 case 0: break;
-                case 1: array_ptr[4] = (int)in_r_ptr1; break;
-                case 2: array_ptr[4] = (int)in_l_ptr2; break;
-                case 3: array_ptr[4] = (int)in_r_ptr2; break;
+                case 1: array_ptr[4] = (int*)in_r_ptr1; break;
+                case 2: array_ptr[4] = (int*)in_l_ptr2; break;
+                case 3: array_ptr[4] = (int*)in_r_ptr2; break;
             }
             switch(in_rx2_r)
             {
                 case 0: break;
-                case 1: array_ptr[5] = (int)in_r_ptr1; break;
-                case 2: array_ptr[5] = (int)in_l_ptr2; break;
-                case 3: array_ptr[5] = (int)in_r_ptr2; break;
+                case 1: array_ptr[5] = (int*)in_r_ptr1; break;
+                case 2: array_ptr[5] = (int*)in_l_ptr2; break;
+                case 3: array_ptr[5] = (int*)in_r_ptr2; break;
             }*/
 
             if (!localmox)
@@ -3631,7 +3631,7 @@ namespace PowerSDR
 
             void* ex_input = input;
             void* ex_output = output;
-            var array_ptr_input = (int*)input;
+            var array_ptr_input = (int**)input;
             var in_l_ptr1 = (float*)array_ptr_input[0];
             var in_r_ptr1 = (float*)array_ptr_input[1];
             var in_l_ptr2 = (float*)array_ptr_input[2];
@@ -3640,7 +3640,7 @@ namespace PowerSDR
             var in_r_ptr3 = (float*)array_ptr_input[5];
             var in_l_ptr4 = (float*)array_ptr_input[6];
             var in_r_ptr4 = (float*)array_ptr_input[7];
-            var array_ptr_output = (int*)output;
+            var array_ptr_output = (int**)output;
             var out_l_ptr1 = (float*)array_ptr_output[0];
             var out_r_ptr1 = (float*)array_ptr_output[1];
             var out_l_ptr2 = (float*)array_ptr_output[2];
@@ -3656,167 +3656,167 @@ namespace PowerSDR
             switch (in_rx1_l)
             {
                 case 0:
-                    array_ptr_input[0] = (int)in_l_ptr1;
+                    array_ptr_input[0] = (int*)in_l_ptr1;
                     break;
                 case 1:
-                    array_ptr_input[0] = (int)in_r_ptr1;
+                    array_ptr_input[0] = (int*)in_r_ptr1;
                     break;
                 case 2:
-                    array_ptr_input[0] = (int)in_l_ptr2;
+                    array_ptr_input[0] = (int*)in_l_ptr2;
                     break;
                 case 3:
-                    array_ptr_input[0] = (int)in_r_ptr2;
+                    array_ptr_input[0] = (int*)in_r_ptr2;
                     break;
                 case 4:
-                    array_ptr_input[0] = (int)in_l_ptr3;
+                    array_ptr_input[0] = (int*)in_l_ptr3;
                     break;
                 case 5:
-                    array_ptr_input[0] = (int)in_r_ptr3;
+                    array_ptr_input[0] = (int*)in_r_ptr3;
                     break;
                 case 6:
-                    array_ptr_input[0] = (int)in_l_ptr4;
+                    array_ptr_input[0] = (int*)in_l_ptr4;
                     break;
                 case 7:
-                    array_ptr_input[0] = (int)in_r_ptr4;
+                    array_ptr_input[0] = (int*)in_r_ptr4;
                     break;
             }
 
             switch (in_rx1_r)
             {
                 case 0:
-                    array_ptr_input[1] = (int)in_l_ptr1;
+                    array_ptr_input[1] = (int*)in_l_ptr1;
                     break;
                 case 1:
-                    array_ptr_input[1] = (int)in_r_ptr1;
+                    array_ptr_input[1] = (int*)in_r_ptr1;
                     break;
                 case 2:
-                    array_ptr_input[1] = (int)in_l_ptr2;
+                    array_ptr_input[1] = (int*)in_l_ptr2;
                     break;
                 case 3:
-                    array_ptr_input[1] = (int)in_r_ptr2;
+                    array_ptr_input[1] = (int*)in_r_ptr2;
                     break;
                 case 4:
-                    array_ptr_input[1] = (int)in_l_ptr3;
+                    array_ptr_input[1] = (int*)in_l_ptr3;
                     break;
                 case 5:
-                    array_ptr_input[1] = (int)in_r_ptr3;
+                    array_ptr_input[1] = (int*)in_r_ptr3;
                     break;
                 case 6:
-                    array_ptr_input[1] = (int)in_l_ptr4;
+                    array_ptr_input[1] = (int*)in_l_ptr4;
                     break;
                 case 7:
-                    array_ptr_input[1] = (int)in_r_ptr4;
+                    array_ptr_input[1] = (int*)in_r_ptr4;
                     break;
             }
 
             switch (in_tx_l)
             {
                 case 0:
-                    array_ptr_input[2] = (int)in_l_ptr1;
+                    array_ptr_input[2] = (int*)in_l_ptr1;
                     break;
                 case 1:
-                    array_ptr_input[2] = (int)in_r_ptr1;
+                    array_ptr_input[2] = (int*)in_r_ptr1;
                     break;
                 case 2:
-                    array_ptr_input[2] = (int)in_l_ptr2;
+                    array_ptr_input[2] = (int*)in_l_ptr2;
                     break;
                 case 3:
-                    array_ptr_input[2] = (int)in_r_ptr2;
+                    array_ptr_input[2] = (int*)in_r_ptr2;
                     break;
                 case 4:
-                    array_ptr_input[2] = (int)in_l_ptr3;
+                    array_ptr_input[2] = (int*)in_l_ptr3;
                     break;
                 case 5:
-                    array_ptr_input[2] = (int)in_r_ptr3;
+                    array_ptr_input[2] = (int*)in_r_ptr3;
                     break;
                 case 6:
-                    array_ptr_input[2] = (int)in_l_ptr4;
+                    array_ptr_input[2] = (int*)in_l_ptr4;
                     break;
                 case 7:
-                    array_ptr_input[2] = (int)in_r_ptr4;
+                    array_ptr_input[2] = (int*)in_r_ptr4;
                     break;
             }
 
             switch (in_tx_r)
             {
                 case 0:
-                    array_ptr_input[3] = (int)in_l_ptr1;
+                    array_ptr_input[3] = (int*)in_l_ptr1;
                     break;
                 case 1:
-                    array_ptr_input[3] = (int)in_r_ptr1;
+                    array_ptr_input[3] = (int*)in_r_ptr1;
                     break;
                 case 2:
-                    array_ptr_input[3] = (int)in_l_ptr2;
+                    array_ptr_input[3] = (int*)in_l_ptr2;
                     break;
                 case 3:
-                    array_ptr_input[3] = (int)in_r_ptr2;
+                    array_ptr_input[3] = (int*)in_r_ptr2;
                     break;
                 case 4:
-                    array_ptr_input[3] = (int)in_l_ptr3;
+                    array_ptr_input[3] = (int*)in_l_ptr3;
                     break;
                 case 5:
-                    array_ptr_input[3] = (int)in_r_ptr3;
+                    array_ptr_input[3] = (int*)in_r_ptr3;
                     break;
                 case 6:
-                    array_ptr_input[3] = (int)in_l_ptr4;
+                    array_ptr_input[3] = (int*)in_l_ptr4;
                     break;
                 case 7:
-                    array_ptr_input[3] = (int)in_r_ptr4;
+                    array_ptr_input[3] = (int*)in_r_ptr4;
                     break;
             }
 
             switch (in_rx2_l)
             {
                 case 0:
-                    array_ptr_input[4] = (int)in_l_ptr1;
+                    array_ptr_input[4] = (int*)in_l_ptr1;
                     break;
                 case 1:
-                    array_ptr_input[4] = (int)in_r_ptr1;
+                    array_ptr_input[4] = (int*)in_r_ptr1;
                     break;
                 case 2:
-                    array_ptr_input[4] = (int)in_l_ptr2;
+                    array_ptr_input[4] = (int*)in_l_ptr2;
                     break;
                 case 3:
-                    array_ptr_input[4] = (int)in_r_ptr2;
+                    array_ptr_input[4] = (int*)in_r_ptr2;
                     break;
                 case 4:
-                    array_ptr_input[4] = (int)in_l_ptr3;
+                    array_ptr_input[4] = (int*)in_l_ptr3;
                     break;
                 case 5:
-                    array_ptr_input[4] = (int)in_r_ptr3;
+                    array_ptr_input[4] = (int*)in_r_ptr3;
                     break;
                 case 6:
-                    array_ptr_input[4] = (int)in_l_ptr4;
+                    array_ptr_input[4] = (int*)in_l_ptr4;
                     break;
                 case 7:
-                    array_ptr_input[4] = (int)in_r_ptr4;
+                    array_ptr_input[4] = (int*)in_r_ptr4;
                     break;
             }
             switch (in_rx2_r)
             {
                 case 0:
-                    array_ptr_input[5] = (int)in_l_ptr1;
+                    array_ptr_input[5] = (int*)in_l_ptr1;
                     break;
                 case 1:
-                    array_ptr_input[5] = (int)in_r_ptr1;
+                    array_ptr_input[5] = (int*)in_r_ptr1;
                     break;
                 case 2:
-                    array_ptr_input[5] = (int)in_l_ptr2;
+                    array_ptr_input[5] = (int*)in_l_ptr2;
                     break;
                 case 3:
-                    array_ptr_input[5] = (int)in_r_ptr2;
+                    array_ptr_input[5] = (int*)in_r_ptr2;
                     break;
                 case 4:
-                    array_ptr_input[5] = (int)in_l_ptr3;
+                    array_ptr_input[5] = (int*)in_l_ptr3;
                     break;
                 case 5:
-                    array_ptr_input[5] = (int)in_r_ptr3;
+                    array_ptr_input[5] = (int*)in_r_ptr3;
                     break;
                 case 6:
-                    array_ptr_input[5] = (int)in_l_ptr4;
+                    array_ptr_input[5] = (int*)in_l_ptr4;
                     break;
                 case 7:
-                    array_ptr_input[5] = (int)in_r_ptr4;
+                    array_ptr_input[5] = (int*)in_r_ptr4;
                     break;
             }
 
@@ -4617,11 +4617,11 @@ namespace PowerSDR
         {
             if (!vac_enabled) return 0;
 
-            int* array_ptr = (int*)input;
+            int** array_ptr = (int**)input;
             float* in_l_ptr1 = (float*)array_ptr[0];
             float* in_r_ptr1 = null;
             if (vac_stereo || vac_output_iq) in_r_ptr1 = (float*)array_ptr[1];
-            array_ptr = (int*)output;
+            array_ptr = (int**)output;
             float* out_l_ptr1 = (float*)array_ptr[0];
             float* out_r_ptr1 = null;
             if (vac_stereo || vac_output_iq) out_r_ptr1 = (float*)array_ptr[1];
@@ -4757,11 +4757,11 @@ namespace PowerSDR
         {
             if (!vac2_enabled) return 0;
 
-            int* array_ptr = (int*)input;
+            int** array_ptr = (int**)input;
             float* in_l_ptr1 = (float*)array_ptr[0];
             float* in_r_ptr1 = null;
             if (vac2_stereo || vac2_output_iq) in_r_ptr1 = (float*)array_ptr[1];
-            array_ptr = (int*)output;
+            array_ptr = (int**)output;
             float* out_l_ptr1 = (float*)array_ptr[0];
             float* out_r_ptr1 = null;
             if (vac2_stereo || vac2_output_iq) out_r_ptr1 = (float*)array_ptr[1];
@@ -4895,13 +4895,13 @@ namespace PowerSDR
         unsafe public static int Pipe(void* input, void* output, int frameCount,
             PA19.PaStreamCallbackTimeInfo* timeInfo, int statusFlags, void* userData)
         {
-            float* inptr = (float*)input;
-            float* outptr = (float*)output;
+            float** inptr = (float**)input;
+            float** outptr = (float**)output;
 
             for (int i = 0; i < frameCount; i++)
             {
-                *outptr++ = *inptr++;
-                *outptr++ = *inptr++;
+                **outptr++ = **inptr++;
+                **outptr++ = **inptr++;
             }
             return 0;
         }
@@ -5298,16 +5298,28 @@ namespace PowerSDR
 
         unsafe private static void InitVAC()
         {
-            if (rb_vacOUT_l == null) rb_vacOUT_l = new RingBufferFloat(2 * 65536);
+            //K5IT - Size the VAC ring buffer to hold twice the samples of the target latency
+            int vac_ringbuffer_size = 2 * sample_rate2 * latency2 / 1000;
+            if (block_size_vac * 2 > vac_ringbuffer_size) //minimum ringbuffer size is two audio buffers
+            {
+                vac_ringbuffer_size = block_size_vac * 2;
+            }
+            else if (vac_ringbuffer_size % block_size_vac > 0) //ringbuffer should hold an even number of buffers (prevents write past end)
+            {
+                vac_ringbuffer_size = vac_ringbuffer_size + block_size_vac - (vac_ringbuffer_size % block_size_vac); //round up to nearest buffer size
+            }
+            VACDebug(string.Format("VAC ringbuffer size {0}", vac_ringbuffer_size));
+
+            if (rb_vacOUT_l == null) rb_vacOUT_l = new RingBufferFloat(vac_ringbuffer_size);
             rb_vacOUT_l.Restart(vac_output_iq ? block_size1 : block_size_vac);
 
-            if (rb_vacOUT_r == null) rb_vacOUT_r = new RingBufferFloat(2 * 65536);
+            if (rb_vacOUT_r == null) rb_vacOUT_r = new RingBufferFloat(vac_ringbuffer_size);
             rb_vacOUT_r.Restart(vac_output_iq ? block_size1 : block_size_vac);
 
-            if (rb_vacIN_l == null) rb_vacIN_l = new RingBufferFloat(4 * 65536); 
+            if (rb_vacIN_l == null) rb_vacIN_l = new RingBufferFloat(vac_ringbuffer_size); 
             rb_vacIN_l.Restart(block_size_vac);
 
-            if (rb_vacIN_r == null) rb_vacIN_r = new RingBufferFloat(4 * 65536);
+            if (rb_vacIN_r == null) rb_vacIN_r = new RingBufferFloat(vac_ringbuffer_size);
             rb_vacIN_r.Restart(block_size_vac);
 
             if (sample_rate2 != sample_rate1 && !vac_output_iq)
@@ -5387,16 +5399,28 @@ namespace PowerSDR
             int block_size = block_size_vac2;
             if (vac2_output_iq) block_size = block_size1;
 
-            if (rb_vac2OUT_l == null) rb_vac2OUT_l = new RingBufferFloat(2 * 65536);
+            //K5IT - Size the VAC2 ring buffer to hold twice the samples of the target latency
+            int vac2_ringbuffer_size = 2 * sample_rate3 * latency3 / 1000;
+            if (block_size_vac2 * 2 > vac2_ringbuffer_size) //minimum ringbuffer size is two audio buffers
+            {
+                vac2_ringbuffer_size = block_size_vac2 * 2;
+            }
+            else if (vac2_ringbuffer_size % block_size_vac2 > 0) //ringbuffer should hold an even number of buffers (prevents write past end)
+            {
+                vac2_ringbuffer_size = vac2_ringbuffer_size + block_size_vac2 - (vac2_ringbuffer_size % block_size_vac2); //round up to nearest buffer size
+            }
+            VACDebug(string.Format("VAC2 ringbuffer size {0}", vac2_ringbuffer_size));
+
+            if (rb_vac2OUT_l == null) rb_vac2OUT_l = new RingBufferFloat(vac2_ringbuffer_size);
             rb_vac2OUT_l.Restart(block_size);
 
-            if (rb_vac2OUT_r == null) rb_vac2OUT_r = new RingBufferFloat(2 * 65536);
+            if (rb_vac2OUT_r == null) rb_vac2OUT_r = new RingBufferFloat(vac2_ringbuffer_size);
             rb_vac2OUT_r.Restart(block_size);
 
-            if (rb_vac2IN_l == null) rb_vac2IN_l = new RingBufferFloat(4 * 65536);
+            if (rb_vac2IN_l == null) rb_vac2IN_l = new RingBufferFloat(vac2_ringbuffer_size);
             rb_vac2IN_l.Restart(block_size_vac2);
 
-            if (rb_vac2IN_r == null) rb_vac2IN_r = new RingBufferFloat(4 * 65536);
+            if (rb_vac2IN_r == null) rb_vac2IN_r = new RingBufferFloat(vac2_ringbuffer_size);
             rb_vac2IN_r.Restart(block_size_vac2);
 
             if (sample_rate3 != sample_rate1 && !vac2_output_iq)

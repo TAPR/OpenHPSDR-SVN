@@ -356,13 +356,13 @@ void create_txa (int channel)
 		channel,									// channel number
 		1,											// run calibration
 		1024,										// input buffer size
-		ch[channel].dsp_rate,						// samplerate
+		ch[channel].in_rate,						// samplerate
 		16,											// ints
 		256,										// spi
 		(1.0 / 0.4072),								// hw_scale
 		0.1,										// mox delay
 		0.0,										// loop delay
-		0.9,										// ptol
+		0.8,										// ptol
 		0,											// mox
 		1);											// solidmox
 

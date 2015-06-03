@@ -75,6 +75,12 @@
             this.btnPSAmpView = new System.Windows.Forms.ButtonTS();
             this.chkPSAutoAttenuate = new System.Windows.Forms.CheckBoxTS();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.lblPSInfo6 = new System.Windows.Forms.LabelTS();
+            this.labelTS10 = new System.Windows.Forms.LabelTS();
+            this.lblPSInfo13 = new System.Windows.Forms.LabelTS();
+            this.labelTS12 = new System.Windows.Forms.LabelTS();
+            this.lblPSInfo5 = new System.Windows.Forms.LabelTS();
+            this.labelTS14 = new System.Windows.Forms.LabelTS();
             this.grpLincorSave.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udPSMoxDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPSPhnum)).BeginInit();
@@ -103,7 +109,7 @@
             // 
             this.chkPSRelaxPtol.AutoSize = true;
             this.chkPSRelaxPtol.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPSRelaxPtol.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.chkPSRelaxPtol.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.chkPSRelaxPtol.Image = null;
             this.chkPSRelaxPtol.Location = new System.Drawing.Point(38, 368);
             this.chkPSRelaxPtol.Name = "chkPSRelaxPtol";
@@ -339,6 +345,12 @@
             // 
             // grpPSInfo
             // 
+            this.grpPSInfo.Controls.Add(this.lblPSInfo5);
+            this.grpPSInfo.Controls.Add(this.labelTS14);
+            this.grpPSInfo.Controls.Add(this.lblPSInfo13);
+            this.grpPSInfo.Controls.Add(this.labelTS12);
+            this.grpPSInfo.Controls.Add(this.lblPSInfo6);
+            this.grpPSInfo.Controls.Add(this.labelTS10);
             this.grpPSInfo.Controls.Add(this.PSdispRX);
             this.grpPSInfo.Controls.Add(this.labelTS6);
             this.grpPSInfo.Controls.Add(this.GetPSpeak);
@@ -360,7 +372,7 @@
             this.grpPSInfo.ForeColor = System.Drawing.Color.White;
             this.grpPSInfo.Location = new System.Drawing.Point(164, 125);
             this.grpPSInfo.Name = "grpPSInfo";
-            this.grpPSInfo.Size = new System.Drawing.Size(226, 172);
+            this.grpPSInfo.Size = new System.Drawing.Size(226, 220);
             this.grpPSInfo.TabIndex = 21;
             this.grpPSInfo.TabStop = false;
             this.grpPSInfo.Text = "Calibration Information";
@@ -369,7 +381,7 @@
             // PSdispRX
             // 
             this.PSdispRX.BackColor = System.Drawing.Color.Bisque;
-            this.PSdispRX.Location = new System.Drawing.Point(170, 139);
+            this.PSdispRX.Location = new System.Drawing.Point(170, 192);
             this.PSdispRX.Name = "PSdispRX";
             this.PSdispRX.Size = new System.Drawing.Size(38, 20);
             this.PSdispRX.TabIndex = 17;
@@ -379,7 +391,7 @@
             // 
             this.labelTS6.AutoSize = true;
             this.labelTS6.Image = null;
-            this.labelTS6.Location = new System.Drawing.Point(6, 142);
+            this.labelTS6.Location = new System.Drawing.Point(6, 195);
             this.labelTS6.Name = "labelTS6";
             this.labelTS6.Size = new System.Drawing.Size(158, 13);
             this.labelTS6.TabIndex = 16;
@@ -637,7 +649,7 @@
             this.chkPSAutoAttenuate.Checked = true;
             this.chkPSAutoAttenuate.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkPSAutoAttenuate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPSAutoAttenuate.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.chkPSAutoAttenuate.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.chkPSAutoAttenuate.Image = null;
             this.chkPSAutoAttenuate.Location = new System.Drawing.Point(38, 328);
             this.chkPSAutoAttenuate.Name = "chkPSAutoAttenuate";
@@ -651,6 +663,72 @@
             // 
             this.timer2.Enabled = true;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // lblPSInfo6
+            // 
+            this.lblPSInfo6.AutoSize = true;
+            this.lblPSInfo6.BackColor = System.Drawing.Color.Bisque;
+            this.lblPSInfo6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPSInfo6.ForeColor = System.Drawing.Color.Black;
+            this.lblPSInfo6.Image = null;
+            this.lblPSInfo6.Location = new System.Drawing.Point(72, 120);
+            this.lblPSInfo6.Name = "lblPSInfo6";
+            this.lblPSInfo6.Size = new System.Drawing.Size(2, 15);
+            this.lblPSInfo6.TabIndex = 19;
+            // 
+            // labelTS10
+            // 
+            this.labelTS10.AutoSize = true;
+            this.labelTS10.Image = null;
+            this.labelTS10.Location = new System.Drawing.Point(6, 120);
+            this.labelTS10.Name = "labelTS10";
+            this.labelTS10.Size = new System.Drawing.Size(41, 13);
+            this.labelTS10.TabIndex = 18;
+            this.labelTS10.Text = "sln.chk";
+            // 
+            // lblPSInfo13
+            // 
+            this.lblPSInfo13.AutoSize = true;
+            this.lblPSInfo13.BackColor = System.Drawing.Color.Bisque;
+            this.lblPSInfo13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPSInfo13.ForeColor = System.Drawing.Color.Black;
+            this.lblPSInfo13.Image = null;
+            this.lblPSInfo13.Location = new System.Drawing.Point(72, 144);
+            this.lblPSInfo13.Name = "lblPSInfo13";
+            this.lblPSInfo13.Size = new System.Drawing.Size(2, 15);
+            this.lblPSInfo13.TabIndex = 21;
+            // 
+            // labelTS12
+            // 
+            this.labelTS12.AutoSize = true;
+            this.labelTS12.Image = null;
+            this.labelTS12.Location = new System.Drawing.Point(6, 144);
+            this.labelTS12.Name = "labelTS12";
+            this.labelTS12.Size = new System.Drawing.Size(37, 13);
+            this.labelTS12.TabIndex = 20;
+            this.labelTS12.Text = "dg.cnt";
+            // 
+            // lblPSInfo5
+            // 
+            this.lblPSInfo5.AutoSize = true;
+            this.lblPSInfo5.BackColor = System.Drawing.Color.Bisque;
+            this.lblPSInfo5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPSInfo5.ForeColor = System.Drawing.Color.Black;
+            this.lblPSInfo5.Image = null;
+            this.lblPSInfo5.Location = new System.Drawing.Point(72, 168);
+            this.lblPSInfo5.Name = "lblPSInfo5";
+            this.lblPSInfo5.Size = new System.Drawing.Size(2, 15);
+            this.lblPSInfo5.TabIndex = 23;
+            // 
+            // labelTS14
+            // 
+            this.labelTS14.AutoSize = true;
+            this.labelTS14.Image = null;
+            this.labelTS14.Location = new System.Drawing.Point(6, 168);
+            this.labelTS14.Name = "labelTS14";
+            this.labelTS14.Size = new System.Drawing.Size(40, 13);
+            this.labelTS14.TabIndex = 22;
+            this.labelTS14.Text = "cor.cnt";
             // 
             // PSForm
             // 
@@ -746,5 +824,11 @@
         private System.Windows.Forms.ButtonTS btnPSAmpView;
         private System.Windows.Forms.CheckBoxTS chkPSAutoAttenuate;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.LabelTS lblPSInfo5;
+        private System.Windows.Forms.LabelTS labelTS14;
+        private System.Windows.Forms.LabelTS lblPSInfo13;
+        private System.Windows.Forms.LabelTS labelTS12;
+        private System.Windows.Forms.LabelTS lblPSInfo6;
+        private System.Windows.Forms.LabelTS labelTS10;
     }
 }

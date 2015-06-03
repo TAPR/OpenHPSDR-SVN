@@ -83,6 +83,15 @@ namespace PowerSDR
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool AttachConsole(int dwProcessId);
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int GetWindowTextW(IntPtr hwnd, System.Text.StringBuilder lpString, int maxcount);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int GetWindowTextLengthW(IntPtr hwnd);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern bool IsWindow(IntPtr hWnd);
+        
         [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr GetForegroundWindow();
 
@@ -91,6 +100,14 @@ namespace PowerSDR
 
         [DllImport("gdi32.dll")]
         public static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [In] ref uint pcFonts);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool ShowWindowAsync(HandleRef hWnd, int nCmdShow);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
 
         #endregion
 

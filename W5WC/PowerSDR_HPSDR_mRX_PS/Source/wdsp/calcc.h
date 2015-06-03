@@ -114,6 +114,7 @@ extern __declspec(dllexport) void pscc (int channel, int size, double* tx, doubl
 //		 3 - builder for cs
 //		 4 - feedback level warning
 //		 5 - count of attempted calibrations
+//		 6 - results from scheck()
 //
 //		13 - dogcount
 //		14 - indicates iqc_Run = 1

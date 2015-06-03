@@ -2062,6 +2062,7 @@
             this.tpAppearance = new System.Windows.Forms.TabPage();
             this.tcAppearance = new System.Windows.Forms.TabControl();
             this.tpAppearanceGeneral = new System.Windows.Forms.TabPage();
+            this.chkEnableLEDFont = new System.Windows.Forms.CheckBoxTS();
             this.btnSkinExport = new System.Windows.Forms.ButtonTS();
             this.grpAppSkins = new System.Windows.Forms.GroupBoxTS();
             this.comboAppSkin = new System.Windows.Forms.ComboBoxTS();
@@ -2262,6 +2263,15 @@
             this.tpCATControl = new System.Windows.Forms.TabPage();
             this.tcCAT = new System.Windows.Forms.TabControl();
             this.tpCAT = new System.Windows.Forms.TabPage();
+            this.grpFocusMaster = new System.Windows.Forms.GroupBoxTS();
+            this.txtFocusMasterDelay = new System.Windows.Forms.TextBoxTS();
+            this.labelTS359 = new System.Windows.Forms.LabelTS();
+            this.labelTS358 = new System.Windows.Forms.LabelTS();
+            this.labelTS357 = new System.Windows.Forms.LabelTS();
+            this.labelTS356 = new System.Windows.Forms.LabelTS();
+            this.txtFocusMasterWinTitle = new System.Windows.Forms.TextBoxTS();
+            this.txtFocusMasterUDPPort = new System.Windows.Forms.TextBoxTS();
+            this.comboFocusMasterMode = new System.Windows.Forms.ComboBoxTS();
             this.labelTS323 = new System.Windows.Forms.LabelTS();
             this.txtZZSN = new System.Windows.Forms.TextBoxTS();
             this.chkKWAI = new System.Windows.Forms.CheckBoxTS();
@@ -2467,7 +2477,6 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
-            this.chkEnableLEDFont = new System.Windows.Forms.CheckBoxTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             tpAlexAntCtrl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udATTOnTX)).BeginInit();
@@ -3152,6 +3161,7 @@
             this.tpCATControl.SuspendLayout();
             this.tcCAT.SuspendLayout();
             this.tpCAT.SuspendLayout();
+            this.grpFocusMaster.SuspendLayout();
             this.grpCatControlBox.SuspendLayout();
             this.grpRTTYOffset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udRTTYU)).BeginInit();
@@ -34958,6 +34968,19 @@
             this.tpAppearanceGeneral.TabIndex = 0;
             this.tpAppearanceGeneral.Text = "General";
             // 
+            // chkEnableLEDFont
+            // 
+            this.chkEnableLEDFont.AutoSize = true;
+            this.chkEnableLEDFont.Image = null;
+            this.chkEnableLEDFont.Location = new System.Drawing.Point(457, 27);
+            this.chkEnableLEDFont.Name = "chkEnableLEDFont";
+            this.chkEnableLEDFont.Size = new System.Drawing.Size(71, 17);
+            this.chkEnableLEDFont.TabIndex = 87;
+            this.chkEnableLEDFont.Text = "LED Font";
+            this.toolTip1.SetToolTip(this.chkEnableLEDFont, "Use 7-segment LED fonts for VFO and Meter displays.");
+            this.chkEnableLEDFont.UseVisualStyleBackColor = true;
+            this.chkEnableLEDFont.CheckedChanged += new System.EventHandler(this.chkEnableLEDFont_CheckedChanged);
+            // 
             // btnSkinExport
             // 
             this.btnSkinExport.Image = null;
@@ -37308,6 +37331,7 @@
             // tpCAT
             // 
             this.tpCAT.BackColor = System.Drawing.SystemColors.Control;
+            this.tpCAT.Controls.Add(this.grpFocusMaster);
             this.tpCAT.Controls.Add(this.labelTS323);
             this.tpCAT.Controls.Add(this.txtZZSN);
             this.tpCAT.Controls.Add(this.chkKWAI);
@@ -37324,6 +37348,106 @@
             this.tpCAT.Size = new System.Drawing.Size(579, 338);
             this.tpCAT.TabIndex = 0;
             this.tpCAT.Text = "CAT";
+            // 
+            // grpFocusMaster
+            // 
+            this.grpFocusMaster.Controls.Add(this.txtFocusMasterDelay);
+            this.grpFocusMaster.Controls.Add(this.labelTS359);
+            this.grpFocusMaster.Controls.Add(this.labelTS358);
+            this.grpFocusMaster.Controls.Add(this.labelTS357);
+            this.grpFocusMaster.Controls.Add(this.labelTS356);
+            this.grpFocusMaster.Controls.Add(this.txtFocusMasterWinTitle);
+            this.grpFocusMaster.Controls.Add(this.txtFocusMasterUDPPort);
+            this.grpFocusMaster.Controls.Add(this.comboFocusMasterMode);
+            this.grpFocusMaster.Location = new System.Drawing.Point(6, 236);
+            this.grpFocusMaster.Name = "grpFocusMaster";
+            this.grpFocusMaster.Size = new System.Drawing.Size(304, 100);
+            this.grpFocusMaster.TabIndex = 103;
+            this.grpFocusMaster.TabStop = false;
+            this.grpFocusMaster.Text = "FocusMaster";
+            // 
+            // txtFocusMasterDelay
+            // 
+            this.txtFocusMasterDelay.Location = new System.Drawing.Point(184, 42);
+            this.txtFocusMasterDelay.Name = "txtFocusMasterDelay";
+            this.txtFocusMasterDelay.Size = new System.Drawing.Size(40, 20);
+            this.txtFocusMasterDelay.TabIndex = 106;
+            this.txtFocusMasterDelay.Text = "2000";
+            this.txtFocusMasterDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtFocusMasterDelay.TextChanged += new System.EventHandler(this.txtFocusMasterDelay_TextChanged);
+            // 
+            // labelTS359
+            // 
+            this.labelTS359.AutoSize = true;
+            this.labelTS359.Image = null;
+            this.labelTS359.Location = new System.Drawing.Point(126, 45);
+            this.labelTS359.Name = "labelTS359";
+            this.labelTS359.Size = new System.Drawing.Size(58, 13);
+            this.labelTS359.TabIndex = 105;
+            this.labelTS359.Text = "Delay (mS)";
+            // 
+            // labelTS358
+            // 
+            this.labelTS358.AutoSize = true;
+            this.labelTS358.Image = null;
+            this.labelTS358.Location = new System.Drawing.Point(5, 71);
+            this.labelTS358.Name = "labelTS358";
+            this.labelTS358.Size = new System.Drawing.Size(69, 13);
+            this.labelTS358.TabIndex = 104;
+            this.labelTS358.Text = "Window Title";
+            // 
+            // labelTS357
+            // 
+            this.labelTS357.AutoSize = true;
+            this.labelTS357.Image = null;
+            this.labelTS357.Location = new System.Drawing.Point(6, 45);
+            this.labelTS357.Name = "labelTS357";
+            this.labelTS357.Size = new System.Drawing.Size(61, 13);
+            this.labelTS357.TabIndex = 104;
+            this.labelTS357.Text = "N1MM Port";
+            // 
+            // labelTS356
+            // 
+            this.labelTS356.AutoSize = true;
+            this.labelTS356.Image = null;
+            this.labelTS356.Location = new System.Drawing.Point(5, 18);
+            this.labelTS356.Name = "labelTS356";
+            this.labelTS356.Size = new System.Drawing.Size(34, 13);
+            this.labelTS356.TabIndex = 104;
+            this.labelTS356.Text = "Mode";
+            // 
+            // txtFocusMasterWinTitle
+            // 
+            this.txtFocusMasterWinTitle.Location = new System.Drawing.Point(72, 68);
+            this.txtFocusMasterWinTitle.Name = "txtFocusMasterWinTitle";
+            this.txtFocusMasterWinTitle.Size = new System.Drawing.Size(224, 20);
+            this.txtFocusMasterWinTitle.TabIndex = 104;
+            this.txtFocusMasterWinTitle.TextChanged += new System.EventHandler(this.txtFocusMasterWinTitle_TextChanged);
+            this.txtFocusMasterWinTitle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFocusMasterWinTitle_KeyDown);
+            // 
+            // txtFocusMasterUDPPort
+            // 
+            this.txtFocusMasterUDPPort.Location = new System.Drawing.Point(72, 42);
+            this.txtFocusMasterUDPPort.Name = "txtFocusMasterUDPPort";
+            this.txtFocusMasterUDPPort.Size = new System.Drawing.Size(48, 20);
+            this.txtFocusMasterUDPPort.TabIndex = 104;
+            this.txtFocusMasterUDPPort.Text = "12060";
+            this.txtFocusMasterUDPPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtFocusMasterUDPPort.TextChanged += new System.EventHandler(this.txtFocusMasterUDPPort_TextChanged);
+            // 
+            // comboFocusMasterMode
+            // 
+            this.comboFocusMasterMode.FormattingEnabled = true;
+            this.comboFocusMasterMode.Items.AddRange(new object[] {
+            "None",
+            "N1MM+ Logger",
+            "Select by Click",
+            "Enter Window Title"});
+            this.comboFocusMasterMode.Location = new System.Drawing.Point(72, 15);
+            this.comboFocusMasterMode.Name = "comboFocusMasterMode";
+            this.comboFocusMasterMode.Size = new System.Drawing.Size(121, 21);
+            this.comboFocusMasterMode.TabIndex = 104;
+            this.comboFocusMasterMode.SelectedIndexChanged += new System.EventHandler(this.comboFocusMasterMode_SelectedIndexChanged);
             // 
             // labelTS323
             // 
@@ -40613,19 +40737,6 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
-            // chkEnableLEDFont
-            // 
-            this.chkEnableLEDFont.AutoSize = true;
-            this.chkEnableLEDFont.Image = null;
-            this.chkEnableLEDFont.Location = new System.Drawing.Point(457, 27);
-            this.chkEnableLEDFont.Name = "chkEnableLEDFont";
-            this.chkEnableLEDFont.Size = new System.Drawing.Size(71, 17);
-            this.chkEnableLEDFont.TabIndex = 87;
-            this.chkEnableLEDFont.Text = "LED Font";
-            this.toolTip1.SetToolTip(this.chkEnableLEDFont, "Use 7-segment LED fonts for VFO and Meter displays.");
-            this.chkEnableLEDFont.UseVisualStyleBackColor = true;
-            this.chkEnableLEDFont.CheckedChanged += new System.EventHandler(this.chkEnableLEDFont_CheckedChanged);
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -41404,6 +41515,8 @@
             this.tcCAT.ResumeLayout(false);
             this.tpCAT.ResumeLayout(false);
             this.tpCAT.PerformLayout();
+            this.grpFocusMaster.ResumeLayout(false);
+            this.grpFocusMaster.PerformLayout();
             this.grpCatControlBox.ResumeLayout(false);
             this.grpRTTYOffset.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udRTTYU)).EndInit();
@@ -42519,5 +42632,14 @@
         private System.Windows.Forms.RadioButtonTS radDSPNR2Gamma;
 		private System.Windows.Forms.CheckBoxTS chkDisableRXOut;
         private System.Windows.Forms.CheckBoxTS chkEnableLEDFont;
+        private System.Windows.Forms.GroupBoxTS grpFocusMaster;
+        private System.Windows.Forms.LabelTS labelTS358;
+        private System.Windows.Forms.LabelTS labelTS357;
+        private System.Windows.Forms.LabelTS labelTS356;
+        private System.Windows.Forms.TextBoxTS txtFocusMasterWinTitle;
+        private System.Windows.Forms.TextBoxTS txtFocusMasterUDPPort;
+        private System.Windows.Forms.ComboBoxTS comboFocusMasterMode;
+        private System.Windows.Forms.TextBoxTS txtFocusMasterDelay;
+        private System.Windows.Forms.LabelTS labelTS359;
     }
 }

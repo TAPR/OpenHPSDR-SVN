@@ -662,7 +662,10 @@ namespace PowerSDR
 				case "ZZCM":
 					rtncmd = cmdlist.ZZCM(suffix);
 					break;
-				case "ZZCP":
+                case "ZZCN":
+                    rtncmd = cmdlist.ZZCN(suffix);
+                    break;
+                case "ZZCP":
 					rtncmd = cmdlist.ZZCP(suffix);
 					break;
 				case "ZZCS":
@@ -734,7 +737,13 @@ namespace PowerSDR
                 case "ZZFD":
                     rtncmd = cmdlist.ZZFD(suffix);
                     break;
-				case "ZZFI":
+                case "ZZFR":
+                    rtncmd = cmdlist.ZZFR(suffix);
+                    break;
+                case "ZZFS":
+                    rtncmd = cmdlist.ZZFS(suffix);
+                    break;
+                case "ZZFI":
 					rtncmd = cmdlist.ZZFI(suffix);
 					break;
                 case "ZZFJ":
