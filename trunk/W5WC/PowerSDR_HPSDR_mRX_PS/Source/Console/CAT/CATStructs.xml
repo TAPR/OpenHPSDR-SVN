@@ -1148,7 +1148,14 @@
 		<ngetparms>0</ngetparms>
 		<nansparms>1</nansparms>
 	</catstruct>
-	<catstruct code="ZZCF">
+  <catstruct code="ZZCN">
+    <desc>CTUN Enable</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZCF">
 		<desc>Show CW Freq</desc>
 		<active>true</active>
 		<nsetparms>1</nsetparms>
@@ -1323,14 +1330,14 @@
 		<ngetparms>0</ngetparms>
 		<nansparms>1</nansparms>
 	</catstruct>
-	<catstruct code="ZZMU">
-		<desc>MultiRX button status</desc>
-		<active>true</active>
-		<nsetparms>1</nsetparms>
-		<ngetparms>0</ngetparms>
-		<nansparms>1</nansparms>
-	</catstruct>
-	<catstruct code="ZZMS">
+  <catstruct code="ZZMU">
+    <desc>MultiRX button status</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZMS">
 		<desc>MultiRX Swap checkbox status</desc>
 		<active>true</active>
 		<nsetparms>1</nsetparms>
@@ -1414,7 +1421,21 @@
 		<ngetparms>0</ngetparms>
 		<nansparms>5</nansparms>
 	</catstruct>
-	<catstruct code="ZZHA">
+  <catstruct code="ZZFR">
+    <desc>RX2 DSP Filter High</desc>
+    <active>true</active>
+    <nsetparms>5</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>5</nansparms>
+  </catstruct>
+  <catstruct code="ZZFS">
+    <desc>RX2 DSP Filter Low</desc>
+    <active>true</active>
+    <nsetparms>5</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>5</nansparms>
+  </catstruct>
+  <catstruct code="ZZHA">
 		<desc>Audio Buffer Size</desc>
 		<active>true</active>
 		<nsetparms>1</nsetparms>

@@ -816,7 +816,8 @@ namespace PowerSDR
             DictButtons.Add(71, "I/Q to VAC1 use RX2"); //ZZVJ
             DictButtons.Add(72, "VAC2 On/Off"); //ZZVK
 
-           // DictButtons.Add(73, "ESC On/Off"); //ZZDE
+            DictButtons.Add(73, "CTUN"); //ZZCN
+            //DictButtons.Add(73, "ESC On/Off"); //ZZDE
            // DictButtons.Add(74, "ESC Form Open/Close"); //ZZDF
             DictButtons.Add(75, "Mute RX2");
             DictButtons.Add(76, "TUN");
@@ -2499,7 +2500,8 @@ namespace PowerSDR
 
                 case 73:
                     {
-                        ESCOnOff(msg);
+                        CTun(msg);
+                        //ESCOnOff(msg);
                         break;
                     }
                 case 74:
@@ -5902,23 +5904,45 @@ namespace PowerSDR
 
        
 
-        private void ESCOnOff(int msg)
+        //private void ESCOnOff(int msg)
+        //{
+        //    if (msg == 127)
+        //    {
+        //        parser.nGet = 0;
+        //        parser.nSet = 1;
+
+        //        int ESC = Convert.ToInt16(commands.ZZDE(""));
+
+        //        if (ESC == 0)
+        //        {
+        //            commands.ZZDE("1");
+        //            return;
+        //        }
+        //        if (ESC == 1)
+        //        {
+        //            commands.ZZDE("0");
+        //            return;
+        //        }
+        //    }
+        //}
+
+        private void CTun(int msg)
         {
             if (msg == 127)
             {
                 parser.nGet = 0;
                 parser.nSet = 1;
 
-                int ESC = Convert.ToInt16(commands.ZZDE(""));
+                int ESC = Convert.ToInt16(commands.ZZCN(""));
 
                 if (ESC == 0)
                 {
-                    commands.ZZDE("1");
+                    commands.ZZCN("1");
                     return;
                 }
                 if (ESC == 1)
                 {
-                    commands.ZZDE("0");
+                    commands.ZZCN("0");
                     return;
                 }
             }

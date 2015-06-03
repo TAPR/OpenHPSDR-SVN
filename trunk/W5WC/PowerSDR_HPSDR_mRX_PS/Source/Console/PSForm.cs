@@ -390,6 +390,9 @@ namespace PowerSDR
             lblPSInfo1.Text = puresignal.Info[1].ToString();
             lblPSInfo2.Text = puresignal.Info[2].ToString();
             lblPSInfo3.Text = puresignal.Info[3].ToString();
+            lblPSInfo5.Text = puresignal.Info[5].ToString();
+            lblPSInfo6.Text = puresignal.Info[6].ToString();
+            lblPSInfo13.Text = puresignal.Info[13].ToString();
 
             if (puresignal.Info[14] == 1)
             {
@@ -525,7 +528,7 @@ namespace PowerSDR
             if (chkPSRelaxPtol.Checked)
                 puresignal.SetPSPtol(txachannel, 0.400);
             else
-                puresignal.SetPSPtol(txachannel, 0.900);
+                puresignal.SetPSPtol(txachannel, 0.800);
         }
 
         private void chkPSAutoAttenuate_CheckedChanged(object sender, EventArgs e)
@@ -820,10 +823,9 @@ namespace PowerSDR
 
         #region public methods
 
-        public static int[] Info;
+        public static int[] Info = new int[16];
         public static void getinfo(int txachannel)
         {
-            Info = new int[16];
             fixed (int* ptr = &(Info[0]))
                 GetPSInfo(txachannel, ptr);
         }

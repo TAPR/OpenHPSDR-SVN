@@ -174,6 +174,7 @@ void xiqc (IQC a)
 			}
 			a->out[2 * i + 0] = PRE0;
 			a->out[2 * i + 1] = PRE1;
+			// print_iqc_values("iqc.txt", a->state, env, PRE0, PRE1, ym, yc, ys, 1.1);
 		}
 	}
 	else if (a->out != a->in)

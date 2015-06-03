@@ -233,7 +233,10 @@ namespace PowerSDR
             if (rx_out_override && rx_out == 1)
             {
                 if (!tx) trx_ant = 4;
-                rx_out = 0; // disable Rx_Bypass_Out relay
+               // rx_out = 0; // disable Rx_Bypass_Out relay
+                if (tx) // override override
+                    rx_out = RxOutOnTx || Ext1OutOnTx || Ext2OutOnTx ? 1 : 0;
+                else rx_out = 0; // disable Rx_Bypass_Out relay
             }
 
             if (init_update)

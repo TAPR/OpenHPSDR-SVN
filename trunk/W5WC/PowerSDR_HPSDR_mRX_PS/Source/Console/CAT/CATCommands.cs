@@ -1533,7 +1533,36 @@ namespace PowerSDR
 
 		}
 
-		// Sets or reads the compander button status
+        //Sets or reads CTUN for RX1
+        public string ZZCN(string s)
+        {
+            if (s.Length == parser.nSet)
+            {
+                if (s == "1")
+                {
+                    console.CTuneDisplay = true;
+                    return "";
+                }
+                else if (s == "0")
+                {
+                    console.CTuneDisplay = false;
+                    return "";
+                }
+                else
+                    return parser.Error1;
+            }
+            else if (s.Length == parser.nGet)
+            {
+                if (console.CTuneDisplay)
+                   return "1";
+                  else
+                return "0";
+            }
+            else
+                return parser.Error1;
+        }
+        
+        // Sets or reads the compander button status
 		public string ZZCP(string s)
 		{
 			if(s.Length == parser.nSet)
@@ -2410,6 +2439,76 @@ namespace PowerSDR
                 return parser.Error1;
 
 		}
+
+        /// <summary>
+        /// Reads or sets the RX2 DSP Filter High value
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public string ZZFR(string s)
+        {
+            string sign;
+            int n;
+
+            if (s.Length == parser.nSet)
+            {
+                n = Convert.ToInt32(s);
+                n = Math.Min(9999, n);
+                n = Math.Max(-9999, n);
+                console.RX2FilterHigh = n;
+                console.UpdateRX2Filters(console.RX2FilterLow, n);
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                n = console.RX2FilterHigh;
+                if (n < 0)
+                    sign = "-";
+                else
+                    sign = "+";
+
+                // we have to remove the leading zero and replace it with the sign.
+                return sign + AddLeadingZeros(Math.Abs(n)).Substring(1);
+            }
+            else
+                return parser.Error1;
+        }
+
+
+        /// <summary>
+        /// Reads or sets the RX2 DSP Filter Low value
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public string ZZFS(string s)
+        {
+            string sign;
+            int n;
+
+            if (s.Length == parser.nSet)
+            {
+                n = Convert.ToInt32(s);
+                n = Math.Min(9999, n);
+                n = Math.Max(-9999, n);
+                console.RX2FilterLow = n;
+                console.UpdateRX2Filters(n, console.RX2FilterHigh);
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                n = console.RX2FilterLow;
+                if (n < 0)
+                    sign = "-";
+                else
+                    sign = "+";
+
+                // we have to remove the leading zero and replace it with the sign.
+                return sign + AddLeadingZeros(Math.Abs(n)).Substring(1);
+            }
+            else
+                return parser.Error1;
+        }
+
 		//Reads FlexWire single byte value commands
 		public string ZZFV(string s)
 		{
@@ -3967,20 +4066,6 @@ namespace PowerSDR
                 return parser.Error1;
         }
 
-        //Sets or reads the console ATU button
-        public string ZZOV(string s)
-        {
-                parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-        }
-
-        //Sets or reads the console ATU Bypass button
-        public string ZZOW(string s)
-        {
-                 parser.Verbose_Error_Code = 7;
-                return parser.Error1;
-        }
-
         // Sets or reads the DigU Click Tune Offset
         public string ZZOU(string s)
         {
@@ -4004,6 +4089,21 @@ namespace PowerSDR
             {
                 return parser.Error1;
             }
+
+        }
+
+        //Sets or reads the console ATU button
+        public string ZZOV(string s)
+        {
+                parser.Verbose_Error_Code = 7;
+                return parser.Error1;
+        }
+
+        //Sets or reads the console ATU Bypass button
+        public string ZZOW(string s)
+        {
+                 parser.Verbose_Error_Code = 7;
+                return parser.Error1;
         }
 
 		// Sets or reads the Preamp thumbwheel
@@ -4401,8 +4501,8 @@ namespace PowerSDR
 			if(s != "")
 			{
 				n = Convert.ToInt32(s);
-				n = Math.Max(-9999, n);
-				n = Math.Min(9999, n);
+				n = Math.Max(-99999, n);
+				n = Math.Min(99999, n);
 			}
 
 			if(s.Length == parser.nSet)
@@ -6380,8 +6480,8 @@ namespace PowerSDR
 			if(s != "")
 			{
 				n = Convert.ToInt32(s);
-				n = Math.Max(-9999, n);
-				n = Math.Min(9999, n);
+				n = Math.Max(-99999, n);
+				n = Math.Min(99999, n);
 			}
 
 			if(s.Length == parser.nSet)

@@ -203,6 +203,7 @@
     <Compile Include="DJConsoleUI\Setup_MP3LE.designer.cs">
       <DependentUpon>Setup_MP3LE.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalMouseHandler.cs" />
     <Compile Include="HPSDR\Alex.cs" />
     <Compile Include="alphawarnform.cs">
       <SubType>Form</SubType>

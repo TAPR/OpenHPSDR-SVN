@@ -47,13 +47,25 @@ namespace PowerSDR
     using System.Globalization;
     using System.IO;
     using System.IO.Ports;
+    using System.Net.Sockets;
     using System.Net;
     using System.Reflection;
     using System.Threading;
     using System.Text;
     using System.Windows.Forms;
+    using System.Xml;
+    using System.Timers;
+    using System.Linq;
 
     #region Enums
+
+    public enum FocusMasterMode
+    {
+        None = 0,
+        Logger,
+        Click,
+        Title,
+    }
 
     public enum FWCATUMode
     {
@@ -517,6 +529,7 @@ namespace PowerSDR
         private SIO3ListenerII sio3listen = null;
         private SIO4ListenerII sio4listen = null;
 
+        private System.Timers.Timer n1mm_delay;             // timer for setting delay on focus
         private Thread[] audio_process_thread;				// threads to run DttSP functions
         private Thread draw_display_thread;					// draws the main display 
         private Thread multimeter_thread;					// updates the rx1/tx meter data
@@ -555,6 +568,9 @@ namespace PowerSDR
         public FilterForm filterRX2Form;
         public DiversityForm diversityForm;
         public RAForm raForm;
+
+        public RadioInfo radio_info;
+        public ContactInfo contact_info;
 
         // public bool buffiszero = false;
 
@@ -1662,6 +1678,39 @@ namespace PowerSDR
             InitializeComponent();								// Windows Forms Generated Code
             booting = false;
 
+            GlobalMouseHandler gmh = new GlobalMouseHandler(); // capture mouse up event
+            gmh.MouseUp += new MouseMovedEvent(gmh_MouseUp);
+            Application.AddMessageFilter(gmh);
+
+            foreach (PanelTS control in this.Controls.OfType<PanelTS>())
+            {
+                foreach (TextBoxTS c in control.Controls.OfType<TextBoxTS>())
+                {
+                    c.GotFocus += new EventHandler(textbox_GotFocus);
+                    c.LostFocus += new EventHandler(textbox_LostFocus);
+                }
+                foreach (ComboBoxTS c in control.Controls.OfType<ComboBoxTS>())
+                {
+                    c.DropDown += new EventHandler(combo_OpenDropDown);
+                    c.DropDownClosed += new EventHandler(combo_CloseDropDown);
+                }
+
+            }
+
+            foreach (GroupBoxTS control in this.Controls.OfType<GroupBoxTS>())
+            {
+                foreach (TextBoxTS c in control.Controls.OfType<TextBoxTS>())
+                {
+                    c.GotFocus += new EventHandler(textbox_GotFocus);
+                    c.LostFocus += new EventHandler(textbox_LostFocus);
+                }
+                foreach (ComboBoxTS c in control.Controls.OfType<ComboBoxTS>())
+                {
+                    c.DropDown += new EventHandler(combo_OpenDropDown);
+                    c.DropDownClosed += new EventHandler(combo_CloseDropDown);
+                }
+            }
+
             // create LED font
             byte[] fontData = Properties.Resources.digital7;
             IntPtr fontPtr = Marshal.AllocCoTaskMem(fontData.Length);
@@ -1825,6 +1874,12 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+        }
+
+        void gmh_MouseUp()
+        {
+            if (!selectByClick)
+            ToggleFocusMasterTimer();
         }
 
         //private int dispose_count = 0;
@@ -8243,6 +8298,10 @@ namespace PowerSDR
               {
 
               }*/
+
+            if (n1mm_udp_client != null)
+                n1mm_udp_client.Close();
+
             if (SaveTXProfileOnExit == true)    // save the tx profile
             {
                 SetupForm.SaveTXProfileData();
@@ -17323,6 +17382,117 @@ namespace PowerSDR
         // Properties
         // ======================================================
 
+
+        private IntPtr n1mm_handle = IntPtr.Zero;
+        public IntPtr N1MMHandle
+        {
+            get { return n1mm_handle; }
+            set { n1mm_handle = value; }
+        }
+
+        IntPtr myHandle = IntPtr.Zero;
+        bool selectByClick = false;
+        private FocusMasterMode focus_master_mode = FocusMasterMode.None;
+        public FocusMasterMode FocusMasterMode
+        {
+            get { return focus_master_mode; }
+            set
+            {
+                focus_master_mode = value;
+                n1mm_handle = IntPtr.Zero;
+
+                if (value != FocusMasterMode.None)
+                {
+                    if (n1mm_delay == null)
+                    {
+                        n1mm_delay = new System.Timers.Timer(focus_master_delay);
+                        n1mm_delay.Elapsed += new ElapsedEventHandler(n1mm_delay_Elapsed);
+                        n1mm_delay.AutoReset = false;
+                        n1mm_delay.Enabled = false;
+                    }
+                    else n1mm_delay.Enabled = false;
+                }
+                else
+                {
+                    if (n1mm_delay != null)
+                        n1mm_delay.Enabled = false;
+                }
+
+                switch (value)
+                {
+                    case FocusMasterMode.Logger:
+                        Thread n1mm_focus_thread = new Thread(new ThreadStart(PollN1MMPacket))
+                        {
+                            Name = "N1MM Packet Thread",
+                            IsBackground = true,
+                            Priority = ThreadPriority.BelowNormal
+                        };
+                        n1mm_focus_thread.Start();
+                        break;
+                    case FocusMasterMode.Click:
+                        myHandle = Win32.GetForegroundWindow();
+                        selectByClick = true;
+                        SetFocusMaster(false);
+                        SetFocusMaster(true);
+                       // n1mm_delay.Enabled = true;
+                        break;
+                    case FocusMasterMode.Title:
+                        //foreach (Process pList in Process.GetProcesses())
+                        //{
+                        //    if (pList.MainWindowTitle.Equals(focus_master_win_title))
+                        //    {
+                        //        n1mm_handle = pList.MainWindowHandle;
+                        //    }
+                        //}
+                        break;
+                    case FocusMasterMode.None:
+                        SetFocusMaster(false);
+                        //n1mm_handle = IntPtr.Zero;
+                        break;
+                }
+
+                //if (value != FocusMasterMode.None)
+                //{
+                //    if (n1mm_delay == null)
+                //    {
+                //        n1mm_delay = new System.Timers.Timer(focus_master_delay);
+                //        n1mm_delay.Elapsed += new ElapsedEventHandler(n1mm_delay_Elapsed);
+                //        n1mm_delay.AutoReset = false;
+                //        n1mm_delay.Enabled = false;
+                //    }
+                //    else n1mm_delay.Enabled = false;
+                //}
+                //else
+                //{
+                //    if (n1mm_delay != null)
+                //    n1mm_delay.Enabled = false;
+                //}
+
+                //if (FocusMasterMode == FocusMasterMode.Click) SetFocusMaster(true);// n1mm_delay.Enabled = true;
+            }
+        }
+
+        private int focus_master_delay = 2000;
+        public int FocusMasterDelay
+        {
+            get { return focus_master_delay; }
+            set { focus_master_delay = value; }
+        }
+
+        private int focus_master_udp_port = 12060;
+        public int FocusMasterUDPPort
+        {
+            get { return focus_master_udp_port; }
+            set { focus_master_udp_port = value; }
+        }
+
+        private string focus_master_win_title = "";
+        public string FocusMasterWinTitle
+        {
+            get { return focus_master_win_title; }
+            set { focus_master_win_title = value; }
+        }
+
         private bool enable_led_font = false;
         public bool EnableLEDFont
         {
@@ -17537,6 +17707,13 @@ namespace PowerSDR
                 update_rx2_centerfreq = value;
             }
         }
+
+        public bool CTuneDisplay
+        {
+            get { return chkFWCATU.Checked; }
+            set { chkFWCATU.Checked = value; }
+        }
+
 
         private bool click_tune_display = false;
         public bool ClickTuneDisplay
@@ -30698,6 +30875,341 @@ namespace PowerSDR
             }
         }
 
+        private UdpClient n1mm_udp_client;
+        private void PollN1MMPacket()
+        {
+            radio_info = new RadioInfo();
+            contact_info = new ContactInfo();
+
+            if (n1mm_udp_client != null) n1mm_udp_client.Close();
+            IPEndPoint udp_ep = new IPEndPoint(IPAddress.Any, focus_master_udp_port);
+            n1mm_udp_client = new UdpClient(udp_ep);
+ 
+            while (focus_master_mode == FocusMasterMode.Logger)
+            {              
+                    try
+                    {
+                        {
+                            byte[] data = n1mm_udp_client.Receive(ref udp_ep);
+                            //MessageBox.Show(Encoding.ASCII.GetString(data));
+                            string tmp = Encoding.UTF8.GetString(data);
+                            HandleXml(tmp);
+                        }
+                    }
+                    catch (SocketException e) // handle blocking exception
+                    {
+                        Thread.Sleep(500);
+                        continue;
+                    }              
+            }
+
+            if (n1mm_udp_client != null)
+            {
+                n1mm_udp_client.Close();
+                n1mm_udp_client = null;
+            }
+
+        }
+
+        private void n1mm_delay_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (selectByClick & !initializing)
+            {
+                IntPtr curHandle = Win32.GetForegroundWindow();
+                if (curHandle != myHandle)
+                {
+                    n1mm_handle = curHandle;
+                    selectByClick = false;
+                    SetFocusMaster(false);
+                    int slen = Win32.GetWindowTextLengthW(n1mm_handle);
+                    StringBuilder wtxt = new StringBuilder(slen + 1);
+                    Win32.GetWindowTextW(n1mm_handle, wtxt, 256);
+                    SetupForm.FocusMasterTitle = wtxt.ToString();
+                }
+                else
+                {
+                    ToggleFocusMasterTimer();
+                }
+            }
+
+            if (n1mm_handle != IntPtr.Zero && !Win32.IsWindow(n1mm_handle))
+            {
+                n1mm_handle = IntPtr.Zero;
+                SetupForm.FocusMasterMode = FocusMasterMode.None;
+                SetupForm.FocusMasterTitle = "";
+            }
+
+            if (n1mm_state == 3)
+            {
+                n1mm_state = 0;
+                if (n1mm_handle != IntPtr.Zero)
+                    Win32.SetForegroundWindow(n1mm_handle);
+            }
+        }
+
+        public struct RadioInfo
+        {
+            public string RadioNr;
+            public string Freq;
+            public string TXFreq;
+            public string Mode;
+            public string OpCall;
+            public string IsRunning;
+            public string FocusEntry;
+            public string Antenna;
+            public string Rotors;
+        }
+
+        public struct ContactInfo
+        {
+            public string contestname;
+            public string contestnr;
+            public string timestamp;
+            public string mycall;
+            public string band;
+            public string rxfreq;
+            public string txfreq;
+            public string opr;
+            public string mode;
+            public string call;
+            public string countryprefix;
+            public string wpxprefix;
+            public string stationprefix;
+            public string continent;
+            public string snt;
+            public string sntnr;
+            public string rcv;
+            public string rcvnr;
+            public string gridsquare;
+            public string exchange1;
+            public string section;
+            public string comment;
+            public string qth;
+            public string name;
+            public string power;
+            public string misctext;
+            public string zone;
+            public string prec;
+            public string ck;
+            public string ismultiplier1;
+            public string ismultiplier2;
+            public string ismultiplier3;
+            public string points;
+            public string radionr;
+            public string RoverLocation;
+            public string RadioInterfaced;
+            public string NetBiosName;
+            public string IsRunQSO;
+        }
+
+        void HandleXml(string str)
+        {
+            int textCount = 0;
+            bool valid_data = true;
+            string element = "";
+            StringReader stream = new StringReader(str);
+            XmlTextReader tr = new XmlTextReader(stream);
+            while (tr.Read() && valid_data)
+            {
+                switch (tr.NodeType)
+                {
+                    case XmlNodeType.XmlDeclaration:
+                    case XmlNodeType.EndElement:
+                    case XmlNodeType.Whitespace:
+                        break;
+                    case XmlNodeType.Element:
+                        switch (tr.Name)
+                        {
+                            case "appinfo":
+                            case "N1MMRotor":
+                                valid_data = false;
+                                break;
+                            case "contactinfo":
+                                //element = "contactinfo";
+                                valid_data = false;
+                                break;
+                            case "RadioInfo":
+                                element = "RadioInfo";
+                                break;
+                        }
+                        break;
+                    case XmlNodeType.Text:
+                        switch (element)
+                        {
+                            case "RadioInfo":
+                                switch (++textCount)
+                                {
+                                    case 1:
+                                        radio_info.RadioNr = tr.Value;
+                                        break;
+                                    case 2:
+                                        radio_info.Freq = tr.Value;
+                                        break;
+                                    case 3:
+                                        radio_info.TXFreq = tr.Value;
+                                        break;
+                                    case 4:
+                                        radio_info.Mode = tr.Value;
+                                        break;
+                                    case 5:
+                                        radio_info.OpCall = tr.Value;
+                                        break;
+                                    case 6:
+                                        radio_info.IsRunning = tr.Value;
+                                        break;
+                                    case 7:
+                                        radio_info.FocusEntry = tr.Value;
+                                        break;
+                                    case 8:
+                                        radio_info.Antenna = tr.Value;
+                                        break;
+                                    case 9:
+                                        radio_info.Rotors = tr.Value;
+                                        break;
+                                }
+                                break;
+                            case "contactinfo":
+                                switch (++textCount)
+                                {
+                                    case 1:
+                                        contact_info.contestname = tr.Value;
+                                        break;
+                                    case 2:
+                                        contact_info.contestnr = tr.Value;
+                                        break;
+                                    case 3:
+                                        contact_info.timestamp = tr.Value;
+                                        break;
+                                    case 4:
+                                        contact_info.mycall = tr.Value;
+                                        break;
+                                    case 5:
+                                        contact_info.band = tr.Value;
+                                        break;
+                                    case 6:
+                                        contact_info.rxfreq = tr.Value;
+                                        break;
+                                    case 7:
+                                        contact_info.txfreq = tr.Value;
+                                        break;
+                                    case 8:
+                                        contact_info.opr = tr.Value;
+                                        break;
+                                    case 9:
+                                        contact_info.mode = tr.Value;
+                                        break;
+                                    case 10:
+                                        contact_info.call = tr.Value;
+                                        break;
+                                    case 11:
+                                        contact_info.countryprefix = tr.Value;
+                                        break;
+                                    case 12:
+                                        contact_info.wpxprefix = tr.Value;
+                                        break;
+                                    case 13:
+                                        contact_info.stationprefix = tr.Value;
+                                        break;
+                                    case 14:
+                                        contact_info.continent = tr.Value;
+                                        break;
+                                    case 15:
+                                        contact_info.snt = tr.Value;
+                                        break;
+                                    case 16:
+                                        contact_info.sntnr = tr.Value;
+                                        break;
+                                    case 17:
+                                        contact_info.rcv = tr.Value;
+                                        break;
+                                    case 18:
+                                        contact_info.rcvnr = tr.Value;
+                                        break;
+                                    case 19:
+                                        contact_info.gridsquare = tr.Value;
+                                        break;
+                                    case 20:
+                                        contact_info.exchange1 = tr.Value;
+                                        break;
+                                    case 21:
+                                        contact_info.section = tr.Value;
+                                        break;
+                                    case 22:
+                                        contact_info.comment = tr.Value;
+                                        break;
+                                    case 23:
+                                        contact_info.qth = tr.Value;
+                                        break;
+                                    case 24:
+                                        contact_info.name = tr.Value;
+                                        break;
+                                    case 25:
+                                        contact_info.power = tr.Value;
+                                        break;
+                                    case 26:
+                                        contact_info.misctext = tr.Value;
+                                        break;
+                                    case 27:
+                                        contact_info.zone = tr.Value;
+                                        break;
+                                    case 28:
+                                        contact_info.prec = tr.Value;
+                                        break;
+                                    case 29:
+                                        contact_info.ck = tr.Value;
+                                        break;
+                                    case 30:
+                                        contact_info.ismultiplier1 = tr.Value;
+                                        break;
+                                    case 31:
+                                        contact_info.ismultiplier2 = tr.Value;
+                                        break;
+                                    case 32:
+                                        contact_info.ismultiplier3 = tr.Value;
+                                        break;
+                                    case 33:
+                                        contact_info.points = tr.Value;
+                                        break;
+                                    case 34:
+                                        contact_info.radionr = tr.Value;
+                                        break;
+                                    case 35:
+                                        contact_info.RoverLocation = tr.Value;
+                                        break;
+                                    case 36:
+                                        contact_info.RadioInterfaced = tr.Value;
+                                        break;
+                                    case 37:
+                                        contact_info.NetBiosName = tr.Value;
+                                        break;
+                                    case 38:
+                                        contact_info.IsRunQSO = tr.Value;
+                                        break;
+                                }
+                                break;
+                        }
+                        break;
+                }
+
+            }
+
+            if (element == "RadioInfo")
+            {
+                int handle = Int32.Parse(radio_info.FocusEntry);
+                n1mm_handle = (IntPtr)handle;
+            }
+        }
+
+        private void ToggleFocusMasterTimer()
+        {
+            if (focus_master_mode != FocusMasterMode.None && n1mm_state != 1 && n1mm_delay != null)
+            {
+                n1mm_state = 3;    
+                n1mm_delay.Enabled = false;
+                n1mm_delay.Enabled = true;
+            }
+        }
+
         //private void PollFWCPAPWR()
         //{
         //    return;
@@ -31279,6 +31791,7 @@ namespace PowerSDR
         {
             if (e.Shift == false && shift_down)
                 shift_down = false;
+            ToggleFocusMasterTimer();
         }
 
         private void Console_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -34960,6 +35473,26 @@ namespace PowerSDR
             btnHidden.Focus();
         }
 
+        private void textbox_GotFocus(object sender, EventArgs e)
+        {
+            SetFocusMaster(false);
+        }
+
+        private void textbox_LostFocus(object sender, EventArgs e)
+        {
+            SetFocusMaster(true);
+        }
+
+        private void combo_OpenDropDown(object sender, EventArgs e)
+        {
+            SetFocusMaster(false);
+        }
+
+        private void combo_CloseDropDown(object sender, EventArgs e)
+        {
+            SetFocusMaster(true);
+        }
+
         private void chkVFOLock_CheckedChanged(object sender, System.EventArgs e)
         {
             VFOLock = chkVFOLock.Checked;
@@ -35518,6 +36051,10 @@ namespace PowerSDR
                 Console_KeyPress(this, new KeyPressEventArgs((char)Keys.Enter));
                 return;
             }
+
+            if (ClientRectangle.Contains(Form.MousePosition.X - Location.X,
+                                         Form.MousePosition.Y - Location.Y))
+                ToggleFocusMasterTimer();
 
             if (e.Delta == 0) return;
 
@@ -38406,7 +38943,7 @@ namespace PowerSDR
                             {
                                 if ((rx1_grid_adjust && !Display.TXOnVFOB) ||
                                     (rx1_grid_adjust && Display.TXOnVFOB && !RX2Enabled))// &&
-                                   // Display.CurrentDisplayMode != DisplayMode.PANAFALL)
+                                // Display.CurrentDisplayMode != DisplayMode.PANAFALL)
                                 {
                                     grid_minmax_drag_start_point = new Point(e.X, e.Y);
                                     gridminmaxadjust = true;
@@ -46329,6 +46866,7 @@ namespace PowerSDR
                 SetupForm = new Setup(this);
             SetupForm.Show();
             SetupForm.Focus();
+            SetFocusMaster(false);
         }
 
         private void memoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -46337,6 +46875,7 @@ namespace PowerSDR
                 memoryForm = new MemoryForm(this);
             memoryForm.Show();
             memoryForm.Focus();
+            SetFocusMaster(false);
         }
 
         private void waveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -48459,6 +48998,33 @@ namespace PowerSDR
                         chkRX2ANF.Checked = rx2dm.ANF;
                         chkRX2NR.CheckState = rx2dm.NR;
                         break;
+                }
+            }
+        }
+
+        private byte n1mm_state = 0;
+        public void SetFocusMaster(bool state)
+        {
+            if (n1mm_delay != null)
+            {
+                if (state)
+                {
+                    if (n1mm_state == 1)
+                    {
+                        n1mm_state = 3;
+                        ToggleFocusMasterTimer();
+                    }
+                }
+                else
+                {
+                    if (n1mm_state == 0)
+                        n1mm_state = 1;
+                    else if (n1mm_state == 3)
+                    {
+                        n1mm_state = 1;
+                        n1mm_delay.Enabled = false;
+                    }
+
                 }
             }
         }
