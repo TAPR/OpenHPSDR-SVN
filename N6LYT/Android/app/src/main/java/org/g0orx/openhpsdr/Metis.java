@@ -34,40 +34,35 @@ public class Metis extends Thread {
         txcontrol3 = (byte) (ALEX_ATTENUATION_0DB | configuration.dither | configuration.random | configuration.preamp);
         txcontrol4 = (byte) (DUPLEX | (((receivers - 1) << 3) & 0x038));
 
+        // calculate speed and increment
+        if (configuration.samplerate == 48000.0) {
+            outsize=configuration.buffersize;
+            txcontrol1 |= SPEED_48KHZ;
+        } else if (configuration.samplerate == 96000.0) {
+            outsize=configuration.buffersize/2;
+            txcontrol1 |= SPEED_96KHZ;
+        } else if (configuration.samplerate == 192000.0) {
+            outsize=configuration.buffersize/4;
+            txcontrol1 |= SPEED_192KHZ;
+        } else if (configuration.samplerate == 384000.0) {
+            outsize=configuration.buffersize/8;
+            txcontrol1 |= SPEED_384KHZ;
+        }
+
         // allocate space for the input/output samples
-        inlsamples = new float[configuration.fftsize];
-        inrsamples = new float[configuration.fftsize];
-        inmiclsamples = new float[configuration.fftsize];
-        inmicrsamples = new float[configuration.fftsize];
-        outlsamples = new float[configuration.fftsize];
-        outrsamples = new float[configuration.fftsize];
-        suboutlsamples = new float[configuration.fftsize];
-        suboutrsamples = new float[configuration.fftsize];
+        inlsamples = new float[configuration.buffersize];
+        inrsamples = new float[configuration.buffersize];
+        inmiclsamples = new float[configuration.buffersize];
+        inmicrsamples = new float[configuration.buffersize];
+        outlsamples = new float[outsize];
+        outrsamples = new float[outsize];
+        suboutlsamples = new float[outsize];
+        suboutrsamples = new float[outsize];
 
         bslsamples = new float[configuration.fftsize];
         bsrsamples = new float[configuration.fftsize];
         for (int i = 0; i < configuration.fftsize; i++) {
             bsrsamples[i] = 0.0F;
-        }
-
-
-        // calculate speed and increment
-        if (configuration.samplerate == 48000.0) {
-            increment = 1;
-            audioincrement = 1;
-            txcontrol1 |= SPEED_48KHZ;
-        } else if (configuration.samplerate == 96000.0) {
-            increment = 2;
-            audioincrement = 2;
-            txcontrol1 |= SPEED_96KHZ;
-        } else if (configuration.samplerate == 192000.0) {
-            increment = 4;
-            audioincrement = 4;
-            txcontrol1 |= SPEED_192KHZ;
-        } else if (configuration.samplerate == 384000.0) {
-            increment = 8;
-            audioincrement = 8;
-            txcontrol1 |= SPEED_384KHZ;
         }
 
         // build the toaddress InetAddress
@@ -81,13 +76,17 @@ public class Metis extends Thread {
         commanddatagram = new DatagramPacket(commandbuffer, commandbuffer.length, toaddress, toport);
         samplesdatagram = new DatagramPacket(sendbuffer, sendbuffer.length, toaddress, toport);
 
+        status=null;
         try {
             audiotrack = new AudioTrack(AudioManager.STREAM_MUSIC, 48000,
                     AudioFormat.CHANNEL_OUT_STEREO,
                     AudioFormat.ENCODING_PCM_16BIT, 1024,
                     AudioTrack.MODE_STREAM);
-        } catch (IllegalArgumentException e) {
-            Log.i("Metis", "new AudioTrack Error: " + e.getMessage());
+        } catch (Exception e) {
+            if((configuration.audiooutput==Configuration.AUDIO_OUTPUT_LOCAL || configuration.audiooutput==Configuration.AUDIO_OUTPUT_BOTH) && audiotrack==null) {
+                status = "Failed to create AudioTrack: "+e.getMessage();
+            }
+            Log.i("Metis", "new AudioTrack Exception: " + e.getMessage());
             audiotrack = null;
         }
 
@@ -136,7 +135,7 @@ public class Metis extends Thread {
                 data_type,                        //0 for real input data (I only); 1 for complex input data (I & Q)
                 flp,                       //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
                 fft_size,                         //size of the fft, i.e., number of input samples
-                configuration.fftsize,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
+                configuration.buffersize,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
                 window_type,           //integer specifying which window function to use
                 kaiser_pi,                      //PiAlpha parameter for Kaiser window
                 overlap,                      //number of samples each fft (other than the first) is to re-use from the previous
@@ -192,7 +191,7 @@ public class Metis extends Thread {
                 data_type,                        //0 for real input data (I only); 1 for complex input data (I & Q)
                 flp,                       //vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise
                 fft_size,                         //size of the fft, i.e., number of input samples
-                configuration.fftsize,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
+                outsize /*configuration.fftsize*/,                      //number of samples transferred for each OpenBuffer()/CloseBuffer()
                 window_type,           //integer specifying which window function to use
                 kaiser_pi,                      //PiAlpha parameter for Kaiser window
                 overlap,                      //number of samples each fft (other than the first) is to re-use from the previous
@@ -279,8 +278,9 @@ public class Metis extends Thread {
         int endpoint;
         //Log.i("Metis","run: "+this.getName());
 
-        myaddress = getLocalIpAddress();
-        //Log.i("Metis","run: myAddress:"+myaddress);
+        //myaddress = getLocalIpAddress();
+        myaddress = configuration.discovered.getInterface();
+        Log.i("Metis","run: myAddress:"+myaddress);
 
         running = true;
 
@@ -514,13 +514,24 @@ public class Metis extends Thread {
                                 break;
                             case 1:
                                 // forward power
-                                penelope_forward_power = (rxcontrol1 << 8) + (rxcontrol2 & 0xFF);
-                                alex_forward_power = (rxcontrol3 << 8) + (rxcontrol4 & 0xFF);
+                                avg_penelope_forward_power += ((rxcontrol1 << 8)&0xFF00) | (rxcontrol2 & 0xFF);
+                                avg_alex_forward_power += ((rxcontrol3 << 8) & 0xFF00) | (rxcontrol4 & 0xFF);
                                 break;
                             case 2:
                                 // reverse power
-                                alex_reverse_power = (rxcontrol1 << 8) + (rxcontrol2 & 0xFF);
+                                avg_alex_reverse_power += ((rxcontrol1 << 8) & 0xFF00) | (rxcontrol2 & 0xFF);
                                 ain3 = (rxcontrol3 << 8) + (rxcontrol4 & 0xFF);
+                                power_samples++;
+                                if(power_samples==4) {
+                                    penelope_forward_power=avg_penelope_forward_power/4;
+                                    alex_forward_power=avg_alex_forward_power/4;
+                                    alex_reverse_power=avg_alex_reverse_power/4;
+
+                                    avg_penelope_forward_power=0;
+                                    avg_alex_forward_power=0;
+                                    avg_alex_reverse_power=0;
+                                    power_samples=0;
+                                }
                                 break;
                             case 3:
                                 ain4 = (rxcontrol1 << 8) + (rxcontrol2 & 0xFF);
@@ -574,7 +585,7 @@ public class Metis extends Thread {
 
                         inoffset++;
 
-                        if (inoffset == configuration.fftsize) {
+                        if (inoffset == configuration.buffersize) {
 
                             if (transmit) {
                                 if (tuning) {
@@ -626,7 +637,7 @@ public class Metis extends Thread {
                                     }
                                 }
                                 if (configuration.audiooutput == Configuration.AUDIO_OUTPUT_LOCAL || configuration.audiooutput == Configuration.AUDIO_OUTPUT_BOTH) {
-                                    for (int j = 0; j < outlsamples.length; j = j + audioincrement) {
+                                    for (int j = 0; j < outlsamples.length; j++) {
                                         if (configuration.subrx) {
                                             audiooutput[audiooutputindex++] = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
                                             audiooutput[audiooutputindex++] = (short) (suboutrsamples[j] * 32767.0F * configuration.afgain);
@@ -643,7 +654,7 @@ public class Metis extends Thread {
                                     }
                                 }
                                 if (configuration.audiooutput == Configuration.AUDIO_OUTPUT_LOCAL) {
-                                    for (int j = 0; j < outlsamples.length; j = j + audioincrement) {
+                                    for (int j = 0; j < outlsamples.length; j++) {
                                         outlsamples[j] = outrsamples[j] = 0;
                                     }
                                     sendSamples(outlsamples, outrsamples);
@@ -664,14 +675,6 @@ public class Metis extends Thread {
         }
     }
 
-    public void sendMicSamples(float[] outlsamples, float[] outrsamples) {
-        //Log.i("Metis","sendMicSamples: "+outlsamples.length);
-        int savedIncrement = increment;
-        increment = 1;   // local mic samples are always at 48000
-        sendSamples(outlsamples, outrsamples);
-        increment = savedIncrement;
-    }
-
     public synchronized void sendSamples(float[] outlsamples, float[] outrsamples) {
         //Log.i("Metis","sendSamples: "+outlsamples.length);
         Band band = configuration.bands.get();
@@ -686,7 +689,7 @@ public class Metis extends Thread {
         }
 
         // send data back to Metis
-        for (int j = 0; j < outlsamples.length; j = j + increment) {
+        for (int j = 0; j < outlsamples.length; j++) {
 
             if (transmit) {
                 sendbuffer[txoffset++] = (byte) 0; // rx
@@ -821,6 +824,7 @@ public class Metis extends Thread {
 
                         break;
                     }
+
                     case 1: {
                         sendbuffer[11] = 0x12;
                         if (tuning) {
@@ -829,9 +833,12 @@ public class Metis extends Thread {
                             sendbuffer[12] = (byte) (255.0F * configuration.bands.get().getTxGain() * configuration.rfgain);
                         }
                         byte c2=0x00;
+                        if(configuration.micboost) {
+                            c2|=0x01;
+                        }
                         if(configuration.discovered.getDevice()==Discovered.DEVICE_HERMES) {
                             if(configuration.radio==Configuration.HERMES_APOLLO) {
-                                c2=(byte)(APOLLO_BOARD | APOLLO_FILTER | APOLLO_TUNER);
+                                c2|=(byte)(APOLLO_BOARD | APOLLO_FILTER | APOLLO_TUNER);
                                 if(tuning) {
                                     c2|=APOLLO_TUNE;
                                 }
@@ -1151,6 +1158,8 @@ public class Metis extends Thread {
         return adc4overflow;
     }
 
+    public String getStatus() { return status; }
+
     private boolean bandscope;
 
     private PTTListener pttListener;
@@ -1295,8 +1304,7 @@ public class Metis extends Thread {
     // local audio
     private AudioTrack audiotrack;
 
-    private int audioincrement;
-    private int increment = 1;
+    private int outsize;
     private short[] audiooutput = new short[1024 * 2];
     private int audiooutputindex = 0;
 
@@ -1312,6 +1320,11 @@ public class Metis extends Thread {
     public int metis_software_version = 0;
     public int mercury_software_version = 0;
     public int penelope_software_version = 0;
+
+    private int power_samples=0;
+    private int avg_penelope_forward_power=0;
+    private int avg_alex_forward_power = 0;
+    private int avg_alex_reverse_power = 0;
 
     private int penelope_forward_power = 0;
     private int alex_forward_power = 0;
@@ -1371,5 +1384,7 @@ public class Metis extends Thread {
             23, 22, 21, 20, 19, 18, 17, 16,
             15, 14, 13, 12, 11, 10, 9, 8,
             7, 6, 5, 4, 3, 2, 1, 0};
+
+    String status=null;
 
 }

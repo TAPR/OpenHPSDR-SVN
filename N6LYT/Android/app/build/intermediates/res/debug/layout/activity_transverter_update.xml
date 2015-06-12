@@ -97,4 +97,4 @@
         android:layout_alignLeft="@+id/editTextEnd"
         android:text="Delete" />
 
-</RelativeLayout><!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/layout/activity_transverter_update.xml -->
+</RelativeLayout><!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/layout/activity_transverter_update.xml -->

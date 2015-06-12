@@ -194,10 +194,12 @@ public class SettingsActivity extends Activity {
         s.setValue(Integer.toString((int) configuration.samplerate));
         settings.add(s);
 
+        /*
         s = new Setting();
         s.setTitle("DSP Rate");
         s.setValue(Integer.toString((int) configuration.dsprate));
         settings.add(s);
+        */
 
         s = new Setting();
         s.setTitle("Buffer Size");

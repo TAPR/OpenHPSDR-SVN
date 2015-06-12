@@ -26,6 +26,10 @@ public class FrequencyView extends SurfaceView {
         paint = new Paint();
     }
 
+    public void setMetis(Metis metis) {
+        this.metis=metis;
+    }
+
     public void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         //Log.i("PanadapterView","onLayout changed:"+changed+" left:"+left+" top:"+top+" right:"+right+" bottom:"+bottom);
@@ -42,6 +46,10 @@ public class FrequencyView extends SurfaceView {
             return;
         }
 
+        int samplerate=(int)configuration.samplerate;
+        if(metis.isTransmitting()) {
+            samplerate=48000;
+        }
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
         Filter filter = Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
@@ -54,8 +62,8 @@ public class FrequencyView extends SurfaceView {
             low=configuration.cwsidetonefrequency-low;
             high=configuration.cwsidetonefrequency+high;
         }
-        filterLeft = ((int) low - (-(int) configuration.samplerate / 2)) * WIDTH / (int) configuration.samplerate;
-        filterRight = ((int) high - (-(int) configuration.samplerate / 2)) * WIDTH / (int) configuration.samplerate;
+        filterLeft = ((int) low - (-samplerate / 2)) * WIDTH / samplerate;
+        filterRight = ((int) high - (-samplerate / 2)) * WIDTH / samplerate;
         if (filterLeft == filterRight) {
             filterRight++;
         }
@@ -76,11 +84,11 @@ public class FrequencyView extends SurfaceView {
 
 
         // plot the vertical frequency markers
-        float hzPerPixel = (float) configuration.samplerate / (float) WIDTH;
+        float hzPerPixel = (float)samplerate / (float) WIDTH;
         long f = frequency - ((long) configuration.samplerate / 2);
         String fs;
         for (int i = 0; i < WIDTH; i++) {
-            f = frequency - ((long) configuration.samplerate / 2) + (long) (hzPerPixel * i);
+            f = frequency - ((long)samplerate / 2) + (long) (hzPerPixel * i);
             if (f > 0) {
                 if ((f % 20000) < (long) hzPerPixel) {
                     canvas.drawLine(i, 0, i, HEIGHT - 30, paint);
@@ -108,6 +116,8 @@ public class FrequencyView extends SurfaceView {
     }
 
     private Configuration configuration;
+
+    private Metis metis;
 
     private Paint paint;
     private SurfaceHolder holder;

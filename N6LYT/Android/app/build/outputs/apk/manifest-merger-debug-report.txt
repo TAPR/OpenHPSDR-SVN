@@ -27,145 +27,133 @@ MERGED from com.android.support:support-v4:21.0.0:15:5
 uses-permission#android.permission.INTERNET
 ADDED from AndroidManifest.xml:17:5
 	android:name
-		ADDED from AndroidManifest.xml:17:22
+		ADDED from AndroidManifest.xml:18:9
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from AndroidManifest.xml:18:5
-	android:name
-		ADDED from AndroidManifest.xml:18:22
-uses-permission#android.permission.CHANGE_WIFI_MULTICAST_STATE
 ADDED from AndroidManifest.xml:19:5
 	android:name
-		ADDED from AndroidManifest.xml:19:22
-uses-permission#android.permission.RECORD_AUDIO
-ADDED from AndroidManifest.xml:20:5
-	android:name
-		ADDED from AndroidManifest.xml:20:22
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+		ADDED from AndroidManifest.xml:20:9
+uses-permission#android.permission.CHANGE_WIFI_MULTICAST_STATE
 ADDED from AndroidManifest.xml:21:5
-	android:maxSdkVersion
-		ADDED from AndroidManifest.xml:23:9
 	android:name
 		ADDED from AndroidManifest.xml:22:9
-uses-permission#android.permission.READ_PHONE_STATE
-ADDED from AndroidManifest.xml:24:5
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from AndroidManifest.xml:23:5
 	android:name
-		ADDED from AndroidManifest.xml:24:22
-uses-permission#android.permission.READ_EXTERNAL_STORAGE
+		ADDED from AndroidManifest.xml:24:9
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from AndroidManifest.xml:25:5
 	android:maxSdkVersion
 		ADDED from AndroidManifest.xml:27:9
 	android:name
 		ADDED from AndroidManifest.xml:26:9
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from AndroidManifest.xml:28:5
+	android:name
+		ADDED from AndroidManifest.xml:29:9
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:30:5
+	android:maxSdkVersion
+		ADDED from AndroidManifest.xml:32:9
+	android:name
+		ADDED from AndroidManifest.xml:31:9
 application
-ADDED from AndroidManifest.xml:29:5
+ADDED from AndroidManifest.xml:34:5
 MERGED from com.android.support:support-v4:21.0.0:16:5
 	android:label
-		ADDED from AndroidManifest.xml:32:9
+		ADDED from AndroidManifest.xml:37:9
 	android:allowBackup
-		ADDED from AndroidManifest.xml:30:9
+		ADDED from AndroidManifest.xml:35:9
 	android:icon
-		ADDED from AndroidManifest.xml:31:9
+		ADDED from AndroidManifest.xml:36:9
 	android:theme
-		ADDED from AndroidManifest.xml:33:9
+		ADDED from AndroidManifest.xml:38:9
 activity#org.g0orx.openhpsdr.MainActivity
-ADDED from AndroidManifest.xml:34:9
+ADDED from AndroidManifest.xml:39:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:37:13
+		ADDED from AndroidManifest.xml:42:13
 	android:label
-		ADDED from AndroidManifest.xml:36:13
+		ADDED from AndroidManifest.xml:41:13
 	android:name
-		ADDED from AndroidManifest.xml:35:13
+		ADDED from AndroidManifest.xml:40:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:38:13
+ADDED from AndroidManifest.xml:43:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:39:17
+ADDED from AndroidManifest.xml:44:17
 	android:name
-		ADDED from AndroidManifest.xml:39:25
+		ADDED from AndroidManifest.xml:44:25
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:41:17
+ADDED from AndroidManifest.xml:45:17
 	android:name
-		ADDED from AndroidManifest.xml:41:27
+		ADDED from AndroidManifest.xml:45:27
 activity#org.g0orx.openhpsdr.RadioActivity
-ADDED from AndroidManifest.xml:44:9
+ADDED from AndroidManifest.xml:48:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:47:13
+		ADDED from AndroidManifest.xml:51:13
 	android:label
-		ADDED from AndroidManifest.xml:46:13
+		ADDED from AndroidManifest.xml:50:13
 	android:theme
-		ADDED from AndroidManifest.xml:48:13
-	android:name
-		ADDED from AndroidManifest.xml:45:13
-activity#org.g0orx.openhpsdr.AboutActivity
-ADDED from AndroidManifest.xml:50:9
-	android:screenOrientation
-		ADDED from AndroidManifest.xml:53:13
-	android:label
 		ADDED from AndroidManifest.xml:52:13
 	android:name
-		ADDED from AndroidManifest.xml:51:13
-activity#org.g0orx.openhpsdr.HelpActivity
-ADDED from AndroidManifest.xml:55:9
+		ADDED from AndroidManifest.xml:49:13
+activity#org.g0orx.openhpsdr.AboutActivity
+ADDED from AndroidManifest.xml:54:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:58:13
-	android:label
 		ADDED from AndroidManifest.xml:57:13
-	android:name
+	android:label
 		ADDED from AndroidManifest.xml:56:13
-activity#org.g0orx.openhpsdr.SettingsActivity
-ADDED from AndroidManifest.xml:60:9
+	android:name
+		ADDED from AndroidManifest.xml:55:13
+activity#org.g0orx.openhpsdr.HelpActivity
+ADDED from AndroidManifest.xml:59:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:63:13
-	android:label
 		ADDED from AndroidManifest.xml:62:13
-	android:name
+	android:label
 		ADDED from AndroidManifest.xml:61:13
-activity#org.g0orx.openhpsdr.TransverterActivity
-ADDED from AndroidManifest.xml:65:9
+	android:name
+		ADDED from AndroidManifest.xml:60:13
+activity#org.g0orx.openhpsdr.SettingsActivity
+ADDED from AndroidManifest.xml:64:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:68:13
-	android:label
 		ADDED from AndroidManifest.xml:67:13
-	android:name
+	android:label
 		ADDED from AndroidManifest.xml:66:13
-activity#org.g0orx.openhpsdr.TransverterAddActivity
-ADDED from AndroidManifest.xml:70:9
+	android:name
+		ADDED from AndroidManifest.xml:65:13
+activity#org.g0orx.openhpsdr.TransverterActivity
+ADDED from AndroidManifest.xml:69:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:73:13
-	android:label
 		ADDED from AndroidManifest.xml:72:13
-	android:name
+	android:label
 		ADDED from AndroidManifest.xml:71:13
-activity#org.g0orx.openhpsdr.TransverterUpdateActivity
-ADDED from AndroidManifest.xml:75:9
+	android:name
+		ADDED from AndroidManifest.xml:70:13
+activity#org.g0orx.openhpsdr.TransverterAddActivity
+ADDED from AndroidManifest.xml:74:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:78:13
-	android:label
 		ADDED from AndroidManifest.xml:77:13
-	android:name
+	android:label
 		ADDED from AndroidManifest.xml:76:13
-activity#org.g0orx.openhpsdr.CWActivity
-ADDED from AndroidManifest.xml:80:9
+	android:name
+		ADDED from AndroidManifest.xml:75:13
+activity#org.g0orx.openhpsdr.TransverterUpdateActivity
+ADDED from AndroidManifest.xml:79:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:83:13
-	android:label
 		ADDED from AndroidManifest.xml:82:13
-	android:name
-		ADDED from AndroidManifest.xml:81:13
-activity#org.g0orx.openhpsdr.WisdomActivity
-ADDED from AndroidManifest.xml:85:9
 	android:label
-		ADDED from AndroidManifest.xml:87:13
+		ADDED from AndroidManifest.xml:81:13
 	android:name
+		ADDED from AndroidManifest.xml:80:13
+activity#org.g0orx.openhpsdr.CWActivity
+ADDED from AndroidManifest.xml:84:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:87:13
+	android:label
 		ADDED from AndroidManifest.xml:86:13
-activity#org.g0orx.openhpsdr.BandscopeActivity
+	android:name
+		ADDED from AndroidManifest.xml:85:13
+activity#org.g0orx.openhpsdr.WisdomActivity
 ADDED from AndroidManifest.xml:89:9
 	android:label
 		ADDED from AndroidManifest.xml:91:13
 	android:name
 		ADDED from AndroidManifest.xml:90:13
-activity#org.g0orx.openhpsdr.IFActivity
-ADDED from AndroidManifest.xml:93:9
-	android:label
-		ADDED from AndroidManifest.xml:95:13
-	android:name
-		ADDED from AndroidManifest.xml:94:13

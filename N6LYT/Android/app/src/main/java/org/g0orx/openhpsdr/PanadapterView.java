@@ -75,6 +75,18 @@ public class PanadapterView extends SurfaceView {
             return;
         }
 
+        int samplerate=(int)configuration.samplerate;
+        if(metis.isTransmitting()) {
+            samplerate=48000;
+        }
+
+        int spectrumhigh=configuration.spectrumHigh;
+        int spectrumlow=configuration.spectrumLow;
+        if(metis.isTransmitting()) {
+            spectrumhigh=30;
+            spectrumlow=-100;
+        }
+
         Band band = configuration.bands.get();
         BandStack bandstack = band.get();
         Filter filter = Modes.getMode(bandstack.getMode()).getFilter(bandstack.getFilter());
@@ -87,8 +99,8 @@ public class PanadapterView extends SurfaceView {
             low=configuration.cwsidetonefrequency-low;
             high=configuration.cwsidetonefrequency+high;
         }
-        filterLeft = ((int) low - (-(int) configuration.samplerate / 2)) * WIDTH / (int) configuration.samplerate;
-        filterRight = ((int) high - (-(int) configuration.samplerate / 2)) * WIDTH / (int) configuration.samplerate;
+        filterLeft = ((int) low - (-samplerate / 2)) * WIDTH / samplerate;
+        filterRight = ((int) high - (-samplerate / 2)) * WIDTH / samplerate;
         if (filterLeft == filterRight) {
             filterRight++;
         }
@@ -105,18 +117,18 @@ public class PanadapterView extends SurfaceView {
 
         if (configuration.subrx) {
             // draw the subrx filter
-            int offset = (int) ((bandstack.getSubRxFrequency() - bandstack.getFrequency()) / (configuration.samplerate / WIDTH));
+            int offset = (int) ((bandstack.getSubRxFrequency() - bandstack.getFrequency()) / (samplerate / WIDTH));
             paint.setColor(Color.GRAY);
             canvas.drawRect(filterLeft + offset, 0, filterRight + offset, HEIGHT, paint);
         }
 
         // plot the spectrum levels
-        int V = configuration.spectrumHigh - configuration.spectrumLow;
+        int V = spectrumhigh - spectrumlow;
         int numSteps = V / 20;
         paint.setTextSize(20.0F);
         for (int i = 1; i < numSteps; i++) {
-            int num = configuration.spectrumHigh - i * 20;
-            int y = (int) Math.floor((configuration.spectrumHigh - num) * HEIGHT / V);
+            int num = spectrumhigh - i * 20;
+            int y = (int) Math.floor((spectrumhigh - num) * HEIGHT / V);
 
             paint.setColor(Color.YELLOW);
             canvas.drawLine(0, y, WIDTH, y, paint);
@@ -126,11 +138,11 @@ public class PanadapterView extends SurfaceView {
         }
 
         // plot the vertical frequency markers
-        float hzPerPixel = (float) configuration.samplerate / (float) WIDTH;
-        long f = frequency - ((long) configuration.samplerate / 2);
+        float hzPerPixel = (float) samplerate / (float) WIDTH;
+        long f = frequency - ((long) samplerate / 2);
         String fs;
         for (int i = 0; i < WIDTH; i++) {
-            f = frequency - ((long) configuration.samplerate / 2) + (long) (hzPerPixel * i);
+            f = frequency - ((long) samplerate / 2) + (long) (hzPerPixel * i);
             if (f > 0) {
                 if ((f % 20000) < (long) hzPerPixel) {
                     paint.setColor(Color.YELLOW);
@@ -172,9 +184,9 @@ public class PanadapterView extends SurfaceView {
         // plot the band edge
         BandEdge bandedge = band.getBandEdge();
         if (bandedge.getLow() != 0) {
-            long minfrequency = frequency - ((long) configuration.samplerate / 2);
-            long maxfrequency = frequency + ((long) configuration.samplerate / 2);
-            double hzperpixel = configuration.samplerate / (double) WIDTH;
+            long minfrequency = frequency - ((long) samplerate / 2);
+            long maxfrequency = frequency + ((long) samplerate / 2);
+            double hzperpixel = samplerate / (double) WIDTH;
             if (bandedge.getLow() > minfrequency && bandedge.getLow() < maxfrequency) {
                 // show lower band edge
                 float x = (float) (bandedge.getLow() - minfrequency) / (float) hzperpixel;
@@ -224,6 +236,13 @@ public class PanadapterView extends SurfaceView {
             points = new float[WIDTH * 4];
         }
 
+        int spectrumhigh=configuration.spectrumHigh;
+        int spectrumlow=configuration.spectrumLow;
+        if(metis.isTransmitting()) {
+            spectrumhigh=30;
+            spectrumlow=-100;
+        }
+
         int p = 0;
         float sample;
         float previous = 0.0F;
@@ -239,9 +258,9 @@ public class PanadapterView extends SurfaceView {
             if (sample > max) max = sample;
 
             sample = (float) Math
-                    .floor(((float) configuration.spectrumHigh - sample)
+                    .floor(((float) spectrumhigh - sample)
                             * (float) HEIGHT
-                            / (float) (configuration.spectrumHigh - configuration.spectrumLow));
+                            / (float) (spectrumhigh - spectrumlow));
             if (i == 0) {
                 points[p++] = (float) i;
                 points[p++] = sample;

@@ -46,6 +46,8 @@ public class MainActivity extends Activity {
         }
 		setTitle("openHPSDR (v"+version+")");
 
+        Log.i("MainActivity", "Running on: "+System.getProperty("os.name"));
+
         Display display = getWindowManager().getDefaultDisplay();
         Point size=new Point();
         display.getSize(size);

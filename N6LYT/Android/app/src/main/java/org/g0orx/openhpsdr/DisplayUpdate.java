@@ -50,11 +50,6 @@ public class DisplayUpdate extends Thread {
         }
         if (metis.isTransmitting()) {
             if (metis.Process_Panadapter(Display.TX, samples)) {
-                /*
-                for (int i = 0; i < samples.length; i++) {
-                    samples[i] += -68.0F;
-                }
-                */
                 if(panadapterView!=null) {
                     panadapterView.plotSpectrum(samples);
                 }

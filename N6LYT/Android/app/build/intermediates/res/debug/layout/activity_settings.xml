@@ -17,4 +17,4 @@
         android:layout_marginLeft="14dp" >
     </ListView>
 
-</RelativeLayout><!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/layout/activity_settings.xml -->
+</RelativeLayout><!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/layout/activity_settings.xml -->

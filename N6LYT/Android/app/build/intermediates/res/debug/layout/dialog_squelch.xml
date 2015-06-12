@@ -20,4 +20,4 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/checkBoxSquelch" />
 
-</LinearLayout><!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/layout/dialog_squelch.xml -->
+</LinearLayout><!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/layout/dialog_squelch.xml -->

@@ -32,7 +32,7 @@ public class DiscoverAdapter extends ArrayAdapter<Discovered> {
         if (d != null) {
         	v = vi.inflate(R.layout.item_discover, null);
         	TextView t=(TextView)v.findViewById(R.id.textViewTitle);
-        	t.setText(d.getDeviceName()+" "+d.getAddress()+" ("+d.getMac()+")");
+        	t.setText(d.getDeviceName()+" "+d.getAddress()+" ("+d.getMac()+") on "+d.getInterfaceName());
         	TextView s=(TextView)v.findViewById(R.id.textViewSubtitle);
         	s.setText("software version: "+format.format((float)d.getSoftwareversion()/10.0F)+" state: "+d.getStateName());
         }

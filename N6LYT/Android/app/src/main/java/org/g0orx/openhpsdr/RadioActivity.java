@@ -145,6 +145,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
 
 
         frequencyView = (FrequencyView) this.findViewById(R.id.viewFrequency);
+        frequencyView.setMetis(metis);
 
         if(configuration.waterfall) {
             waterfallView = (WaterfallView) this.findViewById(R.id.viewWaterfall);
@@ -180,9 +181,14 @@ public class RadioActivity extends Activity implements OnTouchListener {
 
         // setup receiver
         Log.i("RadioActivity","OpenChannel RX");
-        wdsp.OpenChannel(Channel.RX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
-                (int) configuration.dsprate, (int) configuration.samplerate, 0/*rx*/, 1/*RUNNING*/, 0.010,
-                0.025, 0.0, 0.010, 0);
+        wdsp.OpenChannel(Channel.RX,
+                configuration.buffersize,
+                configuration.fftsize,
+                (int) configuration.samplerate,
+                (int) configuration.dsprate,
+                48000,
+                0/*rx*/, 1/*RUNNING*/,
+                0.010, 0.025, 0.0, 0.010, 0);
 
         Log.i("RadioActivity","SetRXAMode RX");
         wdsp.SetRXAMode(Channel.RX, bandstack.getMode());
@@ -212,18 +218,28 @@ public class RadioActivity extends Activity implements OnTouchListener {
 
         // setup transmitter
         Log.i("RadioActivity","OpenChannel TX");
-        wdsp.OpenChannel(Channel.TX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
-                (int) configuration.dsprate, (int) configuration.samplerate, 1/*tx*/, 0/*NOT RUNNING*/, 0.010,
-                0.025, 0.0, 0.010, 0);
+        wdsp.OpenChannel(Channel.TX,
+                configuration.buffersize,
+                configuration.fftsize,
+                (int) configuration.samplerate,
+                (int) configuration.dsprate,
+                48000,
+                1/*tx*/, 0/*NOT RUNNING*/,
+                0.010, 0.025, 0.0, 0.010, 0);
         wdsp.SetTXAMode(Channel.TX, bandstack.getMode());
         wdsp.SetTXABandpassFreqs(Channel.TX, low, high);
         wdsp.SetTXABandpassRun(Channel.TX, 1);
 
         // setup sub receiver
         Log.i("RadioActivity","OpenChannel SUBRX");
-        wdsp.OpenChannel(Channel.SUBRX, configuration.fftsize, configuration.fftsize, (int) configuration.samplerate,
-                (int) configuration.dsprate, (int) configuration.samplerate, 0/*rx*/, 0/*NOT RUNNING*/, 0.010,
-                0.025, 0.0, 0.010, 0);
+        wdsp.OpenChannel(Channel.SUBRX,
+                configuration.buffersize,
+                configuration.fftsize,
+                (int) configuration.samplerate,
+                (int) configuration.dsprate,
+                48000,
+                0/*rx*/, 1/*RUNNING*/,
+                0.010, 0.025, 0.0, 0.010, 0);
 
         Log.i("RadioActivity","SetRXAMode SUBRX");
         wdsp.SetRXAMode(Channel.SUBRX, bandstack.getMode());
@@ -493,6 +509,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
                         }
                     }
                     vfoView.update();
+                    frequencyView.update();
                 }
                 return false;
             }
@@ -898,7 +915,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    ConfigureDialog d=new ConfigureDialog(activity,locked);
+                    ConfigureDialog d=new ConfigureDialog(activity,locked,metis.isTransmitting());
                     d.show();
                 }
                 return false;
@@ -1532,6 +1549,7 @@ public class RadioActivity extends Activity implements OnTouchListener {
         }
 
         vfoView.update();
+        frequencyView.update();
     }
 
     private static final int PTT_FALSE = 0;

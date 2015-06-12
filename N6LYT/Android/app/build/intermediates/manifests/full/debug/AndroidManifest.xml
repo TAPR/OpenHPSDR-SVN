@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.g0orx.openhpsdr"
-    android:versionCode="115"
-    android:versionName="1.15" >
+    android:versionCode="131"
+    android:versionName="1.31" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -85,14 +85,6 @@
         <activity
             android:name="org.g0orx.openhpsdr.WisdomActivity"
             android:label="@string/title_activity_wisdom" >
-        </activity>
-        <activity
-            android:name="org.g0orx.openhpsdr.BandscopeActivity"
-            android:label="@string/title_activity_band_scope" >
-        </activity>
-        <activity
-            android:name="org.g0orx.openhpsdr.IFActivity"
-            android:label="@string/title_activity_if" >
         </activity>
     </application>
 

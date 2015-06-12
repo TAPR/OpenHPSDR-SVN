@@ -6,7 +6,7 @@ import org.g0orx.openhpsdr.discovery.Discovered;
 
 public class Configuration  implements Serializable {
 
-	private static final long serialVersionUID = 8L;
+	private static final long serialVersionUID = 9L;
 	
 	public static Configuration getInstance() {
 		if(instance==null) {
@@ -29,16 +29,17 @@ public class Configuration  implements Serializable {
 	
 	public Discovered discovered;
 	
-	public double samplerate=96000.0;
-    public double dsprate=24000.0;
-	public int fftsize=1024;
+	public double samplerate=48000.0;
+    public double dsprate=48000.0;
+    public int buffersize=1024;
+	public int fftsize=4096;
 	public int receivers=1;
 	public int receiver=0;
 	public int fps=10;
 
 	public Bands bands;
 	
-	public byte speed=Metis.SPEED_96KHZ;
+	public byte speed=Metis.SPEED_48KHZ;
 	
 	public byte dither=Metis.LT2208_DITHER_ON;
 	public byte random=Metis.LT2208_RANDOM_ON;

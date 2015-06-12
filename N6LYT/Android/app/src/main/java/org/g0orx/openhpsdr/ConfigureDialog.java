@@ -29,10 +29,11 @@ import java.util.ArrayList;
  */
 public class ConfigureDialog extends Dialog {
 
-    public ConfigureDialog(Activity a, boolean locked) {
+    public ConfigureDialog(Activity a, boolean locked,boolean transmitting) {
         super(a);
         this.activity = a;
         this.locked = locked;
+        this.transmitting=transmitting;
         this.configuration = Configuration.getInstance();
         this.wdsp = WDSP.getInstance();
     }
@@ -43,7 +44,9 @@ public class ConfigureDialog extends Dialog {
         super.onCreate(savedInstanceState);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_configure);
+
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
+
         updateTitle();
 
         Window window = getWindow();
@@ -1059,6 +1062,11 @@ public class ConfigureDialog extends Dialog {
                 }
             }
         });
+
+        if(transmitting) {
+            viewFlipper.setDisplayedChild(3/*viewFlipper.indexOfChild(child)*/);
+            updateTitle();
+        }
     }
 
     public boolean onTouchEvent(MotionEvent touchevent) {
@@ -1140,6 +1148,7 @@ public class ConfigureDialog extends Dialog {
 
     private Activity activity;
     private boolean locked;
+    private boolean transmitting;
     private Configuration configuration;
     private WDSP wdsp;
     private ViewFlipper viewFlipper;
