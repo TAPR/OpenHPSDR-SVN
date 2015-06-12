@@ -126,35 +126,45 @@ public class MeterView extends ImageView {
                     break;
             }
 
+            if (fwdpower > peak_power) {
+                peak_power = fwdpower;
+            } else {
+                peak_power_count++;
+                if (peak_power_count == configuration.fps) {
+                    peak_power_count = 0;
+                    peak_power = fwdpower;
+                }
+            }
+
             paint.setColor(Color.RED);
             paint.setStrokeWidth(3);
 
             //Log.i("SMeterView","fwd="+fwdpower+" rev="+revpower+" swr="+swr);
 
-            if(fwdpower<=5.0) {
-                angle=224.0+(fwdpower*(13.0/5.0));
-            } else if (fwdpower<=10.0) {
-                angle=237.0+((fwdpower-5.0)*(7.0/5.0));
-            } else if (fwdpower<=20.0) {
-                angle=244.0+((fwdpower-10.0)*(10.0/10.0));
-            } else if (fwdpower<=30.0) {
-                angle=254.0+((fwdpower-20.0)*(8.0/10.0));
-            } else if (fwdpower<=40.0) {
-                angle=262.0+((fwdpower-30.0)*(7.0/10.0));
-            } else if (fwdpower<=50.0) {
-                angle=269.0+((fwdpower-40.0)*(7.0/10.0));
-            } else if (fwdpower<=60.0) {
-                angle=276.0+((fwdpower-50.0)*(7.0/10.0));
-            } else if (fwdpower<=70.0) {
-                angle=283.0+((fwdpower-60.0)*(6.0/10.0));
-            } else if (fwdpower<=80.0) {
-                angle=288.0+((fwdpower-70.0)*(6.0/10.0));
-            } else if (fwdpower<=90.0) {
-                angle=294.0+((fwdpower-90.0)*(6.0/10.0));
-            } else if (fwdpower<=100.0) {
-                angle = 298.0 + ((fwdpower - 90.0)*(6.0/10.0));
+            if(peak_power<=5.0) {
+                angle=224.0+(peak_power*(13.0/5.0));
+            } else if (peak_power<=10.0) {
+                angle=237.0+((peak_power-5.0)*(7.0/5.0));
+            } else if (peak_power<=20.0) {
+                angle=244.0+((peak_power-10.0)*(10.0/10.0));
+            } else if (peak_power<=30.0) {
+                angle=254.0+((peak_power-20.0)*(8.0/10.0));
+            } else if (peak_power<=40.0) {
+                angle=262.0+((peak_power-30.0)*(7.0/10.0));
+            } else if (peak_power<=50.0) {
+                angle=269.0+((peak_power-40.0)*(7.0/10.0));
+            } else if (peak_power<=60.0) {
+                angle=276.0+((peak_power-50.0)*(7.0/10.0));
+            } else if (peak_power<=70.0) {
+                angle=283.0+((peak_power-60.0)*(6.0/10.0));
+            } else if (peak_power<=80.0) {
+                angle=288.0+((peak_power-70.0)*(6.0/10.0));
+            } else if (peak_power<=90.0) {
+                angle=294.0+((peak_power-90.0)*(6.0/10.0));
+            } else if (peak_power<=100.0) {
+                angle = 298.0 + ((peak_power - 90.0)*(6.0/10.0));
             } else {
-                angle = 304 +((fwdpower-100.0) * (6.0/10.0));
+                angle = 304 +((peak_power-100.0) * (6.0/10.0));
             }
 
             //Log.i("SMeterView","angle="+angle);
@@ -169,9 +179,18 @@ public class MeterView extends ImageView {
             paint.setTextSize(10.0F*density);
             String w="";
             if(haveswr) {
-                w=String.format("%1.2fW %1.1f:1",fwdpower,swr);
+                if (swr > peak_swr) {
+                    peak_swr = swr;
+                } else {
+                    peak_swr_count++;
+                    if (peak_swr_count == configuration.fps) {
+                        peak_swr_count = 0;
+                        peak_swr = swr;
+                    }
+                }
+                w=String.format("%1.2fW %1.1f:1",peak_power,peak_swr);
             } else {
-                w=String.format("%1.2fW",fwdpower);
+                w=String.format("%1.2fW",peak_power);
             }
             c.drawText(w,(float)centerX,(float)getHeight()-2,paint);
         }
@@ -201,6 +220,11 @@ public class MeterView extends ImageView {
     private int penelope_forward_power;
     private int alex_forward_power;
     private int alex_reverse_power;
+
+    private int peak_power_count = 0;
+    private double peak_power = 0.0;
+    private int peak_swr_count = 0;
+    private double peak_swr = 0.0;
 
     private boolean receiving;
 

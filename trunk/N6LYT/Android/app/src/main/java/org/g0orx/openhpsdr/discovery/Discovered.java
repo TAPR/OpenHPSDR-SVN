@@ -8,7 +8,15 @@ public class Discovered implements Serializable {
 	
 	public Discovered() {
 	}
-	
+
+	public void setInterface(String iface) {
+		this.iface=iface;
+	}
+
+	public void setInterfaceName(String name) {
+		this.ifacename=name;
+	}
+
 	public void setDevice(int device) {
 		this.device=device;
 	}
@@ -28,8 +36,16 @@ public class Discovered implements Serializable {
 	public void setState(int state) {
 		this.state=state;
 	}
-	
-	
+
+	public String getInterface() {
+		return iface;
+	}
+
+	public String getInterfaceName() {
+		return ifacename;
+	}
+
+
 	public int getDevice() {
 		return device;
 	}
@@ -87,18 +103,20 @@ public class Discovered implements Serializable {
 		}
 		return result;
 	}
-	
+
 	public String toString() {
-		StringBuilder result=new StringBuilder();
+		StringBuilder result = new StringBuilder();
 		result.append(getDeviceName());
-		result.append(" software version:");
-		result.append(String.format("%02X", softwareversion));
-		result.append(" address:");
+		result.append(" Interface: "+ifacename+" ("+iface+")");
+		result.append(" Address:");
 		result.append(address);
 		result.append(" (");
 		result.append(mac);
+		result.append(") (software version:");
+		result.append(String.format("%02X", softwareversion));
 		result.append(") state:");
 		result.append(getStateName());
+
 		return result.toString();
 	}
 	
@@ -118,5 +136,7 @@ public class Discovered implements Serializable {
 	private String address;
 	private String mac;
 	private int state;
-	
+
+	private String iface;
+	private String ifacename;
 }

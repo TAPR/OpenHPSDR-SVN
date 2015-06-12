@@ -3,4 +3,4 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" android:showAsAction="never" />
 </menu>
-<!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/menu/menu_i.xml -->
+<!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/menu/menu_i.xml -->

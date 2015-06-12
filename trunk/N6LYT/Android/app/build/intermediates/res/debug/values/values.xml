@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string-array name="bands">
         <item>160</item>
@@ -37,16 +37,16 @@
         <item name="rate_192000">192000</item>
         <item name="rate_384000">384000</item>
     </array>
-    <!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="black_overlay">#66000000</color>
     <declare-styleable name="ButtonBarContainerTheme"><attr format="reference" name="metaButtonBarStyle"/><attr format="reference" name="metaButtonBarButtonStyle"/></declare-styleable>
     <declare-styleable name="TuningKnobView"><attr format="string" name="exampleString"/><attr format="dimension" name="exampleDimension"/><attr format="color" name="exampleColor"/><attr format="color|reference" name="exampleDrawable"/></declare-styleable>
-    <!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="LT2208">LT2208</string>
     <string name="about"/>
@@ -79,12 +79,11 @@
     <string name="title_activity_about">About</string>
     <string name="title_activity_alex">AlexActivity</string>
     <string name="title_activity_alex_band">AlexBandActivity</string>
-    <string name="title_activity_band_scope">BandScope</string>
+    <string name="title_activity_bandscope">BandscopeActivity</string>
     <string name="title_activity_configure">ConfigureActivity</string>
     <string name="title_activity_cw">CW Configuration</string>
     <string name="title_activity_display">DisplayActivity</string>
     <string name="title_activity_help">Help</string>
-    <string name="title_activity_if">IFActivity</string>
     <string name="title_activity_open_collector">OpenCollectorActivity</string>
     <string name="title_activity_radio">RadioActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
@@ -96,8 +95,8 @@
     <string name="title_activity_txlevel">TXLevelActivity</string>
     <string name="title_activity_wisdom">Create FFTW3 Wisdom file</string>
     <string name="usb">USB</string>
-    <string name="wisdom">Create FFTW Wisdom files\\n(This can take several minutes the first time to create them)</string>
-    <!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/values/styles.xml -->
+    <string name="wisdom">Create FFTW Wisdom file\\n(This can take several minutes the first time to create)</string>
+    <!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--

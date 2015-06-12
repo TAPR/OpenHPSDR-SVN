@@ -85,4 +85,4 @@
         android:text="Osc Frequency (Hz)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</RelativeLayout><!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/layout/activity_transverter_add.xml -->
+</RelativeLayout><!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/layout/activity_transverter_add.xml -->

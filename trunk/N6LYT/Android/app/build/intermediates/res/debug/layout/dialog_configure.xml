@@ -4,37 +4,286 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <!-- page -->
+        <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewDummy1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text=" " />
-
-            <TextView
-                android:id="@+id/textViewSystem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Configure System" />
+            android:layout_height="fill_parent">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:id="@+id/general"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Receiver Configuration"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewAudio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="Audio Output:" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupAudioOutput"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioButtonAudioLocal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Local" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonAudioRadio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Radio" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonAudioBoth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Both" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewAFGain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="AF Gain:" />
+
+                <SeekBar
+                    android:id="@+id/seekBarAFGain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/textViewAFGain" />
+
+                <Spinner
+                    android:id="@+id/spinnerAGC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/textViewAGCGain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="AGC Gain: " />
+
+                <SeekBar
+                    android:id="@+id/seekBarAGCGain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/textViewAGCGain" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxDither"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dither" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxRandom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Random" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxPreamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Preamp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxNB2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NB2" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxNB2AE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AE Filter" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewNB2GainMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="NB2 Gain Method: " />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupNB2GainMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2Linear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Linear" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2Log"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Log" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewNB2NPEMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="NB2 NPE Method: " />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupNB2NPEMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2OSMS"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="OSMS" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2MMSE"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MMSE" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewNB2Position"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="NB2 Position: " />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupNB2Position"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2PreAGC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pre AGC" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonNB2PostAGC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Post AGC" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewAttenuation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Attenuation: " />
+
+                <SeekBar
+                    android:id="@+id/seekBarAttenuation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+        <!-- page -->
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:id="@+id/band"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Display Configuration"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewSpectrumHigh"
@@ -42,19 +291,11 @@
                     android:layout_height="wrap_content"
                     android:text="Spectrum High: " />
 
-                <org.g0orx.openhpsdr.NumberPicker
-                    android:id="@+id/numberPickerSpectrumHigh"
-                    android:layout_width="wrap_content"
+                <SeekBar
+                    android:id="@+id/seekBarSpectrumHigh"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                    android:layout_alignParentLeft="true" />
 
                 <TextView
                     android:id="@+id/textViewSpectrumLow"
@@ -62,19 +303,23 @@
                     android:layout_height="wrap_content"
                     android:text="Spectrum Low: " />
 
-                <org.g0orx.openhpsdr.NumberPicker
-                    android:id="@+id/numberPickerSpectrumLow"
+                <SeekBar
+                    android:id="@+id/seekBarSpectrumLow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxWaterfallAutomatic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" />
+                    android:text="Waterfall Automatic" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/checkBoxWaterfallGrayscale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Waterfall Grayscale" />
 
                 <TextView
                     android:id="@+id/textViewWaterfallHigh"
@@ -82,19 +327,11 @@
                     android:layout_height="wrap_content"
                     android:text="Waterfall High: " />
 
-                <org.g0orx.openhpsdr.NumberPicker
-                    android:id="@+id/numberPickerWaterfallHigh"
-                    android:layout_width="wrap_content"
+                <SeekBar
+                    android:id="@+id/seekBarWaterfallHigh"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                    android:layout_alignParentLeft="true" />
 
                 <TextView
                     android:id="@+id/textViewWaterfallLow"
@@ -102,331 +339,388 @@
                     android:layout_height="wrap_content"
                     android:text="Waterfall Low: " />
 
-                <org.g0orx.openhpsdr.NumberPicker
-                    android:id="@+id/numberPickerWaterfallLow"
-                    android:layout_width="wrap_content"
+                <SeekBar
+                    android:id="@+id/seekBarWaterfallLow"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" />
+                    android:layout_alignParentLeft="true" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- page -->
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:id="@+id/antenna"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewAnt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Antenna Configuration"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewTx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TX Ant:" />
+
+                        <RadioGroup
+                            android:id="@+id/radioGroupTx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <RadioButton
+                                android:id="@+id/radioAnt1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:text="Ant 1" />
+
+                            <RadioButton
+                                android:id="@+id/radioAnt2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ant 2" />
+
+                            <RadioButton
+                                android:id="@+id/radioAnt3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ant 3" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewRx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="RX Ant:" />
+
+                        <RadioGroup
+                            android:id="@+id/radioGroupRx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <RadioButton
+                                android:id="@+id/radioNone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:text="None (use Tx)" />
+
+                            <RadioButton
+                                android:id="@+id/radioRX1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="RX 1" />
+
+                            <RadioButton
+                                android:id="@+id/radioRX2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="RX 2" />
+
+                            <RadioButton
+                                android:id="@+id/radioRXXV"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="RX XV" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textViewMicGain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text="Mic Gain" />
+        </ScrollView>
 
-            <SeekBar
-                android:id="@+id/seekBarMicGain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true" />
-
-            <TextView
-                android:id="@+id/textViewRFPower"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text="RF Power: " />
-
-            <SeekBar
-                android:id="@+id/seekBarRFPower"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"/>
-
-            <TextView
-                android:id="@+id/textViewTunePower"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text="Tune Power" />
-
-            <SeekBar
-                android:id="@+id/seekBarTunePower"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"/>
-
-            <TextView
-                android:id="@+id/textViewAFGain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text="AF Gain:" />
-
-            <SeekBar
-                android:id="@+id/seekBarAFGain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/textViewAFGain" />
-
-
-            <TextView
-                android:id="@+id/textViewDummy2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text=" " />
-
-            <TextView
-                android:id="@+id/textViewTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text=" " />
-
-            <TextView
-                android:id="@+id/textViewTxGain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text="Tx Gain: " />
-
-            <SeekBar
-                android:id="@+id/seekBarTxGain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/textViewTxGain" />
-
+        <!-- page -->
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:id="@+id/transmit"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/transmittext"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Transmit Configuration"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textViewTx"
+                        android:id="@+id/textViewMicSource"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TX Ant:" />
+                        android:layout_alignParentLeft="true"
+                        android:text="Mic Source:" />
 
                     <RadioGroup
-                        android:id="@+id/radioGroupTx"
+                        android:id="@+id/radioGroupMicSource"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/radioAnt1"
+                            android:id="@+id/radioButtonLocal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:text="Ant 1" />
+                            android:text="Local" />
 
                         <RadioButton
-                            android:id="@+id/radioAnt2"
+                            android:id="@+id/radioButtonRadio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ant 2" />
-
-                        <RadioButton
-                            android:id="@+id/radioAnt3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Ant 3" />
-
+                            android:text="Radio" />
                     </RadioGroup>
-
                 </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/checkBoxMicBoost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mic 20dB Boost" />
+
+                <TextView
+                    android:id="@+id/textViewMicGain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Mic Gain" />
+
+                <SeekBar
+                    android:id="@+id/seekBarMicGain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true" />
+
+
+                <TextView
+                    android:id="@+id/textViewRFPower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="RF Power: " />
+
+                <SeekBar
+                    android:id="@+id/seekBarRFPower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true" />
+
+                <TextView
+                    android:id="@+id/textViewTunePower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Tune Power" />
+
+                <SeekBar
+                    android:id="@+id/seekBarTunePower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true" />
+
+                <TextView
+                    android:id="@+id/textViewTxGain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Tx Gain: " />
+
+                <SeekBar
+                    android:id="@+id/seekBarTxGain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/textViewTxGain" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <!-- page -->
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:id="@+id/oc"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewOC"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Open Collector Configuration"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewOCRx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RX Pins:" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textViewRx"
+                    <CheckBox
+                        android:id="@+id/checkBoxOCRx1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="RX Ant:" />
+                        android:text="1" />
 
-                    <RadioGroup
-                        android:id="@+id/radioGroupRx"
+                    <CheckBox
+                        android:id="@+id/checkBoxOCRx2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:text="2" />
 
-                        <RadioButton
-                            android:id="@+id/radioNone"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:text="None (use Tx)" />
+                    <CheckBox
+                        android:id="@+id/checkBoxOCRx3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3" />
 
-                        <RadioButton
-                            android:id="@+id/radioRX1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="RX 1" />
+                    <CheckBox
+                        android:id="@+id/checkBoxOCRx4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4" />
 
-                        <RadioButton
-                            android:id="@+id/radioRX2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="RX 2" />
+                    <CheckBox
+                        android:id="@+id/checkBoxOCRx5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5" />
 
-                        <RadioButton
-                            android:id="@+id/radioRXXV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="RX XV" />
+                    <CheckBox
+                        android:id="@+id/checkBoxOCRx6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="6" />
 
-                    </RadioGroup>
+                    <CheckBox
+                        android:id="@+id/checkBoxOCRx7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewOCTx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TX Pins:" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
 
-                    <!--
-                    <Spinner
-                        android:id="@+id/spinnerMode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                        -->
+                    <CheckBox
+                        android:id="@+id/checkBoxOCTx1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1" />
 
-                    <Spinner
-                        android:id="@+id/spinnerAGC"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                    <CheckBox
+                        android:id="@+id/checkBoxOCTx2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxOCTx3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxOCTx4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxOCTx5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxOCTx6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="6" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxOCTx7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7" />
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textViewOCRx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Open Collector RX Pins:" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCRx1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCRx2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCRx3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCRx4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCRx5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCRx6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="6" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCRx7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="7" />
 
             </LinearLayout>
+        </ScrollView>
 
-            <TextView
-                android:id="@+id/textViewOCTx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Open Collector TX Pins:" />
+    </ViewFlipper>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCTx1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCTx2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCTx3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCTx4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCTx5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCTx6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="6" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxOCTx7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="7" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-</LinearLayout>
-<!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/layout/dialog_configure.xml -->
+</LinearLayout><!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/layout/dialog_configure.xml -->

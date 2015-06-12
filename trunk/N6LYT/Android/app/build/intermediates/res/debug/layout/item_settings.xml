@@ -18,4 +18,4 @@
         android:text="TextView" 
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-</LinearLayout><!-- From: file:/home/john/AndroidstudioProjects/HPSDR-WDSP/app/src/main/res/layout/item_settings.xml -->
+</LinearLayout><!-- From: file:/home/john/AndroidstudioProjects/openHPSDR/app/src/main/res/layout/item_settings.xml -->

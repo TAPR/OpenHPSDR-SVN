@@ -69,7 +69,7 @@ public class Microphone extends Thread {
                     }
 
                     // send to Metis
-                    metis.sendMicSamples(outlsamples, outrsamples);
+                    metis.sendSamples(outlsamples, outrsamples);
                     wdsp.Spectrum(txchannel, 0, 0, outrsamples, outlsamples);
                     index = 0;
                 }

@@ -64,7 +64,12 @@ public class VFOView extends SurfaceView {
             paint.setColor(Color.GREEN);
         }
 
-        canvas.drawText(Frequency.toString(frequency) + " " + Modes.getMode(bandstack.getMode()).getName() + " " + filter.getName()+"Hz", 0, HEIGHT-10, paint);
+        String status="";
+        if(metis.getStatus()!=null) {
+            status=" Error: "+metis.getStatus();
+        }
+
+        canvas.drawText(Frequency.toString(frequency) + " " + Modes.getMode(bandstack.getMode()).getName() + " " + filter.getName()+"Hz"+status, 0, HEIGHT-10, paint);
 
         if (configuration.subrx) {
             paint.setColor(Color.GRAY);
