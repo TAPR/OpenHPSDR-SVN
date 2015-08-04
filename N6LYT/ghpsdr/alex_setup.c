@@ -45,13 +45,10 @@ GtkWidget* alexPage;
 
 GtkWidget* alexEnable;
 
-GtkWidget* rxAnt1;
-GtkWidget* rxAnt2;
-GtkWidget* rxAnt3;
 GtkWidget* rxNone;
-GtkWidget* rxR1;
-GtkWidget* rxR2;
-GtkWidget* rxRXV;
+GtkWidget* rxExt1;
+GtkWidget* rxExt2;
+GtkWidget* rxRXXV;
 GtkWidget* txAnt1;
 GtkWidget* txAnt2;
 GtkWidget* txAnt3;
@@ -61,58 +58,30 @@ GtkWidget* alexAttenuation10dB;
 GtkWidget* alexAttenuation20dB;
 GtkWidget* alexAttenuation30dB;
 
-void rxAnt1Callback(GtkWidget* widget,gpointer data) {
+void rxNoneCallback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         setAlexRxAntenna(0);
         bandSetAlexRxAntenna(0);
-        setAlexRxOnlyAntenna(0);
-        bandSetAlexRxOnlyAntenna(0);
+    }
+}
+void rxExt1Callback(GtkWidget* widget,gpointer data) {
+    if(GTK_TOGGLE_BUTTON(widget)->active) {
+        setAlexRxAntenna(0);
+        bandSetAlexRxAntenna(0);
     }
 }
 
-void rxAnt2Callback(GtkWidget* widget,gpointer data) {
+void rxExt2Callback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         setAlexRxAntenna(1);
         bandSetAlexRxAntenna(1);
-        setAlexRxOnlyAntenna(0);
-        bandSetAlexRxOnlyAntenna(0);
     }
 }
 
-void rxAnt3Callback(GtkWidget* widget,gpointer data) {
+void rxRXXVCallback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         setAlexRxAntenna(2);
         bandSetAlexRxAntenna(2);
-        setAlexRxOnlyAntenna(0);
-        bandSetAlexRxOnlyAntenna(0);
-    }
-}
-
-//void rxNoneCallback(GtkWidget* widget,gpointer data) {
-//    if(GTK_TOGGLE_BUTTON(widget)->active) {
-//        setAlexRxOnlyAntenna(0);
-//        bandSetAlexRxOnlyAntenna(0);
-//    }
-//}
-
-void rxR1Callback(GtkWidget* widget,gpointer data) {
-    if(GTK_TOGGLE_BUTTON(widget)->active) {
-        setAlexRxOnlyAntenna(1);
-        bandSetAlexRxOnlyAntenna(1);
-    }
-}
-
-void rxR2Callback(GtkWidget* widget,gpointer data) {
-    if(GTK_TOGGLE_BUTTON(widget)->active) {
-        setAlexRxOnlyAntenna(2);
-        bandSetAlexRxOnlyAntenna(2);
-    }
-}
-
-void rxRXVCallback(GtkWidget* widget,gpointer data) {
-    if(GTK_TOGGLE_BUTTON(widget)->active) {
-        setAlexRxOnlyAntenna(3);
-        bandSetAlexRxOnlyAntenna(3);
     }
 }
 
@@ -191,46 +160,24 @@ GtkWidget* alexSetupUI() {
     gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
 
     box=gtk_hbox_new(FALSE,2);
-    rxAnt1=gtk_radio_button_new_with_label(NULL,"Ant 1");
-    gtk_widget_show(rxAnt1);
-    gtk_box_pack_start(GTK_BOX(box),rxAnt1,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(rxAnt1),"clicked",G_CALLBACK(rxAnt1Callback),NULL);
-    rxAnt2=gtk_radio_button_new_with_label(gtk_radio_button_group(GTK_RADIO_BUTTON(rxAnt1)),"Ant 2");
-    gtk_widget_show(rxAnt2);
-    gtk_box_pack_start(GTK_BOX(box),rxAnt2,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(rxAnt2),"clicked",G_CALLBACK(rxAnt2Callback),NULL);
-    rxAnt3=gtk_radio_button_new_with_label(gtk_radio_button_group(GTK_RADIO_BUTTON(rxAnt2)),"Ant 3");
-    gtk_widget_show(rxAnt3);
-    gtk_box_pack_start(GTK_BOX(box),rxAnt3,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(rxAnt3),"clicked",G_CALLBACK(rxAnt3Callback),NULL);
-//    gtk_widget_show(box);
-//    gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
+    rxNone=gtk_radio_button_new_with_label(NULL,"None (use Tx)");
+    gtk_widget_show(rxNone);
+    gtk_box_pack_start(GTK_BOX(box),rxNone,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(rxNone),"clicked",G_CALLBACK(rxNoneCallback),NULL);
 
-//    box=gtk_hbox_new(FALSE,2);
-//    label=gtk_label_new("Rx Only");
-//    gtk_widget_show(label);
-//    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-//    gtk_widget_show(box);
-//    gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
+    rxExt1=gtk_radio_button_new_with_label(gtk_radio_button_group(GTK_RADIO_BUTTON(rxNone)),"Ext 1");
+    gtk_widget_show(rxExt1);
+    gtk_box_pack_start(GTK_BOX(box),rxExt1,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(rxExt1),"clicked",G_CALLBACK(rxExt1Callback),NULL);
 
-//    box=gtk_hbox_new(FALSE,2);
-//    rxNone=gtk_radio_button_new_with_label(NULL,"None");
-//    gtk_widget_show(rxNone);
-//    gtk_box_pack_start(GTK_BOX(box),rxNone,FALSE,FALSE,2);
-//    g_signal_connect(G_OBJECT(rxNone),"clicked",G_CALLBACK(rxNoneCallback),NULL);
-
-    rxR1=gtk_radio_button_new_with_label(gtk_radio_button_group(GTK_RADIO_BUTTON(rxAnt3)),"Rx 1");
-    gtk_widget_show(rxR1);
-    gtk_box_pack_start(GTK_BOX(box),rxR1,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(rxR1),"clicked",G_CALLBACK(rxR1Callback),NULL);
-    rxR2=gtk_radio_button_new_with_label(gtk_radio_button_group(GTK_RADIO_BUTTON(rxR1)),"Rx 2");
-    gtk_widget_show(rxR2);
-    gtk_box_pack_start(GTK_BOX(box),rxR2,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(rxR2),"clicked",G_CALLBACK(rxR2Callback),NULL);
-    rxRXV=gtk_radio_button_new_with_label(gtk_radio_button_group(GTK_RADIO_BUTTON(rxR2)),"Rx XV");
-    gtk_widget_show(rxRXV);
-    gtk_box_pack_start(GTK_BOX(box),rxRXV,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(rxRXV),"clicked",G_CALLBACK(rxRXVCallback),NULL);
+    rxExt2=gtk_radio_button_new_with_label(gtk_radio_button_group(GTK_RADIO_BUTTON(rxExt1)),"Ext 2");
+    gtk_widget_show(rxExt2);
+    gtk_box_pack_start(GTK_BOX(box),rxExt2,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(rxExt2),"clicked",G_CALLBACK(rxExt2Callback),NULL);
+    rxRXXV=gtk_radio_button_new_with_label(gtk_radio_button_group(GTK_RADIO_BUTTON(rxExt2)),"Rx XV");
+    gtk_widget_show(rxRXXV);
+    gtk_box_pack_start(GTK_BOX(box),rxRXXV,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(rxRXXV),"clicked",G_CALLBACK(rxRXXVCallback),NULL);
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(alexPage),box,FALSE,FALSE,2);
 
@@ -291,41 +238,29 @@ GtkWidget* alexSetupUI() {
 }
 
 void updateAlexSetup() {
-    if(alexRxOnlyAntenna==0) {
-        switch(alexRxAntenna) {
-            case 0:
-                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxAnt1),TRUE);
-                break;
-            case 1:
-                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxAnt2),TRUE);
-                break;
-            case 2:
-                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxAnt3),TRUE);
-                break;
-        }
-    } else {
-        switch(alexRxOnlyAntenna) {
-            case 1:
-                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxR1),TRUE);
-                break;
-            case 2:
-                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxR2),TRUE);
-                break;
-            case 3:
-                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxRXV),TRUE);
-                break;
-        }
+    switch(alexRxAntenna) {
+        case NONE:
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxNone),TRUE);
+            break;
+        case RX1:
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxExt1),TRUE);
+            break;
+        case RX2:
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxExt2),TRUE);
+            break;
+        case RXXV:
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rxRXXV),TRUE);
+            break;
     }
 
-
     switch(alexTxAntenna) {
-        case 0:
+        case ANT1:
             gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(txAnt1),TRUE);
             break;
-        case 1:
+        case ANT2:
             gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(txAnt2),TRUE);
             break;
-        case 2:
+        case ANT3:
             gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(txAnt3),TRUE);
             break;
     }

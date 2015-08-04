@@ -33,6 +33,7 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include "filter.h"
+#include "discovery.h"
 #include "hpsdr_setup.h"
 #include "ozy.h"
 #include "soundcard.h"
@@ -142,18 +143,6 @@ void modeClassEButtonCallback(GtkWidget* widget,gpointer data) {
     }
 }
 
-void janusMicSourceButtonCallback(GtkWidget* widget,gpointer data) {
-    if(GTK_TOGGLE_BUTTON(widget)->active) {
-        setMicSource(0);
-    }
-}
-
-void penelopeMicSourceButtonCallback(GtkWidget* widget,gpointer data) {
-    if(GTK_TOGGLE_BUTTON(widget)->active) {
-        setMicSource(1);
-    }
-}
-
 void hpsdrHalfDuplexButtonCallback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         fullDuplex=0;
@@ -184,30 +173,95 @@ GtkWidget* hpsdrSetupUI() {
     GtkWidget* item;
     char text[80];
 
+    DISCOVERED* d=&discovered[selected_device];
+
     hpsdrPage=gtk_vbox_new(FALSE,8);
 
-    box=gtk_vbox_new(TRUE,4);
-    sprintf(text,"Ozy FX2 version: %s",get_ozy_firmware_version());
-    label=gtk_label_new(text);
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-    sprintf(text,"Ozy/Metis software version: %d",get_ozy_software_version());
-    label=gtk_label_new(text);
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-    sprintf(text,"Mercury software version: %d",get_mercury_software_version());
-    label=gtk_label_new(text);
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-    sprintf(text,"Penelope/PennyLane software version: %d",get_penelope_software_version());
-    label=gtk_label_new(text);
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+
+    if(!ozy_use_metis()) {
+        box=gtk_vbox_new(TRUE,5);
+        sprintf(text,"Ozy FX2 version: %s",get_ozy_firmware_version());
+        label=gtk_label_new(text);
+        gtk_widget_show(label);
+        gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+        sprintf(text,"Ozy FX2 version: %s",get_ozy_firmware_version());
+        label=gtk_label_new(text);
+        gtk_widget_show(label);
+        gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+        sprintf(text,"Ozy software version: %d",get_ozy_software_version());
+        label=gtk_label_new(text);
+        gtk_widget_show(label);
+        gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+        sprintf(text,"Mercury software version: %d",get_mercury_software_version());
+        label=gtk_label_new(text);
+        gtk_widget_show(label);
+        gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+        sprintf(text,"Penelope/PennyLane software version: %d",get_penelope_software_version());
+        label=gtk_label_new(text);
+        gtk_widget_show(label);
+        gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+        gtk_widget_show(box);
+    } else {
+        switch(d->device) {
+            case DEVICE_METIS:
+                box=gtk_vbox_new(TRUE,3);
+                sprintf(text,"Metis software version: %d",get_ozy_software_version());
+                label=gtk_label_new(text);
+                gtk_widget_show(label);
+                gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+                sprintf(text,"Mercury software version: %d",get_mercury_software_version());
+                label=gtk_label_new(text);
+                gtk_widget_show(label);
+                gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+                sprintf(text,"Penelope/PennyLane software version: %d",get_penelope_software_version());
+                label=gtk_label_new(text);
+                gtk_widget_show(label);
+                gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+                break;
+            case DEVICE_HERMES:
+                box=gtk_vbox_new(TRUE,1);
+                sprintf(text,"Hermes software version: %d",get_ozy_software_version());
+                label=gtk_label_new(text);
+                gtk_widget_show(label);
+                gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+                break;
+            case DEVICE_GRIFFIN:
+                box=gtk_vbox_new(TRUE,1);
+                sprintf(text,"Griffin software version: %d",get_ozy_software_version());
+                label=gtk_label_new(text);
+                gtk_widget_show(label);
+                gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+                break;
+                break;
+            case DEVICE_ANGELIA:
+                box=gtk_vbox_new(TRUE,1);
+                sprintf(text,"Angelia software version: %d",get_ozy_software_version());
+                label=gtk_label_new(text);
+                gtk_widget_show(label);
+                gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+                break;
+            case DEVICE_ORION:
+                box=gtk_vbox_new(TRUE,1);
+                sprintf(text,"Orion software version: %d",get_ozy_software_version());
+                label=gtk_label_new(text);
+                gtk_widget_show(label);
+                gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+                break;
+            case DEVICE_HERMES_LITE:
+                box=gtk_vbox_new(TRUE,1);
+                sprintf(text,"Metis Lite software version: %d",get_ozy_software_version());
+                label=gtk_label_new(text);
+                gtk_widget_show(label);
+                gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+                break;
+        }
+    }
+
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
 
     box=gtk_hbox_new(FALSE,5);
-    label=gtk_label_new("Speed:					");
+    label=gtk_label_new("Speed:						");
     gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
     speed48K=gtk_radio_button_new_with_label(NULL,"48K		");
@@ -230,7 +284,7 @@ GtkWidget* hpsdrSetupUI() {
     gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
 
     box=gtk_hbox_new(FALSE,5);
-    label=gtk_label_new("LT2208:					");
+    label=gtk_label_new("LT2208:						");
     gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
     LT2208Dither=gtk_check_button_new_with_label("Dither	");
@@ -244,44 +298,46 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
 
-    box=gtk_hbox_new(FALSE,5);
-    label=gtk_label_new("122.88MHz Clock Source:	");
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-    penelope122_88MHz=gtk_radio_button_new_with_label(NULL,"Penelope	");
-    gtk_widget_show(penelope122_88MHz);
-    gtk_box_pack_start(GTK_BOX(box),penelope122_88MHz,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(LT2208Random),"clicked",G_CALLBACK(penelope122_88MHzButtonCallback),NULL);
-    mercury122_88MHz=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(penelope122_88MHz),"Mercury	");
-    gtk_widget_show(mercury122_88MHz);
-    gtk_box_pack_start(GTK_BOX(box),mercury122_88MHz,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(LT2208Random),"clicked",G_CALLBACK(mercury122_88MHzButtonCallback),NULL);
-    gtk_widget_show(box);
-    gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
+    if(!ozy_use_metis() || d->device==DEVICE_METIS) {
+        box=gtk_hbox_new(FALSE,5);
+        label=gtk_label_new("122.88MHz Clock Source:	");
+        gtk_widget_show(label);
+        gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+        penelope122_88MHz=gtk_radio_button_new_with_label(NULL,"Penelope	");
+        gtk_widget_show(penelope122_88MHz);
+        gtk_box_pack_start(GTK_BOX(box),penelope122_88MHz,FALSE,FALSE,2);
+        g_signal_connect(G_OBJECT(LT2208Random),"clicked",G_CALLBACK(penelope122_88MHzButtonCallback),NULL);
+        mercury122_88MHz=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(penelope122_88MHz),"Mercury	");
+        gtk_widget_show(mercury122_88MHz);
+        gtk_box_pack_start(GTK_BOX(box),mercury122_88MHz,FALSE,FALSE,2);
+        g_signal_connect(G_OBJECT(LT2208Random),"clicked",G_CALLBACK(mercury122_88MHzButtonCallback),NULL);
+        gtk_widget_show(box);
+        gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
+    
+        box=gtk_hbox_new(FALSE,5);
+        label=gtk_label_new("10MHz Clock Source:			");
+        gtk_widget_show(label);
+        gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+        atlas10MHz=gtk_radio_button_new_with_label(NULL,"Atlas	");
+        gtk_widget_show(atlas10MHz);
+        gtk_box_pack_start(GTK_BOX(box),atlas10MHz,FALSE,FALSE,2);
+        g_signal_connect(G_OBJECT(atlas10MHz),"clicked",G_CALLBACK(atlas10MHzButtonCallback),NULL);
+        penelope10MHz=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(atlas10MHz),"Penelope	");
+        gtk_widget_show(penelope10MHz);
+        gtk_box_pack_start(GTK_BOX(box),penelope10MHz,FALSE,FALSE,2);
+        g_signal_connect(G_OBJECT(penelope10MHz),"clicked",G_CALLBACK(penelope10MHzButtonCallback),NULL);
+        mercury10MHz=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(atlas10MHz),"Mercury	");
+        gtk_widget_show(mercury10MHz);
+        gtk_box_pack_start(GTK_BOX(box),mercury10MHz,FALSE,FALSE,2);
+        g_signal_connect(G_OBJECT(mercury10MHz),"clicked",G_CALLBACK(mercury10MHzButtonCallback),NULL);
+        gtk_widget_show(penelope122_88MHz);
+        gtk_widget_show(box);
+        gtk_widget_show(box);
+        gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
+    }
 
     box=gtk_hbox_new(FALSE,5);
-    label=gtk_label_new("10MHz Clock Source:		");
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-    atlas10MHz=gtk_radio_button_new_with_label(NULL,"Atlas	");
-    gtk_widget_show(atlas10MHz);
-    gtk_box_pack_start(GTK_BOX(box),atlas10MHz,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(atlas10MHz),"clicked",G_CALLBACK(atlas10MHzButtonCallback),NULL);
-    penelope10MHz=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(atlas10MHz),"Penelope	");
-    gtk_widget_show(penelope10MHz);
-    gtk_box_pack_start(GTK_BOX(box),penelope10MHz,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(penelope10MHz),"clicked",G_CALLBACK(penelope10MHzButtonCallback),NULL);
-    mercury10MHz=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(atlas10MHz),"Mercury	");
-    gtk_widget_show(mercury10MHz);
-    gtk_box_pack_start(GTK_BOX(box),mercury10MHz,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(mercury10MHz),"clicked",G_CALLBACK(mercury10MHzButtonCallback),NULL);
-    gtk_widget_show(penelope122_88MHz);
-    gtk_widget_show(box);
-    gtk_widget_show(box);
-    gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
-
-    box=gtk_hbox_new(FALSE,5);
-    label=gtk_label_new("Mode:					");
+    label=gtk_label_new("Mode:							");
     gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
     modeOther=gtk_radio_button_new_with_label(NULL,"Other	");
@@ -295,23 +351,8 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
 
-    box=gtk_hbox_new(FALSE,5);
-    label=gtk_label_new("Mic Source:				");
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-    janusMicSource=gtk_radio_button_new_with_label(NULL,"Janus	");
-    gtk_widget_show(janusMicSource);
-    gtk_box_pack_start(GTK_BOX(box),janusMicSource,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(janusMicSource),"clicked",G_CALLBACK(janusMicSourceButtonCallback),NULL);
-    penelopeMicSource=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(janusMicSource),"Penelope	");
-    gtk_widget_show(penelopeMicSource);
-    gtk_box_pack_start(GTK_BOX(box),penelopeMicSource,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(penelopeMicSource),"clicked",G_CALLBACK(penelopeMicSourceButtonCallback),NULL);
-    gtk_widget_show(box);
-    gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
-
     box=gtk_hbox_new(FALSE,3);
-    label=gtk_label_new("HPSDR Duplex:			");
+    label=gtk_label_new("HPSDR Duplex:				");
     gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
     hpsdrHalfDuplex=gtk_radio_button_new_with_label(NULL,"Half		");
@@ -325,16 +366,18 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
 
-    box=gtk_hbox_new(FALSE,3);
-    label=gtk_label_new("PennyLane/Hermes:		");
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
-    pennyLaneWidget=gtk_check_button_new_with_label("PennyLane/Hermes");
-    gtk_widget_show(pennyLaneWidget);
-    gtk_box_pack_start(GTK_BOX(box),pennyLaneWidget,FALSE,FALSE,2);
-    g_signal_connect(G_OBJECT(pennyLaneWidget),"clicked",G_CALLBACK(pennyLaneButtonCallback),NULL);
-    gtk_widget_show(box);
-    gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
+    if(!ozy_use_metis() || d->device==DEVICE_METIS) {
+        box=gtk_hbox_new(FALSE,3);
+        label=gtk_label_new("PennyLane:					");
+        gtk_widget_show(label);
+        gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+        pennyLaneWidget=gtk_check_button_new_with_label("PennyLane");
+        gtk_widget_show(pennyLaneWidget);
+        gtk_box_pack_start(GTK_BOX(box),pennyLaneWidget,FALSE,FALSE,2);
+        g_signal_connect(G_OBJECT(pennyLaneWidget),"clicked",G_CALLBACK(pennyLaneButtonCallback),NULL);
+        gtk_widget_show(box);
+        gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
+    }
 
     switch(speed) {
         case 0:
@@ -355,25 +398,27 @@ GtkWidget* hpsdrSetupUI() {
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(LT2208Dither),lt2208Dither);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(LT2208Random),lt2208Random);
 
-    switch(clock122_88MHz) {
-        case 0:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(penelope122_88MHz),TRUE);
-            break;
-        case 1:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(mercury122_88MHz),TRUE);
-            break;
-    }
-
-    switch(clock10MHz) {
-        case 0:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(atlas10MHz),TRUE);
-            break;
-        case 1:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(penelope10MHz),TRUE);
-            break;
-        case 2:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(mercury10MHz),TRUE);
-            break;
+    if(!ozy_use_metis() || d->device==DEVICE_METIS) {
+        switch(clock122_88MHz) {
+            case 0:
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(penelope122_88MHz),TRUE);
+                break;
+            case 1:
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(mercury122_88MHz),TRUE);
+                break;
+        }
+    
+        switch(clock10MHz) {
+            case 0:
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(atlas10MHz),TRUE);
+                break;
+            case 1:
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(penelope10MHz),TRUE);
+                break;
+            case 2:
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(mercury10MHz),TRUE);
+                break;
+        }
     }
 
     switch(class) {
@@ -382,15 +427,6 @@ GtkWidget* hpsdrSetupUI() {
             break;
         case 1:
             gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(modeClassE),TRUE);
-            break;
-    }
-
-    switch(micSource) {
-        case 0:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(janusMicSource),TRUE);
-            break;
-        case 1:
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(penelopeMicSource),TRUE);
             break;
     }
 
@@ -403,7 +439,9 @@ GtkWidget* hpsdrSetupUI() {
             break;
     }
 
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(pennyLaneWidget),pennyLane);
+    if(!ozy_use_metis() || d->device==DEVICE_METIS) {
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(pennyLaneWidget),pennyLane);
+    }
 
     gtk_widget_show(hpsdrPage);
     return hpsdrPage;

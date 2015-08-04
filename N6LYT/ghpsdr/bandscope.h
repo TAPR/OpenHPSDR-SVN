@@ -34,7 +34,7 @@
 #define bandscopeHEIGHT 100
 #endif
 
-#define BANDSCOPE_BUFFER_SIZE 4096
+//#define BANDSCOPE_BUFFER_SIZE 4096
 #define BANDSCOPE_MULTIPLIER 1
 
 int bandscopeMAX;

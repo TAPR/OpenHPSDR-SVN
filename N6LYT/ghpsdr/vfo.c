@@ -79,7 +79,7 @@ GtkWidget* buttonBtoA;
 GtkWidget* buttonAswapB;
 GtkWidget* buttonSplit;
 
-long frequencyIncrement=100;
+long frequencyIncrement=1000;
 GtkWidget* buttonFrequencyUp;
 GtkWidget* buttonIncrementPlus;
 GtkWidget* incrementDisplay;
@@ -93,6 +93,14 @@ int bSplit=0;
 int splitChanged=0;
 
 void setIncrement(int increment);
+void vfoIncrementFrequency(long increment,gboolean round);
+
+int vfoStep(void * data) {
+    int step=*(int*)data;
+    vfoIncrementFrequency(step*frequencyIncrement,TRUE);
+    free(data);
+    return 0;
+}
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -1117,6 +1125,9 @@ void vfoSaveState() {
     setProperty("vfoDspBFrequency",string);
     sprintf(string,"%lld",ddsBFrequency);
     setProperty("vfoDdsBFrequency",string);
+
+    sprintf(string,"%ld",frequencyIncrement);
+    setProperty("frequencyIncrement",string);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -1144,6 +1155,9 @@ void vfoRestoreState() {
     if(value) dspBFrequency=atoll(value);
     value=getProperty("vfoDdsBFrequency");
     if(value) ddsBFrequency=atoll(value);
+
+    value=getProperty("frequencyIncrement");
+    if(value) setIncrement(atol(value));
 
     frequencyAChanged=1;
     frequencyBChanged=1;

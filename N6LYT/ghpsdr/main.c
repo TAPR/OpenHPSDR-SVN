@@ -133,6 +133,7 @@
 #include "cw.h"
 
 #include "discovery.h"
+#include "controller.h"
 
 
 GdkColor background;
@@ -194,6 +195,46 @@ void restoreState(void);
 
 void initAnalyzer(int channel);
 void initBSAnalyzer(int channel);
+
+/* --------------------------------------------------------------------------*/
+/*
+ * USB controller
+ */
+
+extern int vfoStep(void * data);
+extern int setAFGain(void * data);
+extern int nextBand(void * data);
+extern int previousBand(void * data);
+
+void controller_update(char* command) {
+    char* p=command;
+fprintf(stderr,"controller: %s\n", command);
+    if(strncmp(p,"ZZSB",4)==0) {
+        int *vfoinc=malloc(sizeof(int));
+        *vfoinc=-1;
+        g_idle_add(vfoStep,(gpointer)vfoinc);
+    } else if(strncmp(p,"ZZSA",4)==0) {
+        int *vfoinc=malloc(sizeof(int));
+        *vfoinc=1;
+        g_idle_add(vfoStep,(gpointer)vfoinc);
+    } else if(strncmp(p,"ZZBD",4)==0) {
+        g_idle_add(previousBand,NULL);
+    } else if(strncmp(p,"ZZBU",4)==0) {
+        g_idle_add(nextBand,NULL);
+    } else if(strncmp(p,"ZZLA",4)==0) {
+        p+=4; // skip over command
+        int *gain=malloc(sizeof(int));
+        *gain=(*p-'0') * 100;
+        p++;
+        *gain+=(*p-'0') * 10;
+        p++;
+        *gain+=*p-'0';
+        g_idle_add(setAFGain,(gpointer)gain);
+    } else if(strncmp(p,"ZZPC",4)==0) {
+    } else {
+        fprintf(stderr, "controller invalid command: '%s'\n",command);
+    }
+}
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -272,7 +313,15 @@ void discoverCallback(GtkWidget* widget,gpointer data) {
     char title[128];
     strcpy(title,"Gtk+ GUI for HPSDR - Discovering devices ...");
     gtk_window_set_title((GtkWindow*)mainWindow,title);
+    GtkWidget* dialog = gtk_message_dialog_new (NULL,
+                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                 GTK_MESSAGE_INFO,
+                                                 GTK_BUTTONS_NONE,
+                                                 "Discovering ... Please Wait");
+    gtk_widget_show(dialog);
     discovery();
+    gtk_widget_hide(dialog);
+    gtk_widget_destroy(dialog);
     if(devices==0) {
         strcpy(title,"Gtk+ GUI for HPSDR - No HPSDR devices found");
     } else {
@@ -281,17 +330,17 @@ void discoverCallback(GtkWidget* widget,gpointer data) {
         } else {
             GtkWidget* dialog = gtk_message_dialog_new (NULL,
                                                  GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                 GTK_MESSAGE_ERROR,
+                                                 GTK_MESSAGE_QUESTION,
                                                  GTK_BUTTONS_OK_CANCEL,
                                                  "Discovery found %d devices!",
                                                  devices);
             gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Select required device");
             gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
-            GtkWidget* area=gtk_message_dialog_get_message_area (dialog);
+            GtkWidget* area=gtk_message_dialog_get_message_area ((GtkMessageDialog*)dialog);
             GSList* group=NULL;
             char label[128];
             int i;
-            GtkRadioButton* radioButton[devices];
+            GtkWidget* radioButton[devices];
             for(i=0;i<devices;i++) {
                 DISCOVERED* d=&discovered[i];
 fprintf(stderr,"main:  adding radio button device=%d software_version=%d status=%d\n",
@@ -324,7 +373,7 @@ fprintf(stderr,"    (%02X:%02X:%02X:%02X:%02X:%02X)\n",
                         d->mac_address[5],
                         d->interface_name);
                radioButton[i]=gtk_radio_button_new_with_label(group,label);
-               gtk_toggle_button_set_active((GtkRadioButton*)radioButton[i],(gboolean)(i==0));
+               gtk_toggle_button_set_active((GtkToggleButton*)radioButton[i],(gboolean)(i==0));
                gtk_widget_show(radioButton[i]);
                gtk_container_add((GtkContainer*)area,(GtkWidget*)radioButton[i]);
                group=gtk_radio_button_group (GTK_RADIO_BUTTON (radioButton[i]));
@@ -895,7 +944,6 @@ static struct option longOptions[] = {
     {"property-path",required_argument, NULL, 'p'},
     {"timing",no_argument, NULL, 't'},
     {"usb",no_argument, NULL, 'u'},
-    {"metis",no_argument, NULL, 'm'},
     {"interface",required_argument, NULL, 'i'},
     {0,0,0,0}
 };
@@ -929,9 +977,6 @@ void processCommands(int argc,char* argv[]) {
                 break;
             case 't':
                 timing=1;
-                break;
-            case 'm':
-                ozy_set_metis();
                 break;
             case 'u':
                 ozy_set_usb();
@@ -978,6 +1023,11 @@ int main(int argc,char* argv[]) {
 
     strcpy(soundCardName,"HPSDR");
     processCommands(argc,argv);
+
+    if(init_controller()<0) {
+        fprintf(stderr,"init_controller failed\n");
+    }
+
 
     fprintf(stderr,"OpenChannel CHANNEL_RX0 buffer_size=%d fft_size=%d sampleRate=%d dspRate=%d outputRate=%d\n",
                 buffer_size,

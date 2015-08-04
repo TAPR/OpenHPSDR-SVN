@@ -239,7 +239,7 @@ void meterDrawSignal() {
         layout = pango_layout_new(context);
         pango_layout_set_width(layout,120*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_LEFT);
-        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans 5'>  1    3    5    7    9    +20   +40   +60</span>",meterDbm);
+        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans 5'>  1    3    5    7    9    +20   +40   +60</span>");
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(meterPixmap),gc,20,20,layout);
 
