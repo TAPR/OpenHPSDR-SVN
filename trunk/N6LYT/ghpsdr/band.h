@@ -25,6 +25,8 @@
 * 
 */
 
+#include "bandstack.h"
+
 #define band160 0
 #define band80 1
 #define band60 2
@@ -42,12 +44,29 @@
 
 #define BANDS 14
 
+/* --------------------------------------------------------------------------*/
+/**
+* @brief Bandlimit definition
+*/
 struct _BAND_LIMITS {
     long long minFrequency;
     long long maxFrequency;
 };
 
 typedef struct _BAND_LIMITS BAND_LIMITS;
+
+/* --------------------------------------------------------------------------*/
+/**
+* @brief Band definition
+*/
+struct _BAND {
+    BANDSTACK bandstack;
+    unsigned char OCrx;
+    unsigned char OCtx;
+};
+
+typedef struct _BAND BAND;
+
 
 int band;
 int xvtr_band;

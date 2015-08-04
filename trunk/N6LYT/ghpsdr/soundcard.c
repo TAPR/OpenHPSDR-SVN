@@ -70,10 +70,10 @@ void setSoundcard(int card) {
             displayCalibrationOffset=-82.62103f;
             break;
         case HPSDR:
-            //multimeterCalibrationOffset=0.0f;
-            //displayCalibrationOffset=0.0f;
-            multimeterCalibrationOffset=17.0f;
-            displayCalibrationOffset=17.0f;
+            multimeterCalibrationOffset=0.0f;
+            displayCalibrationOffset=0.0f;
+            //multimeterCalibrationOffset=17.0f;
+            //displayCalibrationOffset=17.0f;
 
             break;
     }

@@ -5,6 +5,7 @@
  * Created on 10 March 2009, 20:26
  */
 
+#include <math.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -155,7 +156,7 @@ int dash=0;
 
 int xmit=0;  // not transmitting
 
-int pennyLane=0;       // default is Penelope
+int pennyLane=1;       // default is Pennylane
 int driveLevel=255;    // default is max
 int driveLevelChanged=0; // force drive level to be sent
 
@@ -167,17 +168,12 @@ static int sample_count=0;
 static int metis=1;
 //static char interface[128];
 
-int alexRxAntenna=0;
-int alexTxAntenna=0;
-int alexRxOnlyAntenna=0;
+int alexRxAntenna=NONE;
+int alexTxAntenna=ANT1;
 
 float vswr=0.0;
 
 int debug_control1=0;
-
-void ozy_set_metis() {
-    metis=1;
-}
 
 void ozy_set_usb() {
     metis=0;
@@ -1290,30 +1286,16 @@ void ozyRestoreState() {
 
 void setAlexRxAntenna(int a) {
     alexRxAntenna=a;
-    if(!xmit) {
-        control_out[4]=control_out[4]&0xFC;
-        control_out[4]=control_out[4]|a;
-    }
+    //if(!xmit) {
+    //    control_out[4]=control_out[4]&0xFC;
+    //    control_out[4]=control_out[4]|a;
+    //}
 }
 
 void setAlexTxAntenna(int a) {
     alexTxAntenna=a;
-    if(xmit) {
-        control_out[4]=control_out[4]&0xFC;
-        control_out[4]=control_out[4]|a;
-    }
-}
-
-void setAlexRxOnlyAntenna(int a) {
-    alexRxOnlyAntenna=a;
-    if(!xmit) {
-        control_out[3]=control_out[3]&0x9F;
-        control_out[3]=control_out[3]|(a<<5);
-
-        if(a!=0) {
-            control_out[3]=control_out[3]|0x80;
-        } else {
-            control_out[3]=control_out[3]&0x7F;
-        }
-    }
+    //if(xmit) {
+    //    control_out[4]=control_out[4]&0xFC;
+    //    control_out[4]=control_out[4]|a;
+    //}
 }

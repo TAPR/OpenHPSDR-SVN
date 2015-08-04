@@ -46,6 +46,18 @@ double volume;
 
 GtkWidget* volumeScale;
 
+int setAFGain(void * data) {
+    int gain=*(int*)data;
+    volume=(double)gain;
+fprintf(stderr,"setAFGain: %f\n", volume);
+#ifdef DTTSP
+    SetRXOutputGain(0,0,volume/100.0);
+#endif
+    gtk_range_set_value((GtkRange*)volumeScale,volume);
+    free(data);
+    return 0;
+}
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief  Select the volume
@@ -66,6 +78,7 @@ void selectVolume(GtkWidget* widget) {
 */
 void volumeChanged(GtkWidget* widget,gpointer data) {
     volume=gtk_range_get_value((GtkRange*)volumeScale);
+fprintf(stderr,"volumeChanged: %f\n", volume);
 #ifdef DTTSP
     SetRXOutputGain(0,0,volume/100.0);
 #endif

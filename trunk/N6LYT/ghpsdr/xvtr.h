@@ -47,13 +47,7 @@ struct _XVTR_ENTRY {
     int var2High;
     int step;
     int preamp;
-    int spectrumHigh;
-    int spectrumLow;
-    int spectrumStep;
-    int waterfallHigh;
-    int waterfallLow;
     int alexRxAntenna;
-    int alexRxOnlyAntenna;
     int alexTxAntenna;
     int alexAttenuation;
 };

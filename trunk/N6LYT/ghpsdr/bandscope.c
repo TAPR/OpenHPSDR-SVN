@@ -36,15 +36,16 @@
 #include "bandscope.h"
 #include "vfo.h"
 #include "preamp.h"
+#include "ozy.h"
 
 GtkWidget* bandscopeScrolledWindow;
 GtkAdjustment* horizontalAdjustment;
 GtkAdjustment* verticalAdjustment;
 GtkWidget* bandscope;
 
-int bandscopeMAX=0;
-int bandscopeMIN=-100;
-int bandscopeSTEP=10;
+int bandscopeMAX=-40;
+int bandscopeMIN=-140;
+int bandscopeSTEP=40;
 
 int bandscopeLow=0;
 int bandscopeHigh=61440000;

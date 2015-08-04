@@ -24,6 +24,8 @@
 * 
 */
 
+#ifndef BANDSTACK_H
+#define BANDSTACK_H
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Bandstack definition
@@ -36,15 +38,8 @@ struct _BANDSTACK_ENTRY {
     int var1High;
     int var2Low;
     int var2High;
-    int step;
     int preamp;
-    int spectrumHigh;
-    int spectrumLow;
-    int spectrumStep;
-    int waterfallHigh;
-    int waterfallLow;
     int alexRxAntenna;
-    int alexRxOnlyAntenna;
     int alexTxAntenna;
     int alexAttenuation;
 };
@@ -59,3 +54,4 @@ struct _BANDSTACK {
 
 typedef struct _BANDSTACK BANDSTACK;
 
+#endif

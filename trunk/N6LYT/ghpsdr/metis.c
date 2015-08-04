@@ -110,6 +110,23 @@ static int get_addr(int sock, char * ifname) {
 */
 
 void metis_stop() {
+    int i;
+
+    // send a packet to stop the stream
+    buffer[0]=0xEF;
+    buffer[1]=0xFE;
+    buffer[2]=0x04;    // data send state
+    buffer[3]=0x00;    // 0x00=stop
+
+    for(i=0;i<60;i++) {
+        buffer[i+4]=0x00;
+    }
+
+    if(sendto(data_socket,buffer,64,0,(struct sockaddr*)&data_addr,data_addr_length)<0) {
+        perror("sendto socket failed for stop\n");
+        exit(1);
+    }
+
     running=0;
     close(data_socket);
 }

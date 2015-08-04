@@ -38,7 +38,8 @@ SOURCES= agc.c audio.c band.c bandscope.c bandscope_control.c bandscope_update.c
          subrx.c\
          metis.c\
          cw.c\
-         discovery.c
+         discovery.c\
+         controller.c
 
 HEADERS= agc.h audio.h audiostream.h band.h bandscope_control.h\
          bandscope.h bandscope_update.h bandstack.h command.h cw.h display.h display_setup.h\
@@ -47,7 +48,8 @@ HEADERS= agc.h audio.h audiostream.h band.h bandscope_control.h\
          screensize.h setup.h sinewave.h soundcard.h spectrum_buffers.h spectrum.h\
          spectrum_update.h subrx.h transmit.h util.h version.h vfo.h volume.h\
          xvtr.h xvtr_setup.h \
-         discovered.h discovery.h
+         discovered.h discovery.h\
+         controller.h
 
 OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o command.o\
       display.o filter.o frequency.o libusbio.o main.o meter.o\
@@ -60,7 +62,8 @@ OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o co
       subrx.o\
       metis.o\
       cw.o\
-      discovery.o
+      discovery.o\
+      controller.o
 
 
 all: $(PROGRAM) $(HEADERS) $(SOURCES)

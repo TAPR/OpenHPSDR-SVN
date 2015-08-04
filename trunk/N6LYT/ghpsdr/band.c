@@ -87,75 +87,77 @@ gboolean displayHF=TRUE;
 */
 /* ----------------------------------------------------------------------------*/
 BANDSTACK_ENTRY bandstack160[] =
-    {{1810000LL,modeCWL,filterF4,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {1835000LL,modeCWU,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {1845000LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{1810000LL,modeCWL,filterF4,-2800,-200,-2800,-200,0,0,0,0},
+     {1835000LL,modeCWU,filterF0,-2800,-200,-2800,-200,0,0,0,0},
+     {1845000LL,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack80[] =
-    {{3501000LL,modeCWL,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {3751000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {3850000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{3501000LL,modeCWL,filterF0,-2800,-200,-2800,-200,0,0,0,0},
+     {3751000LL,modeLSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {3850000LL,modeLSB,filterF5,-2800,-200,-2800,-200,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack60[] =
-    {{5330500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {5346500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {5366500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {5371500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {5403500LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{5330500LL,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {5346500LL,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {5366500LL,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {5371500LL,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {5403500LL,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack40[] =
-    {{7001000LL,modeCWL,filterF0,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {7152000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {7255000LL,modeLSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{7001000LL,modeCWL,filterF0,-2800,-200,-2800,-200,0,0,0,0},
+     {7152000LL,modeLSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {7255000LL,modeLSB,filterF5,-2800,-200,-2800,-200,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack30[] =
-    {{10120000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {10130000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {10140000LL,modeCWU,filterF4,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{10120000LL,modeCWU,filterF0,200,2800,200,2800,0,0,0,0},
+     {10130000LL,modeCWU,filterF0,200,2800,200,2800,0,0,0,0},
+     {10140000LL,modeCWU,filterF4,200,2800,200,2800,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack20[] =
-    {{14010000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {14230000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {14336000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{14010000LL,modeCWU,filterF0,200,2800,200,2800,0,0,0,0},
+     {14230000LL,modeUSB,filterF5,200,2800,200,2800,0,0,0,0},
+     {14336000LL,modeUSB,filterF5,200,2800,200,2800,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack18[] =
-    {{18068600LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {18125000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {18140000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{18068600LL,modeCWU,filterF0,200,2800,200,2800,0,0,0,0},
+     {18125000LL,modeUSB,filterF5,200,2800,200,2800,0,0,0,0},
+     {18140000LL,modeUSB,filterF5,200,2800,200,2800,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack15[] =
-    {{21001000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {21255000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {21300000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{21001000LL,modeCWU,filterF0,200,2800,200,2800,0,0,0,0},
+     {21255000LL,modeUSB,filterF5,200,2800,200,2800,0,0,0,0},
+     {21300000LL,modeUSB,filterF5,200,2800,200,2800,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack12[] =
-    {{24895000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {24900000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {24910000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{24895000LL,modeCWU,filterF0,200,2800,200,2800,0,0,0,0},
+     {24900000LL,modeUSB,filterF5,200,2800,200,2800,0,0,0,0},
+     {24910000LL,modeUSB,filterF5,200,2800,200,2800,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack10[] =
-    {{28010000LL,modeCWU,filterF0,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {28300000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {28400000LL,modeUSB,filterF5,200,2800,200,2800,100,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{28010000LL,modeCWU,filterF0,200,2800,200,2800,0,0,0,0},
+     {28300000LL,modeUSB,filterF5,200,2800,200,2800,0,0,0,0},
+     {28400000LL,modeUSB,filterF5,200,2800,200,2800,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstack50[] =
-    {{50010000LL,modeCWU,filterF0,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0,0},
-     {50125000LL,modeUSB,filterF5,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0,0},
-     {50200000LL,modeUSB,filterF5,200,2800,200,2800,100,1,-50,-150,10,-90,-120,0,0,0,0}};
+    {{50010000LL,modeCWU,filterF0,200,2800,200,2800,1,0,0,0},
+     {50125000LL,modeUSB,filterF5,200,2800,200,2800,1,0,0,0},
+     {50200000LL,modeUSB,filterF5,200,2800,200,2800,1,0,0,0}};
 
 BANDSTACK_ENTRY bandstackGEN[] =
-    {{909000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0,0},
-     {5975000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0,0},
-     {13845000LL,modeAM,filterF6,-6000,6000,-6000,6000,1000,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{909000LL,modeAM,filterF6,-6000,6000,-6000,60000,0,0,0,0},
+     {5975000LL,modeAM,filterF6,-6000,6000,-6000,60000,0,0,0,0},
+     {13845000LL,modeAM,filterF6,-6000,6000,-6000,60000,0,0,0,0}};
 
 BANDSTACK_ENTRY bandstackWWV[] =
-    {{2500000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0,0},
-     {5000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0,0},
-     {10000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0,0},
-     {15000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0,0},
-     {20000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{2500000LL,modeSAM,filterF6,200,2800,200,2800,0,0,0,0},
+     {5000000LL,modeSAM,filterF6,200,2800,200,2800,0,0,0,0},
+     {10000000LL,modeSAM,filterF6,200,2800,200,2800,0,0,0,0},
+     {15000000LL,modeSAM,filterF6,200,2800,200,2800,0,0,0,0},
+     {20000000LL,modeSAM,filterF6,200,2800,200,2800,0,0,0,0}};
 
 BANDSTACK bandstack[BANDS];
+
+BAND bands[BANDS];
 
 #define NUM_BAND_LIMITS 22
 
@@ -190,18 +192,18 @@ BAND_LIMITS bandLimits[NUM_BAND_LIMITS] = {
 */
 /* ----------------------------------------------------------------------------*/
 static XVTR_ENTRY xvtr[12]=
-    {{"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0},
-     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-50,-150,10,-90,-120,0,0,0,0}};
+    {{"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,0,0,0,0}};
 
 void setTuningMode(int mode);
 void setBand(int band);
@@ -443,15 +445,8 @@ void selectBand(GtkWidget* widget) {
             entry->var1High=filterVar1High;
             entry->var2Low=filterVar2Low;
             entry->var2High=filterVar2High;
-            entry->step=frequencyIncrement;
             entry->preamp=preamp;
-            entry->spectrumHigh=spectrumMAX;
-            entry->spectrumLow=spectrumMIN;
-            entry->spectrumStep=spectrumSTEP;
-            entry->waterfallHigh=waterfallHighThreshold;
-            entry->waterfallLow=waterfallLowThreshold;
             entry->alexRxAntenna=alexRxAntenna;
-            entry->alexRxOnlyAntenna=alexRxOnlyAntenna;
             entry->alexTxAntenna=alexTxAntenna;
             entry->alexAttenuation=alexAttenuation;
         } else {
@@ -467,13 +462,7 @@ void selectBand(GtkWidget* widget) {
             xvtr[xvtr_band].var2High=filterVar2High;
             xvtr[xvtr_band].step=frequencyIncrement;
             xvtr[xvtr_band].preamp=preamp;
-            xvtr[xvtr_band].spectrumHigh=spectrumMAX;
-            xvtr[xvtr_band].spectrumLow=spectrumMIN;
-            xvtr[xvtr_band].spectrumStep=spectrumSTEP;
-            xvtr[xvtr_band].waterfallHigh=waterfallHighThreshold;
-            xvtr[xvtr_band].waterfallLow=waterfallLowThreshold;
             xvtr[xvtr_band].alexRxAntenna=alexRxAntenna;
-            xvtr[xvtr_band].alexRxOnlyAntenna=alexRxOnlyAntenna;
             xvtr[xvtr_band].alexTxAntenna=alexTxAntenna;
             xvtr[xvtr_band].alexAttenuation=alexAttenuation;
         }
@@ -544,19 +533,11 @@ void selectBand(GtkWidget* widget) {
             filterVar2High=entry->var2High;
             setFilter(entry->filter);
             setAFrequency(entry->frequencyA);
-            setIncrement(entry->step);
 
             setPreamp(entry->preamp);
             forcePreamp(entry->preamp);
 
-            spectrumMAX=entry->spectrumHigh;
-            spectrumMIN=entry->spectrumLow;
-            spectrumSTEP=entry->spectrumStep;
-            waterfallHighThreshold=entry->waterfallHigh;
-            waterfallLowThreshold=entry->waterfallLow;
-
             setAlexRxAntenna(entry->alexRxAntenna);
-            setAlexRxOnlyAntenna(entry->alexRxOnlyAntenna);
             setAlexTxAntenna(entry->alexTxAntenna);
 
             setAlexAttenuation(entry->alexAttenuation);
@@ -603,14 +584,7 @@ void selectBand(GtkWidget* widget) {
             setPreamp(xvtr[xvtr_band].preamp);
             forcePreamp(xvtr[xvtr_band].preamp);
 
-            spectrumMAX=xvtr[xvtr_band].spectrumHigh;
-            spectrumMIN=xvtr[xvtr_band].spectrumLow;
-            spectrumSTEP=xvtr[xvtr_band].spectrumStep;
-            waterfallHighThreshold=xvtr[xvtr_band].waterfallHigh;
-            waterfallLowThreshold=xvtr[xvtr_band].waterfallLow;
-
             setAlexRxAntenna(xvtr[xvtr_band].alexRxAntenna);
-            setAlexRxOnlyAntenna(xvtr[xvtr_band].alexRxOnlyAntenna);
             setAlexTxAntenna(xvtr[xvtr_band].alexTxAntenna);
 
             setAlexAttenuation(xvtr[xvtr_band].alexAttenuation);
@@ -762,11 +736,9 @@ void forceBand(int b,int setup) {
 
         if(setup) {
             setAlexRxAntenna(alexRxAntenna);
-            setAlexRxOnlyAntenna(alexRxOnlyAntenna);
             setAlexTxAntenna(alexTxAntenna);
         } else {
             setAlexRxAntenna(xvtr[xvtr_band].alexRxAntenna);
-            setAlexRxOnlyAntenna(xvtr[xvtr_band].alexRxOnlyAntenna);
             setAlexTxAntenna(xvtr[xvtr_band].alexTxAntenna);
         }
 
@@ -991,15 +963,8 @@ void bandSaveState() {
         entry->var1High=filterVar1High;
         entry->var2Low=filterVar2Low;
         entry->var2High=filterVar2High;
-        entry->step=frequencyIncrement;
         entry->preamp=preamp;
-        entry->spectrumHigh=spectrumMAX;
-        entry->spectrumLow=spectrumMIN;
-        entry->spectrumStep=spectrumSTEP;
-        entry->waterfallHigh=waterfallHighThreshold;
-        entry->waterfallLow=waterfallLowThreshold;
         entry->alexRxAntenna=alexRxAntenna;
-        entry->alexRxOnlyAntenna=alexRxOnlyAntenna;
         entry->alexTxAntenna=alexTxAntenna;
         entry->alexAttenuation=alexAttenuation;
     } else {
@@ -1014,12 +979,7 @@ void bandSaveState() {
         xvtr[xvtr_band].var2High=filterVar2High;
         xvtr[xvtr_band].step=frequencyIncrement;
         xvtr[xvtr_band].preamp=preamp;
-        xvtr[xvtr_band].spectrumHigh=spectrumMAX;
-        xvtr[xvtr_band].spectrumLow=spectrumMIN;
-        xvtr[xvtr_band].spectrumStep=spectrumSTEP;
-        xvtr[xvtr_band].waterfallHigh=waterfallHighThreshold;
         xvtr[xvtr_band].alexRxAntenna=alexRxAntenna;
-        xvtr[xvtr_band].alexRxOnlyAntenna=alexRxOnlyAntenna;
         xvtr[xvtr_band].alexTxAntenna=alexTxAntenna;
         xvtr[xvtr_band].alexAttenuation=alexAttenuation;
     }
@@ -1068,40 +1028,12 @@ void bandSaveState() {
             sprintf(name,"band.%d.stack.%d.var2High",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",entry->step);
-            sprintf(name,"band.%d.stack.%d.step",b,stack);
-            setProperty(name,string);
-
             sprintf(string,"%d",entry->preamp);
             sprintf(name,"band.%d.stack.%d.preamp",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",entry->spectrumHigh);
-            sprintf(name,"band.%d.stack.%d.spectrumHigh",b,stack);
-            setProperty(name,string);
-
-            sprintf(string,"%d",entry->spectrumLow);
-            sprintf(name,"band.%d.stack.%d.spectrumLow",b,stack);
-            setProperty(name,string);
-
-            sprintf(string,"%d",entry->spectrumStep);
-            sprintf(name,"band.%d.stack.%d.spectrumStep",b,stack);
-            setProperty(name,string);
-
-            sprintf(string,"%d",entry->waterfallHigh);
-            sprintf(name,"band.%d.stack.%d.waterfallHigh",b,stack);
-            setProperty(name,string);
-
-            sprintf(string,"%d",entry->waterfallLow);
-            sprintf(name,"band.%d.stack.%d.waterfallLow",b,stack);
-            setProperty(name,string);
-
             sprintf(string,"%d",entry->alexRxAntenna);
             sprintf(name,"band.%d.stack.%d.alexRxAntenna",b,stack);
-            setProperty(name,string);
-
-            sprintf(string,"%d",entry->alexRxOnlyAntenna);
-            sprintf(name,"band.%d.stack.%d.alexRxOnlyAntenna",b,stack);
             setProperty(name,string);
 
             sprintf(string,"%d",entry->alexTxAntenna);
@@ -1189,32 +1121,8 @@ void bandSaveState() {
             sprintf(name,"xvtr.%d.preamp",b);
             setProperty(name,string);
 
-            sprintf(string,"%d",xvtr[b].spectrumHigh);
-            sprintf(name,"xvtr.%d.spectrumHigh",b);
-            setProperty(name,string);
-
-            sprintf(string,"%d",xvtr[b].spectrumLow);
-            sprintf(name,"xvtr.%d.spectrumLow",b);
-            setProperty(name,string);
-
-            sprintf(string,"%d",xvtr[b].spectrumStep);
-            sprintf(name,"xvtr.%d.spectrumStep",b);
-            setProperty(name,string);
-
-            sprintf(string,"%d",xvtr[b].waterfallHigh);
-            sprintf(name,"xvtr.%d.waterfallHigh",b);
-            setProperty(name,string);
-
-            sprintf(string,"%d",xvtr[b].waterfallLow);
-            sprintf(name,"xvtr.%d.waterfallLow",b);
-            setProperty(name,string);
-
             sprintf(string,"%d",xvtr[b].alexRxAntenna);
             sprintf(name,"xvtr.%d.alexRxAntenna",b);
-            setProperty(name,string);
-
-            sprintf(string,"%d",xvtr[b].alexRxOnlyAntenna);
-            sprintf(name,"xvtr.%d.alexRxOnlyAntenna",b);
             setProperty(name,string);
 
             sprintf(string,"%d",xvtr[b].alexTxAntenna);
@@ -1378,41 +1286,13 @@ void bandRestoreState() {
             value=getProperty(name);
             if(value) entry->var2High=atoi(value);
 
-            sprintf(name,"band.%d.stack.%d.step",b,stack);
-            value=getProperty(name);
-            if(value) entry->step=atoi(value);
-
             sprintf(name,"band.%d.stack.%d.preamp",b,stack);
             value=getProperty(name);
             if(value) entry->preamp=atoi(value);
 
-            sprintf(name,"band.%d.stack.%d.spectrumHigh",b,stack);
-            value=getProperty(name);
-            if(value) entry->spectrumHigh=atoi(value);
-
-            sprintf(name,"band.%d.stack.%d.spectrumLow",b,stack);
-            value=getProperty(name);
-            if(value) entry->spectrumLow=atoi(value);
-
-            sprintf(name,"band.%d.stack.%d.spectrumStep",b,stack);
-            value=getProperty(name);
-            if(value) entry->spectrumStep=atoi(value);
-
-            sprintf(name,"band.%d.stack.%d.waterfallHigh",b,stack);
-            value=getProperty(name);
-            if(value) entry->waterfallHigh=atoi(value);
-
-            sprintf(name,"band.%d.stack.%d.waterfallLow",b,stack);
-            value=getProperty(name);
-            if(value) entry->waterfallLow=atoi(value);
-
             sprintf(name,"band.%d.stack.%d.alexRxAntenna",b,stack);
             value=getProperty(name);
             if(value) entry->alexRxAntenna=atoi(value);
-
-            sprintf(name,"band.%d.stack.%d.alexRxOnlyAntenna",b,stack);
-            value=getProperty(name);
-            if(value) entry->alexRxOnlyAntenna=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.alexTxAntenna",b,stack);
             value=getProperty(name);
@@ -1497,33 +1377,9 @@ void bandRestoreState() {
             value=getProperty(name);
             if(value) xvtr[b].preamp=atoi(value);
 
-            sprintf(name,"xvtr.%d.spectrumHigh",b);
-            value=getProperty(name);
-            if(value) xvtr[b].spectrumHigh=atoi(value);
-
-            sprintf(name,"xvtr.%d.spectrumLow",b);
-            value=getProperty(name);
-            if(value) xvtr[b].spectrumLow=atoi(value);
-
-            sprintf(name,"xvtr.%d.spectrumStep",b);
-            value=getProperty(name);
-            if(value) xvtr[b].spectrumStep=atoi(value);
-    
-            sprintf(name,"xvtr.%d.waterfallHigh",b);
-            value=getProperty(name);
-            if(value) xvtr[b].waterfallHigh=atoi(value);
-
-            sprintf(name,"xvtr.%d.waterfallLow",b);
-            value=getProperty(name);
-            if(value) xvtr[b].waterfallLow=atoi(value);
-
             sprintf(name,"xvtr.%d.alexRxAntenna",b);
             value=getProperty(name);
             if(value) xvtr[b].alexRxAntenna=atoi(value);
-
-            sprintf(name,"xvtr.%d.alexRxOnlyAntenna",b);
-            value=getProperty(name);
-            if(value) xvtr[b].alexRxOnlyAntenna=atoi(value);
 
             sprintf(name,"xvtr.%d.alexTxAntenna",b);
             value=getProperty(name);
@@ -1577,16 +1433,6 @@ void bandSetAlexRxAntenna(int a) {
     }    
 }
 
-void bandSetAlexRxOnlyAntenna(int a) {
-    int current;
-    current=bandstack[band].current_entry;
-    if(displayHF) {
-        bandstack[band].entry[current].alexRxOnlyAntenna=a;
-    } else {
-        xvtr[xvtr_band].alexRxOnlyAntenna=0;
-    }    
-}
-
 void bandSetAlexTxAntenna(int a) {
     int current;
     current=bandstack[band].current_entry;
@@ -1596,3 +1442,25 @@ void bandSetAlexTxAntenna(int a) {
         xvtr[xvtr_band].alexTxAntenna=0;
     }    
 }
+
+int nextBand(gpointer *data) {
+    int b=band;
+    b++;
+    if(b==BANDS) {
+        b=0;
+    }
+    setBand(b);
+    return 0;
+}
+
+int previousBand(gpointer *data) {
+    int b=band;
+    b--;
+    if(b<0) {
+        b=BANDS-1;
+    }
+    setBand(b);
+    return 0;
+}
+
+

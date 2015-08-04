@@ -108,13 +108,20 @@ int bandscope_buffer_size;
 #define FFT_SIZE 4096;
 int fft_size;
 
+#define ANT1 0
+#define ANT2 1
+#define ANT3 2
+
+#define NONE 0
+#define RX1 1 // ANAN EXT2
+#define RX2 2 // ANAN EXT1
+#define RXXV 3
+
 int alexRxAntenna;
 int alexTxAntenna;
-int alexRxOnlyAntenna;
 
 float vswr;
 
-void ozy_set_metis();
 int ozy_use_metis();
 void ozy_set_usb();
 void ozy_set_interface(char*);
