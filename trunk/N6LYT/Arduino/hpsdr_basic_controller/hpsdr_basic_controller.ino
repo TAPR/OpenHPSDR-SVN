@@ -99,50 +99,9 @@ void setup() {
 }
 
 void loop() {
-    while(Serial.available() > 0) {
-      // read the incoming byte:
-      char c=Serial.read();
-      if(c==';') {
-        if(strncmp(message,"ZZAG",4)==0 && messageIndex==7) {
-            int gain=((message[4]-'0')*100)+
-                     ((message[5]-'0')*10)+
-                     (message[6]-'0');
-            afGain=gain;
-        } else if(strncmp(message,"ZZPC",4)==0 && messageIndex==7) {
-            int gain=((message[4]-'0')*100)+
-                     ((message[5]-'0')*10)+
-                     (message[6]-'0');
-            rfGain=gain;
-        } else if(strncmp(message,"ZZMD",4)==0 && messageIndex==6) {
-          int mode=((message[4]-'0')*10)+
-                   (message[5]-'0');
-          if(function) {
-            mode--;
-            if(mode<0) {
-              mode=11;
-            }
-          } else {  
-            mode++;
-            if(mode>11) {
-              mode=0;
-            }
-          }
-          Serial.print("ZZMD");
-          Serial.print(mode/10);
-          Serial.print(mode%10);
-          Serial.print(";");
-        } else {
-            // unhandled message;
-        }
-        messageIndex=0;
-      } else {
-        message[messageIndex++]=c;
-      }
-   }
-
+   checkSerialData();
 
    if(functionSwitch.update()) {
-      // note this switch has no pullup resistor
       if(functionSwitch.read()==0) {
         function=1;
       } else {
@@ -232,4 +191,45 @@ void loop() {
 
 }
 
-
+void checkSerialData() {
+   while(Serial.available() > 0) {
+      // read the incoming byte:
+      char c=Serial.read();
+      if(c==';') {
+        if(strncmp(message,"ZZAG",4)==0 && messageIndex==7) {
+            int gain=((message[4]-'0')*100)+
+                     ((message[5]-'0')*10)+
+                     (message[6]-'0');
+            afGain=gain;
+        } else if(strncmp(message,"ZZPC",4)==0 && messageIndex==7) {
+            int gain=((message[4]-'0')*100)+
+                     ((message[5]-'0')*10)+
+                     (message[6]-'0');
+            rfGain=gain;
+        } else if(strncmp(message,"ZZMD",4)==0 && messageIndex==6) {
+          int mode=((message[4]-'0')*10)+
+                   (message[5]-'0');
+          if(function) {
+            mode--;
+            if(mode<0) {
+              mode=11;
+            }
+          } else {
+            mode++;
+            if(mode>11) {
+              mode=0;
+            }
+          }
+          Serial.print("ZZMD");
+          Serial.print(mode/10);
+          Serial.print(mode%10);
+          Serial.print(";");
+        } else {
+            // unhandled message;
+        }
+        messageIndex=0;
+      } else {
+        message[messageIndex++]=c;
+      }
+   }
+}
