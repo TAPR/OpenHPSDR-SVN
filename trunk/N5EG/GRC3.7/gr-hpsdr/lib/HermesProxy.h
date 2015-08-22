@@ -45,7 +45,10 @@
 					// Must be integral power of 2
 
 #define TXBUFSIZE	512		// number of bytes in one TxBuf
-					
+
+
+#define TXINITIALBURST	  4		// Number of Ethernet frames to holdoff before bursting
+					// to fill hardware TXFIFO
 
 typedef float* IQBuf_t;			// IQ buffer type (IQ samples as floats)
 typedef unsigned char* RawBuf_t;	// Raw transmit buffer type
@@ -63,6 +66,7 @@ private:
 	unsigned RxWriteCounter;	// Which Rx buffer to write to
 	unsigned RxReadCounter;		// Which Rx buffer to read from
 	unsigned RxWriteFill;		// Fill level of the RxWrite buffer
+	bool TxHoldOff;			// Transmit buffer holdoff flag
 
 	RawBuf_t TxBuf[NUMTXBUFS]; 	// Transmit buffers
 	unsigned TxWriteCounter;	// Which Tx buffer to write to
