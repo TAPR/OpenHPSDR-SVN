@@ -135,6 +135,8 @@ HermesProxy::HermesProxy(int RxFreq0, int RxFreq1, int TxFreq, bool RxPre,
 	CurrentEthSeqNum = 0;	//
 
 	
+	TxHoldOff = 0;		// initialize transmit hold off counter
+
 	// allocate the receiver buffers
 	for(int i=0; i<NUMRXIQBUFS; i++)
 		RxIQBuf[i] = new float[RXBUFSIZE];
@@ -212,6 +214,7 @@ void HermesProxy::Start()	// start rx stream
 {
 	TxStop = false;					// allow Tx data to Hermes
 	metis_receive_stream_control(RxStream_NB_On, metis_entry);	// stop Hermes Rx data stream
+	TxHoldOff = true;				// Hold off buffers before bursting Tx
 };
 
 void HermesProxy::PrintRawBuf(RawBuf_t inbuf)	// for debugging
@@ -370,13 +373,34 @@ void HermesProxy::ReceiveRxIQ(unsigned char * inbuf)	// called by metis Rx threa
 			  SlowCount++;
 			  if ((SlowCount & 0x1ff) == 0x1ff)
 			  {
-			    float FwdPwr = (float)AIN1 * (float)AIN1 / 145000.0;
-			    float RevPwr = (float)AIN2 * (float)AIN2 / 145000.0;
+				float FwdPwr = (float)AIN1 * (float)AIN1 / 145000.0;
+				float RevPwr = (float)AIN2 * (float)AIN2 / 145000.0;
 
-			    fprintf(stderr, "AlexFwdPwr = %4.0f  AlexRevPwr = %4.0f   ", FwdPwr, RevPwr);
-			    fprintf(stderr, "ADCOver: %u  HermesVersion: %d (dec)  %X (hex)\n", ADCoverload, HermesVersion, HermesVersion);
-			    //fprintf(stderr, "AIN1:%u  AIN2:%u  AIN3:%u  AIN4:%u  AIN5:%u  AIN6:%u\n", AIN1, AIN2, AIN3, AIN4, AIN5, AIN6);  
-			    } 
+				// calculate SWR
+				double SWR =  0.0;
+				try
+				{
+					SWR = (1+sqrt(RevPwr/FwdPwr))/(1-sqrt(RevPwr/FwdPwr));
+					if(false == std::isnormal(SWR))
+					{
+						throw 0;
+					}
+				}
+				catch(int& e)
+				{
+					// there was an anomaly in the SWR calculation, make it obvious ...
+					SWR =  99.9;
+				}
+
+				fprintf(stderr, "AlexFwdPwr = %4.1f  AlexRevPwr = %4.1f   ", FwdPwr, RevPwr);
+				// report SWR if forward power is non-zero
+				if(static_cast<int>(FwdPwr) != 0)
+				{
+					fprintf(stderr, "SWR = %.2f:1   ", SWR);
+				}
+				fprintf(stderr, "ADCOver: %u  HermesVersion: %d (dec)  %X (hex)\n", ADCoverload, HermesVersion, HermesVersion);
+				//fprintf(stderr, "AIN1:%u  AIN2:%u  AIN3:%u  AIN4:%u  AIN5:%u  AIN6:%u\n", AIN1, AIN2, AIN3, AIN4, AIN5, AIN6);  
+				}
 			}
 		} //endif sync is valid
 		
@@ -1031,27 +1055,40 @@ void HermesProxy::SendTxIQ()
 	bool bufempty = (TxReadCounter == TxWriteCounter);
 	bool bufone = ((TxReadCounter+1 & (NUMTXBUFS - 1)) == TxWriteCounter);
 
+	int TempWriteCounter = TxWriteCounter;
+	if (TxWriteCounter < TxReadCounter)
+	  TempWriteCounter += NUMTXBUFS;
+	bool bufburst = ((TempWriteCounter - TxReadCounter) >= (TXINITIALBURST * 2));
+
 	//pthread_mutex_unlock(&mutexGPT);
 
 	TotalTxBufCount++;
 
+	if(TxHoldOff)	    	// Hold back initial burst of Tx Eth frames
+	{
+	  if (!bufburst)	// Not enough frames to send a burst
+	    return;
+	  			// Have enough frames to send the burst 
+	  TxHoldOff = false;	// clear the holdoff flag
+
+	  for (int i=0; i<(TXINITIALBURST * 2); i++)	// 2 USB frames per Ethernet frame
+ 	  {
+	    metis_write(ep, TxBuf[TxReadCounter], 512);	// write one USB frame to metis
+	    ++TxReadCounter &= (NUMTXBUFS - 1);		// and free it
+	  }
+
+	  return;
+	}
+
+ 	// We're out of bursting mode and into one-at-a-time mode
+
 	if ( bufempty | bufone )    // zero or one buffer ready	
 	{
 	  LostTxBufCount++;
-
-	//fprintf(stderr, "SendTxIQ01: TxReadCounter = %d   TxWriteCounter = %d  "
-		//"TxFrameIdleCount = %d  bufempty = %d   bufone = %d\n",
-		//TxReadCounter, TxWriteCounter, TxFrameIdleCount, bufempty, bufone); 
-
-	 // if(TxFrameIdleCount++ > 400)
-	 // {
-	    //UpdateHermes();             // Force basic register update if 
-	 //   TxFrameIdleCount = 0;	//   we've not sent for about 1 second
-	 // }
+	  return;
 	}
 	else	// two or more buffers ready
 	{
-
 	//fprintf(stderr, "SendTxIQ02: TxReadCounter = %d   TxWriteCounter = %d  TxFrameIdleCount = %d\n",
 		//TxReadCounter, TxWriteCounter, TxFrameIdleCount); 
 
