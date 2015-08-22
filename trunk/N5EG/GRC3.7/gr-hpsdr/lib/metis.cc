@@ -288,7 +288,8 @@ void metis_receive_stream_control(unsigned char streamControl, unsigned int entr
 
     h=gethostbyname(metis_cards[entry].ip_address);
     if(h==NULL) {
-        fprintf(stderr,"metis_start_receiver_stream: unknown host %s\n",metis_cards[0].ip_address);
+        fprintf(stderr,"metis_start_receiver_stream unknown target.  MAC: %s    IP: %s\n",
+	    metis_cards[entry].mac_address, metis_cards[entry].ip_address);
         exit(1);
     }
 
