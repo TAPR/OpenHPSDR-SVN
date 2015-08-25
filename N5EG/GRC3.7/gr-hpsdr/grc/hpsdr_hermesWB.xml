@@ -3,6 +3,7 @@
   <name>hermesWB</name>
   <key>hpsdr_hermesWB</key>
   <category>hpsdr</category>
+  <flags>throttle</flags>
   <import>import hpsdr</import>
   <make>hpsdr.hermesWB($RxPre, $Intfc, $CkS, $AlexRA, $AlexTA, $AlexHPF, $AlexLPF, $MACAddr)</make>
   <callback>set_RxPreamp($RxPre)</callback>
@@ -174,8 +175,8 @@
   <doc>
   This block is the HPSDR Hermes/Metis wideband module.
   It supports one wideband sampled receiver which outputs a vector
-  of 16384 time-continuous real float samples sampled at 122.88 MHz.
-  Consecutive vectors ARE NOT time contiguous. The update rates is a
+  of 16384 time-contiguous real float samples sampled at 122.88 MHz.
+  Consecutive vectors ARE NOT time contiguous. The update rate is a
   few vectors per second.
   *RxPreamp = 0 (Off), or  1 (On)
   *Interface = the ethernet interface to use.
