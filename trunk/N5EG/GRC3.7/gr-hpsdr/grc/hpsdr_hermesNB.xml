@@ -3,6 +3,7 @@
   <name>hermesNB</name>
   <key>hpsdr_hermesNB</key>
   <category>hpsdr</category>
+  <flags>throttle</flags>
   <import>import hpsdr</import>
   <make>hpsdr.hermesNB($Rx0F, $Rx1F, $TxF, $RxPre, $PTTmode, $PTTTx, $PTTRx, $TxDrive, $RxSmp, $Intfc, $CkS, $AlexRA, $AlexTA, $AlexHPF, $AlexLPF, $Verbose, $num_outputs,$MACAddr)</make>
   <callback>set_Receive0Frequency($Rx0F)</callback>
