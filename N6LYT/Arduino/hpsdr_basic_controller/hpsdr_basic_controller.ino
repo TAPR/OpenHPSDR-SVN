@@ -31,7 +31,7 @@
 * 
 *     Tuning up/down
 *     Band up/down
-*     Mode up/down
+*     filter up/down
 *     AF Gain up/down
 *     RF Gain up/down
 *     
@@ -51,12 +51,14 @@ Bounce encoderSwitch = Bounce();
 #define bandPin 5
 Bounce bandSwitch = Bounce();
 
-#define modePin 6
-Bounce modeSwitch = Bounce();
+#define filterPin 6
+Bounce filterSwitch = Bounce();
 
 #define functionPin 7
 Bounce functionSwitch = Bounce();
 
+#define pttPin 8
+Bounce pttSwitch = Bounce();
 
 
 int encoder=0;
@@ -64,6 +66,8 @@ int function=0;
 
 int afGain = -1;
 int rfGain = -1;
+
+int ptt=1;
 
 char message[8];
 int messageIndex=0;
@@ -83,11 +87,18 @@ void setup() {
   bandSwitch.interval(20);
   digitalWrite(bandPin, HIGH);
 
-  // setup mode pin
-  pinMode(modePin, INPUT);
-  modeSwitch.attach(modePin);
-  modeSwitch.interval(20);
-  digitalWrite(modePin, HIGH);
+  // setup filter pin
+  pinMode(filterPin, INPUT);
+  filterSwitch.attach(filterPin);
+  filterSwitch.interval(20);
+  digitalWrite(filterPin, HIGH);
+
+  // setup ptt pin
+  pinMode(pttPin, INPUT);
+  pttSwitch.attach(pttPin);
+  pttSwitch.interval(20);
+  digitalWrite(pttPin, HIGH);
+  
   
   //setup encoder switch
   pinMode(encoderPin, INPUT);
@@ -182,13 +193,34 @@ void loop() {
       }
     }
 
-    if(modeSwitch.update()) {
-      // note this switch has no pullup resistor
-      if(modeSwitch.read()==0) {
-        Serial.print("ZZMD;"); // get the mode
+  if(filterSwitch.update()) {
+    // note this switch has no pullup resistor
+    if(filterSwitch.read()==0) {
+      Serial.print("ZZFI;"); // get the filter
+    }
+  }
+
+  if(pttSwitch.update()) {
+    if(pttSwitch.read()==0) {
+      if(ptt) {
+        ptt=0;
+        if(function) {
+          Serial.print("ZZTU1;");
+        } else {
+          Serial.print("ZZTX1;");
+        }
+      }
+    } else {
+      if(!ptt) {
+        ptt=1;
+        if(function) {
+          Serial.print("ZZTU0;");
+        } else {
+          Serial.print("ZZTX0;");
+        }
       }
     }
-
+  }
 }
 
 void checkSerialData() {
@@ -223,6 +255,24 @@ void checkSerialData() {
           Serial.print("ZZMD");
           Serial.print(mode/10);
           Serial.print(mode%10);
+          Serial.print(";");
+        } else if(strncmp(message,"ZZFI",4)==0 && messageIndex==6) {
+          int filter=((message[4]-'0')*10)+
+                   (message[5]-'0');
+          if(function) {
+            filter--;
+            if(filter<0) {
+              filter=11;
+            }
+          } else {
+            filter++;
+            if(filter>11) {
+              filter=0;
+            }
+          }
+          Serial.print("ZZFI");
+          Serial.print(filter/10);
+          Serial.print(filter%10);
           Serial.print(";");
         } else {
             // unhandled message;
