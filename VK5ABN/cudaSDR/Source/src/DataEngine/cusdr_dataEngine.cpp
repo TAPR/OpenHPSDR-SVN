@@ -3180,6 +3180,8 @@ void DataProcessor::processOutputBuffer(const CPX &buffer) {
 					//if (m_dataIOThreadRunning) {
 					//	de->m_dataIO->writeData();
 					//}
+					de->m_dataIO->sendAudio(de->io.output_buffer); //RRK
+
 					writeData();
 					break;
 			

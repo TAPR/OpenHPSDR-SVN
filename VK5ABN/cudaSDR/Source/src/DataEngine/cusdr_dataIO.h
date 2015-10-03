@@ -37,6 +37,7 @@
 //#include <QThread>
 
 #include "cusdr_settings.h"
+#include "soundout.h"
 
 #ifdef LOG_DATAIO
 #   define DATAIO_DEBUG qDebug().nospace() << "DataIO::\t"
@@ -58,6 +59,7 @@ public slots:
 	void	initDataReceiverSocket();
 	void	readData();
 	void 	writeData();
+	void 	sendAudio(u_char *buf);
 	void	sendInitFramesToNetworkDevice(int rx);
 	void	networkDeviceStartStop(char value);
 	//void	setWidebandBuffers(int value);
@@ -109,6 +111,7 @@ private:
 	bool	m_firstFrame;
 	
 	volatile bool	m_stopped;
+	CSoundOut* m_pSoundCardOut;
 
 signals:
 	void	messageEvent(QString message);

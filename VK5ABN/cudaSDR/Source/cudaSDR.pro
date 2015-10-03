@@ -46,13 +46,16 @@ armv7l { HOST_ARCH = armv7-linux-gnueabihf }
         $$PWD/src/GL \
         $$PWD/src/QtDSP \
         $$PWD/src/Util \
-        $$CUDA_DIR/targets/$$HOST_ARCH/include
+        $$CUDA_DIR/targets/$$HOST_ARCH/include \
+        $$CUDA_DIR/include
 
     LIBS += \
         -lcudart \
         -lcufftw \
         -lcufft \
-        -L$$CUDA_DIR/targets/$$HOST_ARCH/lib
+        -lasound \
+        -L$$CUDA_DIR/targets/$$HOST_ARCH/lib \
+        -L$$CUDA_DIR/lib64
 
     CUDA_INC = $$join(INCLUDEPATH,' -I','-I',' ')
 

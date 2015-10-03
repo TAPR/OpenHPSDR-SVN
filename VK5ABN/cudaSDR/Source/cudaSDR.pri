@@ -25,6 +25,9 @@ HEADERS += \
 	./src/DataEngine/cusdr_dataIO.h \
 	./src/DataEngine/cusdr_discoverer.h \
 	./src/DataEngine/cusdr_receiver.h \
+	./src/DataEngine/datatypes.h \
+	./src/DataEngine/fractresampler.h \
+	./src/DataEngine/soundout.h \
 	./src/QtDSP/qtdsp_demodulation.h \
 	./src/QtDSP/qtdsp_dspEngine.h \
 	./src/QtDSP/qtdsp_dualModeAverager.h \
@@ -94,6 +97,8 @@ SOURCES += \
 	./src/DataEngine/cusdr_dataIO.cpp \
 	./src/DataEngine/cusdr_discoverer.cpp \
 	./src/DataEngine/cusdr_receiver.cpp \
+	./src/DataEngine/fractresampler.cpp \
+	./src/DataEngine/soundout.cpp \
 	./src/QtDSP/qtdsp_demodulation.cpp \
 	./src/QtDSP/qtdsp_dspEngine.cpp \
 	./src/QtDSP/qtdsp_dualModeAverager.cpp \
