@@ -100,6 +100,7 @@ public:
 	QList<qreal>		chirpData;
 
 	QUdpSocket*			sendSocket;
+	DataIO*					m_dataIO;
 	
 public slots:
 	bool	initDataEngine();
@@ -190,7 +191,6 @@ private:
 	void	setHPSDRConfig();
 
 private:
-	DataIO*					m_dataIO;
 	DataProcessor*			m_dataProcessor;
 	WideBandDataProcessor*	m_wbDataProcessor;
 	QDSPEngine*				m_chirpDspEngine;
