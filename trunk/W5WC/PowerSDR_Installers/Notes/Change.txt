@@ -33,4 +33,11 @@ This new control has been added in Setup on the DSP -> AM/SAM tab.
 - Added workaround for initializing Hermes PA relays.
 - Added "Stereo Diversity" capability for Beta testing.
 
-
+3.2.28 (2015-10-3)
+- added Spectral Noise Blanker (SNB)
+- Radio Astronomy (RA) enhanced for use with Rx2
+- corrected a undesired behavior preventing discovery from working when using a static IP address
+- added the ability to split the open collector outputs between VFOA (1-4) and VFOB (5-7) "4x3 Split"
+- added muli-lingual for ToolTip information
+- fixed 6m panadapter display reading for the Anan-10E
+- fixed crashing on startup when the Disable PA for HF/VHF is enabled
