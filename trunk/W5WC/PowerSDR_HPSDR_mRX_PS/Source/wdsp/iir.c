@@ -44,6 +44,7 @@ void calc_snotch (SNOTCH a)
 	a->a2 = + qk;
 	a->b1 = + 2.0 * qr * csn;
 	a->b2 = - qr * qr;
+	flush_snotch (a);
 }
 
 SNOTCH create_snotch (int run, int size, double* in, double* out, int rate, double f, double bw)
@@ -91,6 +92,24 @@ void xsnotch (SNOTCH a)
 	else if (a->out != a->in)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
 	LeaveCriticalSection (&a->cs_update);
+}
+
+void setBuffers_snotch (SNOTCH a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_snotch (SNOTCH a, int rate)
+{
+	a->rate = rate;
+	calc_snotch (a);
+}
+
+void setSize_snotch (SNOTCH a, int size)
+{
+	a->size = size;
+	flush_snotch (a);
 }
 
 /********************************************************************************************************
@@ -194,6 +213,7 @@ void calc_speak (SPEAK a)
 		}
 		break;
 	}
+	flush_speak (a);
 }
 
 SPEAK create_speak (int run, int size, double* in, double* out, int rate, double f, double bw, double gain, int nstages, int design)
@@ -275,6 +295,24 @@ void xspeak (SPEAK a)
 	LeaveCriticalSection (&a->cs_update);
 }
 
+void setBuffers_speak (SPEAK a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_speak (SPEAK a, int rate)
+{
+	a->rate = rate;
+	calc_speak (a);
+}
+
+void setSize_speak (SPEAK a, int size)
+{
+	a->size = size;
+	flush_speak (a);
+}
+
 /********************************************************************************************************
 *																										*
 *											RXA Properties												*
@@ -326,9 +364,37 @@ void SetRXASPCWGain (int channel, double gain)
 *																										*
 ********************************************************************************************************/
 
-MPEAK create_mpeak (int run, int size, double* in, double* out, int rate, int npeaks, int* enable, double* f, double* bw, double* gain, int nstages)
+void calc_mpeak (MPEAK a)
 {
 	int i;
+	a->tmp = (double *) malloc0 (a->size * sizeof (complex));
+	a->mix = (double *) malloc0 (a->size * sizeof (complex));
+	for (i = 0; i < a->npeaks; i++)
+	{
+		a->pfil[i] = create_speak (	1, 
+									a->size, 
+									a->in, 
+									a->tmp, 
+									a->rate, 
+									a->f[i], 
+									a->bw[i], 
+									a->gain[i], 
+									a->nstages, 
+									1 );
+	}
+}
+
+void decalc_mpeak (MPEAK a)
+{
+	int i;
+	for (i = 0; i < a->npeaks; i++)
+		destroy_speak (a->pfil[i]);
+	_aligned_free (a->mix);
+	_aligned_free (a->tmp);
+}
+
+MPEAK create_mpeak (int run, int size, double* in, double* out, int rate, int npeaks, int* enable, double* f, double* bw, double* gain, int nstages)
+{
 	MPEAK a = (MPEAK) malloc0 (sizeof (mpeak));
 	a->run = run;
 	a->size = size;
@@ -345,32 +411,17 @@ MPEAK create_mpeak (int run, int size, double* in, double* out, int rate, int np
 	memcpy (a->f, f, a->npeaks * sizeof (double));
 	memcpy (a->bw, bw, a->npeaks * sizeof (double));
 	memcpy (a->gain, gain, a->npeaks * sizeof (double));
-	a->tmp = (double *) malloc0 (a->size * sizeof (complex));
-	a->mix = (double *) malloc0 (a->size * sizeof (complex));
 	a->pfil = (SPEAK *) malloc0 (a->npeaks * sizeof (SPEAK));
-	for (i = 0; i < a->npeaks; i++)
-	{
-		a->pfil[i] = create_speak (	1, 
-									a->size, 
-									a->in, 
-									a->tmp, 
-									a->rate, 
-									a->f[i], 
-									a->bw[i], 
-									a->gain[i], 
-									a->nstages, 
-									1 );
-	}
 	InitializeCriticalSectionAndSpinCount ( &a->cs_update, 2500 );
+	calc_mpeak (a);
 	return a;
 }
 
 void destroy_mpeak (MPEAK a)
 {
+	decalc_mpeak (a);
 	DeleteCriticalSection (&a->cs_update);
 	_aligned_free (a->pfil);
-	_aligned_free (a->mix);
-	_aligned_free (a->tmp);
 	_aligned_free (a->gain);
 	_aligned_free (a->bw);
 	_aligned_free (a->f);
@@ -406,6 +457,28 @@ void xmpeak (MPEAK a)
 	else if (a->in != a->out)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
 	LeaveCriticalSection (&a->cs_update);
+}
+
+void setBuffers_mpeak (MPEAK a, double* in, double* out)
+{
+	decalc_mpeak (a);
+	a->in = in;
+	a->out = out;
+	calc_mpeak (a);
+}
+
+void setSamplerate_mpeak (MPEAK a, int rate)
+{
+	decalc_mpeak (a);
+	a->rate = rate;
+	calc_mpeak (a);
+}
+
+void setSize_mpeak (MPEAK a, int size)
+{
+	decalc_mpeak (a);
+	a->size = size;
+	calc_mpeak (a);
 }
 
 /********************************************************************************************************

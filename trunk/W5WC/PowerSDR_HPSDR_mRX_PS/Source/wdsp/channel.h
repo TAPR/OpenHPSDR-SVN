@@ -53,6 +53,7 @@ struct _ch
 	struct	//io buffers
 	{
 		IOB pc, pd, pe, pf;		// copies for console calls, dsp, exchange, and flush thread
+		volatile long ch_upslew;
 	} iob;
 } ch[MAX_CHANNELS];
 

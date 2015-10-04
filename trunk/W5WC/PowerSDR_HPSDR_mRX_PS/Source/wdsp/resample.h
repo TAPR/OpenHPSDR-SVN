@@ -39,8 +39,14 @@ typedef struct _resample
 	int size;			// number of input samples per buffer
 	double* in;			// input buffer for resampler
 	double* out;		// output buffer for resampler
+	int in_rate;
+	int out_rate;
+	double fcin;
+	double fc;
+	double fc_low;
 	double gain;
 	int idx_in;			// index for input into ring
+	int ncoefin;
 	int ncoef;			// number of coefficients
 	int L;				// interpolation factor
 	int M;				// decimation factor
@@ -62,6 +68,16 @@ void flush_resample (RESAMPLE a);
 
 __declspec (dllexport)
 int xresample (RESAMPLE a);
+
+extern void setBuffers_resample (RESAMPLE a, double* in, double* out);
+
+extern void setSize_resample(RESAMPLE a, int size);
+
+extern void setInRate_resample(RESAMPLE a, int rate);
+
+extern void setOutRate_resample(RESAMPLE a, int rate);
+
+extern void setFCLow_resample (RESAMPLE a, double fc_low);
 
 #endif
 

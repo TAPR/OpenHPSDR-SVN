@@ -136,6 +136,23 @@ void flush_anf (ANF a)
 	a->in_idx = 0;
 }
 
+void setBuffers_anf (ANF a, double* in, double* out)
+{
+	a->in_buff = in;
+	a->out_buff = out;
+}
+
+void setSamplerate_anf (ANF a, int rate)
+{
+	flush_anf (a);
+}
+
+void setSize_anf (ANF a, int size)
+{
+	a->buff_size = size;
+	flush_anf (a);
+}
+
 /********************************************************************************************************
 *																										*
 *											RXA Properties												*

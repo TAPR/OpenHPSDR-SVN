@@ -47,3 +47,5 @@ extern void doCalccPrintSamples(int channel);
 __declspec (dllexport) void print_buffer_parameters (const char* filename, int channel);
 
 extern void print_anb_parms (const char* filename, ANB a);
+
+extern void WriteAudioWDSP(double seconds, int rate, int size, double* indata, int mode, double gain);

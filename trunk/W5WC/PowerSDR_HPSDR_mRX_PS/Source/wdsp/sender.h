@@ -55,6 +55,12 @@ extern void flush_sender (SENDER a);
 
 extern void xsender (SENDER a);
 
+extern void setBuffers_sender (SENDER a, double* in);
+
+extern void setSamplerate_sender (SENDER a, int rate);
+
+extern void setSize_sender (SENDER a, int size);
+
 // RXA Properties
 
 extern __declspec (dllexport) void SetRXASpectrum (int channel, int flag, int disp, int ss, int LO);

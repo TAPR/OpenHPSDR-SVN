@@ -56,6 +56,12 @@ extern void flush_meter (METER a);
 
 extern void xmeter (METER a);
 
+extern void setBuffers_meter (METER a, double* in);
+
+extern void setSamplerate_meter (METER a, int rate);
+
+extern void setSize_meter (METER a, int size);
+
 // RXA Properties
 
 extern __declspec (dllexport) double GetRXAMeter (int channel, int mt);

@@ -494,6 +494,24 @@ void xnob (NOB a)
 	LeaveCriticalSection (&a->cs_update);
 }
 
+void setBuffers_nob (NOB a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_nob (NOB a, int rate)
+{
+	a->samplerate = rate;
+	init_nob (a);
+}
+
+void setSize_nob (NOB a, int size)
+{
+	a->buffsize = size;
+	flush_nob (a);
+}
+
 /********************************************************************************************************
 *																										*
 *										POINTER-BASED PROPERTIES										*

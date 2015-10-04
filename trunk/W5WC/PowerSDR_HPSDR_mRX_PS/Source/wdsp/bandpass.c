@@ -26,11 +26,31 @@ warren@wpratt.com
 
 #include "comm.h"
 
+void calc_bandpass (BANDPASS a)
+{
+	double* impulse;
+	a->infilt = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->product = (double *)malloc0(2 * a->size * sizeof(complex));
+	impulse = fir_bandpass(a->size + 1, a->f_low, a->f_high, a->samplerate, a->wintype, 1, 1.0 / (double)(2 * a->size));
+	a->mults = fftcv_mults(2 * a->size, impulse);
+	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt, (fftw_complex *)a->product, FFTW_FORWARD, FFTW_PATIENT);
+	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->out, FFTW_BACKWARD, FFTW_PATIENT);
+	_aligned_free(impulse);
+}
+
+void decalc_bandpass (BANDPASS a)
+{
+	fftw_destroy_plan(a->CRev);
+	fftw_destroy_plan(a->CFor);
+	_aligned_free(a->mults);
+	_aligned_free(a->product);
+	_aligned_free(a->infilt);
+}
+
 BANDPASS create_bandpass (int run, int position, int size, double* in, double* out, 
 	double f_low, double f_high, int samplerate, int wintype, double gain)
 {
 	BANDPASS a = (BANDPASS) malloc0 (sizeof (bandpass));
-	double* impulse;
 	a->run = run;
 	a->position = position;
 	a->size = size;
@@ -41,23 +61,13 @@ BANDPASS create_bandpass (int run, int position, int size, double* in, double* o
 	a->out = out;
 	a->f_low = f_low;
 	a->f_high = f_high;
-	a->infilt  = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->product = (double *) malloc0 (2 * a->size * sizeof (complex));
-	impulse = fir_bandpass (a->size + 1, f_low, f_high, a->samplerate, a->wintype, 1, 1.0 / (double)(2 * a->size));
-	a->mults = fftcv_mults (2 * a->size, impulse);
-	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt,  (fftw_complex *)a->product, FFTW_FORWARD,  FFTW_PATIENT);
-	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->out, FFTW_BACKWARD, FFTW_PATIENT);
-	_aligned_free (impulse);
+	calc_bandpass (a);
 	return a;
 }
 
 void destroy_bandpass (BANDPASS a)
 {
-	fftw_destroy_plan (a->CRev);
-	fftw_destroy_plan (a->CFor);
-	_aligned_free (a->mults);
-	_aligned_free (a->product);
-	_aligned_free (a->infilt);
+	decalc_bandpass (a);
 	_aligned_free (a);
 }
 
@@ -86,6 +96,36 @@ void xbandpass (BANDPASS a, int pos)
 	}
 	else if (a->in != a->out)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
+}
+
+void setBuffers_bandpass (BANDPASS a, double* in, double* out)
+{
+	decalc_bandpass (a);
+	a->in = in;
+	a->out = out;
+	calc_bandpass (a);
+}
+
+void setSamplerate_bandpass (BANDPASS a, int rate)
+{
+	decalc_bandpass (a);
+	a->samplerate = rate;
+	calc_bandpass (a);
+}
+
+void setSize_bandpass (BANDPASS a, int size)
+{
+	decalc_bandpass (a);
+	a->size = size;
+	calc_bandpass (a);
+}
+
+void setFreqs_bandpass (BANDPASS a, double f_low, double f_high)
+{
+	decalc_bandpass (a);
+	a->f_low = f_low;
+	a->f_high = f_high;
+	calc_bandpass (a);
 }
 
 /********************************************************************************************************

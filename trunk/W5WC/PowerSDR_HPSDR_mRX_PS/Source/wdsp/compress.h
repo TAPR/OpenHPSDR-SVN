@@ -49,6 +49,12 @@ extern void destroy_compressor (COMPRESSOR a);
 
 extern void flush_compressor (COMPRESSOR a);
 
+extern void setBuffers_compressor (COMPRESSOR a, double* in, double* out);
+
+extern void setSamplerate_compressor (COMPRESSOR a, int rate);
+
+extern void setSize_compressor (COMPRESSOR a, int size);
+
 // TXA Properties
 
 extern __declspec (dllexport) void SetTXACompressorRun (int channel, int run);

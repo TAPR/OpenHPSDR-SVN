@@ -57,12 +57,12 @@ SIPHON create_siphon (int run, int insize, double* in, int sipsize, int fftsize,
 	a->insize = insize;
 	a->in = in;
 	a->sipsize = sipsize;	// NOTE:  sipsize MUST BE A POWER OF TWO!!
+	a->fftsize = fftsize;
+	a->specmode = specmode;
 	a->sipbuff = (double *) malloc0 (a->sipsize * sizeof (complex));
 	a->idx = 0;
 	a->sipout  = (double *) malloc0 (a->sipsize * sizeof (complex));
-	a->fftsize = fftsize;
 	a->specout = (double *) malloc0 (a->fftsize * sizeof (complex));
-	a->specmode = specmode;
 	a->sipplan = fftw_plan_dft_1d (a->fftsize, (fftw_complex *)a->sipout, (fftw_complex *)a->specout, FFTW_FORWARD, FFTW_PATIENT);
 	a->window  = (double *) malloc0 (a->fftsize * sizeof (complex));
 	InitializeCriticalSectionAndSpinCount(&a->update, 2500);
@@ -115,6 +115,22 @@ void xsiphon (SIPHON a)
 		}
 	}
 	LeaveCriticalSection(&a->update);
+}
+
+void setBuffers_siphon (SIPHON a, double* in)
+{
+	a->in = in;
+}
+
+void setSamplerate_siphon (SIPHON a, int rate)
+{
+	flush_siphon (a);
+}
+
+void setSize_siphon (SIPHON a, int size)
+{
+	a->insize = size;
+	flush_siphon (a);
 }
 
 void suck (SIPHON a)

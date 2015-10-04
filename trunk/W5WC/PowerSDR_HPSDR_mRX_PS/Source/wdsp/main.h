@@ -35,4 +35,12 @@ extern void destroy_main (int channel);
 
 extern void flush_main (int channel);
 
+extern void setInputSamplerate_main (int channel);
+
+extern void setOutputSamplerate_main (int channel);
+
+extern void setDSPSamplerate_main (int channel);
+
+extern void setDSPBuffsize_main (int channel);
+
 #endif

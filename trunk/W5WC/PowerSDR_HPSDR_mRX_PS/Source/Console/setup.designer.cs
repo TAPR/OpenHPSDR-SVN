@@ -192,6 +192,10 @@
             this.udDDSIFFreq = new System.Windows.Forms.NumericUpDownTS();
             this.grpOzyType = new System.Windows.Forms.GroupBoxTS();
             this.panelTS7 = new System.Windows.Forms.PanelTS();
+            this.udStaticIPmask4 = new System.Windows.Forms.NumericUpDownTS();
+            this.udStaticIPmask3 = new System.Windows.Forms.NumericUpDownTS();
+            this.udStaticIPmask2 = new System.Windows.Forms.NumericUpDownTS();
+            this.udStaticIPmask1 = new System.Windows.Forms.NumericUpDownTS();
             this.radStaticIP4 = new System.Windows.Forms.RadioButtonTS();
             this.udStaticIP16 = new System.Windows.Forms.NumericUpDownTS();
             this.udStaticIP15 = new System.Windows.Forms.NumericUpDownTS();
@@ -374,6 +378,7 @@
             this.chkSpaceNavFlyPanadapter = new System.Windows.Forms.CheckBoxTS();
             this.chkSpaceNavControlVFOs = new System.Windows.Forms.CheckBoxTS();
             this.tpPennyCtrl = new System.Windows.Forms.TabPage();
+            this.chkSplitPins = new System.Windows.Forms.CheckBoxTS();
             this.btnPennyCtrlVHFReset = new System.Windows.Forms.ButtonTS();
             this.checkBoxTS1 = new System.Windows.Forms.CheckBoxTS();
             this.grpPennyExtCtrlVHF = new System.Windows.Forms.GroupBoxTS();
@@ -1266,6 +1271,11 @@
             this.tpDSP = new System.Windows.Forms.TabPage();
             this.tcDSP = new System.Windows.Forms.TabControl();
             this.tpDSPOptions = new System.Windows.Forms.TabPage();
+            this.grpDSPSNB = new System.Windows.Forms.GroupBoxTS();
+            this.udDSPSNBThresh2 = new System.Windows.Forms.NumericUpDownTS();
+            this.lblDSPSNBThresh2 = new System.Windows.Forms.LabelTS();
+            this.udDSPSNBThresh1 = new System.Windows.Forms.NumericUpDownTS();
+            this.lblDSPSNBThresh1 = new System.Windows.Forms.LabelTS();
             this.grpDSPSpeechProcessor = new System.Windows.Forms.GroupBoxTS();
             this.chkDSPCESSB = new System.Windows.Forms.CheckBoxTS();
             this.chkDSPTXMeterPeak = new System.Windows.Forms.CheckBoxTS();
@@ -2516,6 +2526,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).BeginInit();
             this.grpOzyType.SuspendLayout();
             this.panelTS7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udStaticIPmask4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udStaticIPmask3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udStaticIPmask2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udStaticIPmask1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udStaticIP16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udStaticIP15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udStaticIP14)).BeginInit();
@@ -2766,6 +2780,9 @@
             this.tpDSP.SuspendLayout();
             this.tcDSP.SuspendLayout();
             this.tpDSPOptions.SuspendLayout();
+            this.grpDSPSNB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh1)).BeginInit();
             this.grpDSPSpeechProcessor.SuspendLayout();
             this.grpDSPBufferSize.SuspendLayout();
             this.grpDSPBufDig.SuspendLayout();
@@ -5394,7 +5411,7 @@
             0,
             0,
             0});
-            this.udDDSIFFreq.Location = new System.Drawing.Point(332, 295);
+            this.udDDSIFFreq.Location = new System.Drawing.Point(209, 315);
             this.udDDSIFFreq.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -5437,6 +5454,10 @@
             // 
             this.panelTS7.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.panelTS7.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.panelTS7.Controls.Add(this.udStaticIPmask4);
+            this.panelTS7.Controls.Add(this.udStaticIPmask3);
+            this.panelTS7.Controls.Add(this.udStaticIPmask2);
+            this.panelTS7.Controls.Add(this.udStaticIPmask1);
             this.panelTS7.Controls.Add(this.radStaticIP4);
             this.panelTS7.Controls.Add(this.udStaticIP16);
             this.panelTS7.Controls.Add(this.udStaticIP15);
@@ -5458,20 +5479,133 @@
             this.panelTS7.Controls.Add(this.udStaticIP3);
             this.panelTS7.Controls.Add(this.udStaticIP2);
             this.panelTS7.Controls.Add(this.udStaticIP1);
-            this.panelTS7.Location = new System.Drawing.Point(6, 98);
+            this.panelTS7.Location = new System.Drawing.Point(0, 98);
             this.panelTS7.Name = "panelTS7";
-            this.panelTS7.Size = new System.Drawing.Size(234, 124);
+            this.panelTS7.Size = new System.Drawing.Size(245, 140);
             this.panelTS7.TabIndex = 15;
+            // 
+            // udStaticIPmask4
+            // 
+            this.udStaticIPmask4.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udStaticIPmask4.Location = new System.Drawing.Point(205, 81);
+            this.udStaticIPmask4.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udStaticIPmask4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udStaticIPmask4.Name = "udStaticIPmask4";
+            this.udStaticIPmask4.Size = new System.Drawing.Size(32, 20);
+            this.udStaticIPmask4.TabIndex = 24;
+            this.udStaticIPmask4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.udStaticIPmask4.Value = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            // 
+            // udStaticIPmask3
+            // 
+            this.udStaticIPmask3.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udStaticIPmask3.Location = new System.Drawing.Point(205, 55);
+            this.udStaticIPmask3.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udStaticIPmask3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udStaticIPmask3.Name = "udStaticIPmask3";
+            this.udStaticIPmask3.Size = new System.Drawing.Size(32, 20);
+            this.udStaticIPmask3.TabIndex = 23;
+            this.udStaticIPmask3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.udStaticIPmask3.Value = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            // 
+            // udStaticIPmask2
+            // 
+            this.udStaticIPmask2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udStaticIPmask2.Location = new System.Drawing.Point(205, 29);
+            this.udStaticIPmask2.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udStaticIPmask2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udStaticIPmask2.Name = "udStaticIPmask2";
+            this.udStaticIPmask2.Size = new System.Drawing.Size(32, 20);
+            this.udStaticIPmask2.TabIndex = 22;
+            this.udStaticIPmask2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.udStaticIPmask2.Value = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            // 
+            // udStaticIPmask1
+            // 
+            this.udStaticIPmask1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udStaticIPmask1.Location = new System.Drawing.Point(205, 3);
+            this.udStaticIPmask1.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.udStaticIPmask1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udStaticIPmask1.Name = "udStaticIPmask1";
+            this.udStaticIPmask1.Size = new System.Drawing.Size(32, 20);
+            this.udStaticIPmask1.TabIndex = 21;
+            this.udStaticIPmask1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.udStaticIPmask1.Value = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
             // 
             // radStaticIP4
             // 
             this.radStaticIP4.AutoSize = true;
             this.radStaticIP4.Image = null;
-            this.radStaticIP4.Location = new System.Drawing.Point(194, 82);
+            this.radStaticIP4.Location = new System.Drawing.Point(183, 83);
             this.radStaticIP4.Name = "radStaticIP4";
             this.radStaticIP4.Size = new System.Drawing.Size(14, 13);
             this.radStaticIP4.TabIndex = 20;
             this.radStaticIP4.UseVisualStyleBackColor = true;
+            this.radStaticIP4.Click += new System.EventHandler(this.btnSetIPAddr_Click);
             // 
             // udStaticIP16
             // 
@@ -5480,7 +5614,7 @@
             0,
             0,
             0});
-            this.udStaticIP16.Location = new System.Drawing.Point(149, 80);
+            this.udStaticIP16.Location = new System.Drawing.Point(138, 81);
             this.udStaticIP16.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5508,7 +5642,7 @@
             0,
             0,
             0});
-            this.udStaticIP15.Location = new System.Drawing.Point(104, 80);
+            this.udStaticIP15.Location = new System.Drawing.Point(93, 81);
             this.udStaticIP15.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5536,7 +5670,7 @@
             0,
             0,
             0});
-            this.udStaticIP14.Location = new System.Drawing.Point(59, 80);
+            this.udStaticIP14.Location = new System.Drawing.Point(48, 81);
             this.udStaticIP14.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5564,7 +5698,7 @@
             0,
             0,
             0});
-            this.udStaticIP13.Location = new System.Drawing.Point(14, 80);
+            this.udStaticIP13.Location = new System.Drawing.Point(3, 81);
             this.udStaticIP13.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5589,11 +5723,12 @@
             // 
             this.radStaticIP3.AutoSize = true;
             this.radStaticIP3.Image = null;
-            this.radStaticIP3.Location = new System.Drawing.Point(194, 56);
+            this.radStaticIP3.Location = new System.Drawing.Point(183, 57);
             this.radStaticIP3.Name = "radStaticIP3";
             this.radStaticIP3.Size = new System.Drawing.Size(14, 13);
             this.radStaticIP3.TabIndex = 15;
             this.radStaticIP3.UseVisualStyleBackColor = true;
+            this.radStaticIP3.Click += new System.EventHandler(this.btnSetIPAddr_Click);
             // 
             // udStaticIP12
             // 
@@ -5602,7 +5737,7 @@
             0,
             0,
             0});
-            this.udStaticIP12.Location = new System.Drawing.Point(149, 54);
+            this.udStaticIP12.Location = new System.Drawing.Point(138, 55);
             this.udStaticIP12.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5630,7 +5765,7 @@
             0,
             0,
             0});
-            this.udStaticIP11.Location = new System.Drawing.Point(104, 54);
+            this.udStaticIP11.Location = new System.Drawing.Point(93, 55);
             this.udStaticIP11.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5658,7 +5793,7 @@
             0,
             0,
             0});
-            this.udStaticIP10.Location = new System.Drawing.Point(59, 54);
+            this.udStaticIP10.Location = new System.Drawing.Point(48, 55);
             this.udStaticIP10.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5686,7 +5821,7 @@
             0,
             0,
             0});
-            this.udStaticIP9.Location = new System.Drawing.Point(14, 54);
+            this.udStaticIP9.Location = new System.Drawing.Point(3, 55);
             this.udStaticIP9.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5711,23 +5846,25 @@
             // 
             this.radStaticIP2.AutoSize = true;
             this.radStaticIP2.Image = null;
-            this.radStaticIP2.Location = new System.Drawing.Point(194, 30);
+            this.radStaticIP2.Location = new System.Drawing.Point(183, 31);
             this.radStaticIP2.Name = "radStaticIP2";
             this.radStaticIP2.Size = new System.Drawing.Size(14, 13);
             this.radStaticIP2.TabIndex = 10;
             this.radStaticIP2.UseVisualStyleBackColor = true;
+            this.radStaticIP2.Click += new System.EventHandler(this.btnSetIPAddr_Click);
             // 
             // radStaticIP1
             // 
             this.radStaticIP1.AutoSize = true;
             this.radStaticIP1.Checked = true;
             this.radStaticIP1.Image = null;
-            this.radStaticIP1.Location = new System.Drawing.Point(194, 5);
+            this.radStaticIP1.Location = new System.Drawing.Point(183, 6);
             this.radStaticIP1.Name = "radStaticIP1";
             this.radStaticIP1.Size = new System.Drawing.Size(14, 13);
             this.radStaticIP1.TabIndex = 9;
             this.radStaticIP1.TabStop = true;
             this.radStaticIP1.UseVisualStyleBackColor = true;
+            this.radStaticIP1.Click += new System.EventHandler(this.btnSetIPAddr_Click);
             // 
             // udStaticIP8
             // 
@@ -5736,7 +5873,7 @@
             0,
             0,
             0});
-            this.udStaticIP8.Location = new System.Drawing.Point(149, 28);
+            this.udStaticIP8.Location = new System.Drawing.Point(138, 29);
             this.udStaticIP8.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5764,7 +5901,7 @@
             0,
             0,
             0});
-            this.udStaticIP7.Location = new System.Drawing.Point(104, 28);
+            this.udStaticIP7.Location = new System.Drawing.Point(93, 29);
             this.udStaticIP7.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5792,7 +5929,7 @@
             0,
             0,
             0});
-            this.udStaticIP6.Location = new System.Drawing.Point(59, 28);
+            this.udStaticIP6.Location = new System.Drawing.Point(48, 29);
             this.udStaticIP6.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5820,7 +5957,7 @@
             0,
             0,
             0});
-            this.udStaticIP5.Location = new System.Drawing.Point(14, 28);
+            this.udStaticIP5.Location = new System.Drawing.Point(3, 29);
             this.udStaticIP5.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5844,7 +5981,7 @@
             // btnSetIPAddr
             // 
             this.btnSetIPAddr.Image = null;
-            this.btnSetIPAddr.Location = new System.Drawing.Point(166, 102);
+            this.btnSetIPAddr.Location = new System.Drawing.Point(120, 107);
             this.btnSetIPAddr.Name = "btnSetIPAddr";
             this.btnSetIPAddr.Size = new System.Drawing.Size(60, 20);
             this.btnSetIPAddr.TabIndex = 4;
@@ -5859,7 +5996,7 @@
             0,
             0,
             0});
-            this.udStaticIP4.Location = new System.Drawing.Point(149, 2);
+            this.udStaticIP4.Location = new System.Drawing.Point(138, 3);
             this.udStaticIP4.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5887,7 +6024,7 @@
             0,
             0,
             0});
-            this.udStaticIP3.Location = new System.Drawing.Point(104, 2);
+            this.udStaticIP3.Location = new System.Drawing.Point(93, 3);
             this.udStaticIP3.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5915,7 +6052,7 @@
             0,
             0,
             0});
-            this.udStaticIP2.Location = new System.Drawing.Point(59, 2);
+            this.udStaticIP2.Location = new System.Drawing.Point(48, 3);
             this.udStaticIP2.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5943,7 +6080,7 @@
             0,
             0,
             0});
-            this.udStaticIP1.Location = new System.Drawing.Point(14, 2);
+            this.udStaticIP1.Location = new System.Drawing.Point(3, 3);
             this.udStaticIP1.Maximum = new decimal(new int[] {
             254,
             0,
@@ -5969,9 +6106,9 @@
             this.chkEnableStaticIP.Image = null;
             this.chkEnableStaticIP.Location = new System.Drawing.Point(28, 80);
             this.chkEnableStaticIP.Name = "chkEnableStaticIP";
-            this.chkEnableStaticIP.Size = new System.Drawing.Size(152, 16);
+            this.chkEnableStaticIP.Size = new System.Drawing.Size(217, 16);
             this.chkEnableStaticIP.TabIndex = 14;
-            this.chkEnableStaticIP.Text = "Enable Static IP Address";
+            this.chkEnableStaticIP.Text = "Use Static IP Address                   Mask";
             this.chkEnableStaticIP.CheckedChanged += new System.EventHandler(this.chkEnableStaticIP_CheckedChanged);
             // 
             // chkFullDiscovery
@@ -6110,7 +6247,6 @@
             this.radGenModelANAN100B.TabIndex = 10;
             this.radGenModelANAN100B.Text = "100B";
             this.radGenModelANAN100B.UseVisualStyleBackColor = true;
-            this.radGenModelANAN100B.Visible = false;
             this.radGenModelANAN100B.CheckedChanged += new System.EventHandler(this.radGenModelANAN100B_CheckedChanged);
             // 
             // radGenModelOrion
@@ -6264,7 +6400,7 @@
             this.grpMetisAddr.Controls.Add(this.labelTS9);
             this.grpMetisAddr.Controls.Add(this.lblMetisIP);
             this.grpMetisAddr.Controls.Add(this.lblMetisMAC);
-            this.grpMetisAddr.Location = new System.Drawing.Point(326, 235);
+            this.grpMetisAddr.Location = new System.Drawing.Point(326, 279);
             this.grpMetisAddr.Name = "grpMetisAddr";
             this.grpMetisAddr.Size = new System.Drawing.Size(251, 56);
             this.grpMetisAddr.TabIndex = 35;
@@ -8303,6 +8439,7 @@
             // tpPennyCtrl
             // 
             this.tpPennyCtrl.BackColor = System.Drawing.SystemColors.Control;
+            this.tpPennyCtrl.Controls.Add(this.chkSplitPins);
             this.tpPennyCtrl.Controls.Add(this.btnPennyCtrlVHFReset);
             this.tpPennyCtrl.Controls.Add(this.checkBoxTS1);
             this.tpPennyCtrl.Controls.Add(this.grpPennyExtCtrlVHF);
@@ -8317,6 +8454,19 @@
             this.tpPennyCtrl.TabIndex = 6;
             this.tpPennyCtrl.Text = "Penny/Hermes Ctrl";
             this.tpPennyCtrl.Paint += new System.Windows.Forms.PaintEventHandler(this.tpPennyCtrl_Paint);
+            // 
+            // chkSplitPins
+            // 
+            this.chkSplitPins.AutoSize = true;
+            this.chkSplitPins.Image = null;
+            this.chkSplitPins.Location = new System.Drawing.Point(22, 278);
+            this.chkSplitPins.Name = "chkSplitPins";
+            this.chkSplitPins.Size = new System.Drawing.Size(66, 17);
+            this.chkSplitPins.TabIndex = 8;
+            this.chkSplitPins.Text = "4x3 Split";
+            this.toolTip1.SetToolTip(this.chkSplitPins, "Use Pins 1-4 for VFOA, 5-7 for VFOB");
+            this.chkSplitPins.UseVisualStyleBackColor = true;
+            this.chkSplitPins.CheckedChanged += new System.EventHandler(this.chkSplitPins_CheckedChanged);
             // 
             // btnPennyCtrlVHFReset
             // 
@@ -20679,6 +20829,7 @@
             // 
             // tpDSPOptions
             // 
+            this.tpDSPOptions.Controls.Add(this.grpDSPSNB);
             this.tpDSPOptions.Controls.Add(this.grpDSPSpeechProcessor);
             this.tpDSPOptions.Controls.Add(this.chkDSPTXMeterPeak);
             this.tpDSPOptions.Controls.Add(this.grpDSPBufferSize);
@@ -20690,10 +20841,101 @@
             this.tpDSPOptions.TabIndex = 2;
             this.tpDSPOptions.Text = "Options";
             // 
+            // grpDSPSNB
+            // 
+            this.grpDSPSNB.Controls.Add(this.udDSPSNBThresh2);
+            this.grpDSPSNB.Controls.Add(this.lblDSPSNBThresh2);
+            this.grpDSPSNB.Controls.Add(this.udDSPSNBThresh1);
+            this.grpDSPSNB.Controls.Add(this.lblDSPSNBThresh1);
+            this.grpDSPSNB.Location = new System.Drawing.Point(364, 8);
+            this.grpDSPSNB.Name = "grpDSPSNB";
+            this.grpDSPSNB.Size = new System.Drawing.Size(138, 80);
+            this.grpDSPSNB.TabIndex = 44;
+            this.grpDSPSNB.TabStop = false;
+            this.grpDSPSNB.Text = "SNB";
+            // 
+            // udDSPSNBThresh2
+            // 
+            this.udDSPSNBThresh2.DecimalPlaces = 1;
+            this.udDSPSNBThresh2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDSPSNBThresh2.Location = new System.Drawing.Point(76, 48);
+            this.udDSPSNBThresh2.Maximum = new decimal(new int[] {
+            600,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh2.Minimum = new decimal(new int[] {
+            40,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh2.Name = "udDSPSNBThresh2";
+            this.udDSPSNBThresh2.Size = new System.Drawing.Size(56, 20);
+            this.udDSPSNBThresh2.TabIndex = 12;
+            this.toolTip1.SetToolTip(this.udDSPSNBThresh2, "Controls the detection threshold for impulse noise.  ");
+            this.udDSPSNBThresh2.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh2.ValueChanged += new System.EventHandler(this.udDSPSNBThresh2_ValueChanged);
+            // 
+            // lblDSPSNBThresh2
+            // 
+            this.lblDSPSNBThresh2.Image = null;
+            this.lblDSPSNBThresh2.Location = new System.Drawing.Point(6, 49);
+            this.lblDSPSNBThresh2.Name = "lblDSPSNBThresh2";
+            this.lblDSPSNBThresh2.Size = new System.Drawing.Size(64, 16);
+            this.lblDSPSNBThresh2.TabIndex = 13;
+            this.lblDSPSNBThresh2.Text = "Threshold 2";
+            // 
+            // udDSPSNBThresh1
+            // 
+            this.udDSPSNBThresh1.DecimalPlaces = 1;
+            this.udDSPSNBThresh1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDSPSNBThresh1.Location = new System.Drawing.Point(76, 24);
+            this.udDSPSNBThresh1.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh1.Minimum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh1.Name = "udDSPSNBThresh1";
+            this.udDSPSNBThresh1.Size = new System.Drawing.Size(56, 20);
+            this.udDSPSNBThresh1.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.udDSPSNBThresh1, "Controls the detection threshold for impulse noise.  ");
+            this.udDSPSNBThresh1.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh1.ValueChanged += new System.EventHandler(this.udDSPSNBThresh1_ValueChanged);
+            // 
+            // lblDSPSNBThresh1
+            // 
+            this.lblDSPSNBThresh1.Image = null;
+            this.lblDSPSNBThresh1.Location = new System.Drawing.Point(6, 25);
+            this.lblDSPSNBThresh1.Name = "lblDSPSNBThresh1";
+            this.lblDSPSNBThresh1.Size = new System.Drawing.Size(64, 16);
+            this.lblDSPSNBThresh1.TabIndex = 11;
+            this.lblDSPSNBThresh1.Text = "Threshold 1";
+            // 
             // grpDSPSpeechProcessor
             // 
             this.grpDSPSpeechProcessor.Controls.Add(this.chkDSPCESSB);
-            this.grpDSPSpeechProcessor.Location = new System.Drawing.Point(134, 208);
+            this.grpDSPSpeechProcessor.Location = new System.Drawing.Point(170, 278);
             this.grpDSPSpeechProcessor.Name = "grpDSPSpeechProcessor";
             this.grpDSPSpeechProcessor.Size = new System.Drawing.Size(200, 48);
             this.grpDSPSpeechProcessor.TabIndex = 43;
@@ -20968,12 +21210,12 @@
             this.grpDSPNB.Controls.Add(this.labelTS151);
             this.grpDSPNB.Controls.Add(this.udDSPNB);
             this.grpDSPNB.Controls.Add(this.lblDSPNBThreshold);
-            this.grpDSPNB.Location = new System.Drawing.Point(468, 8);
+            this.grpDSPNB.Location = new System.Drawing.Point(249, 8);
             this.grpDSPNB.Name = "grpDSPNB";
             this.grpDSPNB.Size = new System.Drawing.Size(109, 211);
             this.grpDSPNB.TabIndex = 35;
             this.grpDSPNB.TabStop = false;
-            this.grpDSPNB.Text = "Noise Blanker";
+            this.grpDSPNB.Text = "NB / NB2";
             // 
             // labelTS326
             // 
@@ -21161,7 +21403,7 @@
             // lblDSPNBThreshold
             // 
             this.lblDSPNBThreshold.Image = null;
-            this.lblDSPNBThreshold.Location = new System.Drawing.Point(6, 26);
+            this.lblDSPNBThreshold.Location = new System.Drawing.Point(5, 25);
             this.lblDSPNBThreshold.Name = "lblDSPNBThreshold";
             this.lblDSPNBThreshold.Size = new System.Drawing.Size(64, 16);
             this.lblDSPNBThreshold.TabIndex = 9;
@@ -40797,6 +41039,10 @@
             this.grpOzyType.PerformLayout();
             this.panelTS7.ResumeLayout(false);
             this.panelTS7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udStaticIPmask4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udStaticIPmask3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udStaticIPmask2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udStaticIPmask1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udStaticIP16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udStaticIP15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udStaticIP14)).EndInit();
@@ -40878,6 +41124,7 @@
             this.grpOptSpaceNav.ResumeLayout(false);
             this.grpOptSpaceNav.PerformLayout();
             this.tpPennyCtrl.ResumeLayout(false);
+            this.tpPennyCtrl.PerformLayout();
             this.grpPennyExtCtrlVHF.ResumeLayout(false);
             this.grpPennyExtCtrl.ResumeLayout(false);
             this.tpHPSDR.ResumeLayout(false);
@@ -41086,6 +41333,9 @@
             this.tpDSP.ResumeLayout(false);
             this.tcDSP.ResumeLayout(false);
             this.tpDSPOptions.ResumeLayout(false);
+            this.grpDSPSNB.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh1)).EndInit();
             this.grpDSPSpeechProcessor.ResumeLayout(false);
             this.grpDSPSpeechProcessor.PerformLayout();
             this.grpDSPBufferSize.ResumeLayout(false);
@@ -42641,5 +42891,15 @@
         private System.Windows.Forms.ComboBoxTS comboFocusMasterMode;
         private System.Windows.Forms.TextBoxTS txtFocusMasterDelay;
         private System.Windows.Forms.LabelTS labelTS359;
+        private System.Windows.Forms.NumericUpDownTS udStaticIPmask4;
+        private System.Windows.Forms.NumericUpDownTS udStaticIPmask3;
+        private System.Windows.Forms.NumericUpDownTS udStaticIPmask2;
+        private System.Windows.Forms.NumericUpDownTS udStaticIPmask1;
+        private System.Windows.Forms.GroupBoxTS grpDSPSNB;
+        private System.Windows.Forms.NumericUpDownTS udDSPSNBThresh1;
+        private System.Windows.Forms.LabelTS lblDSPSNBThresh1;
+        private System.Windows.Forms.NumericUpDownTS udDSPSNBThresh2;
+        private System.Windows.Forms.LabelTS lblDSPSNBThresh2;
+        private System.Windows.Forms.CheckBoxTS chkSplitPins;
     }
 }

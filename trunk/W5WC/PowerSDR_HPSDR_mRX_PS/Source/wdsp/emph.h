@@ -53,4 +53,10 @@ extern void flush_emph (EMPH a);
 
 extern void xemph (EMPH a, int position);
 
+extern void setBuffers_emph (EMPH a, double* in, double* out);
+
+extern void setSamplerate_emph (EMPH a, int rate);
+
+extern void setSize_emph (EMPH a, int size);
+
 #endif

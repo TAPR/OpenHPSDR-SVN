@@ -49,6 +49,12 @@ extern void flush_panel (PANEL a);
 
 extern void xpanel (PANEL a);
 
+extern void setBuffers_panel (PANEL a, double* in, double* out);
+
+extern void setSamplerate_panel (PANEL a, int rate);
+
+extern void setSize_panel (PANEL a, int size);
+
 // RXA Properties
 
 extern __declspec (dllexport) void SetRXAPanelRun (int channel, int run);

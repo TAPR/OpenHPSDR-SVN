@@ -349,12 +349,12 @@ namespace PowerSDR
             this.grpModel.Text = "Model";
             this.grpModel.Visible = false;
             // 
-            // radGenModelANAN10B
+            // radGenModelANAN10E
             // 
             this.radGenModelANAN10E.AutoSize = true;
             this.radGenModelANAN10E.Image = null;
             this.radGenModelANAN10E.Location = new System.Drawing.Point(19, 71);
-            this.radGenModelANAN10E.Name = "radGenModelANAN10B";
+            this.radGenModelANAN10E.Name = "radGenModelANAN10E";
             this.radGenModelANAN10E.Size = new System.Drawing.Size(77, 17);
             this.radGenModelANAN10E.TabIndex = 14;
             this.radGenModelANAN10E.Text = "ANAN-10E";
@@ -365,19 +365,18 @@ namespace PowerSDR
             // 
             this.radGenModelANAN100B.AutoSize = true;
             this.radGenModelANAN100B.Image = null;
-            this.radGenModelANAN100B.Location = new System.Drawing.Point(18, 162);
+            this.radGenModelANAN100B.Location = new System.Drawing.Point(19, 105);
             this.radGenModelANAN100B.Name = "radGenModelANAN100B";
             this.radGenModelANAN100B.Size = new System.Drawing.Size(83, 17);
             this.radGenModelANAN100B.TabIndex = 13;
             this.radGenModelANAN100B.Text = "ANAN-100B";
             this.radGenModelANAN100B.UseVisualStyleBackColor = true;
-            this.radGenModelANAN100B.Visible = false;
             // 
             // radGenModelOrion
             // 
             this.radGenModelOrion.AutoSize = true;
             this.radGenModelOrion.Image = null;
-            this.radGenModelOrion.Location = new System.Drawing.Point(19, 121);
+            this.radGenModelOrion.Location = new System.Drawing.Point(19, 139);
             this.radGenModelOrion.Name = "radGenModelOrion";
             this.radGenModelOrion.Size = new System.Drawing.Size(84, 17);
             this.radGenModelOrion.TabIndex = 12;
@@ -389,7 +388,7 @@ namespace PowerSDR
             // 
             this.radGenModelANAN100D.AutoSize = true;
             this.radGenModelANAN100D.Image = null;
-            this.radGenModelANAN100D.Location = new System.Drawing.Point(19, 104);
+            this.radGenModelANAN100D.Location = new System.Drawing.Point(19, 122);
             this.radGenModelANAN100D.Name = "radGenModelANAN100D";
             this.radGenModelANAN100D.Size = new System.Drawing.Size(84, 17);
             this.radGenModelANAN100D.TabIndex = 11;

@@ -46,7 +46,32 @@ void compute_slews(AMSQ a)
 	}
 }
 
-AMSQ create_amsq (int run, int size, double* in, double* out, double* trigger, int rate, double avtau, double tup, double tdown, double tail_thresh, double unmute_thresh, double min_tail, double max_tail, double muted_gain)
+void calc_amsq(AMSQ a)
+{
+	// signal averaging
+	a->trigsig = (double *)malloc0(a->size * sizeof(complex));
+	a->avm = exp(-1.0 / (a->rate * a->avtau));
+	a->onem_avm = 1.0 - a->avm;
+	a->avsig = 0.0;
+	// level change
+	a->ntup = (int)(a->tup * a->rate);
+	a->ntdown = (int)(a->tdown * a->rate);
+	a->cup = (double *)malloc0((a->ntup + 1) * sizeof(double));
+	a->cdown = (double *)malloc0((a->ntdown + 1) * sizeof(double));
+	compute_slews(a);
+	// control
+	a->state = 0;
+}
+
+void decalc_amsq (AMSQ a)
+{
+	_aligned_free (a->cdown);
+	_aligned_free (a->cup);
+	_aligned_free (a->trigsig);
+}
+
+AMSQ create_amsq (int run, int size, double* in, double* out, double* trigger, int rate, double avtau, 
+	double tup, double tdown, double tail_thresh, double unmute_thresh, double min_tail, double max_tail, double muted_gain)
 {
 	AMSQ a = (AMSQ) malloc0 (sizeof (amsq));
 	a->run = run;
@@ -55,35 +80,21 @@ AMSQ create_amsq (int run, int size, double* in, double* out, double* trigger, i
 	a->out = out;
 	a->rate = (double)rate;
 	a->muted_gain = muted_gain;
-	// signal averaging
 	a->trigger = trigger;
-	a->trigsig = (double *)malloc0 (a->size * sizeof (complex));
 	a->avtau = avtau;
-	a->avm = exp (-1.0 / (a->rate * a->avtau));
-	a->onem_avm = 1.0 - a->avm;
-	a->avsig = 0.0;
-	// level change
 	a->tup = tup;
 	a->tdown = tdown;
-	a->ntup = (int)(a->tup * a->rate);
-	a->ntdown = (int)(a->tdown * a->rate);
-	a->cup   = (double *) malloc0 ((a->ntup + 1) * sizeof (double));
-	a->cdown = (double *) malloc0 ((a->ntdown + 1) * sizeof (double));
-	compute_slews(a);
-	// control
 	a->tail_thresh = tail_thresh;
 	a->unmute_thresh = unmute_thresh;
 	a->min_tail = min_tail;
 	a->max_tail = max_tail;
-	a->state = 0;
+	calc_amsq (a);
 	return a;
 }
 
 void destroy_amsq (AMSQ a)
 {
-	_aligned_free (a->cdown);
-	_aligned_free (a->cup);
-	_aligned_free (a->trigsig);
+	decalc_amsq (a);
 	_aligned_free (a);
 }
 
@@ -167,6 +178,27 @@ void xamsq (AMSQ a)
 void xamsqcap (AMSQ a)
 {
 	memcpy (a->trigsig, a->trigger, a->size * sizeof (complex));
+}
+
+void setBuffers_amsq (AMSQ a, double* in, double* out, double* trigger)
+{
+	a->in = in;
+	a->out = out;
+	a->trigger = trigger;
+}
+
+void setSamplerate_amsq (AMSQ a, int rate)
+{
+	decalc_amsq (a);
+	a->rate = rate;
+	calc_amsq (a);
+}
+
+void setSize_amsq (AMSQ a, int size)
+{
+	decalc_amsq (a);
+	a->size = size;
+	calc_amsq (a);
 }
 
 /********************************************************************************************************

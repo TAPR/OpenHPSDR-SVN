@@ -85,6 +85,12 @@ extern void flush_fmd (FMD a);
 
 extern void xfmd (FMD a);
 
+extern void setBuffers_fmd (FMD a, double* in, double* out);
+
+extern void setSamplerate_fmd (FMD a, int rate);
+
+extern void setSize_fmd (FMD a, int size);
+
 // RXA Properties
 
 extern __declspec (dllexport) void SetRXAFMDeviation (int channel, double deviation);

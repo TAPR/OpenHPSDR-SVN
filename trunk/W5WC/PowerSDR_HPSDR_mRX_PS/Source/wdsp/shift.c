@@ -43,7 +43,6 @@ SHIFT create_shift (int run, int size, double* in, double* out, int rate, double
 	a->out = out;
 	a->rate = (double)rate;
 	a->shift = fshift;
-	a->phase = 0.0;
 	calc_shift (a);
 	return a;
 }
@@ -83,6 +82,24 @@ void xshift (SHIFT a)
 	}
 	else if (a->in != a->out)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
+}
+
+void setBuffers_shift(SHIFT a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_shift (SHIFT a, int rate)
+{
+	a->rate = rate;
+	calc_shift(a);
+}
+
+void setSize_shift (SHIFT a, int size)
+{
+	a->size = size;
+	flush_shift (a);
 }
 
 /********************************************************************************************************

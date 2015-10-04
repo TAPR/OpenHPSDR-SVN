@@ -77,6 +77,22 @@ void xgain (GAIN a)
 	LeaveCriticalSection (&a->cs_update);
 }
 
+void setBuffers_gain (GAIN a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_gain (GAIN a, int rate)
+{
+
+}
+
+void setSize_gain (GAIN a, int size)
+{
+	a->size = size;
+}
+
 /********************************************************************************************************
 *																										*
 *									      POINTER-BASED PROPERTIES										*

@@ -101,6 +101,12 @@ extern void flush_amd (AMD a);
 
 extern void xamd (AMD a);
 
+extern void setBuffers_amd (AMD a, double* in, double* out);
+
+extern void setSamplerate_amd (AMD a, int rate);
+
+extern void setSize_amd (AMD a, int size);
+
 // RXA Properties
 
 extern __declspec (dllexport) void SetRXAAMDRun(int channel, int run);

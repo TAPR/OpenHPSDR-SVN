@@ -47,6 +47,12 @@ __declspec (dllexport) void flush_gain (GAIN a);
 
 __declspec (dllexport) void xgain (GAIN a);
 
+extern void setBuffers_gain (GAIN a, double* in, double* out);
+
+extern void setSamplerate_gain (GAIN a, int rate);
+
+extern void setSize_gain (GAIN a, int size);
+
 // TXA Properties
 
 // POINTER-BASED Properties

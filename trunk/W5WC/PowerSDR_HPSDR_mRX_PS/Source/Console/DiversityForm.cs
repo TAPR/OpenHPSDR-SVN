@@ -1220,7 +1220,7 @@ namespace PowerSDR
         {
             console.RX2DSPMode = console.RX1DSPMode;
             console.RX2Filter = console.RX1Filter;
-            console.RX2PreampMode = console.RX1PreampMode;
+            //console.RX2PreampMode = console.RX1PreampMode;
             console.VFOSync = true;
             console.radio.GetDSPRX(1, 0).Copy(console.radio.GetDSPRX(0, 0));
         }

@@ -101,9 +101,7 @@ namespace PowerSDR
 
 		
 		public static Band AntBandFromFreq() 
-		{
-
-			
+		{		
 			Band result;
  
 			Console c = Console.getConsole(); 
@@ -168,6 +166,71 @@ namespace PowerSDR
 			return result; 
 		}
 
+
+        public static Band AntBandFromFreqB()
+        {
+            Band result;
+
+            Console c = Console.getConsole();
+            if (c == null)
+            {
+                System.Console.WriteLine("no console");
+                return Band.LAST;
+            }
+
+            double freq = Console.getConsole().VFOBFreq;   //was = 0.0 Vk4xv Txvr fix.
+
+            if (c.RX2XVTRIndex >= 0)
+                freq = c.XVTRForm.TranslateFreq(freq);
+            else freq = Console.getConsole().VFOBFreq;
+
+            System.Console.WriteLine("Freq is: " + freq);
+
+            if (freq >= 12.075)
+            {
+                if (freq >= 23.17)
+                {
+                    if (freq >= 26.465)
+                    {
+                        result = freq >= 39.85 ? Band.B6M : Band.B10M;
+                    }
+                    else /* >23.17  <26.465 */
+                    {
+                        result = Band.B12M;
+                    }
+                }
+                else  /* >12.075  <23.17 */
+                {
+                    if (freq >= 16.209)
+                    {
+                        result = freq >= 19.584 ? Band.B15M : Band.B17M;
+                    }
+                    else
+                    {
+                        result = Band.B20M;
+                    }
+                }
+            }
+            else  /* < 12.075 */
+            {
+                if (freq >= 6.20175)
+                {
+                    result = freq >= 8.7 ? Band.B30M : Band.B40M;
+                }
+                else
+                {
+                    if (freq >= 4.66525)
+                    {
+                        result = Band.B60M;
+                    }
+                    else
+                    {
+                        result = freq >= 2.75 ? Band.B80M : Band.B160M;
+                    }
+                }
+            }
+            return result;
+        }
 
         public void UpdateAlexAntSelection(Band band, bool tx, bool xvtr)  
 		{ 

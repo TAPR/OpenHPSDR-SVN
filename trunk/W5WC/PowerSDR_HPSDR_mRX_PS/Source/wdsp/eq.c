@@ -93,6 +93,25 @@ double* eq_mults (int size, int nfreqs, double* F, double* G, double samplerate,
 	return mults;
 }
 
+void calc_eq (EQ a)
+{
+	a->scale = 1.0 / (double)(2 * a->size);
+	a->infilt = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->product = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt, (fftw_complex *)a->product, FFTW_FORWARD, FFTW_PATIENT);
+	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->out, FFTW_BACKWARD, FFTW_PATIENT);
+	a->mults = eq_mults(a->size, a->nfreqs, a->F, a->G, a->samplerate, a->scale, a->ctfmode, a->method);
+}
+
+void decalc_eq (EQ a)
+{
+	fftw_destroy_plan(a->CRev);
+	fftw_destroy_plan(a->CFor);
+	_aligned_free(a->mults);
+	_aligned_free(a->product);
+	_aligned_free(a->infilt);
+}
+
 EQ create_eq (int run, int size, double *in, double *out, int nfreqs, double* F, double* G, int ctfmode, int method, int samplerate)
 {
 	EQ a = (EQ) malloc0 (sizeof (eq));
@@ -101,27 +120,22 @@ EQ create_eq (int run, int size, double *in, double *out, int nfreqs, double* F,
 	a->in = in;
 	a->out = out;
 	a->nfreqs = nfreqs;
-	a->F = F;
-	a->G = G;
+	a->F = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
+	a->G = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
+	memcpy (a->F, F, (nfreqs + 1) * sizeof (double));
+	memcpy (a->G, G, (nfreqs + 1) * sizeof (double));
 	a->ctfmode = ctfmode;
 	a->method = method;
 	a->samplerate = (double)samplerate;
-	a->scale = 1.0 / (double)(2 * a->size);
-	a->infilt  = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->product = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt,  (fftw_complex *)a->product, FFTW_FORWARD,  FFTW_PATIENT);
-	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->out, FFTW_BACKWARD, FFTW_PATIENT);
-	a->mults = eq_mults (a->size, a->nfreqs, a->F, a->G, a->samplerate, a->scale, a->ctfmode, a->method);
+	calc_eq (a);
 	return a;
 }
 
 void destroy_eq (EQ a)
 {
-	fftw_destroy_plan (a->CRev);
-	fftw_destroy_plan (a->CFor);
-	_aligned_free (a->mults);
-	_aligned_free (a->product);
-	_aligned_free (a->infilt);
+	decalc_eq (a);
+	_aligned_free (a->G);
+	_aligned_free (a->F);
 	_aligned_free (a);
 }
 
@@ -152,6 +166,28 @@ void xeq (EQ a)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
 }
 
+void setBuffers_eq (EQ a, double* in, double* out)
+{
+	decalc_eq (a);
+	a->in = in;
+	a->out = out;
+	calc_eq (a);
+}
+
+void setSamplerate_eq (EQ a, int rate)
+{
+	decalc_eq (a);
+	a->samplerate = rate;
+	calc_eq (a);
+}
+
+void setSize_eq (EQ a, int size)
+{
+	decalc_eq (a);
+	a->size = size;
+	calc_eq (a);
+}
+
 /********************************************************************************************************
 *																										*
 *											RXA Properties												*
@@ -172,9 +208,13 @@ void SetRXAEQProfile (int channel, int nfreqs, double* F, double* G)
 	EQ a;
 	EnterCriticalSection (&ch[channel].csDSP);
 	a = rxa[channel].eq.p;
+	_aligned_free (a->G);
+	_aligned_free (a->F);
 	a->nfreqs = nfreqs;
-	a->F = F;
-	a->G = G;
+	a->F = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
+	a->G = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
+	memcpy (a->F, F, (nfreqs + 1) * sizeof (double));
+	memcpy (a->G, G, (nfreqs + 1) * sizeof (double));
 	_aligned_free (a->mults);
 	a->mults = eq_mults (a->size, a->nfreqs, a->F, a->G, a->samplerate, a->scale, a->ctfmode, a->method);
 	LeaveCriticalSection (&ch[channel].csDSP);
@@ -210,6 +250,8 @@ void SetRXAGrphEQ (int channel, int *rxeq)
 	EQ a;
 	EnterCriticalSection (&ch[channel].csDSP);
 	a = rxa[channel].eq.p;
+	_aligned_free (a->G);
+	_aligned_free (a->F);
 	a->nfreqs = 4;
 	a->F = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
 	a->G = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
@@ -225,8 +267,6 @@ void SetRXAGrphEQ (int channel, int *rxeq)
 	a->ctfmode = 0;
 	_aligned_free (a->mults);
 	a->mults = eq_mults (a->size, a->nfreqs, a->F, a->G, a->samplerate, a->scale, a->ctfmode, a->method);
-	_aligned_free (a->F);
-	_aligned_free (a->G);
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
 
@@ -237,6 +277,8 @@ void SetRXAGrphEQ10 (int channel, int *rxeq)
 	int i;
 	EnterCriticalSection (&ch[channel].csDSP);
 	a = rxa[channel].eq.p;
+	_aligned_free (a->G);
+	_aligned_free (a->F);
 	a->nfreqs = 10;
 	a->F = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
 	a->G = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
@@ -255,8 +297,6 @@ void SetRXAGrphEQ10 (int channel, int *rxeq)
 	a->ctfmode = 0;
 	_aligned_free (a->mults);
 	a->mults = eq_mults (a->size, a->nfreqs, a->F, a->G, a->samplerate, a->scale, a->ctfmode, a->method);
-	_aligned_free (a->F);
-	_aligned_free (a->G);
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
 
@@ -280,9 +320,13 @@ void SetTXAEQProfile (int channel, int nfreqs, double* F, double* G)
 	EQ a;
 	EnterCriticalSection (&ch[channel].csDSP);
 	a = txa[channel].eq.p;
+	_aligned_free (a->G);
+	_aligned_free (a->F);
 	a->nfreqs = nfreqs;
-	a->F = F;
-	a->G = G;
+	a->F = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
+	a->G = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
+	memcpy (a->F, F, (nfreqs + 1) * sizeof (double));
+	memcpy (a->G, G, (nfreqs + 1) * sizeof (double));
 	_aligned_free (a->mults);
 	a->mults = eq_mults (a->size, a->nfreqs, a->F, a->G, a->samplerate, a->scale, a->ctfmode, a->method);
 	LeaveCriticalSection (&ch[channel].csDSP);
@@ -318,6 +362,8 @@ void SetTXAGrphEQ (int channel, int *txeq)
 	EQ a;
 	EnterCriticalSection (&ch[channel].csDSP);
 	a = txa[channel].eq.p;
+	_aligned_free (a->G);
+	_aligned_free (a->F);
 	a->nfreqs = 4;
 	a->F = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
 	a->G = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
@@ -333,8 +379,6 @@ void SetTXAGrphEQ (int channel, int *txeq)
 	a->ctfmode = 0;
 	_aligned_free (a->mults);
 	a->mults = eq_mults (a->size, a->nfreqs, a->F, a->G, a->samplerate, a->scale, a->ctfmode, a->method);
-	_aligned_free (a->F);
-	_aligned_free (a->G);
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
 
@@ -345,6 +389,8 @@ void SetTXAGrphEQ10 (int channel, int *txeq)
 	int i;
 	EnterCriticalSection (&ch[channel].csDSP);
 	a = txa[channel].eq.p;
+	_aligned_free (a->G);
+	_aligned_free (a->F);
 	a->nfreqs = 10;
 	a->F = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
 	a->G = (double *) malloc0 ((a->nfreqs + 1) * sizeof (double));
@@ -363,7 +409,5 @@ void SetTXAGrphEQ10 (int channel, int *txeq)
 	a->ctfmode = 0;
 	_aligned_free (a->mults);
 	a->mults = eq_mults (a->size, a->nfreqs, a->F, a->G, a->samplerate, a->scale, a->ctfmode, a->method);
-	_aligned_free (a->F);
-	_aligned_free (a->G);
 	LeaveCriticalSection (&ch[channel].csDSP);
 }

@@ -119,6 +119,12 @@ extern __declspec (dllexport) void flush_nobEXT (int id);
 
 extern __declspec (dllexport) void xnobEXT (int id, double* in, double* out);
 
+extern void setBuffers_nob (NOB a, double* in, double* out);
+
+extern void setSamplerate_nob (NOB a, int rate);
+
+extern void setSize_nob (NOB a, int size);
+
 
 extern __declspec (dllexport) void pSetRCVRNOBRun (NOB a, int run);
 

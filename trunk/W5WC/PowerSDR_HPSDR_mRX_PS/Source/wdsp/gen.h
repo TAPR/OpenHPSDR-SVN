@@ -121,6 +121,12 @@ extern void flush_gen (GEN a);
 
 extern void xgen (GEN a);
 
+extern void setBuffers_gen (GEN a, double* in, double* out);
+
+extern void setSamplerate_gen (GEN a, int rate);
+
+extern void setSize_gen (GEN a, int size);
+
 // TXA Properties
 
 extern __declspec (dllexport) void SetTXAgenRun (int channel, int run);

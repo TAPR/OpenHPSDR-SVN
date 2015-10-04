@@ -26,7 +26,7 @@
 #include "fromsys.h"
 #include "pthread.h"
 #include "semaphore.h"
-
+//#include <VersionHelpers.h>
 
 #undef XYLO
 #define OZY 1
@@ -134,7 +134,7 @@ extern int MetisBulkRead(int endpoint, char *bufp, int buflen);
 extern int MetisBulkWrite(int endpoint, char *bufp, int buflen);
 extern int MetisReadDirect(char *bufp, int buflen);
 extern void SendCommandToMetis(unsigned char command);
-
+extern int CheckIPAddr(DWORD addr);
 extern void ForceCandCFrame(int);
 // all extern declarations need to be above this point
 
@@ -405,10 +405,32 @@ extern int ain4_voltage;
 /* Metis stuff */
 extern int isMetis;
 extern SOCKET listenSock;
+extern u_long oldbroadcastip;
+extern u_long oldipaddr;
+extern int useoldbroadcastip;
 // extern SOCKET discoverySock;
 extern WSADATA WSAdata;
 extern int WSAinitialized;
 // extern int MetisReadThreadRunning;
+//#	define PGM_GNUC_MALLOC			__attribute__((__malloc__))
+//#	define PGM_GNUC_ALLOC_SIZE2(x,y)	__attribute__((__alloc_size__(x,y)))
+//void* pgm_malloc0_n(const size_t, const size_t) PGM_GNUC_MALLOC PGM_GNUC_ALLOC_SIZE2(1, 2);
+//#define pgm_new0(struct_type, n_structs) \
+//	((struct_type*)malloc ((size_t)sizeof(struct_type), (size_t)(n_structs)))
+//
+//struct pgm_ifaddrs_t
+//{
+//	struct pgm_ifaddrs_t*	ifa_next;	/* Pointer to the next structure.  */
+//
+//	char*			ifa_name;	/* Name of this network interface.  */
+//	unsigned int		ifa_flags;	/* Flags as from SIOCGIFFLAGS ioctl.  */
+//
+//#ifdef ifa_addr
+//#	undef ifa_addr
+//#endif
+//	struct sockaddr*	ifa_addr;	/* Network address of this interface.  */
+//	struct sockaddr*	ifa_netmask;	/* Netmask of this interface.  */
+//};
 
 #if 0
 // dbg buffer

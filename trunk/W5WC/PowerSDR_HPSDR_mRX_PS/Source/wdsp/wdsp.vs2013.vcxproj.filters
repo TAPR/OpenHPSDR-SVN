@@ -153,6 +153,12 @@
     <ClInclude Include="emnr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lmath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="snb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="channel.c">
@@ -288,6 +294,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="emnr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lmath.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snb.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

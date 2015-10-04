@@ -64,6 +64,12 @@ extern void xamsq (AMSQ a);
 
 extern void xamsqcap (AMSQ a);
 
+extern void setBuffers_amsq (AMSQ a, double* in, double* out, double* trigger);
+
+extern void setSamplerate_amsq (AMSQ a, int rate);
+
+extern void setSize_amsq (AMSQ a, int size);
+
 // RXA Properties
 
 extern __declspec (dllexport) void SetRXAAMSQRun (int channel, int run);

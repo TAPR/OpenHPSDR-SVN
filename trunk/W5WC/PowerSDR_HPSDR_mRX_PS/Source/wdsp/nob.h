@@ -99,6 +99,12 @@ extern __declspec (dllexport) void flush_anbEXT (int id);
 
 extern __declspec (dllexport) void xanbEXT (int id, double* in, double* out);
 
+extern void setBuffers_anb (ANB a, double* in, double* out);
+
+extern void setSamplerate_anb (ANB a, int rate);
+
+extern void setSize_anb (ANB a, int size);
+
 
 extern __declspec (dllexport) void pSetRCVRANBRun (ANB a, int run);
 

@@ -31,6 +31,32 @@ Santa Cruz, CA  95060
 */
 
 #include "comm.h"
+
+void calc_wcpagc (WCPAGC a)
+{
+	//assign constants
+	a->ring_buffsize = RB_SIZE;
+	//do one-time initialization
+	a->out_index = -1;
+	a->ring_max = 0.0;
+	a->volts = 0.0;
+	a->save_volts = 0.0;
+	a->fast_backaverage = 0.0;
+	a->hang_backaverage = 0.0;
+	a->hang_counter = 0;
+	a->decay_type = 0;
+	a->state = 0;
+	a->ring = (double *)malloc0(RB_SIZE * sizeof(complex));
+	a->abs_ring = (double *)malloc0(RB_SIZE * sizeof(double));
+	loadWcpAGC(a);
+}
+
+void decalc_wcpagc (WCPAGC a)
+{
+	_aligned_free(a->abs_ring);
+	_aligned_free(a->ring);
+}
+
 WCPAGC create_wcpagc (	int run,
 						int mode,
 						int pmode,
@@ -82,22 +108,7 @@ WCPAGC create_wcpagc (	int run,
 	a->hangtime = hangtime;
 	a->hang_thresh = hang_thresh;
 	a->tau_hang_decay = tau_hang_decay;
-	//assign constants
-	a->ring_buffsize = RB_SIZE;
-	//do one-time initialization
-	a->out_index = -1;
-	a->ring_max = 0.0;
-	a->volts = 0.0;
-	a->save_volts = 0.0;
-	a->fast_backaverage = 0.0;
-	a->hang_backaverage = 0.0;
-	a->hang_counter = 0;
-	a->decay_type = 0;
-	a->state = 0;
-	a->ring = (double *) malloc0 (RB_SIZE * sizeof (complex));
-	a->abs_ring = (double *) malloc0 (RB_SIZE * sizeof (double));
-	loadWcpAGC (a);
-
+	calc_wcpagc (a);
 	return a;
 }
 
@@ -136,8 +147,7 @@ void loadWcpAGC (WCPAGC a)
 
 void destroy_wcpagc (WCPAGC a)
 {
-	_aligned_free (a->abs_ring);
-	_aligned_free (a->ring);
+	decalc_wcpagc (a);
 	_aligned_free (a);
 }
 
@@ -329,6 +339,26 @@ void xwcpagc (WCPAGC a)
 	}
 	else if (a->out != a->in)
 		memcpy(a->out, a->in, a->io_buffsize * sizeof (complex));
+}
+
+void setBuffers_wcpagc (WCPAGC a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_wcpagc (WCPAGC a, int rate)
+{
+	decalc_wcpagc (a);
+	a->sample_rate = rate;
+	calc_wcpagc (a);
+}
+
+void setSize_wcpagc (WCPAGC a, int size)
+{
+	decalc_wcpagc (a);
+	a->io_buffsize = size;
+	calc_wcpagc (a);
 }
 
 /********************************************************************************************************

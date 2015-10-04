@@ -2388,7 +2388,6 @@ namespace PowerSDR
             this.txtRX2Meter = new System.Windows.Forms.TextBoxTS();
             this.lblRX2Meter = new System.Windows.Forms.LabelTS();
             this.panelBandVHF = new System.Windows.Forms.PanelTS();
-            this.radBandVHF13 = new System.Windows.Forms.RadioButtonTS();
             this.radBandVHF12 = new System.Windows.Forms.RadioButtonTS();
             this.radBandVHF11 = new System.Windows.Forms.RadioButtonTS();
             this.radBandVHF10 = new System.Windows.Forms.RadioButtonTS();
@@ -2402,6 +2401,7 @@ namespace PowerSDR
             this.radBandVHF2 = new System.Windows.Forms.RadioButtonTS();
             this.radBandVHF1 = new System.Windows.Forms.RadioButtonTS();
             this.radBandVHF0 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF13 = new System.Windows.Forms.RadioButtonTS();
             this.ptbSquelch = new PowerSDR.PrettyTrackBar();
             this.panelModeSpecificFM = new System.Windows.Forms.PanelTS();
             this.ptbFMMic = new PowerSDR.PrettyTrackBar();
@@ -2569,7 +2569,6 @@ namespace PowerSDR
             this.chkRX2NR.Name = "chkRX2NR";
             this.chkRX2NR.ThreeState = true;
             this.toolTip1.SetToolTip(this.chkRX2NR, resources.GetString("chkRX2NR.ToolTip"));
-            this.chkRX2NR.CheckedChanged += new System.EventHandler(this.chkRX2NR_CheckedChanged);
             this.chkRX2NR.CheckStateChanged += new System.EventHandler(this.chkRX2NR_CheckStateChanged);
             // 
             // chkRX2NB
@@ -2578,8 +2577,9 @@ namespace PowerSDR
             this.chkRX2NB.FlatAppearance.BorderSize = 0;
             this.chkRX2NB.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkRX2NB.Name = "chkRX2NB";
+            this.chkRX2NB.ThreeState = true;
             this.toolTip1.SetToolTip(this.chkRX2NB, resources.GetString("chkRX2NB.ToolTip"));
-            this.chkRX2NB.CheckedChanged += new System.EventHandler(this.chkRX2NB_CheckedChanged);
+            this.chkRX2NB.CheckStateChanged += new System.EventHandler(this.chkRX2NB_CheckStateChanged);
             // 
             // lblRX2AGC
             // 
@@ -3226,7 +3226,6 @@ namespace PowerSDR
             this.chkNR.Name = "chkNR";
             this.chkNR.ThreeState = true;
             this.toolTip1.SetToolTip(this.chkNR, resources.GetString("chkNR.ToolTip"));
-            this.chkNR.CheckedChanged += new System.EventHandler(this.chkNR_CheckedChanged);
             this.chkNR.CheckStateChanged += new System.EventHandler(this.chkNR_CheckStateChanged);
             // 
             // chkDSPNB2
@@ -3253,8 +3252,9 @@ namespace PowerSDR
             this.chkNB.FlatAppearance.BorderSize = 0;
             this.chkNB.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkNB.Name = "chkNB";
+            this.chkNB.ThreeState = true;
             this.toolTip1.SetToolTip(this.chkNB, resources.GetString("chkNB.ToolTip"));
-            this.chkNB.CheckedChanged += new System.EventHandler(this.chkNB_CheckedChanged);
+            this.chkNB.CheckStateChanged += new System.EventHandler(this.chkNB_CheckStateChanged);
             // 
             // chkANF
             // 
@@ -7021,7 +7021,6 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelBandVHF, "panelBandVHF");
             this.panelBandVHF.BackColor = System.Drawing.Color.Transparent;
-            this.panelBandVHF.Controls.Add(this.radBandVHF13);
             this.panelBandVHF.Controls.Add(this.radBandVHF12);
             this.panelBandVHF.Controls.Add(this.radBandVHF11);
             this.panelBandVHF.Controls.Add(this.radBandVHF10);
@@ -7036,17 +7035,8 @@ namespace PowerSDR
             this.panelBandVHF.Controls.Add(this.radBandVHF1);
             this.panelBandVHF.Controls.Add(this.radBandVHF0);
             this.panelBandVHF.Controls.Add(this.btnBandHF);
+            this.panelBandVHF.Controls.Add(this.radBandVHF13);
             this.panelBandVHF.Name = "panelBandVHF";
-            // 
-            // radBandVHF13
-            // 
-            resources.ApplyResources(this.radBandVHF13, "radBandVHF13");
-            this.radBandVHF13.FlatAppearance.BorderSize = 0;
-            this.radBandVHF13.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF13.Name = "radBandVHF13";
-            this.radBandVHF13.TabStop = true;
-            this.radBandVHF13.UseVisualStyleBackColor = true;
-            this.radBandVHF13.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF12
             // 
@@ -7056,6 +7046,7 @@ namespace PowerSDR
             this.radBandVHF12.Name = "radBandVHF12";
             this.radBandVHF12.TabStop = true;
             this.radBandVHF12.UseVisualStyleBackColor = true;
+            this.radBandVHF12.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF12.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF11
@@ -7066,6 +7057,7 @@ namespace PowerSDR
             this.radBandVHF11.Name = "radBandVHF11";
             this.radBandVHF11.TabStop = true;
             this.radBandVHF11.UseVisualStyleBackColor = true;
+            this.radBandVHF11.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF11.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF10
@@ -7076,6 +7068,7 @@ namespace PowerSDR
             this.radBandVHF10.Name = "radBandVHF10";
             this.radBandVHF10.TabStop = true;
             this.radBandVHF10.UseVisualStyleBackColor = true;
+            this.radBandVHF10.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF10.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF9
@@ -7086,6 +7079,7 @@ namespace PowerSDR
             this.radBandVHF9.Name = "radBandVHF9";
             this.radBandVHF9.TabStop = true;
             this.radBandVHF9.UseVisualStyleBackColor = true;
+            this.radBandVHF9.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF9.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF8
@@ -7096,6 +7090,7 @@ namespace PowerSDR
             this.radBandVHF8.Name = "radBandVHF8";
             this.radBandVHF8.TabStop = true;
             this.radBandVHF8.UseVisualStyleBackColor = true;
+            this.radBandVHF8.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF8.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF7
@@ -7106,6 +7101,7 @@ namespace PowerSDR
             this.radBandVHF7.Name = "radBandVHF7";
             this.radBandVHF7.TabStop = true;
             this.radBandVHF7.UseVisualStyleBackColor = true;
+            this.radBandVHF7.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF7.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF6
@@ -7116,6 +7112,7 @@ namespace PowerSDR
             this.radBandVHF6.Name = "radBandVHF6";
             this.radBandVHF6.TabStop = true;
             this.radBandVHF6.UseVisualStyleBackColor = true;
+            this.radBandVHF6.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF6.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF5
@@ -7126,6 +7123,7 @@ namespace PowerSDR
             this.radBandVHF5.Name = "radBandVHF5";
             this.radBandVHF5.TabStop = true;
             this.radBandVHF5.UseVisualStyleBackColor = true;
+            this.radBandVHF5.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF5.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF4
@@ -7136,6 +7134,7 @@ namespace PowerSDR
             this.radBandVHF4.Name = "radBandVHF4";
             this.radBandVHF4.TabStop = true;
             this.radBandVHF4.UseVisualStyleBackColor = true;
+            this.radBandVHF4.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF4.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF3
@@ -7146,6 +7145,7 @@ namespace PowerSDR
             this.radBandVHF3.Name = "radBandVHF3";
             this.radBandVHF3.TabStop = true;
             this.radBandVHF3.UseVisualStyleBackColor = true;
+            this.radBandVHF3.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF3.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF2
@@ -7156,6 +7156,7 @@ namespace PowerSDR
             this.radBandVHF2.Name = "radBandVHF2";
             this.radBandVHF2.TabStop = true;
             this.radBandVHF2.UseVisualStyleBackColor = true;
+            this.radBandVHF2.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF2.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF1
@@ -7166,6 +7167,7 @@ namespace PowerSDR
             this.radBandVHF1.Name = "radBandVHF1";
             this.radBandVHF1.TabStop = true;
             this.radBandVHF1.UseVisualStyleBackColor = true;
+            this.radBandVHF1.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF1.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // radBandVHF0
@@ -7176,7 +7178,19 @@ namespace PowerSDR
             this.radBandVHF0.Name = "radBandVHF0";
             this.radBandVHF0.TabStop = true;
             this.radBandVHF0.UseVisualStyleBackColor = true;
+            this.radBandVHF0.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
             this.radBandVHF0.Click += new System.EventHandler(this.radBandVHF_Click);
+            // 
+            // radBandVHF13
+            // 
+            resources.ApplyResources(this.radBandVHF13, "radBandVHF13");
+            this.radBandVHF13.FlatAppearance.BorderSize = 0;
+            this.radBandVHF13.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF13.Name = "radBandVHF13";
+            this.radBandVHF13.TabStop = true;
+            this.radBandVHF13.UseVisualStyleBackColor = true;
+            this.radBandVHF13.CheckedChanged += new System.EventHandler(this.radBandVHF_CheckedChanged);
+            this.radBandVHF13.Click += new System.EventHandler(this.radBandVHF_Click);
             // 
             // ptbSquelch
             // 
@@ -7316,12 +7330,12 @@ namespace PowerSDR
             this.Controls.Add(this.ptbSquelch);
             this.Controls.Add(this.panelRX2Power);
             this.Controls.Add(this.lblRF2);
-            this.Controls.Add(this.panelBandHF);
-            this.Controls.Add(this.panelBandVHF);
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelModeSpecificFM);
             this.Controls.Add(this.panelModeSpecificDigital);
             this.Controls.Add(this.panelModeSpecificCW);
+            this.Controls.Add(this.panelBandHF);
+            this.Controls.Add(this.panelBandVHF);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Console";
@@ -8490,8 +8504,8 @@ namespace PowerSDR
             a.Add("diversity_gain_12m/" + diversity_gain_12m);
             a.Add("diversity_gain_r2_12m/" + diversity_gain_r2_12m);
             a.Add("diversity_phase_12m/" + diversity_phase_12m);
-            a.Add("wdiversity_gain_10m/" + diversity_gain_10m);
-            a.Add("wdiversity_gain_r2_10m/" + diversity_gain_r2_10m);
+            a.Add("diversity_gain_10m/" + diversity_gain_10m);
+            a.Add("diversity_gain_r2_10m/" + diversity_gain_r2_10m);
             a.Add("diversity_phase_10m/" + diversity_phase_10m);
             a.Add("diversity_gain_6m/" + diversity_gain_6m);
             a.Add("diversity_gain_r2_6m/" + diversity_gain_r2_6m);
@@ -16143,7 +16157,7 @@ namespace PowerSDR
             rx2_preamp_offset[(int)PreampMode.HPSDR_OFF] = -off_offset;
             rx2_preamp_offset[(int)PreampMode.HPSDR_ON] = 0.0f;
 
-            if (alexpresent && !ANAN10Present && !ANAN10EPresent && !ANAN100BPresent)
+            if (alexpresent && !ANAN10Present && !ANAN10EPresent /* && !ANAN100BPresent*/)
             {
                 RX1PreampMode = PreampMode.HPSDR_MINUS10; //-10dB
                 Thread.Sleep(100);
@@ -17476,7 +17490,14 @@ namespace PowerSDR
         public int FocusMasterDelay
         {
             get { return focus_master_delay; }
-            set { focus_master_delay = value; }
+            set 
+            { 
+                focus_master_delay = value;
+                if (n1mm_delay != null)
+                {
+                    n1mm_delay.Interval = focus_master_delay;
+                }
+            }
         }
 
         private int focus_master_udp_port = 12060;
@@ -17565,7 +17586,7 @@ namespace PowerSDR
                 {
                     RX2DSPMode = RX1DSPMode;
                     RX2Filter = RX1Filter;
-                    RX2PreampMode = RX1PreampMode;
+                    //RX2PreampMode = RX1PreampMode;
                     txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                     txtVFOBFreq_LostFocus(this, EventArgs.Empty);
                 }
@@ -17742,6 +17763,7 @@ namespace PowerSDR
             set
             {
                 vhf_tr_relay = value;
+                if (!initializing)
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
             }
         }
@@ -17753,6 +17775,7 @@ namespace PowerSDR
             set
             {
                 hf_tr_relay = value;
+                if (!initializing)
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
             }
         }
@@ -17802,13 +17825,13 @@ namespace PowerSDR
             {
                 rx1_attenuator_data = value;
                 if (initializing) return;
-                if (AlexPresent && !ANAN10Present && !ANAN10EPresent && !ANAN100BPresent)
+                if (AlexPresent && !ANAN10Present && !ANAN10EPresent /* && !ANAN100BPresent */)
                     udRX1StepAttData.Maximum = (decimal)61;
                 else udRX1StepAttData.Maximum = (decimal)31;
 
                 if (rx1_step_att_present)
                 {
-                    if (AlexPresent && !ANAN10Present && !ANAN10EPresent && !ANAN100BPresent)
+                    if (AlexPresent && !ANAN10Present && !ANAN10EPresent /* && !ANAN100BPresent */)
                     {
                         if (rx1_attenuator_data <= 31)
                         {
@@ -18391,14 +18414,41 @@ namespace PowerSDR
         public int RX1XVTRIndex
         {
             get { return rx1_xvtr_index; }
-            set { rx1_xvtr_index = value; }
+            set 
+            { 
+                rx1_xvtr_index = value;
+                if (value >= 0)
+                {
+                    lblRX1MuteVFOA.SendToBack();
+                    lblRX1APF.SendToBack();
+                }
+                else
+                {
+                    lblRX1MuteVFOA.BringToFront();
+                    lblRX1APF.BringToFront();
+                }
+
+            }
         }
 
         private int rx2_xvtr_index = -1;				// index of current xvtr in use
         public int RX2XVTRIndex
         {
             get { return rx2_xvtr_index; }
-            set { rx2_xvtr_index = value; }
+            set
+            {
+                rx2_xvtr_index = value;
+                if (value >= 0)
+                { 
+                    lblRX2MuteVFOB.SendToBack();
+                    lblRX2APF.SendToBack();
+                }
+                else
+                { 
+                    lblRX2MuteVFOB.BringToFront();
+                    lblRX2APF.BringToFront();
+                }
+            }
         }
 
         private int tx_xvtr_index = -1;				// index of current xvtr in use
@@ -21136,6 +21186,7 @@ namespace PowerSDR
             set
             {
                 Band lo_band = Band.FIRST;
+                Band lo_bandb = Band.FIRST;
                 penny_ext_ctrl_enabled = value;
 
                 if (rx1_xvtr_index >= 0)
@@ -21143,10 +21194,10 @@ namespace PowerSDR
                     //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
                     // Fix Penny O/C VHF control Vk4xv
                     lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
-
+                    lo_bandb = BandByFreq(XVTRForm.TranslateFreq(VFOBFreq), rx2_xvtr_index, false, current_region);
                     // if (penny_ext_ctrl_enabled)
                     // Penny.getPenny().UpdateExtCtrl(lo_band, mox);
-                    Penny.getPenny().ExtCtrlEnable(value, lo_band, mox);
+                    Penny.getPenny().ExtCtrlEnable(value, lo_band, lo_bandb, mox);
                     // if (alex_ant_ctrl_enabled)
                     //  Alex.getAlex().UpdateAlexAntSelection(lo_band, mox);
                 }
@@ -21154,7 +21205,7 @@ namespace PowerSDR
                 {
                     //  if (penny_ext_ctrl_enabled)
                     //  Penny.getPenny().UpdateExtCtrl(RX1Band, mox);
-                    Penny.getPenny().ExtCtrlEnable(value, RX1Band, mox);
+                    Penny.getPenny().ExtCtrlEnable(value, RX1Band, RX2Band, mox);
                     // if (alex_ant_ctrl_enabled)
                     //Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox);
                 }
@@ -22275,10 +22326,14 @@ namespace PowerSDR
             get { return cat_nb1_status; }
             set
             {
+                //if (value == 0)
+                //    chkNB.Checked = false;
+                //else if (value == 1)
+                //    chkNB.Checked = true;
                 if (value == 0)
-                    chkNB.Checked = false;
+                    chkNB.CheckState = CheckState.Unchecked;
                 else if (value == 1)
-                    chkNB.Checked = true;
+                    chkNB.CheckState = CheckState.Checked;
             }
         }
 
@@ -22289,10 +22344,14 @@ namespace PowerSDR
             get { return cat_nb2_status; }
             set
             {
+                //if (value == 0)
+                //    chkDSPNB2.Checked = false;
+                //else if (value == 1)
+                //    chkDSPNB2.Checked = true;
                 if (value == 0)
-                    chkDSPNB2.Checked = false;
+                    chkNB.CheckState = CheckState.Unchecked;
                 else if (value == 1)
-                    chkDSPNB2.Checked = true;
+                    chkNB.CheckState = CheckState.Indeterminate;
             }
         }
 
@@ -22306,10 +22365,14 @@ namespace PowerSDR
             }
             set
             {
+                //if (value == 0)
+                //    chkRX2NB.Checked = false;
+                //else
+                //    chkRX2NB.Checked = true;
                 if (value == 0)
-                    chkRX2NB.Checked = false;
-                else
-                    chkRX2NB.Checked = true;
+                    chkRX2NB.CheckState = CheckState.Unchecked;
+                else if (value == 1)
+                    chkRX2NB.CheckState = CheckState.Checked;
             }
         }
 
@@ -24419,6 +24482,7 @@ namespace PowerSDR
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
+                    if (!initializing)
                     txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                 }
             }
@@ -24465,6 +24529,7 @@ namespace PowerSDR
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
+                    if (!initializing)
                     txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                 }
             }
@@ -24646,6 +24711,7 @@ namespace PowerSDR
                 {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
+                    if (!initializing)
                     txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                 }
             }
@@ -24758,19 +24824,19 @@ namespace PowerSDR
             set
             {
                 anan100Bpresent = value;
-                if (anan100Bpresent)
-                {
-                    if (!comboMeterTXMode.Items.Contains("Fwd SWR"))
-                        comboMeterTXMode.Items.Insert(3, "Fwd SWR");
-                }
-                else
-                {
-                    if (!initializing)
-                    {
-                        if (comboMeterTXMode.Items.Contains("Fwd SWR"))
-                            comboMeterTXMode.Items.Remove("Fwd SWR");
-                    }
-                }
+                //if (anan100Bpresent)
+                //{
+                //    if (!comboMeterTXMode.Items.Contains("Fwd SWR"))
+                //        comboMeterTXMode.Items.Insert(3, "Fwd SWR");
+                //}
+                //else
+                //{
+                //    if (!initializing)
+                //    {
+                //        if (comboMeterTXMode.Items.Contains("Fwd SWR"))
+                //            comboMeterTXMode.Items.Remove("Fwd SWR");
+                //    }
+                //}
             }
         }
 
@@ -24935,6 +25001,16 @@ namespace PowerSDR
             }
         }
 
+        private uint static_broadcast_addr;
+        public uint StaticBroadcastAddr
+        {
+            get { return static_broadcast_addr; }
+            set
+            {               
+                static_broadcast_addr = value;
+             }
+        }
+        
         private int mic_gain_min = -40;
         public int MicGainMin
         {
@@ -34173,15 +34249,15 @@ namespace PowerSDR
                 }
 
                 Band lo_band = Band.FIRST;
-
+                Band lo_bandb = Band.FIRST;
                 if (rx1_xvtr_index >= 0)
                 {
                     // Fix Penny O/C VHF control Vk4xv
                     lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
-                    //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
+                    lo_bandb = BandByFreq(XVTRForm.TranslateFreq(VFOBFreq), rx2_xvtr_index, false, current_region);
 
                     if (penny_ext_ctrl_enabled)
-                        Penny.getPenny().UpdateExtCtrl(lo_band, mox);
+                        Penny.getPenny().UpdateExtCtrl(lo_band, lo_bandb, mox);
 
                     if (alex_ant_ctrl_enabled)
                         Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, true);
@@ -34189,7 +34265,7 @@ namespace PowerSDR
                 else
                 {
                     if (penny_ext_ctrl_enabled)
-                        Penny.getPenny().UpdateExtCtrl(tx_band, mox);
+                        Penny.getPenny().UpdateExtCtrl(tx_band, rx2_band, mox);
 
                     if (alex_ant_ctrl_enabled)
                         Alex.getAlex().UpdateAlexAntSelection(tx_band, mox, false);
@@ -34240,7 +34316,7 @@ namespace PowerSDR
                 UpdateTXDDSFreq();
 
                 Band lo_band = Band.FIRST;
-
+                Band lo_bandb = Band.FIRST;
                 if (rx1_xvtr_index >= 0)
                 {
                     // Fix Penny O/C VHF control Vk4xv
@@ -34248,7 +34324,7 @@ namespace PowerSDR
                     //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
 
                     if (penny_ext_ctrl_enabled)
-                        Penny.getPenny().UpdateExtCtrl(lo_band, mox);
+                        Penny.getPenny().UpdateExtCtrl(lo_band, lo_bandb, mox);
 
                     if (alex_ant_ctrl_enabled)
                         Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, true);
@@ -34256,7 +34332,7 @@ namespace PowerSDR
                 else
                 {
                     if (penny_ext_ctrl_enabled)
-                        Penny.getPenny().UpdateExtCtrl(rx1_band, mox);
+                        Penny.getPenny().UpdateExtCtrl(rx1_band, rx2_band, mox);
 
                     if (alex_ant_ctrl_enabled)
                         Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox, false);
@@ -35519,8 +35595,8 @@ namespace PowerSDR
             if (!rx2_click_tune_drag)
                 chkX2TR.Checked = false;
 
-            lblRX1MuteVFOA.SendToBack();
-            lblRX1APF.SendToBack();
+          //  lblRX1MuteVFOA.SendToBack();
+          //  lblRX1APF.SendToBack();
         }
 
         private void btnBandHF_Click(object sender, System.EventArgs e)
@@ -35540,8 +35616,8 @@ namespace PowerSDR
             if (!rx2_click_tune_drag)
                 chkX2TR.Checked = false;
 
-            lblRX1MuteVFOA.BringToFront();
-            lblRX1APF.BringToFront();
+          //  lblRX1MuteVFOA.BringToFront();
+          //  lblRX1APF.BringToFront();
         }
 
         private void udFilterLow_LostFocus(object sender, EventArgs e)
@@ -36312,7 +36388,7 @@ namespace PowerSDR
 
             if (stereo_diversity) Display.VFOB = Display.VFOA;
 
-            rx1_xvtr_index = XVTRForm.XVTRFreq(freq);
+            RX1XVTRIndex = XVTRForm.XVTRFreq(freq);
 
             if (!chkVFOSplit.Checked && !chkVFOBTX.Checked)
                 tx_xvtr_index = rx1_xvtr_index;
@@ -36392,6 +36468,7 @@ namespace PowerSDR
             }
 
             Band lo_band = Band.FIRST;
+            Band lo_bandb = Band.FIRST;
 
             if (chkPower.Checked)
             {
@@ -36399,9 +36476,9 @@ namespace PowerSDR
                 {
                     // Fix Penny O/C VHF control Vk4xv
                     lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
-
+                    lo_bandb = BandByFreq(XVTRForm.TranslateFreq(VFOBFreq), rx2_xvtr_index, false, current_region);
                     if (penny_ext_ctrl_enabled)
-                        Penny.getPenny().UpdateExtCtrl(lo_band, mox);
+                        Penny.getPenny().UpdateExtCtrl(lo_band, lo_bandb, mox);
 
                     if (alex_ant_ctrl_enabled)
                         Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, true);
@@ -36409,7 +36486,7 @@ namespace PowerSDR
                 else
                 {
                     if (penny_ext_ctrl_enabled)
-                        Penny.getPenny().UpdateExtCtrl(RX1Band, mox);
+                        Penny.getPenny().UpdateExtCtrl(RX1Band, RX2Band, mox);
 
                     if (alex_ant_ctrl_enabled)
                         Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox, false);
@@ -36447,7 +36524,8 @@ namespace PowerSDR
 
             if (alexpresent && rx1_band == Band.B6M &&
                (chkSR.Checked || (!chkSR.Checked && !disable_6m_lna_on_rx && !alex6bphpf_bypass && !alex_hpf_bypass)) &&
-                current_hpsdr_model != HPSDRModel.ANAN10)
+                current_hpsdr_model != HPSDRModel.ANAN10 &&
+                current_hpsdr_model != HPSDRModel.ANAN10E)
                 RX16mGainOffset = -RX6mGainOffset;
             else RX16mGainOffset = 0;
 
@@ -37028,8 +37106,10 @@ namespace PowerSDR
                 }
             }
 
-            int xvtr_index = XVTRForm.XVTRFreq(freq);
-            if (xvtr_index < 0)
+            RX2XVTRIndex = XVTRForm.XVTRFreq(freq);
+            //RX2XVTRIndex = rx2_xvtr_index;
+
+            if (rx2_xvtr_index < 0)
             {
                 int old_xvtr_index = XVTRForm.XVTRFreq(saved_vfob_freq);
                 if (old_xvtr_index >= 0 && freq >= max_freq)
@@ -37060,6 +37140,27 @@ namespace PowerSDR
             else txtVFOBBand.BackColor = band_background_color;
             txtVFOBBand.Text = bandInfo;
 
+            Band lo_band = Band.FIRST;
+            Band lo_banda = Band.FIRST;
+
+            if (chkPower.Checked)
+            {
+                if (rx2_xvtr_index >= 0)
+                {
+                    // Fix Penny O/C VHF control Vk4xv
+                    lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOBFreq), rx2_xvtr_index, false, current_region);
+                    lo_banda = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
+
+                    if (penny_ext_ctrl_enabled)
+                        Penny.getPenny().UpdateExtCtrl(lo_banda, lo_band, mox);
+                }
+                else
+                {
+                    if (penny_ext_ctrl_enabled)
+                        Penny.getPenny().UpdateExtCtrl(RX1Band, RX2Band, mox);                
+                }
+            }
+         
             saved_vfob_freq = freq;
 
             // if (current_model == Model.HPSDR || current_model == Model.HERMES)
@@ -37076,7 +37177,7 @@ namespace PowerSDR
 
         set_tx_freq:
             // int last_tx_xvtr_index = tx_xvtr_index;
-            tx_xvtr_index = xvtr_index;
+            tx_xvtr_index = rx2_xvtr_index;
             double tx_freq = freq;
             Band old_tx_band = tx_band;
             Band b = BandByFreq(tx_freq, tx_xvtr_index, true, current_region);
@@ -37196,7 +37297,7 @@ namespace PowerSDR
             goto end;
 
         set_rx2_freq:
-            rx2_xvtr_index = xvtr_index;
+            //RX2XVTRIndex = xvtr_index;
 
             Band band = BandByFreq(freq, rx2_xvtr_index, false, current_region);
             if (band != rx2_band)
@@ -37206,14 +37307,14 @@ namespace PowerSDR
 
             if (rx2_xvtr_index >= 0) freq = XVTRForm.TranslateFreq(freq);
 
-            if (xvtr_index < 0)
+            if (rx2_xvtr_index < 0)
             {
                 RX2XVTRGainOffset = 0.0f;
             }
             else
             {
                 freq = XVTRForm.TranslateFreq(freq);
-                RX2XVTRGainOffset = XVTRForm.GetRXGain(xvtr_index);
+                RX2XVTRGainOffset = XVTRForm.GetRXGain(rx2_xvtr_index);
             }
 
             if (chkRIT.Checked && VFOSync)
@@ -39875,6 +39976,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBand80_Click(object sender, EventArgs e)
@@ -39901,6 +40004,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBand60_Click(object sender, EventArgs e)
@@ -39955,6 +40060,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBand40_Click(object sender, EventArgs e)
@@ -39981,6 +40088,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBand30_Click(object sender, EventArgs e)
@@ -40007,6 +40116,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBand20_Click(object sender, EventArgs e)
@@ -40033,6 +40144,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+            //rx1_xvtr_index = -1;
         }
 
         private void radBand17_Click(object sender, EventArgs e)
@@ -40059,6 +40172,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBand15_Click(object sender, EventArgs e)
@@ -40085,6 +40200,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBand12_Click(object sender, EventArgs e)
@@ -40111,6 +40228,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBand10_Click(object sender, EventArgs e)
@@ -40137,6 +40256,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBand6_Click(object sender, EventArgs e)
@@ -40163,6 +40284,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+            //rx1_xvtr_index = -1;
         }
 
         private void radBand2_Click(object sender, EventArgs e)
@@ -40188,6 +40311,8 @@ namespace PowerSDR
             }
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBandWWV_Click(object sender, EventArgs e)
@@ -40214,6 +40339,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBandGEN_Click(object sender, EventArgs e)
@@ -40240,6 +40367,8 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+           // rx1_xvtr_index = -1;
         }
 
         private void radBandVHF_Click(object sender, EventArgs e)
@@ -40257,20 +40386,20 @@ namespace PowerSDR
 
             switch (new_band)
             {
-                case "VHF0": index = band_vhf0_index; register = band_vhf0_register; break;
-                case "VHF1": index = band_vhf1_index; register = band_vhf1_register; break;
-                case "VHF2": index = band_vhf2_index; register = band_vhf2_register; break;
-                case "VHF3": index = band_vhf3_index; register = band_vhf3_register; break;
-                case "VHF4": index = band_vhf4_index; register = band_vhf4_register; break;
-                case "VHF5": index = band_vhf5_index; register = band_vhf5_register; break;
-                case "VHF6": index = band_vhf6_index; register = band_vhf6_register; break;
-                case "VHF7": index = band_vhf7_index; register = band_vhf7_register; break;
-                case "VHF8": index = band_vhf8_index; register = band_vhf8_register; break;
-                case "VHF9": index = band_vhf9_index; register = band_vhf9_register; break;
-                case "VHF10": index = band_vhf10_index; register = band_vhf10_register; break;
-                case "VHF11": index = band_vhf11_index; register = band_vhf11_register; break;
-                case "VHF12": index = band_vhf12_index; register = band_vhf12_register; break;
-                case "VHF13": index = band_vhf13_index; register = band_vhf13_register; break;
+                case "VHF0": index = band_vhf0_index; register = band_vhf0_register;  break;
+                case "VHF1": index = band_vhf1_index; register = band_vhf1_register;  break;
+                case "VHF2": index = band_vhf2_index; register = band_vhf2_register;  break;
+                case "VHF3": index = band_vhf3_index; register = band_vhf3_register;  break;
+                case "VHF4": index = band_vhf4_index; register = band_vhf4_register;  break;
+                case "VHF5": index = band_vhf5_index; register = band_vhf5_register;  break;
+                case "VHF6": index = band_vhf6_index; register = band_vhf6_register;  break;
+                case "VHF7": index = band_vhf7_index; register = band_vhf7_register;  break;
+                case "VHF8": index = band_vhf8_index; register = band_vhf8_register;  break;
+                case "VHF9": index = band_vhf9_index; register = band_vhf9_register;  break;
+                case "VHF10": index = band_vhf10_index; register = band_vhf10_register;  break;
+                case "VHF11": index = band_vhf11_index; register = band_vhf11_register;  break;
+                case "VHF12": index = band_vhf12_index; register = band_vhf12_register;  break;
+                case "VHF13": index = band_vhf13_index; register = band_vhf13_register;  break;
             }
 
             int xvtr_index = Int32.Parse(new_band.Substring(3));
@@ -42786,23 +42915,15 @@ namespace PowerSDR
         {
             if (chkDSPNB2.Checked) chkDSPNB2.BackColor = button_selected_color;
             else chkDSPNB2.BackColor = SystemColors.Control;
-            if (chkDSPNB2.Checked && chkNB.Checked) chkNB.Checked = false;
-            // radio.GetDSPRX(0, 0).NB2On = chkDSPNB2.Checked;
-            // radio.GetDSPRX(0, 1).NB2On = chkDSPNB2.Checked;
-            specRX.GetSpecRX(0).NB2On = chkDSPNB2.Checked;
-            cat_nb2_status = Convert.ToInt32(chkDSPNB2.Checked);
-            NB2ToolStripMenuItem.Checked = chkDSPNB2.Checked;
+            wdsp.SetRXASNBARun(wdsp.id(0, 0), chkDSPNB2.Checked);
+            wdsp.SetRXASNBARun(wdsp.id(0, 1), chkDSPNB2.Checked);
         }
 
         private void chkRX2NB2_CheckedChanged(object sender, EventArgs e)
         {
             if (chkRX2NB2.Checked) chkRX2NB2.BackColor = button_selected_color;
             else chkRX2NB2.BackColor = SystemColors.Control;
-            if (chkRX2NB2.Checked && chkRX2NB.Checked) chkRX2NB.Checked = false;
-
-            specRX.GetSpecRX(1).NB2On = chkRX2NB2.Checked;
-            // cat_nb2_status = Convert.ToInt32(chkDSPNB2.Checked);
-            // NB2ToolStripMenuItem.Checked = chkDSPNB2.Checked;
+            wdsp.SetRXASNBARun(wdsp.id(2, 0), chkRX2NB2.Checked);
         }
 
         #endregion
@@ -49113,6 +49234,77 @@ namespace PowerSDR
                     break;
 
             }
+        }
+
+        private void chkNB_CheckStateChanged(object sender, EventArgs e)
+        {
+            switch (chkNB.CheckState)
+            {
+                case CheckState.Checked: // NB
+                    specRX.GetSpecRX(0).NB2On = false;
+                    specRX.GetSpecRX(0).NBOn = true;
+                    NB2ToolStripMenuItem.Checked = false; 
+                    NBToolStripMenuItem.Checked = true;
+                    cat_nb1_status = 1;
+                    cat_nb2_status = 0;
+                    chkNB.Text = "NB";
+                    break;
+                case CheckState.Indeterminate: // NB2
+                    specRX.GetSpecRX(0).NBOn = false;
+                    specRX.GetSpecRX(0).NB2On = true;
+                    NBToolStripMenuItem.Checked = false;
+                    NB2ToolStripMenuItem.Checked = true;                   
+                    cat_nb1_status = 0;
+                    cat_nb2_status = 1;
+                    chkNB.Text = "NB2";
+                    break;
+                case CheckState.Unchecked: // all off                    
+                    specRX.GetSpecRX(0).NBOn = false;
+                    specRX.GetSpecRX(0).NB2On = false;
+                    NB2ToolStripMenuItem.Checked = false; 
+                    cat_nb1_status = 0;
+                    cat_nb2_status = 0;
+                    chkNB.Text = "NB";
+                    break;
+
+            }
+
+        }
+
+        private void chkRX2NB_CheckStateChanged(object sender, EventArgs e)
+        {
+            switch (chkRX2NB.CheckState)
+            {
+                case CheckState.Checked: // NB
+                    specRX.GetSpecRX(1).NB2On = false;
+                    specRX.GetSpecRX(1).NBOn = true;
+                    nB2ToolStripMenuItem1.Checked = true;
+                    chkRX2NB.Text = "NB";
+                    break;
+                case CheckState.Indeterminate: // NB2
+                    specRX.GetSpecRX(1).NBOn = false;
+                    specRX.GetSpecRX(1).NB2On = true;
+                    nB2ToolStripMenuItem1.Checked = false;
+                    chkRX2NB.Text = "NB2";
+                    break;
+                case CheckState.Unchecked: // all off                    
+                    specRX.GetSpecRX(1).NBOn = false;
+                    specRX.GetSpecRX(1).NB2On = false;
+                    nB2ToolStripMenuItem1.Checked = false;
+                    chkRX2NB.Text = "NB";
+                    break;
+
+            }
+        }
+
+        private void radBandVHF_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender == null) return;
+            if (sender.GetType() != typeof(RadioButtonTS)) return;
+            RadioButtonTS radioBtnTS = (RadioButtonTS)sender;
+            if (!radioBtnTS.Checked) return;
+
+           // radBandVHF_Click(sender, EventArgs.Empty);
         }
 
     }

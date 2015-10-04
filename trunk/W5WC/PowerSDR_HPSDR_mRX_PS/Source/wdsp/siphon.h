@@ -56,6 +56,12 @@ extern void flush_siphon (SIPHON a);
 
 extern void xsiphon (SIPHON a);
 
+extern void setBuffers_siphon (SIPHON a, double* in);
+
+extern void setSamplerate_siphon (SIPHON a, int rate);
+
+extern void setSize_siphon (SIPHON a, int size);
+
 // RXA Properties
 
 extern __declspec (dllexport) void RXAGetaSipF  (int channel, float* out, int size);

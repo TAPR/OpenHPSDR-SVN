@@ -136,6 +136,23 @@ void flush_anr (ANR a)
 	a->in_idx = 0;
 }
 
+void setBuffers_anr (ANR a, double* in, double* out)
+{
+	a->in_buff = in;
+	a->out_buff = out;
+}
+
+void setSamplerate_anr (ANR a, int rate)
+{
+	flush_anr(a);
+}
+
+void setSize_anr (ANR a, int size)
+{
+	a->buff_size = size;
+	flush_anr(a);
+}
+
 /********************************************************************************************************
 *																										*
 *											RXA Properties												*

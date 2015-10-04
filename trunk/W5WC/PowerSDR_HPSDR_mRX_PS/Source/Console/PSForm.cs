@@ -606,11 +606,11 @@ namespace PowerSDR
                     txRCVR = 4;
                     break;
                 case HPSDRModel.ANAN10E:
-                    rxRCVR = 1;
+                case HPSDRModel.ANAN100B:
+                   rxRCVR = 1;
                     txRCVR = 2;
                     break;
                 case HPSDRModel.ANAN100:
-                case HPSDRModel.ANAN100B:
                     rxRCVR = 3;
                     txRCVR = 4;
                     break;
@@ -645,10 +645,10 @@ namespace PowerSDR
                     newnr = Math.Max(4, nr);
                     break;
                 case HPSDRModel.ANAN10E:
-                    newnr = Math.Max(2, nr);
+                case HPSDRModel.ANAN100B:
+                   newnr = Math.Max(2, nr);
                     break;
                 case HPSDRModel.ANAN100:
-                case HPSDRModel.ANAN100B:
                     newnr = Math.Max(4, nr);
                     break;
                 case HPSDRModel.ANAN100D:
@@ -696,6 +696,7 @@ namespace PowerSDR
                         SetRXFreq(txRCVR, txfreq, false);
                         break;
                     case HPSDRModel.ANAN10E:
+                    case HPSDRModel.ANAN100B:
                         if (mox)
                         {
                             SetRXFreq(rxRCVR, txfreq, false);
@@ -708,7 +709,6 @@ namespace PowerSDR
                         }
                         break;
                     case HPSDRModel.ANAN100:
-                    case HPSDRModel.ANAN100B:
                         SetRXFreq(rxRCVR, txfreq, false);
                         SetRXFreq(txRCVR, txfreq, false);
                         break;

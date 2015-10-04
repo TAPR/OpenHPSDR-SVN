@@ -100,6 +100,22 @@ void xpanel (PANEL a)
 	}
 }
 
+void setBuffers_panel (PANEL a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_panel (PANEL a, int rate)
+{
+
+}
+
+void setSize_panel (PANEL a, int size)
+{
+	a->size = size;
+}
+
 /********************************************************************************************************
 *																										*
 *											RXA Properties												*

@@ -34,19 +34,10 @@ enum _USLEW
 	ON
 };
 
-USLEW create_uslew (int channel, volatile long *ch_upslew, int size, double* in, double* out, double rate, double tdelay, double tupslew)
+void calc_uslew (USLEW a)
 {
 	int i;
 	double delta, theta;
-	USLEW a = (USLEW)malloc0 (sizeof (uslew));
-	a->channel = channel;
-	a->ch_upslew = ch_upslew;
-	a->size = size;
-	a->in = in;
-	a->out = out;
-	a->rate = rate;
-	a->tdelay = tdelay;
-	a->tupslew = tupslew;
 	a->runmode = 0;
 	a->state = BEGIN;
 	a->count = 0;
@@ -61,12 +52,31 @@ USLEW create_uslew (int channel, volatile long *ch_upslew, int size, double* in,
 		theta += delta;
 	}
 	InterlockedBitTestAndReset (a->ch_upslew, 0);
+}
+
+void decalc_uslew (USLEW a)
+{
+	_aligned_free (a->cup);
+}
+
+USLEW create_uslew (int channel, volatile long *ch_upslew, int size, double* in, double* out, double rate, double tdelay, double tupslew)
+{
+	USLEW a = (USLEW)malloc0 (sizeof (uslew));
+	a->channel = channel;
+	a->ch_upslew = ch_upslew;
+	a->size = size;
+	a->in = in;
+	a->out = out;
+	a->rate = rate;
+	a->tdelay = tdelay;
+	a->tupslew = tupslew;
+	calc_uslew (a);
 	return a;
 }
 
 void destroy_uslew (USLEW a)
 {
-	_aligned_free (a->cup);
+	decalc_uslew (a);
 	_aligned_free (a);
 }
 
@@ -142,4 +152,23 @@ void xuslew (USLEW a)
 	}
 	else if (a->out != a->in)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
+}
+
+void setBuffers_uslew (USLEW a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_uslew (USLEW a, int rate)
+{
+	decalc_uslew (a);
+	a->rate = rate;
+	calc_uslew (a);
+}
+
+void setSize_uslew (USLEW a, int size)
+{
+	a->size = size;
+	flush_uslew (a);
 }

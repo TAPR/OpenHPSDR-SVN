@@ -47,6 +47,12 @@ extern void flush_ammod (AMMOD a);
 
 extern void xammod (AMMOD a);
 
+extern void setBuffers_ammod (AMMOD a, double* in, double* out);
+
+extern void setSamplerate_ammod (AMMOD a, int rate);
+
+extern void setSize_ammod (AMMOD a, int size);
+
 // TXA Properties
 
 extern __declspec (dllexport) void SetTXAAMCarrierLevel (int channel, double c_level);

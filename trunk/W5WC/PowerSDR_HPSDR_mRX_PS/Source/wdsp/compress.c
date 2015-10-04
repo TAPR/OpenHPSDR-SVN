@@ -43,7 +43,6 @@ COMPRESSOR create_compressor (
 	a->outbuff = outbuff;
 	a->buffsize = buffsize;
 	a->gain = gain;
-
 	return a;
 }
 
@@ -73,6 +72,22 @@ void xcompressor (COMPRESSOR a)
 		}
 	else if (a->inbuff != a->outbuff)
 		memcpy(a->outbuff, a->inbuff, a->buffsize * sizeof (complex));
+}
+
+void setBuffers_compressor (COMPRESSOR a, double* in, double* out)
+{
+	a->inbuff = in;
+	a->outbuff = out;
+}
+
+void setSamplerate_compressor (COMPRESSOR a, int rate)
+{
+
+}
+
+void setSize_compressor (COMPRESSOR a, int size)
+{
+	a->buffsize = size;
 }
 
 /********************************************************************************************************

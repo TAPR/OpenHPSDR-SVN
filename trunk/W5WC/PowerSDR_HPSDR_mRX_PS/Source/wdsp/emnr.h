@@ -51,6 +51,7 @@ typedef struct _emnr
 	double* outaccum;
 	double rate;
 	int wintype;
+	double ogain;
 	double gain;
 	int nsamps;
 	int iainidx;
@@ -162,5 +163,11 @@ extern void destroy_emnr (EMNR a);
 extern void flush_emnr (EMNR a);
 
 extern void xemnr (EMNR a, int pos);
+
+extern setBuffers_emnr (EMNR a, double* in, double* out);
+
+extern setSamplerate_emnr (EMNR a, int rate);
+
+extern setSize_emnr (EMNR a, int size);
 
 #endif

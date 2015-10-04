@@ -79,6 +79,12 @@ extern void flush_fmsq (FMSQ a);
 
 extern void xfmsq (FMSQ a);
 
+extern void setBuffers_fmsq (FMSQ a, double* in, double* out, double* trig);
+
+extern void setSamplerate_fmsq (FMSQ a, int rate);
+
+extern void setSize_fmsq (FMSQ a, int size);
+
 // RXA Properties
 
 extern __declspec (dllexport) void SetRXAFMSQThreshold (int channel, double threshold);
