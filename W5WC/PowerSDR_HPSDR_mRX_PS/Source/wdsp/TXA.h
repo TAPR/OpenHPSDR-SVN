@@ -145,6 +145,10 @@ struct _txa
 		IQC p0, p1;
 		// p0 for dsp-synchronized reference, p1 for other
 	} iqc;
+	struct
+	{
+		CFIR p;
+	} cfir;
 } txa[MAX_CHANNELS];
 
 extern void create_txa (int channel);
@@ -156,6 +160,14 @@ extern void flush_txa (int channel);
 extern void xtxa (int channel);
 
 extern int TXAUslewCheck (int channel);
+
+extern void setInputSamplerate_txa (int channel);
+
+extern void setOutputSamplerate_txa (int channel);
+
+extern void setDSPSamplerate_txa (int channel);
+
+extern void setDSPBuffsize_txa (int channel);
 
 // TXA Properties
 

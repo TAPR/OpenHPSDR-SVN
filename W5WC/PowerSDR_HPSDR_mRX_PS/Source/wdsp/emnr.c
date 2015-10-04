@@ -201,28 +201,17 @@ void interpM (double* res, double x, int nvals, double* xvals, double* yvals)
 	}
 }
 
-EMNR create_emnr (int run, int position, int size, double* in, double* out, int fsize, int ovrlp, 
-	int rate, int wintype, double gain, int gain_method, int npe_method, int ae_run)
+void calc_emnr(EMNR a)
 {
-	EMNR a = (EMNR) malloc0 (sizeof (emnr));
 	int i;
-	double Dvals[18] = {  1.0,   2.0,   5.0,   8.0,  10.0,  15.0,  20.0,  30.0,  40.0, 
-	                     60.0,  80.0, 120.0, 140.0, 160.0, 180.0, 220.0, 260.0, 300.0};
-	double Mvals[18] = {0.000, 0.260, 0.480, 0.580, 0.610, 0.668, 0.705, 0.762, 0.800, 
-		                0.841, 0.865, 0.890, 0.900, 0.910, 0.920, 0.930, 0.935, 0.940};
-	double Hvals[18] = {0.000, 0.150, 0.480, 0.780, 0.980, 1.550, 2.000, 2.300, 2.520, 
-		                3.100, 3.380, 4.150, 4.350, 4.250, 3.900, 4.100, 4.700, 5.000};
-	a->run = run;
-	a->position = position;
-	a->bsize = size;
-	a->in = in;
-	a->out = out;
-	a->fsize = fsize;
-	a->ovrlp = ovrlp;
+	double Dvals[18] = { 1.0, 2.0, 5.0, 8.0, 10.0, 15.0, 20.0, 30.0, 40.0,
+		60.0, 80.0, 120.0, 140.0, 160.0, 180.0, 220.0, 260.0, 300.0 };
+	double Mvals[18] = { 0.000, 0.260, 0.480, 0.580, 0.610, 0.668, 0.705, 0.762, 0.800,
+		0.841, 0.865, 0.890, 0.900, 0.910, 0.920, 0.930, 0.935, 0.940 };
+	double Hvals[18] = { 0.000, 0.150, 0.480, 0.780, 0.980, 1.550, 2.000, 2.300, 2.520,
+		3.100, 3.380, 4.150, 4.350, 4.250, 3.900, 4.100, 4.700, 5.000 };
 	a->incr = a->fsize / a->ovrlp;
-	a->rate = rate;
-	a->wintype = wintype;
-	a->gain = gain / fsize / (double)a->ovrlp;
+	a->gain = a->ogain / a->fsize / (double)a->ovrlp;
 	if (a->fsize > a->bsize)
 		a->iasize = a->fsize;
 	else
@@ -243,44 +232,42 @@ EMNR create_emnr (int run, int position, int size, double* in, double* out, int 
 	a->init_oainidx = a->oainidx;
 	a->oaoutidx = 0;
 	a->msize = a->fsize / 2 + 1;
-	a->window    = (double *) malloc0 (a->fsize * sizeof (double));
-	a->inaccum   = (double *) malloc0 (a->iasize * sizeof (double));
-	a->forfftin  = (double *) malloc0 (a->fsize * sizeof (double));
-	a->forfftout = (double *) malloc0 (a->msize * sizeof (complex));
-	a->mask      = (double *) malloc0 (a->msize * sizeof (double));
-	a->revfftin  = (double *) malloc0 (a->msize * sizeof (complex));
-	a->revfftout = (double *) malloc0 (a->fsize * sizeof (double));
-	a->save = (double **) malloc0 (a->ovrlp * sizeof (double *));
+	a->window = (double *)malloc0(a->fsize * sizeof(double));
+	a->inaccum = (double *)malloc0(a->iasize * sizeof(double));
+	a->forfftin = (double *)malloc0(a->fsize * sizeof(double));
+	a->forfftout = (double *)malloc0(a->msize * sizeof(complex));
+	a->mask = (double *)malloc0(a->msize * sizeof(double));
+	a->revfftin = (double *)malloc0(a->msize * sizeof(complex));
+	a->revfftout = (double *)malloc0(a->fsize * sizeof(double));
+	a->save = (double **)malloc0(a->ovrlp * sizeof(double *));
 	for (i = 0; i < a->ovrlp; i++)
-		a->save[i] = (double *) malloc0 (a->fsize * sizeof (double));
-	a->outaccum  = (double *) malloc0 (a->oasize * sizeof (double));
-	a->nsamps   = 0;
-	a->saveidx  = 0;
+		a->save[i] = (double *)malloc0(a->fsize * sizeof(double));
+	a->outaccum = (double *)malloc0(a->oasize * sizeof(double));
+	a->nsamps = 0;
+	a->saveidx = 0;
 	a->Rfor = fftw_plan_dft_r2c_1d(a->fsize, a->forfftin, (fftw_complex *)a->forfftout, FFTW_ESTIMATE);
-    a->Rrev = fftw_plan_dft_c2r_1d(a->fsize, (fftw_complex *)a->revfftin, a->revfftout, FFTW_ESTIMATE);
-	calc_window (a);
+	a->Rrev = fftw_plan_dft_c2r_1d(a->fsize, (fftw_complex *)a->revfftin, a->revfftout, FFTW_ESTIMATE);
+	calc_window(a);
 
 	a->g.msize = a->msize;
 	a->g.mask = a->mask;
 	a->g.y = a->forfftout;
-	a->g.lambda_y   = (double *) malloc0 (a->msize * sizeof (double));
-	a->g.lambda_d   = (double *) malloc0 (a->msize * sizeof (double));
-	a->g.prev_gamma = (double *) malloc0 (a->msize * sizeof (double));
-	a->g.prev_mask  = (double *) malloc0 (a->msize * sizeof (double));
-	
-	a->g.gain_method = gain_method;
-	a->g.npe_method = npe_method;
-	a->g.gf1p5 = sqrt (PI) / 2.0;
+	a->g.lambda_y = (double *)malloc0(a->msize * sizeof(double));
+	a->g.lambda_d = (double *)malloc0(a->msize * sizeof(double));
+	a->g.prev_gamma = (double *)malloc0(a->msize * sizeof(double));
+	a->g.prev_mask = (double *)malloc0(a->msize * sizeof(double));
+
+	a->g.gf1p5 = sqrt(PI) / 2.0;
 	{
-		double tau = - 128.0 / 8000.0 / log (0.98);
-		a->g.alpha = exp (- a->incr / a->rate / tau);
+		double tau = -128.0 / 8000.0 / log(0.98);
+		a->g.alpha = exp(-a->incr / a->rate / tau);
 	}
 	a->g.eps_floor = 1.0e-300;
 	a->g.gamma_max = 1000.0;
 	a->g.q = 0.2;
 	for (i = 0; i < a->g.msize; i++)
 	{
-		a->g.prev_mask[i]  = 1.0;
+		a->g.prev_mask[i] = 1.0;
 		a->g.prev_gamma[i] = 1.0;
 	}
 	a->g.gmax = 10000.0;
@@ -300,25 +287,25 @@ EMNR create_emnr (int run, int position, int size, double* in, double* out, int 
 	a->np.lambda_d = a->g.lambda_d;
 
 	{
-		double tau = - 128.0 / 8000.0 / log (0.7);
-		a->np.alphaCsmooth = exp (- a->np.incr / a->np.rate / tau);
+		double tau = -128.0 / 8000.0 / log(0.7);
+		a->np.alphaCsmooth = exp(-a->np.incr / a->np.rate / tau);
 	}
 	{
-		double tau = - 128.0 / 8000.0 / log (0.96);
-		a->np.alphaMax = exp (- a->np.incr / a->np.rate / tau);
+		double tau = -128.0 / 8000.0 / log(0.96);
+		a->np.alphaMax = exp(-a->np.incr / a->np.rate / tau);
 	}
 	{
-		double tau = - 128.0 / 8000.0 / log (0.7);
-		a->np.alphaCmin = exp (- a->np.incr / a->np.rate / tau);
+		double tau = -128.0 / 8000.0 / log(0.7);
+		a->np.alphaCmin = exp(-a->np.incr / a->np.rate / tau);
 	}
 	{
-		double tau = - 128.0 / 8000.0 / log (0.3);
-		a->np.alphaMin_max_value = exp (- a->np.incr / a->np.rate / tau);
+		double tau = -128.0 / 8000.0 / log(0.3);
+		a->np.alphaMin_max_value = exp(-a->np.incr / a->np.rate / tau);
 	}
-	a->np.snrq = - a->np.incr / (0.064 * a->np.rate);
+	a->np.snrq = -a->np.incr / (0.064 * a->np.rate);
 	{
-		double tau = - 128.0 / 8000.0 / log (0.8);
-		a->np.betamax = exp (- a->np.incr / a->np.rate / tau);
+		double tau = -128.0 / 8000.0 / log(0.8);
+		a->np.betamax = exp(-a->np.incr / a->np.rate / tau);
 	}
 	a->np.invQeqMax = 0.5;
 	a->np.av = 2.12;
@@ -328,41 +315,41 @@ EMNR create_emnr (int run, int position, int size, double* in, double* out, int 
 	if (a->np.V < 4) a->np.V = 4;
 	if ((a->np.U = (int)(0.5 + (a->np.Dtime * a->np.rate / (a->np.V * a->np.incr)))) < 1) a->np.U = 1;
 	a->np.D = a->np.U * a->np.V;
-	interpM (&a->np.MofD, a->np.D, 18, Dvals, Mvals);
-	interpM (&a->np.MofV, a->np.V, 18, Dvals, Mvals);
+	interpM(&a->np.MofD, a->np.D, 18, Dvals, Mvals);
+	interpM(&a->np.MofV, a->np.V, 18, Dvals, Mvals);
 	a->np.invQbar_points[0] = 0.03;
 	a->np.invQbar_points[1] = 0.05;
 	a->np.invQbar_points[2] = 0.06;
 	a->np.invQbar_points[3] = 1.0e300;
 	{
 		double db;
-		db = 10.0 * log10 (8.0) / (12.0 * 128 / 8000);
-		a->np.nsmax[0] = pow (10.0, db / 10.0 * a->np.V * a->np.incr / a->np.rate);
-		db = 10.0 * log10 (4.0) / (12.0 * 128 / 8000);
-		a->np.nsmax[1] = pow (10.0, db / 10.0 * a->np.V * a->np.incr / a->np.rate);
-		db = 10.0 * log10 (2.0) / (12.0 * 128 / 8000);
-		a->np.nsmax[2] = pow (10.0, db / 10.0 * a->np.V * a->np.incr / a->np.rate);
-		db = 10.0 * log10 (1.2) / (12.0 * 128 / 8000);
-		a->np.nsmax[3] = pow (10.0, db / 10.0 * a->np.V * a->np.incr / a->np.rate);
+		db = 10.0 * log10(8.0) / (12.0 * 128 / 8000);
+		a->np.nsmax[0] = pow(10.0, db / 10.0 * a->np.V * a->np.incr / a->np.rate);
+		db = 10.0 * log10(4.0) / (12.0 * 128 / 8000);
+		a->np.nsmax[1] = pow(10.0, db / 10.0 * a->np.V * a->np.incr / a->np.rate);
+		db = 10.0 * log10(2.0) / (12.0 * 128 / 8000);
+		a->np.nsmax[2] = pow(10.0, db / 10.0 * a->np.V * a->np.incr / a->np.rate);
+		db = 10.0 * log10(1.2) / (12.0 * 128 / 8000);
+		a->np.nsmax[3] = pow(10.0, db / 10.0 * a->np.V * a->np.incr / a->np.rate);
 	}
 
-	a->np.p           = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.alphaOptHat = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.alphaHat    = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.sigma2N     = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.pbar        = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.p2bar       = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.Qeq         = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.bmin        = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.bmin_sub    = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.k_mod       = (int *)    malloc0 (a->np.msize * sizeof (int));
-	a->np.actmin      = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.actmin_sub  = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.lmin_flag   = (int *)    malloc0 (a->np.msize * sizeof (int));
-	a->np.pmin_u      = (double *) malloc0 (a->np.msize * sizeof (double));
-	a->np.actminbuff  = (double**) malloc0 (a->np.U     * sizeof (double*));
+	a->np.p = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.alphaOptHat = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.alphaHat = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.sigma2N = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.pbar = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.p2bar = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.Qeq = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.bmin = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.bmin_sub = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.k_mod = (int *)malloc0(a->np.msize * sizeof(int));
+	a->np.actmin = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.actmin_sub = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.lmin_flag = (int *)malloc0(a->np.msize * sizeof(int));
+	a->np.pmin_u = (double *)malloc0(a->np.msize * sizeof(double));
+	a->np.actminbuff = (double**)malloc0(a->np.U     * sizeof(double*));
 	for (i = 0; i < a->np.U; i++)
-		a->np.actminbuff[i] = (double *) malloc0 (a->np.msize * sizeof (double));
+		a->np.actminbuff[i] = (double *)malloc0(a->np.msize * sizeof(double));
 
 	{
 		int k, ku;
@@ -370,10 +357,10 @@ EMNR create_emnr (int run, int position, int size, double* in, double* out, int 
 		a->np.subwc = a->np.V;
 		a->np.amb_idx = 0;
 		for (k = 0; k < a->np.msize; k++) a->np.lambda_y[k] = 0.5;
-		memcpy (a->np.p,       a->np.lambda_y, a->np.msize * sizeof (double));
-		memcpy (a->np.sigma2N, a->np.lambda_y, a->np.msize * sizeof (double));
-		memcpy (a->np.pbar,    a->np.lambda_y, a->np.msize * sizeof (double));
-		memcpy (a->np.pmin_u,  a->np.lambda_y, a->np.msize * sizeof (double));
+		memcpy(a->np.p, a->np.lambda_y, a->np.msize * sizeof(double));
+		memcpy(a->np.sigma2N, a->np.lambda_y, a->np.msize * sizeof(double));
+		memcpy(a->np.pbar, a->np.lambda_y, a->np.msize * sizeof(double));
+		memcpy(a->np.pmin_u, a->np.lambda_y, a->np.msize * sizeof(double));
 		for (k = 0; k < a->np.msize; k++)
 		{
 			a->np.p2bar[k] = a->np.lambda_y[k] * a->np.lambda_y[k];
@@ -382,7 +369,7 @@ EMNR create_emnr (int run, int position, int size, double* in, double* out, int 
 			for (ku = 0; ku < a->np.U; ku++)
 				a->np.actminbuff[ku][k] = 1.0e300;
 		}
-		memset (a->np.lmin_flag, 0, a->np.msize * sizeof (int));
+		memset(a->np.lmin_flag, 0, a->np.msize * sizeof(int));
 	}
 
 	a->nps.incr = a->incr;
@@ -392,20 +379,20 @@ EMNR create_emnr (int run, int position, int size, double* in, double* out, int 
 	a->nps.lambda_d = a->g.lambda_d;
 
 	{
-		double tau = - 128.0 / 8000.0 / log (0.8);
-		a->nps.alpha_pow = exp (- a->nps.incr / a->nps.rate / tau);
+		double tau = -128.0 / 8000.0 / log(0.8);
+		a->nps.alpha_pow = exp(-a->nps.incr / a->nps.rate / tau);
 	}
 	{
-		double tau = - 128.0 / 8000.0 / log (0.9);
-		a->nps.alpha_Pbar = exp (- a->nps.incr / a->nps.rate / tau);
+		double tau = -128.0 / 8000.0 / log(0.9);
+		a->nps.alpha_Pbar = exp(-a->nps.incr / a->nps.rate / tau);
 	}
-	a->nps.epsH1 = pow (10.0, 15.0 / 10.0);
+	a->nps.epsH1 = pow(10.0, 15.0 / 10.0);
 	a->nps.epsH1r = a->nps.epsH1 / (1.0 + a->nps.epsH1);
 
-	a->nps.sigma2N   = (double *) malloc0 (a->nps.msize * sizeof (double));
-	a->nps.PH1y      = (double *) malloc0 (a->nps.msize * sizeof (double));
-	a->nps.Pbar      = (double *) malloc0 (a->nps.msize * sizeof (double));
-	a->nps.EN2y      = (double *) malloc0 (a->nps.msize * sizeof (double));
+	a->nps.sigma2N = (double *)malloc0(a->nps.msize * sizeof(double));
+	a->nps.PH1y = (double *)malloc0(a->nps.msize * sizeof(double));
+	a->nps.Pbar = (double *)malloc0(a->nps.msize * sizeof(double));
+	a->nps.EN2y = (double *)malloc0(a->nps.msize * sizeof(double));
 
 	for (i = 0; i < a->nps.msize; i++)
 	{
@@ -413,14 +400,84 @@ EMNR create_emnr (int run, int position, int size, double* in, double* out, int 
 		a->nps.Pbar[i] = 0.5;
 	}
 
-	a->g.ae_run = ae_run;
 	a->ae.msize = a->msize;
 	a->ae.lambda_y = a->g.lambda_y;
 
-	a->ae.zetaThresh = sqrt (10.0) / 10.0;
+	a->ae.zetaThresh = sqrt(10.0) / 10.0;
 	a->ae.psi = 10.0;
 
-	a->ae.nmask = (double *) malloc0 (a->ae.msize * sizeof (double));
+	a->ae.nmask = (double *)malloc0(a->ae.msize * sizeof(double));
+}
+
+void decalc_emnr(EMNR a)
+{
+	int i;
+	_aligned_free(a->ae.nmask);
+
+	_aligned_free(a->nps.EN2y);
+	_aligned_free(a->nps.Pbar);
+	_aligned_free(a->nps.PH1y);
+	_aligned_free(a->nps.sigma2N);
+
+	for (i = 0; i < a->np.U; i++)
+		_aligned_free(a->np.actminbuff[i]);
+	_aligned_free(a->np.actminbuff);
+	_aligned_free(a->np.pmin_u);
+	_aligned_free(a->np.lmin_flag);
+	_aligned_free(a->np.actmin_sub);
+	_aligned_free(a->np.actmin);
+	_aligned_free(a->np.k_mod);
+	_aligned_free(a->np.bmin_sub);
+	_aligned_free(a->np.bmin);
+	_aligned_free(a->np.Qeq);
+	_aligned_free(a->np.p2bar);
+	_aligned_free(a->np.pbar);
+	_aligned_free(a->np.sigma2N);
+	_aligned_free(a->np.alphaHat);
+	_aligned_free(a->np.alphaOptHat);
+	_aligned_free(a->np.p);
+
+	_aligned_free(a->g.GGS);
+	_aligned_free(a->g.GG);
+	_aligned_free(a->g.prev_mask);
+	_aligned_free(a->g.prev_gamma);
+	_aligned_free(a->g.lambda_d);
+	_aligned_free(a->g.lambda_y);
+
+	fftw_destroy_plan(a->Rrev);
+	fftw_destroy_plan(a->Rfor);
+	_aligned_free(a->outaccum);
+	for (i = 0; i < a->ovrlp; i++)
+		_aligned_free(a->save[i]);
+	_aligned_free(a->save);
+	_aligned_free(a->revfftout);
+	_aligned_free(a->revfftin);
+	_aligned_free(a->mask);
+	_aligned_free(a->forfftout);
+	_aligned_free(a->forfftin);
+	_aligned_free(a->inaccum);
+	_aligned_free(a->window);
+}
+
+EMNR create_emnr (int run, int position, int size, double* in, double* out, int fsize, int ovrlp, 
+	int rate, int wintype, double gain, int gain_method, int npe_method, int ae_run)
+{
+	EMNR a = (EMNR) malloc0 (sizeof (emnr));
+	
+	a->run = run;
+	a->position = position;
+	a->bsize = size;
+	a->in = in;
+	a->out = out;
+	a->fsize = fsize;
+	a->ovrlp = ovrlp;
+	a->rate = rate;
+	a->wintype = wintype;
+	a->ogain = gain;
+	a->g.gain_method = gain_method;
+	a->g.npe_method = npe_method;
+	a->g.ae_run = ae_run;
+	calc_emnr (a);
 	return a;
 }
 
@@ -441,52 +498,7 @@ void flush_emnr (EMNR a)
 
 void destroy_emnr (EMNR a)
 {
-	int i;
-	_aligned_free(a->ae.nmask);
-
-	_aligned_free(a->nps.EN2y);
-	_aligned_free(a->nps.Pbar);
-	_aligned_free(a->nps.PH1y);
-	_aligned_free(a->nps.sigma2N);
-
-	for (i = 0; i < a->np.U; i++)
-		_aligned_free (a->np.actminbuff[i]);
-	_aligned_free (a->np.actminbuff);
-	_aligned_free (a->np.pmin_u);
-	_aligned_free (a->np.lmin_flag);
-	_aligned_free (a->np.actmin_sub);
-	_aligned_free (a->np.actmin);
-	_aligned_free (a->np.k_mod);
-	_aligned_free (a->np.bmin_sub);
-	_aligned_free (a->np.bmin);
-	_aligned_free (a->np.Qeq);
-	_aligned_free (a->np.p2bar);
-	_aligned_free (a->np.pbar);
-	_aligned_free (a->np.sigma2N);
-	_aligned_free (a->np.alphaHat);
-	_aligned_free (a->np.alphaOptHat);
-	_aligned_free (a->np.p);
-
-	_aligned_free (a->g.GGS);
-	_aligned_free (a->g.GG);
-	_aligned_free (a->g.prev_mask);
-	_aligned_free (a->g.prev_gamma);
-	_aligned_free (a->g.lambda_d);
-	_aligned_free (a->g.lambda_y);
-
-	fftw_destroy_plan (a->Rrev);
-	fftw_destroy_plan (a->Rfor);
-	_aligned_free (a->outaccum);
-	for (i = 0; i < a->ovrlp; i++)
-		_aligned_free (a->save[i]);
-	_aligned_free (a->save);
-	_aligned_free (a->revfftout);
-	_aligned_free (a->revfftin);
-	_aligned_free (a->mask);
-	_aligned_free (a->forfftout);
-	_aligned_free (a->forfftin);
-	_aligned_free (a->inaccum);
-	_aligned_free (a->window);
+	decalc_emnr (a);
 	_aligned_free (a);
 }
 
@@ -840,6 +852,26 @@ void xemnr (EMNR a, int pos)
 	}
 	else if (a->out != a->in)
 		memcpy (a->out, a->in, a->bsize * sizeof (complex));
+}
+
+setBuffers_emnr (EMNR a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+setSamplerate_emnr (EMNR a, int rate)
+{
+	decalc_emnr (a);
+	a->rate = rate;
+	calc_emnr (a);
+}
+
+setSize_emnr (EMNR a, int size)
+{
+	decalc_emnr (a);
+	a->bsize = size;
+	calc_emnr (a);
 }
 
 /********************************************************************************************************

@@ -96,20 +96,25 @@ void xeer (EER a)
 			Q = a->in[2 * i + 1];
 			a->outM[2 * i + 0] = I * a->mgain;
 			a->outM[2 * i + 1] = Q * a->mgain;
-			if(a->amiq)
+			switch (a->amiq)
 			{
-				a->out [2 * i + 0] = a->pgain * I;
-				a->out [2 * i + 1] = a->pgain * Q;
-			}
-			else
-			{
+			case 0:		// send phase info only, magnitude is constant
 				mag = sqrt (I * I + Q * Q);
 				a->out [2 * i + 0] = a->pgain * I / mag;
 				a->out [2 * i + 1] = a->pgain * Q / mag;
+				break;
+			case 1:		// send magnitude and phase information, I and Q
+				a->out [2 * i + 0] = a->pgain * I;
+				a->out [2 * i + 1] = a->pgain * Q;
+				break;
+			case 2:		// send envelope
+				mag = sqrt (I * I + Q * Q);
+				a->out [2 * i + 0] = a->out[2 * i + 1] = a->pgain * mag;
+				break;
 			}
 		}
-		xdelay (a->mdel);
-		xdelay (a->pdel);
+		xdelay (a->mdel);		// delay for outM
+		xdelay (a->pdel);		// delay for out
 	}
 	else if (a->out != a->in)
 		memcpy (a->out, a->in, a->size * sizeof (complex));

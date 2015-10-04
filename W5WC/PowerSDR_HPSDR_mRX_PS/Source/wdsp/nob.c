@@ -185,6 +185,24 @@ void xanb (ANB a)
 		memcpy (a->out, a->in, a->buffsize * sizeof (complex));
 }
 
+void setBuffers_anb (ANB a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_anb (ANB a, int rate)
+{
+	a->samplerate = rate;
+	initBlanker (a);
+}
+
+void setSize_anb (ANB a, int size)
+{
+	a->buffsize = size;
+	initBlanker (a);
+}
+
 
 /********************************************************************************************************
 *																										*

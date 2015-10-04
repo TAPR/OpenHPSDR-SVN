@@ -71,7 +71,8 @@ void build_channel (int channel)
 }
 
 PORT
-void OpenChannel (int channel, int in_size, int dsp_size, int input_samplerate, int dsp_rate, int output_samplerate, int type, int state, double tdelayup, double tslewup, double tdelaydown, double tslewdown, int bfo)
+void OpenChannel (int channel, int in_size, int dsp_size, int input_samplerate, int dsp_rate, int output_samplerate, 
+	int type, int state, double tdelayup, double tslewup, double tdelaydown, double tslewdown, int bfo)
 {
 	ch[channel].in_size = in_size;
 	ch[channel].dsp_size = dsp_size;
@@ -90,7 +91,7 @@ void OpenChannel (int channel, int in_size, int dsp_size, int input_samplerate, 
 	if (ch[channel].state)
 	{
 		InterlockedBitTestAndSet (&ch[channel].iob.pc->slew.upflag, 0);
-		InterlockedBitTestAndSet (&ch[channel].iob.pc->slew.ch_upslew, 0);
+		InterlockedBitTestAndSet (&ch[channel].iob.ch_upslew, 0);
 		InterlockedBitTestAndSet (&ch[channel].exchange, 0);
 	}
 	_MM_SET_FLUSH_ZERO_MODE (_MM_FLUSH_ZERO_ON);
@@ -168,20 +169,26 @@ void SetDSPBuffsize (int channel, int dsp_size)
 {
 	if (dsp_size != ch[channel].dsp_size)
 	{
-		CloseChannel (channel);
+		pre_main_destroy (channel);
+		post_main_destroy (channel);
 		ch[channel].dsp_size = dsp_size;
-		build_channel (channel);
+		pre_main_build (channel);
+		setDSPBuffsize_main (channel);
+		post_main_build (channel);
 	}
 }
 
 PORT
 void SetInputSamplerate (int channel, int in_rate)
-{
+{	// no re-build of main required
 	if (in_rate != ch[channel].in_rate)
 	{
-		CloseChannel (channel);
+		pre_main_destroy (channel);
+		post_main_destroy (channel);
 		ch[channel].in_rate = in_rate;
-		build_channel (channel);
+		pre_main_build (channel);
+		setInputSamplerate_main (channel);
+		post_main_build (channel);
 	}
 }
 
@@ -190,20 +197,26 @@ void SetDSPSamplerate (int channel, int dsp_rate)
 {
 	if (dsp_rate != ch[channel].dsp_rate)
 	{
-		CloseChannel (channel);
+		pre_main_destroy (channel);
+		post_main_destroy (channel);
 		ch[channel].dsp_rate = dsp_rate;
-		build_channel (channel);
+		pre_main_build (channel);
+		setDSPSamplerate_main (channel);
+		post_main_build (channel);
 	}
 }
 
 PORT
 void SetOutputSamplerate (int channel, int out_rate)
-{
+{	// no re-build of main required
 	if (out_rate != ch[channel].out_rate)
 	{
-		CloseChannel (channel);
+		pre_main_destroy (channel);
+		post_main_destroy (channel);
 		ch[channel].out_rate = out_rate;
-		build_channel (channel);
+		pre_main_build (channel);
+		setOutputSamplerate_main (channel);
+		post_main_build (channel);
 	}
 }
 
@@ -212,11 +225,16 @@ void SetAllRates (int channel, int in_rate, int dsp_rate, int out_rate)
 {
 	if ((in_rate != ch[channel].in_rate) || (dsp_rate != ch[channel].dsp_rate) || (out_rate != ch[channel].out_rate))
 	{
-		CloseChannel (channel);
+		pre_main_destroy (channel);
+		post_main_destroy (channel);
 		ch[channel].in_rate  = in_rate;
 		ch[channel].dsp_rate = dsp_rate;
 		ch[channel].out_rate = out_rate;
-		build_channel (channel);
+		pre_main_build (channel);
+		setInputSamplerate_main (channel);
+		setDSPSamplerate_main (channel);
+		setOutputSamplerate_main (channel);
+		post_main_build (channel);
 	}
 }
 
@@ -238,7 +256,7 @@ void SetChannelState (int channel, int state, int dmode)
 		case 1:
 			while (_InterlockedAnd (&ch[channel].flushflag, 1)) Sleep(1);
 			InterlockedBitTestAndSet (&a->slew.upflag, 0);
-			InterlockedBitTestAndSet (&a->slew.ch_upslew, 0);
+			InterlockedBitTestAndSet (&ch[channel].iob.ch_upslew, 0);
 			InterlockedBitTestAndSet (&ch[channel].exchange, 0);
 			break;
 		}

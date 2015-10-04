@@ -194,7 +194,7 @@ namespace PowerSDR
         public static extern void DeInitMetisSockets();
 
         [DllImport("JanusAudio.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int nativeInitMetis(String netaddr, bool dostatic);
+        unsafe public static extern int nativeInitMetis(String netaddr, uint broadcast, bool dostatic);
 
         //		private static bool MetisInitialized = false;
         // returns 0 on success, !0 on failure 
@@ -207,7 +207,7 @@ namespace PowerSDR
             //			} 
             int rc;
             System.Console.WriteLine("MetisNetIPAddr: " + Console.getConsole().MetisNetworkIPAddr);
-            rc = nativeInitMetis(Console.getConsole().MetisNetworkIPAddr, enableStaticIP);
+            rc = nativeInitMetis(Console.getConsole().MetisNetworkIPAddr, Console.getConsole().StaticBroadcastAddr, enableStaticIP);
             //			if  ( rc == 0 ) 
             //			{
             //				MetisInitialized = true;

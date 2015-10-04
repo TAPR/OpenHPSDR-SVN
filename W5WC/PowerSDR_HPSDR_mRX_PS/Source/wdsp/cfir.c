@@ -26,6 +26,25 @@ warren@wpratt.com
 #define _CRT_SECURE_NO_DEPRECATE
 #include "comm.h"
 
+void calc_cfir (CFIR a)
+{
+	a->scale = 1.0 / (double)(2 * a->size);
+	a->infilt = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->product = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt, (fftw_complex *)a->product, FFTW_FORWARD, FFTW_ESTIMATE);
+	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->out, FFTW_BACKWARD, FFTW_ESTIMATE);
+	a->mults = cfir_mults(a->size, a->runrate, a->cicrate, a->scale, a->DD, a->R, a->Pairs, a->cutoff, a->xtype, a->xbw);
+}
+
+void decalc_cfir (CFIR a)
+{
+	fftw_destroy_plan(a->CRev);
+	fftw_destroy_plan(a->CFor);
+	_aligned_free(a->mults);
+	_aligned_free(a->product);
+	_aligned_free(a->infilt);
+}
+
 CFIR create_cfir (int run, int size, double* in, double* out, int runrate, int cicrate, int DD, int R, int Pairs, double cutoff, int xtype, double xbw)
 //	run:  0 - no action; 1 - operate
 //	size:  number of complex samples in an input buffer to the CFIR filter
@@ -52,22 +71,13 @@ CFIR create_cfir (int run, int size, double* in, double* out, int runrate, int c
 	a->cutoff = cutoff;
 	a->xtype = xtype;
 	a->xbw = xbw;
-	a->scale = 1.0 / (double)(2 * a->size);
-	a->infilt  = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->product = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt,  (fftw_complex *)a->product, FFTW_FORWARD,  FFTW_ESTIMATE);
-	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->out, FFTW_BACKWARD, FFTW_ESTIMATE);
-	a->mults = cfir_mults (a->size, a->runrate, a->cicrate, a->scale, a->DD, a->R, a->Pairs, a->cutoff, a->xtype, a->xbw);
+	calc_cfir (a);
 	return a;
 }
 
 void destroy_cfir (CFIR a)
 {
-	fftw_destroy_plan (a->CRev);
-	fftw_destroy_plan (a->CFor);
-	_aligned_free (a->mults);
-	_aligned_free (a->product);
-	_aligned_free (a->infilt);
+	decalc_cfir (a);
 	_aligned_free (a);
 }
 
@@ -96,6 +106,28 @@ void xcfir (CFIR a)
 	}
 	else if (a->in != a->out)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
+}
+
+void setBuffers_cfir (CFIR a, double* in, double* out)
+{
+	decalc_cfir (a);
+	a->in = in;
+	a->out = out;
+	calc_cfir (a);
+}
+
+void setSamplerate_cfir (CFIR a, int rate)
+{
+	decalc_cfir (a);
+	a->runrate = rate;
+	calc_cfir (a);
+}
+
+void setSize_cfir (CFIR a, int size)
+{
+	decalc_cfir (a);
+	a->size = size;
+	calc_cfir (a);
 }
 
 
@@ -225,7 +257,7 @@ double* cfir_impulse (int N, int DD, int R, int Pairs, double runrate, double ci
 
 	// print_response ("cfirResponse.txt", N, A);
 	impulse = fir_fsamp(N, A, rtype, 1.0, -1);
-	// print_impulse ("cfirImpulse.txt", N, impulse, 1, 0);
+	print_impulse ("cfirImpulse.txt", N, impulse, 1, 0);
 	_aligned_free (A);
 	return impulse;
 }
@@ -239,4 +271,18 @@ double* cfir_mults (int size, int runrate, int cicrate, double scale, int DD, in
 	mults = fftcv_mults(2 * size, impulse);
 	_aligned_free (impulse);
 	return mults;
+}
+
+/********************************************************************************************************
+*																										*
+*											TXA Properties												*
+*																										*
+********************************************************************************************************/
+
+PORT void
+SetTXACFIRRun (int channel, int run)
+{
+	EnterCriticalSection(&ch[channel].csDSP);
+	txa[channel].cfir.p->run = run;
+	LeaveCriticalSection(&ch[channel].csDSP);
 }

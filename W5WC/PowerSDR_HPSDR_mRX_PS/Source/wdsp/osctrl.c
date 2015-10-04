@@ -30,6 +30,25 @@ warren@wpratt.com
 
 #include "comm.h"
 
+void calc_osctrl (OSCTRL a)
+{
+	a->pn = (int)((0.3 / a->bw) * a->rate + 0.5);
+	if ((a->pn & 1) == 0) a->pn += 1;
+	if (a->pn < 3) a->pn = 3;
+	a->dl_len = a->pn >> 1;
+	a->dl    = (double *) malloc0 (a->pn * sizeof (complex));
+	a->dlenv = (double *) malloc0 (a->pn * sizeof (double));
+	a->in_idx = 0;
+	a->out_idx = a->in_idx + a->dl_len;
+	a->max_env = 0.0;
+}
+
+void decalc_osctrl (OSCTRL a)
+{
+	_aligned_free (a->dlenv);
+	_aligned_free (a->dl);
+}
+
 OSCTRL create_osctrl (
 				int run,
 				int size,
@@ -46,22 +65,13 @@ OSCTRL create_osctrl (
 	a->rate = rate;
 	a->osgain = osgain;
 	a->bw = 3000.0;
-	a->pn = (int)((0.3 / a->bw) * a->rate + 0.5);
-	if ((a->pn & 1) == 0) a->pn += 1;
-	if (a->pn < 3) a->pn = 3;
-	a->dl_len = a->pn >> 1;
-	a->dl    = (double *) malloc0 (a->pn * sizeof (complex));
-	a->dlenv = (double *) malloc0 (a->pn * sizeof (double));
-	a->in_idx = 0;
-	a->out_idx = a->in_idx + a->dl_len;
-	a->max_env = 0.0;
+	calc_osctrl (a);
 	return a;
 }
 
 void destroy_osctrl (OSCTRL a)
 {
-	_aligned_free (a->dlenv);
-	_aligned_free (a->dl);
+	decalc_osctrl (a);
 	_aligned_free (a);
 }
 
@@ -101,6 +111,25 @@ void xosctrl (OSCTRL a)
 	}
 	else if (a->inbuff != a->outbuff)
 		memcpy (a->outbuff, a->inbuff, a->size * sizeof (complex));
+}
+
+void setBuffers_osctrl (OSCTRL a, double* in, double* out)
+{
+	a->inbuff = in;
+	a->outbuff = out;
+}
+
+void setSamplerate_osctrl (OSCTRL a, int rate)
+{
+	decalc_osctrl (a);
+	a->rate = rate;
+	calc_osctrl (a);
+}
+
+void setSize_osctrl (OSCTRL a, int size)
+{
+	a->size = size;
+	flush_osctrl (a);
 }
 
 /********************************************************************************************************

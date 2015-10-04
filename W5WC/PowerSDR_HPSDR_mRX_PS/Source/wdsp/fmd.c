@@ -26,20 +26,10 @@ warren@wpratt.com
 
 #include "comm.h"
 
-FMD create_fmd( int run, int size, double* in, double* out, int rate, double deviation, double f_low, double f_high, double fmin, double fmax, double zeta, double omegaN, double tau, double afgain, int sntch_run, double ctcss_freq)
+void calc_fmd (FMD a)
 {
-	FMD a = (FMD) malloc0 (sizeof (fmd));
 	double* impulse;
-	a->run = run;
-	a->size = size;
-	a->in = in;
-	a->out = out;
-	a->rate = (double)rate;
 	// pll
-	a->fmin = fmin;
-	a->fmax = fmax;
-	a->zeta = zeta;
-	a->omegaN = omegaN;
 	a->omega_min = TWOPI * a->fmin / a->rate;
 	a->omega_max = TWOPI * a->fmax / a->rate;
 	a->g1 = 1.0 - exp(-2.0 * a->omegaN * a->zeta / a->rate);
@@ -47,56 +37,77 @@ FMD create_fmd( int run, int size, double* in, double* out, int rate, double dev
 	a->phs = 0.0;
 	a->fil_out = 0.0;
 	a->omega = 0.0;
-	a->pllpole = a->omegaN * sqrt (2.0 * a->zeta * a->zeta + 1.0 + sqrt ((2.0 * a->zeta * a->zeta + 1.0) * (2.0 * a->zeta * a->zeta + 1.0) + 1)) / TWOPI;
+	a->pllpole = a->omegaN * sqrt(2.0 * a->zeta * a->zeta + 1.0 + sqrt((2.0 * a->zeta * a->zeta + 1.0) * (2.0 * a->zeta * a->zeta + 1.0) + 1)) / TWOPI;
 	// dc removal
-	a->tau = tau;
-	a->mtau = exp (-1.0 / (a->rate * a->tau));
+	a->mtau = exp(-1.0 / (a->rate * a->tau));
 	a->onem_mtau = 1.0 - a->mtau;
 	a->fmdc = 0.0;
 	// pll audio gain
-	a->deviation = deviation;
 	a->again = a->rate / (a->deviation * TWOPI);
-	a->audio = (double *) malloc0 (a->size * sizeof (complex));
+	a->audio = (double *)malloc0(a->size * sizeof(complex));
 	// de-emphasis filter
+	a->mults = fc_mults(a->size, a->f_low, a->f_high, +20.0 * log10(a->f_high / a->f_low), 0.0, 1, a->rate, 1.0 / (2.0 * a->size), 0, 1);
+	a->infilt = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->product = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->outfilt = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt, (fftw_complex *)a->product, FFTW_FORWARD, FFTW_PATIENT);
+	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->outfilt, FFTW_BACKWARD, FFTW_PATIENT);
+	// audio filter
+	impulse = fir_bandpass(a->size + 1, 0.8 * a->f_low, 1.1 * a->f_high, a->rate, 0, 1, a->afgain / (2.0 * a->size));
+	a->amults = fftcv_mults(2 * a->size, impulse);
+	a->ainfilt = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->aproduct = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->aCFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->ainfilt, (fftw_complex *)a->aproduct, FFTW_FORWARD, FFTW_PATIENT);
+	a->aCRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->aproduct, (fftw_complex *)a->out, FFTW_BACKWARD, FFTW_PATIENT);
+	_aligned_free(impulse);
+	// CTCSS Removal
+	a->sntch = create_snotch(1, a->size, a->out, a->out, (int)a->rate, a->ctcss_freq, 0.0002);
+}
+
+void decalc_fmd (FMD a)
+{
+	destroy_snotch(a->sntch);
+	fftw_destroy_plan(a->aCRev);
+	fftw_destroy_plan(a->aCFor);
+	_aligned_free(a->aproduct);
+	_aligned_free(a->ainfilt);
+	_aligned_free(a->amults);
+	fftw_destroy_plan(a->CRev);
+	fftw_destroy_plan(a->CFor);
+	_aligned_free(a->outfilt);
+	_aligned_free(a->product);
+	_aligned_free(a->infilt);
+	_aligned_free(a->mults);
+	_aligned_free(a->audio);
+}
+
+FMD create_fmd( int run, int size, double* in, double* out, int rate, double deviation, double f_low, double f_high, 
+	double fmin, double fmax, double zeta, double omegaN, double tau, double afgain, int sntch_run, double ctcss_freq)
+{
+	FMD a = (FMD) malloc0 (sizeof (fmd));
+	a->run = run;
+	a->size = size;
+	a->in = in;
+	a->out = out;
+	a->rate = (double)rate;
+	a->deviation = deviation;
 	a->f_low = f_low;
 	a->f_high = f_high;
-	a->mults = fc_mults (a->size, a->f_low, a->f_high, + 20.0 * log10 (a->f_high / a->f_low), 0.0, 1, a->rate, 1.0 / (2.0 * a->size), 0, 1);
-	a->infilt  = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->product = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->outfilt = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt,  (fftw_complex *)a->product, FFTW_FORWARD,  FFTW_PATIENT);
-	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->outfilt,  FFTW_BACKWARD, FFTW_PATIENT);
-	// audio filter
+	a->fmin = fmin;
+	a->fmax = fmax;
+	a->zeta = zeta;
+	a->omegaN = omegaN;
+	a->tau = tau;
 	a->afgain = afgain;
-	impulse = fir_bandpass (a->size + 1, 0.8 * a->f_low, 1.1 * a->f_high, a->rate, 0, 1, a->afgain / (2.0 * a->size));
-	a->amults = fftcv_mults (2 * a->size, impulse);
-	a->ainfilt  = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->aproduct = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->aCFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->ainfilt,  (fftw_complex *)a->aproduct, FFTW_FORWARD,  FFTW_PATIENT);
-	a->aCRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->aproduct, (fftw_complex *)a->out,      FFTW_BACKWARD, FFTW_PATIENT);
-	_aligned_free (impulse);
-	// CTCSS Removal
 	a->sntch_run = sntch_run;
 	a->ctcss_freq = ctcss_freq;
-	a->sntch = create_snotch (1, a->size, a->out, a->out, (int)a->rate, a->ctcss_freq, 0.0002);
+	calc_fmd (a);
 	return a;
 }
 
 void destroy_fmd (FMD a)
 {
-	destroy_snotch (a->sntch);
-	fftw_destroy_plan (a->aCRev);
-	fftw_destroy_plan (a->aCFor);
-	_aligned_free (a->aproduct);
-	_aligned_free (a->ainfilt);
-	_aligned_free (a->amults);
-	fftw_destroy_plan (a->CRev);
-	fftw_destroy_plan (a->CFor);
-	_aligned_free (a->outfilt);
-	_aligned_free (a->product);
-	_aligned_free (a->infilt);
-	_aligned_free (a->mults);
-	_aligned_free (a->audio);
+	decalc_fmd (a);
 	_aligned_free (a);
 }
 
@@ -171,6 +182,28 @@ void xfmd (FMD a)
 	}
 	else if (a->in != a->out)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
+}
+
+void setBuffers_fmd (FMD a, double* in, double* out)
+{
+	decalc_fmd (a);
+	a->in = in;
+	a->out = out;
+	calc_fmd (a);
+}
+
+void setSamplerate_fmd (FMD a, int rate)
+{
+	decalc_fmd (a);
+	a->rate = rate;
+	calc_fmd (a);
+}
+
+void setSize_fmd (FMD a, int size)
+{
+	decalc_fmd (a);
+	a->size = size;
+	calc_fmd (a);
 }
 
 /********************************************************************************************************

@@ -66,6 +66,22 @@ void xammod (AMMOD a)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
 }
 
+void setBuffers_ammod (AMMOD a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_ammod (AMMOD a, int rate)
+{
+
+}
+
+void setSize_ammod (AMMOD a, int size)
+{
+	a->size = size;
+}
+
 /********************************************************************************************************
 *																										*
 *											TXA Properties												*

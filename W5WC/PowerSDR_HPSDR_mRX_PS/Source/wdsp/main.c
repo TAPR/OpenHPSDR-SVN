@@ -108,3 +108,67 @@ void flush_main (int channel)
 		break;
 	}
 }
+
+void setInputSamplerate_main (int channel)
+{
+	switch (ch[channel].type)
+	{
+	case 0:
+		setInputSamplerate_rxa (channel);
+		break;
+	case 1:
+		setInputSamplerate_txa (channel);
+		break;
+	case 31:  //
+
+		break;
+	}
+}
+
+void setOutputSamplerate_main (int channel)
+{
+	switch (ch[channel].type)
+	{
+	case 0:
+		setOutputSamplerate_rxa (channel);
+		break;
+	case 1:
+		setOutputSamplerate_txa (channel);
+		break;
+	case 31:  //
+
+		break;
+	}
+}
+
+void setDSPSamplerate_main (int channel)
+{
+	switch (ch[channel].type)
+	{
+	case 0:
+		setDSPSamplerate_rxa (channel);
+		break;
+	case 1:
+		setDSPSamplerate_txa (channel);
+		break;
+	case 31:  //
+
+		break;
+	}
+}
+
+void setDSPBuffsize_main (int channel)
+{
+	switch (ch[channel].type)
+	{
+	case 0:
+		setDSPBuffsize_rxa (channel);
+		break;
+	case 1:
+		setDSPBuffsize_txa (channel);
+		break;
+	case 31:  //
+
+		break;
+	}
+}

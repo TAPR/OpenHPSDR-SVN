@@ -82,6 +82,12 @@ extern void flush_anf (ANF a);
 
 extern void xanf (ANF a, int position);
 
+extern void setBuffers_anf (ANF a, double* in, double* out);
+
+extern void setSamplerate_anf (ANF a, int rate);
+
+extern void setSize_anf (ANF a, int size);
+
 // RXA Properties
 
 extern __declspec (dllexport) void SetRXAANFRun (int channel, int setit);

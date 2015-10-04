@@ -65,6 +65,12 @@ extern void flush_fmmod (FMMOD a);
 
 extern void xfmmod (FMMOD a);
 
+extern setBuffers_fmmod (FMMOD a, double* in, double* out);
+
+extern setSamplerate_fmmod (FMMOD a, int rate);
+
+extern setSize_fmmod (FMMOD a, int size);
+
 // TXA Properties
 
 extern __declspec (dllexport) void SetTXAFMDeviation (int channel, double deviation);

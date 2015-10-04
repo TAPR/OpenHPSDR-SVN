@@ -26,11 +26,40 @@ warren@wpratt.com
 
 #include "comm.h"
 
-FMMOD create_fmmod (int run, int size, double* in, double* out, int rate, double dev, double f_low, double f_high, int ctcss_run, double ctcss_level, double ctcss_freq, int bp_run)
+void calc_fmmod (FMMOD a)
+{
+	double* impulse;
+	// ctcss gen
+	a->tscale = 1.0 / (1.0 + a->ctcss_level);
+	a->tphase = 0.0;
+	a->tdelta = TWOPI * a->ctcss_freq / a->samplerate;
+	// mod
+	a->sphase = 0.0;
+	a->sdelta = TWOPI * a->deviation / a->samplerate;
+	// bandpass
+	a->bp_fc = a->deviation + a->f_high;
+	impulse = fir_bandpass(a->size + 1, -a->bp_fc, +a->bp_fc, a->samplerate, 0, 1, 1.0 / (2 * a->size));
+	a->bp_mults = fftcv_mults(2 * a->size, impulse);
+	a->bp_infilt = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->bp_product = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->bp_CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->bp_infilt, (fftw_complex *)a->bp_product, FFTW_FORWARD, FFTW_PATIENT);
+	a->bp_CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->bp_product, (fftw_complex *)a->out, FFTW_BACKWARD, FFTW_PATIENT);
+	_aligned_free(impulse);
+}
+
+void decalc_fmmod (FMMOD a)
+{
+	fftw_destroy_plan(a->bp_CRev);
+	fftw_destroy_plan(a->bp_CFor);
+	_aligned_free(a->bp_product);
+	_aligned_free(a->bp_infilt);
+	_aligned_free(a->bp_mults);
+}
+
+FMMOD create_fmmod (int run, int size, double* in, double* out, int rate, double dev, double f_low, double f_high, 
+	int ctcss_run, double ctcss_level, double ctcss_freq, int bp_run)
 {
 	FMMOD a = (FMMOD) malloc0 (sizeof (fmmod));
-	double* impulse;
-	// inputs
 	a->run = run;
 	a->size = size;
 	a->in = in;
@@ -42,33 +71,14 @@ FMMOD create_fmmod (int run, int size, double* in, double* out, int rate, double
 	a->ctcss_run = ctcss_run;
 	a->ctcss_level = ctcss_level;
 	a->ctcss_freq = ctcss_freq;
-	// ctcss gen
-	a->tscale = 1.0 / (1.0 + a->ctcss_level);
-	a->tphase = 0.0;
-	a->tdelta = TWOPI * a->ctcss_freq / a->samplerate;
-	// mod
-	a->sphase = 0.0;
-	a->sdelta = TWOPI * a->deviation / a->samplerate;
-	// bandpass
 	a->bp_run = bp_run;
-	a->bp_fc = a->deviation + a->f_high;
-	impulse = fir_bandpass (a->size + 1, -a->bp_fc, +a->bp_fc, a->samplerate, 0, 1, 1.0 / (2 * a->size));
-	a->bp_mults = fftcv_mults (2 * a->size, impulse);
-	a->bp_infilt  = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->bp_product = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->bp_CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->bp_infilt,  (fftw_complex *)a->bp_product, FFTW_FORWARD,  FFTW_PATIENT);
-	a->bp_CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->bp_product, (fftw_complex *)a->out, FFTW_BACKWARD, FFTW_PATIENT);
-	_aligned_free (impulse);
+	calc_fmmod (a);
 	return a;
 }
 
 void destroy_fmmod (FMMOD a)
 {
-	fftw_destroy_plan (a->bp_CRev);
-	fftw_destroy_plan (a->bp_CFor);
-	_aligned_free (a->bp_product);
-	_aligned_free (a->bp_infilt);
-	_aligned_free (a->bp_mults);
+	decalc_fmmod (a);
 	_aligned_free (a);
 }
 
@@ -122,6 +132,28 @@ void xfmmod (FMMOD a)
 	}
 	else if (a->in != a->out)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
+}
+
+setBuffers_fmmod (FMMOD a, double* in, double* out)
+{
+	decalc_fmmod (a);
+	a->in = in;
+	a->out = out;
+	calc_fmmod (a);
+}
+
+setSamplerate_fmmod (FMMOD a, int rate)
+{
+	decalc_fmmod (a);
+	a->samplerate = rate;
+	calc_fmmod (a);
+}
+
+setSize_fmmod (FMMOD a, int size)
+{
+	decalc_fmmod (a);
+	a->size = size;
+	calc_fmmod (a);
 }
 
 /********************************************************************************************************

@@ -68,7 +68,6 @@ typedef struct _iob
 		int ntdown;
 		double* cdown;
 		volatile long upflag;
-		volatile long ch_upslew;
 		volatile long downflag;
 	} slew;
 } iob, *IOB;

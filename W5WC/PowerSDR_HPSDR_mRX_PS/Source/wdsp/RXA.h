@@ -86,6 +86,14 @@ struct _rxa
 	} bp0, bp1;
 	struct
 	{
+		BPSNBA p;
+	} bpsnba;
+	struct
+	{
+		SNBA p;
+	} snba;
+	struct
+	{
 		SENDER p;
 	} sender;
 	struct
@@ -154,6 +162,14 @@ extern void destroy_rxa (int channel);
 extern void flush_rxa (int channel);
 
 extern void xrxa (int channel);
+
+extern void setInputSamplerate_rxa (int channel);
+
+extern void setOutputSamplerate_rxa (int channel);
+
+extern void setDSPSamplerate_rxa (int channel);
+
+extern void setDSPBuffsize_rxa (int channel);
 
 // RXA Properties
 

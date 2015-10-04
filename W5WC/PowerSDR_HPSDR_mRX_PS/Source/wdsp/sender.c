@@ -26,6 +26,16 @@ warren@wpratt.com
 
 #include "comm.h"
 
+calc_sender (SENDER a)
+{
+	a->out = (double *) malloc0 (a->size * sizeof (complex));
+}
+
+decalc_sender (SENDER a)
+{
+	_aligned_free (a->out);
+}
+
 SENDER create_sender (int run, int flag, int mode, int size, double* in, int arg0, int arg1, int arg2, int arg3)
 {
 	SENDER a = (SENDER) malloc0 (sizeof (sender));
@@ -38,13 +48,13 @@ SENDER create_sender (int run, int flag, int mode, int size, double* in, int arg
 	a->arg1 = arg1;
 	a->arg2 = arg2;
 	a->arg3 = arg3;
-	a->out = (double *) malloc0 (a->size * sizeof (complex));
+	calc_sender (a);
 	return a;
 }
 
 void destroy_sender (SENDER a)
 {
-	_aligned_free (a->out);
+	decalc_sender (a);
 	_aligned_free (a);
 }
 
@@ -73,6 +83,23 @@ void xsender (SENDER a)
 			}
 		}
 	}
+}
+
+void setBuffers_sender (SENDER a, double* in)
+{
+	a->in = in;
+}
+
+void setSamplerate_sender (SENDER a, int rate)
+{
+	flush_sender (a);
+}
+
+void setSize_sender (SENDER a, int size)
+{
+	decalc_sender (a);
+	a->size = size;
+	calc_sender (a);
 }
 
 /********************************************************************************************************

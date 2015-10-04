@@ -27,7 +27,8 @@ warren@wpratt.com
 #define _CRT_SECURE_NO_WARNINGS
 #include "comm.h"
 
-CALCC create_calcc (int channel, int runcal, int size, int rate, int ints, int spi, double hw_scale, double moxdelay, double loopdelay, double ptol, int mox, int solidmox)
+CALCC create_calcc (int channel, int runcal, int size, int rate, int ints, int spi, double hw_scale, 
+	double moxdelay, double loopdelay, double ptol, int mox, int solidmox)
 {
 	int i;
 	CALCC a = (CALCC) malloc0 (sizeof (calcc));
@@ -497,7 +498,7 @@ void scheck(CALCC a)
 	}
 	dx = a->t[a->ints] - a->t[a->ints - 1];
 	out = a->cm[4 * intm1 + 0] + dx * (a->cm[4 * intm1 + 1] + dx * (a->cm[4 * intm1 + 2] + dx * a->cm[4 * intm1 + 3]));
-	if (out > 1.01)	// VALUE
+	if (out > 1.07)	// VALUE
 		a->binfo[6] |= 0x0008;
 	if (out < 0.0) a->binfo[6] |= 0x0020;
 }

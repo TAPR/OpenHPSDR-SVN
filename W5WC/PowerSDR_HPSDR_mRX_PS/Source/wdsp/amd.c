@@ -237,6 +237,23 @@ void xamd (AMD a)
 		memcpy (a->out_buff, a->in_buff, a->buff_size * sizeof(complex));
 }
 
+void setBuffers_amd (AMD a, double* in, double* out)
+{
+	a->in_buff = in;
+	a->out_buff = out;
+}
+
+void setSamplerate_amd (AMD a, int rate)
+{
+	a->sample_rate = rate;
+	init_amd(a);
+}
+
+void setSize_amd (AMD a, int size)
+{
+	a->buff_size = size;
+}
+
 /********************************************************************************************************
 *																										*
 *											RXA Properties												*

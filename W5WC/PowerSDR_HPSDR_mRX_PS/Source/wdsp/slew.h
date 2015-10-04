@@ -53,4 +53,10 @@ extern void flush_uslew (USLEW a);
 
 extern void xuslew (USLEW a);
 
+extern void setBuffers_uslew (USLEW a, double* in, double* out);
+
+extern void setSamplerate_uslew (USLEW a, int rate);
+
+extern void setSize_uslew (USLEW a, int size);
+
 #endif

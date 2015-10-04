@@ -40,7 +40,6 @@
 
 #define OBSOLETE (0) 
 
-
 /* globals */ 
 int MetisKeepRunning; 
 int MetisReadThreadRunning = 0; 
@@ -53,6 +52,14 @@ char MetisMACAddr[6] = { 0, 0, 0, 0, 0, 0 };
 char MetisCodeVersion[1] = { 0 };
 char MetisBoardID[1] = {0 };
 
+//struct _pgm_ifaddrs_t
+//{
+//	struct pgm_ifaddrs_t		_ifa;
+//	char				_name[IF_NAMESIZE];
+//	struct sockaddr_storage		_addr;
+//	struct sockaddr_storage		_netmask;
+//};
+
 extern void Dump(FILE *ofile,                /* file handle to dump to - assumed to be      */
                                          /* open.                                       */
     unsigned char *buf,            /* pointer to data to dump                     */
@@ -62,11 +69,14 @@ extern void Dump(FILE *ofile,                /* file handle to dump to - assumed
 
 
 #if 1 
-KD5TFDVK6APHAUDIO_API int getNetworkAddrs(int addrs[], int addr_count) { 
+KD5TFDVK6APHAUDIO_API int getNetworkAddrs(u_long addrs[], u_long broadcast_addrs[], int addr_count) {
+	//int i;
 	int addrs_used = 0; 
 	IP_ADAPTER_ADDRESSES addrbuf[5]; 
 	PIP_ADAPTER_ADDRESSES paddrs = addrbuf; 
 	PIP_ADAPTER_ADDRESSES p; 
+	//LPSOCKADDR saBroadcast;
+	//d IP_ADAPTER_PREFIX *pPrefix;
 
 	ULONG addrbufsize = sizeof(addrbuf); 	
 	IP_ADAPTER_UNICAST_ADDRESS *unip; 
@@ -74,7 +84,7 @@ KD5TFDVK6APHAUDIO_API int getNetworkAddrs(int addrs[], int addr_count) {
 	CHAR ipaddrbuf[100]; 
 	DWORD ipaddrbuflen; 
 	ULONG family = AF_INET;
-	ULONG flags = GAA_FLAG_SKIP_MULTICAST;
+	ULONG flags = GAA_FLAG_SKIP_MULTICAST; //d | GAA_FLAG_INCLUDE_PREFIX;
 
 	printf("addrbufsize is: %d\n", addrbufsize); 
 	memset(addrbuf, 0, sizeof(addrbuf)); 
@@ -115,15 +125,47 @@ KD5TFDVK6APHAUDIO_API int getNetworkAddrs(int addrs[], int addr_count) {
 		} 
 		while ( unip != NULL ) { 
 			struct sockaddr_in *saddrp; 
+			struct sockaddr_in *hostipaddrp;
+			struct sockaddr_in *subnetipaddrp;
+			struct sockaddr_in *broadcastipaddrp;
+			//struct _pgm_ifaddrs_t* ifa = pgm_new0(struct _pgm_ifaddrs_t, addr_count);
+			//struct _pgm_ifaddrs_t* ift = ifa;
+
 			ipaddrbuflen = sizeof(ipaddrbuf); 
 			WSAAddressToString(unip->Address.lpSockaddr, unip->Address.iSockaddrLength, NULL, ipaddrbuf,  &ipaddrbuflen); 			
 			printf("    %s\n", ipaddrbuf); 
 			Dump(stdout, (unsigned char *)(unip->Address.lpSockaddr), unip->Address.iSockaddrLength, (unsigned char *)"sockaddr"); 
 			saddrp = (struct sockaddr_in *)(unip->Address.lpSockaddr); 
+
+			//d if (IsWindows7SP1OrGreater)
+			//{
+			//	pPrefix = p->FirstPrefix;
+			//	if (pPrefix)
+			//	{
+			//		// XP only has 1 Address.lpSockaddr
+			//		//saBroadcast = pPrefix->Address.lpSockaddr;
+			//		subnetipaddrp = (struct sockaddr_in *)(pPrefix->Address.lpSockaddr);
+			//		pPrefix = pPrefix->Next;
+			//		hostipaddrp = (struct sockaddr_in *)(pPrefix->Address.lpSockaddr);
+			//		pPrefix = pPrefix->Next;
+			//		broadcastipaddrp = (struct sockaddr_in *)(pPrefix->Address.lpSockaddr);
+			//	}
+			//}
+			//else broadcastipaddrp = inet_addr("255.255.255.255");
+
+			/* address */
+			//ift->_ifa.ifa_addr = (void*)&ift->_addr;
+			//memcpy(ift->_ifa.ifa_addr, unip->Address.lpSockaddr, unip->Address.iSockaddrLength);
+
+			/* netmask */
+			//ift->_ifa.ifa_netmask = (void*)&ift->_netmask;
+
 			printf("addr: 0x%08x\n", saddrp->sin_addr.S_un.S_addr);
 			if ( addrs_used < addr_count ) { 
 				addrs[addrs_used] = saddrp->sin_addr.S_un.S_addr;
+				//d broadcast_addrs[addrs_used] = broadcastipaddrp->sin_addr.s_addr; 
 				++addrs_used;
+
 			}
 			unip = unip->Next;				
 		} 
@@ -272,7 +314,7 @@ void oldlistNetworkAddrs(void) {
  }
 
 
-SOCKET createSocket(int portnum, u_long addr) { 
+SOCKET createSocket(int portnum, u_long addr, int is_static) { 
 	struct sockaddr_in bind_addr; 
 	int addrcount = 0; 
 	int rc; 
@@ -292,12 +334,11 @@ SOCKET createSocket(int portnum, u_long addr) {
 	memset(&bind_addr, 0, sizeof(bind_addr)); 
 	
 	bind_addr.sin_family = AF_INET; 
-if (full_discovery) {
-	bind_addr.sin_addr.S_un.S_addr = addr;
-}
-else {
-	bind_addr.sin_addr.S_un.S_addr = INADDR_ANY; // inet_addr("10.1.1.15"); 
-}
+if (is_static) 
+	bind_addr.sin_addr.s_addr = INADDR_ANY;
+else 
+	bind_addr.sin_addr.s_addr = addr;
+
 	bind_addr.sin_port = htons(portnum); 
 	
 	rc = bind(sock, (struct sockaddr *)&bind_addr, (int)sizeof(bind_addr)); 
@@ -355,7 +396,7 @@ else {
 	return rc; 
  } 
 
- u_long doDiscovery(char *netaddr, int dostatic) { 
+ u_long doDiscovery(char *netaddr, u_long broadcast, int is_static) {
 	 int rc; 
 	 struct outdgram {
 		 unsigned char packetbuf[63];
@@ -385,14 +426,18 @@ else {
 	 Dump(stdout, outpacket.packetbuf, 100, (unsigned char *)"packetbuf"); 
 	 dest_addr.sin_family = AF_INET;
 	 dest_addr.sin_port = htons(1024); 
-	 dest_addr.sin_addr.s_addr = inet_addr("255.255.255.255"); 
+	 if (is_static)
+		 dest_addr.sin_addr.s_addr = broadcast;
+	 else
+		 dest_addr.sin_addr.s_addr = htonl(INADDR_BROADCAST); 
+
 	 // outsock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP); 
 	 // rc = setsockopt(outsock, SOL_SOCKET, SO_BROADCAST, (const char *)&btrue, sizeof(int)); 
 	 // if ( rc == SOCKET_ERROR ) { 
 	 // 	printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
 	 // }
 
-	 for ( i = 0; i < 5; i++ ) { 
+	 for ( i = 0; i < 2; i++ ) { 
 		 sendto(listenSock, (char *) &outpacket, sizeof(outpacket), 0, (SOCKADDR *)&dest_addr, sizeof(dest_addr)); 
 		 printf("discovery packet sent\n");  fflush(stdout); 
 
@@ -412,13 +457,13 @@ else {
 					 memcpy(MetisCodeVersion, inpacket.discbuf+9, 1); /* save off loaded Code Version */
 					 memcpy(MetisBoardID, inpacket.discbuf+10, 1); /* save off Board_ID 0x00 = Metis, 0x01 = Hermes, 0x02 = Griffin */
 
-					 if (dostatic) {
-						 if (disc_reply_addr.sin_addr.S_un.S_addr == inet_addr(netaddr)) {
-							 return disc_reply_addr.sin_addr.S_un.S_addr;
+					 if (is_static) {
+						 if (disc_reply_addr.sin_addr.s_addr == inet_addr(netaddr)) {
+							 return disc_reply_addr.sin_addr.s_addr;
 						 }
 					 }
 					 else {
-						 return disc_reply_addr.sin_addr.S_un.S_addr;
+						 return disc_reply_addr.sin_addr.s_addr;
 					 }
 				 }
 			 } 
@@ -426,16 +471,15 @@ else {
 				 printf("disc reply rc=%d\n", rc); 
 			 } 
 		 }
-	 }					
+	 }		
+
 	 fflush(stdout); 
 	 return 0; 
  }
 
- u_long MetisAddr = 0; 
+u_long MetisAddr = 0; 
 struct sockaddr_in MetisSockAddr; 
-
 int WSA_inited = 0; 
-
 
 KD5TFDVK6APHAUDIO_API void DeInitMetisSockets(void) {
 	if ( listenSock != (SOCKET)0 ) { 
@@ -449,9 +493,14 @@ KD5TFDVK6APHAUDIO_API void DeInitMetisSockets(void) {
 //	} 
 }
 
-
+//d useoldbroadcastip = 0;
 /* returns 0 on success, != 0 otherwise */ 
-KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr, int dostatic) {
+KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr, unsigned int ext_broadcast, int is_static) {
+	DWORD dwRetVal;
+	IPAddr DestIp = 0;
+	IPAddr SrcIp = 0;       /* default for src ip */
+	ULONG MacAddr[2];       /* for 6-byte hardware addresses */
+	ULONG PhysAddrLen = 6;  /* default to length of six bytes */
 
 	int rc; 
 	u_long metis_addr; 
@@ -460,9 +509,10 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr, int dostatic) {
 	int i; 
 	int j;
 	int sndbufsize; 
-	int addrs[10]; 
+	u_long addrs[10]; 
+	u_long broadcast_addrs[10];
 	int addr_count; 
-
+	u_long broadcast;
 	isMetis = 1; 
 
 	if ( !WSA_inited ) { 
@@ -479,9 +529,24 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr, int dostatic) {
 			addrs[0] = inet_addr(netaddr);
 		}
 		else */
-		addr_count = getNetworkAddrs(addrs, 10);   
+	//d if (is_static) useoldbroadcastip = 0;
+	addr_count = getNetworkAddrs(addrs, broadcast_addrs, 10);
 		printf("addr_count: %d\n", addr_count); 
 		for ( j = 0; j < addr_count; j++ ) { 
+
+			//if (is_static)
+				//if (CheckIPAddr(addrs[j], ext_broadcast, 1) != 1) continue;
+			//d if (IsWindows7SP1OrGreater)
+			//{
+			//	if (useoldbroadcastip)
+			//	{
+			//		if (CheckIPAddr(oldipaddr, ext_broadcast, 0) != 1)
+			//			useoldbroadcastip = 0;
+			//	}
+
+			//	if (!useoldbroadcastip && !is_static)
+			//		if (CheckIPAddr(addrs[j], ext_broadcast, 0) != 1) continue;
+			//}
 
 			if ( listenSock == (SOCKET)0 ) { 
 				if (full_discovery) {
@@ -489,7 +554,11 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr, int dostatic) {
 					listenSock = (SOCKET)0; 
 				}
 			}
-			listenSock = createSocket(0, addrs[j]); 
+
+			//d if (useoldbroadcastip)
+				//listenSock = createSocket(0, oldipaddr, 0);
+			//else
+				listenSock = createSocket(0, addrs[j], is_static);
 
 			if ( listenSock == INVALID_SOCKET ) { 
 				printf("createSocket on listenSock failed.\n");
@@ -513,7 +582,14 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr, int dostatic) {
 				printf("CreateSockets Warning: setsockopt SO_RCVBUF failed!\n"); 
 			}
 
-			metis_addr = doDiscovery(netaddr, dostatic); 						
+			if (is_static)
+				broadcast = htonl(ext_broadcast);
+			//else if (useoldbroadcastip)
+				//broadcast = oldbroadcastip;
+			else
+				broadcast = broadcast_addrs[j];
+
+			metis_addr = doDiscovery(netaddr, broadcast, is_static);
 
 			if ( metis_addr != 0 ) { 
 				printf("metis_addr: 0x%08x\n", metis_addr); 
@@ -523,6 +599,18 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr, int dostatic) {
 				MetisSockAddr.sin_family = AF_INET;
 				MetisSockAddr.sin_port = htons(1024); 
 				MetisSockAddr.sin_addr.s_addr = metis_addr;
+				//add to ARP table
+				DestIp = metis_addr;
+				memset(&MacAddr, 0xff, sizeof(MacAddr));
+				dwRetVal = SendARP(DestIp, SrcIp, &MacAddr, &PhysAddrLen);
+
+				//d if (!useoldbroadcastip && !is_static)
+				//{
+				//	useoldbroadcastip = 1;
+				//	oldipaddr = addrs[j];
+				//	oldbroadcastip = broadcast_addrs[j];
+				//}
+				
 				return 0; 
 			}
 		}
@@ -915,3 +1003,55 @@ void SendCommandToMetis(unsigned char command) 	 {
 	 
 	 sendto(listenSock, (char *) &outpacket, sizeof(outpacket), 0, (SOCKADDR *)&MetisSockAddr, sizeof(MetisSockAddr)); 
 } 
+
+int CheckIPAddr(DWORD addr, DWORD ext_broadcast, int is_static)
+{
+	//IN_ADDR IPAddr;
+	ULONG ulSize = 0;
+	DWORD broadcast;
+    int fFound = 0;
+
+	if (GetIpAddrTable(NULL, &ulSize, 0) ==
+		ERROR_INSUFFICIENT_BUFFER) {
+		PMIB_IPADDRTABLE piat = (PMIB_IPADDRTABLE)(LocalAlloc(LMEM_FIXED, ulSize));
+		if (piat) {
+			if (GetIpAddrTable(piat, &ulSize, 0) == ERROR_SUCCESS) {
+				
+				for (DWORD dwIndex = 0; dwIndex < piat->dwNumEntries;
+					dwIndex++) {
+					PMIB_IPADDRROW prow = &piat->table[dwIndex];
+					if (prow->dwAddr == 0) continue;
+					//IPAddr.S_un.S_addr = prow->dwAddr;
+					if (is_static)
+					{
+					    broadcast = (prow->dwAddr & prow->dwMask)
+						| (prow->dwMask ^ (DWORD)0xffffffff);
+						if (broadcast != htonl(ext_broadcast)) continue;
+					}
+					else
+					if (prow->dwAddr != addr) continue;
+
+					//IPAddr.S_un.S_addr = prow->dwMask;					
+					//IPAddr.S_un.S_addr = broadcast;
+					if ((prow->wType & (MIB_IPADDR_PRIMARY |
+						MIB_IPADDR_DYNAMIC |
+						MIB_IPADDR_DELETED |
+						MIB_IPADDR_DISCONNECTED)) !=
+						MIB_IPADDR_DYNAMIC &&
+						(prow->wType & (MIB_IPADDR_PRIMARY |
+						MIB_IPADDR_DYNAMIC |
+						MIB_IPADDR_DELETED |
+						MIB_IPADDR_DISCONNECTED)) !=
+						MIB_IPADDR_PRIMARY) continue;
+					fFound = 1;
+					break;
+				}
+
+			}
+			LocalFree(piat);
+			return fFound;
+		}
+	}
+
+
+}

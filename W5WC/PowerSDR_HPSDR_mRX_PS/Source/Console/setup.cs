@@ -1671,7 +1671,7 @@ namespace PowerSDR
 
             cmboSigGenRXMode.Text = "Radio";
             cmboSigGenTXMode.Text = "Radio";
-            
+
             /* K5IT - vestigal code throws exception in debug - HPSDR audio is the only allowed option
             if (comboAudioDriver1.SelectedIndex < 0 &&
                 comboAudioDriver1.Items.Count > 0)
@@ -2917,8 +2917,11 @@ namespace PowerSDR
             // Alex
             radAlexAutoControl_CheckedChanged(this, e);
             radAlexManualControl_CheckedChanged(this, e);
-            //CAT
+            // CAT
             comboFocusMasterMode_SelectedIndexChanged(this, e);
+            // SNB
+            udDSPSNBThresh1_ValueChanged(this, e);
+            udDSPSNBThresh2_ValueChanged(this, e);
         }
 
         public string[] GetTXProfileStrings()
@@ -3985,12 +3988,12 @@ namespace PowerSDR
             {
                 if (chkDSPRX1APFEnable != null)
                 {
-                   // if (console.RX1DSPMode == DSPMode.CWL ||
-                  //      console.RX1DSPMode == DSPMode.CWU)
-                   // {
-                        chkDSPRX1APFEnable.Checked = value;
-                        chkDSPRX1APFEnable_CheckedChanged(this, EventArgs.Empty);
-                   // }
+                    // if (console.RX1DSPMode == DSPMode.CWL ||
+                    //      console.RX1DSPMode == DSPMode.CWU)
+                    // {
+                    chkDSPRX1APFEnable.Checked = value;
+                    chkDSPRX1APFEnable_CheckedChanged(this, EventArgs.Empty);
+                    // }
                 }
             }
         }
@@ -4007,12 +4010,12 @@ namespace PowerSDR
             {
                 if (chkDSPRX1subAPFEnable != null)
                 {
-                   // if (console.RX1DSPMode == DSPMode.CWL ||
-                   //     console.RX1DSPMode == DSPMode.CWU)
-                   // {
-                        chkDSPRX1subAPFEnable.Checked = value;
-                        chkDSPRX1subAPFEnable_CheckedChanged(this, EventArgs.Empty);
-                   // }
+                    // if (console.RX1DSPMode == DSPMode.CWL ||
+                    //     console.RX1DSPMode == DSPMode.CWU)
+                    // {
+                    chkDSPRX1subAPFEnable.Checked = value;
+                    chkDSPRX1subAPFEnable_CheckedChanged(this, EventArgs.Empty);
+                    // }
                 }
             }
         }
@@ -4029,12 +4032,12 @@ namespace PowerSDR
             {
                 if (chkDSPRX2APFEnable != null)
                 {
-                   // if (console.RX2DSPMode == DSPMode.CWL ||
-                   //     console.RX2DSPMode == DSPMode.CWU)
-                   // {
-                        chkDSPRX2APFEnable.Checked = value;
-                        chkDSPRX2APFEnable_CheckedChanged(this, EventArgs.Empty);
-                   // }
+                    // if (console.RX2DSPMode == DSPMode.CWL ||
+                    //     console.RX2DSPMode == DSPMode.CWU)
+                    // {
+                    chkDSPRX2APFEnable.Checked = value;
+                    chkDSPRX2APFEnable_CheckedChanged(this, EventArgs.Empty);
+                    // }
                 }
             }
         }
@@ -6597,7 +6600,7 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-               // chkGeneralRXOnly.Visible = true;
+                // chkGeneralRXOnly.Visible = true;
                 // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
@@ -6635,11 +6638,11 @@ namespace PowerSDR
                 int nr;
                 bool pwr_cycled = false;
                 //if (chkLimitRX.Checked) 
-                    nr = 2;
+                nr = 2;
                 //else nr = 4;
-                    chkLimitRX.Checked = true;
+                chkLimitRX.Checked = true;
                 //if (chkLimitRX.Checked)
-                    console.StitchedReceivers = 1;
+                console.StitchedReceivers = 1;
                 //else console.StitchedReceivers = 3;
                 if (!chkDisablePureSignal.Checked)
                     nr = console.psform.NRX(nr, console.CurrentHPSDRModel);
@@ -6744,12 +6747,13 @@ namespace PowerSDR
             {
                 int nr;
                 bool pwr_cycled = false;
-                if (chkLimitRX.Checked) nr = 2;
-                else nr = 4;
-
-                if (chkLimitRX.Checked)
-                    console.StitchedReceivers = 1;
-                else console.StitchedReceivers = 3;
+                //if (chkLimitRX.Checked) 
+                nr = 2;
+                //else nr = 4;
+                chkLimitRX.Checked = true;
+                //if (chkLimitRX.Checked)
+                console.StitchedReceivers = 1;
+                //else console.StitchedReceivers = 3;
                 if (!chkDisablePureSignal.Checked)
                     nr = console.psform.NRX(nr, console.CurrentHPSDRModel);
 
@@ -6812,7 +6816,7 @@ namespace PowerSDR
                 groupBox10MhzClock.Visible = false;
                 groupBox122MHz.Visible = false;
                 groupBoxMicSource.Visible = false;
-               // chkGeneralRXOnly.Visible = true;
+                // chkGeneralRXOnly.Visible = true;
                 // chkGeneralRXOnly.Checked = false;
                 chkHermesStepAttenuator.Enabled = true;
                 groupBoxRXOptions.Text = "ANAN Options";
@@ -7420,227 +7424,227 @@ namespace PowerSDR
             // add or remove setup pages for HPSDR stuff 
             //
             bool b = is_hermes;
-           // bool b = is_hermes ? radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN100.Checked ||
-                                   // radGenModelANAN100D.Checked || radGenModelOrion.Checked : radGenModelHPSDR.Checked;
+            // bool b = is_hermes ? radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN100.Checked ||
+            // radGenModelANAN100D.Checked || radGenModelOrion.Checked : radGenModelHPSDR.Checked;
 
-           // if (is_hermes)
-           // {
-                AddHPSDRPages();
+            // if (is_hermes)
+            // {
+            AddHPSDRPages();
 
-                // disable iq correction -- not needed with mercury and penelope 
-                //DttSP.SetCorrectIQEnable(0); // turn off I/Q correction       // NOT USED
-                //DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 0);       // NOT USED
-                //DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 1);       // NOT USED
-                // udDSPImagePhaseTX.Value = 0.0M;
-                // udDSPImageGainTX.Value = 0.0M;
-                // grpDSPImageRejectTX.Enabled = false;
-                // force setting of audio card 
-                comboAudioSoundCard.Text = "HPSDR";
-                comboAudioSoundCard.Enabled = false;
-                // comboAudioSampleRate1.Text = "192000"; 
-                // comboAudioSampleRate1.Enabled = false;
-                udAudioVoltage1.Value = 0.80M;
-                udAudioVoltage1.Enabled = false;
-                btnAudioVoltTest1.Visible = false;
-                // and enable the gain by band page 
-                grpFRSRegion.Visible = true;
-                grpPAGainByBand.Visible = true;
-                // grpGeneralHardwareSDR1000.Visible = false;
-                // grpGeneralDDS.Visible = false;
-                // btnWizard.Visible = true;
-                //chkGeneralRXOnly.Checked = false;
-                //chkGeneralRXOnly.Enabled = true;
-                // grpHWSoftRock.Visible = false;
-                //  chkGeneralCustomFilter.Visible = false;
-                //  grpGenAutoMute.Visible = false;
-                grpGenCalRXImage.Visible = false;
-                grpTestX2.Visible = false;
-                //chkGenTX1Delay.Visible = false;
-                //lblGenTX1Delay.Visible = false;
-                //udGenTX1Delay.Visible = false;
-                //chkGeneralEnableX2.Visible = false;
-                //lblGeneralX2Delay.Visible = false;
-                //udGeneralX2Delay.Visible = false;
-                //  rtxtPACalReq.Visible = false;
-                // lblPTTOutDelay.Visible = true;
-                // udGenPTTOutDelay.Visible = true;
-                lblMoxDelay.Visible = true;
-                udMoxDelay.Visible = true;
-                udMoxDelay.Enabled = true;
-                //chkPTTOutDelay.Visible = true;
-                //chkPTTOutDelay.Enabled = true;
-                udRFDelay.Visible = true;
-                udRFDelay.Enabled = true;
-                lblRFDelay.Visible = true;
-                grpImpulseTest.Visible = false;
-                // chkGeneralPAPresent.Checked = true;
+            // disable iq correction -- not needed with mercury and penelope 
+            //DttSP.SetCorrectIQEnable(0); // turn off I/Q correction       // NOT USED
+            //DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 0);       // NOT USED
+            //DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 1);       // NOT USED
+            // udDSPImagePhaseTX.Value = 0.0M;
+            // udDSPImageGainTX.Value = 0.0M;
+            // grpDSPImageRejectTX.Enabled = false;
+            // force setting of audio card 
+            comboAudioSoundCard.Text = "HPSDR";
+            comboAudioSoundCard.Enabled = false;
+            // comboAudioSampleRate1.Text = "192000"; 
+            // comboAudioSampleRate1.Enabled = false;
+            udAudioVoltage1.Value = 0.80M;
+            udAudioVoltage1.Enabled = false;
+            btnAudioVoltTest1.Visible = false;
+            // and enable the gain by band page 
+            grpFRSRegion.Visible = true;
+            grpPAGainByBand.Visible = true;
+            // grpGeneralHardwareSDR1000.Visible = false;
+            // grpGeneralDDS.Visible = false;
+            // btnWizard.Visible = true;
+            //chkGeneralRXOnly.Checked = false;
+            //chkGeneralRXOnly.Enabled = true;
+            // grpHWSoftRock.Visible = false;
+            //  chkGeneralCustomFilter.Visible = false;
+            //  grpGenAutoMute.Visible = false;
+            grpGenCalRXImage.Visible = false;
+            grpTestX2.Visible = false;
+            //chkGenTX1Delay.Visible = false;
+            //lblGenTX1Delay.Visible = false;
+            //udGenTX1Delay.Visible = false;
+            //chkGeneralEnableX2.Visible = false;
+            //lblGeneralX2Delay.Visible = false;
+            //udGeneralX2Delay.Visible = false;
+            //  rtxtPACalReq.Visible = false;
+            // lblPTTOutDelay.Visible = true;
+            // udGenPTTOutDelay.Visible = true;
+            lblMoxDelay.Visible = true;
+            udMoxDelay.Visible = true;
+            udMoxDelay.Enabled = true;
+            //chkPTTOutDelay.Visible = true;
+            //chkPTTOutDelay.Enabled = true;
+            udRFDelay.Visible = true;
+            udRFDelay.Enabled = true;
+            lblRFDelay.Visible = true;
+            grpImpulseTest.Visible = false;
+            // chkGeneralPAPresent.Checked = true;
 
-                if (is_hermes)
+            if (is_hermes)
+            {
+                //   int old_rate = console.NReceivers;
+                //  int new_rate = 4;
+                //  bool power = console.PowerOn;
+                if (radGenModelOrion.Checked)
                 {
-                    //   int old_rate = console.NReceivers;
-                    //  int new_rate = 4;
-                    //  bool power = console.PowerOn;
-                    if (radGenModelOrion.Checked)
-                    {
-                        groupBoxHPSDRHW.Visible = false;
-                        grpGeneralHardwareORION.Visible = true;
-                    }
-                    else
-                    {
-                        grpGeneralHardwareORION.Visible = false;
-                       // groupBoxHPSDRHW.Visible = true;
-                    }
-                    grpOzyType.Visible = true;
-                    grpOzyType.Enabled = true;
-                    // make sure one of these is checked 
-                    //  if (radOzyUSB.Checked == false && radMetis.Checked == false)
-                    //  {
-                    radMetis.Checked = true;
-                    grpMetisAddr.Visible = true;
-                    // }
-                    radOzyUSB.Enabled = false;
-
-                    /*    if (power && new_rate != old_rate)
-                        {
-                            console.PowerOn = false;
-                            Thread.Sleep(100);
-                        }
-
-                        console.NReceivers = 4;
- 
-                        if (power && new_rate != old_rate)
-                            console.PowerOn = true; */
+                    groupBoxHPSDRHW.Visible = false;
+                    grpGeneralHardwareORION.Visible = true;
                 }
                 else
                 {
-                    //  int old_rate = console.NReceivers;
-                    //  int new_rate = 2;
-                    //  bool power = console.PowerOn;
-
                     grpGeneralHardwareORION.Visible = false;
-                    groupBoxHPSDRHW.BringToFront();
-                   // groupBoxHPSDRHW.Visible = true;
-                    grpOzyType.Visible = true;
-                    grpOzyType.Enabled = true;
-                    radOzyUSB.Enabled = true;
-                    if (radOzyUSB.Checked == false && radMetis.Checked == false)
+                    // groupBoxHPSDRHW.Visible = true;
+                }
+                grpOzyType.Visible = true;
+                grpOzyType.Enabled = true;
+                // make sure one of these is checked 
+                //  if (radOzyUSB.Checked == false && radMetis.Checked == false)
+                //  {
+                radMetis.Checked = true;
+                grpMetisAddr.Visible = true;
+                // }
+                radOzyUSB.Enabled = false;
+
+                /*    if (power && new_rate != old_rate)
                     {
-                        radOzyUSB.Checked = true;
+                        console.PowerOn = false;
+                        Thread.Sleep(100);
                     }
 
-                    /*   if (power && new_rate != old_rate)
-                       {
-                           console.PowerOn = false;
-                           Thread.Sleep(100);
-                       }
-                    
-                       console.NReceivers = 2;
+                    console.NReceivers = 4;
  
-                       if (power && new_rate != old_rate)
-                           console.PowerOn = true; */
-                }
+                    if (power && new_rate != old_rate)
+                        console.PowerOn = true; */
+            }
+            else
+            {
+                //  int old_rate = console.NReceivers;
+                //  int new_rate = 2;
+                //  bool power = console.PowerOn;
 
-                //chkGeneralSpurRed.Visible = false;
-                //chkGeneralSpurRed.Checked = false;
-                //chkGeneralSpurRed.Enabled = false;
-                chkAudioExpert.Checked = false;
-                chkAudioExpert.Visible = false;
-                // console.DisableSR();
-                //chkGeneralEnableX2.Checked = false;
-                //chkGeneralEnableX2.Enabled = true;
-
-                // grpGeneralCalibration.Enabled = false; 
-                grpGenCalRXImage.Enabled = false;
-                chkCalExpert.Enabled = false;
-                grpHPSDRFreqCalDbg.Visible = true;
-
-                //string key = comboKeyerConnPrimary.Text;
-                //if (comboKeyerConnPrimary.Items.Contains("5000"))
-                //    comboKeyerConnPrimary.Items.Remove("5000");
-                //if (comboKeyerConnPrimary.Items.Contains("SDR"))
-                //    comboKeyerConnPrimary.Items.Remove("SDR");
-                //if (!comboKeyerConnPrimary.Items.Contains("Ozy/Hermes"))
-                //    comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
-                //comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
-                //comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
-
-                if (radGenModelANAN10.Checked || radGenModelANAN10E.Checked || radGenModelANAN100B.Checked)
+                grpGeneralHardwareORION.Visible = false;
+                groupBoxHPSDRHW.BringToFront();
+                // groupBoxHPSDRHW.Visible = true;
+                grpOzyType.Visible = true;
+                grpOzyType.Enabled = true;
+                radOzyUSB.Enabled = true;
+                if (radOzyUSB.Checked == false && radMetis.Checked == false)
                 {
-                    chkRxOutOnTx.Checked = false;
-                    chkRxOutOnTx.Enabled = false;
-                    chkEXT1OutOnTx.Checked = false;
-                    chkEXT1OutOnTx.Enabled = false;
-                    chkEXT2OutOnTx.Checked = false;
-                    chkEXT2OutOnTx.Enabled = false;
-                    panelAlex1HPFControl.Visible = false;
-                    tpAlexFilterControl.Text = "LPF";
-                    panelAlexRXXVRTControl.Visible = false;
-                    labelAlexFilterActive.Location = new Point(298, 0);
-                }
-                else
-                {
-                    chkRxOutOnTx.Enabled = true;
-                    chkEXT1OutOnTx.Enabled = true;
-                    chkEXT2OutOnTx.Enabled = true;
-                    panelAlex1HPFControl.Visible = true;
-                    tpAlexFilterControl.Text = "HPF/LPF";
-                    panelAlexRXXVRTControl.Visible = true;
-                    labelAlexFilterActive.Location = new Point(275, 0);
+                    radOzyUSB.Checked = true;
                 }
 
-                if (radGenModelHermes.Checked || radGenModelHPSDR.Checked)
-                 {
-                    tpAlexControl.Text = "Alex";
-                    chkHFTRRelay.Checked = false;
-                    chkHFTRRelay.Enabled = false;
-                    chkHFTRRelay.Visible = false;
-                }
-                else
-                {
-                    tpAlexControl.Text = "Ant/Filters";
-                    chkHFTRRelay.Visible = true;
-                    chkHFTRRelay.Enabled = true;
-                }
+                /*   if (power && new_rate != old_rate)
+                   {
+                       console.PowerOn = false;
+                       Thread.Sleep(100);
+                   }
+                    
+                   console.NReceivers = 2;
+ 
+                   if (power && new_rate != old_rate)
+                       console.PowerOn = true; */
+            }
 
-                if (radGenModelANAN10E.Checked)
-                    chkLimitRX.Enabled = false;
-                else
-                    chkLimitRX.Enabled = true;
+            //chkGeneralSpurRed.Visible = false;
+            //chkGeneralSpurRed.Checked = false;
+            //chkGeneralSpurRed.Enabled = false;
+            chkAudioExpert.Checked = false;
+            chkAudioExpert.Visible = false;
+            // console.DisableSR();
+            //chkGeneralEnableX2.Checked = false;
+            //chkGeneralEnableX2.Enabled = true;
 
-                /*  if (console.RX2PreampPresent)
+            // grpGeneralCalibration.Enabled = false; 
+            grpGenCalRXImage.Enabled = false;
+            chkCalExpert.Enabled = false;
+            grpHPSDRFreqCalDbg.Visible = true;
+
+            //string key = comboKeyerConnPrimary.Text;
+            //if (comboKeyerConnPrimary.Items.Contains("5000"))
+            //    comboKeyerConnPrimary.Items.Remove("5000");
+            //if (comboKeyerConnPrimary.Items.Contains("SDR"))
+            //    comboKeyerConnPrimary.Items.Remove("SDR");
+            //if (!comboKeyerConnPrimary.Items.Contains("Ozy/Hermes"))
+            //    comboKeyerConnPrimary.Items.Insert(0, "Ozy/Hermes");
+            //comboKeyerConnPrimary.Text = !key.StartsWith("COM") ? "Ozy/Hermes" : key;
+            //comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+
+            if (radGenModelANAN10.Checked || radGenModelANAN10E.Checked /*|| radGenModelANAN100B.Checked */)
+            {
+                chkRxOutOnTx.Checked = false;
+                chkRxOutOnTx.Enabled = false;
+                chkEXT1OutOnTx.Checked = false;
+                chkEXT1OutOnTx.Enabled = false;
+                chkEXT2OutOnTx.Checked = false;
+                chkEXT2OutOnTx.Enabled = false;
+                panelAlex1HPFControl.Visible = false;
+                tpAlexFilterControl.Text = "LPF";
+                panelAlexRXXVRTControl.Visible = false;
+                labelAlexFilterActive.Location = new Point(298, 0);
+            }
+            else
+            {
+                chkRxOutOnTx.Enabled = true;
+                chkEXT1OutOnTx.Enabled = true;
+                chkEXT2OutOnTx.Enabled = true;
+                panelAlex1HPFControl.Visible = true;
+                tpAlexFilterControl.Text = "HPF/LPF";
+                panelAlexRXXVRTControl.Visible = true;
+                labelAlexFilterActive.Location = new Point(275, 0);
+            }
+
+            if (radGenModelHermes.Checked || radGenModelHPSDR.Checked)
+            {
+                tpAlexControl.Text = "Alex";
+                chkHFTRRelay.Checked = false;
+                chkHFTRRelay.Enabled = false;
+                chkHFTRRelay.Visible = false;
+            }
+            else
+            {
+                tpAlexControl.Text = "Ant/Filters";
+                chkHFTRRelay.Visible = true;
+                chkHFTRRelay.Enabled = true;
+            }
+
+            if (radGenModelANAN10E.Checked)
+                chkLimitRX.Enabled = false;
+            else
+                chkLimitRX.Enabled = true;
+
+            /*  if (console.RX2PreampPresent)
+              {
+                  tpAlexFilterControl.Text = "Alex-1 Filters";
+
+                  if (!tcGeneral.TabPages.Contains(tpAlex2FilterControl))
                   {
-                      tpAlexFilterControl.Text = "Alex-1 Filters";
-
-                      if (!tcGeneral.TabPages.Contains(tpAlex2FilterControl))
-                      {
-                          Common.TabControlInsert(tcGeneral, tpAlex2FilterControl, 6);
-                      }
-                      else
-                      {
-                          if (tcGeneral.TabPages.IndexOf(tpAlex2FilterControl) != 6)
-                          {
-                              tcGeneral.TabPages.Remove(tpAlexControl);
-                              Common.TabControlInsert(tcGeneral, tpAlex2FilterControl, 6);
-                          }
-                      }
+                      Common.TabControlInsert(tcGeneral, tpAlex2FilterControl, 6);
                   }
                   else
                   {
-                      if (console.RX2PreampPresent)
+                      if (tcGeneral.TabPages.IndexOf(tpAlex2FilterControl) != 6)
                       {
-                          if (tcGeneral.TabPages.Contains(tpAlex2FilterControl))
-                          {
-                              tcGeneral.TabPages.Remove(tpAlex2FilterControl);
-                              tcGeneral.SelectedIndex = 0;
-                          }
+                          tcGeneral.TabPages.Remove(tpAlexControl);
+                          Common.TabControlInsert(tcGeneral, tpAlex2FilterControl, 6);
                       }
-                  } */
+                  }
+              }
+              else
+              {
+                  if (console.RX2PreampPresent)
+                  {
+                      if (tcGeneral.TabPages.Contains(tpAlex2FilterControl))
+                      {
+                          tcGeneral.TabPages.Remove(tpAlex2FilterControl);
+                          tcGeneral.SelectedIndex = 0;
+                      }
+                  }
+              } */
 
-                if (radGenModelHPSDR.Checked) tpPennyCtrl.Text = "Penny Ctrl";
-                else if (radGenModelHermes.Checked) tpPennyCtrl.Text = "Hermes Ctrl";
-                //else if (radGenModelOrion.Checked) tpPennyCtrl.Text = "Orion Ctrl";
-                else tpPennyCtrl.Text = "ANAN Ctrl";
-           // }
+            if (radGenModelHPSDR.Checked) tpPennyCtrl.Text = "Penny Ctrl";
+            else if (radGenModelHermes.Checked) tpPennyCtrl.Text = "Hermes Ctrl";
+            //else if (radGenModelOrion.Checked) tpPennyCtrl.Text = "Orion Ctrl";
+            else tpPennyCtrl.Text = "ANAN Ctrl";
+            // }
             //else
             //{
             //    RemoveHPSDRPages();
@@ -8664,11 +8668,11 @@ namespace PowerSDR
         private bool force_reset = false;
         public bool ForceReset
         {
-            set 
-            { 
+            set
+            {
                 force_reset = value;
                 if (value)
-                comboAudioSampleRate1_SelectedIndexChanged(this, EventArgs.Empty);
+                    comboAudioSampleRate1_SelectedIndexChanged(this, EventArgs.Empty);
             }
         }
 
@@ -11733,7 +11737,7 @@ namespace PowerSDR
             console.bandToolStripMenuItem.Visible = !chkShowBandControls.Checked;
 
             if (console.CollapsedDisplay)
-               console.CollapseDisplay();
+                console.CollapseDisplay();
         }
 
         private void chkShowBandControls_CheckedChanged(object sender, EventArgs e)
@@ -11752,7 +11756,7 @@ namespace PowerSDR
             console.modeControlsToolStripMenuItem.Checked = chkShowModeControls.Checked;
 
             if (console.CollapsedDisplay)
-               console.CollapseDisplay();
+                console.CollapseDisplay();
         }
 
 
@@ -14816,7 +14820,7 @@ namespace PowerSDR
         {
             console.BlankRX1OnVFOBTX = chkRX1BlankDisplayOnVFOBTX.Checked;
         }
-        
+
         private void chkRX2BlankDisplayOnVFOATX_CheckedChanged(object sender, System.EventArgs e)
         {
             console.BlankRX2OnVFOATX = chkRX2BlankDisplayOnVFOATX.Checked;
@@ -15079,7 +15083,7 @@ namespace PowerSDR
                 }
                 console.PennyPresent = false;
                 //console.PennyLanePresent = true;
-               // chkGeneralRXOnly.Enabled = true;
+                // chkGeneralRXOnly.Enabled = true;
                 // chkGeneralRXOnly.Enabled = false;
 
                 JanusAudio.EnableHermesPower(1);
@@ -15367,7 +15371,8 @@ namespace PowerSDR
             if (chkPenOCrcv1606.Checked) val += 1 << 5;
             if (chkPenOCrcv1607.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B160M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B160M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B160M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15382,7 +15387,8 @@ namespace PowerSDR
             if (chkPenOCxmit1606.Checked) val += 1 << 5;
             if (chkPenOCxmit1607.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B160M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B160M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B160M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15397,7 +15403,8 @@ namespace PowerSDR
             if (chkPenOCrcv806.Checked) val += 1 << 5;
             if (chkPenOCrcv807.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B80M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B80M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B80M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15412,7 +15419,8 @@ namespace PowerSDR
             if (chkPenOCxmit806.Checked) val += 1 << 5;
             if (chkPenOCxmit807.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B80M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B80M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B80M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15427,7 +15435,8 @@ namespace PowerSDR
             if (chkPenOCrcv606.Checked) val += 1 << 5;
             if (chkPenOCrcv607.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B60M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B60M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B60M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15442,7 +15451,8 @@ namespace PowerSDR
             if (chkPenOCxmit606.Checked) val += 1 << 5;
             if (chkPenOCxmit607.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B60M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B60M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B60M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15458,7 +15468,8 @@ namespace PowerSDR
             if (chkPenOCrcv406.Checked) val += 1 << 5;
             if (chkPenOCrcv407.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B40M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B40M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B40M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15474,7 +15485,8 @@ namespace PowerSDR
             if (chkPenOCxmit406.Checked) val += 1 << 5;
             if (chkPenOCxmit407.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B40M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B40M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B40M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15490,7 +15502,8 @@ namespace PowerSDR
             if (chkPenOCrcv306.Checked) val += 1 << 5;
             if (chkPenOCrcv307.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B30M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B30M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B30M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15506,7 +15519,8 @@ namespace PowerSDR
             if (chkPenOCxmit306.Checked) val += 1 << 5;
             if (chkPenOCxmit307.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B30M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B30M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B30M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15522,7 +15536,8 @@ namespace PowerSDR
             if (chkPenOCrcv206.Checked) val += 1 << 5;
             if (chkPenOCrcv207.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B20M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B20M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B20M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15538,7 +15553,8 @@ namespace PowerSDR
             if (chkPenOCxmit206.Checked) val += 1 << 5;
             if (chkPenOCxmit207.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B20M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B20M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B20M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15554,7 +15570,8 @@ namespace PowerSDR
             if (chkPenOCrcv176.Checked) val += 1 << 5;
             if (chkPenOCrcv177.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B17M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B17M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B17M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15570,7 +15587,8 @@ namespace PowerSDR
             if (chkPenOCxmit176.Checked) val += 1 << 5;
             if (chkPenOCxmit177.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B17M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B17M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B17M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15586,7 +15604,8 @@ namespace PowerSDR
             if (chkPenOCrcv156.Checked) val += 1 << 5;
             if (chkPenOCrcv157.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B15M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B15M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B15M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15601,7 +15620,8 @@ namespace PowerSDR
             if (chkPenOCxmit156.Checked) val += 1 << 5;
             if (chkPenOCxmit157.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B15M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B15M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B15M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
 
         }
@@ -15619,7 +15639,8 @@ namespace PowerSDR
             if (chkPenOCrcv126.Checked) val += 1 << 5;
             if (chkPenOCrcv127.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B12M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B12M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B12M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15635,7 +15656,8 @@ namespace PowerSDR
             if (chkPenOCxmit126.Checked) val += 1 << 5;
             if (chkPenOCxmit127.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B12M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B12M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B12M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15651,7 +15673,8 @@ namespace PowerSDR
             if (chkPenOCrcv106.Checked) val += 1 << 5;
             if (chkPenOCrcv107.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B10M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B10M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B10M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15667,7 +15690,8 @@ namespace PowerSDR
             if (chkPenOCxmit106.Checked) val += 1 << 5;
             if (chkPenOCxmit107.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B10M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B10M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B10M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15684,7 +15708,8 @@ namespace PowerSDR
             if (chkPenOCrcv66.Checked) val += 1 << 5;
             if (chkPenOCrcv67.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B6M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B6M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B6M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15700,7 +15725,8 @@ namespace PowerSDR
             if (chkPenOCxmit66.Checked) val += 1 << 5;
             if (chkPenOCxmit67.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B6M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B6M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B6M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15716,7 +15742,8 @@ namespace PowerSDR
             if (chkPenOCrcv26.Checked) val += 1 << 5;
             if (chkPenOCrcv27.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B2M, (byte)val, false);
+            Penny.getPenny().setBandABitMask(Band.B2M, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.B2M, (byte)(val & 0x70), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -15732,7 +15759,8 @@ namespace PowerSDR
             if (chkPenOCxmit26.Checked) val += 1 << 5;
             if (chkPenOCxmit27.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.B2M, (byte)val, true);
+            Penny.getPenny().setBandABitMask(Band.B2M, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.B2M, (byte)(val & 0x70), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -16727,7 +16755,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF06.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF07.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF0, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF0, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandABitMask(Band.VHF0, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -16742,7 +16771,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF16.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF17.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF1, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF1, (byte)(val & 0x70), false);
+            Penny.getPenny().setBandABitMask(Band.VHF1, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -16757,7 +16787,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF26.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF27.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF2, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF2, (byte)(val & 0x70), false);
+            Penny.getPenny().setBandABitMask(Band.VHF2, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -16772,7 +16803,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF36.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF37.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF3, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF3, (byte)(val & 0x70), false);
+            Penny.getPenny().setBandABitMask(Band.VHF3, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -16787,7 +16819,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF46.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF47.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF4, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF4, (byte)(val & 0x70), false);
+            Penny.getPenny().setBandABitMask(Band.VHF4, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -16802,7 +16835,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF56.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF57.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF5, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF5, (byte)(val & 0x70), false);
+            Penny.getPenny().setBandABitMask(Band.VHF5, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -16817,7 +16851,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF66.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF67.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF6, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF6, (byte)(val & 0x70), false);
+            Penny.getPenny().setBandABitMask(Band.VHF6, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -16832,7 +16867,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF76.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF77.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF7, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF7, (byte)(val & 0x70), false);
+            Penny.getPenny().setBandABitMask(Band.VHF7, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -16847,7 +16883,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF86.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF87.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF8, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF8, (byte)(val & 0x70), false);
+            Penny.getPenny().setBandABitMask(Band.VHF8, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code  
         }
 
@@ -16862,7 +16899,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF96.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF97.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF9, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF9, (byte)(val & 0x70), false);
+            Penny.getPenny().setBandABitMask(Band.VHF9, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code  
         }
 
@@ -16877,7 +16915,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF106.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF107.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF10, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF10, (byte)(val & 0x70), false);
+            Penny.getPenny().setBandABitMask(Band.VHF10, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code  
         }
 
@@ -16892,7 +16931,8 @@ namespace PowerSDR
             if (chkPenOCrcvVHF116.Checked) val += 1 << 5;
             if (chkPenOCrcvVHF117.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF11, (byte)val, false);
+            Penny.getPenny().setBandBBitMask(Band.VHF11, (byte)(val & 0x70), false);
+            Penny.getPenny().setBandABitMask(Band.VHF11, (byte)val, false);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -16907,7 +16947,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF06.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF07.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF0, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF0, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF0, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -16922,7 +16963,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF16.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF17.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF1, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF1, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF1, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -16937,7 +16979,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF26.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF27.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF2, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF2, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF2, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -16952,7 +16995,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF36.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF37.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF3, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF3, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF3, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -16967,7 +17011,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF46.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF47.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF4, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF4, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF4, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -16982,7 +17027,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF56.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF57.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF5, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF5, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF5, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -16997,7 +17043,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF66.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF67.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF6, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF6, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF6, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -17012,7 +17059,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF76.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF77.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF7, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF7, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF7, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -17027,7 +17075,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF86.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF87.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF8, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF8, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF8, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -17042,7 +17091,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF96.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF97.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF9, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF9, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF9, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -17057,7 +17107,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF106.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF107.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF10, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF10, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF10, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -17072,7 +17123,8 @@ namespace PowerSDR
             if (chkPenOCxmitVHF116.Checked) val += 1 << 5;
             if (chkPenOCxmitVHF117.Checked) val += 1 << 6;
 
-            Penny.getPenny().setBandBitMask(Band.VHF11, (byte)val, true);
+            Penny.getPenny().setBandBBitMask(Band.VHF11, (byte)(val & 0x70), true);
+            Penny.getPenny().setBandABitMask(Band.VHF11, (byte)val, true);
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code
         }
 
@@ -17457,7 +17509,7 @@ namespace PowerSDR
         {
             console.RX1AttenuatorData = (int)udHermesStepAttenuatorData.Value;
 
-            if (AlexPresent && !console.ANAN10Present && !console.ANAN10EPresent && !console.ANAN100BPresent)
+            if (AlexPresent && !console.ANAN10Present && !console.ANAN10EPresent /* && !console.ANAN100BPresent */)
                 udHermesStepAttenuatorData.Maximum = (decimal)61;
             else udHermesStepAttenuatorData.Maximum = (decimal)31;
         }
@@ -18120,22 +18172,63 @@ namespace PowerSDR
             {
                 console.MetisNetworkIPAddr = udStaticIP1.Text + "." + udStaticIP2.Text + "." +
                                              udStaticIP3.Text + "." + udStaticIP4.Text;
+                console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask1.Text);
+
             }
             if (radStaticIP2.Checked)
             {
                 console.MetisNetworkIPAddr = udStaticIP5.Text + "." + udStaticIP6.Text + "." +
                                              udStaticIP7.Text + "." + udStaticIP8.Text;
+                console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask2.Text);
             }
             if (radStaticIP3.Checked)
             {
                 console.MetisNetworkIPAddr = udStaticIP9.Text + "." + udStaticIP10.Text + "." +
                                              udStaticIP11.Text + "." + udStaticIP12.Text;
+                console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask3.Text);
             }
             if (radStaticIP4.Checked)
             {
                 console.MetisNetworkIPAddr = udStaticIP13.Text + "." + udStaticIP14.Text + "." +
                                              udStaticIP15.Text + "." + udStaticIP16.Text;
+                console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask4.Text);
             }
+        }
+
+        uint Network2Broadcast(string sNetwork)
+        {
+            uint ip,        /* ip address */
+                mask,       /* subnet mask */
+                broadcast,  /* Broadcast address */
+                network;    /* Network address */
+
+            int bits;
+
+            string[] elements = sNetwork.Split(new Char[] { '/' });
+
+            ip = IP2Int(elements[0]);
+            bits = Convert.ToInt32(elements[1]);
+
+            mask = ~(0xffffffff >> bits);
+
+            network = ip & mask;
+            broadcast = network + ~mask;
+
+            return broadcast;
+        }
+
+        uint IP2Int(string IPNumber)
+        {
+            uint ip = 0;
+            string[] elements = IPNumber.Split(new Char[] { '.' });
+            if (elements.Length == 4)
+            {
+                ip = Convert.ToUInt32(elements[0]) << 24;
+                ip += Convert.ToUInt32(elements[1]) << 16;
+                ip += Convert.ToUInt32(elements[2]) << 8;
+                ip += Convert.ToUInt32(elements[3]);
+            }
+            return ip;
         }
 
         private void chkEnableStaticIP_CheckedChanged(object sender, EventArgs e)
@@ -18607,9 +18700,9 @@ namespace PowerSDR
 
         private void chkDSPRX1subAPFEnable_CheckedChanged(object sender, EventArgs e)
         {
-            if (console.RX1DSPMode == DSPMode.CWL || 
+            if (console.RX1DSPMode == DSPMode.CWL ||
                 console.RX1DSPMode == DSPMode.CWU)
-            console.radio.GetDSPRX(0, 1).RXAPFRun = chkDSPRX1subAPFEnable.Checked;
+                console.radio.GetDSPRX(0, 1).RXAPFRun = chkDSPRX1subAPFEnable.Checked;
 
             if (radDSPRX1subAPFControls.Checked)
                 console.APFEnabled = chkDSPRX1subAPFEnable.Checked;
@@ -18708,7 +18801,7 @@ namespace PowerSDR
                 chkDSPRX1APFEnable.Checked = console.APFEnabled;
                 if (console.RX1DSPMode == DSPMode.CWL ||
                     console.RX1DSPMode == DSPMode.CWU)
-                console.radio.GetDSPRX(0, 0).RXAPFRun = chkDSPRX1APFEnable.Checked;
+                    console.radio.GetDSPRX(0, 0).RXAPFRun = chkDSPRX1APFEnable.Checked;
                 tbDSPAudRX1APFGain.Value = console.APFGain;
                 console.radio.GetDSPRX(0, 0).RXAPFGain = Math.Pow(10.0, (double)tbDSPAudRX1APFGain.Value / 200.0);
                 tbRX1APFTune.Value = console.APFFreq;
@@ -18726,7 +18819,7 @@ namespace PowerSDR
                 chkDSPRX1subAPFEnable.Checked = console.APFEnabled;
                 if (console.RX1DSPMode == DSPMode.CWL ||
                     console.RX1DSPMode == DSPMode.CWU)
-                console.radio.GetDSPRX(0, 1).RXAPFRun = chkDSPRX1subAPFEnable.Checked;
+                    console.radio.GetDSPRX(0, 1).RXAPFRun = chkDSPRX1subAPFEnable.Checked;
                 tbDSPAudRX1subAPFGain.Value = console.APFGain;
                 console.radio.GetDSPRX(0, 1).RXAPFGain = Math.Pow(10.0, (double)tbDSPAudRX1subAPFGain.Value / 200.0);
                 tbRX1subAPFTune.Value = console.APFFreq;
@@ -18744,7 +18837,7 @@ namespace PowerSDR
                 chkDSPRX2APFEnable.Checked = console.APFEnabled;
                 if (console.RX2DSPMode == DSPMode.CWL ||
                     console.RX2DSPMode == DSPMode.CWU)
-                console.radio.GetDSPRX(1, 0).RXAPFRun = chkDSPRX2APFEnable.Checked;
+                    console.radio.GetDSPRX(1, 0).RXAPFRun = chkDSPRX2APFEnable.Checked;
                 tbDSPAudRX2APFGain.Value = console.APFGain;
                 console.radio.GetDSPRX(1, 0).RXAPFGain = Math.Pow(10.0, (double)tbDSPAudRX2APFGain.Value / 200.0);
                 tbRX2APFTune.Value = console.APFFreq;
@@ -18803,7 +18896,7 @@ namespace PowerSDR
         private void udATTOnTX_ValueChanged(object sender, EventArgs e)
         {
             // if (chkATTOnTX.Checked)
-                 //JanusAudio.SetTxAttenData((int)udATTOnTX.Value);
+            //JanusAudio.SetTxAttenData((int)udATTOnTX.Value);
             console.TxAttenData = (int)udATTOnTX.Value;
         }
 
@@ -18993,9 +19086,9 @@ namespace PowerSDR
         {
             console.AmpProtect = chkLimitExtAmpOnOverload.Checked;
             if (chkLimitExtAmpOnOverload.Checked)
-                JanusAudio.SetAmpProtectRun (1);
+                JanusAudio.SetAmpProtectRun(1);
             else
-                JanusAudio.SetAmpProtectRun (0);
+                JanusAudio.SetAmpProtectRun(0);
         }
 
         private void radDSPNR2Gamma_CheckedChanged(object sender, EventArgs e)
@@ -19010,7 +19103,7 @@ namespace PowerSDR
             console.radio.GetDSPRX(1, 1).RXANR2GainMethod = 2;
         }
 
-		private void chkDisableRXOut_CheckedChanged(object sender, EventArgs e)
+        private void chkDisableRXOut_CheckedChanged(object sender, EventArgs e)
         {
             console.RxOutOverride = chkDisableRXOut.Checked;
         }
@@ -19042,14 +19135,14 @@ namespace PowerSDR
                     console.FocusMasterMode = FocusMasterMode.Click;
                     break;
 
-                case "Enter Window Title":                   
+                case "Enter Window Title":
                     txtFocusMasterDelay.Enabled = true;
                     txtFocusMasterUDPPort.Enabled = true;
                     txtFocusMasterWinTitle.Enabled = true;
                     txtFocusMasterWinTitle.Text = "Enter Window Title and Press Enter";
                     txtFocusMasterWinTitle.Focus();
-                   // console.FocusMasterMode = FocusMasterMode.Title;
-                   break;
+                    // console.FocusMasterMode = FocusMasterMode.Title;
+                    break;
 
                 case "None":
                     txtFocusMasterDelay.Enabled = true;
@@ -19097,7 +19190,7 @@ namespace PowerSDR
                     console.FocusMasterMode = FocusMasterMode.Title;
                     console.N1MMHandle = hwtemp;
                     comboFocusMasterMode.Focus();
-               }
+                }
                 else
                 {
                     txtFocusMasterDelay.Enabled = true;
@@ -19108,6 +19201,26 @@ namespace PowerSDR
 
             }
 
+        }
+
+        private void udDSPSNBThresh1_ValueChanged(object sender, EventArgs e)
+        {
+            wdsp.SetRXASNBAk1(wdsp.id(0, 0), (double)udDSPSNBThresh1.Value);
+            wdsp.SetRXASNBAk1(wdsp.id(0, 1), (double)udDSPSNBThresh1.Value);
+            wdsp.SetRXASNBAk1(wdsp.id(2, 0), (double)udDSPSNBThresh1.Value);
+        }
+
+        private void udDSPSNBThresh2_ValueChanged(object sender, EventArgs e)
+        {
+            wdsp.SetRXASNBAk2(wdsp.id(0, 0), (double)udDSPSNBThresh2.Value);
+            wdsp.SetRXASNBAk2(wdsp.id(0, 1), (double)udDSPSNBThresh2.Value);
+            wdsp.SetRXASNBAk2(wdsp.id(2, 0), (double)udDSPSNBThresh2.Value);
+        }
+
+        private void chkSplitPins_CheckedChanged(object sender, EventArgs e)
+        {
+            Penny.getPenny().SplitPins = chkSplitPins.Checked;
+            console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;
         }
 
     }

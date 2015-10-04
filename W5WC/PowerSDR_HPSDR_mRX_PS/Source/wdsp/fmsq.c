@@ -26,23 +26,14 @@ warren@wpratt.com
 
 #include "comm.h"
 
-FMSQ create_fmsq (int run, int size, double* insig, double* outsig, double* trigger, int rate, double fc, double pllpole, double tdelay, double avtau, double longtau, double tup, double tdown, double tail_thresh, double unmute_thresh, double min_tail, double max_tail)
+void calc_fmsq (FMSQ a)
 {
-	FMSQ a = (FMSQ) malloc0 (sizeof (fmsq));
 	double delta, theta;
 	int i;
-	a->run = run;
-	a->size = size;
-	a->insig = insig;
-	a->outsig = outsig;
-	a->trigger = trigger;
-	a->rate = (double)rate;
 	// noise filter
-	a->fc = fc;
-	a->pllpole = pllpole;
-	a->infilt  = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->product = (double *) malloc0 (2 * a->size * sizeof (complex));
-	a->noise   = (double *) malloc0 (2 * a->size * sizeof (complex));
+	a->infilt = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->product = (double *)malloc0(2 * a->size * sizeof(complex));
+	a->noise = (double *)malloc0(2 * a->size * sizeof(complex));
 	a->F[0] = 0.0;
 	a->F[1] = a->fc;
 	a->F[2] = a->pllpole;
@@ -50,63 +41,84 @@ FMSQ create_fmsq (int run, int size, double* insig, double* outsig, double* trig
 	a->G[0] = 0.0;
 	a->G[1] = 0.0;
 	a->G[2] = 3.0;
-	a->G[3] = + 20.0 * log10 (20000.0 / a->pllpole);
-	a->mults = eq_mults (a->size, 3, a->F, a->G, a->rate, 1.0 / (2.0 * a->size), 0, 1);
-	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt,  (fftw_complex *)a->product, FFTW_FORWARD,  FFTW_PATIENT);
-	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->noise,   FFTW_BACKWARD, FFTW_PATIENT);
+	a->G[3] = +20.0 * log10(20000.0 / a->pllpole);
+	a->mults = eq_mults(a->size, 3, a->F, a->G, a->rate, 1.0 / (2.0 * a->size), 0, 1);
+	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt, (fftw_complex *)a->product, FFTW_FORWARD, FFTW_PATIENT);
+	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->noise, FFTW_BACKWARD, FFTW_PATIENT);
 	// noise averaging
-	a->avtau = avtau;
-	a->avm = exp (-1.0 / (a->rate * a->avtau));
+	a->avm = exp(-1.0 / (a->rate * a->avtau));
 	a->onem_avm = 1.0 - a->avm;
 	a->avnoise = 100.0;
-	a->longtau = longtau;
-	a->longavm = exp (-1.0 / (a->rate * a->longtau));
+	a->longavm = exp(-1.0 / (a->rate * a->longtau));
 	a->onem_longavm = 1.0 - a->longavm;
 	a->longnoise = 1.0;
 	// level change
-	a->tup = tup;
-	a->tdown = tdown;
 	a->ntup = (int)(a->tup * a->rate);
 	a->ntdown = (int)(a->tdown * a->rate);
-	a->cup   = (double *) malloc0 ((a->ntup + 1) * sizeof (double));
-	a->cdown = (double *) malloc0 ((a->ntdown + 1) * sizeof (double));
+	a->cup = (double *)malloc0((a->ntup + 1) * sizeof(double));
+	a->cdown = (double *)malloc0((a->ntdown + 1) * sizeof(double));
 	delta = PI / (double)a->ntup;
 	theta = 0.0;
 	for (i = 0; i <= a->ntup; i++)
 	{
-		a->cup[i] = 0.5 * (1.0 - cos (theta));
+		a->cup[i] = 0.5 * (1.0 - cos(theta));
 		theta += delta;
 	}
 	delta = PI / (double)a->ntdown;
 	theta = 0.0;
 	for (i = 0; i <= a->ntdown; i++)
 	{
-		a->cdown[i] = 0.5 * (1 + cos (theta));
+		a->cdown[i] = 0.5 * (1 + cos(theta));
 		theta += delta;
 	}
 	// control
-	a->tail_thresh = tail_thresh;
-	a->unmute_thresh = unmute_thresh;
-	a->min_tail = min_tail;
-	a->max_tail = max_tail;
 	a->state = 0;
 	a->ready = 0;
 	a->ramp = 0.0;
 	a->rstep = 1.0 / a->rate;
+}
+
+void decalc_fmsq (FMSQ a)
+{
+	_aligned_free(a->cdown);
+	_aligned_free(a->cup);
+	fftw_destroy_plan(a->CRev);
+	fftw_destroy_plan(a->CFor);
+	_aligned_free(a->mults);
+	_aligned_free(a->noise);
+	_aligned_free(a->product);
+	_aligned_free(a->infilt);
+}
+
+FMSQ create_fmsq (int run, int size, double* insig, double* outsig, double* trigger, int rate, double fc, 
+	double pllpole, double tdelay, double avtau, double longtau, double tup, double tdown, double tail_thresh, 
+	double unmute_thresh, double min_tail, double max_tail)
+{
+	FMSQ a = (FMSQ) malloc0 (sizeof (fmsq));
+	a->run = run;
+	a->size = size;
+	a->insig = insig;
+	a->outsig = outsig;
+	a->trigger = trigger;
+	a->rate = (double)rate;
+	a->fc = fc;
+	a->pllpole = pllpole;
 	a->tdelay = tdelay;
+	a->avtau = avtau;
+	a->longtau = longtau;
+	a->tup = tup;
+	a->tdown = tdown;
+	a->tail_thresh = tail_thresh;
+	a->unmute_thresh = unmute_thresh;
+	a->min_tail = min_tail;
+	a->max_tail = max_tail;
+	calc_fmsq (a);
 	return a;
 }
 
 void destroy_fmsq (FMSQ a)
 {
-	_aligned_free (a->cdown);
-	_aligned_free (a->cup);
-	fftw_destroy_plan (a->CRev);
-	fftw_destroy_plan (a->CFor);
-	_aligned_free (a->mults);
-	_aligned_free (a->noise);
-	_aligned_free (a->product);
-	_aligned_free (a->infilt);
+	decalc_fmsq (a);
 	_aligned_free (a);
 }
 
@@ -204,6 +216,27 @@ void xfmsq (FMSQ a)
 	}
 	else if (a->insig != a->outsig)
 		memcpy (a->outsig, a->insig, a->size * sizeof (complex));
+}
+
+void setBuffers_fmsq (FMSQ a, double* in, double* out, double* trig)
+{
+	a->insig = in;
+	a->outsig = out;
+	a->trigger = trig;
+}
+
+void setSamplerate_fmsq (FMSQ a, int rate)
+{
+	decalc_fmsq (a);
+	a->rate = rate;
+	calc_fmsq (a);
+}
+
+void setSize_fmsq (FMSQ a, int size)
+{
+	decalc_fmsq (a);
+	a->size = size;
+	calc_fmsq (a);
 }
 
 /********************************************************************************************************

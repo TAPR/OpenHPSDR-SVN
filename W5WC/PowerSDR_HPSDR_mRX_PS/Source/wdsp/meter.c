@@ -26,6 +26,13 @@ warren@wpratt.com
 
 #include "comm.h"
 
+void calc_meter (METER a)
+{
+	a->mult_average = exp(-1.0 / (a->rate * a->tau_average));
+	a->mult_peak = exp(-1.0 / (a->rate * a->tau_peak_decay));
+	flush_meter(a);
+}
+
 METER create_meter (int run, int* prun, int size, double* buff, int rate, double tau_av, double tau_decay, double* result, CRITICAL_SECTION** pmtupdate, int enum_av, int enum_pk, int enum_gain, double* pgain)
 {
 	METER a = (METER) malloc0 (sizeof (meter));
@@ -41,13 +48,11 @@ METER create_meter (int run, int* prun, int size, double* buff, int rate, double
 	a->enum_pk = enum_pk;
 	a->enum_gain = enum_gain;
 	a->pgain = pgain;
-	a->mult_average = exp (-1.0 / (a->rate * a->tau_average));
-	a->mult_peak = exp (-1.0 / (a->rate * a->tau_peak_decay));
+	calc_meter(a);
 	InitializeCriticalSectionAndSpinCount (&a->mtupdate, 2500);
 	pmtupdate[enum_av]   = &a->mtupdate;
 	pmtupdate[enum_pk]   = &a->mtupdate;
 	pmtupdate[enum_gain] = &a->mtupdate;
-	flush_meter (a);
 	return a;
 }
 
@@ -100,6 +105,23 @@ void xmeter (METER a)
 		if (a->enum_gain >= 0) a->result[a->enum_gain] = +   0.0;
 	}
 	LeaveCriticalSection (&a->mtupdate);
+}
+
+void setBuffers_meter (METER a, double* in)
+{
+	a->buff = in;
+}
+
+void setSamplerate_meter (METER a, int rate)
+{
+	a->rate = rate;
+	calc_meter(a);
+}
+
+void setSize_meter (METER a, int size)
+{
+	a->size = size;
+	flush_meter (a);
 }
 
 /********************************************************************************************************

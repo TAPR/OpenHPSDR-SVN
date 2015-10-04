@@ -49,6 +49,12 @@ extern void flush_shift (SHIFT a);
 
 extern void xshift (SHIFT a);
 
+extern void setBuffers_shift (SHIFT a, double* in, double* out);
+
+extern void setSamplerate_shift (SHIFT a, int rate);
+
+extern void setSize_shift (SHIFT a, int size);
+
 // RXA Properties
 
 extern __declspec (dllexport) void SetRXAShiftRun (int channel, int run);

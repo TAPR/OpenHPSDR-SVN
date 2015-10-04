@@ -59,6 +59,7 @@ warren@wpratt.com
 #include "iir.h"
 #include "iobuffs.h"
 #include "iqc.h"
+#include "lmath.h"
 #include "main.h"
 #include "meter.h"
 #include "meterlog10.h"
@@ -72,6 +73,7 @@ warren@wpratt.com
 #include "shift.h"
 #include "siphon.h"
 #include "slew.h"
+#include "snb.h"
 #include "TXA.h"
 #include "utilities.h"
 #include "wcpAGC.h"
@@ -83,7 +85,7 @@ warren@wpratt.com
 #define OUTREAL							float				// data type for channel output buffer
 
 // display definitions
-#define dMAX_DISPLAYS					16					// maximum number of displays = max instances
+#define dMAX_DISPLAYS					64					// maximum number of displays = max instances
 #define dMAX_STITCH						4					// maximum number of sub-spans to stitch together
 #define dMAX_NUM_FFT					1					// maximum number of ffts for an elimination
 #define dMAX_PIXELS						2560				// maximum number of pixels that can be requested

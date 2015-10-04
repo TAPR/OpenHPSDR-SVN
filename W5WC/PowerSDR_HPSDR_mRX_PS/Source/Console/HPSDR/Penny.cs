@@ -50,26 +50,43 @@ namespace PowerSDR
 		}
 
 
-		private byte[] TXBitMasks = new byte[25]; 
-		private byte[] RXBitMasks = new byte[25]; 
+		private byte[] TXABitMasks = new byte[25]; 
+		private byte[] RXABitMasks = new byte[25];
+        private byte[] TXBBitMasks = new byte[25];
+        private byte[] RXBBitMasks = new byte[25]; 
 
 
-		public void setBandBitMask(Band band, byte mask, bool tx) 
+		public void setBandABitMask(Band band, byte mask, bool tx) 
 		{ 
 			int idx = (int)band - (int)Band.B160M; 
 			if ( tx ) 
 			{ 
-				TXBitMasks[idx] = mask;
+				TXABitMasks[idx] = mask;
 			} 
 			else 
 			{ 
-				RXBitMasks[idx] = mask;
+				RXABitMasks[idx] = mask;
 			} 
 			return; 
 
-		} 
+		}
 
-		public void ExtCtrlEnable(bool enable, Band band, bool tx ) 
+        public void setBandBBitMask(Band band, byte mask, bool tx)
+        {
+            int idx = (int)band - (int)Band.B160M;
+            if (tx)
+            {
+                TXBBitMasks[idx] = mask;
+            }
+            else
+            {
+                RXBBitMasks[idx] = mask;
+            }
+            return;
+
+        }
+        
+        public void ExtCtrlEnable(bool enable, Band band, Band bandb, bool tx) 
 		{
 			if ( !enable ) 
 			{
@@ -77,28 +94,40 @@ namespace PowerSDR
 			}
 			else 
 			{
-				UpdateExtCtrl(band, tx);
+				UpdateExtCtrl(band, bandb, tx);
 			}
 		}
 
-		public void UpdateExtCtrl(Band band, bool tx) 
+        public bool SplitPins = false;
+		public void UpdateExtCtrl(Band band, Band bandb, bool tx) 
 		{
 			if ( !tx && (int)band < 12)  // if !tx ignore given band and round off to nearest band based on freq 
 			{ 
 				band = Alex.AntBandFromFreq();
-			} 
+			}
 
-			int idx = (int)band - (int)Band.B160M; 
+            if (!tx && (int)bandb < 12)
+            {
+                bandb = Alex.AntBandFromFreqB();
+            }
+            
+            int idx = (int)band - (int)Band.B160M;
+            int idxb = (int)bandb - (int)Band.B160M;
 			int bits; 
-			if ( idx < 0 || idx > 26 ) 
+			if ( idx < 0 || idx > 26 || idxb < 0 || idxb > 26) 
 			{ 
 				bits = 0; 
 			} 
 			else 
 			{ 
-				bits = tx ? TXBitMasks[idx] : RXBitMasks[idx];
+                if (SplitPins)
+                {
+                    bits = tx ? (TXABitMasks[idx] & 0xf) | TXBBitMasks[idxb] : (RXABitMasks[idx] & 0xf) | RXBBitMasks[idxb];
+                }
+                else
+				    bits = tx ? TXABitMasks[idx] : RXABitMasks[idx];
 			}
-			System.Console.WriteLine("Bits: " + bits + " Band: " + (int)band); 
+            System.Console.WriteLine("Bits: " + bits + " Band: " + (int)band + " Band: " + (int)bandb); 
 			JanusAudio.SetPennyOCBits(bits);
 		}
 	}

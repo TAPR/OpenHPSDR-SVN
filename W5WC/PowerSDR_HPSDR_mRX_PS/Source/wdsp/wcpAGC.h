@@ -133,6 +133,12 @@ extern void destroy_wcpagc (WCPAGC a);
 
 extern void flush_wcpagc (WCPAGC a);
 
+extern void setBuffers_wcpagc (WCPAGC a, double* in, double* out);
+
+extern void setSamplerate_wcpagc (WCPAGC a, int rate);
+
+extern void setSize_wcpagc (WCPAGC a, int size);
+
 // RXA Properties
 
 extern AGCPORT void SetRXAAGCMode (int channel, int mode);

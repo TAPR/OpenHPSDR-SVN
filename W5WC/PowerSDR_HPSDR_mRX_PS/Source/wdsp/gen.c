@@ -85,7 +85,7 @@ void calc_pulse (GEN a)
 	if (a->pulse.pnoff < 0) a->pulse.pnoff = 0;
 	a->pulse.pcount = a->pulse.pnoff;
 	a->pulse.state = 0;
-	a->pulse.ctrans   = (double *) malloc0 ((a->pulse.pntrans + 1) * sizeof (double));
+	a->pulse.ctrans = (double *) malloc0 ((a->pulse.pntrans + 1) * sizeof (double));
 	delta = PI / (double)a->pulse.pntrans;
 	theta = 0.0;
 	for (i = 0; i <= a->pulse.pntrans; i++)
@@ -93,6 +93,21 @@ void calc_pulse (GEN a)
 		a->pulse.ctrans[i] = 0.5 * (1.0 - cos (theta));
 		theta += delta;
 	}
+}
+
+void calc_gen (GEN a)
+{
+	calc_tone (a);
+	calc_tt (a);
+	calc_sweep (a);
+	calc_sawtooth (a);
+	calc_triangle (a);
+	calc_pulse (a);
+}
+
+void decalc_gen (GEN a)
+{
+	_aligned_free (a->pulse.ctrans);
 }
 
 GEN create_gen (int run, int size, double* in, double* out, int rate, int mode)
@@ -107,13 +122,11 @@ GEN create_gen (int run, int size, double* in, double* out, int rate, int mode)
 	// tone
 	a->tone.mag = 1.0;
 	a->tone.freq = 1000.0;
-	calc_tone (a);
 	// two-tone
 	a->tt.mag1 = 0.5;
 	a->tt.mag2 = 0.5;
 	a->tt.f1 = +  900.0;
 	a->tt.f2 = + 1700.0;
-	calc_tt (a);
 	// noise
 	srand ((unsigned int)time (0));
 	a->noise.mag = 1.0;
@@ -122,28 +135,25 @@ GEN create_gen (int run, int size, double* in, double* out, int rate, int mode)
 	a->sweep.f1 = -20000.0;
 	a->sweep.f2 = +20000.0;
 	a->sweep.sweeprate = +4000.0;
-	calc_sweep (a);
 	// sawtooth
 	a->saw.mag = 1.0;
 	a->saw.f = 500.0;
-	calc_sawtooth (a);
 	// triangle
 	a->tri.mag = 1.0;
 	a->tri.f = 500.0;
-	calc_triangle (a);
 	// pulse
 	a->pulse.mag = 1.0;
 	a->pulse.pf = 0.25;
 	a->pulse.pdutycycle = 0.25;
 	a->pulse.ptranstime = 0.002;
 	a->pulse.tf = 1000.0;
-	calc_pulse (a);
+	calc_gen (a);
 	return a;
 }
 
 void destroy_gen (GEN a)
 {
-	
+	decalc_gen (a);
 	_aligned_free (a);
 }
 
@@ -341,6 +351,25 @@ void xgen (GEN a)
 	}
 	else if (a->in != a->out)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
+}
+
+void setBuffers_gen (GEN a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_gen (GEN a, int rate)
+{
+	decalc_gen (a);
+	a->rate = rate;
+	calc_gen (a);
+}
+
+void setSize_gen (GEN a, int size)
+{
+	a->size = size;
+	flush_gen (a);
 }
 
 

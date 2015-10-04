@@ -55,6 +55,14 @@ extern void flush_bandpass (BANDPASS a);
 
 extern void xbandpass (BANDPASS a, int pos);
 
+extern void setBuffers_bandpass (BANDPASS a, double* in, double* out);
+
+extern void setSamplerate_bandpass (BANDPASS a, int rate);
+
+extern void setSize_bandpass (BANDPASS a, int size);
+
+extern void setFreqs_bandpass (BANDPASS a, double f_low, double f_high);
+
 // RXA Prototypes
 
 extern __declspec (dllexport) void SetRXABandpassRun (int channel, int run);

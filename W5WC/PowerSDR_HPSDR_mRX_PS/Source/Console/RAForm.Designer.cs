@@ -33,9 +33,10 @@
             this.picRAGraph = new System.Windows.Forms.PictureBox();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.groupBox_Rx2 = new System.Windows.Forms.GroupBoxTS();
+            this.textBox_Rx2 = new System.Windows.Forms.TextBoxTS();
             this.button_writeFile = new System.Windows.Forms.ButtonTS();
             this.button_readFile = new System.Windows.Forms.ButtonTS();
-            this.labelTS14 = new System.Windows.Forms.LabelTS();
             this.labelTS13 = new System.Windows.Forms.LabelTS();
             this.labelTS12 = new System.Windows.Forms.LabelTS();
             this.labelTS10 = new System.Windows.Forms.LabelTS();
@@ -63,7 +64,7 @@
             this.button_linear = new System.Windows.Forms.RadioButtonTS();
             this.button_dBm = new System.Windows.Forms.RadioButtonTS();
             this.groupBox_signal = new System.Windows.Forms.GroupBoxTS();
-            this.textBoxTS2 = new System.Windows.Forms.TextBoxTS();
+            this.textBox_Rx1 = new System.Windows.Forms.TextBoxTS();
             this.groupBoxTS4 = new System.Windows.Forms.GroupBoxTS();
             this.textBoxTS3 = new System.Windows.Forms.TextBoxTS();
             this.groupBoxTS3 = new System.Windows.Forms.GroupBoxTS();
@@ -75,7 +76,12 @@
             this.numericUpDownTS1 = new System.Windows.Forms.NumericUpDownTS();
             this.groupBox2 = new System.Windows.Forms.GroupBoxTS();
             this.RArecordCheckBox = new System.Windows.Forms.CheckBoxTS();
+            this.groupBox_Rx_select = new System.Windows.Forms.GroupBoxTS();
+            this.radioButton_Rx2_only = new System.Windows.Forms.RadioButtonTS();
+            this.radioButton_Rx1_only = new System.Windows.Forms.RadioButtonTS();
+            this.radioButton_both = new System.Windows.Forms.RadioButtonTS();
             ((System.ComponentModel.ISupportInitialize)(this.picRAGraph)).BeginInit();
+            this.groupBox_Rx2.SuspendLayout();
             this.groupBoxTS8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.manual_xmin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.manual_xmax)).BeginInit();
@@ -93,6 +99,7 @@
             this.groupBoxTS1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS1)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox_Rx_select.SuspendLayout();
             this.SuspendLayout();
             // 
             // RA_timer
@@ -107,7 +114,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picRAGraph.Location = new System.Drawing.Point(196, 76);
             this.picRAGraph.Name = "picRAGraph";
-            this.picRAGraph.Size = new System.Drawing.Size(738, 333);
+            this.picRAGraph.Size = new System.Drawing.Size(738, 429);
             this.picRAGraph.TabIndex = 17;
             this.picRAGraph.TabStop = false;
             this.picRAGraph.Paint += new System.Windows.Forms.PaintEventHandler(this.picRAGraph_Paint);
@@ -117,11 +124,32 @@
             // 
             this.openFileDialog3.FileName = "openFileDialog3";
             // 
+            // groupBox_Rx2
+            // 
+            this.groupBox_Rx2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.groupBox_Rx2.Controls.Add(this.textBox_Rx2);
+            this.groupBox_Rx2.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBox_Rx2.Location = new System.Drawing.Point(734, 14);
+            this.groupBox_Rx2.Name = "groupBox_Rx2";
+            this.groupBox_Rx2.Size = new System.Drawing.Size(200, 56);
+            this.groupBox_Rx2.TabIndex = 38;
+            this.groupBox_Rx2.TabStop = false;
+            this.groupBox_Rx2.Text = "Rx2 signal (dBm)";
+            // 
+            // textBox_Rx2
+            // 
+            this.textBox_Rx2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Rx2.Location = new System.Drawing.Point(38, 17);
+            this.textBox_Rx2.Name = "textBox_Rx2";
+            this.textBox_Rx2.Size = new System.Drawing.Size(124, 29);
+            this.textBox_Rx2.TabIndex = 13;
+            this.textBox_Rx2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // button_writeFile
             // 
             this.button_writeFile.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.button_writeFile.Image = null;
-            this.button_writeFile.Location = new System.Drawing.Point(12, 387);
+            this.button_writeFile.Location = new System.Drawing.Point(12, 482);
             this.button_writeFile.Name = "button_writeFile";
             this.button_writeFile.Size = new System.Drawing.Size(127, 23);
             this.button_writeFile.TabIndex = 36;
@@ -133,7 +161,7 @@
             // 
             this.button_readFile.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.button_readFile.Image = null;
-            this.button_readFile.Location = new System.Drawing.Point(12, 362);
+            this.button_readFile.Location = new System.Drawing.Point(12, 457);
             this.button_readFile.Name = "button_readFile";
             this.button_readFile.Size = new System.Drawing.Size(127, 23);
             this.button_readFile.TabIndex = 35;
@@ -141,26 +169,13 @@
             this.button_readFile.UseVisualStyleBackColor = false;
             this.button_readFile.Click += new System.EventHandler(this.button_readFile_Click);
             // 
-            // labelTS14
-            // 
-            this.labelTS14.AutoSize = true;
-            this.labelTS14.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.labelTS14.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelTS14.Image = null;
-            this.labelTS14.Location = new System.Drawing.Point(806, 56);
-            this.labelTS14.Name = "labelTS14";
-            this.labelTS14.Size = new System.Drawing.Size(37, 13);
-            this.labelTS14.TabIndex = 34;
-            this.labelTS14.Text = "Y plot:";
-            this.labelTS14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // labelTS13
             // 
             this.labelTS13.AutoSize = true;
             this.labelTS13.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.labelTS13.ForeColor = System.Drawing.SystemColors.Control;
             this.labelTS13.Image = null;
-            this.labelTS13.Location = new System.Drawing.Point(556, 414);
+            this.labelTS13.Location = new System.Drawing.Point(560, 514);
             this.labelTS13.Name = "labelTS13";
             this.labelTS13.Size = new System.Drawing.Size(79, 13);
             this.labelTS13.TabIndex = 33;
@@ -173,7 +188,7 @@
             this.labelTS12.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.labelTS12.ForeColor = System.Drawing.SystemColors.Control;
             this.labelTS12.Image = null;
-            this.labelTS12.Location = new System.Drawing.Point(64, 244);
+            this.labelTS12.Location = new System.Drawing.Point(64, 301);
             this.labelTS12.Name = "labelTS12";
             this.labelTS12.Size = new System.Drawing.Size(126, 13);
             this.labelTS12.TabIndex = 32;
@@ -186,7 +201,7 @@
             this.labelTS10.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.labelTS10.ForeColor = System.Drawing.SystemColors.Highlight;
             this.labelTS10.Image = null;
-            this.labelTS10.Location = new System.Drawing.Point(9, 417);
+            this.labelTS10.Location = new System.Drawing.Point(9, 512);
             this.labelTS10.Name = "labelTS10";
             this.labelTS10.Size = new System.Drawing.Size(55, 13);
             this.labelTS10.TabIndex = 30;
@@ -199,7 +214,7 @@
             this.labelTS9.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.labelTS9.ForeColor = System.Drawing.SystemColors.Control;
             this.labelTS9.Image = null;
-            this.labelTS9.Location = new System.Drawing.Point(907, 412);
+            this.labelTS9.Location = new System.Drawing.Point(911, 512);
             this.labelTS9.Name = "labelTS9";
             this.labelTS9.Size = new System.Drawing.Size(49, 13);
             this.labelTS9.TabIndex = 29;
@@ -212,7 +227,7 @@
             this.labelTS8.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.labelTS8.ForeColor = System.Drawing.SystemColors.Control;
             this.labelTS8.Image = null;
-            this.labelTS8.Location = new System.Drawing.Point(193, 412);
+            this.labelTS8.Location = new System.Drawing.Point(197, 512);
             this.labelTS8.Name = "labelTS8";
             this.labelTS8.Size = new System.Drawing.Size(49, 13);
             this.labelTS8.TabIndex = 28;
@@ -227,7 +242,7 @@
             this.groupBoxTS8.Controls.Add(this.labelTS6);
             this.groupBoxTS8.Controls.Add(this.manual_xmax);
             this.groupBoxTS8.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBoxTS8.Location = new System.Drawing.Point(954, 288);
+            this.groupBoxTS8.Location = new System.Drawing.Point(948, 388);
             this.groupBoxTS8.Name = "groupBoxTS8";
             this.groupBoxTS8.Size = new System.Drawing.Size(122, 117);
             this.groupBoxTS8.TabIndex = 27;
@@ -240,9 +255,9 @@
             this.labelTS7.Image = null;
             this.labelTS7.Location = new System.Drawing.Point(18, 66);
             this.labelTS7.Name = "labelTS7";
-            this.labelTS7.Size = new System.Drawing.Size(79, 13);
+            this.labelTS7.Size = new System.Drawing.Size(77, 13);
             this.labelTS7.TabIndex = 11;
-            this.labelTS7.Text = "Xmin (seconds)";
+            this.labelTS7.Text = "Xmin (degrees)";
             // 
             // manual_xmin
             // 
@@ -316,7 +331,7 @@
             this.labelTS5.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.labelTS5.ForeColor = System.Drawing.SystemColors.Control;
             this.labelTS5.Image = null;
-            this.labelTS5.Location = new System.Drawing.Point(154, 396);
+            this.labelTS5.Location = new System.Drawing.Point(145, 492);
             this.labelTS5.Name = "labelTS5";
             this.labelTS5.Size = new System.Drawing.Size(49, 13);
             this.labelTS5.TabIndex = 26;
@@ -341,7 +356,7 @@
             this.txtCursorTime.AutoSize = true;
             this.txtCursorTime.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.txtCursorTime.Image = null;
-            this.txtCursorTime.Location = new System.Drawing.Point(248, 413);
+            this.txtCursorTime.Location = new System.Drawing.Point(252, 513);
             this.txtCursorTime.Name = "txtCursorTime";
             this.txtCursorTime.Size = new System.Drawing.Size(10, 13);
             this.txtCursorTime.TabIndex = 22;
@@ -352,7 +367,7 @@
             this.txtCursorPower.AutoSize = true;
             this.txtCursorPower.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.txtCursorPower.Image = null;
-            this.txtCursorPower.Location = new System.Drawing.Point(374, 413);
+            this.txtCursorPower.Location = new System.Drawing.Point(378, 513);
             this.txtCursorPower.Name = "txtCursorPower";
             this.txtCursorPower.Size = new System.Drawing.Size(10, 13);
             this.txtCursorPower.TabIndex = 21;
@@ -365,7 +380,7 @@
             this.groupBoxTS6.Controls.Add(this.groupBox_scaling);
             this.groupBoxTS6.Controls.Add(this.groupBoxTS5);
             this.groupBoxTS6.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBoxTS6.Location = new System.Drawing.Point(954, 8);
+            this.groupBoxTS6.Location = new System.Drawing.Point(954, 74);
             this.groupBoxTS6.Name = "groupBoxTS6";
             this.groupBoxTS6.Size = new System.Drawing.Size(122, 267);
             this.groupBoxTS6.TabIndex = 20;
@@ -537,30 +552,30 @@
             // groupBox_signal
             // 
             this.groupBox_signal.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox_signal.Controls.Add(this.textBoxTS2);
+            this.groupBox_signal.Controls.Add(this.textBox_Rx1);
             this.groupBox_signal.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox_signal.Location = new System.Drawing.Point(491, 12);
+            this.groupBox_signal.Location = new System.Drawing.Point(512, 13);
             this.groupBox_signal.Name = "groupBox_signal";
             this.groupBox_signal.Size = new System.Drawing.Size(200, 56);
             this.groupBox_signal.TabIndex = 19;
             this.groupBox_signal.TabStop = false;
-            this.groupBox_signal.Text = "signal (dBm)";
+            this.groupBox_signal.Text = "Rx1 signal (dBm)";
             // 
-            // textBoxTS2
+            // textBox_Rx1
             // 
-            this.textBoxTS2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxTS2.Location = new System.Drawing.Point(38, 17);
-            this.textBoxTS2.Name = "textBoxTS2";
-            this.textBoxTS2.Size = new System.Drawing.Size(124, 29);
-            this.textBoxTS2.TabIndex = 13;
-            this.textBoxTS2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox_Rx1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Rx1.Location = new System.Drawing.Point(38, 17);
+            this.textBox_Rx1.Name = "textBox_Rx1";
+            this.textBox_Rx1.Size = new System.Drawing.Size(124, 29);
+            this.textBox_Rx1.TabIndex = 13;
+            this.textBox_Rx1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBoxTS4
             // 
             this.groupBoxTS4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.groupBoxTS4.Controls.Add(this.textBoxTS3);
             this.groupBoxTS4.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBoxTS4.Location = new System.Drawing.Point(270, 12);
+            this.groupBoxTS4.Location = new System.Drawing.Point(200, 8);
             this.groupBoxTS4.Name = "groupBoxTS4";
             this.groupBoxTS4.Size = new System.Drawing.Size(184, 56);
             this.groupBoxTS4.TabIndex = 18;
@@ -581,7 +596,7 @@
             this.groupBoxTS3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.groupBoxTS3.Controls.Add(this.numericUpDownTS2);
             this.groupBoxTS3.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBoxTS3.Location = new System.Drawing.Point(12, 85);
+            this.groupBoxTS3.Location = new System.Drawing.Point(12, 121);
             this.groupBoxTS3.Name = "groupBoxTS3";
             this.groupBoxTS3.Size = new System.Drawing.Size(127, 59);
             this.groupBoxTS3.TabIndex = 12;
@@ -623,7 +638,7 @@
             this.groupBoxTS2.Controls.Add(this.labelTS1);
             this.groupBoxTS2.Controls.Add(this.textBox_pts_collected);
             this.groupBoxTS2.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBoxTS2.Location = new System.Drawing.Point(12, 280);
+            this.groupBoxTS2.Location = new System.Drawing.Point(12, 375);
             this.groupBoxTS2.Name = "groupBoxTS2";
             this.groupBoxTS2.Size = new System.Drawing.Size(127, 76);
             this.groupBoxTS2.TabIndex = 10;
@@ -653,7 +668,7 @@
             this.groupBoxTS1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.groupBoxTS1.Controls.Add(this.numericUpDownTS1);
             this.groupBoxTS1.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBoxTS1.Location = new System.Drawing.Point(12, 150);
+            this.groupBoxTS1.Location = new System.Drawing.Point(12, 187);
             this.groupBoxTS1.Name = "groupBoxTS1";
             this.groupBoxTS1.Size = new System.Drawing.Size(127, 65);
             this.groupBoxTS1.TabIndex = 8;
@@ -694,7 +709,7 @@
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.groupBox2.Controls.Add(this.RArecordCheckBox);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox2.Location = new System.Drawing.Point(12, 12);
+            this.groupBox2.Location = new System.Drawing.Point(12, 8);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(127, 64);
             this.groupBox2.TabIndex = 6;
@@ -715,16 +730,66 @@
             this.RArecordCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RArecordCheckBox.CheckedChanged += new System.EventHandler(this.RArecordCheckBox_CheckedChanged);
             // 
+            // groupBox_Rx_select
+            // 
+            this.groupBox_Rx_select.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.groupBox_Rx_select.Controls.Add(this.radioButton_Rx2_only);
+            this.groupBox_Rx_select.Controls.Add(this.radioButton_Rx1_only);
+            this.groupBox_Rx_select.Controls.Add(this.radioButton_both);
+            this.groupBox_Rx_select.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBox_Rx_select.Location = new System.Drawing.Point(12, 271);
+            this.groupBox_Rx_select.Name = "groupBox_Rx_select";
+            this.groupBox_Rx_select.Size = new System.Drawing.Size(90, 83);
+            this.groupBox_Rx_select.TabIndex = 39;
+            this.groupBox_Rx_select.TabStop = false;
+            this.groupBox_Rx_select.Text = "display";
+            // 
+            // radioButton_Rx2_only
+            // 
+            this.radioButton_Rx2_only.AutoSize = true;
+            this.radioButton_Rx2_only.Image = null;
+            this.radioButton_Rx2_only.Location = new System.Drawing.Point(6, 55);
+            this.radioButton_Rx2_only.Name = "radioButton_Rx2_only";
+            this.radioButton_Rx2_only.Size = new System.Drawing.Size(66, 17);
+            this.radioButton_Rx2_only.TabIndex = 10;
+            this.radioButton_Rx2_only.Text = "Rx2 only";
+            this.radioButton_Rx2_only.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Rx1_only
+            // 
+            this.radioButton_Rx1_only.AutoSize = true;
+            this.radioButton_Rx1_only.Image = null;
+            this.radioButton_Rx1_only.Location = new System.Drawing.Point(5, 33);
+            this.radioButton_Rx1_only.Name = "radioButton_Rx1_only";
+            this.radioButton_Rx1_only.Size = new System.Drawing.Size(66, 17);
+            this.radioButton_Rx1_only.TabIndex = 9;
+            this.radioButton_Rx1_only.Text = "Rx1 only";
+            this.radioButton_Rx1_only.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_both
+            // 
+            this.radioButton_both.AutoSize = true;
+            this.radioButton_both.Checked = true;
+            this.radioButton_both.Image = null;
+            this.radioButton_both.Location = new System.Drawing.Point(4, 14);
+            this.radioButton_both.Name = "radioButton_both";
+            this.radioButton_both.Size = new System.Drawing.Size(47, 17);
+            this.radioButton_both.TabIndex = 3;
+            this.radioButton_both.TabStop = true;
+            this.radioButton_both.Text = "Both";
+            this.radioButton_both.UseVisualStyleBackColor = true;
+            // 
             // RAForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(1088, 434);
+            this.ClientSize = new System.Drawing.Size(1088, 562);
+            this.Controls.Add(this.groupBox_Rx_select);
+            this.Controls.Add(this.groupBox_Rx2);
             this.Controls.Add(this.button_writeFile);
             this.Controls.Add(this.button_readFile);
-            this.Controls.Add(this.labelTS14);
             this.Controls.Add(this.labelTS13);
             this.Controls.Add(this.labelTS12);
             this.Controls.Add(this.labelTS10);
@@ -746,10 +811,12 @@
             this.ForeColor = System.Drawing.SystemColors.Control;
             this.MaximizeBox = false;
             this.Name = "RAForm";
-            this.Text = "Radio Astromony data collection utility          v1.1 (2Feb2014)";
+            this.Text = "Radio Astromony data collection utility   v1.2 (29 Aug 2014)";
             this.Load += new System.EventHandler(this.RAForm_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.RAForm_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.picRAGraph)).EndInit();
+            this.groupBox_Rx2.ResumeLayout(false);
+            this.groupBox_Rx2.PerformLayout();
             this.groupBoxTS8.ResumeLayout(false);
             this.groupBoxTS8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.manual_xmin)).EndInit();
@@ -774,6 +841,8 @@
             this.groupBoxTS1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS1)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox_Rx_select.ResumeLayout(false);
+            this.groupBox_Rx_select.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -791,7 +860,7 @@
         private System.Windows.Forms.GroupBoxTS groupBoxTS2;
         private System.Windows.Forms.NumericUpDownTS numericUpDownTS2;
         private System.Windows.Forms.GroupBoxTS groupBoxTS3;
-        private System.Windows.Forms.TextBoxTS textBoxTS2;
+        private System.Windows.Forms.TextBoxTS textBox_Rx1;
         private System.Windows.Forms.TextBoxTS textBoxTS3;
         private System.Windows.Forms.PictureBox picRAGraph;
         private System.Windows.Forms.GroupBoxTS groupBoxTS4;
@@ -823,11 +892,16 @@
         private System.Windows.Forms.NumericUpDownTS manual_ymax;
         private System.Windows.Forms.LabelTS labelTS12;
         private System.Windows.Forms.LabelTS labelTS13;
-        private System.Windows.Forms.LabelTS labelTS14;
         private System.Windows.Forms.ButtonTS button_readFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog3;
         private System.Windows.Forms.ButtonTS button_writeFile;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.GroupBoxTS groupBox_Rx2;
+        private System.Windows.Forms.TextBoxTS textBox_Rx2;
+        private System.Windows.Forms.GroupBoxTS groupBox_Rx_select;
+        private System.Windows.Forms.RadioButtonTS radioButton_Rx2_only;
+        private System.Windows.Forms.RadioButtonTS radioButton_Rx1_only;
+        private System.Windows.Forms.RadioButtonTS radioButton_both;
 
     }
 }

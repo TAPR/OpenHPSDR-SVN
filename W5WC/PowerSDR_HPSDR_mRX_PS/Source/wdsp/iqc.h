@@ -64,6 +64,12 @@ extern void flush_iqc (IQC a);
 
 extern void xiqc (IQC a);
 
+extern void setBuffers_iqc (IQC a, double* in, double* out);
+
+extern void setSamplerate_iqc (IQC a, int rate);
+
+extern void setSize_iqc (IQC a, int size);
+
 // TXA Properties
 
 extern __declspec (dllexport)  void GetTXAiqcValues (int channel, double* cm, double* cc, double* cs);

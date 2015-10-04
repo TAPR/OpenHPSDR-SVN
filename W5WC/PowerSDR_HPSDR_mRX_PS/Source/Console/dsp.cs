@@ -537,6 +537,17 @@ namespace PowerSDR
         [DllImport("wdsp.dll", EntryPoint = "SetRXAmpeakFilGain", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAmpeakFilGain(int channel, int fil, double gain);
 
+        // snba
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXASNBARun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXASNBARun(int channel, bool run);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXASNBAk1", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXASNBAk1(int channel, double k1);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXASNBAk2", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXASNBAk2(int channel, double k2);
+
         #endregion
 
         #region Enums

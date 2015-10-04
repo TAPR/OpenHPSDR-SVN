@@ -56,6 +56,7 @@ void destroy_div (MDIV a)
 	_aligned_free (a->Qrotate);
 	_aligned_free (a->Irotate);
 	_aligned_free (a->in);
+	_aligned_free (a);
 }
 
 void flush_div (MDIV a)

@@ -19,12 +19,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
+using System.Text.RegularExpressions;
+using System.Net.NetworkInformation;  // so we don't have country issues with '.' and ',' in .csv files
+
+
 
 namespace PowerSDR
 {
     public partial class RAForm : System.Windows.Forms.Form
     {
-
         public RAForm()
         {
             //
@@ -35,8 +39,6 @@ namespace PowerSDR
             RArecordCheckBox.ForeColor = Color.White;
             RArecordCheckBox.Text = "Start";
             labelTS10.Text = "";
-            labelTS14.ForeColor = System.Drawing.Color.Yellow;
-            labelTS14.Text = "";
             max_count = 1;
         }
         
@@ -65,7 +67,9 @@ namespace PowerSDR
         private int max_count;
         private int data_points;
         private float sig_level;
+        private float sig_level2;
         private float sig_level_avg;
+        private float sig_level2_avg;
         private float sig_max;
         private float sig_min;
         private float initial_sig;
@@ -78,6 +82,7 @@ namespace PowerSDR
         private bool rescale;
         private float RA_cal;
         private float[] sig_data = new float[10000];
+        private float[] sig_data2 = new float[10000];
         private float[] time_data = new float[10000]; 
         private double time_elapsed;
         double ref_power = 0;
@@ -107,7 +112,7 @@ namespace PowerSDR
                                            0x42, 0x6D, 0x29, 0x0D, 0x0A 
                                           };
 
-                writer.Write(header_K5SO, 0, 30);
+                //writer.Write(header_K5SO, 0, 30);
                 time0 = Environment.TickCount;
                 CRLF = new byte[] { 0x0D, 0x0A };
                 // collect initial data point
@@ -137,7 +142,6 @@ namespace PowerSDR
                 RArecordCheckBox.Text = "Start";
                 writer.Flush();
                 writer.Close();
-                labelTS14.Text = "";
                 labelTS10.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
                 labelTS10.ForeColor = System.Drawing.SystemColors.Highlight;
                 labelTS10.Text = "data written to: RA_data.csv";
@@ -150,12 +154,14 @@ namespace PowerSDR
             max_count = (int) numericUpDownTS1.Value;
         }
 
+ 
         private void RA_timer_Tick(object sender, EventArgs e)
         {
             RA_data = new byte[30];
             int cnt_string;
             string time_string;
             string signal_string;
+            string signal_string2;
             string line_string;
             double time_now;
             string format = "f1";
@@ -169,7 +175,9 @@ namespace PowerSDR
                    time_elapsed = 0.001 * (time_now - time0);   // in seconds
                    time_string = time_elapsed.ToString("f3") + ", ";
                    sig_level_avg = (sig_level / RA_count) + RA_cal;   // approximate signal level in dBm
+                   sig_level2_avg = (sig_level2 / RA_count) + RA_cal;
                    sig_data[data_points] = sig_level_avg;
+                   sig_data2[data_points] = sig_level2_avg;
                    time_data[data_points] = (float) time_elapsed;
                    if (sig_level_avg > sig_max)
                    {
@@ -182,15 +190,18 @@ namespace PowerSDR
                        rescale = true;
                    }
                    textBoxTS3.Text = time_elapsed.ToString(format);
-                   textBoxTS2.Text = sig_level_avg.ToString(format);
-                   signal_string = sig_level_avg.ToString("f3"); // System.Convert.ToString(sig_level_avg);
-                   line_string = time_string + signal_string;
+                   textBox_Rx1.Text = sig_level_avg.ToString(format);
+                   textBox_Rx2.Text = sig_level2_avg.ToString(format);
+                   signal_string = sig_level_avg.ToString("f2"); // System.Convert.ToString(sig_level_avg);
+                   signal_string2 = sig_level2_avg.ToString("f2"); 
+                   line_string = time_string + signal_string + ", " + time_string + signal_string2;
                    RA_data = StrToByteArray(line_string);
                    cnt_string = RA_data.Length;
                    writer.Write(RA_data, 0, cnt_string);
                    writer.Write(CRLF, 0, 2);
                    //get current value of signal and go accumulate a new average
                    sig_level = wdsp.CalculateRXMeter(0, 0, wdsp.MeterType.SIGNAL_STRENGTH);
+                   sig_level2 = wdsp.CalculateRXMeter(2, 0, wdsp.MeterType.SIGNAL_STRENGTH);
                    RA_count = 1;
 
                    // update by plotting new graphics display
@@ -200,6 +211,7 @@ namespace PowerSDR
             else
             {
                 sig_level += wdsp.CalculateRXMeter(0, 0, wdsp.MeterType.SIGNAL_STRENGTH);
+                sig_level2 += wdsp.CalculateRXMeter(2, 0, wdsp.MeterType.SIGNAL_STRENGTH);
                 RA_count = RA_count + 1;
             }       
         }
@@ -242,6 +254,8 @@ namespace PowerSDR
                 Point bottom_right = new Point(picRAGraph.Right, picRAGraph.Bottom);
                 Point p1 = new Point();
                 Point p2 = new Point();
+                Point p3 = new Point();
+                Point p4 = new Point();
                 int X_left = bottom_left.X;
                 int X_right = bottom_right.X;
                 int Y_top = top_right.Y;
@@ -263,7 +277,6 @@ namespace PowerSDR
                 if (button_dBm.Checked)     // dBm display mode
                 {
                     labelTS12.Text = "                  Signal (dBm)";
-                    labelTS14.Text = "";
                     // rescale plot if necessary
                     if (auto_rescale.Checked)
                     {
@@ -482,6 +495,8 @@ namespace PowerSDR
                     float time = (float)((time_elapsed / 600d) * (X_right - X_left));
                     float data1 = 0;
                     float data2 = 0;
+                    float data3 = 0;
+                    float data4 = 0;
 
                     // plot the accumulated data
                     for (i = 1; i <= data_points; i++)
@@ -490,6 +505,8 @@ namespace PowerSDR
                         {
                             data1 = sig_data[i];
                             data2 = sig_data[i - 1];
+                            data3 = sig_data2[i];
+                            data4 = sig_data2[i - 1];
                         }
                         else                             // linear mode
                         {
@@ -497,16 +514,23 @@ namespace PowerSDR
                             {
                                 data1 = 0;
                                 data2 = 0;
+                                data3 = 0;
+                                data4 = 0;
                             }
                             else
                             {
                                 if (sig_data[2] == 0) sig_data[2] = sig_data[i];
+                                if (sig_data2[2] == 0) sig_data2[2] = sig_data2[i];
                                 data1 = 100 * (float)((Math.Pow(10, sig_data[i] / 10)) / ref_power);
                                 data2 = 100 * (float)(Math.Pow(10, sig_data[i - 1] / 10) / ref_power);
+                                data3 = 100 * (float)((Math.Pow(10, sig_data2[i] / 10)) / ref_power);
+                                data4 = 100 * (float)((Math.Pow(10, sig_data2[i - 1] / 10)) / ref_power);
+
                             }
                         }
 
                         p2.Y = (int)(((display_y_max - data1) / (display_y_max - display_y_min)) * Y_range);
+                        p4.Y = (int)(((display_y_max - data3) / (display_y_max - display_y_min)) * Y_range);
 
                         if (button_linear.Checked)
                         {
@@ -524,12 +548,25 @@ namespace PowerSDR
 
                         if (p2.Y >= Y_range) p2.Y = Y_range - 1;
                         if (p2.Y <= 0) p2.Y = 1;
+                        if (p4.Y >= Y_range) p4.Y = Y_range - 1;
+                        if (p4.Y <= 0) p4.Y = 1;
                         p2.X = (int)(((time_data[i] - display_x_min)/ (display_x_max - display_x_min) * (X_range)));
+                        p4.X = p2.X;
                         p1.Y = (int)(((display_y_max - data2) / (display_y_max - display_y_min)) * Y_range);
+                        p3.Y = (int)(((display_y_max - data4) / (display_y_max - display_y_min)) * Y_range);
                         if (p1.Y > Y_range) p1.Y = Y_range - 1;
                         if (p1.Y < 0) p1.Y = 1;
+                        if (p3.Y > Y_range) p3.Y = Y_range - 1;
+                        if (p3.Y < 0) p3.Y = 1;
                         p1.X = (int)(((time_data[i - 1] -  display_x_min) / (display_x_max - display_x_min)) * (X_range));
-                        g.DrawLine(pen, p1, p2);                        
+                        p3.X = p1.X;
+                        if (radioButton_both.Checked)
+                        {
+                            g.DrawLine(pen, p1, p2);
+                            g.DrawLine(pen5, p3, p4);
+                        }
+                        if (radioButton_Rx1_only.Checked) g.DrawLine(pen, p1, p2);
+                        if (radioButton_Rx2_only.Checked) g.DrawLine(pen5, p3, p4);
                     }
                     if (data_points >= 9999)
                     {
@@ -610,6 +647,7 @@ namespace PowerSDR
                     {
                         float.TryParse(values[0], out time_data[i_max]);
                         float.TryParse(values[1], out sig_data[i_max]);
+                        float.TryParse(values[2], out sig_data2[i_max]);
                     }
                 }
                 reader.Close();
@@ -626,14 +664,18 @@ namespace PowerSDR
                              labelTS10.Text = "NO VALID DATA IN THE FILE";
                          }
                          sig_max = -140;
-                         for (int i = 2; i < data_points; i++) if (sig_data[i] > sig_max & sig_data[i] < 0) sig_max = sig_data[i];
+                         for (int i = 2; i < data_points; i++) 
+                         {
+                             if (sig_data[i] > sig_max & sig_data[i] < 0) sig_max = sig_data[i];
+                             if (sig_data2[i] > sig_max & sig_data2[i] < 0) sig_max = sig_data2[i];
+                         }
                          picRAGraph.Invalidate();
             }
         }
 
         private void button_writeFile_Click(object sender, EventArgs e)
         {
-            String text_line;
+            String text_line = " ";
             String path = Environment.CurrentDirectory;
             saveFileDialog1.InitialDirectory = path;
             saveFileDialog1.Filter = "RA data file (*.csv) | *.csv";
@@ -644,8 +686,8 @@ namespace PowerSDR
                 System.IO.StreamWriter writer = new System.IO.StreamWriter(file);
                 for (int i = 0; i <= data_points; i++)
                 {
-                    if (i < 1) text_line = "time (seconds), signal (dBm)";
-                    else text_line = time_data[i].ToString("f3") + ", " + sig_data[i].ToString("f3");
+                    if (i < 1) text_line = "time (seconds), Rx1 signal (dBm), Rx2 signal (dBm)";
+                    else text_line = time_data[i].ToString("f3") + ", " + sig_data[i].ToString("f3") + ", " + sig_data2[i].ToString("f3");
                     writer.WriteLine(text_line);
                 }
                 writer.Close();

@@ -57,6 +57,12 @@ extern void flush_eq (EQ a);
 
 extern void xeq (EQ a);
 
+extern void setBuffers_eq (EQ a, double* in, double* out);
+
+extern void setSamplerate_eq (EQ a, int rate);
+
+extern void setSize_eq (EQ a, int size);
+
 // RXA Properties
 
 extern __declspec (dllexport) void SetRXAEQRun (int channel, int run);

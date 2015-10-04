@@ -26,6 +26,14 @@ warren@wpratt.com
 
 #include "comm.h"
 
+void calc_cbl (CBL a)
+{
+	a->dcI = 0.0;
+	a->dcQ = 0.0;
+	a->mtau = exp(-1.0 / (a->sample_rate * a->tau));
+	a->onem_mtau = 1.0 - a->mtau;
+}
+
 CBL create_cbl
 	(
 	int run,
@@ -45,12 +53,7 @@ CBL create_cbl
 	a->mode = mode;
 	a->sample_rate = (double)sample_rate;
 	a->tau = tau;
-
-	a->dcI = 0.0;
-	a->dcQ = 0.0;
-	a->mtau = exp(-1.0 / (a->sample_rate * a->tau));
-	a->onem_mtau = 1.0 - a->mtau;
-
+	calc_cbl (a);
 	return a;
 }
 
@@ -80,6 +83,24 @@ void xcbl (CBL a)
 	}
 	else if (a->in_buff != a->out_buff)
 		memcpy (a->out_buff, a->in_buff, a->buff_size * sizeof (complex));
+}
+
+void setBuffers_cbl (CBL a, double* in, double* out)
+{
+	a->in_buff = in;
+	a->out_buff = out;
+}
+
+void setSamplerate_cbl (CBL a, int rate)
+{
+	a->sample_rate = rate;
+	calc_cbl (a);
+}
+
+void setSize_cbl (CBL a, int size)
+{
+	a->buff_size = size;
+	flush_cbl (a);
 }
 
 /********************************************************************************************************

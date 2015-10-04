@@ -321,7 +321,7 @@ void create_txa (int channel)
 
 	txa[channel].uslew.p = create_uslew (
 		channel,									// channel
-		&ch[channel].iob.pd->slew.ch_upslew,		// pointer to channel upslew flag
+		&ch[channel].iob.ch_upslew,					// pointer to channel upslew flag
 		ch[channel].dsp_size,						// buffer size
 		txa[channel].midbuff,						// input buffer
 		txa[channel].midbuff,						// output buffer
@@ -376,6 +376,20 @@ void create_txa (int channel)
 		0.005,										// changeover time
 		256);										// spi
 
+	txa[channel].cfir.p = create_cfir(
+		0,											// run
+		ch[channel].dsp_size,						// size
+		txa[channel].midbuff,						// input buffer
+		txa[channel].midbuff,						// output buffer
+		ch[channel].dsp_rate,						// input sample rate
+		ch[channel].out_rate,						// CIC input sample rate
+		1,											// CIC differential delay
+		640,										// CIC interpolation factor
+		5,											// CIC integrator-comb pairs
+		20000.0,									// cutoff frequency
+		0,											// fourth-power rolloff
+		0.0);										// raised-cosine transition width
+
 	txa[channel].rsmpout.p = create_resample (
 		0,											// run - will be turned ON below if needed
 		ch[channel].dsp_size,						// input size
@@ -411,6 +425,7 @@ void destroy_txa (int channel)
 	// in reverse order, free each item we created
 	destroy_meter (txa[channel].outmeter.p);
 	destroy_resample (txa[channel].rsmpout.p);
+	destroy_cfir(txa[channel].cfir.p);
 	destroy_iqc (txa[channel].iqc.p0);
 	destroy_calcc (txa[channel].calcc.p);
 	destroy_siphon (txa[channel].sip1.p);
@@ -474,6 +489,7 @@ void flush_txa (int channel)
 	flush_meter (txa[channel].alcmeter.p);
 	flush_siphon (txa[channel].sip1.p);
 	flush_iqc (txa[channel].iqc.p0);
+	flush_cfir(txa[channel].cfir.p);
 	flush_resample (txa[channel].rsmpout.p);
 	flush_meter (txa[channel].outmeter.p);
 }
@@ -508,9 +524,157 @@ void xtxa (int channel)
 	xmeter (txa[channel].alcmeter.p);
 	xsiphon (txa[channel].sip1.p);
 	xiqc (txa[channel].iqc.p0);
+	xcfir(txa[channel].cfir.p);
 	xresample (txa[channel].rsmpout.p);
 	xmeter (txa[channel].outmeter.p);
 	// print_peak_env ("env_exception.txt", ch[channel].dsp_outsize, txa[channel].outbuff, 0.990);
+}
+
+void setInputSamplerate_txa (int channel)
+{
+	// buffers
+	_aligned_free (txa[channel].inbuff);
+	txa[channel].inbuff = (double *)malloc0(1 * ch[channel].dsp_insize  * sizeof(complex));
+	// input resampler
+	setBuffers_resample (txa[channel].rsmpin.p, txa[channel].inbuff, txa[channel].midbuff);
+	setSize_resample (txa[channel].rsmpin.p, ch[channel].dsp_insize);
+	setInRate_resample (txa[channel].rsmpin.p, ch[channel].in_rate);
+	TXAResCheck (channel);
+}
+
+void setOutputSamplerate_txa (int channel)
+{
+	// buffers
+	_aligned_free (txa[channel].outbuff);
+	txa[channel].outbuff = (double *)malloc0(1 * ch[channel].dsp_outsize * sizeof(complex));
+	// output resampler
+	setBuffers_resample (txa[channel].rsmpout.p, txa[channel].midbuff, txa[channel].outbuff);
+	setOutRate_resample (txa[channel].rsmpout.p, ch[channel].out_rate);
+	TXAResCheck (channel);
+	// output meter
+	setBuffers_meter (txa[channel].outmeter.p, txa[channel].outbuff);
+	setSize_meter (txa[channel].outmeter.p, ch[channel].dsp_outsize);
+	setSamplerate_meter (txa[channel].outmeter.p, ch[channel].out_rate);
+}
+
+void setDSPSamplerate_txa (int channel)
+{
+	// buffers
+	_aligned_free (txa[channel].inbuff);
+	txa[channel].inbuff = (double *)malloc0(1 * ch[channel].dsp_insize  * sizeof(complex));
+	_aligned_free (txa[channel].outbuff);
+	txa[channel].outbuff = (double *)malloc0(1 * ch[channel].dsp_outsize * sizeof(complex));
+	// input resampler
+	setBuffers_resample (txa[channel].rsmpin.p, txa[channel].inbuff, txa[channel].midbuff);
+	setSize_resample (txa[channel].rsmpin.p, ch[channel].dsp_insize);
+	setOutRate_resample (txa[channel].rsmpin.p, ch[channel].dsp_rate);
+	// dsp_rate blocks
+	setSamplerate_gen (txa[channel].gen0.p, ch[channel].dsp_rate);
+	setSamplerate_panel (txa[channel].panel.p, ch[channel].dsp_rate);
+	setSamplerate_meter (txa[channel].micmeter.p, ch[channel].dsp_rate);
+	setSamplerate_amsq (txa[channel].amsq.p, ch[channel].dsp_rate);
+	setSamplerate_eq (txa[channel].eq.p, ch[channel].dsp_rate);
+	setSamplerate_meter (txa[channel].eqmeter.p, ch[channel].dsp_rate);
+	setSamplerate_emph (txa[channel].preemph.p, ch[channel].dsp_rate);
+	setSamplerate_wcpagc (txa[channel].leveler.p, ch[channel].dsp_rate);
+	setSamplerate_meter (txa[channel].lvlrmeter.p, ch[channel].dsp_rate);
+	setSamplerate_bandpass (txa[channel].bp0.p, ch[channel].dsp_rate);
+	setSamplerate_gain (txa[channel].pfgain0.p, ch[channel].dsp_rate);
+	setSamplerate_compressor (txa[channel].compressor.p, ch[channel].dsp_rate);
+	setSamplerate_bandpass (txa[channel].bp1.p, ch[channel].dsp_rate);
+	setSamplerate_gain (txa[channel].pfgain1.p, ch[channel].dsp_rate);
+	setSamplerate_osctrl (txa[channel].osctrl.p, ch[channel].dsp_rate);
+	setSamplerate_bandpass (txa[channel].bp2.p, ch[channel].dsp_rate);
+	setSamplerate_meter (txa[channel].compmeter.p, ch[channel].dsp_rate);
+	setSamplerate_wcpagc (txa[channel].alc.p, ch[channel].dsp_rate);
+	setSamplerate_ammod (txa[channel].ammod.p, ch[channel].dsp_rate);
+	setSamplerate_fmmod (txa[channel].fmmod.p, ch[channel].dsp_rate);
+	setSamplerate_gen (txa[channel].gen1.p, ch[channel].dsp_rate);
+	setSamplerate_uslew (txa[channel].uslew.p, ch[channel].dsp_rate);
+	setSamplerate_meter (txa[channel].alcmeter.p, ch[channel].dsp_rate);
+	setSamplerate_siphon (txa[channel].sip1.p, ch[channel].dsp_rate);
+	setSamplerate_iqc (txa[channel].iqc.p0, ch[channel].dsp_rate);
+	setSamplerate_cfir (txa[channel].cfir.p, ch[channel].dsp_rate);
+	// output resampler
+	setBuffers_resample (txa[channel].rsmpout.p, txa[channel].midbuff, txa[channel].outbuff);
+	setInRate_resample (txa[channel].rsmpout.p, ch[channel].dsp_rate);
+	TXAResCheck (channel);
+	// output meter
+	setBuffers_meter (txa[channel].outmeter.p, txa[channel].outbuff);
+	setSize_meter (txa[channel].outmeter.p, ch[channel].dsp_outsize);
+}
+
+void setDSPBuffsize_txa (int channel)
+{
+	// buffers
+	_aligned_free (txa[channel].inbuff);
+	txa[channel].inbuff = (double *)malloc0(1 * ch[channel].dsp_insize  * sizeof(complex));
+	_aligned_free (txa[channel].midbuff);
+	txa[channel].midbuff = (double *)malloc0(2 * ch[channel].dsp_size * sizeof(complex));
+	_aligned_free (txa[channel].outbuff);
+	txa[channel].outbuff = (double *)malloc0(1 * ch[channel].dsp_outsize * sizeof(complex));
+	// input resampler
+	setBuffers_resample (txa[channel].rsmpin.p, txa[channel].inbuff, txa[channel].midbuff);
+	setSize_resample (txa[channel].rsmpin.p, ch[channel].dsp_insize);
+	// dsp_size blocks
+	setBuffers_gen (txa[channel].gen0.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_gen (txa[channel].gen0.p, ch[channel].dsp_size);
+	setBuffers_panel (txa[channel].panel.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_panel (txa[channel].panel.p, ch[channel].dsp_size);
+	setBuffers_meter (txa[channel].micmeter.p, txa[channel].midbuff);
+	setSize_meter (txa[channel].micmeter.p, ch[channel].dsp_size);
+	setBuffers_amsq (txa[channel].amsq.p, txa[channel].midbuff, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_amsq (txa[channel].amsq.p, ch[channel].dsp_size);
+	setBuffers_eq (txa[channel].eq.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_eq (txa[channel].eq.p, ch[channel].dsp_size);
+	setBuffers_meter (txa[channel].eqmeter.p, txa[channel].midbuff);
+	setSize_meter (txa[channel].eqmeter.p, ch[channel].dsp_size);
+	setBuffers_emph (txa[channel].preemph.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_emph (txa[channel].preemph.p, ch[channel].dsp_size);
+	setBuffers_wcpagc (txa[channel].leveler.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_wcpagc (txa[channel].leveler.p, ch[channel].dsp_size);
+	setBuffers_meter (txa[channel].lvlrmeter.p, txa[channel].midbuff);
+	setSize_meter (txa[channel].lvlrmeter.p, ch[channel].dsp_size);
+	setBuffers_bandpass (txa[channel].bp0.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_bandpass (txa[channel].bp0.p, ch[channel].dsp_size);
+	setBuffers_gain (txa[channel].pfgain0.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_gain (txa[channel].pfgain0.p, ch[channel].dsp_size);
+	setBuffers_compressor (txa[channel].compressor.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_compressor (txa[channel].compressor.p, ch[channel].dsp_size);
+	setBuffers_bandpass (txa[channel].bp1.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_bandpass (txa[channel].bp1.p, ch[channel].dsp_size);
+	setBuffers_gain (txa[channel].pfgain1.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_gain (txa[channel].pfgain1.p, ch[channel].dsp_size);
+	setBuffers_osctrl (txa[channel].osctrl.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_osctrl (txa[channel].osctrl.p, ch[channel].dsp_size);
+	setBuffers_bandpass (txa[channel].bp2.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_bandpass (txa[channel].bp2.p, ch[channel].dsp_size);
+	setBuffers_meter (txa[channel].compmeter.p, txa[channel].midbuff);
+	setSize_meter (txa[channel].compmeter.p, ch[channel].dsp_size);
+	setBuffers_wcpagc (txa[channel].alc.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_wcpagc (txa[channel].alc.p, ch[channel].dsp_size);
+	setBuffers_ammod (txa[channel].ammod.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_ammod (txa[channel].ammod.p, ch[channel].dsp_size);
+	setBuffers_fmmod (txa[channel].fmmod.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_fmmod (txa[channel].fmmod.p, ch[channel].dsp_size);
+	setBuffers_gen (txa[channel].gen1.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_gen (txa[channel].gen1.p, ch[channel].dsp_size);
+	setBuffers_uslew (txa[channel].uslew.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_uslew (txa[channel].uslew.p, ch[channel].dsp_size);
+	setBuffers_meter (txa[channel].alcmeter.p, txa[channel].midbuff);
+	setSize_meter (txa[channel].alcmeter.p, ch[channel].dsp_size);
+	setBuffers_siphon (txa[channel].sip1.p, txa[channel].midbuff);
+	setSize_siphon (txa[channel].sip1.p, ch[channel].dsp_size);
+	setBuffers_iqc (txa[channel].iqc.p0, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_iqc (txa[channel].iqc.p0, ch[channel].dsp_size);
+	setBuffers_cfir (txa[channel].cfir.p, txa[channel].midbuff, txa[channel].midbuff);
+	setSize_cfir (txa[channel].cfir.p, ch[channel].dsp_size);
+	// output resampler
+	setBuffers_resample (txa[channel].rsmpout.p, txa[channel].midbuff, txa[channel].outbuff);
+	setSize_resample (txa[channel].rsmpout.p, ch[channel].dsp_size);
+	// output meter
+	setBuffers_meter (txa[channel].outmeter.p, txa[channel].outbuff);
+	setSize_meter (txa[channel].outmeter.p, ch[channel].dsp_outsize);
 }
 
 /********************************************************************************************************

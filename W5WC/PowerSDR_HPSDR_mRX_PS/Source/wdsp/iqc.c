@@ -26,17 +26,10 @@ warren@wpratt.com
 
 #include "comm.h"
 
-IQC create_iqc (int run, int size, double* in, double* out, double rate, int ints, double tup, int spi)
+void calc_iqc (IQC a)
 {
 	int i;
 	double delta, theta;
-	IQC a = (IQC) malloc0 (sizeof (iqc));
-	a->run = run;
-	a->size = size;
-	a->in = in;
-	a->out = out;
-	a->rate = rate;
-	a->ints = ints;
 	a->t =	(double *) malloc0 ((a->ints + 1) * sizeof(double));
 	for (i = 0; i <= a->ints; i++)
 		a->t[i] = (double)i / (double)a->ints;
@@ -50,7 +43,6 @@ IQC create_iqc (int run, int size, double* in, double* out, double rate, int int
 	a->count = 0;
 	a->state = 0;
 	a->busy = 0;
-	a->tup = tup;
 	a->ntup = (int)(a->tup * a->rate);
 	a->cup = (double *) malloc0 ((a->ntup + 1) * sizeof (double));
 	delta = PI / (double)a->ntup;
@@ -62,13 +54,11 @@ IQC create_iqc (int run, int size, double* in, double* out, double rate, int int
 	}
 	a->dog.cpi = (int *) malloc0 (a->ints * sizeof (int));
 	InitializeCriticalSectionAndSpinCount (&a->dog.cs, 2500);
-	a->dog.spi = spi;
 	a->dog.count = 0;
 	a->dog.full_ints = 0;
-	return a;
 }
 
-void destroy_iqc (IQC a)
+void decalc_iqc (IQC a)
 {
 	int i;
 	DeleteCriticalSection (&a->dog.cs);
@@ -81,6 +71,26 @@ void destroy_iqc (IQC a)
 		_aligned_free (a->cs[i]);
 	}
 	_aligned_free (a->t);
+}
+
+IQC create_iqc (int run, int size, double* in, double* out, double rate, int ints, double tup, int spi)
+{
+	IQC a = (IQC) malloc0 (sizeof (iqc));
+	a->run = run;
+	a->size = size;
+	a->in = in;
+	a->out = out;
+	a->rate = rate;
+	a->ints = ints;
+	a->tup = tup;
+	a->dog.spi = spi;
+	calc_iqc (a);
+	return a;
+}
+
+void destroy_iqc (IQC a)
+{
+	decalc_iqc (a);
 	_aligned_free (a);
 }
 
@@ -179,6 +189,24 @@ void xiqc (IQC a)
 	}
 	else if (a->out != a->in)
 		memcpy (a->out, a->in, a->size * sizeof (complex));
+}
+
+void setBuffers_iqc (IQC a, double* in, double* out)
+{
+	a->in = in;
+	a->out = out;
+}
+
+void setSamplerate_iqc (IQC a, int rate)
+{
+	decalc_iqc (a);
+	a->rate = rate;
+	calc_iqc (a);
+}
+
+void setSize_iqc (IQC a, int size)
+{
+	a->size = size;
 }
 
 /********************************************************************************************************

@@ -55,6 +55,12 @@ extern void flush_snotch (SNOTCH a);
 
 extern void xsnotch (SNOTCH a);
 
+extern void setBuffers_snotch (SNOTCH a, double* in, double* out);
+
+extern void setSamplerate_snotch (SNOTCH a, int rate);
+
+extern void setSize_snotch (SNOTCH a, int size);
+
 extern void SetSNCTCSSFreq (SNOTCH a, double freq);
 
 extern void SetSNCTCSSRun (SNOTCH a, int run);
@@ -97,6 +103,12 @@ extern void flush_speak (SPEAK a);
 
 extern void xspeak (SPEAK a);
 
+extern void setBuffers_speak (SPEAK a, double* in, double* out);
+
+extern void setSamplerate_speak (SPEAK a, int rate);
+
+extern void setSize_speak (SPEAK a, int size);
+
 #endif
 
 /********************************************************************************************************
@@ -134,5 +146,11 @@ extern void destroy_mpeak (MPEAK a);
 extern void flush_mpeak (MPEAK a);
 
 extern void xmpeak (MPEAK a);
+
+extern void setBuffers_mpeak (MPEAK a, double* in, double* out);
+
+extern void setSamplerate_mpeak (MPEAK a, int rate);
+
+extern void setSize_mpeak (MPEAK a, int size);
 
 #endif

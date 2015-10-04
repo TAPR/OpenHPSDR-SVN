@@ -73,6 +73,8 @@
       <AdditionalIncludeDirectories>.;../../lib/portaudio_VS2008/include</AdditionalIncludeDirectories>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <AdditionalOptions>/D_ATL_XP_TARGETING %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -97,6 +99,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <AdditionalOptions>/D_ATL_XP_TARGETING %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -123,6 +126,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <AdditionalOptions>/D_ATL_XP_TARGETING %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -164,6 +168,7 @@
     <ClInclude Include="iir.h" />
     <ClInclude Include="iobuffs.h" />
     <ClInclude Include="iqc.h" />
+    <ClInclude Include="lmath.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="meter.h" />
     <ClInclude Include="meterlog10.h" />
@@ -178,6 +183,7 @@
     <ClInclude Include="siphon.h" />
     <ClInclude Include="fmsq.h" />
     <ClInclude Include="slew.h" />
+    <ClInclude Include="snb.h" />
     <ClInclude Include="TXA.h" />
     <ClInclude Include="utilities.h" />
     <ClInclude Include="wcpAGC.h" />
@@ -207,6 +213,7 @@
     <ClCompile Include="gen.c" />
     <ClCompile Include="iir.c" />
     <ClCompile Include="iqc.c" />
+    <ClCompile Include="lmath.c" />
     <ClCompile Include="meterlog10.c" />
     <ClCompile Include="fir.c" />
     <ClCompile Include="fmmod.c" />
@@ -224,6 +231,7 @@
     <ClCompile Include="siphon.c" />
     <ClCompile Include="fmsq.c" />
     <ClCompile Include="slew.c" />
+    <ClCompile Include="snb.c" />
     <ClCompile Include="TXA.c" />
     <ClCompile Include="utilities.c" />
     <ClCompile Include="wcpAGC.c" />
