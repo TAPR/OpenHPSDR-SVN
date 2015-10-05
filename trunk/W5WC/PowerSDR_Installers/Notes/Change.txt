@@ -45,5 +45,5 @@ This new control has been added in Setup on the DSP -> AM/SAM tab.
 3.2.29 (2015-10-4)
 - fixed open collectors not functioning during transmit
 - fixed the problem with crashing using Split mode
-- removed the German console language translation 
+- removed the German console language translation, ToolTip translation remains 
 - added a colon to the LED fonts
