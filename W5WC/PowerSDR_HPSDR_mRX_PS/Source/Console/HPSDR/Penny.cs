@@ -99,9 +99,10 @@ namespace PowerSDR
 		}
 
         public bool SplitPins = false;
+        public bool VFOTBX = false;
 		public void UpdateExtCtrl(Band band, Band bandb, bool tx) 
 		{
-			if ( !tx && (int)band < 12)  // if !tx ignore given band and round off to nearest band based on freq 
+			if (!tx && (int)band < 12)  // if !tx ignore given band and round off to nearest band based on freq 
 			{ 
 				band = Alex.AntBandFromFreq();
 			}
@@ -114,18 +115,24 @@ namespace PowerSDR
             int idx = (int)band - (int)Band.B160M;
             int idxb = (int)bandb - (int)Band.B160M;
 			int bits; 
-			if ( idx < 0 || idx > 26 || idxb < 0 || idxb > 26) 
+			if ( idx < 0 || idx > 26) 
 			{ 
 				bits = 0; 
 			} 
 			else 
-			{ 
+			{
                 if (SplitPins)
                 {
                     bits = tx ? (TXABitMasks[idx] & 0xf) | TXBBitMasks[idxb] : (RXABitMasks[idx] & 0xf) | RXBBitMasks[idxb];
                 }
                 else
-				    bits = tx ? TXABitMasks[idx] : RXABitMasks[idx];
+                {
+                    if (tx && VFOTBX)
+                        bits = TXABitMasks[idxb];
+                    else if (tx)
+                        bits = TXABitMasks[idx];
+                    else bits = RXABitMasks[idx];
+                }
 			}
             System.Console.WriteLine("Bits: " + bits + " Band: " + (int)band + " Band: " + (int)bandb); 
 			JanusAudio.SetPennyOCBits(bits);
