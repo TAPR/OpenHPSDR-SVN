@@ -41,3 +41,9 @@ This new control has been added in Setup on the DSP -> AM/SAM tab.
 - added multilingual for ToolTip information
 - fixed 6m panadapter display reading for the Anan-10E
 - fixed crashing on startup when the Disable PA for HF/VHF is enabled
+
+3.2.29 (2015-10-4)
+- fixed open collectors not functioning during transmit
+- fixed the problem with crashing using Split mode
+- removed the German console language translation 
+- added a colon to the LED fonts
