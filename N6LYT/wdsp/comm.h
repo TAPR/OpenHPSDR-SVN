@@ -24,7 +24,15 @@ warren@wpratt.com
 
 */
 
-#ifdef __linux__
+
+//#ifndef _comm_h
+//#define _comm_h
+
+#ifdef __APPLE__
+#define linux
+#endif
+
+#ifdef linux
 #include <stdlib.h>
 #include <pthread.h>
 #include <semaphore.h>
@@ -123,5 +131,10 @@ warren@wpratt.com
 #define TWOPI							6.2831853071795864
 
 // miscellaneous
+#ifndef __complex
+#define __complex
 typedef double complex[2];
+#endif
 #define PORT							__declspec( dllexport )
+
+//#endif
