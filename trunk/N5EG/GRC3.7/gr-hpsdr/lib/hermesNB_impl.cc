@@ -79,10 +79,13 @@ namespace gr {
 
     /*
      * Our virtual destructor.
+     *  NOTE: In V3.9 of gnuradio, destructor never gets called,
+     *        but all resources are cleaned up anyway.
+     *        Move to ::stop() so that statistics are printed.
      */
     hermesNB_impl::~hermesNB_impl()
     {
-	delete Hermes;
+	//delete Hermes;
     }
 
 
@@ -90,6 +93,8 @@ namespace gr {
 bool hermesNB::stop()		// override base class
     {
 	Hermes->Stop();			// stop ethernet activity on Hermes
+        delete Hermes;			// Stop is guaranteed to be called
+					// by gnuradio.
 	return gr::block::stop();	// call base class stop()
     }
 
