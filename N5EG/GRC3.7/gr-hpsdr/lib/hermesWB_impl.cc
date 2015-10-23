@@ -62,18 +62,19 @@ namespace gr {
     }
 
     /*
-     * Our virtual destructor.
+     * Our virtual destructor. With Ver 3.9, never gets called.
      */
     hermesWB_impl::~hermesWB_impl()
     {
-	delete HermesW;
+	// delete HermesW;
     }
 
 
 
 bool hermesWB::stop()		// override base class
     {
-	HermesW->Stop();			// stop ethernet activity on Hermes
+	HermesW->Stop();		// stop ethernet activity on Hermes
+	delete HermesW;			// print stats, dispose buffers.
 	return gr::block::stop();	// call base class stop()
     }
 
