@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7889761C-C21D-4DDD-95D7-86E11EFA9005}</ProjectGuid>
     <RootNamespace>pthread</RootNamespace>
+    <ProjectName>pthread</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

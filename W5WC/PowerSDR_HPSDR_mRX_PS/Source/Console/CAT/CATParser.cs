@@ -923,7 +923,13 @@ namespace PowerSDR
 				case "ZZNM":
 					rtncmd = cmdlist.ZZNM(suffix);
 					break;
-				case "ZZNR":
+                case "ZZNN":
+                    rtncmd = cmdlist.ZZNN(suffix);
+                    break;
+                case "ZZNO":
+                    rtncmd = cmdlist.ZZNO(suffix);
+                    break;
+                case "ZZNR":
 					rtncmd = cmdlist.ZZNR(suffix);
 					break;
 				case "ZZNT":

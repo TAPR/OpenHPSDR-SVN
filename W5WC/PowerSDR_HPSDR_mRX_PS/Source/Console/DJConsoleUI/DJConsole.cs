@@ -782,10 +782,10 @@ namespace PowerSDR
             DictButtons.Add(41, "Enable Rx EQ");
             DictButtons.Add(42, "Enable Tx EQ");
             DictButtons.Add(43, "Squelch");
-          // DictButtons.Add(44, "BCI Rejection");
+            DictButtons.Add(44, "SNB");
             DictButtons.Add(45, "AGC Mode Up");
             DictButtons.Add(46, "AGC Mode Down");
-          // DictButtons.Add(47, "Preamp (Flex5000)");
+            DictButtons.Add(47, "RX2 SNB");
             //display
             DictButtons.Add(48, "AVG");
             DictButtons.Add(49, "Peak");
@@ -2348,7 +2348,7 @@ namespace PowerSDR
 
                 case 44:
                     {
-                        BCIRejection(msg);
+                        SpectralNoiseBlankerOnOff(msg);
                         break;
                     }
 
@@ -2366,7 +2366,7 @@ namespace PowerSDR
 
                 case 47:
                     {
-                        PreampFlex5000(msg);
+                        SpectralNoiseBlankerRx2OnOff(msg);
                         break;
                     }
 
@@ -3561,66 +3561,69 @@ namespace PowerSDR
                     d = 000010;
                     break;
                 case 2:
-                    d = 000050;
+                    d = 000025;
                     break;
                 case 3:
-                    d = 000100;
+                    d = 000050;
                     break;
                 case 4:
-                    d = 000250;
+                    d = 000100;
                     break;
                 case 5:
-                    d = 000500;
+                    d = 000250;
                     break;
                 case 6:
-                    d = 001000;
+                    d = 000500;
                     break;
                 case 7:
-                    d = 002500;
+                    d = 001000;
                     break;
                 case 8:
-                    d = 005000;
+                    d = 002500;
                     break;
                 case 9:
-                    d = 006250;
+                    d = 005000;
                     break;
                 case 10:
-                    d = 009000;
+                    d = 006250;
                     break;
                 case 11:
-                    d = 010000;
+                    d = 009000;
                     break;
                 case 12:
-                    d = 012500;
+                    d = 010000;
                     break;
                 case 13:
-                    d = 015000;
+                    d = 012500;
                     break;
                 case 14:
-                    d = 020000;
+                    d = 015000;
                     break;
                 case 15:
-                    d = 025000;
+                    d = 020000;
                     break;
                 case 16:
-                    d = 030000;
+                    d = 025000;
                     break;
                 case 17:
-                    d = 050000;
+                    d = 030000;
                     break;
                 case 18:
-                    d = 100000;
+                    d = 050000;
                     break;
                 case 19:
-                    d = 250000;
+                    d = 100000;
                     break;
                 case 20:
-                    d = 500000;
+                    d = 250000;
                     break;
                 case 21:
-                    d = 1000000;
+                    d = 500000;
                     break;
                 case 22:
+                    d = 1000000;
+                    break;
+                case 23:
                     d = 10000000;
                     break;
             }
@@ -5340,23 +5343,45 @@ namespace PowerSDR
         }
 
 
-        private void BCIRejection(int msg)
+        private void SpectralNoiseBlankerOnOff(int msg)
         {
             if (msg == 127)
             {
                 parser.nGet = 0;
                 parser.nSet = 1;
 
-                string BCIRState = commands.ZZBR("");
+                int Rx1SNBState = Convert.ToInt16(commands.ZZNN(""));
 
-                if (BCIRState == "0")
+                if (Rx1SNBState == 0)
                 {
-                    commands.ZZBR("1");
+                    commands.ZZNN("1");
                     return;
                 }
-                if (BCIRState == "1")
+                if (Rx1SNBState == 1)
                 {
-                    commands.ZZBR("0");
+                    commands.ZZNN("0");
+                    return;
+                }
+            }
+        }
+
+        private void SpectralNoiseBlankerRx2OnOff(int msg)
+        {
+            if (msg == 127)
+            {
+                parser.nGet = 0;
+                parser.nSet = 1;
+
+                int Rx2SNBState = Convert.ToInt16(commands.ZZNO(""));
+
+                if (Rx2SNBState == 0)
+                {
+                    commands.ZZNO("1");
+                    return;
+                }
+                if (Rx2SNBState == 1)
+                {
+                    commands.ZZNO("0");
                     return;
                 }
             }

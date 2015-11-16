@@ -34,7 +34,8 @@
     <value>118</value>
   </data>
   <data name="ptbRX2RF.ToolTip" xml:space="preserve">
-    <value>АРУ Макс прибыль - работает аналогично для традиционных прибыль RF</value>
+    <value>Регулирует усиление АРУ для RX2.
+Работает аналогично усилению RF</value>
   </data>
   <data name="lblRX2RF.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value></value>
@@ -55,7 +56,8 @@
     <value>MiddleLeft</value>
   </data>
   <data name="lblRX2RF.ToolTip" xml:space="preserve">
-    <value>АРУ Макс прибыль/порог - работает аналогично для традиционных прибыль RF</value>
+    <value>Регулирует усиление и порог срабатывания АРУ для RX2. 
+Работает аналогично усилению RF</value>
   </data>
   <data name="chkRX2Squelch.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -79,7 +81,7 @@
     <value>98</value>
   </data>
   <data name="chkRX2Squelch.ToolTip" xml:space="preserve">
-    <value>Включение подавления</value>
+    <value>Включает пороговый шумоподавитель для RX2</value>
   </data>
   <data name="chkRX2Mute.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -109,7 +111,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkRX2Mute.ToolTip" xml:space="preserve">
-    <value>Выключить - выключает вывод громкоговорителя.</value>
+    <value>Выключает звук RX2 на аудиовыход трансивера</value>
   </data>
   <data name="chkRX2NB2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -139,7 +141,8 @@
     <value>TopCenter</value>
   </data>
   <data name="chkRX2NB2.ToolTip" xml:space="preserve">
-    <value>Интерполирует Blanker шум</value>
+    <value>Включает SNB 
+(спектральный подавитель импульсных помех) для RX2</value>
   </data>
   <data name="chkRX2NR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -169,7 +172,8 @@
     <value>TopCenter</value>
   </data>
   <data name="chkRX2NR.ToolTip" xml:space="preserve">
-    <value>Снижение шума</value>
+    <value>Включает шумоподавитель эфирного шума для RX2. 
+NR - стандартный. NR2 - обновленный</value>
   </data>
   <data name="chkRX2NB.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -199,7 +203,8 @@
     <value>TopCenter</value>
   </data>
   <data name="chkRX2NB.ToolTip" xml:space="preserve">
-    <value>Blanker шум</value>
+    <value>Включает подавитель импульсных помех для RX2. 
+Используется два режима: NB или NB2</value>
   </data>
   <data name="lblRX2AGC.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value></value>
@@ -220,7 +225,7 @@
     <value>MiddleLeft</value>
   </data>
   <data name="lblRX2AGC.ToolTip" xml:space="preserve">
-    <value>Режим АРУ</value>
+    <value>Выбирает режима АРУ для приемника RX2</value>
   </data>
   <data name="chkRX2ANF.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -250,7 +255,7 @@
     <value>TopCenter</value>
   </data>
   <data name="chkRX2ANF.ToolTip" xml:space="preserve">
-    <value>Автоматическое деление фильтра</value>
+    <value>Включает автоматический нотч фильтр для RX2</value>
   </data>
   <data name="comboRX2AGC.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -265,7 +270,7 @@
     <value>94</value>
   </data>
   <data name="comboRX2AGC.ToolTip" xml:space="preserve">
-    <value>Режим управления регулятор уровня микрофона</value>
+    <value>Автоматическое управление уровнем микрофона</value>
   </data>
   <data name="chkRX2BIN.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -295,7 +300,7 @@
     <value>TopCenter</value>
   </data>
   <data name="chkRX2BIN.ToolTip" xml:space="preserve">
-    <value>Binaural - выводит I и Q для левого и правого звуковых каналов.</value>
+    <value>Включает режим псевдостерео</value>
   </data>
   <data name="ckQuickPlay.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -328,7 +333,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="ckQuickPlay.ToolTip" xml:space="preserve">
-    <value>Записанные быстрого воспроизведения сигналов «off air»</value>
+    <value>Воспроизведение записи из речевого магнитофона</value>
   </data>
   <data name="chkMON.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -358,7 +363,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkMON.ToolTip" xml:space="preserve">
-    <value>Монитор - поддержкой аудио TX приходят через динамики.</value>
+    <value>Включает самопрослушивание</value>
   </data>
   <data name="ckQuickRec.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -388,7 +393,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="ckQuickRec.ToolTip" xml:space="preserve">
-    <value>Быстрая запись «off воздух» сигналы</value>
+    <value>Включает запись речевого магнитофона</value>
   </data>
   <data name="chkRX2SR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -418,7 +423,8 @@
     <value>TopCenter</value>
   </data>
   <data name="chkRX2SR.ToolTip" xml:space="preserve">
-    <value>Получение изображения на MOX.</value>
+    <value>Отображать свой сигнал на экране 
+в режиме передачи</value>
   </data>
   <data name="chkMOX.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -451,7 +457,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkMOX.ToolTip" xml:space="preserve">
-    <value>Передачи - нажмите для циклического переключения режимов RX и TX.</value>
+    <value>Включает/выключает режим передачи трансивера</value>
   </data>
   <data name="chkTUN.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -484,7 +490,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkTUN.ToolTip" xml:space="preserve">
-    <value>Этот элемент управления выводит постоянной тона с помощью сохраненного PWR установка (регулируемой при активном TUN).</value>
+    <value>Включает несущую (тон) в режиме передачи. 
+Выходная мощность регулируется ручкой Drive</value>
   </data>
   <data name="chkSR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -514,7 +521,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkSR.ToolTip" xml:space="preserve">
-    <value>Alex автоматического и ручного управления</value>
+    <value>Включает автоматическое 
+nили ручное управление ФВЧ, ФНЧ, УМ</value>
   </data>
   <data name="comboTuneMode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -532,7 +540,7 @@
     <value>38</value>
   </data>
   <data name="comboTuneMode.ToolTip" xml:space="preserve">
-    <value>Режим работы ATU</value>
+    <value>blank</value>
   </data>
   <data name="comboTuneMode.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -565,7 +573,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkX2TR.ToolTip" xml:space="preserve">
-    <value>Позволяет нажмите кнопку Настройка перетаскивания для RX2</value>
+    <value>Фиксирует панораму/водопад для перемещения 
+nтолько курсора фильтра в RX2</value>
   </data>
   <data name="chkFWCATUBypass.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -595,7 +604,7 @@
     <value>TopCenter</value>
   </data>
   <data name="chkFWCATUBypass.ToolTip" xml:space="preserve">
-    <value>Щелкните, чтобы обойти ATU</value>
+    <value>Включает обход ATU</value>
   </data>
   <data name="chkFWCATU.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -625,7 +634,8 @@
     <value>TopCenter</value>
   </data>
   <data name="chkFWCATU.ToolTip" xml:space="preserve">
-    <value>Щелкните Настройка позволяет перетаскивать Tunig для RX1</value>
+    <value>Фиксирует панораму/водопад для перемещения 
+только курсора фильтра в RX1</value>
   </data>
   <data name="comboRX2Band.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -643,7 +653,7 @@
     <value>110</value>
   </data>
   <data name="comboRX2Band.ToolTip" xml:space="preserve">
-    <value>Выбор режима отображения</value>
+    <value>Выбирает диапазон для приемника RX2</value>
   </data>
   <data name="chkRX2Preamp.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -670,7 +680,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkRX2Preamp.ToolTip" xml:space="preserve">
-    <value>Включает аттенюатор RX2 Вкл/Выкл</value>
+    <value>Управляет затуханием аттенюатора приемника RX2</value>
   </data>
   <data name="chkRX2Preamp.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -700,7 +710,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkPower.ToolTip" xml:space="preserve">
-    <value>Включите радио или выключить.</value>
+    <value>Включает/Выключает Радио</value>
   </data>
   <data name="ptbFilterShift.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -724,7 +734,8 @@
     <value>108</value>
   </data>
   <data name="ptbFilterShift.ToolTip" xml:space="preserve">
-    <value>Сдвигает фильтр вверх или вниз диапазон с помощью ползунка.</value>
+    <value>Сдвигает фильтр относительно 
+основной частоты приема</value>
   </data>
   <data name="ptbFilterWidth.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -748,7 +759,8 @@
     <value>114</value>
   </data>
   <data name="ptbFilterWidth.ToolTip" xml:space="preserve">
-    <value>Расширяет или контракты ширина фильтра с помощью ползунка.</value>
+    <value>Изменяет ширину фильтра относительно 
+основной частоты</value>
   </data>
   <data name="btnFilterShiftReset.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -772,7 +784,7 @@
     <value>50</value>
   </data>
   <data name="btnFilterShiftReset.ToolTip" xml:space="preserve">
-    <value>Сброс Если Shift по центру (0) положение.</value>
+    <value>Сбрасывает сдвиг фильтра</value>
   </data>
   <data name="udFilterHigh.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -793,7 +805,7 @@
     <value>Right</value>
   </data>
   <data name="udFilterHigh.ToolTip" xml:space="preserve">
-    <value>Высокая фильтра</value>
+    <value>Управляет верхней границей фильтра для RX1</value>
   </data>
   <data name="udFilterLow.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -814,7 +826,7 @@
     <value>Right</value>
   </data>
   <data name="udFilterLow.ToolTip" xml:space="preserve">
-    <value>Низкий фильтр</value>
+    <value>Управляет нижней границей фильтра для RX1</value>
   </data>
   <data name="ptbCWSpeed.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -838,7 +850,8 @@
     <value>115</value>
   </data>
   <data name="ptbCWSpeed.ToolTip" xml:space="preserve">
-    <value>Задает скорость Вт в WPM</value>
+    <value>Устанавливает скорость телеграфа
+в словах за минуту</value>
   </data>
   <data name="udCWPitch.Location" type="System.Drawing.Point, System.Drawing">
     <value>265, 138</value>
@@ -850,7 +863,7 @@
     <value>7</value>
   </data>
   <data name="udCWPitch.ToolTip" xml:space="preserve">
-    <value>Выбор частоты тона во вт.</value>
+    <value>Выбрает частоту CW тона</value>
   </data>
   <data name="udCWBreakInDelay.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 16</value>
@@ -865,7 +878,8 @@
     <value>Right</value>
   </data>
   <data name="udCWBreakInDelay.ToolTip" xml:space="preserve">
-    <value>Количество времени, чтобы остаться в Техас после последнего обнаружил сигнала во вт.</value>
+    <value>Выбирает период времени нахождения в режиме передачи, 
+после прихода последней телеграфного посыла</value>
   </data>
   <data name="chkCWBreakInEnabled.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -886,7 +900,7 @@
     <value>36</value>
   </data>
   <data name="chkCWBreakInEnabled.ToolTip" xml:space="preserve">
-    <value>Позволяет Semi прервать операцию.</value>
+    <value>Позволяет Semi прервать операцию</value>
   </data>
   <data name="chkShowTXCWFreq.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value></value>
@@ -904,7 +918,8 @@
     <value>76</value>
   </data>
   <data name="chkShowTXCWFreq.ToolTip" xml:space="preserve">
-    <value>Представляет фильтр TX на экране в режиме Panadapter</value>
+    <value>Отображает границы фильтра передачи 
+в режиме Панадаптер</value>
   </data>
   <data name="chkCWIambic.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -925,7 +940,7 @@
     <value>72</value>
   </data>
   <data name="chkCWIambic.ToolTip" xml:space="preserve">
-    <value>Iambic или внешние и ошибок ключа?</value>
+    <value>Включает ямбический ключ</value>
   </data>
   <data name="udRX2FilterHigh.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -940,7 +955,7 @@
     <value>45</value>
   </data>
   <data name="udRX2FilterHigh.ToolTip" xml:space="preserve">
-    <value>Отсечка высокой фильтр</value>
+    <value>Управляет верхней границей фильтра RX2</value>
   </data>
   <data name="udRX2FilterLow.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -955,7 +970,7 @@
     <value>26</value>
   </data>
   <data name="udRX2FilterLow.ToolTip" xml:space="preserve">
-    <value>Отсечка низкий фильтр</value>
+    <value>Управляет нижней границей фильтра RX2</value>
   </data>
   <data name="radRX2ModeAM.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -985,7 +1000,7 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeAM.ToolTip" xml:space="preserve">
-    <value>Амплитудная модуляция</value>
+    <value>Амплитудная модуляция для RX2</value>
   </data>
   <data name="radRX2ModeLSB.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1015,7 +1030,7 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeLSB.ToolTip" xml:space="preserve">
-    <value>Ниже другие</value>
+    <value>Нижняя боковая полоса для RX2</value>
   </data>
   <data name="radRX2ModeSAM.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1045,7 +1060,8 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeSAM.ToolTip" xml:space="preserve">
-    <value>Синхронные амплитуда модуляции (синхронизация только RX)</value>
+    <value>Синхронное детектирование 
+амплитудной модуляции для RX2</value>
   </data>
   <data name="radRX2ModeCWL.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1075,7 +1091,7 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeCWL.ToolTip" xml:space="preserve">
-    <value>Другие нижнего во вт.</value>
+    <value>Телеграф со сдвигом вниз для RX2</value>
   </data>
   <data name="radRX2ModeDSB.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1105,7 +1121,8 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeDSB.ToolTip" xml:space="preserve">
-    <value>Двойные другие</value>
+    <value>Одновременный прием верхней и нижней 
+боковой полосы для RX2</value>
   </data>
   <data name="radRX2ModeUSB.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1135,7 +1152,7 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeUSB.ToolTip" xml:space="preserve">
-    <value>Другие верхней</value>
+    <value>Верхняя боковая полоса для RX2</value>
   </data>
   <data name="radRX2ModeCWU.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1165,7 +1182,7 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeCWU.ToolTip" xml:space="preserve">
-    <value>Другие верхней во вт.</value>
+    <value>Телеграф со сдвигом вверх для RX2</value>
   </data>
   <data name="radRX2ModeFMN.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1195,7 +1212,7 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeFMN.ToolTip" xml:space="preserve">
-    <value>Узкая Частотная модуляция</value>
+    <value>Узкополосная Частотная модуляция для RX2</value>
   </data>
   <data name="radRX2ModeDIGU.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1225,7 +1242,8 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeDIGU.ToolTip" xml:space="preserve">
-    <value>Другие верхней цифровой режим</value>
+    <value>Цифровые виды связи 
+с верхней боковой полосой для RX2</value>
   </data>
   <data name="radRX2ModeDRM.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1255,7 +1273,9 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeDRM.ToolTip" xml:space="preserve">
-    <value>Цифровое радио Mondiale (только--фильтрацию внешнего программного обеспечения)</value>
+    <value>Цифровое радиовещание DRM 
+(только фильтрация для вывода 
+на внешние программное обеспечение) для RX2</value>
   </data>
   <data name="radRX2ModeDIGL.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1285,7 +1305,8 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeDIGL.ToolTip" xml:space="preserve">
-    <value>Другие нижней цифровой режим</value>
+    <value>Цифровые виды связи 
+с нижней боковой полосой для RX2</value>
   </data>
   <data name="radRX2ModeSPEC.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1318,7 +1339,8 @@
     <value>TopCenter</value>
   </data>
   <data name="radRX2ModeSPEC.ToolTip" xml:space="preserve">
-    <value>Спектр режиме (полный пример нефильтрованный ставка)</value>
+    <value>Выдает не фильтрованный сигнал 
+для внешних программ, таких как LinRad для RX2</value>
   </data>
   <data name="chkRX2DisplayPeak.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1348,7 +1370,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkRX2DisplayPeak.ToolTip" xml:space="preserve">
-    <value>Удерживайте пик - Отображение большого сигнала на ячейку при этой функции.</value>
+    <value>Включает фиксацию на экране 
+самых мощных сигналов на панораме для RX2</value>
   </data>
   <data name="comboRX2DisplayMode.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1363,7 +1386,7 @@
     <value>13</value>
   </data>
   <data name="comboRX2DisplayMode.ToolTip" xml:space="preserve">
-    <value>Выбор режима отображения</value>
+    <value>Выбирает режим отображения для RX2</value>
   </data>
   <data name="chkPanSwap.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1393,7 +1416,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkPanSwap.ToolTip" xml:space="preserve">
-    <value>Замените L в смысле R сдвиг элементов управления.</value>
+    <value>Меняет левый и правый каналы</value>
   </data>
   <data name="chkEnableMultiRX.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1423,7 +1446,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkEnableMultiRX.ToolTip" xml:space="preserve">
-    <value>Включает приемник sub, контролируются б VFO.</value>
+    <value>Включает дополнительный приемник в RX1. 
+Переключается двойным кликом на панадаптере</value>
   </data>
   <data name="chkDisplayPeak.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1450,7 +1474,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkDisplayPeak.ToolTip" xml:space="preserve">
-    <value>Удерживайте пик - Отображение большого сигнала на ячейку при этой функции.</value>
+    <value>Включает фиксацию на экране 
+самых мощных сигналов на панораме для RX1</value>
   </data>
   <data name="comboDisplayMode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -1471,7 +1496,7 @@
     <value>13</value>
   </data>
   <data name="comboDisplayMode.ToolTip" xml:space="preserve">
-    <value>Выбор режима отображения</value>
+    <value>Выбирает режим отображения для RX1</value>
   </data>
   <data name="chkDisplayAVG.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1498,7 +1523,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkDisplayAVG.ToolTip" xml:space="preserve">
-    <value>Среднее - отображать сигнал среднего времени.</value>
+    <value>Усредняет отображаемые сигналы на панораме RX1</value>
   </data>
   <data name="chkNR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1528,7 +1553,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkNR.ToolTip" xml:space="preserve">
-    <value>Снижение шума</value>
+    <value>Включает шумоподавитель снижение эфирного шума для RX1. 
+NR - стандартный. NR2 - обновленный</value>
   </data>
   <data name="chkDSPNB2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1561,7 +1587,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkDSPNB2.ToolTip" xml:space="preserve">
-    <value>Интерполирует Blanker шум</value>
+    <value>Включает SNB 
+(спектральный подавитель импульсных помех) для RX1</value>
   </data>
   <data name="chkBIN.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1591,7 +1618,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkBIN.ToolTip" xml:space="preserve">
-    <value>Binaural - выводит I и Q для левого и правого звуковых каналов.</value>
+    <value>Включает режим псевдостерео</value>
   </data>
   <data name="chkNB.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1621,7 +1648,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkNB.ToolTip" xml:space="preserve">
-    <value>Blanker шум</value>
+    <value>Включает подавитель импульсных помех для RX1. 
+Используется два режима: NB или NB2</value>
   </data>
   <data name="chkANF.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1651,7 +1679,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkANF.ToolTip" xml:space="preserve">
-    <value>Автоматическое деление фильтра</value>
+    <value>Включает автоматический нотч фильтр для RX1</value>
   </data>
   <data name="btnZeroBeat.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1675,7 +1703,9 @@
     <value>63</value>
   </data>
   <data name="btnZeroBeat.ToolTip" xml:space="preserve">
-    <value>Переместите VFO 0 борьбы наибольшее сигнал на дисплей.  Требуется отобразить в режиме AVG.</value>
+    <value>Настраивает приемник на самый сильный сигнал 
+в пределах границ фильтра. 
+Работает только при включении режима AVG</value>
   </data>
   <data name="chkVFOSplit.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1705,7 +1735,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkVFOSplit.ToolTip" xml:space="preserve">
-    <value>Раздельный режим - используйте VFO B частоты Передачи.</value>
+    <value> Включает режим Split.  
+На передачу используется VFO B</value>
   </data>
   <data name="btnRITReset.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1726,7 +1757,7 @@
     <value>62</value>
   </data>
   <data name="btnRITReset.ToolTip" xml:space="preserve">
-    <value>Очистить RIT</value>
+    <value>Сбрасывает расстройку приемника - RIT</value>
   </data>
   <data name="btnXITReset.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1747,7 +1778,7 @@
     <value>61</value>
   </data>
   <data name="btnXITReset.ToolTip" xml:space="preserve">
-    <value>Очистить ЫХОД</value>
+    <value>Сбрасывает расстройку передатчика - XIT</value>
   </data>
   <data name="udRIT.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 103</value>
@@ -1759,7 +1790,8 @@
     <value>35</value>
   </data>
   <data name="udRIT.ToolTip" xml:space="preserve">
-    <value>RIT значение смещения получать частота в Гц при работе над кнопкой активен.</value>
+    <value>Задает расстройку частоты приемника (Гц). 
+Работает только при включении кнопки RIT</value>
   </data>
   <data name="btnIFtoVFO.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1783,7 +1815,7 @@
     <value>5</value>
   </data>
   <data name="btnIFtoVFO.ToolTip" xml:space="preserve">
-    <value>Копирование текущего IF VFO</value>
+    <value>blank</value>
   </data>
   <data name="chkRIT.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1810,7 +1842,9 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkRIT.ToolTip" xml:space="preserve">
-    <value>Получите настройки добавочного - смещения частоты ПРИЕМА по значению ниже Гц.</value>
+    <value>Включает расстройку на прием. 
+Смещение частоты ПРИЕМА 
+задается в отдельном окне ниже</value>
   </data>
   <data name="btnVFOSwap.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1834,7 +1868,7 @@
     <value>4</value>
   </data>
   <data name="btnVFOSwap.ToolTip" xml:space="preserve">
-    <value>Замена VFO A с VFO B</value>
+    <value>Меняет местами частоты VFO A и VFO B</value>
   </data>
   <data name="chkXIT.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1861,7 +1895,9 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkXIT.ToolTip" xml:space="preserve">
-    <value>Передайте добавочные настройки - частота смещение Передачи по значению ниже в Гц.</value>
+    <value>Включает расстройку на передачу. 
+Смещение частоты ПЕРЕДАЧИ 
+задается в отдельном окне ниже</value>
   </data>
   <data name="btnVFOBtoA.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1885,7 +1921,7 @@
     <value>3</value>
   </data>
   <data name="btnVFOBtoA.ToolTip" xml:space="preserve">
-    <value>Скопируйте VFO B VFO A</value>
+    <value>Копирует частоту VFO B в VFO A</value>
   </data>
   <data name="udXIT.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 103</value>
@@ -1897,7 +1933,8 @@
     <value>29</value>
   </data>
   <data name="udXIT.ToolTip" xml:space="preserve">
-    <value>Значение смещения XIT передачи частота в Гц при работе над кнопкой активен.</value>
+    <value>Задает расстройку частоты передатчика в Гц. 
+Работает только при включении кнопки XIT</value>
   </data>
   <data name="btnVFOAtoB.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1921,7 +1958,7 @@
     <value>2</value>
   </data>
   <data name="btnVFOAtoB.ToolTip" xml:space="preserve">
-    <value>Копировать VFO A к VFO B</value>
+    <value>Копирует частоту VFO A в VFO B</value>
   </data>
   <data name="chkRX1Preamp.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1951,7 +1988,7 @@
     <value>TopCenter</value>
   </data>
   <data name="chkRX1Preamp.ToolTip" xml:space="preserve">
-    <value>Включает Preamp RX1 Вкл/Выкл</value>
+    <value>Включает предусилитель для приемника RX1</value>
   </data>
   <data name="chkRX1Preamp.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1969,7 +2006,7 @@
     <value>31</value>
   </data>
   <data name="comboAGC.ToolTip" xml:space="preserve">
-    <value>Режим управления регулятор уровня микрофона</value>
+    <value>Автоматическое управление уровнем микрофона</value>
   </data>
   <data name="lblAGC.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value></value>
@@ -1990,7 +2027,7 @@
     <value>TopCenter</value>
   </data>
   <data name="lblAGC.ToolTip" xml:space="preserve">
-    <value>Режим АРУ</value>
+    <value>Выбирает режим для АРУ для RX1</value>
   </data>
   <data name="comboPreamp.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2005,7 +2042,7 @@
     <value>39</value>
   </data>
   <data name="comboPreamp.ToolTip" xml:space="preserve">
-    <value>Параметр аттенюатор</value>
+    <value>Управляет затуханием аттенюатора</value>
   </data>
   <data name="lblRF.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value></value>
@@ -2026,7 +2063,8 @@
     <value>MiddleLeft</value>
   </data>
   <data name="lblRF.ToolTip" xml:space="preserve">
-    <value>АРУ Макс прибыль/порог - работает аналогично для традиционных прибыль RF</value>
+    <value>Регулирует усиление и порог срабатывания АРУ. 
+Работает аналогично усилению RF</value>
   </data>
   <data name="chkShowTXFilter.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2056,7 +2094,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkShowTXFilter.ToolTip" xml:space="preserve">
-    <value>Представляет фильтр TX на экране в режиме Panadapter</value>
+    <value>Отображает фильтр передачи в режиме Panadapter</value>
   </data>
   <data name="chkDX.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2086,7 +2124,10 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkDX.ToolTip" xml:space="preserve">
-    <value>Разнообразие позволяет стерео</value>
+    <value>Включение приемников RX1 и RX2 в стереорежиме. 
+Изначально синхронизуйте приемники! 
+RX1 будет звучать в левом, а RX2 в правом канале. 
+Работает только с трансиверами ANAN 100D или 200D</value>
   </data>
   <data name="chkDX.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2119,7 +2160,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkTXEQ.ToolTip" xml:space="preserve">
-    <value>TX EQ включена</value>
+    <value>Включает эквалайзер на передачу</value>
   </data>
   <data name="comboTXProfile.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2134,7 +2175,8 @@
     <value>0</value>
   </data>
   <data name="comboTXProfile.ToolTip" xml:space="preserve">
-    <value>Задает профиль передачи (PWR, EQ, вход для Микрофона, CPDR, и т.д.)</value>
+    <value>Выбирает ранее сохраненный профиль для передатчика 
+(PWR, EQ, вход для Микрофона)</value>
   </data>
   <data name="chkRXEQ.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2164,7 +2206,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkRXEQ.ToolTip" xml:space="preserve">
-    <value>Включить RX EQ</value>
+    <value>Включает эквалайзер на прием</value>
   </data>
   <data name="chkCPDR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2194,7 +2236,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkCPDR.ToolTip" xml:space="preserve">
-    <value>Включить компрессор</value>
+    <value>Включает компрессор</value>
   </data>
   <data name="chkVAC1.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2224,7 +2266,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkVAC1.ToolTip" xml:space="preserve">
-    <value>Включить VAC1</value>
+    <value>Включает виртуальный аудио кабеля #1</value>
   </data>
   <data name="chkVOX.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2254,7 +2296,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkVOX.ToolTip" xml:space="preserve">
-    <value>Включить голос</value>
+    <value>Включает автоматический переход на передачу от голоса</value>
   </data>
   <data name="chkNoiseGate.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2284,7 +2326,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkNoiseGate.ToolTip" xml:space="preserve">
-    <value>Расширитель вниз - подобных ворота шума, но более гладким</value>
+    <value>Гейт-Экспандер. Подавляет акустический шум 
+попадающего в микрофон</value>
   </data>
   <data name="comboDigTXProfile.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2299,7 +2342,8 @@
     <value>79</value>
   </data>
   <data name="comboDigTXProfile.ToolTip" xml:space="preserve">
-    <value>Задает профиль передачи (PWR, EQ, вход для Микрофона, CPDR, и т.д.)</value>
+    <value>Выбирает ранее сохраненный профиль для передатчика 
+(PWR, EQ, микрофонный вход)</value>
   </data>
   <data name="chkVACStereo.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value></value>
@@ -2317,7 +2361,9 @@
     <value>0</value>
   </data>
   <data name="chkVACStereo.ToolTip" xml:space="preserve">
-    <value>Нажмите эту кнопку, если программное обеспечение сторонних откроется виртуальный аудио кабель в режиме 2 канала (стерео).</value>
+    <value>Нажмите эту кнопку, 
+если требуется отдавать двухканальный звук (стерео) 
+в программное обеспечение сторонних производителей.</value>
   </data>
   <data name="comboVACSampleRate.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2332,7 +2378,9 @@
     <value>60</value>
   </data>
   <data name="comboVACSampleRate.ToolTip" xml:space="preserve">
-    <value>Сэмплов в секунду.  Установите в соответствии с программное обеспечение сторонних производителей.</value>
+    <value>Устанавливает частоту семплирования 
+идентичную частоте в программном обеспечении
+сторонних производителей.</value>
   </data>
   <data name="btnDisplayPanCenter.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -2359,7 +2407,8 @@
     <value>TopCenter</value>
   </data>
   <data name="btnDisplayPanCenter.ToolTip" xml:space="preserve">
-    <value>Центр управления Pan</value>
+    <value>Устанавливает панораму обзора
+по центру экрана</value>
   </data>
   <data name="radModeAM.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2389,7 +2438,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeAM.ToolTip" xml:space="preserve">
-    <value>Амплитудная модуляция</value>
+    <value>Амплитудная модуляция для RX1</value>
   </data>
   <data name="radModeLSB.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2419,7 +2468,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeLSB.ToolTip" xml:space="preserve">
-    <value>Ниже другие</value>
+    <value>Нижняя боковая полоса для RX1</value>
   </data>
   <data name="radModeSAM.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2449,7 +2498,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeSAM.ToolTip" xml:space="preserve">
-    <value>Синхронные амплитуда модуляции (синхронизация только RX)</value>
+    <value>Синхронное детектирование
+амплитудной модуляции для RX1</value>
   </data>
   <data name="radModeCWL.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2479,7 +2529,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeCWL.ToolTip" xml:space="preserve">
-    <value>Другие нижнего во вт.</value>
+    <value>Телеграф со сдвигом вниз для RX1</value>
   </data>
   <data name="radModeDSB.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2509,7 +2559,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeDSB.ToolTip" xml:space="preserve">
-    <value>Двойные другие</value>
+    <value>Одновременный прием верхней и нижней
+боковой полосы для RX1</value>
   </data>
   <data name="radModeUSB.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2539,7 +2590,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeUSB.ToolTip" xml:space="preserve">
-    <value>Другие верхней</value>
+    <value>Верхняя боковая полоса для RX1</value>
   </data>
   <data name="radModeCWU.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2569,7 +2620,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeCWU.ToolTip" xml:space="preserve">
-    <value>Другие верхней во вт.</value>
+    <value>Телеграф со сдвигом вверх для RX1</value>
   </data>
   <data name="radModeFMN.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2599,7 +2650,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeFMN.ToolTip" xml:space="preserve">
-    <value>Узкая Частотная модуляция</value>
+    <value>Узкополосная частотная модуляция для RX1</value>
   </data>
   <data name="radModeDIGU.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2629,7 +2680,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeDIGU.ToolTip" xml:space="preserve">
-    <value>Другие верхней цифровой режим</value>
+    <value>Цифровые виды связи
+с верхней боковой полосой для RX1</value>
   </data>
   <data name="radModeDRM.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2659,7 +2711,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeDRM.ToolTip" xml:space="preserve">
-    <value>Цифровое радио Mondiale (только--фильтрацию внешнего программного обеспечения)</value>
+    <value>Цифровое радиовещание DRM 
+(только фильтрация для вывода на внешнее программное обеспечение) для RX1</value>
   </data>
   <data name="radModeDIGL.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2689,7 +2742,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeDIGL.ToolTip" xml:space="preserve">
-    <value>Другие нижней цифровой режим</value>
+    <value>Цифровые виды
+связи с нижней боковой полосой для RX1</value>
   </data>
   <data name="radModeSPEC.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2719,7 +2773,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radModeSPEC.ToolTip" xml:space="preserve">
-    <value>Спектр режиме (полный пример нефильтрованный ставка)</value>
+    <value>Выдает не фильтрованный сигнал
+для внешних программ, таких как LinRad</value>
   </data>
   <data name="btnBandVHF.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -2743,7 +2798,8 @@
     <value>27</value>
   </data>
   <data name="btnBandVHF.ToolTip" xml:space="preserve">
-    <value>Переключиться на ОВЧ + полосы (определяется в форме XVTR)</value>
+    <value>УКВ диапазоны
+(определяется в меню XVTRs) для RX1</value>
   </data>
   <data name="chkVFOATX.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2770,7 +2826,7 @@
     <value>120</value>
   </data>
   <data name="chkVFOATX.ToolTip" xml:space="preserve">
-    <value>Передачи на частоте VFO A</value>
+    <value>Передача на частоте VFO A</value>
   </data>
   <data name="txtWheelTune.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -2785,7 +2841,7 @@
     <value>15</value>
   </data>
   <data name="txtWheelTune.ToolTip" xml:space="preserve">
-    <value>Сумма для настройки при повороте колесика мыши.</value>
+    <value>Шаг настройки при использовании колеса мышки</value>
   </data>
   <data name="chkVFOBTX.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2812,7 +2868,7 @@
     <value>119</value>
   </data>
   <data name="chkVFOBTX.ToolTip" xml:space="preserve">
-    <value>Передачи на частоте VFO B</value>
+    <value>Передача на частоте VFO B</value>
   </data>
   <data name="comboMeterTXMode.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2830,7 +2886,8 @@
     <value>62</value>
   </data>
   <data name="comboMeterTXMode.ToolTip" xml:space="preserve">
-    <value>Выбор режима multimeter</value>
+    <value>Выбор режима показаний мультиметра 
+для ПЕРЕДАТЧИКА</value>
   </data>
   <data name="comboMeterRXMode.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2845,7 +2902,8 @@
     <value>3</value>
   </data>
   <data name="comboMeterRXMode.ToolTip" xml:space="preserve">
-    <value>Выбор режима multimeter</value>
+    <value>Выбор режима показаний мультиметра
+для ПРИЕМНИКА RX1</value>
   </data>
   <data name="chkSquelch.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2872,7 +2930,7 @@
     <value>61</value>
   </data>
   <data name="chkSquelch.ToolTip" xml:space="preserve">
-    <value>Включение подавления</value>
+    <value>Включает пороговый шумоподавитель для RX1</value>
   </data>
   <data name="btnMemoryQuickRestore.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -2896,7 +2954,8 @@
     <value>76</value>
   </data>
   <data name="btnMemoryQuickRestore.ToolTip" xml:space="preserve">
-    <value>Быстрое восстановление (Freq фильтр, режим)</value>
+    <value>Извлекает предустановки из быстрой памяти:
+Частота, Модуляция, Фильтры</value>
   </data>
   <data name="btnMemoryQuickSave.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -2923,7 +2982,8 @@
     <value>TopCenter</value>
   </data>
   <data name="btnMemoryQuickSave.ToolTip" xml:space="preserve">
-    <value>Быстрое сохранение (Freq фильтр, режим)</value>
+    <value>Сохраняет предустановки в быструю память:
+Частота, Модуляция, Фильтры</value>
   </data>
   <data name="txtMemoryQuick.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 61</value>
@@ -2935,7 +2995,8 @@
     <value>74</value>
   </data>
   <data name="txtMemoryQuick.ToolTip" xml:space="preserve">
-    <value>Быстрое сохранение частоты</value>
+    <value>Отображает сохраненную частоту
+в быстрой памяти</value>
   </data>
   <data name="chkVFOLock.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2968,7 +3029,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkVFOLock.ToolTip" xml:space="preserve">
-    <value>Предотвращает VFO изменения в середине QSO.</value>
+    <value>Включает защиту от изменений
+частоты и модуляции</value>
   </data>
   <data name="chkVFOSync.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2998,7 +3060,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkVFOSync.ToolTip" xml:space="preserve">
-    <value>Синхронизирует VFO A и VFO B частота вместе (изменение одного изменения в другой автоматически)</value>
+    <value>Включает автоматическую синхронизацию частоты VFO A и VFO B
+(изменение в любом VFO автоматически синхронизируются)</value>
   </data>
   <data name="chkFullDuplex.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3028,7 +3091,7 @@
     <value>TopCenter</value>
   </data>
   <data name="chkFullDuplex.ToolTip" xml:space="preserve">
-    <value>Работает оборудование в полнодуплексном режиме</value>
+    <value>blank</value>
   </data>
   <data name="chkFullDuplex.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3055,7 +3118,7 @@
     <value>78</value>
   </data>
   <data name="btnTuneStepChangeLarger.ToolTip" xml:space="preserve">
-    <value>Изменить следующий больший шаг настройки</value>
+    <value>Увеличение шага перестройки</value>
   </data>
   <data name="btnTuneStepChangeSmaller.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -3079,7 +3142,7 @@
     <value>77</value>
   </data>
   <data name="btnTuneStepChangeSmaller.ToolTip" xml:space="preserve">
-    <value>Изменить на следующий этап настройки меньшего размера</value>
+    <value>Уменьшение шага перестройки</value>
   </data>
   <data name="chkSplitDisplay.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3103,7 +3166,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkSplitDisplay.ToolTip" xml:space="preserve">
-    <value>Раздельный режим - используйте VFO B частоты Передачи.</value>
+    <value>Включает режим Split. 
+Передача с помощью VFO B</value>
   </data>
   <data name="comboDisplayModeTop.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -3118,7 +3182,7 @@
     <value>79</value>
   </data>
   <data name="comboDisplayModeTop.ToolTip" xml:space="preserve">
-    <value>Выбор режима отображения</value>
+    <value>Выбирает режим отображения для RX1</value>
   </data>
   <data name="comboDisplayModeBottom.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -3133,7 +3197,7 @@
     <value>80</value>
   </data>
   <data name="comboDisplayModeBottom.ToolTip" xml:space="preserve">
-    <value>Выбор режима отображения</value>
+    <value>Выбирает режим отображения для RX1</value>
   </data>
   <data name="comboRX2MeterMode.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -3148,7 +3212,7 @@
     <value>3</value>
   </data>
   <data name="comboRX2MeterMode.ToolTip" xml:space="preserve">
-    <value>Выбор режима multimeter</value>
+    <value>Выбирает режим мультиметра для RX2</value>
   </data>
   <data name="chkRX2DisplayAVG.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3178,7 +3242,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkRX2DisplayAVG.ToolTip" xml:space="preserve">
-    <value>Среднее - отображать сигнал среднего времени.</value>
+    <value>Включает режим усреднения уровня сигналов
+отображаемых на панораме для RX2</value>
   </data>
   <data name="radBand160.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3208,7 +3273,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand160.ToolTip" xml:space="preserve">
-    <value>160 метров (1.8-2.0 МГц)</value>
+    <value>Диапазон 160 метров (1.8-2.0 МГц)</value>
   </data>
   <data name="radBandGEN.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3238,7 +3303,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBandGEN.ToolTip" xml:space="preserve">
-    <value>Все частоты, не рассматриваются в других режимах.</value>
+    <value>Частоты не входящие в радиолюбительские</value>
   </data>
   <data name="radBandWWV.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3268,7 +3333,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBandWWV.ToolTip" xml:space="preserve">
-    <value>WWV (2.5, 5, 10, 15 и 20 МГц) </value>
+    <value>Cтанции эталонного времени
+(2.5, 5, 10, 15 и 20 МГц)</value>
   </data>
   <data name="radBand2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3301,7 +3367,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand2.ToolTip" xml:space="preserve">
-    <value>2 м (144-148 МГц) Обратите внимание, что DEMI FlexRadio продает только крышки до 146 МГц</value>
+    <value>Диапазон 2 метра (144-148 МГц)</value>
   </data>
   <data name="radBand6.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3331,7 +3397,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand6.ToolTip" xml:space="preserve">
-    <value>6 метров (50,0-54.0 МГц)</value>
+    <value>Диапазон 6 метров (50,0-54.0 МГц)</value>
   </data>
   <data name="radBand10.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3361,7 +3427,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand10.ToolTip" xml:space="preserve">
-    <value>10 метров (28,0-29,7 МГц)</value>
+    <value>Диапазон 10 метров (28,0-29,7 МГц)</value>
   </data>
   <data name="radBand12.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3391,7 +3457,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand12.ToolTip" xml:space="preserve">
-    <value>12 метров (24.89-24.99 МГц)</value>
+    <value>Диапазон 12 метров (24.89-24.99 МГц)</value>
   </data>
   <data name="radBand15.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3421,7 +3487,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand15.ToolTip" xml:space="preserve">
-    <value>15 метров (21.0-21.45 МГц)</value>
+    <value>Диапазон 15 метров (21.0-21.45 МГц)</value>
   </data>
   <data name="radBand17.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3451,7 +3517,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand17.ToolTip" xml:space="preserve">
-    <value>17 метров (18.068-18.168 МГц)</value>
+    <value>Диапазон 17 метров (18.068-18.168 МГц)</value>
   </data>
   <data name="radBand20.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3481,7 +3547,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand20.ToolTip" xml:space="preserve">
-    <value>20 метров (14.0-14.35 МГц)</value>
+    <value>Диапазон 20 метров (14.0-14.35 МГц)</value>
   </data>
   <data name="radBand30.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3511,7 +3577,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand30.ToolTip" xml:space="preserve">
-    <value>30 метров (10.1-10.15 МГц)</value>
+    <value>Диапазон 30 метров (10.1-10.15 МГц)</value>
   </data>
   <data name="radBand40.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3541,7 +3607,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand40.ToolTip" xml:space="preserve">
-    <value>40 м (7.0-7.3 МГц)</value>
+    <value>Диапазон 40 метров (7.0-7.2 МГц)</value>
   </data>
   <data name="radBand60.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3571,7 +3637,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand60.ToolTip" xml:space="preserve">
-    <value>Канальный 60 метров</value>
+    <value>Диапазон 60 метров</value>
   </data>
   <data name="radBand80.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3601,7 +3667,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="radBand80.ToolTip" xml:space="preserve">
-    <value>80 метров (3.5-4.0 МГц)</value>
+    <value>Диапазон 80 метров (3.5-3,8 МГц)</value>
   </data>
   <data name="ptbDisplayZoom.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3622,7 +3688,8 @@
     <value>63</value>
   </data>
   <data name="ptbDisplayZoom.ToolTip" xml:space="preserve">
-    <value>Расширяет или контракты Ширина отображаемого частоту с помощью ползунка.</value>
+    <value>Изменяет ширину фильтра
+относительно основной частоты</value>
   </data>
   <data name="ptbDisplayPan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3643,7 +3710,9 @@
     <value>62</value>
   </data>
   <data name="ptbDisplayPan.ToolTip" xml:space="preserve">
-    <value>Сдвигает отображаемого частоту с помощью ползунка.</value>
+    <value>Перемещает обзорную полосу 
+относительно центральной частоты. 
+Не работает при минимальном зумировании</value>
   </data>
   <data name="ptbPWR.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3667,7 +3736,8 @@
     <value>105</value>
   </data>
   <data name="ptbPWR.ToolTip" xml:space="preserve">
-    <value>Передачи диск - это относительное значение, это не означает Вт.</value>
+    <value>Управляет выходной мощностью при передаче.
+Величина относительная и никак не связана с ваттами</value>
   </data>
   <data name="ptbRF.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3691,7 +3761,8 @@
     <value>104</value>
   </data>
   <data name="ptbRF.ToolTip" xml:space="preserve">
-    <value>АРУ Макс прибыль - работает аналогично для традиционных прибыль RF</value>
+    <value>Регулирует усиление АРУ.
+Работает аналогично регулятору усиления RF</value>
   </data>
   <data name="ptbAF.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3715,7 +3786,8 @@
     <value>64</value>
   </data>
   <data name="ptbAF.ToolTip" xml:space="preserve">
-    <value>Прибыль AF - монитор тома для RX/TX</value>
+    <value>Управляет общей громкостью
+на выходе трансивера</value>
   </data>
   <data name="ptbPanMainRX.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3739,7 +3811,8 @@
     <value>116</value>
   </data>
   <data name="ptbPanMainRX.ToolTip" xml:space="preserve">
-    <value>Задает основной получатель в стерео поле слева направо</value>
+    <value>Управляет стереопанорамой
+основного приемника RX1</value>
   </data>
   <data name="ptbPanSubRX.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3763,7 +3836,8 @@
     <value>117</value>
   </data>
   <data name="ptbPanSubRX.ToolTip" xml:space="preserve">
-    <value>Задает Sub получателя в поле «стерео» слева направо</value>
+    <value>Управляет стереопанорамой
+дополнительного приемника Sub</value>
   </data>
   <data name="ptbRX2Gain.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3784,7 +3858,8 @@
     <value>64</value>
   </data>
   <data name="ptbRX2Gain.ToolTip" xml:space="preserve">
-    <value>Аудио прибыли для приемника основного RX2</value>
+    <value>Управляет громкостью
+основного приемника RX2</value>
   </data>
   <data name="ptbRX2Pan.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3805,7 +3880,8 @@
     <value>65</value>
   </data>
   <data name="ptbRX2Pan.ToolTip" xml:space="preserve">
-    <value>Задает основной получатель RX2 стерео поле слева направо</value>
+    <value>Управляет стереопанорамой
+основного приемника RX2</value>
   </data>
   <data name="ptbRX0Gain.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3826,7 +3902,8 @@
     <value>65</value>
   </data>
   <data name="ptbRX0Gain.ToolTip" xml:space="preserve">
-    <value>Аудио прибыли для приемника основного RX1</value>
+    <value>Управляет громкостью
+основного приемника RX1</value>
   </data>
   <data name="ptbRX1Gain.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3847,7 +3924,8 @@
     <value>66</value>
   </data>
   <data name="ptbRX1Gain.ToolTip" xml:space="preserve">
-    <value>Аудио прибыли для приемника sub RX1</value>
+    <value>Управляет громкостью
+дополнительного приемника RX1</value>
   </data>
   <data name="ptbVACRXGain.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3868,7 +3946,8 @@
     <value>64</value>
   </data>
   <data name="ptbVACRXGain.ToolTip" xml:space="preserve">
-    <value>Управляет прибыль применяется к аудио RX перед отправкой приложения сторонних производителей.</value>
+    <value>Управляет уровнем аудио выхода
+перед отправкой в приложение сторонних производителей.</value>
   </data>
   <data name="ptbVACTXGain.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3889,7 +3968,9 @@
     <value>65</value>
   </data>
   <data name="ptbVACTXGain.ToolTip" xml:space="preserve">
-    <value>Управляет прибыли на аудио, поступающих из приложения сторонних производителей.</value>
+    <value>Управление уровнем аудио входа,
+для сигналов поступающих
+из приложений сторонних производителей.</value>
   </data>
   <data name="radDisplayZoom05.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3919,7 +4000,7 @@
     <value>TopCenter</value>
   </data>
   <data name="radDisplayZoom05.ToolTip" xml:space="preserve">
-    <value>Масштабирование до 0,5 x</value>
+    <value>Включает пресет (0.5х)зумирования</value>
   </data>
   <data name="radDisplayZoom4x.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3949,7 +4030,7 @@
     <value>TopCenter</value>
   </data>
   <data name="radDisplayZoom4x.ToolTip" xml:space="preserve">
-    <value>Масштабирование до 4 x</value>
+    <value>Включает пресет (4х) зумирования</value>
   </data>
   <data name="radDisplayZoom2x.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3979,7 +4060,7 @@
     <value>TopCenter</value>
   </data>
   <data name="radDisplayZoom2x.ToolTip" xml:space="preserve">
-    <value>Масштаб 2 x</value>
+    <value>Включает пресет (2х) зумирования</value>
   </data>
   <data name="radDisplayZoom1x.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4009,7 +4090,7 @@
     <value>TopCenter</value>
   </data>
   <data name="radDisplayZoom1x.ToolTip" xml:space="preserve">
-    <value>Масштаб 1 x</value>
+    <value>Включает пресет (1х) зумирования</value>
   </data>
   <data name="chkMicMute.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4039,7 +4120,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkMicMute.ToolTip" xml:space="preserve">
-    <value>Включение микрофона</value>
+    <value>Включает микрофон в трансивере</value>
   </data>
   <data name="chkMUT.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4069,7 +4150,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkMUT.ToolTip" xml:space="preserve">
-    <value>Выключить - выключает вывод громкоговорителя.</value>
+    <value>Выключает звук приемника RX1
+на аудиовыходе трансивера</value>
   </data>
   <data name="chkCWFWKeyer.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value></value>
@@ -4087,7 +4169,8 @@
     <value>118</value>
   </data>
   <data name="chkCWFWKeyer.ToolTip" xml:space="preserve">
-    <value>Разрешает ввод FPGA во вт.</value>
+    <value>Включить телеграфный ключ
+встроенный в трансивер</value>
   </data>
   <data name="chkCWFWKeyer.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -4111,7 +4194,7 @@
     <value>117</value>
   </data>
   <data name="chkShowCWZero.ToolTip" xml:space="preserve">
-    <value>Отображение линии в ноль во вт.</value>
+    <value>Отображает линию по центру фильтра для CW</value>
   </data>
   <data name="radFMDeviation5kHz.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4141,7 +4224,8 @@
     <value>TopCenter</value>
   </data>
   <data name="radFMDeviation5kHz.ToolTip" xml:space="preserve">
-    <value>Задает отклонение FM 5 кГц</value>
+    <value>Задает девиацию (5 кгц)
+для узкополосной FM</value>
   </data>
   <data name="comboFMTXProfile.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -4156,7 +4240,8 @@
     <value>118</value>
   </data>
   <data name="comboFMTXProfile.ToolTip" xml:space="preserve">
-    <value>Задает профиль передачи (PWR, EQ, вход для Микрофона, CPDR, и т.д.)</value>
+    <value>Выбирает ранее сохраненный профиль для передатчика:
+PWR, EQ, микрофонный вход</value>
   </data>
   <data name="udFMOffset.Location" type="System.Drawing.Point, System.Drawing">
     <value>217, 62</value>
@@ -4168,7 +4253,8 @@
     <value>121</value>
   </data>
   <data name="udFMOffset.ToolTip" xml:space="preserve">
-    <value>Смещение Repeater в МГц передатчик FM - Примечание: не используется в режиме односторонней</value>
+    <value>Репиттерный сдвиг. 
+не работает в симплексном режиме</value>
   </data>
   <data name="chkFMTXSimplex.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4198,7 +4284,7 @@
     <value>TopCenter</value>
   </data>
   <data name="chkFMTXSimplex.ToolTip" xml:space="preserve">
-    <value>Односторонняя FM</value>
+    <value>Включает симплексный режим</value>
   </data>
   <data name="comboFMCTCSS.Location" type="System.Drawing.Point, System.Drawing">
     <value>90, 67</value>
@@ -4210,7 +4296,7 @@
     <value>124</value>
   </data>
   <data name="comboFMCTCSS.ToolTip" xml:space="preserve">
-    <value>Задает частоту FM CTCSS</value>
+    <value>Устанавливает тон CTCSS</value>
   </data>
   <data name="btnFMMemory.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -4234,7 +4320,7 @@
     <value>126</value>
   </data>
   <data name="btnFMMemory.ToolTip" xml:space="preserve">
-    <value>Открывает форму памяти</value>
+    <value>Открывает панель памяти частот</value>
   </data>
   <data name="chkFMCTCSS.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4264,7 +4350,7 @@
     <value>TopCenter</value>
   </data>
   <data name="chkFMCTCSS.ToolTip" xml:space="preserve">
-    <value>Включить тонов CTCSS</value>
+    <value>Включает тон CTCSS</value>
   </data>
   <data name="btnFMMemoryUp.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -4291,7 +4377,7 @@
     <value>TopCenter</value>
   </data>
   <data name="btnFMMemoryUp.ToolTip" xml:space="preserve">
-    <value>Выбирает следующий канал памяти формы списка</value>
+    <value>Выбирает следующий канал памяти из списка</value>
   </data>
   <data name="btnFMMemoryDown.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -4318,7 +4404,7 @@
     <value>TopCenter</value>
   </data>
   <data name="btnFMMemoryDown.ToolTip" xml:space="preserve">
-    <value>Выбирает предыдущий канал памяти формы списка</value>
+    <value>Выбирает предыдущий канал памяти из списка</value>
   </data>
   <data name="radFMDeviation2kHz.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4348,7 +4434,8 @@
     <value>TopCenter</value>
   </data>
   <data name="radFMDeviation2kHz.ToolTip" xml:space="preserve">
-    <value>Задает отклонение FM до 2,5 кГц</value>
+    <value>Задает девиацию (2,5 кгц)
+для узкополосной FM</value>
   </data>
   <data name="chkFMTXLow.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4378,7 +4465,8 @@
     <value>TopCenter</value>
   </data>
   <data name="chkFMTXLow.ToolTip" xml:space="preserve">
-    <value>Низкий уровень передачи FM</value>
+    <value>Сдвигает частоту передачи ВНИЗ
+для режима разнесенного симплекса</value>
   </data>
   <data name="chkFMTXHigh.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4408,7 +4496,8 @@
     <value>TopCenter</value>
   </data>
   <data name="chkFMTXHigh.ToolTip" xml:space="preserve">
-    <value>FM-передачи высокой</value>
+    <value>Сдвигает частоту передачи ВВЕРХ
+для режима разнесенного симплекса</value>
   </data>
   <data name="chkFMTXRev.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4441,7 +4530,7 @@
     <value>TopCenter</value>
   </data>
   <data name="chkFMTXRev.ToolTip" xml:space="preserve">
-    <value>Отменяет частот TX и RX</value>
+    <value>Обмен частотами между TX и RX</value>
   </data>
   <data name="chkTNF.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4471,10 +4560,7 @@
     <value>TopCenter</value>
   </data>
   <data name="chkTNF.ToolTip" xml:space="preserve">
-    <value>Включает руководство отслеживания деление фильтр(-ы) Вкл/Выкл</value>
-  </data>
-  <data name="chkTNF.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+    <value>blank</value>
   </data>
   <data name="btnTNFAdd.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -4501,7 +4587,7 @@
     <value>TopCenter</value>
   </data>
   <data name="btnTNFAdd.ToolTip" xml:space="preserve">
-    <value>Добавление ручного отслеживания фильтра деление</value>
+    <value>blank</value>
   </data>
   <data name="btnTNFAdd.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -4528,7 +4614,8 @@
     <value>109</value>
   </data>
   <data name="ptbRX2AF.ToolTip" xml:space="preserve">
-    <value>Прибыль AF - монитор тома для RX2</value>
+    <value>Управлять громкостью
+основного приемника RX2</value>
   </data>
   <data name="ptbRX1AF.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -4552,7 +4639,8 @@
     <value>107</value>
   </data>
   <data name="ptbRX1AF.ToolTip" xml:space="preserve">
-    <value>Прибыль AF - монитор тома для RX</value>
+    <value>Управлять громкостью
+основного приемника RX1</value>
   </data>
   <data name="chkVAC2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4579,7 +4667,7 @@
     <value>TopCenter</value>
   </data>
   <data name="chkVAC2.ToolTip" xml:space="preserve">
-    <value>Включить в переменного ТОКА 2</value>
+    <value>Включает виртуальный аудио кабель #2</value>
   </data>
   <data name="chkCWSidetone.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value></value>
@@ -4597,7 +4685,7 @@
     <value>0</value>
   </data>
   <data name="chkCWSidetone.ToolTip" xml:space="preserve">
-    <value>Включение в динамике sidetone Вкл/Выкл</value>
+    <value>Включает тон в самоконтроль</value>
   </data>
   <data name="udRX1StepAttData.Location" type="System.Drawing.Point, System.Drawing">
     <value>56, 249</value>
@@ -4612,7 +4700,7 @@
     <value>Center</value>
   </data>
   <data name="udRX1StepAttData.ToolTip" xml:space="preserve">
-    <value>RX1 Аттенюатор шаг</value>
+    <value>Управляет затуханием аттенюатора RX1</value>
   </data>
   <data name="comboRX2Preamp.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -4627,7 +4715,7 @@
     <value>113</value>
   </data>
   <data name="comboRX2Preamp.ToolTip" xml:space="preserve">
-    <value>RX2 Параметр аттенюатор</value>
+    <value>Управляет затуханием аттенюатора RX2</value>
   </data>
   <data name="udRX2StepAttData.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 79</value>
@@ -4642,7 +4730,7 @@
     <value>Center</value>
   </data>
   <data name="udRX2StepAttData.ToolTip" xml:space="preserve">
-    <value>RX2 Аттенюатор шаг</value>
+    <value>Управляет затуханием аттенюатора RX2</value>
   </data>
   <data name="chkCWAPFEnabled.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4672,7 +4760,8 @@
     <value>MiddleCenter</value>
   </data>
   <data name="chkCWAPFEnabled.ToolTip" xml:space="preserve">
-    <value>Позволяет APF</value>
+    <value>Включает APF - улучшает читаемость
+телеграфного сигнала</value>
   </data>
   <data name="ptbCWAPFGain.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -4696,7 +4785,7 @@
     <value>125</value>
   </data>
   <data name="ptbCWAPFGain.ToolTip" xml:space="preserve">
-    <value>Задает прибыль APF во вт.</value>
+    <value>Устаналивает чувствительность для режима APF</value>
   </data>
   <data name="ptbCWAPFBandwidth.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -4720,7 +4809,7 @@
     <value>120</value>
   </data>
   <data name="ptbCWAPFBandwidth.ToolTip" xml:space="preserve">
-    <value>Задает пропускной способности APF во вт.</value>
+    <value>Установливает ширину в режиме APF</value>
   </data>
   <data name="ptbCWAPFFreq.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -4744,7 +4833,7 @@
     <value>119</value>
   </data>
   <data name="ptbCWAPFFreq.ToolTip" xml:space="preserve">
-    <value>Задает частоту APF во вт.</value>
+    <value>Устанавливает расстройку частоты для режима APF</value>
   </data>
   <data name="picSquelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -5137,7 +5226,7 @@
     <value>34, 20</value>
   </data>
   <data name="RAtoolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Получение данных астрономии радио</value>
+    <value>Собирает данные принимаемого сигнала</value>
   </data>
   <data name="picRX2Squelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>

@@ -30,6 +30,7 @@
 namespace PowerSDR
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Reflection;
     using System.Threading;
@@ -453,7 +454,9 @@ namespace PowerSDR
 			{
 				if(low != rx_filter_low_dsp || high != rx_filter_high_dsp || force)
 				{
+                    wdsp.RXANBPSetFreqs(wdsp.id(thread, subrx), low, high);
                     wdsp.SetRXABandpassFreqs(wdsp.id(thread, subrx), low, high);
+                    wdsp.SetRXASNBAOutputBandwidth(wdsp.id(thread, subrx), low, high);
 					rx_filter_low_dsp = low;
 					rx_filter_high_dsp = high;
 				}
@@ -472,7 +475,9 @@ namespace PowerSDR
 				{
 					if(value != rx_filter_low_dsp || force)
 					{
+                        wdsp.RXANBPSetFreqs(wdsp.id(thread, subrx), value, rx_filter_high);
                         wdsp.SetRXABandpassFreqs(wdsp.id(thread, subrx), value, rx_filter_high);
+                        wdsp.SetRXASNBAOutputBandwidth(wdsp.id(thread, subrx), value, rx_filter_high);
 						rx_filter_low_dsp = value;
 					}
 				}
@@ -491,7 +496,9 @@ namespace PowerSDR
 				{
 					if(value != rx_filter_high_dsp || force)
 					{
+                        wdsp.RXANBPSetFreqs(wdsp.id(thread, subrx), rx_filter_low, value);
                         wdsp.SetRXABandpassFreqs(wdsp.id(thread, subrx), rx_filter_low, value);
+                        wdsp.SetRXASNBAOutputBandwidth(wdsp.id(thread, subrx), rx_filter_low, value);
 						rx_filter_high_dsp = value;
 					}
 				}
@@ -1156,6 +1163,7 @@ namespace PowerSDR
 					if(value != rx_osc_dsp || force)
 					{
                         wdsp.SetRXAShiftFreq(wdsp.id(thread, subrx), -value);
+                        wdsp.RXANBPSetShiftFrequency(wdsp.id(thread, subrx), -value);
 						rx_osc_dsp = value;
 					}
 				}
@@ -1374,6 +1382,7 @@ namespace PowerSDR
                 {
                     if (value != rx_bandpass_window_dsp || force)
                     {
+                        wdsp.RXANBPSetWindow(wdsp.id(thread, subrx), value);
                         wdsp.SetRXABandpassWindow(wdsp.id(thread, subrx), value);
                         rx_bandpass_window_dsp = value;
                     }
@@ -3232,4 +3241,81 @@ namespace PowerSDR
 	}
 
 	#endregion
+
+    class MNotchDB
+    {
+        private static List<MNotch> list = new List<MNotch>();
+        public static List<MNotch> List
+        {
+            get { return list; }
+        }
+    }
+
+    class MNotch : IComparable
+    {
+        private double fcenter = 0.0;
+        public double FCenter
+        {
+            get { return fcenter; }
+            set { fcenter = value; }
+        }
+
+        private double fwidth = 0.0;
+        public double FWidth
+        {
+            get { return fwidth; }
+            set { fwidth = value; }
+        }
+
+        private bool active = false;
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; }
+        }
+
+        public MNotch(double freq, double width, bool act)
+        {
+            fcenter = freq;
+            fwidth = width;
+            active = act;            
+        }
+
+        public static MNotch Parse(string s)
+        {
+            int index = s.IndexOf("MHz");
+            double freq = double.Parse(s.Substring(0, index));
+
+            int index2 = s.LastIndexOf("Hz");
+            double width = double.Parse(s.Substring(index + 5, index2 - (index + 5)));
+
+            index = s.IndexOf("active:");
+
+            bool active;
+            string a;
+            //if (index2 != -1)
+            //{
+            //    active = bool.Parse(s.Substring(index + 5, index2 - (index + 5)));               
+            //}
+            //else
+           // {
+                a = s.Substring(index + 7);
+                active = bool.Parse(s.Substring(index + 7));
+           // }
+
+            return new MNotch(freq, width, active);
+        }
+
+        public override string ToString()
+        {
+            return fcenter.ToString("R") + " MHz| " + fwidth + " Hz| active: " + active;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+            return this.fcenter.CompareTo(((MNotch)obj).fcenter);
+        }
+
+    }
 }

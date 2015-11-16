@@ -4473,9 +4473,6 @@
   <data name="chkTNF.ToolTip" xml:space="preserve">
     <value>启用手动跟踪槽口筛选器开/关</value>
   </data>
-  <data name="chkTNF.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="btnTNFAdd.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>

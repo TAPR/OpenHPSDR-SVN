@@ -4473,9 +4473,6 @@
   <data name="chkTNF.ToolTip" xml:space="preserve">
     <value>온/오프 수동 추적 노치 필터를 설정합니다.</value>
   </data>
-  <data name="chkTNF.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="btnTNFAdd.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>

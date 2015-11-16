@@ -18,6 +18,7 @@
     <ProjectGuid>{6DBDF457-8E84-4DFF-B1E4-A9177D15D89F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>wdsp</RootNamespace>
+    <ProjectName>wdsp</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -172,6 +173,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="meter.h" />
     <ClInclude Include="meterlog10.h" />
+    <ClInclude Include="nbp.h" />
     <ClInclude Include="nob.h" />
     <ClInclude Include="nobII.h" />
     <ClInclude Include="osctrl.h" />
@@ -220,6 +222,7 @@
     <ClCompile Include="iobuffs.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="meter.c" />
+    <ClCompile Include="nbp.c" />
     <ClCompile Include="nob.c" />
     <ClCompile Include="nobII.c" />
     <ClCompile Include="osctrl.c" />

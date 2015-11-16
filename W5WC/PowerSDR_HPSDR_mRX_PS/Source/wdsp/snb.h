@@ -112,15 +112,25 @@ typedef struct _bpsnba
 		int rate;
 		int snba_run;
 		double* buff;
-		BANDPASS bpsnba;
+		NBP bpsnba;
 		int mode;
 		double f_low;
 		double f_high;
 		double abs_low_freq;
 		double abs_high_freq;
+		int wintype;
+		double gain;
+		int autoincr;
+		int maxpb;
+		NOTCHDB* ptraddr;
 } bpsnba, *BPSNBA;
 
-extern BPSNBA create_bpsnba (int snba_run, int size, double* in, double* out, int rate, int mode, double abs_low_freq, double abs_high_freq);
+extern void calc_bpsnba (BPSNBA a);
+
+extern void decalc_bpsnba (BPSNBA a);
+
+extern BPSNBA create_bpsnba (int snba_run, int size, double* in, double* out, int rate, int mode, 
+	double abs_low_freq, double abs_high_freq, int wintype, double gain, int autoincr, int maxpb, NOTCHDB* ptraddr);
 
 extern void destroy_bpsnba (BPSNBA a);
 

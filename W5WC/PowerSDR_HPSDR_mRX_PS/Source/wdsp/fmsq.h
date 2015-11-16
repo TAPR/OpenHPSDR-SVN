@@ -40,7 +40,7 @@ typedef struct _fmsq
 	double* mults;
 	double* noise;
 	double fc;							// corner frequency for sig / noise detection
-	double pllpole;						// pole frequency of the fm demodulator pll
+	double* pllpole;					// pointer to pole frequency of the fm demodulator pll
 	double F[4];
 	double G[4];
 	double avtau;						// time constant for averaging noise
@@ -71,7 +71,7 @@ typedef struct _fmsq
 	double tdelay;
 } fmsq, *FMSQ;
 
-extern FMSQ create_fmsq (int run, int size, double* insig, double* outsig, double* trigger, int rate, double fc, double pllpole, double tdelay, double avtau, double longtau, double tup, double tdown, double tail_thresh, double unmute_thresh, double min_tail, double max_tail);
+extern FMSQ create_fmsq (int run, int size, double* insig, double* outsig, double* trigger, int rate, double fc, double* pllpole, double tdelay, double avtau, double longtau, double tup, double tdown, double tail_thresh, double unmute_thresh, double min_tail, double max_tail);
 
 extern void destroy_fmsq (FMSQ a);
 

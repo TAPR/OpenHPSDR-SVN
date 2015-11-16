@@ -4827,7 +4827,7 @@ namespace PowerSDR
             if (!ds.Tables.Contains("State")) return;
 
             // find all the notches and remove them
-            var rows = ds.Tables["State"].Select("Key like 'notchlist*'");
+            var rows = ds.Tables["State"].Select("Key like 'mnotchdb*'");
             if (rows != null)
             {
                 foreach (var row in rows)

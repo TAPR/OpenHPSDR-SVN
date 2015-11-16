@@ -79,8 +79,13 @@ void create_rxa (int channel)
 		-1,												// index for gain value
 		0);												// pointer for gain computation
 
-	// bandpass filter
-	rxa[channel].bp0.p = create_bandpass (
+	// notch database
+	rxa[channel].ndb.p = create_notchdb (
+		0,												// use the notches (run notches)
+		1024);											// max number of notches
+
+	// notched bandpass
+	rxa[channel].nbp0.p = create_nbp (
 		1,												// run, always runs
 		0,												// position
 		ch[channel].dsp_size,							// buffer size
@@ -89,19 +94,27 @@ void create_rxa (int channel)
 		-4150.0,										// lower filter frequency
 		-150.0,											// upper filter frequency
 		ch[channel].dsp_rate,							// sample rate
-		1,												// wintype
-		1.0);											// gain
+		0,												// wintype
+		1.0,											// gain
+		0,												// auto-increase notch width
+		1025,											// max number of passbands
+		&rxa[channel].ndb.p);							// addr of database pointer
 
 	// bandpass for snba
 	rxa[channel].bpsnba.p = create_bpsnba (
-		0,												// snba run flag
+		0,												// bpsnba run flag
 		ch[channel].dsp_size,							// size
 		rxa[channel].midbuff,							// input buffer
 		rxa[channel].midbuff,							// output buffer
 		ch[channel].dsp_rate,							// samplerate
 		rxa[channel].mode,								// rxa mode
-		+ 250.0,										// abs value of cutoff nearest zero
-		+ 5700.0);										// abs value of cutoff farthest zero
+		+ 250.0,										// abs value of cutoff nearest zero ////
+		+ 5700.0,										// abs value of cutoff farthest zero ////
+		0,												// wintype
+		1.0,											// gain
+		0,												// auto-increase notch width
+		1025,											// max number of passbands
+		&rxa[channel].ndb.p);							// addr of database pointer
 
 	// send spectrum display
 	rxa[channel].sender.p = create_sender (
@@ -193,7 +206,7 @@ void create_rxa (int channel)
 		rxa[channel].fmd.p->audio,						// pointer to trigger buffer
 		ch[channel].dsp_rate,							// sample rate
 		5000.0,											// cutoff freq for noise filter (Hz)
-		rxa[channel].fmd.p->pllpole,					// pole frequency of the fmd pll (Hz)
+		&rxa[channel].fmd.p->pllpole,					// pointer to pole frequency of the fmd pll (Hz)
 		0.100,											// delay time after channel flush
 		0.001,											// tau for noise averaging
 		0.100,											// tau for long noise averaging
@@ -244,7 +257,7 @@ void create_rxa (int channel)
 	// ANF
 	rxa[channel].anf.p = create_anf (
 		0,												// run - OFF by default
-		1,												// position
+		0,												// position
 		ch[channel].dsp_size,							// buffer size
 		rxa[channel].midbuff,							// pointer to input buffer
 		rxa[channel].midbuff,							// pointer to output buffer
@@ -264,7 +277,7 @@ void create_rxa (int channel)
 	// ANR
 	rxa[channel].anr.p = create_anr (
 		0,												// run - OFF by default
-		1,												// position
+		0,												// position
 		ch[channel].dsp_size,							// buffer size
 		rxa[channel].midbuff,							// pointer to input buffer
 		rxa[channel].midbuff,							// pointer to output buffer
@@ -285,7 +298,7 @@ void create_rxa (int channel)
 	// EMNR
 	rxa[channel].emnr.p = create_emnr (
 		0,												// run
-		1,												// position
+		0,												// position
 		ch[channel].dsp_size,							// buffer size
 		rxa[channel].midbuff,							// input buffer
 		rxa[channel].midbuff,							// output buffer
@@ -343,7 +356,7 @@ void create_rxa (int channel)
 	// bandpass filter
 	rxa[channel].bp1.p = create_bandpass (
 		1,												// run - used only with ( AM || ANF || ANR || EMNR)
-		1,												// position
+		0,												// position
 		ch[channel].dsp_size,							// buffer size
 		rxa[channel].midbuff,							// pointer to input buffer
 		rxa[channel].midbuff,							// pointer to output buffer
@@ -457,7 +470,8 @@ void destroy_rxa (int channel)
 	destroy_meter (rxa[channel].smeter.p);
 	destroy_sender (rxa[channel].sender.p);
 	destroy_bpsnba (rxa[channel].bpsnba.p);
-	destroy_bandpass (rxa[channel].bp0.p);
+	destroy_nbp (rxa[channel].nbp0.p);
+	destroy_notchdb (rxa[channel].ndb.p);
 	destroy_meter (rxa[channel].adcmeter.p);
 	destroy_gen (rxa[channel].gen0.p);
 	destroy_resample (rxa[channel].rsmpin.p);
@@ -476,7 +490,7 @@ void flush_rxa (int channel)
 	flush_resample (rxa[channel].rsmpin.p);
 	flush_gen (rxa[channel].gen0.p);
 	flush_meter (rxa[channel].adcmeter.p);
-	flush_bandpass (rxa[channel].bp0.p);
+	flush_nbp (rxa[channel].nbp0.p);
 	flush_bpsnba (rxa[channel].bpsnba.p);
 	flush_sender (rxa[channel].sender.p);
 	flush_meter (rxa[channel].smeter.p);
@@ -507,7 +521,7 @@ void xrxa (int channel)
 	xgen (rxa[channel].gen0.p);
 	xmeter (rxa[channel].adcmeter.p);
 	xbpsnbain (rxa[channel].bpsnba.p);
-	xbandpass (rxa[channel].bp0.p, 0);
+	xnbp (rxa[channel].nbp0.p, 0);
 	xmeter (rxa[channel].smeter.p);
 	xsender (rxa[channel].sender.p);
 	xamsqcap (rxa[channel].amsq.p);
@@ -580,13 +594,14 @@ void setDSPSamplerate_rxa (int channel)
 	// dsp_rate blocks
 	setSamplerate_gen (rxa[channel].gen0.p, ch[channel].dsp_rate);
 	setSamplerate_meter (rxa[channel].adcmeter.p, ch[channel].dsp_rate);
-	setSamplerate_bandpass (rxa[channel].bp0.p, ch[channel].dsp_rate);
+	setSamplerate_nbp (rxa[channel].nbp0.p, ch[channel].dsp_rate);
 	setSamplerate_bpsnba (rxa[channel].bpsnba.p, ch[channel].dsp_rate);
 	setSamplerate_meter (rxa[channel].smeter.p, ch[channel].dsp_rate);
 	setSamplerate_sender (rxa[channel].sender.p, ch[channel].dsp_rate);
 	setSamplerate_amsq (rxa[channel].amsq.p, ch[channel].dsp_rate);
 	setSamplerate_amd (rxa[channel].amd.p, ch[channel].dsp_rate);
 	setSamplerate_fmd (rxa[channel].fmd.p, ch[channel].dsp_rate);
+	setBuffers_fmsq (rxa[channel].fmsq.p, rxa[channel].midbuff, rxa[channel].midbuff, rxa[channel].fmd.p->audio);
 	setSamplerate_fmsq (rxa[channel].fmsq.p, ch[channel].dsp_rate);
 	setSamplerate_snba (rxa[channel].snba.p, ch[channel].dsp_rate);
 	setSamplerate_eq (rxa[channel].eq.p, ch[channel].dsp_rate);
@@ -627,8 +642,8 @@ void setDSPBuffsize_rxa (int channel)
 	setSize_gen (rxa[channel].gen0.p, ch[channel].dsp_size);
 	setBuffers_meter (rxa[channel].adcmeter.p, rxa[channel].midbuff);
 	setSize_meter (rxa[channel].adcmeter.p, ch[channel].dsp_size);
-	setBuffers_bandpass (rxa[channel].bp0.p, rxa[channel].midbuff, rxa[channel].midbuff);
-	setSize_bandpass (rxa[channel].bp0.p, ch[channel].dsp_size);
+	setBuffers_nbp (rxa[channel].nbp0.p, rxa[channel].midbuff, rxa[channel].midbuff);
+	setSize_nbp (rxa[channel].nbp0.p, ch[channel].dsp_size);
 	setBuffers_bpsnba (rxa[channel].bpsnba.p, rxa[channel].midbuff, rxa[channel].midbuff);
 	setSize_bpsnba (rxa[channel].bpsnba.p, ch[channel].dsp_size);
 	setBuffers_meter (rxa[channel].smeter.p, rxa[channel].midbuff);

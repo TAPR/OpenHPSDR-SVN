@@ -4473,9 +4473,6 @@
   <data name="chkTNF.ToolTip" xml:space="preserve">
     <value>Convierte los filtros muesca de seguimiento Manual de encendido/apagado</value>
   </data>
-  <data name="chkTNF.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="btnTNFAdd.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>

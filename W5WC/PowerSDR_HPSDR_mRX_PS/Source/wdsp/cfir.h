@@ -63,6 +63,8 @@ extern void setSamplerate_cfir (CFIR a, int rate);
 
 extern void setSize_cfir (CFIR a, int size);
 
+extern void setOutRate_cfir (CFIR a, int rate);
+
 extern double *fir_read (int N, const char *filename, int rtype, double scale);
 
 extern double* cfir_impulse (int N, int DD, int R, int Pairs, double runrate, double cicrate, double cutoff, int xtype, double xbw, int rtype, double scale);

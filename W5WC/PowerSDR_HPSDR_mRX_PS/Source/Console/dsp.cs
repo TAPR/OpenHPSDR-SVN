@@ -214,6 +214,9 @@ namespace PowerSDR
         [DllImport("wdsp.dll", EntryPoint = "SetRXACBLRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXACBLRun(int channel, bool run);
 
+        [DllImport("wdsp.dll", EntryPoint = "SetTXACFIRRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXACFIRRun(int channel, bool run);
+
         [DllImport("wdsp.dll", EntryPoint = "SetTXACompressorRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXACompressorRun(int channel, bool run);
 
@@ -315,6 +318,9 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "SetTXAPanelRun", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAPanelRun(int channel, bool run);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAPanelGain1", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAPanelGain1(int channel, double gain);
 
         [DllImport("wdsp.dll", EntryPoint = "SetRXAShiftFreq", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAShiftFreq(int channel, double freq);
@@ -547,6 +553,47 @@ namespace PowerSDR
 
         [DllImport("wdsp.dll", EntryPoint = "SetRXASNBAk2", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXASNBAk2(int channel, double k2);
+
+        // notched bandpass
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPAddNotch", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int RXANBPAddNotch(int channel, int notch, double fcenter, double fwidth, bool active);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPGetNotch", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int RXANBPGetNotch(int channel, int notch, double* fcenter, double* fwidth, int* active);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPDeleteNotch", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int RXANBPDeleteNotch(int channel, int notch);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPEditNotch", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int RXANBPEditNotch(int channel, int notch, double fcenter, double fwidth, bool active);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPGetNumNotches", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RXANBPGetNumNotches(int channel, int* nnotches);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPSetTuneFrequency", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RXANBPSetTuneFrequency(int channel, double tunefreq);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPSetShiftFrequency", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RXANBPSetShiftFrequency(int channel, double shift);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPSetNotchesRun", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RXANBPSetNotchesRun(int channel, bool run);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPSetFreqs", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RXANBPSetFreqs(int channel, double flow, double fhigh);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPSetWindow", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RXANBPSetWindow(int channel, int wintype);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPGetMinNotchWidth", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RXANBPGetMinNotchWidth(int channel, double* minwidth);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXANBPSetAutoIncrease", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RXANBPSetAutoIncrease(int channel, bool autoincr);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetRXASNBAOutputBandwidth", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetRXASNBAOutputBandwidth(int channel, double flow, double fhigh);
 
         #endregion
 

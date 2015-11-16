@@ -138,7 +138,6 @@ PORT
 void SetRXABandpassRun (int channel, int run)
 {
 	EnterCriticalSection (&ch[channel].csDSP);
-	rxa[channel].bp0.p->run = run;
 	rxa[channel].bp1.p->run = run;
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
@@ -147,18 +146,13 @@ PORT
 void SetRXABandpassFreqs (int channel, double f_low, double f_high)
 {
 	double* impulse;
-	BANDPASS a0, a1;
+	BANDPASS a1;
 	EnterCriticalSection (&ch[channel].csDSP);
-	a0 = rxa[channel].bp0.p;
 	a1 = rxa[channel].bp1.p;
-	if ((f_low != a0->f_low) || (f_high != a0->f_high) || (f_low != a1->f_low) || (f_high != a1->f_high))
+	if ((f_low != a1->f_low) || (f_high != a1->f_high))
 	{
-		a0->f_low = a1->f_low = f_low;
-		a0->f_high = a1->f_high = f_high;
-		_aligned_free (a0->mults);
-		impulse = fir_bandpass(a0->size + 1, f_low, f_high, a0->samplerate, a0->wintype, 1, 1.0 / (double)(2 * a0->size));
-		a0->mults = fftcv_mults (2 * a0->size, impulse);
-		_aligned_free (impulse);
+		a1->f_low = f_low;
+		a1->f_high = f_high;
 		_aligned_free (a1->mults);
 		impulse = fir_bandpass(a1->size + 1, f_low, f_high, a1->samplerate, a1->wintype, 1, 1.0 / (double)(2 * a1->size));
 		a1->mults = fftcv_mults (2 * a1->size, impulse);
@@ -171,18 +165,12 @@ PORT
 void SetRXABandpassWindow (int channel, int wintype)
 {
 	double* impulse;
-	BANDPASS a0, a1;
+	BANDPASS a1;
 	EnterCriticalSection (&ch[channel].csDSP);
-	a0 = rxa[channel].bp0.p;
 	a1 = rxa[channel].bp1.p;
-	if ((a0->wintype != wintype) || (a1->wintype != wintype))
+	if ((a1->wintype != wintype))
 	{
-		a0->wintype = wintype;
 		a1->wintype = wintype;
-		_aligned_free (a0->mults);
-		impulse = fir_bandpass(a0->size + 1, a0->f_low, a0->f_high, a0->samplerate, a0->wintype, 1, 1.0 / (double)(2 * a0->size));
-		a0->mults = fftcv_mults (2 * a0->size, impulse);
-		_aligned_free (impulse);
 		_aligned_free (a1->mults);
 		impulse = fir_bandpass(a1->size + 1, a1->f_low, a1->f_high, a1->samplerate, a1->wintype, 1, 1.0 / (double)(2 * a1->size));
 		a1->mults = fftcv_mults (2 * a1->size, impulse);

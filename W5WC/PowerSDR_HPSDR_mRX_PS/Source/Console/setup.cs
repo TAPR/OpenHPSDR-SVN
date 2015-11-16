@@ -2745,6 +2745,9 @@ namespace PowerSDR
             chkStrictCharSpacing_CheckedChanged(this, e);
             chkDSPCESSB_CheckedChanged(this, e);
             udRXAMSQMaxTail_ValueChanged(this, e);
+            radANFPreAGC_CheckedChanged(this, e);
+            radANF2PreAGC_CheckedChanged(this, e);
+            chkMNFAutoIncrease_CheckedChanged(this, e);
             //AGC
             udDSPAGCFixedGaindB_ValueChanged(this, e);
             udDSPAGCMaxGaindB_ValueChanged(this, e);
@@ -2922,6 +2925,8 @@ namespace PowerSDR
             // SNB
             udDSPSNBThresh1_ValueChanged(this, e);
             udDSPSNBThresh2_ValueChanged(this, e);
+            // MNF
+            chkMNFAutoIncrease_CheckedChanged(this, e);
         }
 
         public string[] GetTXProfileStrings()
@@ -16194,9 +16199,9 @@ namespace PowerSDR
 
             if (console.PowerOn && radGenModelHermes.Checked)
             {
-                byte[] ver_bytes = new byte[1];
-                JanusAudio.GetMetisCodeVersion(ver_bytes);
-                lblOzyFX2.Text = ver_bytes[0].ToString("Hermes: 0\\.0");
+                // byte[] ver_bytes = new byte[1];
+                // JanusAudio.GetMetisCodeVersion(ver_bytes);
+                lblOzyFX2.Text = JanusAudio.MetisCodeVersion.ToString("Hermes: 0\\.0");//ver_bytes[0].ToString("Hermes: 0\\.0");
                 lblOzyFWVer.Text = "";
                 lblMercuryFWVer.Text = "";
                 lblMercury2FWVer.Text = "";
@@ -16205,9 +16210,9 @@ namespace PowerSDR
 
             if (console.PowerOn && (radGenModelANAN10.Checked || radGenModelANAN10E.Checked || radGenModelANAN100.Checked || radGenModelANAN100D.Checked))
             {
-                byte[] ver_bytes = new byte[1];
-                JanusAudio.GetMetisCodeVersion(ver_bytes);
-                lblOzyFX2.Text = ver_bytes[0].ToString("ANAN: 0\\.0");
+                //byte[] ver_bytes = new byte[1];
+                //JanusAudio.GetMetisCodeVersion(ver_bytes);
+                lblOzyFX2.Text = JanusAudio.MetisCodeVersion.ToString("ANAN: 0\\.0"); //ver_bytes[0].ToString("ANAN: 0\\.0");
                 lblOzyFWVer.Text = "";
                 lblMercuryFWVer.Text = "";
                 lblMercury2FWVer.Text = "";
@@ -16216,9 +16221,9 @@ namespace PowerSDR
 
             if (console.PowerOn && radGenModelOrion.Checked)
             {
-                byte[] ver_bytes = new byte[1];
-                JanusAudio.GetMetisCodeVersion(ver_bytes);
-                lblOzyFX2.Text = ver_bytes[0].ToString("Orion: 0\\.0");
+                //byte[] ver_bytes = new byte[1];
+                //JanusAudio.GetMetisCodeVersion(ver_bytes);
+                lblOzyFX2.Text = JanusAudio.MetisCodeVersion.ToString("Orion: 0\\.0"); //ver_bytes[0].ToString("Orion: 0\\.0");
                 lblOzyFWVer.Text = "";
                 lblMercuryFWVer.Text = "";
                 lblMercury2FWVer.Text = "";
@@ -16229,19 +16234,28 @@ namespace PowerSDR
 
         private void tpGeneralHardware_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
-            int metis_ip_addr = JanusAudio.GetMetisIPAddr();
-            lblMetisIP.Text = IPStringFromInt(metis_ip_addr);
-            byte[] mac_bytes = new byte[6];
-            byte[] ver_bytes = new byte[1];
-            byte[] id_bytes = new byte[1];
-            JanusAudio.GetMetisMACAddr(mac_bytes);
-            lblMetisMAC.Text = BitConverter.ToString(mac_bytes).Replace("-", ":").ToLower();
-            JanusAudio.GetMetisCodeVersion(ver_bytes);
+            //int metis_ip_addr = JanusAudio.GetMetisIPAddr();
+            //lblMetisIP.Text = IPStringFromInt(metis_ip_addr);
+            lblMetisIP.Text = JanusAudio.Metis_IP_address;
+            // byte[] mac_bytes = new byte[6];
+            // byte[] ver_bytes = new byte[1];
+            // byte[] id_bytes = new byte[1];
+            // JanusAudio.GetMetisMACAddr(mac_bytes);
+            //lblMetisMAC.Text = BitConverter.ToString(mac_bytes).Replace("-", ":").ToLower();
+            lblMetisMAC.Text = JanusAudio.MetisMAC;
+            //JanusAudio.GetMetisCodeVersion(ver_bytes);
             // lblMetisCodeVersion.Text = BitConverter.ToString(ver_bytes);
-            lblMetisCodeVersion.Text = ver_bytes[0].ToString("0\\.0");
-            JanusAudio.GetMetisBoardID(id_bytes);
-            lblMetisBoardID.Text = BitConverter.ToString(id_bytes);
+            //lblMetisCodeVersion.Text = ver_bytes[0].ToString("0\\.0");
+            lblMetisCodeVersion.Text = JanusAudio.MetisCodeVersion.ToString("0\\.0");
+            // JanusAudio.GetMetisBoardID(id_bytes);
+            // lblMetisBoardID.Text = BitConverter.ToString(id_bytes);
+            lblMetisBoardID.Text = JanusAudio.MetisBoardID.ToString();
             return;
+        }
+
+        public void UpdateGeneraHardware()
+        {
+            tpGeneralHardware.Invalidate();
         }
 
         private void udMaxFreq_ValueChanged(object sender, System.EventArgs e)
@@ -17263,10 +17277,12 @@ namespace PowerSDR
 
         private void chkFullDiscovery_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkFullDiscovery.Checked)
-                JanusAudio.SetDiscoveryMode(1);
-            else
-                JanusAudio.SetDiscoveryMode(0);
+            if (chkFullDiscovery.Checked) chkEnableStaticIP.Checked = false;
+            //    JanusAudio.SetDiscoveryMode(1);
+            //else
+            //    JanusAudio.SetDiscoveryMode(0);
+
+            JanusAudio.FastConnect = chkFullDiscovery.Checked;
         }
 
         private void chkStrictCharSpacing_CheckedChanged(object sender, EventArgs e)
@@ -18172,26 +18188,26 @@ namespace PowerSDR
             {
                 console.MetisNetworkIPAddr = udStaticIP1.Text + "." + udStaticIP2.Text + "." +
                                              udStaticIP3.Text + "." + udStaticIP4.Text;
-                console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask1.Text);
+                //console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask1.Text);
 
             }
             if (radStaticIP2.Checked)
             {
                 console.MetisNetworkIPAddr = udStaticIP5.Text + "." + udStaticIP6.Text + "." +
                                              udStaticIP7.Text + "." + udStaticIP8.Text;
-                console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask2.Text);
+                //console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask2.Text);
             }
             if (radStaticIP3.Checked)
             {
                 console.MetisNetworkIPAddr = udStaticIP9.Text + "." + udStaticIP10.Text + "." +
                                              udStaticIP11.Text + "." + udStaticIP12.Text;
-                console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask3.Text);
+                //console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask3.Text);
             }
             if (radStaticIP4.Checked)
             {
                 console.MetisNetworkIPAddr = udStaticIP13.Text + "." + udStaticIP14.Text + "." +
                                              udStaticIP15.Text + "." + udStaticIP16.Text;
-                console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask4.Text);
+                //console.StaticBroadcastAddr = Network2Broadcast(console.MetisNetworkIPAddr + "/" + udStaticIPmask4.Text);
             }
         }
 
@@ -18213,6 +18229,7 @@ namespace PowerSDR
 
             network = ip & mask;
             broadcast = network + ~mask;
+            JanusAudio.static_host_network = network;
 
             return broadcast;
         }
@@ -18233,12 +18250,7 @@ namespace PowerSDR
 
         private void chkEnableStaticIP_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkEnableStaticIP.Checked)
-            {
-                chkFullDiscovery.Checked = false;
-                chkFullDiscovery.Enabled = false;
-            }
-            else chkFullDiscovery.Enabled = true;
+            if (chkEnableStaticIP.Checked) chkFullDiscovery.Checked = false;                                    
             JanusAudio.enableStaticIP = chkEnableStaticIP.Checked;
         }
 
@@ -19221,6 +19233,339 @@ namespace PowerSDR
         {
             Penny.getPenny().SplitPins = chkSplitPins.Checked;
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;
+        }
+
+
+        #region MultiNotchFilter
+
+        int numnotches = 0;
+        bool AddActive = false;
+        bool RunNotches = false;
+        bool EditActive = false;
+
+        // 'OFF/ON' button for Multi Notch Filter
+        private void btnMNFRun_Click(object sender, EventArgs e)
+        {
+            //if (RunNotches)
+            //{
+            //    RunNotches = false;
+            //    btnMNFRun.Text = "OFF";
+            //    wdsp.RXANBPSetNotchesRun(wdsp.id(0, 0), RunNotches);
+            //    wdsp.RXANBPSetNotchesRun(wdsp.id(0, 1), RunNotches);
+            //    wdsp.RXANBPSetNotchesRun(wdsp.id(2, 0), RunNotches);
+            //}
+            //else
+            //{
+            //    RunNotches = true;
+            //    btnMNFRun.Text = "ON";
+            //    wdsp.RXANBPSetNotchesRun(wdsp.id(0, 0), RunNotches);
+            //    wdsp.RXANBPSetNotchesRun(wdsp.id(0, 1), RunNotches);
+            //    wdsp.RXANBPSetNotchesRun(wdsp.id(2, 0), RunNotches);
+            //}
+        }
+
+        // accept input for a notch to be added
+        private void btnMNFAdd_Click(object sender, EventArgs e)
+        {
+            btnMNFAdd.BackColor = Color.Bisque;
+            udMNFFreq.BackColor = Color.Bisque;
+            udMNFWidth.BackColor = Color.Bisque;
+            chkMNFActive.BackColor = Color.Bisque;
+            udMNFFreq.Enabled = true;
+            udMNFWidth.Enabled = true;
+            chkMNFActive.Enabled = true;
+            AddActive = true;
+            btnMNFEdit.Enabled = false;
+            if (EditActive)
+            {
+                EditActive = false;
+                btnMNFEdit.BackColor = SystemColors.Control;
+            }
+            // get the current number of notches
+            unsafe
+            {
+                int nn;
+                wdsp.RXANBPGetNumNotches(wdsp.id(0, 0), &nn);
+                numnotches = nn;
+            }
+            // if there are any notches already
+            if (numnotches > 0)
+            {
+                // increase the control maximum and the notch number by 1
+                udMNFNotch.Maximum += 1;
+                udMNFNotch.Value += 1;
+            }
+            // the new notch will be inserted just after the previous one being viewed
+            // zero/initialize the values in preparation for input
+            udMNFFreq.Value = 0;
+            udMNFWidth.Value = 0;
+            chkMNFActive.Checked = true;
+        }
+
+        // accept input for editing a notch
+        private void btnMNFEdit_Click(object sender, EventArgs e)
+        {
+            btnMNFEdit.BackColor = Color.Bisque;
+            udMNFNotch.BackColor = Color.Bisque;
+            udMNFFreq.BackColor = Color.Bisque;
+            udMNFWidth.BackColor = Color.Bisque;
+            chkMNFActive.BackColor = Color.Bisque;
+            udMNFFreq.Enabled = true;
+            udMNFWidth.Enabled = true;
+            chkMNFActive.Enabled = true;
+            EditActive = true;
+            btnMNFAdd.Enabled = false;
+
+            if (AddActive)
+            {
+                AddActive = false;
+                btnMNFAdd.BackColor = SystemColors.Control;
+            }
+        }
+
+        // store the values from an Add or Edit operation
+        private void btnMNFEnter_Click(object sender, EventArgs e)
+        {
+            if (AddActive)
+            {
+                AddActive = false;
+                btnMNFAdd.BackColor = SystemColors.Control;
+                udMNFFreq.BackColor = SystemColors.Control;
+                udMNFWidth.BackColor = SystemColors.Control;
+                chkMNFActive.BackColor = SystemColors.Control;
+                wdsp.RXANBPAddNotch(wdsp.id(0, 0), (int)udMNFNotch.Value, 1.0e6 * (double)udMNFFreq.Value, (double)udMNFWidth.Value, chkMNFActive.Checked);
+                wdsp.RXANBPAddNotch(wdsp.id(0, 1), (int)udMNFNotch.Value, 1.0e6 * (double)udMNFFreq.Value, (double)udMNFWidth.Value, chkMNFActive.Checked);
+                wdsp.RXANBPAddNotch(wdsp.id(2, 0), (int)udMNFNotch.Value, 1.0e6 * (double)udMNFFreq.Value, (double)udMNFWidth.Value, chkMNFActive.Checked);
+                // we have at least one notch; enable the 'Delete' button
+                btnMNFDelete.Enabled = true;
+            }
+            if (EditActive)
+            {
+                EditActive = false;
+                btnMNFEdit.BackColor = SystemColors.Control;
+                udMNFNotch.BackColor = SystemColors.Control;
+                udMNFFreq.BackColor = SystemColors.Control;
+                udMNFWidth.BackColor = SystemColors.Control;
+                chkMNFActive.BackColor = SystemColors.Control;
+                wdsp.RXANBPEditNotch(wdsp.id(0, 0), (int)udMNFNotch.Value, 1.0e6 * (double)udMNFFreq.Value, (double)udMNFWidth.Value, chkMNFActive.Checked);
+                wdsp.RXANBPEditNotch(wdsp.id(0, 1), (int)udMNFNotch.Value, 1.0e6 * (double)udMNFFreq.Value, (double)udMNFWidth.Value, chkMNFActive.Checked);
+                wdsp.RXANBPEditNotch(wdsp.id(2, 0), (int)udMNFNotch.Value, 1.0e6 * (double)udMNFFreq.Value, (double)udMNFWidth.Value, chkMNFActive.Checked);
+            }
+            // no longer accepting input; disable entry of values
+            udMNFFreq.Enabled = false;
+            udMNFWidth.Enabled = false;
+            chkMNFActive.Enabled = false;
+            btnMNFAdd.Enabled = true;
+            btnMNFEdit.Enabled = true;
+        }
+
+        // cancel the Add or Edit operation
+        unsafe private void btnMNFCancel_Click(object sender, EventArgs e)
+        {
+            int nn;
+            wdsp.RXANBPGetNumNotches(wdsp.id(0, 0), &nn);
+            numnotches = nn;
+            if (AddActive)
+            {
+                AddActive = false;
+                if (numnotches > 0)
+                {
+                    // Add had potentially increased these values ... put them back the way they were
+                    udMNFNotch.Value -= 1;
+                    udMNFNotch.Maximum -= 1;
+                }
+            }
+            EditActive = false;
+            // reset the controls to the values for the displayed notch, if any
+            if (numnotches > 0)
+            {
+                double fcenter, fwidth;
+                int active;
+                wdsp.RXANBPGetNotch(wdsp.id(0, 0), (int)udMNFNotch.Value, &fcenter, &fwidth, &active);
+                udMNFFreq.Value = (decimal)(fcenter / 1.0e6);
+                udMNFWidth.Value = (decimal)fwidth;
+                if (active != 0)
+                    chkMNFActive.Checked = true;
+                else
+                    chkMNFActive.Checked = false;
+            }
+            btnMNFEdit.BackColor = SystemColors.Control;
+            btnMNFAdd.BackColor = SystemColors.Control;
+            udMNFNotch.BackColor = SystemColors.Control;
+            udMNFFreq.BackColor = SystemColors.Control;
+            udMNFWidth.BackColor = SystemColors.Control;
+            chkMNFActive.BackColor = SystemColors.Control;
+            udMNFFreq.Enabled = false;
+            udMNFWidth.Enabled = false;
+            chkMNFActive.Enabled = false;
+            btnMNFAdd.Enabled = true;
+            btnMNFEdit.Enabled = true;
+        }
+
+        // delete a notch
+        private void btnMNFDelete_Click(object sender, EventArgs e)
+        {
+            // delete the notch
+            wdsp.RXANBPDeleteNotch(wdsp.id(0, 0), (int)udMNFNotch.Value);
+            wdsp.RXANBPDeleteNotch(wdsp.id(0, 1), (int)udMNFNotch.Value);
+            wdsp.RXANBPDeleteNotch(wdsp.id(2, 0), (int)udMNFNotch.Value);
+            // get the number of remaining notches, 'numnotches'
+            unsafe
+            {
+                int nn;
+                wdsp.RXANBPGetNumNotches(wdsp.id(0, 0), &nn);
+                numnotches = nn;
+            }
+            // if the notch number still points to a valid notch, get the notch information
+            if ((int)udMNFNotch.Value < numnotches)
+            {
+                unsafe
+                {
+                    double fcenter, fwidth;
+                    int active;
+                    wdsp.RXANBPGetNotch(wdsp.id(0, 0), (int)udMNFNotch.Value, &fcenter, &fwidth, &active);
+                    udMNFFreq.Value = (decimal)(fcenter / 1.0e6);
+                    udMNFWidth.Value = (decimal)fwidth;
+                    if (active != 0)
+                        chkMNFActive.Checked = true;
+                    else
+                        chkMNFActive.Checked = false;
+                }
+            }
+            // if the deleted notch was the 'top' notch, get the next notch moving down
+            else if (numnotches > 0)
+            {
+                unsafe
+                {
+                    double fcenter, fwidth;
+                    int active;
+                    wdsp.RXANBPGetNotch(wdsp.id(0, 0), (int)udMNFNotch.Value - 1, &fcenter, &fwidth, &active);
+                    udMNFNotch.Value -= 1;
+                    udMNFFreq.Value = (decimal)(fcenter / 1.0e6);
+                    udMNFWidth.Value = (decimal)fwidth;
+                    if (active != 0)
+                        chkMNFActive.Checked = true;
+                    else
+                        chkMNFActive.Checked = false;
+                }
+            }
+            // if there are no remaining notches
+            else
+            {
+                udMNFNotch.Value = 0;
+                udMNFFreq.Value = 0;
+                udMNFWidth.Value = 0;
+                chkMNFActive.Checked = true;
+                btnMNFDelete.Enabled = false;
+            }
+            // set the Maximum for the 'Notch' control
+            if (numnotches > 0)
+                udMNFNotch.Maximum = numnotches - 1;
+            else
+                udMNFNotch.Maximum = 0;
+        }
+
+        private void udMNFNotch_ValueChanged(object sender, EventArgs e)
+        {
+            unsafe
+            {
+                int nn;
+                wdsp.RXANBPGetNumNotches(wdsp.id(0, 0), &nn);
+                numnotches = nn;
+                // if there's a valid notch at the new value, restore it
+                if ((int)udMNFNotch.Value < numnotches)
+                {
+                    double fcenter, fwidth;
+                    int active;
+                    wdsp.RXANBPGetNotch(wdsp.id(0, 0), (int)udMNFNotch.Value, &fcenter, &fwidth, &active);
+                    udMNFFreq.Value = (decimal)(fcenter / 1.0e6);
+                    udMNFWidth.Value = (decimal)fwidth;
+                    if (active != 0)
+                        chkMNFActive.Checked = true;
+                    else
+                        chkMNFActive.Checked = false;
+                }
+                // else, this must be an Add operation
+                else
+                {
+                    udMNFFreq.Value = 0;
+                    udMNFWidth.Value = 0;
+                    chkMNFActive.Checked = true;
+                }
+            }
+        }
+
+
+        private void chkMNFAutoIncrease_CheckedChanged(object sender, EventArgs e)
+        {
+            wdsp.RXANBPSetAutoIncrease(wdsp.id(0, 0), chkMNFAutoIncrease.Checked);
+            wdsp.RXANBPSetAutoIncrease(wdsp.id(0, 1), chkMNFAutoIncrease.Checked);
+            wdsp.RXANBPSetAutoIncrease(wdsp.id(2, 0), chkMNFAutoIncrease.Checked);
+        }
+
+        unsafe public void SaveNotchesToDatabase()
+        {
+            // get the number of notches that exist
+            int nn;
+            wdsp.RXANBPGetNumNotches(wdsp.id(0, 0), &nn);
+            numnotches = nn;
+            // HERE:  SAVE 'numnotches', THE NUMBER OF NOTCHES, TO THE DATABASE
+            MNotchDB.List.Clear();
+            for (int i = 0; i < numnotches; i++)
+            {
+                double fcenter, fwidth;
+                int active;
+                // get fcenter, fwidth, and active for a notch
+                wdsp.RXANBPGetNotch(wdsp.id(0, 0), i, &fcenter, &fwidth, &active);
+                // HERE:  SAVE fcenter, fwidth, and active FOR THIS NOTCH TO THE DATABASE
+                MNotchDB.List.Add(new MNotch(fcenter, fwidth, Convert.ToBoolean(active)));
+            }
+        }
+
+        unsafe public void RestoreNotchesFromDatabase()
+        {
+            // HERE:  Read the number of notches, 'numnotches' from the database
+            for (int i = 0; i < MNotchDB.List.Count; i++)
+            {
+                double fcenter = 0.0, fwidth = 0.0;
+                bool active = false;
+
+                // HERE:  READ VALUES OF fcenter, fwidth, and active FOR NOTCH[i] FROM THE DATABASE
+                fcenter = MNotchDB.List[i].FCenter;
+                fwidth = MNotchDB.List[i].FWidth;
+                active = MNotchDB.List[i].Active;
+
+                wdsp.RXANBPAddNotch(wdsp.id(0, 0), i, fcenter, fwidth, active);
+                wdsp.RXANBPAddNotch(wdsp.id(0, 1), i, fcenter, fwidth, active);
+                wdsp.RXANBPAddNotch(wdsp.id(2, 0), i, fcenter, fwidth, active);
+            }
+            numnotches = MNotchDB.List.Count;
+            udMNFNotch.Value = 0;
+            udMNFNotch.Maximum = 0;
+            if (numnotches > 0)
+            {
+                udMNFNotch.Maximum = numnotches - 1;
+                double fcenter, fwidth;
+                int active;
+                wdsp.RXANBPGetNotch(wdsp.id(0, 0), (int)udMNFNotch.Value, &fcenter, &fwidth, &active);
+                udMNFFreq.Value = (decimal)(fcenter / 1.0e6);
+                udMNFWidth.Value = (decimal)fwidth;
+                if (active != 0)
+                    chkMNFActive.Checked = true;
+                else
+                    chkMNFActive.Checked = false;
+
+                btnMNFDelete.Enabled = true;
+            }
+        }
+
+        #endregion
+
+        private void btnVFOFreq_Click(object sender, EventArgs e)
+        {
+            double vfo = console.VFOAFreq;
+            if (console.RIT) vfo += (double)console.RITValue * 1e-6; // check for RIT
+            udMNFFreq.Value = (decimal)vfo;
         }
 
     }
