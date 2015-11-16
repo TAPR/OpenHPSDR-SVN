@@ -47,3 +47,14 @@ This new control has been added in Setup on the DSP -> AM/SAM tab.
 - fixed the problem with crashing using Split mode
 - removed the German console language translation, ToolTip translation remains 
 - added a colon to the LED fonts
+
+3.3.6 (2015-11-16)
+- Add Multi Notch Filter
+- Added CAT command for Spectral Noise Blanker ZZNN RX1 & ZZNO RX2.
+- Added 25Hz Step Tune.
+- Extended CAT command ZZPB to set & get 10dB, 20dB, and 30dB settings.
+- Removed the subnet mask requirement for static ip addresses.
+- Extended out-of-band transmit between 29.7-61.44MHz.
+- Improved Russian language translation for the ToolTips by Michael, R2AGG.
+- Corrected a problem with the VFO not updating when dragging the panadapter in CW mode
+
