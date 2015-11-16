@@ -130,6 +130,13 @@ void setSize_cfir (CFIR a, int size)
 	calc_cfir (a);
 }
 
+void setOutRate_cfir (CFIR a, int rate)
+{
+	decalc_cfir (a);
+	a->cicrate = rate;
+	calc_cfir (a);
+}
+
 
 double *fir_read (int N, const char *filename, int rtype, double scale)
 	// N = number of real or complex coefficients (see rtype)
@@ -257,7 +264,7 @@ double* cfir_impulse (int N, int DD, int R, int Pairs, double runrate, double ci
 
 	// print_response ("cfirResponse.txt", N, A);
 	impulse = fir_fsamp(N, A, rtype, 1.0, -1);
-	print_impulse ("cfirImpulse.txt", N, impulse, 1, 0);
+	// print_impulse ("cfirImpulse.txt", N, impulse, 1, 0);
 	_aligned_free (A);
 	return impulse;
 }

@@ -626,6 +626,27 @@ PORT void SetRXASNBApmultmin (int channel, double pmultmin)
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
 
+PORT void SetRXASNBAOutputBandwidth (int channel, double flow, double fhigh)
+{
+	RESAMPLE d;
+	double f_low, f_high, tlow, thigh;
+	EnterCriticalSection (&ch[channel].csDSP);
+	d = rxa[channel].snba.p->outresamp;
+	tlow  = fabs (flow);
+	thigh = fabs (fhigh);
+	if (tlow > thigh)
+	{
+		flow  = thigh;
+		fhigh = tlow;
+	}
+	if (flow  >  200.0) f_low  = flow;
+	else                f_low  = 200.0;
+	if (fhigh < 5400.0) f_high = fhigh;
+	else                f_high = 5400.0;
+	setBandwidth_resample (d, f_low, f_high);
+	LeaveCriticalSection (&ch[channel].csDSP);
+}
+
 
 /********************************************************************************************************
 *																										*
@@ -674,10 +695,24 @@ void bpsnba_modecontrol (BPSNBA a)
 void calc_bpsnba (BPSNBA a)
 {
 	a->buff = (double *) malloc0 (a->size * sizeof (complex));
-	a->bpsnba = create_bandpass (1, 0, a->size, a->buff, a->out, a->f_low, a->f_high, a->rate, 1, 1.0);
+	a->bpsnba = create_nbp (
+		1,							// run, always runs
+		0,							// position
+		a->size,					// buffer size
+		a->buff,					// pointer to input buffer
+		a->out,						// pointer to output buffer
+		a->f_low,					// lower filter frequency
+		a->f_high,					// upper filter frequency
+		a->rate,					// sample rate
+		a->wintype,					// wintype
+		a->gain,					// gain
+		a->autoincr,				// auto-increase notch width if below min
+		a->maxpb,					// max number of passbands
+		a->ptraddr);				// addr of database pointer
 }
 
-BPSNBA create_bpsnba (int snba_run, int size, double* in, double* out, int rate, int mode, double abs_low_freq, double abs_high_freq)
+BPSNBA create_bpsnba (int snba_run, int size, double* in, double* out, int rate, int mode, 
+	double abs_low_freq, double abs_high_freq, int wintype, double gain, int autoincr, int maxpb, NOTCHDB* ptraddr)
 {
 	BPSNBA a = (BPSNBA) malloc0 (sizeof (bpsnba));
 	a->snba_run = snba_run;
@@ -688,6 +723,11 @@ BPSNBA create_bpsnba (int snba_run, int size, double* in, double* out, int rate,
 	a->mode = mode;
 	a->abs_low_freq = abs_low_freq;
 	a->abs_high_freq = abs_high_freq;
+	a->wintype = wintype;
+	a->gain = gain;
+	a->autoincr = autoincr;
+	a->maxpb = maxpb;
+	a->ptraddr = ptraddr;
 	bpsnba_modecontrol (a);
 	calc_bpsnba (a);
 	return a;
@@ -695,7 +735,7 @@ BPSNBA create_bpsnba (int snba_run, int size, double* in, double* out, int rate,
 
 void decalc_bpsnba (BPSNBA a)
 {
-	destroy_bandpass (a->bpsnba);
+	destroy_nbp (a->bpsnba);
 	_aligned_free (a->buff);
 }
 
@@ -708,7 +748,7 @@ void destroy_bpsnba (BPSNBA a)
 void flush_bpsnba (BPSNBA a)
 {
 	memset (a->buff, 0, a->size * sizeof (complex));
-	flush_bandpass (a->bpsnba);
+	flush_nbp (a->bpsnba);
 }
 
 void setBuffers_bpsnba (BPSNBA a, double* in, double* out)
@@ -751,5 +791,5 @@ void xbpsnbain (BPSNBA a)
 void xbpsnbaout (BPSNBA a)
 {
 	if (a->run)
-		xbandpass (a->bpsnba, 0);
+		xnbp (a->bpsnba, 0);
 }

@@ -83,7 +83,15 @@ struct _rxa
 	struct
 	{
 		BANDPASS p;
-	} bp0, bp1;
+	} bp1;
+	struct
+	{
+		NOTCHDB p;
+	} ndb;
+	struct
+	{
+		NBP p;
+	} nbp0;
 	struct
 	{
 		BPSNBA p;

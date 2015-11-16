@@ -34,6 +34,7 @@ void initBlanker(ANB a)
 {
     int i;
 	a->trans_count = (int)(a->tau * a->samplerate);
+	if (a->trans_count < 2) a->trans_count = 2;
     a->hang_count = (int)(a->hangtime * a->samplerate);
     a->adv_count = (int)(a->advtime * a->samplerate);
     a->count = 0;

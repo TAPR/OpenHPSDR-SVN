@@ -63,6 +63,7 @@ warren@wpratt.com
 #include "main.h"
 #include "meter.h"
 #include "meterlog10.h"
+#include "nbp.h"
 #include "nob.h"
 #include "nobII.h"
 #include "osctrl.h"

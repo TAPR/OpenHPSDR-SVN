@@ -1118,6 +1118,7 @@ C4
 
 KD5TFDVK6APHAUDIO_API void SetADC1StepAttenData(int bits) { 
 		adc1_step_att_data = bits & 0x1f; 
+		if (diversitymode2) adc2_step_att_data = adc1_step_att_data;
     	return;
 }
 

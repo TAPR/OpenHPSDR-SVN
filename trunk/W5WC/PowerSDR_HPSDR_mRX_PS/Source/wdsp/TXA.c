@@ -527,7 +527,7 @@ void xtxa (int channel)
 	xcfir(txa[channel].cfir.p);
 	xresample (txa[channel].rsmpout.p);
 	xmeter (txa[channel].outmeter.p);
-	// print_peak_env ("env_exception.txt", ch[channel].dsp_outsize, txa[channel].outbuff, 0.990);
+	// print_peak_env ("env_exception.txt", ch[channel].dsp_outsize, txa[channel].outbuff, 0.7);
 }
 
 void setInputSamplerate_txa (int channel)
@@ -547,6 +547,8 @@ void setOutputSamplerate_txa (int channel)
 	// buffers
 	_aligned_free (txa[channel].outbuff);
 	txa[channel].outbuff = (double *)malloc0(1 * ch[channel].dsp_outsize * sizeof(complex));
+	// cfir - needs to know input rate of firmware CIC
+	setOutRate_cfir (txa[channel].cfir.p, ch[channel].out_rate);
 	// output resampler
 	setBuffers_resample (txa[channel].rsmpout.p, txa[channel].midbuff, txa[channel].outbuff);
 	setOutRate_resample (txa[channel].rsmpout.p, ch[channel].out_rate);

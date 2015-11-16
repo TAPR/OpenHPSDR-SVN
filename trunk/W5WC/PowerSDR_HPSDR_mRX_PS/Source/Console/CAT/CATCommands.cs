@@ -3873,8 +3873,43 @@ namespace PowerSDR
 
 		}
 
+        // Sets or reads the Rx1 Spectral Noise Blanker
+        public string ZZNN(string s)
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                console.CATSNB = Convert.ToInt32(s);
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                return console.CATSNB.ToString();
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
 
-		// Sets or reads the Noise Reduction status
+        // Sets or reads the Rx2 Spectral Noise Blanker
+        public string ZZNO(string s)
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                console.CATRX2SNB = Convert.ToInt32(s);
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                return console.CATRX2SNB.ToString();
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+        
+        // Sets or reads the Noise Reduction status
 		//		public string ZZNR()
 		//		{
 		//			int nr = console.CATNR;
@@ -4113,7 +4148,7 @@ namespace PowerSDR
 			if(s != "")
 				n = Convert.ToInt32(s);
 
-            PreampMode e_mode = console.CATPreamp;
+           // PreampMode e_mode = console.CATPreamp;
 
             if (s.Length == parser.nSet)
             {
@@ -4164,23 +4199,72 @@ namespace PowerSDR
         //Sets or reads the RX2 Preamp button
         public string ZZPB(string s)
         {
-                if (s.Length == parser.nGet)
+            int n = 0;
+            if (s != "")
+                n = Convert.ToInt32(s);
+
+            if (s.Length == parser.nSet)
+            {
+                if ((n > (int)PreampMode.FIRST && n < (int)PreampMode.LAST))
                 {
-                    if (console.RX2PreampMode == PreampMode.HPSDR_OFF)
-                        return "0";
-                    else
-                        return "1";
-                }
-                else if (s.Length == parser.nSet)
-                {
-                    if (s == "1")
-                        console.RX2PreampMode = PreampMode.HPSDR_ON;
-                    else
-                        console.RX2PreampMode = PreampMode.HPSDR_OFF;
+                    switch (s)
+                    {
+                        case "0":
+                            console.RX2PreampMode = PreampMode.HPSDR_OFF;
+                            break;
+                        case "1":
+                            console.RX2PreampMode = PreampMode.HPSDR_ON;
+                            break;
+                        case "2":
+                            console.RX2PreampMode = PreampMode.HPSDR_MINUS10;
+                            break;
+                        case "3":
+                            console.RX2PreampMode = PreampMode.HPSDR_MINUS20;
+                            break;
+                        case "4":
+                            console.RX2PreampMode = PreampMode.HPSDR_MINUS30;
+                            break;
+                        //case "5":
+                        //    console.RX2PreampMode = PreampMode.HPSDR_MINUS40;
+                        //    break;
+                        //case "6":
+                        //    console.RX2PreampMode = PreampMode.HPSDR_MINUS50;
+                        //    break;
+                    }
                     return "";
                 }
                 else
                     return parser.Error1;
+            }
+            else if (s.Length == parser.nGet)
+            {
+                int mode = (int)console.RX2PreampMode;
+                string cat_mode = "";
+                cat_mode = mode.ToString();
+                return cat_mode;
+            }
+            else
+            {
+                return parser.Error1;
+            }
+
+                //if (s.Length == parser.nGet)
+                //{
+                //    if (console.RX2PreampMode == PreampMode.HPSDR_OFF)
+                //        return "0";
+                //    else
+                //        return "1";
+                //}
+                //else if (s.Length == parser.nSet)
+                //{
+                //    if (s == "1")
+                //        console.RX2PreampMode = PreampMode.HPSDR_ON;
+                //    else
+                //        console.RX2PreampMode = PreampMode.HPSDR_OFF;
+                //    return "";
+                //}
+                //else
+                //    return parser.Error1;
  
         }
 
@@ -8404,42 +8488,45 @@ namespace PowerSDR
                     freq  =  0.000010;
                     break;
                 case 2:
-                    freq  =  0.000050;
+                    freq  =  0.000025;
                     break;
                 case 3:
-                    freq  =  0.000100;
+                    freq = 0.000050;
                     break;
                 case 4:
-                    freq  =  0.000250;
+                    freq  =  0.000100;
                     break;
                 case 5:
-                    freq  =  0.000500;
+                    freq  =  0.000250;
                     break;
                 case 6:
-                    freq  =  0.001000;
+                    freq  =  0.000500;
                     break;
                 case 7:
-                    freq  =  0.005000;
+                    freq  =  0.001000;
                     break;
                 case 8:
-                    freq  =  0.009000;
+                    freq  =  0.005000;
                     break;
                 case 9:
-                    freq  =  0.010000;
+                    freq  =  0.009000;
                     break;
                 case 10:
-                    freq = 0.100000;
+                    freq  =  0.010000;
                     break;
                 case 11:
-                    freq =  0.250000;
+                    freq = 0.100000;
                     break;
                 case 12:
-                    freq =  0.500000;
+                    freq =  0.250000;
                     break;
                 case 13:
-                    freq =  1.000000;
+                    freq =  0.500000;
                     break;
                 case 14:
+                    freq =  1.000000;
+                    break;
+                case 15:
                     freq = 10.000000;
                     break;
             }

@@ -189,6 +189,14 @@ void setFCLow_resample (RESAMPLE a, double fc_low)
 	calc_resample (a);
 }
 
+void setBandwidth_resample (RESAMPLE a, double fc_low, double fc_high)
+{
+	decalc_resample (a);
+	a->fc_low = fc_low;
+	a->fc = fc_high;
+	calc_resample (a);
+}
+
 // exported calls
 
 PORT

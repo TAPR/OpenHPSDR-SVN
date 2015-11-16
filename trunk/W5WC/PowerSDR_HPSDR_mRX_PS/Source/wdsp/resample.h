@@ -79,6 +79,8 @@ extern void setOutRate_resample(RESAMPLE a, int rate);
 
 extern void setFCLow_resample (RESAMPLE a, double fc_low);
 
+extern void setBandwidth_resample (RESAMPLE a, double fc_low, double fc_high);
+
 #endif
 
 /************************************************************************************************

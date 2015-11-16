@@ -1,7 +1,7 @@
 /*
 *
 * Copyright (C) 2006 Bill Tracey, KD5TFD, bill@ewjt.com 
-* Copyright (C) 2010-2013  Doug Wigley
+* Copyright (C) 2010-2015  Doug Wigley
 * 
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,14 +21,17 @@
 namespace PowerSDR
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Runtime.InteropServices;
     using System.Diagnostics;
-
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Net.NetworkInformation;
     //
     // routines to access audio from kd5tfd/vk6aph fpga based audio 
     // 
-    public class JanusAudio
+    public partial class JanusAudio
     {
         public JanusAudio()
         {
@@ -37,13 +40,7 @@ namespace PowerSDR
             //
         }
 
-
         public static bool isFirmwareLoaded = false;
-
-        //private static void dummy_to_remove_warning() // added to remove fallacious warning about variable never being used
-        //{
-        //    isFirmwareLoaded = isFirmwareLoaded;
-        //}
 
         // get ozy firmware version string - 8 bytes.  returns 
         // null for error 
@@ -63,12 +60,6 @@ namespace PowerSDR
             }
 
             byte[] buf = new byte[8];
-            // int rc = WriteControlMsg(usb_h, 
-            //OzySDR1kControl.VRT_VENDOR_IN, //0xC0
-            // OzySDR1kControl.VRQ_SDR1K_CTL, //0x0d
-            // OzySDR1kControl.SDR1KCTRL_READ_VERSION, // 0x7
-            // 0, buf, buf.Length, 1000); 
-
             int rc = GetOzyID(usb_h, buf, buf.Length);
 
             // System.Console.WriteLine("read version rc: " + rc); 
@@ -162,15 +153,6 @@ namespace PowerSDR
             return fx2_fw_version;
         }
 
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetPennyPresent(int present);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableHermesPower(int enable);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetOutputPowerFactor(int i);
-
         public static void SetOutputPower(float f)
         {
             if (f < 0.0)
@@ -190,29 +172,210 @@ namespace PowerSDR
         // [DllImport("JanusAudio.dll")]
         // public static extern int getNetworkAddrs(Int32[] addrs, Int32 count); 
 
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void DeInitMetisSockets();
-
-        [DllImport("JanusAudio.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int nativeInitMetis(String netaddr, uint broadcast, bool dostatic);
-
         //		private static bool MetisInitialized = false;
         // returns 0 on success, !0 on failure 
+
+        // get the name of this PC and, using it, the IP address of the first adapter
+        //static String strHostName = Dns.GetHostName();
+        //public static IPAddress[] addr = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
+        // get a socket to send and receive on
+        static Socket socket; // = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        // set an endpoint
+        static IPEndPoint iep;
+        // receive data buffer for EP6 (normal data)
+        static byte[] data = new byte[1444];
+        const int MetisPort = 1024;
+        const int LocalPort = 0;
+       // private static IPEndPoint MetisEP = null;
         public static bool enableStaticIP = false;
+        public static uint static_host_network = 0;
+        public static bool FastConnect = false;
+        public static HPSDRHW MetisBoardID = HPSDRHW.Hermes;
+        public static byte MetisCodeVersion = 0;
+        public static string EthernetHostIPAddress = "";
+        public static string Metis_IP_address = "";
+        public static string MetisMAC = "";
+        private const int IP_SUCCESS = 0;
+        private const short VERSION = 2;
+
         public static int initMetis()
         {
-            //			if( MetisInitialized ) 
-            //			{ 
-            //				return 0; 
-            //			} 
             int rc;
+            int adapterIndex = adapterSelected - 1;
+            IPAddress[] addr = null;
+            bool cleanup = false;
             System.Console.WriteLine("MetisNetIPAddr: " + Console.getConsole().MetisNetworkIPAddr);
-            rc = nativeInitMetis(Console.getConsole().MetisNetworkIPAddr, Console.getConsole().StaticBroadcastAddr, enableStaticIP);
-            //			if  ( rc == 0 ) 
-            //			{
-            //				MetisInitialized = true;
-            //			}
-            System.Console.WriteLine("nativeInitMetis returned: " + rc);
+
+            try
+            {
+                addr = Dns.GetHostAddresses(Dns.GetHostName());
+            }
+            catch (SocketException e)
+            {
+                Win32.WSAData data = new Win32.WSAData();
+                int result = 0;
+
+                result = Win32.WSAStartup(VERSION, out data);
+                if (result != IP_SUCCESS)
+                {
+                    System.Console.WriteLine(data.description);
+                    Win32.WSACleanup();
+                }
+
+                addr = Dns.GetHostAddresses(Dns.GetHostName());
+                cleanup = true;
+                // System.Console.WriteLine("SocketException caught!!!");
+                // System.Console.WriteLine("Source : " + e.Source);
+                // System.Console.WriteLine("Message : " + e.Message);           
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("Exception caught!!!");
+                System.Console.WriteLine("Source : " + e.Source);
+                System.Console.WriteLine("Message : " + e.Message);
+            }
+
+            GetNetworkInterfaces();
+
+            List<IPAddress> addrList = new List<IPAddress>();
+
+            // make a list of all the adapters that we found in Dns.GetHostEntry(strHostName).AddressList
+            foreach (IPAddress a in addr)
+            {
+                // make sure to get only IPV4 addresses!
+                // test added because Erik Anderson noted an issue on Windows 7.  May have been in the socket
+                // construction or binding below.
+                if (a.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    addrList.Add(a);
+                }
+            }
+
+            bool foundMetis = false;
+            List<HPSDRDevice> mhd = new List<HPSDRDevice>();
+
+            if (enableStaticIP)
+            {
+                Metis_IP_address = Console.getConsole().MetisNetworkIPAddr;
+ 
+                IPAddress remoteIp = IPAddress.Parse(Metis_IP_address);
+                IPEndPoint remoteEndPoint = new IPEndPoint(remoteIp, 0);
+                Socket socket = new Socket(
+                                      AddressFamily.InterNetwork,
+                                      SocketType.Dgram,
+                                      ProtocolType.Udp);
+                IPEndPoint localEndPoint = QueryRoutingInterface(socket, remoteEndPoint);
+                EthernetHostIPAddress = IPAddress.Parse(localEndPoint.Address.ToString()).ToString();
+
+                socket.Close();
+                socket = null;
+
+                // if success set foundMetis to true, and fill in ONE mhd entry.
+                IPAddress targetIP;
+                IPAddress hostIP;
+                if (IPAddress.TryParse(EthernetHostIPAddress, out hostIP) && IPAddress.TryParse(Metis_IP_address, out targetIP))
+                {
+                    System.Console.WriteLine(String.Format("Attempting fast re-connect to host adapter {0}, metis IP {1}", EthernetHostIPAddress, Metis_IP_address));
+
+                    if (DiscoverMetisOnPort(ref mhd, hostIP, targetIP))
+                    {
+                        foundMetis = true;
+
+                        // make sure that there is only one entry in the list!
+                        if (mhd.Count > 0)
+                        {
+                            // remove the extra ones that don't match!
+                            HPSDRDevice m2 = null;
+                            foreach (var m in mhd)
+                            {
+                                if (m.IPAddress.CompareTo(Metis_IP_address) == 0)
+                                {
+                                    m2 = m;
+                                }
+                            }
+
+                            // clear the list and put our single element in it, if we found it.
+                            mhd.Clear();
+                            if (m2 != null)
+                            {
+                                mhd.Add(m2);
+                            }
+                            else
+                            {
+                                foundMetis = false;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (FastConnect  && (EthernetHostIPAddress.Length > 0) && (Metis_IP_address.Length > 0))
+            {
+                // if success set foundMetis to true, and fill in ONE mhd entry.
+                IPAddress targetIP;
+                IPAddress hostIP;
+                if (IPAddress.TryParse(EthernetHostIPAddress, out hostIP) && IPAddress.TryParse(Metis_IP_address, out targetIP))
+                {
+                    System.Console.WriteLine(String.Format("Attempting fast re-connect to host adapter {0}, metis IP {1}", EthernetHostIPAddress, Metis_IP_address));
+
+                    if (DiscoverMetisOnPort(ref mhd, hostIP, targetIP))
+                    {
+                        foundMetis = true;
+
+                        // make sure that there is only one entry in the list!
+                        if (mhd.Count > 0)
+                        {
+                            // remove the extra ones that don't match!
+                            HPSDRDevice m2 = null;
+                            foreach (var m in mhd)
+                            {
+                                if (m.IPAddress.CompareTo(Metis_IP_address) == 0)
+                                {
+                                    m2 = m;
+                                }
+                            }
+
+                            // clear the list and put our single element in it, if we found it.
+                            mhd.Clear();
+                            if (m2 != null)
+                            {
+                                mhd.Add(m2);
+                            }
+                            else
+                            {
+                                foundMetis = false;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!foundMetis)
+            {
+                foreach (IPAddress ipa in addrList)
+                {
+                    if (DiscoverMetisOnPort(ref mhd, ipa, null))
+                    {
+                        foundMetis = true;
+                    }
+                }
+            }
+
+            if (!foundMetis)
+            {
+                if (cleanup)
+                    Win32.WSACleanup();
+                return -1;
+            }
+
+            int chosenDevice = 0;
+            MetisBoardID = mhd[chosenDevice].deviceType;
+            MetisCodeVersion = mhd[chosenDevice].codeVersion;
+            Metis_IP_address = mhd[chosenDevice].IPAddress;
+            MetisMAC = mhd[chosenDevice].MACAddress;
+            EthernetHostIPAddress = mhd[chosenDevice].hostPortIPAddress.ToString();
+
+            rc = nativeInitMetis(Metis_IP_address);
             return -rc;
         }
 
@@ -261,47 +424,6 @@ namespace PowerSDR
             return 0;
         }
 
-#if false 
-		// old  obsolete code follows 
-
-		public static int oz_start() 
-		{
-			libUSB_Interface.usb_bus bus;
-
-			try
-			{
-				libUSB_Interface.usb_init();
-				System.Console.WriteLine("finding busses...");
-				libUSB_Interface.usb_find_busses();
-				System.Console.WriteLine("finding devices...");
-				libUSB_Interface.usb_find_devices();
-				System.Console.WriteLine("usb_get_busses...");
-				bus = libUSB_Interface.usb_get_busses();
-				System.Console.WriteLine("bus location: " + bus.location.ToString());
-			}
-			catch (Exception e)
-			{
-				System.Console.WriteLine("An error occurred: " + e.Message);
-				return 1;
-			}
-
-			int vid = 0xfffe; 
-			int pid = 0x7; 
-
-			System.Console.WriteLine("Checking for VID PID...");
-
-			libUSB_Interface.usb_device fdev = HPSDR_USB_LIB_V1.USB.FindDevice(bus, vid, pid);
-			if (fdev != null)
-				System.Console.WriteLine("Found VID PID: " + vid.ToString("x") + " " + pid.ToString("x"));
-			else
-			{
-				System.Console.WriteLine("did not find VID PID: " + vid.ToString("x") + " " + pid.ToString("x"));
-				return 1;
-			}
-			return 1; 
-		}
-#endif
-
         public static bool fwVersionsChecked = false;
         private static string fwVersionMsg = null;
 
@@ -326,7 +448,7 @@ namespace PowerSDR
             byte[] metis_ver = new byte[1];
             int mercury2_ver = 0;
 
-           // if (c.CurrentHPSDRModel == HPSDRModel.ANAN100D) c.RX2PreampPresent = true;
+            // if (c.CurrentHPSDRModel == HPSDRModel.ANAN100D) c.RX2PreampPresent = true;
             if (forceFWGood == true || c.CurrentModel == Model.HERMES)
             {
                 System.Console.WriteLine("Firmware ver check forced good!");
@@ -335,11 +457,11 @@ namespace PowerSDR
 
             if (c != null && c.HPSDRisMetis)
             {
-                GetMetisCodeVersion(metis_ver);
+                // GetMetisCodeVersion(metis_ver);
 
                 if (c.PowerOn)
                 {
-                    byte metis_vernum = metis_ver[0];
+                    byte metis_vernum = JanusAudio.MetisCodeVersion;//metis_ver[0];
                     mercury_ver = getMercuryFWVersion();
 
                     if (c.PennyPresent || c.PennyLanePresent)
@@ -599,107 +721,7 @@ namespace PowerSDR
             return result;
         }
 
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetMetisIPAddr();
 
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetMetisMACAddr(byte[] addr_bytes);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetMetisCodeVersion(byte[] addr_bytes);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetMetisBoardID(byte[] addr_bytes);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int StartAudioNative(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits, int no_send);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int StopAudio();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetC1Bits(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexManEnable(int bit);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexEnabled(int bit);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexHPFBits(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexLPFBits(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexTRRelayBit(int bit);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlex2HPFBits(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlex2LPFBits(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableApolloFilter(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableApolloTuner(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableApolloAutoTune(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableEClassModulation(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetEERPWMmin(int min);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetEERPWMmax(int max);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetHermesFilter(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetUserOut0(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetUserOut1(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetUserOut2(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetUserOut3(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern bool getUserI01(); // TX Inhibit input sense
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern bool getUserI02();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern bool getUserI03();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern bool getUserI04();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)] // sets number of receivers
-        unsafe public static extern void SetNRx(int nrx);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)] // controls PureSignal
-        unsafe public static extern void SetPureSignal(int enable);
-        
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)] // sets full or half duplex
-        unsafe public static extern void SetDuplex(int dupx);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int GetC1Bits();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int nativeGetDotDashPTT();  // bit 0 = ptt, bit1 = dash asserted, bit 2 = dot asserted 
         unsafe public static int GetDotDashPTT()
         {
             int bits = nativeGetDotDashPTT();
@@ -712,39 +734,6 @@ namespace PowerSDR
             }
             return bits;
         }
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetLegacyDotDashPTT(int bit);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int GetDiagData(int* a, int count);  // get diag data, count is how many slots are in array 
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetRX1VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetRX2VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetRX3VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetRX4VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetRX5VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetRX6VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetRX7VFOfreq(int f);  // tell aux hardware current freq -- in MHz 
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetTXVFOfreq(int f);  // tell aux hardware current freq -- in MHz 
 
         private static double freq_correction_factor = 1.0;
         public static double FreqCorrectionFactor
@@ -773,6 +762,8 @@ namespace PowerSDR
         private static double lastVFORX1freq = 0.0;
         unsafe public static void SetVFOfreqRX1(double f, bool offset)
         {
+            wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 0), f * 1e6);
+            wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 1), f * 1e6);
             lastVFORX1freq = f;
             int f_freq;
             f_freq = (int)((f * 1e6) * freq_correction_factor);
@@ -782,6 +773,7 @@ namespace PowerSDR
         private static double lastVFORX2freq = 0.0;
         unsafe public static void SetVFOfreqRX2(double f, bool offset)
         {
+            wdsp.RXANBPSetTuneFrequency(wdsp.id(2, 0), f * 1e6);
             lastVFORX2freq = f;
             int f_freq;
             f_freq = (int)((f * 1e6) * freq_correction_factor);
@@ -861,263 +853,112 @@ namespace PowerSDR
             SetTXVFOfreq(f_freq);
             // c.SetupForm.txtTXVFO.Text = f_freq.ToString();
         }
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern IntPtr OzyOpen();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void OzyClose(IntPtr ozyh);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern IntPtr OzyHandleToRealHandle(IntPtr ozh);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int IsOzyAttached();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMicBoost(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetLineIn(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetLineBoost(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexAtten(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMercDither(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMercRandom(int bits);      
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetTxAttenData(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMercTxAtten(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetRX1Preamp(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetRX2Preamp(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableADC1StepAtten(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableADC2StepAtten(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableADC3StepAtten(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetADC1StepAttenData(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetADC2StepAttenData(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetADC3StepAttenData(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMicTipRing(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMicBias(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMicPTT(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getAndResetADC_Overload();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getMercuryFWVersion();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getMercury2FWVersion();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getMercury3FWVersion();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getMercury4FWVersion();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getPenelopeFWVersion();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getOzyFWVersion();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getHaveSync();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getFwdPower();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getRefPower();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getAlexFwdPower();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getHermesDCVoltage();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableCWKeyer(int enable);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWSidetoneVolume(int vol);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWPTTDelay(int delay);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWHangTime(int hang);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWSidetoneFreq(int freq);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWKeyerSpeed(int speed);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWKeyerMode(int mode);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWKeyerWeight(int weight);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableCWKeyerSpacing(int bits);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void ReversePaddles(int bits);
-        
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWDash(int bit);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWDot(int bit);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWX(int bit);
-
         // 
         // compute fwd power from Penny based on count returned 
         // this conversion is a linear interpolation of values measured on an 
         // actual penny board 		
         // 
-    /*    public static float computeFwdPower()
-        {
-            int power_int = getFwdPower();
-            double computed_result = computePower(power_int);
-            return (float)computed_result;
-        }
-
-        public static float computeRefPower()
-        {
-            Console c = Console.getConsole();
-            int adc = JanusAudio.getRefPower();
-            if (adc < 300) adc = 0;
-            float volts = (float)adc * (3.3f / 4095.0f);
-            float watts = (float)(Math.Pow(volts, 2) / 0.095f);
-
-            if (c != null && c.PAValues)
+        /*    public static float computeFwdPower()
             {
-                c.SetupForm.txtRevADCValue.Text = adc.ToString();
-                c.SetupForm.txtRevVoltage.Text = volts.ToString();
-              //  c.SetupForm.txtPARevPower.Text = watts.ToString();              
-            } 
-
-            return watts;
-        }
-
-        public static float computeAlexFwdPower()
-        {
-            Console c = Console.getConsole();
-            int adc = JanusAudio.getAlexFwdPower();
-            if (adc < 300) adc = 0;
-            float volts = (float)adc * (3.3f / 4095.0f);
-            float watts = (float)(Math.Pow(volts, 2) / 0.095f);
-
-            if (c != null && c.PAValues)
-            {
-                c.SetupForm.txtFwdADCValue.Text = adc.ToString();
-                c.SetupForm.txtFwdVoltage.Text = volts.ToString();
-               // c.SetupForm.txtPAFwdPower.Text = watts.ToString();
-            } 
-
-            return watts;
-        }
-
-        public static float computePower(int power_int)
-        {
-            // Console c = Console.getConsole();
-            double power_f = (double)power_int;
-            double result = 0.0;
-
-            if (power_int <= 2095)
-            {
-                if (power_int <= 874)
-                {
-                    if (power_int <= 113)
-                    {
-                        result = 0.0;
-                    }
-                    else  // > 113 
-                    {
-                        result = (power_f - 113.0) * 0.065703;
-                    }
-                }
-                else  // > 874 
-                {
-                    if (power_int <= 1380)
-                    {
-                        result = 50.0 + ((power_f - 874.0) * 0.098814);
-                    }
-                    else  // > 1380 
-                    {
-                        result = 100.0 + ((power_f - 1380.0) * 0.13986);
-                    }
-                }
-            }
-            else  // > 2095 
-            {
-                if (power_int <= 3038)
-                {
-                    if (power_int <= 2615)
-                    {
-                        result = 200.0 + ((power_f - 2095.0) * 0.192308);
-                    }
-                    else  // > 2615, <3038 
-                    {
-                        result = 300.0 + ((power_f - 2615.0) * 0.236407);
-                    }
-                }
-                else  // > 3038 
-                {
-                    result = 400.0 + ((power_f - 3038.0) * 0.243902);
-                }
+                int power_int = getFwdPower();
+                double computed_result = computePower(power_int);
+                return (float)computed_result;
             }
 
-            result = result / 1000;  //convert to watts 
-            // c.SetupForm.txtFwdPower.Text = result.ToString();
-            // c.SetupForm.txtFwdADC.Text = power_int.ToString();
+            public static float computeRefPower()
+            {
+                Console c = Console.getConsole();
+                int adc = JanusAudio.getRefPower();
+                if (adc < 300) adc = 0;
+                float volts = (float)adc * (3.3f / 4095.0f);
+                float watts = (float)(Math.Pow(volts, 2) / 0.095f);
 
-            return (float)result;
-        } */
+                if (c != null && c.PAValues)
+                {
+                    c.SetupForm.txtRevADCValue.Text = adc.ToString();
+                    c.SetupForm.txtRevVoltage.Text = volts.ToString();
+                  //  c.SetupForm.txtPARevPower.Text = watts.ToString();              
+                } 
 
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getControlByteIn(int n);
+                return watts;
+            }
 
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetFPGATestMode(int i);
+            public static float computeAlexFwdPower()
+            {
+                Console c = Console.getConsole();
+                int adc = JanusAudio.getAlexFwdPower();
+                if (adc < 300) adc = 0;
+                float volts = (float)adc * (3.3f / 4095.0f);
+                float watts = (float)(Math.Pow(volts, 2) / 0.095f);
 
-        // return true if ozy vid/pid found on usb bus .. native code does all the real work 
+                if (c != null && c.PAValues)
+                {
+                    c.SetupForm.txtFwdADCValue.Text = adc.ToString();
+                    c.SetupForm.txtFwdVoltage.Text = volts.ToString();
+                   // c.SetupForm.txtPAFwdPower.Text = watts.ToString();
+                } 
+
+                return watts;
+            }
+
+            public static float computePower(int power_int)
+            {
+                // Console c = Console.getConsole();
+                double power_f = (double)power_int;
+                double result = 0.0;
+
+                if (power_int <= 2095)
+                {
+                    if (power_int <= 874)
+                    {
+                        if (power_int <= 113)
+                        {
+                            result = 0.0;
+                        }
+                        else  // > 113 
+                        {
+                            result = (power_f - 113.0) * 0.065703;
+                        }
+                    }
+                    else  // > 874 
+                    {
+                        if (power_int <= 1380)
+                        {
+                            result = 50.0 + ((power_f - 874.0) * 0.098814);
+                        }
+                        else  // > 1380 
+                        {
+                            result = 100.0 + ((power_f - 1380.0) * 0.13986);
+                        }
+                    }
+                }
+                else  // > 2095 
+                {
+                    if (power_int <= 3038)
+                    {
+                        if (power_int <= 2615)
+                        {
+                            result = 200.0 + ((power_f - 2095.0) * 0.192308);
+                        }
+                        else  // > 2615, <3038 
+                        {
+                            result = 300.0 + ((power_f - 2615.0) * 0.236407);
+                        }
+                    }
+                    else  // > 3038 
+                    {
+                        result = 400.0 + ((power_f - 3038.0) * 0.243902);
+                    }
+                }
+
+                result = result / 1000;  //convert to watts 
+                // c.SetupForm.txtFwdPower.Text = result.ToString();
+                // c.SetupForm.txtFwdADC.Text = power_int.ToString();
+
+                return (float)result;
+            } */
+
+         // return true if ozy vid/pid found on usb bus .. native code does all the real work 
         unsafe static bool isOzyAttached()
         {
             int rc;
@@ -1130,131 +971,422 @@ namespace PowerSDR
             return true;
         }
 
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetDiscoveryMode(int b);
+        // Taken from: KISS Konsole
+        public static List<NetworkInterface> foundNics = new List<NetworkInterface>();
+        public static List<NicProperties> nicProperties = new List<NicProperties>();
+        public static string numberOfIPAdapters;
+        public static string Network_interfaces = null;  // holds a list with the description of each Network Adapter
+        public static int adapterSelected = 1;           // from Setup form, the number of the Network Adapter to use
 
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetPennyOCBits(int b);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetSWRProtect(float g);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int GetEP4Data(char* bufp);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetADC_cntrl1(int g);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetADC_cntrl1();
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetADC_cntrl2(int g);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetADC_cntrl2();
-
-        // Diversity
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void EnableDiversity2(int g);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetMercSource(int g);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetrefMerc(int g);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetIQ_Rotate(double a, double b);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetIQ_RotateA(double a, double b);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetIQ_RotateB(double a, double b);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetTheta(double a); 
-
-        // Ozyutils
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe extern public static int GetOzyID(IntPtr usb_h, byte[] bytes, int length);
-
-        //[DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        // unsafe extern public static bool Write_I2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe extern public static bool WriteI2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe extern public static bool ReadI2C(IntPtr usb_h, int i2c_addr, byte[] bytes, int length);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe extern public static bool Set_I2C_Speed(IntPtr hdev, int speed);
-
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe extern public static int WriteControlMsg(IntPtr hdev, int requesttype, int request, int value,
-                                              int index, byte[] bytes, int length, int timeout);
-#if false
-        [DllImport("JanusAudio.dll")]
-        extern public static int LoadFirmware(int VID, int PID, String filename);
-
-        [DllImport("JanusAudio.dll")]
-        extern public static int LoadFPGA(int VID, int PID, String filename);
-
-        [DllImport("JanusAudio.dll")]
-        unsafe extern public static int ReadI2C(int i2c_addr, byte* buffer, int length);
-
-        //[DllImport("JanusAudio.dll")]
-        //unsafe extern public static int WriteI2C(IntPtr usb_h, int i2c_addr, byte* buffer, int length);
-
-        [DllImport("JanusAudio.dll")]
-        unsafe extern public static int ReadEEPROM(int i2c_addr, int offset, byte* buffer, int length);
-
-        [DllImport("JanusAudio.dll")]
-        unsafe extern public static int WriteEEPROM(int i2c_addr, int offset, byte* buffer, int length);
-
-        public static int LoadOzyFirmware(string path, string filename)
+        public static void GetNetworkInterfaces()
         {
-            string firmnamepath = path + "\\" + filename;
+            // creat a string that contains the name and speed of each Network adapter 
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
 
-            if (File.Exists(firmnamepath))
+            foundNics.Clear();
+            nicProperties.Clear();
+
+            Network_interfaces = "";
+            int adapterNumber = 1;
+
+            foreach (var netInterface in nics)
             {
-                return LoadFirmware(0xfffe, 0x7, firmnamepath);
+                if ((netInterface.OperationalStatus == OperationalStatus.Up ||
+                     netInterface.OperationalStatus == OperationalStatus.Unknown) &&
+                    (netInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 ||
+                 netInterface.NetworkInterfaceType == NetworkInterfaceType.Ethernet))
+                {
+                    foreach (var addrInfo in netInterface.GetIPProperties().UnicastAddresses)
+                    {
+                        if (addrInfo.Address.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            NicProperties np = new NicProperties();
+                            np.ipv4Address = addrInfo.Address;
+                            np.ipv4Mask = addrInfo.IPv4Mask;
+                            nicProperties.Add(np);
+                        }
+                    }
+                }
+
+                // if the length of the network adapter name is > 31 characters then trim it, if shorter then pad to 31.
+                // Need to use fixed width font - Courier New
+                string speed = "  " + (netInterface.Speed / 1000000).ToString() + "T";
+                if (netInterface.Description.Length > 31)
+                {
+                    Network_interfaces += adapterNumber++.ToString() + ". " + netInterface.Description.Remove(31) + speed + "\n";
+                }
+                else
+                {
+                    Network_interfaces += adapterNumber++.ToString() + ". " + netInterface.Description.PadRight(31, ' ') + speed + "\n";
+                }
+
+                foundNics.Add(netInterface);
             }
-            else return -1;
+
+            /*
+                        foreach (NetworkInterface adapter in nics)
+                        {
+                            IPInterfaceProperties properties = adapter.GetIPProperties();
+
+                            // if it's not 'up' (operational), ignore it.  (Dan Quigley, 13 Aug 2011)
+                            if (adapter.OperationalStatus != OperationalStatus.Up)
+                                continue;
+
+                            // if it's a loopback interface, ignore it!
+                            if (adapter.NetworkInterfaceType == NetworkInterfaceType.Loopback)
+                                continue;
+
+                            // get rid of non-ethernet addresses
+                            if ((adapter.NetworkInterfaceType != NetworkInterfaceType.Ethernet) && (adapter.NetworkInterfaceType != NetworkInterfaceType.GigabitEthernet))
+                                continue;
+
+                            System.Console.WriteLine("");      // a blank line
+                            System.Console.WriteLine(adapter.Description);
+                            System.Console.WriteLine(String.Empty.PadLeft(adapter.Description.Length, '='));
+                            System.Console.WriteLine("  Interface type .......................... : {0}", adapter.NetworkInterfaceType);
+                            System.Console.WriteLine("  Physical Address ........................ : {0}", adapter.GetPhysicalAddress().ToString());
+                            System.Console.WriteLine("  Is receive only.......................... : {0}", adapter.IsReceiveOnly);
+                            System.Console.WriteLine("  Multicast................................ : {0}", adapter.SupportsMulticast);
+                            System.Console.WriteLine("  Speed    ................................ : {0}", adapter.Speed);
+
+                            // list unicast addresses
+                            UnicastIPAddressInformationCollection c = properties.UnicastAddresses;
+                            foreach (UnicastIPAddressInformation a in c)
+                            {
+                                IPAddress addr = a.Address;
+                                System.Console.WriteLine("  Unicast Addr ............................ : {0}", addr.ToString());
+                                IPAddress mask = a.IPv4Mask;
+                                System.Console.WriteLine("  Unicast Mask ............................ : {0}", (mask == null ? "null" : mask.ToString()));
+
+                                NicProperties np = new NicProperties();
+                                np.ipv4Address = a.Address;
+                                np.ipv4Mask = a.IPv4Mask;
+
+                                nicProperties.Add(np);
+                            }
+
+                            // list multicast addresses
+                            MulticastIPAddressInformationCollection m = properties.MulticastAddresses;
+                            foreach (MulticastIPAddressInformation a in m)
+                            {
+                                IPAddress addr = a.Address;
+                                System.Console.WriteLine("  Multicast Addr .......................... : {0}", addr.ToString());
+                            }
+
+                            // if the length of the network adapter name is > 31 characters then trim it, if shorter then pad to 31.
+                            // Need to use fixed width font - Courier New
+                            string speed = "  " + (adapter.Speed / 1000000).ToString() + "T";
+                            if (adapter.Description.Length > 31)
+                            {
+                                Network_interfaces += adapterNumber++.ToString() + ". " + adapter.Description.Remove(31) + speed + "\n";
+                            }
+                            else
+                            {
+                                Network_interfaces += adapterNumber++.ToString() + ". " + adapter.Description.PadRight(31, ' ') + speed + "\n";
+                            }
+
+                            foundNics.Add(adapter);
+                        }
+            */
+
+            System.Console.WriteLine(Network_interfaces);
+
+            // display number of adapters on Setup form
+            numberOfIPAdapters = (adapterNumber - 1).ToString();
         }
 
-        public static int LoadOzyFPGA(string path, string filename)
+        private static bool DiscoverMetisOnPort(ref List<HPSDRDevice> mhdList, IPAddress HostIP, IPAddress targetIP)
         {
-            string fpganamepath = path + "\\" + filename;
+            bool result = false;
 
-            if (File.Exists(fpganamepath))
+            // configure a new socket object for each Ethernet port we're scanning
+            socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+
+            // Listen to data on this PC's IP address. Allow the program to allocate a free port.
+            iep = new IPEndPoint(HostIP, LocalPort);  // was iep = new IPEndPoint(ipa, 0);
+
+            try
             {
-                return LoadFPGA(0xfffe, 0x7, fpganamepath);
+                // bind to socket and Port
+                socket.Bind(iep);
+                //   socket.ReceiveBufferSize = 0xFFFFF;   // no lost frame counts at 192kHz with this setting
+                socket.Blocking = true;
+
+                IPEndPoint localEndPoint = (IPEndPoint)socket.LocalEndPoint;
+                System.Console.WriteLine("Looking for Metis boards using host adapter IP {0}, port {1}", localEndPoint.Address, localEndPoint.Port);
+
+                if (Metis_Discovery(ref mhdList, iep, targetIP))
+                {
+                    result = true;
+                }
+
             }
-            else return -1;
+            catch (System.Exception ex)
+            {
+                System.Console.WriteLine("Caught an exception while binding a socket to endpoint {0}.  Exception was: {1} ", iep.ToString(), ex.ToString());
+                result = false;
+            }
+            finally
+            {
+                socket.Close();
+                socket = null;
+            }
+
+            return result;
         }
-#endif
-        //		public static bool CWptt() 
-        //		{ 			
-        //			if ( ( GetDotDash() & 0x3 ) != 0  ) 
-        //			{
-        //				return true; 
-        //			}
-        //			/* else */ 
-        //			return false; 									 									 
-        //		} 
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe extern public static int GetAndResetAmpProtect();
 
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe extern public static void SetAmpProtectRun(int run);
 
-        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe extern public static void SetAIN4Voltage(int v);
+        private static bool Metis_Discovery(ref List<HPSDRDevice> mhdList, IPEndPoint iep, IPAddress targetIP)
+        {
+            string MetisMAC;
+
+            // socket.SendBufferSize = 0xFFFFFFF;
+
+            // set up HPSDR Metis discovery packet
+            byte[] Metis_discovery = new byte[63];
+            Array.Clear(Metis_discovery, 0, Metis_discovery.Length);
+
+            byte[] Metis_discovery_preamble = new byte[] { 0xEF, 0xFE, 0x02 };
+            Metis_discovery_preamble.CopyTo(Metis_discovery, 0);
+
+            bool have_Metis = false;            // true when we find an Metis
+            int time_out = 0;
+
+            // set socket option so that broadcast is allowed.
+            socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
+
+            // need this so we can Broadcast on the socket
+            IPEndPoint broadcast = new IPEndPoint(IPAddress.Broadcast, MetisPort);
+            string receivedIP = "";   // the IP address Metis obtains; assigned, from DHCP or APIPA (169.254.x.y)
+
+            IPAddress hostPortIPAddress = iep.Address;
+            IPAddress hostPortMask = IPAddress.Broadcast;
+
+            // find the subnet mask that goes with this host port
+            foreach (NicProperties n in nicProperties)
+            {
+                if (hostPortIPAddress.Equals(n.ipv4Address))
+                {
+                    hostPortMask = n.ipv4Mask;
+                    break;
+                }
+            }
+
+            broadcast = new IPEndPoint(IPAddressExtensions.GetBroadcastAddress(hostPortIPAddress, hostPortMask), MetisPort);
+
+            // send every second until we either find an Metis board or exceed the number of attempts
+            while (!have_Metis)            // #### djm should loop for a while in case there are multiple Metis boards
+            {
+                // send a broadcast to the port 1024
+                socket.SendTo(Metis_discovery, broadcast);
+
+                // now listen on  send port for any Metis cards
+                System.Console.WriteLine("Ready to receive.... ");
+                int recv;
+                byte[] data = new byte[100];
+
+                bool data_available;
+
+                // await possibly multiple replies, if there are multiple Metis/Hermes on this port,
+                // which MIGHT be the 'any' port, 0.0.0.0
+                do
+                {
+                    // Poll the port to see if data is available 
+                    data_available = socket.Poll(100000, SelectMode.SelectRead);  // wait 100 msec  for time out    
+
+                    if (data_available)
+                    {
+                        EndPoint remoteEP = new IPEndPoint(IPAddress.None, 0);
+                        recv = socket.ReceiveFrom(data, ref remoteEP);                 // recv has number of bytes we received
+                        //string stringData = Encoding.ASCII.GetString(data, 0, recv); // use this to print the received data
+
+                        System.Console.WriteLine("raw Discovery data = " + BitConverter.ToString(data, 0, recv));
+                        // see what port this came from at the remote end
+                        // IPEndPoint remoteIpEndPoint = socket.RemoteEndPoint as IPEndPoint;
+                        //  Console.Write(" Remote Port # = ",remoteIpEndPoint.Port);
+
+                        string junk = Convert.ToString(remoteEP);  // see code in DataLoop
+
+                        string[] words = junk.Split(':');
+
+                        System.Console.Write(words[1]);
+
+                        // get Metis MAC address from the payload
+                        byte[] MAC = { 0, 0, 0, 0, 0, 0 };
+                        Array.Copy(data, 3, MAC, 0, 6);
+                        MetisMAC = BitConverter.ToString(MAC);
+                        byte codeVersion = data[9];
+                        byte boardType = data[10];
+
+                        // check for HPSDR frame ID and type 2 (not currently streaming data, which also means 'not yet in use')
+                        // changed to find Metis boards, even if alreay in use!  This prevents the need to power-cycle metis.
+                        // (G Byrkit, 8 Jan 2012)
+                        if ((data[0] == 0xEF) && (data[1] == 0xFE) && ((data[2] & 0x02) != 0))
+                        {
+                            System.Console.WriteLine("\nFound a Metis/Hermes/Griffin.  Checking whether it qualifies");
+
+                            // get Metis IP address from the IPEndPoint passed to ReceiveFrom.
+                            IPEndPoint ripep = (IPEndPoint)remoteEP;
+                            IPAddress receivedIPAddr = ripep.Address;
+                            receivedIP = receivedIPAddr.ToString();
+
+                            System.Console.WriteLine("Metis IP from IP Header = " + receivedIP);
+                            System.Console.WriteLine("Metis MAC address from payload = " + MetisMAC);
+                            if (!SameSubnet(receivedIPAddr, hostPortIPAddress, hostPortMask))
+                            {
+                                // device is NOT on the subnet that this port actually services.  Do NOT add to list!
+                                System.Console.WriteLine("Not on subnet of host adapter! Adapter IP {0}, Adapter mask {1}",
+                                    hostPortIPAddress.ToString(), hostPortMask.ToString());
+                            }
+                            else if (receivedIPAddr.Equals(hostPortIPAddress))
+                            {
+                                System.Console.WriteLine("Rejected: contains same IP address as the host adapter; not from a Metis/Hermes/Griffin");
+                            }
+                            else if (MetisMAC.Equals("00-00-00-00-00-00"))
+                            {
+                                System.Console.WriteLine("Rejected: contains bogus MAC address of all-zeroes");
+                            }
+                            else
+                            {
+                                HPSDRDevice mhd = new HPSDRDevice();
+                                mhd.IPAddress = receivedIP;
+                                mhd.MACAddress = MetisMAC;
+                                mhd.deviceType = (HPSDRHW)boardType;
+                                mhd.codeVersion = codeVersion;
+                                mhd.InUse = false;
+                                mhd.hostPortIPAddress = hostPortIPAddress;
+
+                                if (targetIP != null)
+                                {
+                                    if (mhd.IPAddress.CompareTo(targetIP.ToString()) == 0)
+                                    {
+                                        have_Metis = true;
+                                        mhdList.Add(mhd);
+                                        return true;
+                                    }
+                                }
+                                else
+                                {
+                                    have_Metis = true;
+                                    mhdList.Add(mhd);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("No data  from Port = ");
+                        if ((++time_out) > 3)
+                        {
+                            System.Console.WriteLine("Time out!");
+                            return false;
+                        }
+                    }
+                } while (data_available);
+            }
+
+            return have_Metis;
+        }
+
+        /// <summary>
+        /// Determines whether the board and hostAdapter IPAddresses are on the same subnet,
+        /// using subnetMask to make the determination.  All addresses are IPV4 addresses
+        /// </summary>
+        /// <param name="board">IP address of the remote device</param>
+        /// <param name="hostAdapter">IP address of the ethernet adapter</param>
+        /// <param name="subnetMask">subnet mask to use to determine if the above 2 IPAddresses are on the same subnet</param>
+        /// <returns>true if same subnet, false otherwise</returns>
+        public static bool SameSubnet(IPAddress board, IPAddress hostAdapter, IPAddress subnetMask)
+        {
+            byte[] boardBytes = board.GetAddressBytes();
+            byte[] hostAdapterBytes = hostAdapter.GetAddressBytes();
+            byte[] subnetMaskBytes = subnetMask.GetAddressBytes();
+
+            if (boardBytes.Length != hostAdapterBytes.Length)
+            {
+                return false;
+            }
+            if (subnetMaskBytes.Length != hostAdapterBytes.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < boardBytes.Length; ++i)
+            {
+                byte boardByte = (byte)(boardBytes[i] & subnetMaskBytes[i]);
+                byte hostAdapterByte = (byte)(hostAdapterBytes[i] & subnetMaskBytes[i]);
+                if (boardByte != hostAdapterByte)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Taken From: https://searchcode.com/codesearch/view/7464800/
+        private static IPEndPoint QueryRoutingInterface(
+                  Socket socket,
+                  IPEndPoint remoteEndPoint)
+        {
+            SocketAddress address = remoteEndPoint.Serialize();
+
+            byte[] remoteAddrBytes = new byte[address.Size];
+            for (int i = 0; i < address.Size; i++)
+            {
+                remoteAddrBytes[i] = address[i];
+            }
+
+            byte[] outBytes = new byte[remoteAddrBytes.Length];
+            socket.IOControl(
+                        IOControlCode.RoutingInterfaceQuery,
+                        remoteAddrBytes,
+                        outBytes);
+            for (int i = 0; i < address.Size; i++)
+            {
+                address[i] = outBytes[i];
+            }
+
+            EndPoint ep = remoteEndPoint.Create(address);
+            return (IPEndPoint)ep;
+        }
+
     }
+
+    // Taken from: http://blogs.msdn.com/b/knom/archive/2008/12/31/ip-address-calculations-with-c-subnetmasks-networks.aspx
+    public static class IPAddressExtensions
+    {
+        public static IPAddress GetBroadcastAddress(this IPAddress address, IPAddress subnetMask)
+        {
+            byte[] ipAdressBytes = address.GetAddressBytes();
+            byte[] subnetMaskBytes = subnetMask.GetAddressBytes();
+
+            if (ipAdressBytes.Length != subnetMaskBytes.Length)
+                throw new ArgumentException("Lengths of IP address and subnet mask do not match.");
+
+            byte[] broadcastAddress = new byte[ipAdressBytes.Length];
+            for (int i = 0; i < broadcastAddress.Length; i++)
+            {
+                broadcastAddress[i] = (byte)(ipAdressBytes[i] | (subnetMaskBytes[i] ^ 255));
+            }
+            return new IPAddress(broadcastAddress);
+        }
+    }
+
+    public class HPSDRDevice
+    {
+        public HPSDRHW deviceType;   // which type of device (currently Metis or Hermes)
+        public byte codeVersion;        // reported code version type
+        public bool InUse;              // whether already in use
+        public string IPAddress;        // currently, an IPV4 address
+        public string MACAddress;       // a physical (MAC) address
+        public IPAddress hostPortIPAddress;
+    }
+
+    public class NicProperties
+    {
+        public IPAddress ipv4Address;
+        public IPAddress ipv4Mask;
+    }
+
+
 }

@@ -109,6 +109,29 @@ namespace PowerSDR
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
+        [DllImport("ws2_32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern Int32 WSAStartup(Int16 wVersionRequested, out WSAData wsaData);
+
+        [DllImport("ws2_32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern Int32 WSACleanup();
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+        public struct WSAData
+        {
+            public Int16 version;
+            public Int16 highVersion;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 257)]
+            public String description;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 129)]
+            public String systemStatus;
+
+            public Int16 maxSockets;
+            public Int16 maxUdpDg;
+            public IntPtr vendorInfo;
+        }
+
         #endregion
 
     }

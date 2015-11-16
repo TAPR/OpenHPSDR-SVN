@@ -36,12 +36,12 @@ void calc_fmsq (FMSQ a)
 	a->noise = (double *)malloc0(2 * a->size * sizeof(complex));
 	a->F[0] = 0.0;
 	a->F[1] = a->fc;
-	a->F[2] = a->pllpole;
+	a->F[2] = *a->pllpole;
 	a->F[3] = 20000.0;
 	a->G[0] = 0.0;
 	a->G[1] = 0.0;
 	a->G[2] = 3.0;
-	a->G[3] = +20.0 * log10(20000.0 / a->pllpole);
+	a->G[3] = +20.0 * log10(20000.0 / *a->pllpole);
 	a->mults = eq_mults(a->size, 3, a->F, a->G, a->rate, 1.0 / (2.0 * a->size), 0, 1);
 	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt, (fftw_complex *)a->product, FFTW_FORWARD, FFTW_PATIENT);
 	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->noise, FFTW_BACKWARD, FFTW_PATIENT);
@@ -53,10 +53,10 @@ void calc_fmsq (FMSQ a)
 	a->onem_longavm = 1.0 - a->longavm;
 	a->longnoise = 1.0;
 	// level change
-	a->ntup = (int)(a->tup * a->rate);
+	a->ntup   = (int)(a->tup   * a->rate);
 	a->ntdown = (int)(a->tdown * a->rate);
-	a->cup = (double *)malloc0((a->ntup + 1) * sizeof(double));
-	a->cdown = (double *)malloc0((a->ntdown + 1) * sizeof(double));
+	a->cup   = (double *)malloc0 ((a->ntup   + 1) * sizeof(double));
+	a->cdown = (double *)malloc0 ((a->ntdown + 1) * sizeof(double));
 	delta = PI / (double)a->ntup;
 	theta = 0.0;
 	for (i = 0; i <= a->ntup; i++)
@@ -91,7 +91,7 @@ void decalc_fmsq (FMSQ a)
 }
 
 FMSQ create_fmsq (int run, int size, double* insig, double* outsig, double* trigger, int rate, double fc, 
-	double pllpole, double tdelay, double avtau, double longtau, double tup, double tdown, double tail_thresh, 
+	double* pllpole, double tdelay, double avtau, double longtau, double tup, double tdown, double tail_thresh, 
 	double unmute_thresh, double min_tail, double max_tail)
 {
 	FMSQ a = (FMSQ) malloc0 (sizeof (fmsq));
@@ -179,10 +179,10 @@ void xfmsq (FMSQ a)
 				a->outsig[2 * i + 1] = 0.0;
 				break;
 			case INCREASE:
-				if (a->count-- == 0)
-					a->state = UNMUTED;
 				a->outsig[2 * i + 0] = a->insig[2 * i + 0] * a->cup[a->ntup - a->count];
 				a->outsig[2 * i + 1] = a->insig[2 * i + 1] * a->cup[a->ntup - a->count];
+				if (a->count-- == 0)
+					a->state = UNMUTED;
 				break;
 			case UNMUTED:
 				if (a->avnoise > a->tail_thresh)
@@ -195,6 +195,8 @@ void xfmsq (FMSQ a)
 				a->outsig[2 * i + 1] = a->insig[2 * i + 1];
 				break;
 			case TAIL:
+				a->outsig[2 * i + 0] = a->insig[2 * i + 0];
+				a->outsig[2 * i + 1] = a->insig[2 * i + 1];
 				if (a->avnoise < a->unmute_thresh)
 					a->state = UNMUTED;
 				else if (a->count-- == 0)
@@ -202,14 +204,12 @@ void xfmsq (FMSQ a)
 					a->state = DECREASE;
 					a->count = a->ntdown;
 				}
-				a->outsig[2 * i + 0] = a->insig[2 * i + 0];
-				a->outsig[2 * i + 1] = a->insig[2 * i + 1];
 				break;
 			case DECREASE:
-				if (a->count-- == 0)
-					a->state = MUTED;
 				a->outsig[2 * i + 0] = a->insig[2 * i + 0] * a->cdown[a->ntdown - a->count];
 				a->outsig[2 * i + 1] = a->insig[2 * i + 1] * a->cdown[a->ntdown - a->count];
+				if (a->count-- == 0)
+					a->state = MUTED;
 				break;
 			}
 		}

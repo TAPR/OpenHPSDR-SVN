@@ -1564,6 +1564,22 @@
             this.lblLMSNR2delay = new System.Windows.Forms.LabelTS();
             this.udLMSNR2taps = new System.Windows.Forms.NumericUpDownTS();
             this.lblLMSNR2taps = new System.Windows.Forms.LabelTS();
+            this.tpDSPMNF = new System.Windows.Forms.TabPage();
+            this.grpDSPMNF = new System.Windows.Forms.GroupBoxTS();
+            this.chkMNFAutoIncrease = new System.Windows.Forms.CheckBoxTS();
+            this.btnMNFDelete = new System.Windows.Forms.ButtonTS();
+            this.btnMNFCancel = new System.Windows.Forms.ButtonTS();
+            this.btnMNFEdit = new System.Windows.Forms.ButtonTS();
+            this.chkMNFActive = new System.Windows.Forms.CheckBoxTS();
+            this.btnMNFRun = new System.Windows.Forms.ButtonTS();
+            this.btnMNFEnter = new System.Windows.Forms.ButtonTS();
+            this.btnMNFAdd = new System.Windows.Forms.ButtonTS();
+            this.lblMNFWidth = new System.Windows.Forms.LabelTS();
+            this.lblMNFFreq = new System.Windows.Forms.LabelTS();
+            this.lblMNFName = new System.Windows.Forms.LabelTS();
+            this.udMNFWidth = new System.Windows.Forms.NumericUpDownTS();
+            this.udMNFFreq = new System.Windows.Forms.NumericUpDownTS();
+            this.udMNFNotch = new System.Windows.Forms.NumericUpDownTS();
             this.tpTransmit = new System.Windows.Forms.TabPage();
             this.chkLimitExtAmpOnOverload = new System.Windows.Forms.CheckBoxTS();
             this.grpExtTXInhibit = new System.Windows.Forms.GroupBoxTS();
@@ -2487,6 +2503,7 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
+            this.btnVFOFreq = new System.Windows.Forms.ButtonTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             tpAlexAntCtrl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udATTOnTX)).BeginInit();
@@ -2902,6 +2919,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2gain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2delay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2taps)).BeginInit();
+            this.tpDSPMNF.SuspendLayout();
+            this.grpDSPMNF.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udMNFWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udMNFFreq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udMNFNotch)).BeginInit();
             this.tpTransmit.SuspendLayout();
             this.grpExtTXInhibit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).BeginInit();
@@ -5511,6 +5533,7 @@
             0,
             0,
             0});
+            this.udStaticIPmask4.Visible = false;
             // 
             // udStaticIPmask3
             // 
@@ -5539,6 +5562,7 @@
             0,
             0,
             0});
+            this.udStaticIPmask3.Visible = false;
             // 
             // udStaticIPmask2
             // 
@@ -5567,6 +5591,7 @@
             0,
             0,
             0});
+            this.udStaticIPmask2.Visible = false;
             // 
             // udStaticIPmask1
             // 
@@ -5595,6 +5620,7 @@
             0,
             0,
             0});
+            this.udStaticIPmask1.Visible = false;
             // 
             // radStaticIP4
             // 
@@ -6108,7 +6134,7 @@
             this.chkEnableStaticIP.Name = "chkEnableStaticIP";
             this.chkEnableStaticIP.Size = new System.Drawing.Size(217, 16);
             this.chkEnableStaticIP.TabIndex = 14;
-            this.chkEnableStaticIP.Text = "Use Static IP Address                   Mask";
+            this.chkEnableStaticIP.Text = "Use Static IP Address ";
             this.chkEnableStaticIP.CheckedChanged += new System.EventHandler(this.chkEnableStaticIP_CheckedChanged);
             // 
             // chkFullDiscovery
@@ -6120,7 +6146,8 @@
             this.chkFullDiscovery.Name = "chkFullDiscovery";
             this.chkFullDiscovery.Size = new System.Drawing.Size(152, 16);
             this.chkFullDiscovery.TabIndex = 13;
-            this.chkFullDiscovery.Text = "Full Network Discovery";
+            this.chkFullDiscovery.Text = "Reuse Last IP Address";
+            this.toolTip1.SetToolTip(this.chkFullDiscovery, "Use the last good IP address found for reconnecting to the radio.");
             this.chkFullDiscovery.CheckedChanged += new System.EventHandler(this.chkFullDiscovery_CheckedChanged);
             // 
             // radMetis
@@ -6411,16 +6438,16 @@
             // lblMetisBoardID
             // 
             this.lblMetisBoardID.Image = null;
-            this.lblMetisBoardID.Location = new System.Drawing.Point(219, 34);
+            this.lblMetisBoardID.Location = new System.Drawing.Point(180, 34);
             this.lblMetisBoardID.Name = "lblMetisBoardID";
-            this.lblMetisBoardID.Size = new System.Drawing.Size(26, 16);
+            this.lblMetisBoardID.Size = new System.Drawing.Size(65, 16);
             this.lblMetisBoardID.TabIndex = 7;
             this.lblMetisBoardID.Text = "00";
             // 
             // labelTS88
             // 
             this.labelTS88.Image = null;
-            this.labelTS88.Location = new System.Drawing.Point(189, 34);
+            this.labelTS88.Location = new System.Drawing.Point(154, 34);
             this.labelTS88.Name = "labelTS88";
             this.labelTS88.Size = new System.Drawing.Size(21, 16);
             this.labelTS88.TabIndex = 6;
@@ -6429,7 +6456,7 @@
             // lblMetisCodeVersion
             // 
             this.lblMetisCodeVersion.Image = null;
-            this.lblMetisCodeVersion.Location = new System.Drawing.Point(220, 13);
+            this.lblMetisCodeVersion.Location = new System.Drawing.Point(180, 16);
             this.lblMetisCodeVersion.Name = "lblMetisCodeVersion";
             this.lblMetisCodeVersion.Size = new System.Drawing.Size(26, 16);
             this.lblMetisCodeVersion.TabIndex = 5;
@@ -6438,7 +6465,7 @@
             // lblMetisVer
             // 
             this.lblMetisVer.Image = null;
-            this.lblMetisVer.Location = new System.Drawing.Point(189, 13);
+            this.lblMetisVer.Location = new System.Drawing.Point(154, 16);
             this.lblMetisVer.Name = "lblMetisVer";
             this.lblMetisVer.Size = new System.Drawing.Size(26, 16);
             this.lblMetisVer.TabIndex = 4;
@@ -6465,18 +6492,18 @@
             // lblMetisIP
             // 
             this.lblMetisIP.Image = null;
-            this.lblMetisIP.Location = new System.Drawing.Point(46, 16);
+            this.lblMetisIP.Location = new System.Drawing.Point(40, 16);
             this.lblMetisIP.Name = "lblMetisIP";
-            this.lblMetisIP.Size = new System.Drawing.Size(128, 16);
+            this.lblMetisIP.Size = new System.Drawing.Size(110, 16);
             this.lblMetisIP.TabIndex = 0;
             this.lblMetisIP.Text = "0.0.0.0";
             // 
             // lblMetisMAC
             // 
             this.lblMetisMAC.Image = null;
-            this.lblMetisMAC.Location = new System.Drawing.Point(46, 34);
+            this.lblMetisMAC.Location = new System.Drawing.Point(40, 34);
             this.lblMetisMAC.Name = "lblMetisMAC";
-            this.lblMetisMAC.Size = new System.Drawing.Size(128, 16);
+            this.lblMetisMAC.Size = new System.Drawing.Size(110, 16);
             this.lblMetisMAC.TabIndex = 1;
             this.lblMetisMAC.Text = "00:00:00:00:00:00";
             // 
@@ -20821,6 +20848,7 @@
             this.tcDSP.Controls.Add(this.tpDSPAudio);
             this.tcDSP.Controls.Add(this.tpDSPEER);
             this.tcDSP.Controls.Add(this.tpDSPNR);
+            this.tcDSP.Controls.Add(this.tpDSPMNF);
             this.tcDSP.Location = new System.Drawing.Point(0, 0);
             this.tcDSP.Name = "tcDSP";
             this.tcDSP.SelectedIndex = 0;
@@ -24626,11 +24654,13 @@
             // radANF2PreAGC
             // 
             this.radANF2PreAGC.AutoSize = true;
+            this.radANF2PreAGC.Checked = true;
             this.radANF2PreAGC.Image = null;
             this.radANF2PreAGC.Location = new System.Drawing.Point(6, 43);
             this.radANF2PreAGC.Name = "radANF2PreAGC";
             this.radANF2PreAGC.Size = new System.Drawing.Size(66, 17);
             this.radANF2PreAGC.TabIndex = 12;
+            this.radANF2PreAGC.TabStop = true;
             this.radANF2PreAGC.Text = "Pre-AGC";
             this.radANF2PreAGC.UseVisualStyleBackColor = true;
             this.radANF2PreAGC.CheckedChanged += new System.EventHandler(this.radANF2PreAGC_CheckedChanged);
@@ -24638,13 +24668,11 @@
             // radANFPostAGC2
             // 
             this.radANFPostAGC2.AutoSize = true;
-            this.radANFPostAGC2.Checked = true;
             this.radANFPostAGC2.Image = null;
             this.radANFPostAGC2.Location = new System.Drawing.Point(6, 66);
             this.radANFPostAGC2.Name = "radANFPostAGC2";
             this.radANFPostAGC2.Size = new System.Drawing.Size(71, 17);
             this.radANFPostAGC2.TabIndex = 13;
-            this.radANFPostAGC2.TabStop = true;
             this.radANFPostAGC2.Text = "Post-AGC";
             this.radANFPostAGC2.UseVisualStyleBackColor = true;
             // 
@@ -24948,11 +24976,13 @@
             // radANFPreAGC
             // 
             this.radANFPreAGC.AutoSize = true;
+            this.radANFPreAGC.Checked = true;
             this.radANFPreAGC.Image = null;
             this.radANFPreAGC.Location = new System.Drawing.Point(6, 42);
             this.radANFPreAGC.Name = "radANFPreAGC";
             this.radANFPreAGC.Size = new System.Drawing.Size(66, 17);
             this.radANFPreAGC.TabIndex = 10;
+            this.radANFPreAGC.TabStop = true;
             this.radANFPreAGC.Text = "Pre-AGC";
             this.radANFPreAGC.UseVisualStyleBackColor = true;
             this.radANFPreAGC.CheckedChanged += new System.EventHandler(this.radANFPreAGC_CheckedChanged);
@@ -24960,13 +24990,11 @@
             // radANFPostAGC
             // 
             this.radANFPostAGC.AutoSize = true;
-            this.radANFPostAGC.Checked = true;
             this.radANFPostAGC.Image = null;
             this.radANFPostAGC.Location = new System.Drawing.Point(6, 65);
             this.radANFPostAGC.Name = "radANFPostAGC";
             this.radANFPostAGC.Size = new System.Drawing.Size(71, 17);
             this.radANFPostAGC.TabIndex = 11;
-            this.radANFPostAGC.TabStop = true;
             this.radANFPostAGC.Text = "Post-AGC";
             this.radANFPostAGC.UseVisualStyleBackColor = true;
             // 
@@ -25482,6 +25510,252 @@
             this.lblLMSNR2taps.Size = new System.Drawing.Size(40, 16);
             this.lblLMSNR2taps.TabIndex = 3;
             this.lblLMSNR2taps.Text = "Taps:";
+            // 
+            // tpDSPMNF
+            // 
+            this.tpDSPMNF.BackColor = System.Drawing.SystemColors.Control;
+            this.tpDSPMNF.Controls.Add(this.grpDSPMNF);
+            this.tpDSPMNF.Location = new System.Drawing.Point(4, 22);
+            this.tpDSPMNF.Name = "tpDSPMNF";
+            this.tpDSPMNF.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDSPMNF.Size = new System.Drawing.Size(592, 338);
+            this.tpDSPMNF.TabIndex = 9;
+            this.tpDSPMNF.Text = "MNF";
+            // 
+            // grpDSPMNF
+            // 
+            this.grpDSPMNF.Controls.Add(this.btnVFOFreq);
+            this.grpDSPMNF.Controls.Add(this.chkMNFAutoIncrease);
+            this.grpDSPMNF.Controls.Add(this.btnMNFDelete);
+            this.grpDSPMNF.Controls.Add(this.btnMNFCancel);
+            this.grpDSPMNF.Controls.Add(this.btnMNFEdit);
+            this.grpDSPMNF.Controls.Add(this.chkMNFActive);
+            this.grpDSPMNF.Controls.Add(this.btnMNFRun);
+            this.grpDSPMNF.Controls.Add(this.btnMNFEnter);
+            this.grpDSPMNF.Controls.Add(this.btnMNFAdd);
+            this.grpDSPMNF.Controls.Add(this.lblMNFWidth);
+            this.grpDSPMNF.Controls.Add(this.lblMNFFreq);
+            this.grpDSPMNF.Controls.Add(this.lblMNFName);
+            this.grpDSPMNF.Controls.Add(this.udMNFWidth);
+            this.grpDSPMNF.Controls.Add(this.udMNFFreq);
+            this.grpDSPMNF.Controls.Add(this.udMNFNotch);
+            this.grpDSPMNF.Location = new System.Drawing.Point(6, 24);
+            this.grpDSPMNF.Name = "grpDSPMNF";
+            this.grpDSPMNF.Size = new System.Drawing.Size(571, 160);
+            this.grpDSPMNF.TabIndex = 0;
+            this.grpDSPMNF.TabStop = false;
+            this.grpDSPMNF.Text = "Multi Notch Filter";
+            // 
+            // chkMNFAutoIncrease
+            // 
+            this.chkMNFAutoIncrease.AutoSize = true;
+            this.chkMNFAutoIncrease.Checked = true;
+            this.chkMNFAutoIncrease.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMNFAutoIncrease.Image = null;
+            this.chkMNFAutoIncrease.Location = new System.Drawing.Point(22, 133);
+            this.chkMNFAutoIncrease.Name = "chkMNFAutoIncrease";
+            this.chkMNFAutoIncrease.Size = new System.Drawing.Size(322, 17);
+            this.chkMNFAutoIncrease.TabIndex = 13;
+            this.chkMNFAutoIncrease.Text = "Auto-Increase width (if needed) to achieve >100dB attenuation";
+            this.chkMNFAutoIncrease.UseVisualStyleBackColor = true;
+            this.chkMNFAutoIncrease.CheckedChanged += new System.EventHandler(this.chkMNFAutoIncrease_CheckedChanged);
+            // 
+            // btnMNFDelete
+            // 
+            this.btnMNFDelete.Enabled = false;
+            this.btnMNFDelete.Image = null;
+            this.btnMNFDelete.Location = new System.Drawing.Point(222, 104);
+            this.btnMNFDelete.Name = "btnMNFDelete";
+            this.btnMNFDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnMNFDelete.TabIndex = 12;
+            this.btnMNFDelete.Text = "Delete";
+            this.btnMNFDelete.UseVisualStyleBackColor = true;
+            this.btnMNFDelete.Click += new System.EventHandler(this.btnMNFDelete_Click);
+            // 
+            // btnMNFCancel
+            // 
+            this.btnMNFCancel.Image = null;
+            this.btnMNFCancel.Location = new System.Drawing.Point(492, 104);
+            this.btnMNFCancel.Name = "btnMNFCancel";
+            this.btnMNFCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnMNFCancel.TabIndex = 11;
+            this.btnMNFCancel.Text = "Cancel";
+            this.btnMNFCancel.UseVisualStyleBackColor = true;
+            this.btnMNFCancel.Click += new System.EventHandler(this.btnMNFCancel_Click);
+            // 
+            // btnMNFEdit
+            // 
+            this.btnMNFEdit.Image = null;
+            this.btnMNFEdit.Location = new System.Drawing.Point(122, 104);
+            this.btnMNFEdit.Name = "btnMNFEdit";
+            this.btnMNFEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnMNFEdit.TabIndex = 10;
+            this.btnMNFEdit.Text = "Edit";
+            this.btnMNFEdit.UseVisualStyleBackColor = true;
+            this.btnMNFEdit.Click += new System.EventHandler(this.btnMNFEdit_Click);
+            // 
+            // chkMNFActive
+            // 
+            this.chkMNFActive.AutoSize = true;
+            this.chkMNFActive.Checked = true;
+            this.chkMNFActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMNFActive.Enabled = false;
+            this.chkMNFActive.Image = null;
+            this.chkMNFActive.Location = new System.Drawing.Point(393, 46);
+            this.chkMNFActive.Name = "chkMNFActive";
+            this.chkMNFActive.Size = new System.Drawing.Size(56, 17);
+            this.chkMNFActive.TabIndex = 9;
+            this.chkMNFActive.Text = "Active";
+            this.chkMNFActive.UseVisualStyleBackColor = true;
+            // 
+            // btnMNFRun
+            // 
+            this.btnMNFRun.Image = null;
+            this.btnMNFRun.Location = new System.Drawing.Point(490, 10);
+            this.btnMNFRun.Name = "btnMNFRun";
+            this.btnMNFRun.Size = new System.Drawing.Size(75, 23);
+            this.btnMNFRun.TabIndex = 8;
+            this.btnMNFRun.Text = "OFF";
+            this.btnMNFRun.UseVisualStyleBackColor = true;
+            this.btnMNFRun.Visible = false;
+            this.btnMNFRun.Click += new System.EventHandler(this.btnMNFRun_Click);
+            // 
+            // btnMNFEnter
+            // 
+            this.btnMNFEnter.Image = null;
+            this.btnMNFEnter.Location = new System.Drawing.Point(411, 104);
+            this.btnMNFEnter.Name = "btnMNFEnter";
+            this.btnMNFEnter.Size = new System.Drawing.Size(75, 23);
+            this.btnMNFEnter.TabIndex = 7;
+            this.btnMNFEnter.Text = "ENTER";
+            this.btnMNFEnter.UseVisualStyleBackColor = true;
+            this.btnMNFEnter.Click += new System.EventHandler(this.btnMNFEnter_Click);
+            // 
+            // btnMNFAdd
+            // 
+            this.btnMNFAdd.Image = null;
+            this.btnMNFAdd.Location = new System.Drawing.Point(22, 104);
+            this.btnMNFAdd.Name = "btnMNFAdd";
+            this.btnMNFAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnMNFAdd.TabIndex = 6;
+            this.btnMNFAdd.Text = "Add";
+            this.btnMNFAdd.UseVisualStyleBackColor = true;
+            this.btnMNFAdd.Click += new System.EventHandler(this.btnMNFAdd_Click);
+            // 
+            // lblMNFWidth
+            // 
+            this.lblMNFWidth.AutoSize = true;
+            this.lblMNFWidth.Image = null;
+            this.lblMNFWidth.Location = new System.Drawing.Point(294, 26);
+            this.lblMNFWidth.Name = "lblMNFWidth";
+            this.lblMNFWidth.Size = new System.Drawing.Size(57, 13);
+            this.lblMNFWidth.TabIndex = 5;
+            this.lblMNFWidth.Text = "Width (Hz)";
+            // 
+            // lblMNFFreq
+            // 
+            this.lblMNFFreq.AutoSize = true;
+            this.lblMNFFreq.Image = null;
+            this.lblMNFFreq.Location = new System.Drawing.Point(132, 26);
+            this.lblMNFFreq.Name = "lblMNFFreq";
+            this.lblMNFFreq.Size = new System.Drawing.Size(120, 13);
+            this.lblMNFFreq.TabIndex = 4;
+            this.lblMNFFreq.Text = "Center Frequency (Mhz)";
+            // 
+            // lblMNFName
+            // 
+            this.lblMNFName.AutoSize = true;
+            this.lblMNFName.Image = null;
+            this.lblMNFName.Location = new System.Drawing.Point(6, 26);
+            this.lblMNFName.Name = "lblMNFName";
+            this.lblMNFName.Size = new System.Drawing.Size(46, 13);
+            this.lblMNFName.TabIndex = 3;
+            this.lblMNFName.Text = "Notch #";
+            // 
+            // udMNFWidth
+            // 
+            this.udMNFWidth.Enabled = false;
+            this.udMNFWidth.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udMNFWidth.Location = new System.Drawing.Point(295, 45);
+            this.udMNFWidth.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.udMNFWidth.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udMNFWidth.Name = "udMNFWidth";
+            this.udMNFWidth.Size = new System.Drawing.Size(75, 20);
+            this.udMNFWidth.TabIndex = 2;
+            this.udMNFWidth.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // udMNFFreq
+            // 
+            this.udMNFFreq.DecimalPlaces = 6;
+            this.udMNFFreq.Enabled = false;
+            this.udMNFFreq.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.udMNFFreq.Location = new System.Drawing.Point(133, 45);
+            this.udMNFFreq.Maximum = new decimal(new int[] {
+            6144,
+            0,
+            0,
+            131072});
+            this.udMNFFreq.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udMNFFreq.Name = "udMNFFreq";
+            this.udMNFFreq.Size = new System.Drawing.Size(120, 20);
+            this.udMNFFreq.TabIndex = 1;
+            this.udMNFFreq.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // udMNFNotch
+            // 
+            this.udMNFNotch.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udMNFNotch.Location = new System.Drawing.Point(6, 45);
+            this.udMNFNotch.Maximum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udMNFNotch.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udMNFNotch.Name = "udMNFNotch";
+            this.udMNFNotch.Size = new System.Drawing.Size(75, 20);
+            this.udMNFNotch.TabIndex = 0;
+            this.udMNFNotch.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udMNFNotch.ValueChanged += new System.EventHandler(this.udMNFNotch_ValueChanged);
             // 
             // tpTransmit
             // 
@@ -40979,6 +41253,18 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
+            // btnVFOFreq
+            // 
+            this.btnVFOFreq.Image = null;
+            this.btnVFOFreq.Location = new System.Drawing.Point(133, 70);
+            this.btnVFOFreq.Name = "btnVFOFreq";
+            this.btnVFOFreq.Size = new System.Drawing.Size(58, 23);
+            this.btnVFOFreq.TabIndex = 16;
+            this.btnVFOFreq.Text = "VFOA";
+            this.toolTip1.SetToolTip(this.btnVFOFreq, "Enter the Frequency from VFOA");
+            this.btnVFOFreq.UseVisualStyleBackColor = true;
+            this.btnVFOFreq.Click += new System.EventHandler(this.btnVFOFreq_Click);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -41481,6 +41767,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2gain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2delay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLMSNR2taps)).EndInit();
+            this.tpDSPMNF.ResumeLayout(false);
+            this.grpDSPMNF.ResumeLayout(false);
+            this.grpDSPMNF.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udMNFWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udMNFFreq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udMNFNotch)).EndInit();
             this.tpTransmit.ResumeLayout(false);
             this.tpTransmit.PerformLayout();
             this.grpExtTXInhibit.ResumeLayout(false);
@@ -42901,5 +43193,22 @@
         private System.Windows.Forms.NumericUpDownTS udDSPSNBThresh2;
         private System.Windows.Forms.LabelTS lblDSPSNBThresh2;
         private System.Windows.Forms.CheckBoxTS chkSplitPins;
+        private System.Windows.Forms.TabPage tpDSPMNF;
+        private System.Windows.Forms.GroupBoxTS grpDSPMNF;
+        private System.Windows.Forms.LabelTS lblMNFWidth;
+        private System.Windows.Forms.LabelTS lblMNFFreq;
+        private System.Windows.Forms.LabelTS lblMNFName;
+        private System.Windows.Forms.NumericUpDownTS udMNFWidth;
+        private System.Windows.Forms.NumericUpDownTS udMNFFreq;
+        private System.Windows.Forms.NumericUpDownTS udMNFNotch;
+        private System.Windows.Forms.ButtonTS btnMNFEnter;
+        private System.Windows.Forms.ButtonTS btnMNFAdd;
+        private System.Windows.Forms.ButtonTS btnMNFRun;
+        private System.Windows.Forms.CheckBoxTS chkMNFActive;
+        private System.Windows.Forms.ButtonTS btnMNFEdit;
+        private System.Windows.Forms.ButtonTS btnMNFCancel;
+        private System.Windows.Forms.ButtonTS btnMNFDelete;
+        private System.Windows.Forms.CheckBoxTS chkMNFAutoIncrease;
+        private System.Windows.Forms.ButtonTS btnVFOFreq;
     }
 }

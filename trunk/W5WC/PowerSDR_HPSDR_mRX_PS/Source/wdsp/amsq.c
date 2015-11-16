@@ -136,10 +136,10 @@ void xamsq (AMSQ a)
 				a->out[2 * i + 1] = a->muted_gain * a->in[2 * i + 1];
 				break;
 			case INCREASE:
-				if (a->count-- == 0)
-					a->state = UNMUTED;
 				a->out[2 * i + 0] = a->in[2 * i + 0] * a->cup[a->ntup - a->count];
 				a->out[2 * i + 1] = a->in[2 * i + 1] * a->cup[a->ntup - a->count];
+				if (a->count-- == 0)
+					a->state = UNMUTED;
 				break;
 			case UNMUTED:
 				if (a->avsig < a->tail_thresh)
@@ -152,6 +152,8 @@ void xamsq (AMSQ a)
 				a->out[2 * i + 1] = a->in[2 * i + 1];
 				break;
 			case TAIL:
+				a->out[2 * i + 0] = a->in[2 * i + 0];
+				a->out[2 * i + 1] = a->in[2 * i + 1];
 				if (a->avsig > a->unmute_thresh)
 					a->state = UNMUTED;
 				else if (a->count-- == 0)
@@ -159,14 +161,12 @@ void xamsq (AMSQ a)
 					a->state = DECREASE;
 					a->count = a->ntdown;
 				}
-				a->out[2 * i + 0] = a->in[2 * i + 0];
-				a->out[2 * i + 1] = a->in[2 * i + 1];
 				break;
 			case DECREASE:
-				if (a->count-- == 0)
-					a->state = MUTED;
 				a->out[2 * i + 0] = a->in[2 * i + 0] * a->cdown[a->ntdown - a->count];
 				a->out[2 * i + 1] = a->in[2 * i + 1] * a->cdown[a->ntdown - a->count];
+				if (a->count-- == 0)
+					a->state = MUTED;
 				break;
 			}
 		}
