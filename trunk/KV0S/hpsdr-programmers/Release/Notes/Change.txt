@@ -16,5 +16,5 @@ Date: October 31, 2014
 2.0.4.9 (2014-2-9) - Fixed the multi board selection problem
 2.0.4.10 (2014-7-2) - Disallow programming with no file selected
 2.0.4.11 (2014-11-9) - Shortened discovery delay (2 sec) from 12 sec.  Will leave 2.0.4.10 for those with problems.
-
-
+2.0.4.11 (2015-12-2) - 2.0.4.11 moved to archive to avoid confusion for most users.
+2.0.4.10 (2015-12-2) - 20.04.10 is the current release for the HPSDRProgrammer.
