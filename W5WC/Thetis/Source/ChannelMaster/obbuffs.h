@@ -61,14 +61,6 @@ typedef struct _obb
 	double* out;
 } obb, *OBB;
 
-struct _obpointers
-{
-	OBB pcbuff[numRings];
-	OBB pdbuff[numRings];
-	OBB pebuff[numRings];
-	OBB pfbuff[numRings];
-} p;
-
 extern void create_obbuffs (int id, int accept, int max_insize, int outsize);
 
 extern void destroy_obbuffs (int id);

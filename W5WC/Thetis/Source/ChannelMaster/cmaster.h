@@ -96,4 +96,6 @@ extern void create_cmaster();
 
 extern void destroy_cmaster();
 
+extern __declspec (dllexport) void SendpOutbound (void (*Outbound)(int id, int nsamples, double* buff));
+
 #endif
