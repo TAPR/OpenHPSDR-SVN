@@ -8,6 +8,7 @@
 #include <ws2tcpip.h>
 
 #include "analyzer.h"
+#include "cmcomm.h"
 
 #ifndef _network_h
 #define _network_h

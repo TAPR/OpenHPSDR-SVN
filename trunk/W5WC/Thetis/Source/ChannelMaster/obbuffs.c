@@ -26,6 +26,14 @@ warren@wpratt.com
 
 #include "obbuffs.h"
 
+struct _obpointers
+{
+	OBB pcbuff[numRings];
+	OBB pdbuff[numRings];
+	OBB pebuff[numRings];
+	OBB pfbuff[numRings];
+} obp;
+
 void start_obthread (int id)
 {
 	HANDLE handle = (HANDLE) _beginthread(ob_main, 0, (void *)id);
@@ -35,7 +43,7 @@ void start_obthread (int id)
 void create_obbuffs (int id, int accept, int max_insize, int outsize)
 {
 	OBB a = (OBB) calloc (1, sizeof(obb));
-	p.pcbuff[id] = p.pdbuff[id] = p.pebuff[id] = p.pfbuff[id] = a;
+	obp.pcbuff[id] = obp.pdbuff[id] = obp.pebuff[id] = obp.pfbuff[id] = a;
 	a->id = id;
 	a->accept = accept;
 	a->run = 1;
@@ -59,7 +67,7 @@ void create_obbuffs (int id, int accept, int max_insize, int outsize)
 
 void destroy_obbuffs (int id)
 {
-	OBB a = p.pcbuff[id];
+	OBB a = obp.pcbuff[id];
 	InterlockedBitTestAndReset(&a->accept, 0);
 	EnterCriticalSection (&a->csIN);
 	EnterCriticalSection (&a->csOUT);
@@ -78,7 +86,7 @@ void destroy_obbuffs (int id)
 
 void flush_obbuffs (int id)
 {
-	OBB a = p.pfbuff[id];
+	OBB a = obp.pfbuff[id];
 	memset (a->r1_baseptr, 0, a->r1_active_buffsize * sizeof (complex));
 	a->r1_inidx = 0;
 	a->r1_outidx = 0;
@@ -91,7 +99,7 @@ void OutBound (int id, int nsamples, double* in)
 {
 	int n;
 	int first, second;
-	OBB a = p.pebuff[id];
+	OBB a = obp.pebuff[id];
 	if (_InterlockedAnd (&a->accept, 1))
 	{
 		EnterCriticalSection (&a->csIN);
@@ -123,7 +131,7 @@ void OutBound (int id, int nsamples, double* in)
 void obdata (int id, double* out)
 {
 	int first, second;
-	OBB a = p.pdbuff[id];
+	OBB a = obp.pdbuff[id];
 	if (!_InterlockedAnd (&a->run, 1)) _endthread();
 	if (a->r1_outsize > (a->r1_active_buffsize - a->r1_outidx))
 	{
@@ -144,7 +152,7 @@ void obdata (int id, double* out)
 void ob_main (void *pargs)
 {
 	int id = (int)pargs;
-	OBB a = p.pdbuff[id];
+	OBB a = obp.pdbuff[id];
 	
 	while (_InterlockedAnd (&a->run, 1))
 	{
@@ -153,13 +161,14 @@ void ob_main (void *pargs)
 		LeaveCriticalSection (&a->csOUT);
 		obdata (id, a->out);
 		sendOutbound(id, a->out);
+		// if (id == 0) WriteAudio(30.0, 48000, 360, a->out, 3);
 	}
 	_endthread();
 }
 
 void SetOBRingOutsize (int id, int size)
 {
-	OBB a = p.pcbuff[id];
+	OBB a = obp.pcbuff[id];
 	InterlockedBitTestAndReset(&a->accept, 0);
 	EnterCriticalSection (&a->csIN);
 	EnterCriticalSection (&a->csOUT);

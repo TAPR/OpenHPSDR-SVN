@@ -1,6 +1,6 @@
 /*
  * network.c
- * Copyright (C) 2015 Doug Wigley (W5WC)
+ * Copyright (C) 2015-2016 Doug Wigley (W5WC)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,6 +17,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  */
+
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
@@ -126,7 +129,7 @@ int nativeInitMetis(char *netaddr) {
 	IPAddr SrcIp = 0;       /* default for src ip */
 	ULONG MacAddr[2];       /* for 6-byte hardware addresses */
 	ULONG PhysAddrLen = 6;  /* default to length of six bytes */
-	int rcv_timeo;
+	// int rcv_timeo;
 	int rc;
 	int sndbufsize;
 	//u_long addrs[10];
@@ -464,147 +467,6 @@ void MetisStopReadThread(void) {
 //	}
 //}
 
-
-void ReadThreadMainLoop() {
-	int i, rc, k, j;
-	double sbuf[500] = { 0 };	// FOR DEBUG ONLY
-	prn->hDataEvent = WSACreateEvent();
-	WSAEventSelect(listenSock, prn->hDataEvent, FD_READ);
-
-	while (io_keep_running != 0) {
-
-		DWORD retVal = WSAWaitForMultipleEvents(1, &prn->hDataEvent, FALSE, 1000, FALSE);
-		if ((retVal == WSA_WAIT_FAILED) || (retVal == WSA_WAIT_TIMEOUT))
-		{
-			HaveSync = 0; //send console LOS
-			SendStopToMetis();
-			memset(prn->RxReadBufp, 0, 238);
-			memset(prn->TxReadBufp, 0, 720);
-			Inbound(0, 238, prn->RxReadBufp);
-			Inbound(1, 238, prn->RxReadBufp);
-			Inbound(inid(1, 0), 720, prn->TxReadBufp);
-			continue;
-		}
-		else
-		{
-			WSAEnumNetworkEvents(listenSock, prn->hDataEvent, &prn->wsaProcessEvents);
-			if (prn->wsaProcessEvents.lNetworkEvents & FD_READ)
-			{
-				if (prn->wsaProcessEvents.iErrorCode[FD_READ_BIT] != 0)
-				{
-					printf("FD_READ failed with error %d\n",
-						prn->wsaProcessEvents.iErrorCode[FD_READ_BIT]);
-					break;
-				}
-
-				rc = ReadUDPFrame(prn->ReadBufp);
-
-				switch (rc)
-				{
-				case 1025:
-					//Byte 0 - Bit [0] - PTT  1 = active, 0 = inactive
-					//         Bit [1] - Dot  1 = active, 0 = inactive
-					//         Bit [2] - Dash 1 = active, 0 = inactive
-					prn->ptt_in = prn->ReadBufp[0] & 0x1;
-					prn->dot_in = prn->ReadBufp[0] & 0x2;
-					prn->dash_in = prn->ReadBufp[0] & 0x4;
-
-					//Byte 1 - Bit [0] - ADC0  Overload 1 = active, 0 = inactive
-					//		    Bit [1] - ADC1  Overload 1 = active, 0 = inactive
-					//         Bit [2] - ADC2  Overload 1 = active, 0 = inactive  * ADC2-7 set to 0 for Angelia
-					//         Bit [3] - ADC3  Overload 1 = active, 0 = inactive
-					//         Bit [4] - ADC4  Overload 1 = active, 0 = inactive
-					//         Bit [5] - ADC5  Overload 1 = active, 0 = inactive
-					//         Bit [6] - ADC6  Overload 1 = active, 0 = inactive
-					//         Bit [7] - ADC7  Overload 1 = active, 0 = inactive
-					for (i = 0; i < MAX_ADC; i++)
-						prn->adc[i].adc_overload = ((prn->ReadBufp[1] >> i) & 0x1) != 0;
-
-					//Bytes 2,3      Exciter Power [15:0]     * 12 bits sign extended to 16
-					//Bytes 10,11    FWD Power [15:0]           ditto
-					//Bytes 18,19    REV Power [15:0]           ditto
-					prn->tx[0].exciter_power = prn->ReadBufp[2] << 8 | prn->ReadBufp[3];
-					prn->tx[0].fwd_power = prn->ReadBufp[10] << 8 | prn->ReadBufp[11];
-					prn->tx[0].rev_power = prn->ReadBufp[18] << 8 | prn->ReadBufp[19];
-
-					//Bytes 45,46  Supply Volts [15:0]          
-					prn->supply_volts = prn->ReadBufp[45] << 8 | prn->ReadBufp[46];
-
-					//Bytes 47,48  User ADC3 [15:0]            
-					//Bytes 49,50  User ADC2 [15:0]             
-					//Bytes 51,52  User ADC1 [15:0]            
-					//Bytes 53,54  User ADC0 [15:0]             
-					prn->user_adc3 = prn->ReadBufp[47] << 8 | prn->ReadBufp[48];
-					prn->user_adc2 = prn->ReadBufp[49] << 8 | prn->ReadBufp[50];
-					prn->user_adc1 = prn->ReadBufp[51] << 8 | prn->ReadBufp[52];
-					prn->user_adc0 = prn->ReadBufp[53] << 8 | prn->ReadBufp[54];
-
-					//Byte 55 - Bit [0] - User I/O (IO4) 1 = active, 0 = inactive / J16 pin 9
-					//          Bit [1] - User I/O (IO5) 1 = active, 0 = inactive
-					//          Bit [2] - User I/O (IO6) 1 = active, 0 = inactive
-					//          Bit [3] - User I/O (IO8) 1 = active, 0 = inactive
-					prn->user_io = prn->ReadBufp[55];
-
-					break;
-				case 1026: // 1440 bytes 16-bit mic samples
-					for (i = 0, k = 0; i < 720; i++, k += 2)
-					{
-						// prn->TxReadBufp[2 * i] = ((prn->ReadBufp[k + 0] & 0xff) | 
-						// 	(prn->ReadBufp[k + 1] << 8)) / 32768.0;
-						prn->TxReadBufp[2 * i] = const_1_div_2147483648_ *
-							(double)(prn->ReadBufp[k + 0] << 24 |
-							prn->ReadBufp[k + 1] << 16);
-						prn->TxReadBufp[2 * i + 1] = 0.0;
-					}
-					//WriteAudio(10.0, 48000, 720, prn->TxReadBufp,3);
-					Inbound(inid(1, 0), 720, prn->TxReadBufp);
-					break;
-				case 1027: // 1024 bytes 16bit raw ADC data, handled in ReadUDPFrame()
-				case 1028:
-				case 1029:
-				case 1030:
-				case 1031:
-				case 1032:
-				case 1033:
-				case 1034:
-					break;
-				case 1035: // Receiver I&Q data
-				case 1036:
-				case 1037:
-				case 1038:
-				case 1039:
-				case 1040:
-				case 1041:
-					for (i = 0, k = 0; i < 238; i++, k += 6) //240
-					{
-						prn->RxReadBufp[2 * i + 0] = const_1_div_2147483648_ *
-							(double)(prn->ReadBufp[k + 0] << 24 |
-							prn->ReadBufp[k + 1] << 16 |
-							prn->ReadBufp[k + 2] << 8);
-
-						prn->RxReadBufp[2 * i + 1] = const_1_div_2147483648_ *
-							(double)(prn->ReadBufp[k + 3] << 24 |
-							prn->ReadBufp[k + 4] << 16 |
-							prn->ReadBufp[k + 5] << 8);
-					}
-
-					// sbuf[] USED FOR DEBUG ONLY
-					for (i = 0; i < 2 * 238; i++)
-						sbuf[i] = prn->RxReadBufp[i];
-
-					xrouter(0, 0, rc, 238, prn->RxReadBufp);
-					//Inbound (1, 238, prn->RxReadBufp);
-					break;
-					//default:
-					//	memset(RxReadBufp, 0, 240);
-					//	Inbound (0, 240, RxReadBufp);
-					//	break;
-				}
-			}
-		}
-	}
-}
-
 int ReadUDPFrame(unsigned char *bufp) {
 	unsigned char readbuf[1444];
 	struct sockaddr_in fromaddr;
@@ -817,6 +679,146 @@ int ReadUDPFrame(unsigned char *bufp) {
 	LeaveCriticalSection(&prn->rcvpkt);
 
 	return rc;
+}
+
+void ReadThreadMainLoop() {
+	int i, rc, k;
+	double sbuf[500] = { 0 };	// FOR DEBUG ONLY
+	prn->hDataEvent = WSACreateEvent();
+	WSAEventSelect(listenSock, prn->hDataEvent, FD_READ);
+
+	while (io_keep_running != 0) {
+
+		DWORD retVal = WSAWaitForMultipleEvents(1, &prn->hDataEvent, FALSE, 1000, FALSE);
+		if ((retVal == WSA_WAIT_FAILED) || (retVal == WSA_WAIT_TIMEOUT))
+		{
+			HaveSync = 0; //send console LOS
+			SendStopToMetis();
+			memset(prn->RxReadBufp, 0, 238);
+			memset(prn->TxReadBufp, 0, 720);
+			Inbound(0, 238, prn->RxReadBufp);
+			Inbound(1, 238, prn->RxReadBufp);
+			Inbound(inid(1, 0), 720, prn->TxReadBufp);
+			continue;
+		}
+		else
+		{
+			WSAEnumNetworkEvents(listenSock, prn->hDataEvent, &prn->wsaProcessEvents);
+			if (prn->wsaProcessEvents.lNetworkEvents & FD_READ)
+			{
+				if (prn->wsaProcessEvents.iErrorCode[FD_READ_BIT] != 0)
+				{
+					printf("FD_READ failed with error %d\n",
+						prn->wsaProcessEvents.iErrorCode[FD_READ_BIT]);
+					break;
+				}
+
+				rc = ReadUDPFrame(prn->ReadBufp);
+
+				switch (rc)
+				{
+				case 1025:
+					//Byte 0 - Bit [0] - PTT  1 = active, 0 = inactive
+					//         Bit [1] - Dot  1 = active, 0 = inactive
+					//         Bit [2] - Dash 1 = active, 0 = inactive
+					prn->ptt_in = prn->ReadBufp[0] & 0x1;
+					prn->dot_in = prn->ReadBufp[0] & 0x2;
+					prn->dash_in = prn->ReadBufp[0] & 0x4;
+
+					//Byte 1 - Bit [0] - ADC0  Overload 1 = active, 0 = inactive
+					//		    Bit [1] - ADC1  Overload 1 = active, 0 = inactive
+					//         Bit [2] - ADC2  Overload 1 = active, 0 = inactive  * ADC2-7 set to 0 for Angelia
+					//         Bit [3] - ADC3  Overload 1 = active, 0 = inactive
+					//         Bit [4] - ADC4  Overload 1 = active, 0 = inactive
+					//         Bit [5] - ADC5  Overload 1 = active, 0 = inactive
+					//         Bit [6] - ADC6  Overload 1 = active, 0 = inactive
+					//         Bit [7] - ADC7  Overload 1 = active, 0 = inactive
+					for (i = 0; i < MAX_ADC; i++)
+						prn->adc[i].adc_overload = ((prn->ReadBufp[1] >> i) & 0x1) != 0;
+
+					//Bytes 2,3      Exciter Power [15:0]     * 12 bits sign extended to 16
+					//Bytes 10,11    FWD Power [15:0]           ditto
+					//Bytes 18,19    REV Power [15:0]           ditto
+					prn->tx[0].exciter_power = prn->ReadBufp[2] << 8 | prn->ReadBufp[3];
+					prn->tx[0].fwd_power = prn->ReadBufp[10] << 8 | prn->ReadBufp[11];
+					prn->tx[0].rev_power = prn->ReadBufp[18] << 8 | prn->ReadBufp[19];
+
+					//Bytes 45,46  Supply Volts [15:0]          
+					prn->supply_volts = prn->ReadBufp[45] << 8 | prn->ReadBufp[46];
+
+					//Bytes 47,48  User ADC3 [15:0]            
+					//Bytes 49,50  User ADC2 [15:0]             
+					//Bytes 51,52  User ADC1 [15:0]            
+					//Bytes 53,54  User ADC0 [15:0]             
+					prn->user_adc3 = prn->ReadBufp[47] << 8 | prn->ReadBufp[48];
+					prn->user_adc2 = prn->ReadBufp[49] << 8 | prn->ReadBufp[50];
+					prn->user_adc1 = prn->ReadBufp[51] << 8 | prn->ReadBufp[52];
+					prn->user_adc0 = prn->ReadBufp[53] << 8 | prn->ReadBufp[54];
+
+					//Byte 55 - Bit [0] - User I/O (IO4) 1 = active, 0 = inactive
+					//          Bit [1] - User I/O (IO5) 1 = active, 0 = inactive
+					//          Bit [2] - User I/O (IO6) 1 = active, 0 = inactive
+					//          Bit [3] - User I/O (IO8) 1 = active, 0 = inactive
+					prn->user_io = prn->ReadBufp[55];
+
+					break;
+				case 1026: // 1440 bytes 16-bit mic samples
+					for (i = 0, k = 0; i < 720; i++, k += 2)
+					{
+						// prn->TxReadBufp[2 * i] = ((prn->ReadBufp[k + 0] & 0xff) | 
+						// 	(prn->ReadBufp[k + 1] << 8)) / 32768.0;
+						prn->TxReadBufp[2 * i] = const_1_div_2147483648_ *
+							(double)(prn->ReadBufp[k + 0] << 24 |
+							prn->ReadBufp[k + 1] << 16);
+						prn->TxReadBufp[2 * i + 1] = 0.0;
+					}
+					//WriteAudio(10.0, 48000, 720, prn->TxReadBufp,3);
+					Inbound(inid(1, 0), 720, prn->TxReadBufp);
+					break;
+				case 1027: // 1024 bytes 16bit raw ADC data, handled in ReadUDPFrame()
+				case 1028:
+				case 1029:
+				case 1030:
+				case 1031:
+				case 1032:
+				case 1033:
+				case 1034:
+					break;
+				case 1035: // Receiver I&Q data
+				case 1036:
+				case 1037:
+				case 1038:
+				case 1039:
+				case 1040:
+				case 1041:
+					for (i = 0, k = 0; i < 238; i++, k += 6) //240
+					{
+						prn->RxReadBufp[2 * i + 0] = const_1_div_2147483648_ *
+							(double)(prn->ReadBufp[k + 0] << 24 |
+							prn->ReadBufp[k + 1] << 16 |
+							prn->ReadBufp[k + 2] << 8);
+
+						prn->RxReadBufp[2 * i + 1] = const_1_div_2147483648_ *
+							(double)(prn->ReadBufp[k + 3] << 24 |
+							prn->ReadBufp[k + 4] << 16 |
+							prn->ReadBufp[k + 5] << 8);
+					}
+
+					// sbuf[] USED FOR DEBUG ONLY
+					for (i = 0; i < 2 * 238; i++)
+						sbuf[i] = prn->RxReadBufp[i];
+
+					xrouter(0, 0, rc, 238, prn->RxReadBufp);
+					//Inbound (1, 238, prn->RxReadBufp);
+					break;
+					//default:
+					//	memset(RxReadBufp, 0, 240);
+					//	Inbound (0, 240, RxReadBufp);
+					//	break;
+				}
+			}
+		}
+	}
 }
 
 void CmdGeneral() {
@@ -1196,7 +1198,7 @@ void CmdTx() {
 	sendPacket(listenSock, packetbuf, sizeof(packetbuf), 1026);
 
 }
-
+// #include "cmUtilities.h"
 void sendOutbound(int id, double* out) {
 	int i;
 	short temp;
@@ -1222,6 +1224,7 @@ void sendOutbound(int id, double* out) {
 	else
 	{
 		// 16-bit receiver audio out
+		// WriteAudio(30.0, 48000, 360, out, 3);
 		for (i = 0; i < 720; i++)
 		{
 			temp = out[i] >= 0.0 ? (short)floor(out[i] * 32767.0 + 0.5) :
@@ -1354,14 +1357,14 @@ DWORD WINAPI ReadThreadMain(LPVOID n) {
 	ReadThreadMainLoop();
 	IOThreadRunning = 0;
 
-	return NULL;
+	return 0;//NULL;
 }
 
 DWORD WINAPI KeepAliveMain(LPVOID n) {
 
 	KeepAliveLoop();
 
-	return NULL;
+	return 0;//NULL;
 }
 
 

@@ -282,6 +282,7 @@ void xcmaster (int stream)
 		xpipe (stream, 1, pcm->rcvr[rx].audio[0]);
 		for (j = 0; j < pcm->cmSubRCVR; j++)
 			xMixAudio (0, 0, chid (stream, j), pcm->rcvr[rx].audio[j]);							// mix audio
+		// if (rx == 0) WriteAudio(30.0, 48000, 64, pcm->rcvr[0].audio[0], 3);
 		break;
 
 	case 1:  // standard transmitter
@@ -290,8 +291,9 @@ void xcmaster (int stream)
 		xvox (pcm->xmtr[tx].pvox);																// vox
 		fexchange0 (chid (stream, 0), pcm->in[stream], pcm->xmtr[tx].out[0], &error);			// dsp
 		xpipe (stream, 1, pcm->xmtr[tx].out[0]);
-		// Spectrum0 (1, stream, 0, 0, pcm->xmtr[tx].out[0]);										// panadapter
+		// Spectrum0 (1, stream, 0, 0, pcm->xmtr[tx].out[0]);									// panadapter
 		xMixAudio (0, 0, chid (stream, 0), pcm->xmtr[tx].out[0]);								// mix monitor audio
+		// WriteAudio(30.0, 192000, 256, pcm->xmtr[0].out[0], 3);
 		xtxgain (pcm->xmtr[tx].pgain);															// Gain for Penelope & amp_protect
 		xeer (pcm->xmtr[tx].peer);																// EER transmission
 		xilv(pcm->xmtr[tx].pilv, pcm->xmtr[tx].out);											// interleave EER, call Outbound()

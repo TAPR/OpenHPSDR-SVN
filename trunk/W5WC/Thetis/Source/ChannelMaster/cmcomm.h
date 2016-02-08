@@ -34,6 +34,7 @@ warren@wpratt.com
 #include "amix.h"
 #include "cmaster.h"
 #include "cmbuffs.h"
+#include "cmsetup.h"
 #include "ilv.h"
 #include "ivac.h"
 #include "pipe.h"
