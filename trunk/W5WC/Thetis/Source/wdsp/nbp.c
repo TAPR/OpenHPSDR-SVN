@@ -212,10 +212,9 @@ void calc_nbp_lightweight (NBP a)
 		a->hadnotch = 1;
 }
 
-void calc_nbp (NBP a)
+void calc_nbp_impulse (NBP a)
 {
 	int i;
-	double* impulse;
 	double fl, fh;
 	double offset;
 	NOTCHDB b = *a->ptraddr;
@@ -231,20 +230,25 @@ void calc_nbp (NBP a)
 			a->bplow[i]  -=	offset;
 			a->bphigh[i] -= offset;
 		}
-		impulse = fir_mbandpass (a->size + 1, a->numpb, a->bplow, a->bphigh,
+		a->impulse = fir_mbandpass (a->size + 1, a->numpb, a->bplow, a->bphigh,
 			a->rate, 1.0 / (double)(2 * a->size), a->wintype);
 	}
 	else
 	{
-		impulse = fir_bandpass(a->size + 1, a->flow, a->fhigh, a->rate, a->wintype, 1, 1.0 / (double)(2 * a->size));
+		a->impulse = fir_bandpass(a->size + 1, a->flow, a->fhigh, a->rate, a->wintype, 1, 1.0 / (double)(2 * a->size));
 	}
+}
+
+void calc_nbp (NBP a)
+{
+	calc_nbp_impulse (a);
 	a->infilt = (double *)malloc0(2 * a->size * sizeof(complex));
 	a->product = (double *)malloc0(2 * a->size * sizeof(complex));
-	a->mults = fftcv_mults(2 * a->size, impulse);
+	a->mults = fftcv_mults(2 * a->size, a->impulse);
 	a->CFor = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->infilt, (fftw_complex *)a->product, FFTW_FORWARD, FFTW_PATIENT);
 	a->CRev = fftw_plan_dft_1d(2 * a->size, (fftw_complex *)a->product, (fftw_complex *)a->out, FFTW_BACKWARD, FFTW_PATIENT);
 	// print_impulse ("nbp.txt", a->size + 1, impulse, 1, 0);
-	_aligned_free(impulse);
+	_aligned_free(a->impulse);
 }
 
 void decalc_nbp (NBP a)
@@ -542,10 +546,12 @@ void RXANBPSetFreqs (int channel, double flow, double fhigh)
 	a0 = rxa[channel].nbp0.p;
 	if ((flow != a0->flow) || (fhigh != a0->fhigh))
 	{
-		decalc_nbp (a0);
+		_aligned_free (a0->mults);
 		a0->flow = flow;
 		a0->fhigh = fhigh;
-		calc_nbp (a0);
+		calc_nbp_impulse (a0);
+		a0->mults = fftcv_mults(2 * a0->size, a0->impulse);
+		_aligned_free (a0->impulse);
 	}
 	LeaveCriticalSection (&ch[channel].csDSP);
 }
