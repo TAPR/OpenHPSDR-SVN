@@ -1,7 +1,7 @@
 /*
  * netinterface.c
  * Copyright (C) 2006,2007  Bill Tracey (bill@ejwt.com) (KD5TFD)
- * Copyright (C) 2010-2015 Doug Wigley (W5WC)
+ * Copyright (C) 2010-2016 Doug Wigley (W5WC)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public

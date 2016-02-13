@@ -3,6 +3,7 @@
 //=====================================================================
 // Copyright (C) 2013 Tobias Wellnitz EA4/DH1TW
 // Copyright (C) 2013 Doug Wigley W5WC 
+// Copyright (C) 2016 Andrew Mansfield M0YGG 
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,12 +29,13 @@ using System.Windows.Forms;
 namespace Thetis
 {
 
-    public enum DJConsoleModels  
+    public enum DJConsoleModels
     {
-        NotSupported, 
-        HerculesMK2, 
-        HerculesMP3e2, 
-        HerculesMP3LE 
+        NotSupported,
+        HerculesMK2,
+        HerculesMP3e2,
+        HerculesMP3LE,
+        HerculesRmx
     }
 
     public partial class DJConsole
@@ -43,9 +45,10 @@ namespace Thetis
         public DJConsoleUI.DJConsole_MK2 DJConsole_MK2;
         public DJConsoleUI.DJConsole_MP3e2 DJConsole_MP3e2;
         public DJConsoleUI.DJConsole_MP3LE DJConsole_MP3LE;
+        public DJConsoleUI.DJConsole_Rmx DJConsole_Rmx;
 
-       // private InputDevice inDevice;
-       // private OutputDevice outDevice;
+        // private InputDevice inDevice;
+        // private OutputDevice outDevice;
         private CATParser parser;
         private CATCommands commands;
         private int selectedConsole = 0;
@@ -55,6 +58,13 @@ namespace Thetis
         private Dictionary<int, string> DictFixKnobs = new Dictionary<int, string>();
         private Dictionary<int, string> SupportedConsoles = new Dictionary<int, string>();
         private Dictionary<int, string> ConnectedConsoles = new Dictionary<int, string>();
+
+        private DateTime LastVfoAUpdateTime;
+        private int VfoAStepValue;
+        private int NumVfoASteps;
+        private int VfoALastSpeed=-1;
+        private DateTime VfoALastSpeedChangeTime;
+        private int VfoAConsoleStep = 1000;
 
         #region Properties
 
@@ -90,9 +100,9 @@ namespace Thetis
 
         public int SelectedConsole
         {
-            get{ return selectedConsole;}
-            set 
-            { 
+            get { return selectedConsole; }
+            set
+            {
                 selectedConsole = value;
                 SaveSettings();
             }
@@ -110,13 +120,14 @@ namespace Thetis
             DJConsole_MK2 = new Thetis.DJConsoleUI.DJConsole_MK2(this);
             DJConsole_MP3e2 = new Thetis.DJConsoleUI.DJConsole_MP3e2(this);
             DJConsole_MP3LE = new Thetis.DJConsoleUI.DJConsole_MP3LE(this);
-            
+            DJConsole_Rmx = new Thetis.DJConsoleUI.DJConsole_Rmx(this);
+
             LoadSettings();
             FillTables();
 
             if ((Load_inDevice() == true) & (Load_outDevice() == true))
             {
-               // inDevice.StartRecording();
+                // inDevice.StartRecording();
                 // ResetDJConsole();
                 parser = new CATParser(m_parent);
                 commands = new CATCommands(m_parent, parser);
@@ -128,15 +139,15 @@ namespace Thetis
 
         public void Reload()
         {
-           // inDevice.StopRecording();
-           // inDevice.Close();
-           // outDevice.Close();
+            // inDevice.StopRecording();
+            // inDevice.Close();
+            // outDevice.Close();
             Close();
             DJConsoleUI.Database.Exit();
             LoadSettings();
             if ((Load_inDevice() == true) & (Load_outDevice() == true))
             {
-              //  inDevice.StartRecording();
+                //  inDevice.StartRecording();
                 // ResetDJConsole();
                 parser = new CATParser(m_parent);
                 commands = new CATCommands(m_parent, parser);
@@ -161,7 +172,7 @@ namespace Thetis
                 {
                     for (int i = 0; i < DeviceInCount; i++)
                     {
-                       // string a = InputDevice.GetDeviceCapabilities(i).name;
+                        // string a = InputDevice.GetDeviceCapabilities(i).name;
                         string a = MidiInGetName(i);
                         // MessageBox.Show("DJ Console Found: " + a, "Debugging Message"); //Debug Message
                         string[] b = a.Split(new Char[] { '-' });
@@ -189,10 +200,10 @@ namespace Thetis
 
                     if (ConnectedConsoles.ContainsKey(this.SelectedConsole) == true)
                     {
-                      //  inDevice = new InputDevice(ListInDevices.IndexOf(ConnectedConsoles[this.SelectedConsole]));
+                        //  inDevice = new InputDevice(ListInDevices.IndexOf(ConnectedConsoles[this.SelectedConsole]));
                         OpenMidiIn(ListInDevices.IndexOf(ConnectedConsoles[this.SelectedConsole]));
                         //inDevice = new InputDevice(this.SelectedConsole);
-                       // inDevice.ChannelMessageReceived += new EventHandler<ChannelMessageEventArgs>(inDevice_ChannelMessageReceived);
+                        // inDevice.ChannelMessageReceived += new EventHandler<ChannelMessageEventArgs>(inDevice_ChannelMessageReceived);
                         return (true);
                     }
 
@@ -202,9 +213,9 @@ namespace Thetis
                         if (ListInDevices.Contains(SupportedConsoles[i].ToString()) == true)
                         {
                             OpenMidiIn(ListInDevices.IndexOf(SupportedConsoles[i].ToString()));
-                           // inDevice = new InputDevice(ListInDevices.IndexOf(SupportedConsoles[i].ToString()));
+                            // inDevice = new InputDevice(ListInDevices.IndexOf(SupportedConsoles[i].ToString()));
                             //inDevice = new InputDevice(i);
-                           // inDevice.ChannelMessageReceived += new EventHandler<ChannelMessageEventArgs>(inDevice_ChannelMessageReceived);
+                            // inDevice.ChannelMessageReceived += new EventHandler<ChannelMessageEventArgs>(inDevice_ChannelMessageReceived);
                             return (true);
                         }
                     }
@@ -296,7 +307,7 @@ namespace Thetis
 
                     if (ConnectedConsoles.ContainsKey(this.SelectedConsole) == true)
                     {
-                       // outDevice = new OutputDevice(ListOutDevices.IndexOf(ConnectedConsoles[this.SelectedConsole]));
+                        // outDevice = new OutputDevice(ListOutDevices.IndexOf(ConnectedConsoles[this.SelectedConsole]));
                         OpenMidiOut(ListOutDevices.IndexOf(ConnectedConsoles[this.SelectedConsole]));
                         return (true);
                     }
@@ -306,7 +317,7 @@ namespace Thetis
                     {
                         if (ListOutDevices.Contains(SupportedConsoles[i].ToString()) == true)
                         {
-                           // outDevice = new OutputDevice(ListOutDevices.IndexOf(SupportedConsoles[i].ToString()));
+                            // outDevice = new OutputDevice(ListOutDevices.IndexOf(SupportedConsoles[i].ToString()));
                             OpenMidiOut(ListOutDevices.IndexOf(SupportedConsoles[i].ToString()));
                             return (true);
                         }
@@ -499,6 +510,73 @@ namespace Thetis
                 this.DJConsole_MP3LE.Folders = (int)dr[44];
                 this.DJConsole_MP3LE.Vinyl = (int)dr[45];
                 this.DJConsole_MP3LE.Magic = (int)dr[46];
+                
+                t = DJConsoleUI.Database.ds.Tables["DJConsoleRmx"];
+                dr = t.Rows[0];
+                this.DJConsole_Rmx.TrebleA = (int)dr[0];
+                this.DJConsole_Rmx.TrebleB = (int)dr[1];
+                this.DJConsole_Rmx.MediumA = (int)dr[2];
+                this.DJConsole_Rmx.MediumB = (int)dr[3];
+                this.DJConsole_Rmx.BassA = (int)dr[4];
+                this.DJConsole_Rmx.BassB = (int)dr[5];
+                this.DJConsole_Rmx.VolumeA = (int)dr[6];
+                this.DJConsole_Rmx.VolumeB = (int)dr[7];
+                this.DJConsole_Rmx.Crossfader = (int)dr[8];
+                this.DJConsole_Rmx.PitchA = (int)dr[9];
+                this.DJConsole_Rmx.PitchB = (int)dr[10];
+                this.DJConsole_Rmx.JogWheelA = (int)dr[11];
+                this.DJConsole_Rmx.JogWheelB = (int)dr[12];
+                this.DJConsole_Rmx.PlayA = (int)dr[13];
+                this.DJConsole_Rmx.PlayB = (int)dr[14];
+                this.DJConsole_Rmx.CueA = (int)dr[15];
+                this.DJConsole_Rmx.CueB = (int)dr[16];
+                this.DJConsole_Rmx.TrackNextA = (int)dr[17];
+                this.DJConsole_Rmx.TrackNextB = (int)dr[18];
+                this.DJConsole_Rmx.TrackPrevA = (int)dr[19];
+                this.DJConsole_Rmx.TrackPrevB = (int)dr[20];
+                this.DJConsole_Rmx.BeatLockA = (int)dr[21];
+                this.DJConsole_Rmx.BeatLockB = (int)dr[22];
+                this.DJConsole_Rmx.SourceA = (int)dr[23];
+                this.DJConsole_Rmx.SourceB = (int)dr[24];
+                this.DJConsole_Rmx.OneA = (int)dr[25];
+                this.DJConsole_Rmx.OneB = (int)dr[26];
+                this.DJConsole_Rmx.TwoA = (int)dr[27];
+                this.DJConsole_Rmx.TwoB = (int)dr[28];
+                this.DJConsole_Rmx.ThreeA = (int)dr[29];
+                this.DJConsole_Rmx.ThreeB = (int)dr[30];
+                this.DJConsole_Rmx.FourA = (int)dr[31];
+                this.DJConsole_Rmx.FourB = (int)dr[32];
+                this.DJConsole_Rmx.SelectA = (int)dr[33];
+                this.DJConsole_Rmx.SelectB = (int)dr[34];
+                this.DJConsole_Rmx.SyncA = (int)dr[35];
+                this.DJConsole_Rmx.SyncB = (int)dr[36];
+                this.DJConsole_Rmx.Up = (int)dr[37];
+                this.DJConsole_Rmx.Down = (int)dr[38];
+                this.DJConsole_Rmx.PitchResetA = (int)dr[39];
+                this.DJConsole_Rmx.PitchResetB = (int)dr[40];
+                this.DJConsole_Rmx.LoadA = (int)dr[41];
+                this.DJConsole_Rmx.LoadB = (int)dr[42];
+                this.DJConsole_Rmx.SixB = (int)dr[43];
+                this.DJConsole_Rmx.FiveB = (int)dr[44];
+                this.DJConsole_Rmx.FiveA = (int)dr[45];
+                this.DJConsole_Rmx.SixA = (int)dr[46];
+                this.DJConsole_Rmx.TrebleKillA = (int)dr[47];
+                this.DJConsole_Rmx.MediumKillA = (int)dr[48];
+                this.DJConsole_Rmx.BassKillA = (int)dr[49];
+                this.DJConsole_Rmx.TrebleKillB = (int)dr[50];
+                this.DJConsole_Rmx.MediumKillB = (int)dr[51];
+                this.DJConsole_Rmx.BassKillB = (int)dr[52];
+                this.DJConsole_Rmx.Scratch = (int)dr[53];
+                this.DJConsole_Rmx.Left = (int)dr[54];
+                this.DJConsole_Rmx.Right = (int)dr[55];
+                this.DJConsole_Rmx.StopA = (int)dr[56];
+                this.DJConsole_Rmx.StopB = (int)dr[57];
+                this.DJConsole_Rmx.Balance = (int)dr[58];
+                this.DJConsole_Rmx.GainA = (int)dr[59];
+                this.DJConsole_Rmx.GainB = (int)dr[60];
+                this.DJConsole_Rmx.MonSelect = (int)dr[61];
+                this.DJConsole_Rmx.VolMain = (int)dr[62];
+                this.DJConsole_Rmx.MikeToggle = (int)dr[63];
 
                 t = DJConsoleUI.Database.ds.Tables["Configuration"];
                 dr = t.Rows[0];
@@ -672,6 +750,79 @@ namespace Thetis
                 dr["Magic"] = this.DJConsole_MP3LE.Magic;
                 t.Rows.Add(dr);
 
+                t = DJConsoleUI.Database.ds.Tables["DJConsoleRmx"];
+                if (t.Rows.Count > 0)
+                {
+                    t.Rows[0].Delete();
+                }
+                dr = t.NewRow();
+                dr["TrebleA"] = this.DJConsole_Rmx.TrebleA;
+                dr["TrebleB"] = this.DJConsole_Rmx.TrebleB;
+                dr["MediumA"] = this.DJConsole_Rmx.MediumA;
+                dr["MediumB"] = this.DJConsole_Rmx.MediumB;
+                dr["BassA"] = this.DJConsole_Rmx.BassA;
+                dr["BassB"] = this.DJConsole_Rmx.BassB;
+                dr["VolumeA"] = this.DJConsole_Rmx.VolumeA;
+                dr["VolumeB"] = this.DJConsole_Rmx.VolumeB;
+                dr["Crossfader"] = this.DJConsole_Rmx.Crossfader;
+                dr["PitchA"] = this.DJConsole_Rmx.PitchA;
+                dr["PitchB"] = this.DJConsole_Rmx.PitchB;
+                dr["JogWheelA"] = this.DJConsole_Rmx.JogWheelA;
+                dr["JogWheelB"] = this.DJConsole_Rmx.JogWheelB;
+                dr["PlayA"] = this.DJConsole_Rmx.PlayA;
+                dr["PlayB"] = this.DJConsole_Rmx.PlayB;
+                dr["CueA"] = this.DJConsole_Rmx.CueA;
+                dr["CueB"] = this.DJConsole_Rmx.CueB;
+                dr["TrackNextA"] = this.DJConsole_Rmx.TrackNextA;
+                dr["TrackNextB"] = this.DJConsole_Rmx.TrackNextB;
+                dr["TrackPrevA"] = this.DJConsole_Rmx.TrackPrevA;
+                dr["TrackPrevB"] = this.DJConsole_Rmx.TrackPrevB;
+                dr["BeatLockA"] = this.DJConsole_Rmx.BeatLockA;
+                dr["BeatLockB"] = this.DJConsole_Rmx.BeatLockB;
+                dr["SourceA"] = this.DJConsole_Rmx.SourceA;
+                dr["SourceB"] = this.DJConsole_Rmx.SourceB;
+                dr["OneA"] = this.DJConsole_Rmx.OneA;
+                dr["OneB"] = this.DJConsole_Rmx.OneB;
+                dr["TwoA"] = this.DJConsole_Rmx.TwoA;
+                dr["TwoB"] = this.DJConsole_Rmx.TwoB;
+                dr["ThreeA"] = this.DJConsole_Rmx.ThreeA;
+                dr["ThreeB"] = this.DJConsole_Rmx.ThreeB;
+                dr["FourA"] = this.DJConsole_Rmx.FourA;
+                dr["FourB"] = this.DJConsole_Rmx.FourB;
+                dr["SelectA"] = this.DJConsole_Rmx.SelectA;
+                dr["SelectB"] = this.DJConsole_Rmx.SelectB;
+                dr["SyncA"] = this.DJConsole_Rmx.SyncA;
+                dr["SyncB"] = this.DJConsole_Rmx.SyncB;
+                dr["Up"] = this.DJConsole_Rmx.Up;
+                dr["Down"] = this.DJConsole_Rmx.Down;
+                dr["PitchResetA"] = this.DJConsole_Rmx.PitchResetA;
+                dr["PitchResetB"] = this.DJConsole_Rmx.PitchResetB;
+                dr["LoadA"] = this.DJConsole_Rmx.LoadA;
+                dr["LoadB"] = this.DJConsole_Rmx.LoadB;
+                dr["SixB"] = this.DJConsole_Rmx.SixB;
+                dr["FiveB"] = this.DJConsole_Rmx.FiveB;
+                dr["FiveA"] = this.DJConsole_Rmx.FiveA;
+                dr["SixA"] = this.DJConsole_Rmx.SixA;
+                dr["TrebleKillA"] = this.DJConsole_Rmx.TrebleKillA;
+                dr["MediumKillA"] = this.DJConsole_Rmx.MediumKillA;
+                dr["BassKillA"] = this.DJConsole_Rmx.BassKillA;
+                dr["TrebleKillB"] = this.DJConsole_Rmx.TrebleKillB;
+                dr["MediumKillB"] = this.DJConsole_Rmx.MediumKillB;
+                dr["BassKillB"] = this.DJConsole_Rmx.BassKillB;
+                dr["Scratch"] = this.DJConsole_Rmx.Scratch;
+                dr["Left"] = this.DJConsole_Rmx.Left;
+                dr["Right"] = this.DJConsole_Rmx.Right;
+                dr["StopA"] = this.DJConsole_Rmx.StopA;
+                dr["StopB"] = this.DJConsole_Rmx.StopB;
+                dr["Balance"] = this.DJConsole_Rmx.Balance;
+                dr["GainA"] = this.DJConsole_Rmx.GainA;
+                dr["GainB"] = this.DJConsole_Rmx.GainB;
+                dr["MonSelect"] = this.DJConsole_Rmx.MonSelect;
+                dr["VolMain"] = this.DJConsole_Rmx.VolMain;
+                dr["MikeToggle"] = this.DJConsole_Rmx.MikeToggle;
+                t.Rows.Add(dr);
+
+
                 t = DJConsoleUI.Database.ds.Tables["Configuration"];
                 if (t.Rows.Count > 0)
                 {
@@ -694,14 +845,14 @@ namespace Thetis
 
         public void Close()
         {
-           // if (inDevice != null)
+            // if (inDevice != null)
             {
 
                 // ResetDJConsole();
-               // inDevice.ChannelMessageReceived -= new EventHandler<ChannelMessageEventArgs>(inDevice_ChannelMessageReceived);
-               // inDevice.StopRecording();
-               // inDevice.Close();
-               // outDevice.Close();
+                // inDevice.ChannelMessageReceived -= new EventHandler<ChannelMessageEventArgs>(inDevice_ChannelMessageReceived);
+                // inDevice.StopRecording();
+                // inDevice.Close();
+                // outDevice.Close();
                 CloseMidiIn();
                 CloseMidiOut();
                 DJConsoleUI.Database.Exit();
@@ -712,23 +863,23 @@ namespace Thetis
 
         private void ResetDJConsole()
         {
-          /*  try
-            {
-                ChannelMessageBuilder builder = new ChannelMessageBuilder();
-                for (int i = 0; i <= 100; i++)
-                {
-                    builder.Command = ChannelCommand.Controller;
-                    builder.MidiChannel = 0;
-                    builder.Data1 = i;
-                    builder.Data2 = 0;
-                    builder.Build();
-                   // outDevice.Send(builder.Result);
-                }
-            }
-            catch
-            {
-                return;
-            } */
+            /*  try
+              {
+                  ChannelMessageBuilder builder = new ChannelMessageBuilder();
+                  for (int i = 0; i <= 100; i++)
+                  {
+                      builder.Command = ChannelCommand.Controller;
+                      builder.MidiChannel = 0;
+                      builder.Data1 = i;
+                      builder.Data2 = 0;
+                      builder.Build();
+                     // outDevice.Send(builder.Result);
+                  }
+              }
+              catch
+              {
+                  return;
+              } */
         }
 
         private void LoadDictionaries()
@@ -766,10 +917,10 @@ namespace Thetis
             DictButtons.Add(28, "Band Up");
             DictButtons.Add(29, "Band Down");
             DictButtons.Add(30, "Start");
-           // DictButtons.Add(31, "Tuner On/Off");
+            // DictButtons.Add(31, "Tuner On/Off");
             //Phone 
             DictButtons.Add(32, "COMP");
-          //  DictButtons.Add(33, "DX");
+            //  DictButtons.Add(33, "DX");
             DictButtons.Add(34, "DEXP");
             //2. RX
             DictButtons.Add(35, "RX2 On/Off");
@@ -809,7 +960,7 @@ namespace Thetis
             DictButtons.Add(66, "Stop CWX Sending");
             DictButtons.Add(67, "MON");
             DictButtons.Add(68, "Pan Center");
-            
+
             //VAC
             DictButtons.Add(69, "VAC On/Off"); //ZZVA
             DictButtons.Add(70, "I/Q to VAC1"); // ZZVH
@@ -818,10 +969,10 @@ namespace Thetis
 
             DictButtons.Add(73, "CTUN"); //ZZCN
             //DictButtons.Add(73, "ESC On/Off"); //ZZDE
-           // DictButtons.Add(74, "ESC Form Open/Close"); //ZZDF
+            // DictButtons.Add(74, "ESC Form Open/Close"); //ZZDF
             DictButtons.Add(75, "Mute RX2");
             DictButtons.Add(76, "TUN");
-           // DictButtons.Add(77, "Tuner Bypass");
+            // DictButtons.Add(77, "Tuner Bypass");
 
             //Bands
             DictButtons.Add(78, "160m");
@@ -835,7 +986,7 @@ namespace Thetis
             DictButtons.Add(86, "12m");
             DictButtons.Add(87, "10m");
             DictButtons.Add(88, "6m");
-          //  DictButtons.Add(89, "2m");
+            //  DictButtons.Add(89, "2m");
             DictButtons.Add(90, "160m RX2");
             DictButtons.Add(91, "80m RX2");
             DictButtons.Add(92, "60m RX2");
@@ -847,12 +998,12 @@ namespace Thetis
             DictButtons.Add(98, "12m RX2");
             DictButtons.Add(99, "10m RX2");
             DictButtons.Add(500, "6m RX2");
-           // DictButtons.Add(501, "2m RX2");
+            // DictButtons.Add(501, "2m RX2");
             DictButtons.Add(502, "Mode SSB");
             DictButtons.Add(503, "Mode LSB");
             DictButtons.Add(504, "Mode USB");
             DictButtons.Add(505, "Mode DSB");
-       //     DictButtons.Add(506, "Mode CW");
+            //     DictButtons.Add(506, "Mode CW");
             DictButtons.Add(507, "Mode CWL");
             DictButtons.Add(508, "Mode CWU");
             DictButtons.Add(509, "Mode FM");
@@ -862,6 +1013,10 @@ namespace Thetis
             DictButtons.Add(513, "Mode DIGL");
             DictButtons.Add(514, "Mode SAM");
             DictButtons.Add(515, "Mode DRM");
+
+            DictButtons.Add(520, "VFOA khz Step");
+            DictButtons.Add(521, "VFOA mhz Step");
+
 
 
             //Incremental Knobs 100...199
@@ -874,8 +1029,8 @@ namespace Thetis
             DictIncKnobs.Add(106, "Zoom Slider");
             DictIncKnobs.Add(107, "Filter Upper Edge");
             DictIncKnobs.Add(108, "Filter Lower Edge");
-           // DictIncKnobs.Add(109, "Pan Slider");
-
+            // DictIncKnobs.Add(109, "Pan Slider");
+            DictIncKnobs.Add(110, "Freq VfoA Accelerating");
 
             //Fixed Value Range Knobs 200...299
             DictFixKnobs.Add(200, " ");
@@ -891,7 +1046,7 @@ namespace Thetis
             DictFixKnobs.Add(210, "AGC Threshold");
             DictFixKnobs.Add(211, "Drive Level");
             DictFixKnobs.Add(212, "Mic Gain");
-           // DictFixKnobs.Add(213, "DX");
+            // DictFixKnobs.Add(213, "DX");
             DictFixKnobs.Add(214, "COMP Threshold");
             DictFixKnobs.Add(215, "Vox Gain");
             DictFixKnobs.Add(216, "DEXP Threshold");
@@ -917,6 +1072,8 @@ namespace Thetis
             SupportedConsoles.Add(1, "Hercules DJ Console Mk2 MIDI");
             SupportedConsoles.Add(2, "DJ Control MP3 e2 MIDI");
             SupportedConsoles.Add(3, "DJControl MP3 LE MIDI");
+            SupportedConsoles.Add(4, "Hercules DJ Console Rmx MIDI");
+
         }
 
         //private void DetectConnectedConsoles()
@@ -953,7 +1110,7 @@ namespace Thetis
                 {
                     for (int j = 0; j < SupportedConsoles.Count; j++)
                     {
-                       // string dev = InputDevice.GetDeviceCapabilities(i).name;
+                        // string dev = InputDevice.GetDeviceCapabilities(i).name;
                         string dev = MidiInGetName(i);
                         string[] temp = dev.Split(new char[] { '-' });
                         if (temp.Length > 1)
@@ -976,7 +1133,7 @@ namespace Thetis
         //private void inDevice_ChannelMessageReceived(object sender, ChannelMessageEventArgs e)
         public void inDevice_ChannelMessageReceived(int Data1, int Data2)
         {
-            if (this.SelectedConsole == (int)DJConsoleModels.HerculesMK2)  
+            if (this.SelectedConsole == (int)DJConsoleModels.HerculesMK2)
             {
 
                 //switch (e.Message.Data1)
@@ -1240,8 +1397,8 @@ namespace Thetis
 
             if (this.SelectedConsole == (int)DJConsoleModels.HerculesMP3LE)  //Hercules DJ Console MP3LE
             {
-               //Debugging: //MessageBox.Show("Data1: " + e.Message.Data1.ToString() + " Data2: " + e.Message.Data2.ToString());
-               switch (Data1)
+                //Debugging: //MessageBox.Show("Data1: " + e.Message.Data1.ToString() + " Data2: " + e.Message.Data2.ToString());
+                switch (Data1)
                 {
                     case 1: // Key 1 DeckA
                         {
@@ -1659,7 +1816,7 @@ namespace Thetis
                         }
 
                 }
-            
+
             }
 
 
@@ -2085,6 +2242,466 @@ namespace Thetis
 
                 }
             }
+
+                //*******************************************
+
+                if (this.SelectedConsole == (int)DJConsoleModels.HerculesRmx)  //Hercules DJ Console RMX
+                {
+                    //Debugging: //MessageBox.Show("Data1: " + e.Message.Data1.ToString() + " Data2: " + e.Message.Data2.ToString());
+                    switch (Data1)
+                    {
+                        case 0x01: // Key 1 DeckA
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.OneA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x02: // Key 2 DeckA
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.TwoA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x03: // Key 3 DeckA
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.ThreeA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x04: // Key 4 DeckA
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.FourA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                        case 0x05: // Key 5 DeckA
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.FiveA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                        case 0x06: // Key 6 DeckA
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.SixA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x07: // Left Sync
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.SyncA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x08: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.BeatLockA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x09: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.TrackPrevA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x0A: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.TrackNextA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x0b: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.PlayA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                        
+                        case 0x0c: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.CueA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x0d: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.StopA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x0e:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.TrebleKillA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x0f: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.MediumKillA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x10: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.BassKillA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x11: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.PitchResetA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x12:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.LoadA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x13: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.SourceA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x14:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.SelectA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x15:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.BeatLockB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x16: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.LoadB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x17:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.SourceB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x18:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.SelectB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x19:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.OneB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                        case 0x1A:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.TwoB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                        case 0x1B:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.ThreeB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                        case 0x1C:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.FourB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                        case 0x1D:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.FiveB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                        case 0x1E:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.SixB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                            
+                        case 0x1f: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.SyncB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x20:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.PitchResetB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                            
+                        case 0x21:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.TrackPrevB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x22: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.TrackNextB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x23:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.PlayB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x24: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.CueA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x25: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.StopB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x26:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.TrebleKillB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x27:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.MediumKillB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x28:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.BassKillB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x29: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.Scratch;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x2a: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.Up;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+
+                        case 0x2b:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.Down;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+
+                        case 0x2c: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.Left;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x2d: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.Right;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                            
+                        case 0x2e: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.MikeToggle;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x2f: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.JogWheelA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x30: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.JogWheelB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x31:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.PitchA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+                            
+                        case 0x32: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.VolumeA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x33: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.GainA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x34:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.TrebleA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x35:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.MediumA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x36:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.BassA;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x37: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.Balance;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x38: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.VolMain;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x39:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.Crossfader;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x3a: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.MonSelect;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x3b:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.PitchB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x3c:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.VolumeB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x3d: 
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.GainB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x3e:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.TrebleB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x3f:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.MediumB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        case 0x40:
+                            {
+                                int cmd = m_parent.DJConsoleObj.DJConsole_Rmx.BassB;
+                                execute(cmd, Data2);
+                                break;
+                            }
+
+                        default:
+                            {
+                                System.Diagnostics.Debug.WriteLine("RMX unhandled MIDI Cmd "+Data1.ToString("H"));
+                                break;
+                            }
+                    }
+                }
+                //*****************
+
         }
 
         private void execute(int cmd, int msg)
@@ -2515,7 +3132,7 @@ namespace Thetis
                         MuteRX2OnOff(msg);
                         break;
                     }
-                
+
                 case 76:
                     {
                         Tun(msg);
@@ -2719,6 +3336,17 @@ namespace Thetis
                         break;
                     }
 
+                case 520:
+                    {
+                        SetVfoAConsoleStepKhz(msg);
+                        break;
+                    }
+
+                case 521:
+                    {
+                        SetVfoAConsoleStepMhz(msg);
+                        break;
+                    }
 
 
 
@@ -2754,7 +3382,7 @@ namespace Thetis
                         XIT_inc(msg);
                         break;
                     }
-                
+
                 case 106:
                     {
                         ZoomSliderInc(msg);
@@ -2773,6 +3401,11 @@ namespace Thetis
                 case 109:
                     {
                         PanSlider(msg);
+                        break;
+                    }
+                case 110:
+                    {
+                        MultiStepVfoA(msg);
                         break;
                     }
 
@@ -3114,7 +3747,7 @@ namespace Thetis
 
             if (msg == 127)
             {
-               commands.ZZRD("");
+                commands.ZZRD("");
             }
 
             if (msg == 1)
@@ -3131,7 +3764,7 @@ namespace Thetis
             long freq = Convert.ToInt32(commands.ZZXF(""));
             int mode = Convert.ToInt16(commands.ZZMD(""));
 
-            if ((msg == 127) && (freq >-99995))
+            if ((msg == 127) && (freq > -99995))
             {
                 if ((mode == 0) || (mode == 1)) freq = freq - 50;
                 if ((mode == 3) || (mode == 4)) freq = freq - 10;
@@ -3139,7 +3772,7 @@ namespace Thetis
                 if (freq >= 0) commands.ZZXF("+" + freq.ToString("D4"));
             }
 
-            if ((msg == 1) && (freq <99995))
+            if ((msg == 1) && (freq < 99995))
             {
                 if ((mode == 0) || (mode == 1)) freq = freq + 50;
                 if ((mode == 3) || (mode == 4)) freq = freq + 10;
@@ -3637,15 +4270,19 @@ namespace Thetis
             parser.nSet = 2;
             parser.nGet = 0;
             int step = StringToFreq(commands.ZZAC(""));
+            ChangeFreqVfoA(msg, step,true);
+        }
+
+        private void ChangeFreqVfoA(int direction, int step, bool RoundToStepSize)
+        {
+            parser.nGet = 0;
             parser.nSet = 11;
             long freq = Convert.ToInt64(commands.ZZFA(""));
             parser.nAns = 11;
-
             int mode = Convert.ToInt16(commands.ZZMD(""));
-
             commands.isMidi = true;
-
-            switch (mode)  
+            //System.Diagnostics.Debug.WriteLine("Msg=" + msg);
+            switch (mode)
             {
                 case 7: //DIGU
                     {
@@ -3653,29 +4290,29 @@ namespace Thetis
                         {
                             int offsetDIGU = Convert.ToInt16(commands.ZZRH(""));
 
-                            if (msg == 127)
+                            if (direction == 127)
                             {
                                 freq -= offsetDIGU;
-                                long x = SnapTune(freq, step, -1) + offsetDIGU;
+                                long x = SnapTune(freq, step, -1, RoundToStepSize) + offsetDIGU;
                                 commands.ZZFA(x.ToString("D11"));
                             }
-                            if (msg == 1)
+                            if (direction == 1)
                             {
                                 freq -= offsetDIGU;
-                                long x = SnapTune(freq, step, 1) + offsetDIGU;
+                                long x = SnapTune(freq, step, 1, RoundToStepSize) + offsetDIGU;
                                 commands.ZZFA(x.ToString("D11"));
                             }
 
                         }
                         else
                         {
-                            if (msg == 127)
+                            if (direction == 127)
                             {
-                                commands.ZZFA((SnapTune(freq, step, -1).ToString("D11")));
+                                commands.ZZFA((SnapTune(freq, step, -1, RoundToStepSize).ToString("D11")));
                             }
-                            if (msg == 1)
+                            if (direction == 1)
                             {
-                                commands.ZZFA((SnapTune(freq, step, 1).ToString("D11")));
+                                commands.ZZFA((SnapTune(freq, step, 1, RoundToStepSize).ToString("D11")));
                             }
                         }
                         break;
@@ -3686,29 +4323,29 @@ namespace Thetis
                         {
                             int offsetDIGL = Convert.ToInt16(commands.ZZRL(""));
 
-                            if (msg == 127)
+                            if (direction == 127)
                             {
                                 freq += offsetDIGL;
-                                long x = SnapTune(freq, step, -1) - offsetDIGL;
+                                long x = SnapTune(freq, step, -1, RoundToStepSize) - offsetDIGL;
                                 commands.ZZFA(x.ToString("D11"));
                             }
-                            if (msg == 1)
+                            if (direction == 1)
                             {
                                 freq += offsetDIGL;
-                                long x = SnapTune(freq, step, 1) - offsetDIGL;
+                                long x = SnapTune(freq, step, 1, RoundToStepSize) - offsetDIGL;
                                 commands.ZZFA(x.ToString("D11"));
                             }
 
                         }
                         else
                         {
-                            if (msg == 127)
+                            if (direction == 127)
                             {
-                                commands.ZZFA((SnapTune(freq, step, -1).ToString("D11")));
+                                commands.ZZFA((SnapTune(freq, step, -1, RoundToStepSize).ToString("D11")));
                             }
-                            if (msg == 1)
+                            if (direction == 1)
                             {
-                                commands.ZZFA((SnapTune(freq, step, 1).ToString("D11")));
+                                commands.ZZFA((SnapTune(freq, step, 1, RoundToStepSize).ToString("D11")));
                             }
                         }
                         break;
@@ -3716,13 +4353,13 @@ namespace Thetis
                 default: //for all other modes
                     {
 
-                        if (msg == 127)
+                        if (direction == 127)
                         {
-                            commands.ZZFA((SnapTune(freq, step, -1).ToString("D11")));
+                            commands.ZZFA((SnapTune(freq, step, -1, RoundToStepSize).ToString("D11")));
                         }
-                        if (msg == 1)
+                        if (direction == 1)
                         {
-                            commands.ZZFA((SnapTune(freq, step, 1).ToString("D11")));
+                            commands.ZZFA((SnapTune(freq, step, 1, RoundToStepSize).ToString("D11")));
                         }
                         break;
                     }
@@ -3730,7 +4367,7 @@ namespace Thetis
             commands.isMidi = false;
         }
 
-        private long SnapTune(long freq, int step, int num_steps)
+        private long SnapTune(long freq, int step, int num_steps, bool RoundToStepSize)
         {
             long temp;
 
@@ -3739,35 +4376,48 @@ namespace Thetis
                 return freq;
             }
 
-            try
+            if (RoundToStepSize)
             {
-                temp = freq / step; // do integer division to end up on a step size boundary
+                try
+                {
+                    temp = freq / step; // do integer division to end up on a step size boundary
+                }
+                catch
+                {
+                    return freq;
+                }
+
+                // handle when starting frequency was already on a step size boundary and tuning down
+                if (num_steps < 0 && freq % step != 0)
+                    num_steps++; // off boundary -- add one as the divide takes care of one step
+
+                temp += num_steps; // increment by the number of steps (positive or negative)
+
+                freq = temp * step; // multiply back up to get hz
+                return freq; // return freq in MHz
             }
-            catch
+            else
             {
-                return freq;
+                if ( num_steps > 0 )
+                    return freq + step;
+                else
+                    return freq - step;
             }
-
-            // handle when starting frequency was already on a step size boundary and tuning down
-            if (num_steps < 0 && freq % step != 0)
-                num_steps++; // off boundary -- add one as the divide takes care of one step
-
-            temp += num_steps; // increment by the number of steps (positive or negative)
-
-            freq = temp * step; // multiply back up to get hz
-            return freq; // return freq in MHz
         }
 
         private void ChangeFreqVfoB(int msg)
         {
+            bool RoundToStepSize = true;
             parser.nSet = 2;
             parser.nGet = 0;
+            int mode;
+            if (int.TryParse(commands.ZZMD(""), out mode) == false)
+                return;
             int step = StringToFreq(commands.ZZAC(""));
             parser.nSet = 11;
             long freq = Convert.ToInt64(commands.ZZFB(""));
             parser.nAns = 11;
 
-            int mode = Convert.ToInt16(commands.ZZMD(""));
             commands.isMidi2 = true;
 
             switch (mode)
@@ -3781,13 +4431,13 @@ namespace Thetis
                             if (msg == 127)
                             {
                                 freq -= offsetDIGU;
-                                long x = SnapTune(freq, step, -1) + offsetDIGU;
+                                long x = SnapTune(freq, step, -1, RoundToStepSize) + offsetDIGU;
                                 commands.ZZFB(x.ToString("D11"));
                             }
                             if (msg == 1)
                             {
                                 freq -= offsetDIGU;
-                                long x = SnapTune(freq, step, 1) + offsetDIGU;
+                                long x = SnapTune(freq, step, 1, RoundToStepSize) + offsetDIGU;
                                 commands.ZZFB(x.ToString("D11"));
                             }
 
@@ -3796,11 +4446,11 @@ namespace Thetis
                         {
                             if (msg == 127)
                             {
-                                commands.ZZFB((SnapTune(freq, step, -1).ToString("D11")));
+                                commands.ZZFB((SnapTune(freq, step, -1, RoundToStepSize).ToString("D11")));
                             }
                             if (msg == 1)
                             {
-                                commands.ZZFB((SnapTune(freq, step, 1).ToString("D11")));
+                                commands.ZZFB((SnapTune(freq, step, 1, RoundToStepSize).ToString("D11")));
                             }
                         }
                         break;
@@ -3814,13 +4464,13 @@ namespace Thetis
                             if (msg == 127)
                             {
                                 freq += offsetDIGL;
-                                long x = SnapTune(freq, step, -1) - offsetDIGL;
+                                long x = SnapTune(freq, step, -1, RoundToStepSize) - offsetDIGL;
                                 commands.ZZFB(x.ToString("D11"));
                             }
                             if (msg == 1)
                             {
                                 freq += offsetDIGL;
-                                long x = SnapTune(freq, step, 1) - offsetDIGL;
+                                long x = SnapTune(freq, step, 1, RoundToStepSize) - offsetDIGL;
                                 commands.ZZFB(x.ToString("D11"));
                             }
 
@@ -3829,11 +4479,11 @@ namespace Thetis
                         {
                             if (msg == 127)
                             {
-                                commands.ZZFB((SnapTune(freq, step, -1).ToString("D11")));
+                                commands.ZZFB((SnapTune(freq, step, -1, RoundToStepSize).ToString("D11")));
                             }
                             if (msg == 1)
                             {
-                                commands.ZZFB((SnapTune(freq, step, 1).ToString("D11")));
+                                commands.ZZFB((SnapTune(freq, step, 1, RoundToStepSize).ToString("D11")));
                             }
                         }
                         break;
@@ -3843,11 +4493,11 @@ namespace Thetis
 
                         if (msg == 127)
                         {
-                            commands.ZZFB((SnapTune(freq, step, -1).ToString("D11")));
+                            commands.ZZFB((SnapTune(freq, step, -1, RoundToStepSize).ToString("D11")));
                         }
                         if (msg == 1)
                         {
-                            commands.ZZFB((SnapTune(freq, step, 1).ToString("D11")));
+                            commands.ZZFB((SnapTune(freq, step, 1, RoundToStepSize).ToString("D11")));
                         }
                         break;
                     }
@@ -3965,7 +4615,7 @@ namespace Thetis
                 }
             }
         }
-        
+
         private void Rx2PreAmpOnOff(int msg)
         {
             if (msg == 127)
@@ -4400,7 +5050,7 @@ namespace Thetis
                                 commands.ZZPA("0");
                                 return;
                             }
-                            break;                         
+                            break;
                         }
                     case 1: // w/ALEX ANAN100/D
                         {
@@ -4462,8 +5112,8 @@ namespace Thetis
                             {
                                 commands.ZZPA("3");
                                 return;
-                            } 
-                            
+                            }
+
                             break;
                         }
                     case 3: //ANAN100/D
@@ -4831,7 +5481,7 @@ namespace Thetis
             }
 
         }
-        
+
         private void AGCModeUp(int msg)
         {
             parser.nGet = 0;
@@ -4856,7 +5506,7 @@ namespace Thetis
                 }
             }
         }
-        
+
         private void AGCModeDown(int msg)
         {
             parser.nGet = 0;
@@ -4912,7 +5562,7 @@ namespace Thetis
                 }
             }
         }
-       
+
         private void DisplayAverage(int msg)
         {
             if (msg == 127)
@@ -4941,7 +5591,7 @@ namespace Thetis
                 }
             }
         }
-        
+
         private void DisplayPeak(int msg)
         {
             if (msg == 127)
@@ -5129,7 +5779,7 @@ namespace Thetis
                 try
                 {
                     int dpm = Convert.ToInt16(commands.ZZDM(""));
-                    
+
                     if ((dpm > 0) && (dpm <= 7))
                     {
                         dpm = dpm - 1;
@@ -5232,26 +5882,26 @@ namespace Thetis
                     int zoom = Convert.ToInt16(commands.ZZPZ(""));
                     int zoomf = Convert.ToInt16(commands.ZZPY("")); //check slider position and select closest step
 
-                        if ((zoomf >= 10) && (zoomf <= 49))
-                        {
-                            commands.ZZPZ("0"); //050
-                            return;
-                        }
-                        if ((zoomf >= 50) && (zoomf <= 149))
-                        {
-                            commands.ZZPZ("1"); //150
-                            return;
-                        }
-                        if ((zoomf >= 150) && (zoomf <= 199))
-                        {
-                            commands.ZZPZ("2"); //200
-                            return;
-                        }
-                        if ((zoomf >= 200) && (zoomf <= 225))
-                        {
-                            commands.ZZPZ("3"); //225
-                            return;
-                        }
+                    if ((zoomf >= 10) && (zoomf <= 49))
+                    {
+                        commands.ZZPZ("0"); //050
+                        return;
+                    }
+                    if ((zoomf >= 50) && (zoomf <= 149))
+                    {
+                        commands.ZZPZ("1"); //150
+                        return;
+                    }
+                    if ((zoomf >= 150) && (zoomf <= 199))
+                    {
+                        commands.ZZPZ("2"); //200
+                        return;
+                    }
+                    if ((zoomf >= 200) && (zoomf <= 225))
+                    {
+                        commands.ZZPZ("3"); //225
+                        return;
+                    }
                 }
                 catch
                 {
@@ -5278,18 +5928,18 @@ namespace Thetis
             try
             {
                 int zoom = Convert.ToInt16(commands.ZZPY(""));
-            if ((msg == 127) && (zoom >= 15))
-            {
-                zoom = zoom - 5;
-                commands.ZZPY(zoom.ToString("000"));
-                return;
-            }
-            if ((msg == 1) && (zoom <= 235))
-            {
-                zoom = zoom + 5;
-                commands.ZZPY(zoom.ToString("000"));
-                return;
-            }
+                if ((msg == 127) && (zoom >= 15))
+                {
+                    zoom = zoom - 5;
+                    commands.ZZPY(zoom.ToString("000"));
+                    return;
+                }
+                if ((msg == 1) && (zoom <= 235))
+                {
+                    zoom = zoom + 5;
+                    commands.ZZPY(zoom.ToString("000"));
+                    return;
+                }
             }
             catch
             {
@@ -5406,7 +6056,7 @@ namespace Thetis
             }
         }
 
-        private void CWXMacro1 (int msg)
+        private void CWXMacro1(int msg)
         {
             if (msg == 127)
             {
@@ -5705,9 +6355,9 @@ namespace Thetis
                 parser.nSet = 5;
                 parser.nGet = 0;
                 parser.nAns = 5;
-                
+
                 string s = commands.ZZFH("");
-                
+
                 int UpperEdge = Convert.ToInt32(s);
 
 
@@ -5717,10 +6367,10 @@ namespace Thetis
                     commands.ZZFH(UpperEdge.ToString("00000"));
                     return;
                 }
-                
+
                 if ((msg == 1) && (UpperEdge < 0))
                 {
-                    if (UpperEdge > (-tuningstep-1))
+                    if (UpperEdge > (-tuningstep - 1))
                     {
                         UpperEdge = UpperEdge + tuningstep;
                         commands.ZZFH(UpperEdge.ToString("00000"));
@@ -5810,7 +6460,7 @@ namespace Thetis
 
                 if ((msg == 1) && (LowerEdge < 0))
                 {
-                    if (LowerEdge > (-tuningstep -1))
+                    if (LowerEdge > (-tuningstep - 1))
                     {
                         LowerEdge = LowerEdge + tuningstep;
                         commands.ZZFL(LowerEdge.ToString("00000"));
@@ -5861,9 +6511,9 @@ namespace Thetis
 
             try
             {
-                    int vac = (int)((msg - 63) * 0.64);
-                    commands.ZZVB(vac.ToString("000;-00;000"));
-                    return;
+                int vac = (int)((msg - 63) * 0.64);
+                commands.ZZVB(vac.ToString("000;-00;000"));
+                return;
 
             }
             catch
@@ -5889,18 +6539,18 @@ namespace Thetis
                 return;
             }
         }
-    
 
-            private void VAC2GainRX(int msg)
+
+        private void VAC2GainRX(int msg)
         {
             parser.nGet = 0;
             parser.nSet = 3;
 
             try
             {
-                    int vac = (int)((msg - 63) * 0.64);
-                    commands.ZZVW(vac.ToString("000;-00;000"));
-                    return;
+                int vac = (int)((msg - 63) * 0.64);
+                commands.ZZVW(vac.ToString("000;-00;000"));
+                return;
 
             }
             catch
@@ -5927,7 +6577,7 @@ namespace Thetis
             }
         }
 
-       
+
 
         //private void ESCOnOff(int msg)
         //{
@@ -6798,10 +7448,100 @@ namespace Thetis
             }
         }
 
+        private void MultiStepVfoA(int msg)
+        {
+            TimeSpan timeDiff=DateTime.Now - LastVfoAUpdateTime;
+            NumVfoASteps++;
+            if (timeDiff.TotalMilliseconds >= 100 && NumVfoASteps>5)
+            {
+                if (timeDiff.TotalMilliseconds <= 200 )
+                {
+                    int digitOffset=-1;
+                    int direction = 0;
 
-    
-    }
+                    if (VfoAStepValue > 0)
+                        direction = 127;
+                    else if (VfoAStepValue < 0)
+                        direction = 1;
+                    /*
+                    int rate = Math.Abs((int)timeDiff.TotalMilliseconds / NumVfoASteps);
+                    timeDiff=DateTime.Now - VfoALastSpeedChangeTime;
+                    if ( VfoALastSpeed==0 || timeDiff.TotalMilliseconds > 1000)
+                    {
+                        if (rate < 5)     //fast
+                        {
+                            digitOffset = 100 * VfoAConsoleStep;
+                            VfoALastSpeedChangeTime = DateTime.Now;
+                            VfoALastSpeed = digitOffset;
+                        }
+                        else if (rate < 20) //medium
+                        {
+                            digitOffset = 10 * VfoAConsoleStep;
+                            VfoALastSpeedChangeTime = DateTime.Now;
+                            VfoALastSpeed = digitOffset;
+                        }
+                        else
+                        {
+                            digitOffset = 1 * VfoAConsoleStep; // slow
+                            VfoALastSpeedChangeTime = DateTime.Now;
+                            VfoALastSpeed = digitOffset;
+                        }
+                    }
+                    else
+                    {
+                        VfoALastSpeedChangeTime = DateTime.Now;
+                        digitOffset = VfoALastSpeed;
+                    }
 
+                    if (digitOffset != -1 && ( VfoALastSpeed == digitOffset) || ( VfoALastSpeed==0) )
+                    {
+                        System.Diagnostics.Debug.WriteLine("rate=" + rate + " direction=" + direction + " step=" + digitOffset);
+                        ChangeFreqVfoA(direction, digitOffset, false);
+                    }  
+                     */
+                    parser.nSet = 2;
+                    parser.nGet = 0;
+                    int step;
+                    if ( VfoAConsoleStep > 1 )
+                        step=VfoAConsoleStep;
+                    else
+                        step = StringToFreq(commands.ZZAC(""));
+                    ChangeFreqVfoA(direction,step,false);
+                }
+                NumVfoASteps = 0;
+                VfoAStepValue = 0;
+                LastVfoAUpdateTime = DateTime.Now;
+            }
+            else
+            {
+                if ( msg >=127 )
+                    VfoAStepValue++;
+                else
+                    VfoAStepValue--;
+            }
+        }
 
+        private void SetVfoAConsoleStepKhz(int msg)
+        {
+            if (msg == 127)
+            {
+                if (VfoAConsoleStep == 1)
+                    VfoAConsoleStep = 1000;
+                else
+                    VfoAConsoleStep = 1;
+            }
+        }
 
-}
+        private void SetVfoAConsoleStepMhz(int msg)
+        {
+            if (msg == 127)
+            {
+                if (VfoAConsoleStep == 1)
+                    VfoAConsoleStep = 1000000;
+                else
+                    VfoAConsoleStep = 1;
+            }
+        }
+
+    } // class
+}// namespace

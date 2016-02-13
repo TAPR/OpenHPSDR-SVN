@@ -56,6 +56,7 @@ typedef struct _nbp
 	double fhigh;
 	double* infilt;
 	double* product;
+	double* impulse;
 	double* mults;
 	double rate;
 	int wintype;

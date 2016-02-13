@@ -3,7 +3,7 @@
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
 // Copyright (C) 2004-2012  FlexRadio Systems 
-// Copyright (C) 2010-2015  Doug Wigley
+// Copyright (C) 2010-2016  Doug Wigley
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -35,7 +35,7 @@ namespace Thetis
     class TitleBar
     {
         public const string BUILD_NAME = "";
-        public const string BUILD_DATE = "(2/7/16)";
+        public const string BUILD_DATE = "(2/12/16)";
 
         public static string GetString()
         {

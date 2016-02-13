@@ -3,6 +3,7 @@
 //=====================================================================
 // Copyright (C) 2013 Tobias Wellnitz EA4/DH1TW
 // Copyright (C) 2013 Doug Wigley W5WC 
+// Copyright (C) 2016 Andrew Mansfield M0YGG 
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -92,6 +93,12 @@ namespace Thetis.DJConsoleUI
             if (!ds.Tables.Contains("DJConsoleMP3LE"))
             {
                 AddDJConsoleMP3LE();
+                _new = true;
+            }
+
+            if (!ds.Tables.Contains("DJConsoleRmx"))
+            {
+                AddDJConsoleRmx();
                 _new = true;
             }
 
@@ -407,6 +414,144 @@ namespace Thetis.DJConsoleUI
 
         }
 
+        private static void AddDJConsoleRmx()
+        {
+            ds.Tables.Add("DJConsoleRmx");
+            DataTable t = ds.Tables["DJConsoleRmx"];
+
+            t.Columns.Add("TrebleA", typeof(int));
+            t.Columns.Add("TrebleB", typeof(int));
+            t.Columns.Add("MediumA", typeof(int));
+            t.Columns.Add("MediumB", typeof(int));
+            t.Columns.Add("BassA", typeof(int));
+            t.Columns.Add("BassB", typeof(int));
+            t.Columns.Add("VolumeA", typeof(int));
+            t.Columns.Add("VolumeB", typeof(int));
+            t.Columns.Add("Crossfader", typeof(int));
+            t.Columns.Add("PitchA", typeof(int));
+            t.Columns.Add("PitchB", typeof(int));
+            t.Columns.Add("JogWheelA", typeof(int));
+            t.Columns.Add("JogWheelB", typeof(int));
+            t.Columns.Add("PlayA", typeof(int));
+            t.Columns.Add("PlayB", typeof(int));
+            t.Columns.Add("CueA", typeof(int));
+            t.Columns.Add("CueB", typeof(int));
+            t.Columns.Add("TrackNextA", typeof(int));
+            t.Columns.Add("TrackNextB", typeof(int));
+            t.Columns.Add("TrackPrevA", typeof(int));
+            t.Columns.Add("TrackPrevB", typeof(int));
+            t.Columns.Add("BeatLockA", typeof(int));
+            t.Columns.Add("BeatLockB", typeof(int));
+            t.Columns.Add("SourceA", typeof(int));
+            t.Columns.Add("SourceB", typeof(int));
+            t.Columns.Add("OneA", typeof(int));
+            t.Columns.Add("OneB", typeof(int));
+            t.Columns.Add("TwoA", typeof(int));
+            t.Columns.Add("TwoB", typeof(int));
+            t.Columns.Add("ThreeA", typeof(int));
+            t.Columns.Add("ThreeB", typeof(int));
+            t.Columns.Add("FourA", typeof(int));
+            t.Columns.Add("FourB", typeof(int));
+            t.Columns.Add("SelectA", typeof(int));
+            t.Columns.Add("SelectB", typeof(int));
+            t.Columns.Add("SyncA", typeof(int));
+            t.Columns.Add("SyncB", typeof(int));
+            t.Columns.Add("Up", typeof(int));
+            t.Columns.Add("Down", typeof(int));
+            t.Columns.Add("PitchResetA", typeof(int));
+            t.Columns.Add("PitchResetB", typeof(int));
+            t.Columns.Add("LoadA", typeof(int));
+            t.Columns.Add("LoadB", typeof(int));
+            t.Columns.Add("SixB", typeof(int));
+            t.Columns.Add("FiveB", typeof(int));
+            t.Columns.Add("FiveA", typeof(int));
+            t.Columns.Add("SixA", typeof(int));            
+            t.Columns.Add("TrebleKillA", typeof(int));
+            t.Columns.Add("MediumKillA", typeof(int));
+            t.Columns.Add("BassKillA", typeof(int));
+            t.Columns.Add("TrebleKillB", typeof(int));
+            t.Columns.Add("MediumKillB", typeof(int));
+            t.Columns.Add("BassKillB", typeof(int));
+            t.Columns.Add("Scratch", typeof(int));
+            t.Columns.Add("Left", typeof(int));
+            t.Columns.Add("Right", typeof(int));
+            t.Columns.Add("StopA", typeof(int));
+            t.Columns.Add("StopB", typeof(int));
+            t.Columns.Add("Balance", typeof(int));
+            t.Columns.Add("GainA", typeof(int));
+            t.Columns.Add("GainB", typeof(int));
+            t.Columns.Add("MonSelect", typeof(int));
+            t.Columns.Add("VolMain", typeof(int));
+            t.Columns.Add("MikeToggle", typeof(int));
+
+            DataRow dr = t.NewRow();
+            dr["TrebleA"] = 0;
+            dr["TrebleB"] = 0;
+            dr["MediumA"] = 0;
+            dr["MediumB"] = 0;
+            dr["BassA"] = 0;
+            dr["BassB"] = 0;
+            dr["VolumeA"] = 0;
+            dr["VolumeB"] = 0;
+            dr["Crossfader"] = 0;
+            dr["PitchA"] = 0;
+            dr["PitchB"] = 0;
+            dr["JogWheelA"] = 0;
+            dr["JogWheelB"] = 0;
+            dr["PlayA"] = 0;
+            dr["PlayB"] = 0;
+            dr["CueA"] = 0;
+            dr["CueB"] = 0;
+            dr["TrackNextA"] = 0;
+            dr["TrackNextB"] = 0;
+            dr["TrackPrevA"] = 0;
+            dr["TrackPrevB"] = 0;
+            dr["BeatLockA"] = 0;
+            dr["BeatLockB"] = 0;
+            dr["SourceA"] = 0;
+            dr["SourceB"] = 0;
+            dr["OneA"] = 0;
+            dr["OneB"] = 0;
+            dr["TwoA"] = 0;
+            dr["TwoB"] = 0;
+            dr["ThreeA"] = 0;
+            dr["ThreeB"] = 0;
+            dr["FourA"] = 0;
+            dr["FourB"] = 0;
+            dr["SelectA"] = 0;
+            dr["SelectB"] = 0;
+            dr["SyncA"] = 0;
+            dr["SyncB"] = 0;
+            dr["Up"] = 0;
+            dr["Down"] = 0;
+            dr["PitchResetA"] = 0;
+            dr["PitchResetB"] = 0;
+            dr["LoadA"] = 0;
+            dr["LoadB"] = 0;
+            dr["SixB"] = 0;
+            dr["FiveB"] = 0;
+            dr["FiveA"] = 0;
+            dr["SixA"] = 0;
+            dr["TrebleKillA"] = 0;
+            dr["MediumKillA"] = 0;
+            dr["BassKillA"] = 0;
+            dr["TrebleKillB"] = 0;
+            dr["MediumKillB"] = 0;
+            dr["BassKillB"] = 0;
+            dr["Scratch"] = 0;
+            dr["Left"] = 0;
+            dr["Right"] = 0;
+            dr["StopA"] = 0;
+            dr["StopB"] = 0;
+            dr["Balance"] = 0;
+            dr["GainA"] = 0;
+            dr["GainB"] = 0;
+            dr["MonSelect"] = 0;
+            dr["VolMain"] = 0;
+            dr["MikeToggle"] = 0;
+            t.Rows.Add(dr);
+
+        }
     }
 }
 

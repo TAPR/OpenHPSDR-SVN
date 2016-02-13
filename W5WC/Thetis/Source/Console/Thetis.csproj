@@ -240,6 +240,7 @@
     <Compile Include="DJConsoleUI\DJConsole_MK2.cs" />
     <Compile Include="DJConsoleUI\DJConsole_MP3e2.cs" />
     <Compile Include="DJConsoleUI\DJConsole_MP3LE.cs" />
+    <Compile Include="DJConsoleUI\DJConsole_Rmx.cs" />
     <Compile Include="DJConsoleUI\GeneralSettings1.Designer.cs" />
     <Compile Include="DJConsoleUI\MappingMK21.Designer.cs" />
     <Compile Include="DJConsoleUI\MappingMP3e21.Designer.cs" />
@@ -261,6 +262,10 @@
     <Compile Include="DJConsoleUI\Setup_MP3LE.designer.cs">
       <DependentUpon>Setup_MP3LE.cs</DependentUpon>
     </Compile>
+    <Compile Include="DJConsoleUI\Setup_RMX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DJConsoleUI\Setup_RMX.designer.cs" />
     <Compile Include="GlobalMouseHandler.cs" />
     <Compile Include="HPSDR\Alex.cs" />
     <Compile Include="AssemblyInfo.cs">
@@ -526,6 +531,7 @@
     <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.resx">
       <DependentUpon>Setup_MP3LE.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DJConsoleUI\Setup_RMX.resx" />
     <EmbeddedResource Include="eqform.resx">
       <DependentUpon>eqform.cs</DependentUpon>
       <SubType>Designer</SubType>
