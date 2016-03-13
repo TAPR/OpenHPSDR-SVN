@@ -87,8 +87,10 @@ void create_pipe()
 		512,									// fftsize
 		0);										// specmode
 	(*pip.create_Scope)(0);						// scope display for rcvr[0]
+	ppip->rbuff = (double **) malloc0 (pcm->cmRCVR * sizeof (double *));
 	for (i = 0; i < pcm->cmRCVR; i++)
 	{
+		ppip->rbuff[i] = (double *) malloc0 (pcm->rcvr[i].ch_outsize * sizeof (complex));
 		(*pip.create_WavePlay)(i);
 		(*pip.create_WaveRecord)(i);
 		create_ivac (
@@ -115,13 +117,17 @@ void destroy_pipe()
 	destroy_spc0();
 	for (i = 0; i < pcm->cmRCVR; i++)
 	{
+		_aligned_free (ppip->rbuff[i]);
 		destroy_ivac (i);
 	}
+	_aligned_free (ppip->rbuff);
 	destroy_siphonEXT (0);
 }
 
-void xpipe (int stream, int pos, double* buff)
+void xpipe (int stream, int pos, double** buffs)
 {
+	double* buff = buffs[stream];
+	int i, j;
 	int rx, tx, sp0;
 	int st = stype (stream);
 	if      (st == 0) rx  = rxid (stream);
@@ -140,9 +146,13 @@ void xpipe (int stream, int pos, double* buff)
 			xvacOUT(rx, 0, buff);									// data to VAC
 			break;
 		case 1: // Audio data
-			(*pip.rcvr[rx].xscope)(0, buff);						// scope
-			xvacOUT(rx, 1, buff);									// data to VAC
-			(*pip.rcvr[rx].xrecordwave)(0, 1, buff);				// wav recorder
+			memcpy (ppip->rbuff[rx], buffs[0], pcm->rcvr[rx].ch_outsize * sizeof (complex));
+			for (i = 1; i < pcm->cmSubRCVR; i++)
+				for (j = 0; j < 2 * pcm->rcvr[rx].ch_outsize; j++)
+					ppip->rbuff[rx][j] += buffs[i][j];
+			(*pip.rcvr[rx].xscope)(0, ppip->rbuff[rx]);				// scope
+			xvacOUT(rx, 1, ppip->rbuff[rx]);						// data to VAC
+			(*pip.rcvr[rx].xrecordwave)(0, 1, ppip->rbuff[rx]);		// wav recorder
 			break;
 		}
 	}
@@ -156,8 +166,12 @@ void xpipe (int stream, int pos, double* buff)
 			xvacOUT(rx, 0, buff);									// data to VAC
 			break;
 		case 1: // Audio data
-			xvacOUT(rx, 1, buff);									// data to VAC
-			(*pip.rcvr[rx].xrecordwave)(0, 1, buff);				// wav recorder
+			memcpy (ppip->rbuff[rx], buffs[0], pcm->rcvr[rx].ch_outsize * sizeof (complex));
+			for (i = 1; i < pcm->cmSubRCVR; i++)
+				for (j = 0; j < 2 * pcm->rcvr[rx].ch_outsize; j++)
+					ppip->rbuff[rx][j] += buffs[i][j];
+			xvacOUT(rx, 1, ppip->rbuff[rx]);						// data to VAC
+			(*pip.rcvr[rx].xrecordwave)(0, 1, ppip->rbuff[rx]);		// wav recorder
 			break;
 		}
 	}
@@ -174,11 +188,11 @@ void xpipe (int stream, int pos, double* buff)
 			xvacIN(1, buff);										// data from VAC 1
 			break;
 		case 1: // IQ data
-			(*pip.rcvr[0].xscope)(1, buff);							// scope
-			xvacOUT(0, 2, buff);									// data to VAC 0
-			xvacOUT(1, 2, buff);									// data to VAC 1
-			(*pip.rcvr[0].xrecordwave)(1, 1, buff);					// wav recorder 0
-			(*pip.rcvr[1].xrecordwave)(1, 1, buff);					// wav recorder 1
+			(*pip.rcvr[0].xscope)(1, buffs[0]);						// scope
+			xvacOUT(0, 2, buffs[0]);								// data to VAC 0
+			xvacOUT(1, 2, buffs[0]);								// data to VAC 1
+			(*pip.rcvr[0].xrecordwave)(1, 1, buffs[0]);				// wav recorder 0
+			(*pip.rcvr[1].xrecordwave)(1, 1, buffs[0]);				// wav recorder 1
 			break;
 		}
 	}

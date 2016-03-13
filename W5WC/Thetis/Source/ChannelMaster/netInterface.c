@@ -1132,6 +1132,17 @@ void SendHighPriority(int send) {
 }
 
 PORT
+void SetWatchdogTimer(int enable)
+{
+	if (prn->wdt != enable)
+	{
+		prn->wdt = enable;
+		if (listenSock != (SOCKET)0)
+			CmdGeneral();
+	}
+}
+
+PORT
 void create_rnet() {
 	int i;
 
@@ -1144,6 +1155,7 @@ void create_rnet() {
 	//prn->readbuf = prn->ReadBufp;
 	prn->rx_base_port = 1035;
 	prn->run = 0;
+	prn->wdt = 0;
 	prn->sendHighPriority = 1;
 	prn->num_adc = 1;
 	prn->num_dac = 1;

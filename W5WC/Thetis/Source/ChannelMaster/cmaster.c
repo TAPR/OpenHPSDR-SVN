@@ -145,7 +145,7 @@ void create_xmtr()
 		XCreateAnalyzer (
 			in_id, 
 			&rc, 
-			4096, 
+			262144, 
 			1, 
 			1, 
 			"");
@@ -272,14 +272,14 @@ void xcmaster (int stream)
 
 	case 0:  // standard receiver
 		rx = rxid (stream);
-		xpipe (stream, 0, pcm->in[stream]);
+		xpipe (stream, 0, pcm->in);
 		xanb (pcm->rcvr[rx].panb);																// nb
 		xnob (pcm->rcvr[rx].pnob);																// nb2
 		Spectrum0  (_InterlockedAnd (&pcm->rcvr[rx].run_pan, 0xffffffff), rx, 0, 0,				// panadapter 
 			pcm->in[stream]);
 		for (j = 0; j < pcm->cmSubRCVR; j++)
 			fexchange0 (chid (stream, j), pcm->in[stream], pcm->rcvr[rx].audio[j], &error);		// dsp
-		xpipe (stream, 1, pcm->rcvr[rx].audio[0]);
+		xpipe (stream, 1, pcm->rcvr[rx].audio);
 		for (j = 0; j < pcm->cmSubRCVR; j++)
 			xMixAudio (0, 0, chid (stream, j), pcm->rcvr[rx].audio[j]);							// mix audio
 		// if (rx == 0) WriteAudio(30.0, 48000, 64, pcm->rcvr[0].audio[0], 3);
@@ -287,10 +287,10 @@ void xcmaster (int stream)
 
 	case 1:  // standard transmitter
 		tx = txid (stream);
-		xpipe (stream, 0, pcm->in[stream]);
+		xpipe (stream, 0, pcm->in);
 		xvox (pcm->xmtr[tx].pvox);																// vox
 		fexchange0 (chid (stream, 0), pcm->in[stream], pcm->xmtr[tx].out[0], &error);			// dsp
-		xpipe (stream, 1, pcm->xmtr[tx].out[0]);
+		xpipe (stream, 1, pcm->xmtr[tx].out);
 		// Spectrum0 (1, stream, 0, 0, pcm->xmtr[tx].out[0]);									// panadapter
 		xMixAudio (0, 0, chid (stream, 0), pcm->xmtr[tx].out[0]);								// mix monitor audio
 		// WriteAudio(30.0, 192000, 256, pcm->xmtr[0].out[0], 3);
@@ -300,7 +300,7 @@ void xcmaster (int stream)
 		break;
 
 	case 2:  // special 0, stitched upper panadapter
-		xpipe (stream, 0, pcm->in[stream]);
+		xpipe (stream, 0, pcm->in);
 		break;
 	}
 	LeaveCriticalSection (&pcm->update[stream]);

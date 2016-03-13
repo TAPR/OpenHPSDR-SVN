@@ -1383,8 +1383,6 @@ namespace Thetis
 
             RefreshSkinList();
 
-            // comboGeneralLPTAddr.SelectedIndex = -1;
-            // comboGeneralXVTR.SelectedIndex = (int)XVTRTRMode.POSITIVE;
             comboGeneralProcessPriority.Text = "Normal";
             comboOptFilterWidthMode.Text = "Linear";
             comboAudioSoundCard.Text = "HPSDR";
@@ -1392,15 +1390,9 @@ namespace Thetis
             comboAudioSampleRateRX2.SelectedIndex = 0;
             comboAudioSampleRate2.Text = "48000";
             comboAudioSampleRate3.Text = "48000";
-            comboAudioBuffer2.Text = "512";
-            comboAudioBuffer3.Text = "512";
+            comboAudioBuffer2.Text = "1024";
+            comboAudioBuffer3.Text = "1024";
             comboAudioChannels1.Text = "6";
-            //Audio.IN_RX1_L = 0;
-            //Audio.IN_RX1_R = 1;
-            //Audio.IN_RX2_L = 2;
-            //Audio.IN_RX2_R = 3;
-            //Audio.IN_TX_L = 4;
-            //Audio.IN_TX_R = 5;
             comboDisplayLabelAlign.Text = "Auto";
             comboColorPalette.Text = "enhanced";
             comboRX2ColorPalette.Text = "enhanced";
@@ -1414,6 +1406,19 @@ namespace Thetis
             comboDSPDigTXBuf.Text = "2048";
             comboDispWinType.Text = "Kaiser";
             comboRX2DispWinType.Text = "Kaiser";
+            comboDispPanDetector.Text = "Peak";
+            comboDispWFDetector.Text = "Peak";
+            comboDispPanAveraging.Text = "Log Recursive";
+            comboDispWFAveraging.Text = "Log Recursive";
+            comboRX2DispPanDetector.Text = "Peak";
+            comboRX2DispPanAveraging.Text = "Log Recursive";
+            comboRX2DispWFDetector.Text = "Peak";
+            comboRX2DispWFAveraging.Text = "Log Recursive";
+            comboTXDispPanDetector.Text = "Peak";
+            comboTXDispPanAveraging.Text = "Log Recursive";
+            comboTXDispWinType.Text = "Kaiser";
+            comboTXDispWFDetector.Text = "Peak";
+            comboTXDispWFAveraging.Text = "Log Recursive";
             comboKeyerConnKeyLine.SelectedIndex = 0;
             comboKeyerConnSecondary.SelectedIndex = 0;
             comboKeyerConnPTTLine.SelectedIndex = 0;
@@ -1515,9 +1520,11 @@ namespace Thetis
             cmboSigGenRXMode.Text = "Radio";
             cmboSigGenTXMode.Text = "Radio";
 
+            /* K5IT - vestigal code throws exception in debug - HPSDR audio is the only allowed option
             if (comboAudioDriver1.SelectedIndex < 0 &&
                 comboAudioDriver1.Items.Count > 0)
                 comboAudioDriver1.SelectedIndex = 0;
+             */
 
             if (comboAudioDriver2.SelectedIndex < 0 &&
                 comboAudioDriver2.Items.Count > 0)
@@ -1527,9 +1534,11 @@ namespace Thetis
                 comboAudioDriver3.Items.Count > 0)
                 comboAudioDriver3.SelectedIndex = 0;
 
+            /* K5IT - vestigal code throws exception in debug - HPSDR audio is the only allowed option
             if (comboAudioMixer1.SelectedIndex < 0 &&
                 comboAudioMixer1.Items.Count > 0)
                 comboAudioMixer1.SelectedIndex = 0;
+            */
 
             comboAudioBuffer1_SelectedIndexChanged(this, EventArgs.Empty);
 
@@ -1670,6 +1679,7 @@ namespace Thetis
 
         private void InitAudioTab()
         {
+            /* K5IT - vestigal code throws exception in debug - HPSDR audio is the only allowed option
             // set driver type
             if (comboAudioDriver1.SelectedIndex < 0 &&
                 comboAudioDriver1.Items.Count > 0)
@@ -1686,6 +1696,7 @@ namespace Thetis
                 if (comboAudioDriver1.Text != "ASIO")
                     comboAudioDriver1.Text = "MME";
             }
+            */
 
             // set Input device
             if (comboAudioInput1.Items.Count > 0)
@@ -1736,8 +1747,11 @@ namespace Thetis
             udRX2DisplayGridStep.Value = Display.RX2SpectrumGridStep;
             udDisplayFPS.Value = console.DisplayFPS;
             clrbtnWaterfallLow.Color = Display.WaterfallLowColor;
+            clrbtnRX2WaterfallLow.Color = Display.RX2WaterfallLowColor;
             udDisplayWaterfallLowLevel.Value = (decimal)Display.WaterfallLowThreshold;
             udDisplayWaterfallHighLevel.Value = (decimal)Display.WaterfallHighThreshold;
+            udRX2DisplayWaterfallLowLevel.Value = (decimal)Display.RX2WaterfallLowThreshold;
+            udRX2DisplayWaterfallHighLevel.Value = (decimal)Display.RX2WaterfallHighThreshold;
             udDisplayMeterDelay.Value = console.MeterDelay;
             udDisplayPeakText.Value = console.PeakTextDelay;
             udDisplayCPUMeter.Value = console.CPUMeterDelay;
@@ -1747,7 +1761,6 @@ namespace Thetis
             udTXGridMax.Value = Display.TXSpectrumGridMax;
             udTXGridMin.Value = Display.TXSpectrumGridMin;
             udTXGridStep.Value = Display.TXSpectrumGridStep;
-
         }
 
         private void InitDSPTab()
@@ -2418,6 +2431,7 @@ namespace Thetis
             radOrionMicTip_CheckedChanged(this, e);
             radOrionBiasOn_CheckedChanged(this, e);
             chkDisablePureSignal_CheckedChanged(this, e);
+            chkNetworkWDT_CheckedChanged(this, e);
 
             // Audio Tab
             comboAudioSoundCard_SelectedIndexChanged(this, e);
@@ -2439,6 +2453,13 @@ namespace Thetis
             comboAudioSampleRate2_SelectedIndexChanged(this, e);
             udAudioLatency1_ValueChanged(this, e);
             udAudioLatency2_ValueChanged(this, e);
+            udAudioLatency2_Out_ValueChanged(this, e);
+            udAudioLatencyPAIn_ValueChanged(this, e);
+            udAudioLatencyPAOut_ValueChanged(this, e);
+            udVAC2Latency_ValueChanged(this, e);
+            udVAC2LatencyOut_ValueChanged(this, e);
+            udVAC2LatencyPAIn_ValueChanged(this, e);
+            udVAC2LatencyPAOut_ValueChanged(this, e);
             udAudioLineIn1_ValueChanged(this, e);
             chkAudioLatencyManual1_CheckedChanged(this, e);
             udAudioVACGainRX_ValueChanged(this, e);
@@ -2627,16 +2648,27 @@ namespace Thetis
             tbDisplayFFTSize_Scroll(this, e);
             tbRX2DisplayFFTSize_Scroll(this, e);
             //radDisplayWindow_CheckedChanged(this, e);
-            radDispWeightedLog_CheckedChanged(this, e);
-            radDispWeightedLinear_CheckedChanged(this, e);
-            radDispWindowLog_CheckedChanged(this, e);
-            radDispWindowLinear_CheckedChanged(this, e);
-            radDispLowNoiseFloor_CheckedChanged(this, e);
-            radRX2DispWeightedLog_CheckedChanged(this, e);
-            radRX2DispWeightedLinear_CheckedChanged(this, e);
-            radRX2DispWindowLog_CheckedChanged(this, e);
-            radRX2DispWindowLinear_CheckedChanged(this, e);
-            radRX2DispLowNoiseFloor_CheckedChanged(this, e);
+            comboDispPanDetector_SelectedIndexChanged(this, e);
+            comboDispWFDetector_SelectedIndexChanged(this, e);
+            comboDispPanAveraging_SelectedIndexChanged(this, e);
+            comboDispWFAveraging_SelectedIndexChanged(this, e);
+            udDisplayAVTimeWF_ValueChanged(this, e);
+            comboRX2DispPanDetector_SelectedIndexChanged(this, e);
+            comboRX2DispPanAveraging_SelectedIndexChanged(this, e);
+            comboRX2DispWFDetector_SelectedIndexChanged(this, e);
+            comboRX2DispWFAveraging_SelectedIndexChanged(this, e);
+            udRX2DisplayWFAVTime_ValueChanged(this, e);
+            chkDispRX2Normalize_CheckedChanged(this, e);
+            chkDispNormalize_CheckedChanged(this, e);
+            comboTXDispPanDetector_SelectedIndexChanged(this, e);
+            comboTXDispPanAveraging_SelectedIndexChanged(this, e);
+            udTXDisplayAVGTime_ValueChanged(this, e);
+            chkDispTXNormalize_CheckedChanged(this, e);
+            tbTXDisplayFFTSize_Scroll(this, e);
+            comboTXDispWFDetector_SelectedIndexChanged(this, e);
+            comboTXDispWFAveraging_SelectedIndexChanged(this, e);
+            udTXDisplayAVTime_ValueChanged(this, e);
+            comboTXDispWinType_SelectedIndexChanged(this, e);
             comboDispWinType_SelectedIndexChanged(this, e);
             comboRX2DispWinType_SelectedIndexChanged(this, e);
             udDSPNBTransition_ValueChanged(this, e);
@@ -4356,10 +4388,10 @@ namespace Thetis
             {
                 mox = value;
                 // grpGeneralHardwareSDR1000.Enabled = !mox;
-                if (comboAudioSoundCard.SelectedIndex == (int)SoundCard.UNSUPPORTED_CARD)
-                    grpAudioDetails1.Enabled = !mox;
-                grpAudioCard.Enabled = !mox;
-                grpAudioLatency1.Enabled = !mox;
+               // if (comboAudioSoundCard.SelectedIndex == (int)SoundCard.UNSUPPORTED_CARD)
+                    //grpAudioDetails1.Enabled = !mox;
+                //grpAudioCard.Enabled = !mox;
+                //grpAudioLatency1.Enabled = !mox;
                 chkAudioEnableVAC.Enabled = !mox;
                 if (chkAudioEnableVAC.Checked)
                 {
@@ -4378,7 +4410,7 @@ namespace Thetis
                     grpAudio2Stereo.Enabled = true;
                 }
                 grpDSPBufferSize.Enabled = !mox;
-                grpTestAudioBalance.Enabled = !mox;
+               // grpTestAudioBalance.Enabled = !mox;
                 //if (!mox && !chekTestIMD.Checked && !chkGeneralRXOnly.Checked)
                 //   grpTestTXIMD.Enabled = !mox;
             }
@@ -4399,13 +4431,6 @@ namespace Thetis
                 comboAudioReceive1_SelectedIndexChanged(this, EventArgs.Empty);
             }
         }
-
-
-        //public bool SpurRedEnabled
-        //{
-        //    get { return chkGeneralSpurRed.Enabled; }
-        //    set { chkGeneralSpurRed.Enabled = value; }
-        //}
 
         public double HPSDRFreqCorrectFactor
         {
@@ -6025,11 +6050,11 @@ namespace Thetis
             bool b = radGenModelFLEX5000.Checked;
             radPACalAllBands_CheckedChanged(this, EventArgs.Empty);
 
-            grpAudioDetails1.Visible = !b;
-            grpAudioCard.Visible = !b;
-            grpAudioLineInGain1.Visible = !b;
-            grpAudioMicInGain1.Visible = !b;
-            grpAudioChannels.Visible = !b;
+           // grpAudioDetails1.Visible = !b;
+           // grpAudioCard.Visible = !b;
+           // grpAudioLineInGain1.Visible = !b;
+           // grpAudioMicInGain1.Visible = !b;
+           // grpAudioChannels.Visible = !b;
 
             chkCalExpert.Visible = b;
             chkCalExpert_CheckedChanged(this, EventArgs.Empty);
@@ -6494,6 +6519,97 @@ namespace Thetis
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
             if (radGenModelOrion.Checked)
+            {
+                bool power = console.PowerOn;
+
+                if (power && (old_model != console.CurrentHPSDRModel))
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(100);
+                }
+                cmaster.CMLoadRouterAll(console.CurrentHPSDRModel);
+
+                if (power && (old_model != console.CurrentHPSDRModel))
+                {
+                    console.PowerOn = true;
+                }
+            }
+        }
+
+        private void radGenModelANAN400D_CheckedChanged(object sender, System.EventArgs e)
+        {
+            HPSDRModel old_model = console.CurrentHPSDRModel;
+            console.OrionPresent = radGenModelANAN400D.Checked;
+
+            if (radGenModelANAN400D.Checked)
+            {
+                NetworkIO.fwVersionsChecked = false;
+                console.CurrentModel = Model.HERMES;
+                console.CurrentHPSDRModel = HPSDRModel.ANAN400D;
+                chkPennyPresent.Checked = false;
+                chkPennyPresent.Enabled = false;
+                chkMercuryPresent.Checked = true;
+                chkMercuryPresent.Enabled = false;
+                chkExcaliburPresent.Checked = false;
+                chkExcaliburPresent.Enabled = false;
+                chkExcaliburPresent.Visible = false;
+                chkPennyLane.Checked = true;
+                chkPennyLane.Enabled = false;
+                radPenny10MHz.Checked = true;
+                rad12288MHzPenny.Checked = true;
+                chkAlexPresent.Enabled = true;
+                chkApolloPresent.Enabled = true;
+                groupBox10MhzClock.Visible = false;
+                groupBox122MHz.Visible = false;
+                groupBoxMicSource.Visible = false;
+                chkGeneralRXOnly.Visible = true;
+                chkHermesStepAttenuator.Enabled = true;
+                groupBoxRXOptions.Text = "ANAN Options";
+                grpMetisAddr.Text = "ANAN Address";
+                grpHermesStepAttenuator.Text = "ANAN Step Attenuator";
+                chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
+                chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+                chkAutoPACalibrate.Checked = false;
+                chkAutoPACalibrate.Visible = false;
+                chkBypassANANPASettings.Visible = true;
+                grpOrionPAGainByBand.BringToFront();
+
+                labelRXAntControl.Text = " EXT2  EXT1  XVTR";
+                labelATTOnTX.Visible = true;
+                udATTOnTX.Visible = true;
+                console.RX2PreampPresent = true;
+                chkRX2StepAtt_CheckedChanged(this, EventArgs.Empty);
+                chkRxOutOnTx.Text = "BYPASS on Tx";
+                chkEXT1OutOnTx.Text = "Ext 1 on Tx";
+                chkEXT2OutOnTx.Text = "Ext 2 on Tx";
+
+                chkAlexPresent.Parent = grpGeneralHardwareORION;
+                chkAlexPresent.Location = new Point(43, 120);
+                chkApolloPresent.Parent = grpGeneralHardwareORION;
+                chkApolloPresent.Location = new Point(43, 140);
+                cmaster.SetADCSupply(0, 50);
+                NetworkIO.SetRxADC(2);
+
+                radRX1ADC3.Enabled = true;
+                radRX2ADC3.Enabled = true;
+                radRX3ADC3.Enabled = true;
+                radRX4ADC3.Enabled = true;
+                radRX5ADC3.Enabled = true;
+                radRX6ADC3.Enabled = true;
+                radRX7ADC3.Enabled = true;
+            }
+            else
+            {
+                chkAlexPresent.Parent = groupBoxHPSDRHW;
+                chkAlexPresent.Location = new Point(25, 80);
+                chkApolloPresent.Parent = groupBoxHPSDRHW;
+                chkApolloPresent.Location = new Point(25, 100);
+
+            }
+            console.OrionMKIIPresent = radGenModelANAN400D.Checked;
+            radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
+
+            if (radGenModelANAN400D.Checked)
             {
                 bool power = console.PowerOn;
 
@@ -7587,6 +7703,7 @@ namespace Thetis
 
             string new_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
 
+            /* K5IT - Portaudio will do the best it can with the suggested latency. Do not restrict the user.
             if (new_driver_name != "Windows WDM-KS" && udAudioLatency2.Value < 120)
             {
                 MessageBox.Show("The VAC1 Driver type selected does not support a Buffer Latency value less than 120ms.  " +
@@ -7599,6 +7716,7 @@ namespace Thetis
 
                 udAudioLatency2.Value = 120;
             }
+            */
 
             console.AudioDriverIndex2 = new_driver;
             Audio.Host2 = new_driver;
@@ -7628,6 +7746,7 @@ namespace Thetis
 
             string new_driver_name = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Name;
 
+            /* K5IT - Portaudio will do the best it can with the suggested latency. Do not restrict the user.
             if (new_driver_name != "Windows WDM-KS" && udVAC2Latency.Value < 120)
             {
                 MessageBox.Show("The VAC2 Driver type selected does not support a Buffer Latency value less than 120ms.  " +
@@ -7640,6 +7759,7 @@ namespace Thetis
 
                 udVAC2Latency.Value = 120;
             }
+            */
 
             console.AudioDriverIndex3 = new_driver;
             Audio.Host3 = new_driver;
@@ -7999,22 +8119,7 @@ namespace Thetis
 
         private void udAudioLatency2_ValueChanged(object sender, System.EventArgs e)
         {
-            string vac_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
-
-            if (vac_driver_name != "Windows WDM-KS" && udAudioLatency2.Value < 120)
-            {
-                MessageBox.Show("The VAC1 Buffer Latency value selected is less than 120ms which is too " +
-                    "low for the MME and DirectSound VAC audio drivers.  Buffer Latency values less than " +
-                    "120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
-                    "The VAC1 Buffer Latency has been reset to the default of 120ms.  " +
-                    "Make sure to save your Transmit profile to make the change persistent.",
-                    "Invalid VAC1 Buffer Latency Value",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-
-                udAudioLatency2.Value = 120;
-            }
-
+            // RingBuffer In
             bool power = console.PowerOn;
             if (power && chkAudioEnableVAC.Checked)
             {
@@ -8028,27 +8133,57 @@ namespace Thetis
                 console.PowerOn = true;
         }
 
-        private void udVAC2Latency_ValueChanged(object sender, System.EventArgs e)
+        private void udAudioLatency2_Out_ValueChanged(object sender, System.EventArgs e)
         {
-            string vac_driver_name = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Name;
-
-            if (chkVAC2Enable.Checked)
+            // RingBuffer Out
+            bool power = console.PowerOn;
+            if (power && chkAudioEnableVAC.Checked)
             {
-                if (vac_driver_name != "Windows WDM-KS" && udVAC2Latency.Value < 120)
-                {
-                    MessageBox.Show("The VAC2 Buffer Latency value selected is less than 120ms which is too " +
-                        "low for the MME and DirectSound VAC audio drivers.  Buffer Latency values less than " +
-                        "120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
-                        "The VAC2 Buffer Latency has been reset to the default of 120ms.  " +
-                        "Make sure to save your Transmit profile to make the change persistent.",
-                        "Invalid VAC2 Buffer Latency Value",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-
-                    udVAC2Latency.Value = 120;
-                }
+                console.PowerOn = false;
+                Thread.Sleep(100);
             }
 
+            Audio.Latency2_Out = (int)udAudioLatency2_Out.Value;
+
+            if (power && chkAudioEnableVAC.Checked)
+                console.PowerOn = true;
+        }
+
+
+        private void udAudioLatencyPAIn_ValueChanged(object sender, System.EventArgs e)
+        {
+            // PortAudio In
+            bool power = console.PowerOn;
+            if (power && chkAudioEnableVAC.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            Audio.LatencyPAIn = (int)udAudioLatencyPAIn.Value;
+
+            if (power && chkAudioEnableVAC.Checked)
+                console.PowerOn = true;
+        }
+
+        private void udAudioLatencyPAOut_ValueChanged(object sender, System.EventArgs e)
+        {
+            // PortAudio Out
+            bool power = console.PowerOn;
+            if (power && chkAudioEnableVAC.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            Audio.LatencyPAOut = (int)udAudioLatencyPAOut.Value;
+
+            if (power && chkAudioEnableVAC.Checked)
+                console.PowerOn = true;
+        }
+
+        private void udVAC2Latency_ValueChanged(object sender, System.EventArgs e)
+        {
             bool power = console.PowerOn;
             if (power && chkVAC2Enable.Checked)
             {
@@ -8062,6 +8197,51 @@ namespace Thetis
                 console.PowerOn = true;
         }
 
+        private void udVAC2LatencyOut_ValueChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkVAC2Enable.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            Audio.VAC2LatencyOut = (int)udVAC2LatencyOut.Value;
+
+            if (power && chkVAC2Enable.Checked)
+                console.PowerOn = true;
+        }
+
+        private void udVAC2LatencyPAIn_ValueChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkVAC2Enable.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            Audio.VAC2LatencyPAIn = (int)udVAC2LatencyPAIn.Value;
+
+            if (power && chkVAC2Enable.Checked)
+                console.PowerOn = true;
+        }
+
+        private void udVAC2LatencyPAOut_ValueChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkVAC2Enable.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            Audio.VAC2LatencyPAOut = (int)udVAC2LatencyPAOut.Value;
+
+            if (power && chkVAC2Enable.Checked)
+                console.PowerOn = true;
+        }
+        
         private void chkAudio2Stereo_CheckedChanged(object sender, System.EventArgs e)
         {
             bool power = console.PowerOn;
@@ -8173,8 +8353,65 @@ namespace Thetis
             udAudioLatency2.Enabled = chkAudioLatencyManual2.Checked;
             Audio.VAC1LatencyManual = chkAudioLatencyManual2.Checked;
 
-            if (!chkAudioLatencyManual2.Checked)
-                Audio.Latency2 = 120;
+            //if (!chkAudioLatencyManual2.Checked)
+            //    Audio.Latency2 = 120;
+
+            if (power && chkAudioEnableVAC.Checked)
+                console.PowerOn = true;
+        }
+
+        private void chkAudioLatencyManual2_Out_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkAudioEnableVAC.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            udAudioLatency2_Out.Enabled = chkAudioLatencyManual2_Out.Checked;
+            Audio.VAC1LatencyManualOut = chkAudioLatencyManual2_Out.Checked;
+
+            //if (!chkAudioLatencyManual2_Out.Checked)
+            //    Audio.Latency2_Out = 120;
+
+            if (power && chkAudioEnableVAC.Checked)
+                console.PowerOn = true;
+        }
+
+        private void chkAudioLatencyPAInManual_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkAudioEnableVAC.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            udAudioLatencyPAIn.Enabled = chkAudioLatencyPAInManual.Checked;
+            Audio.VAC1LatencyPAInManual = chkAudioLatencyPAInManual.Checked;
+
+            //if (!chkAudioLatencyPAInManual.Checked)
+            //    Audio.LatencyPAIn = 120;
+
+            if (power && chkAudioEnableVAC.Checked)
+                console.PowerOn = true;
+        }
+
+        private void chkAudioLatencyPAOutManual_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkAudioEnableVAC.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            udAudioLatencyPAOut.Enabled = chkAudioLatencyPAOutManual.Checked;
+            Audio.VAC1LatencyPAOutManual = chkAudioLatencyPAOutManual.Checked;
+
+            //if (!chkAudioLatencyPAOutManual.Checked)
+            //    Audio.LatencyPAOut = 120;
 
             if (power && chkAudioEnableVAC.Checked)
                 console.PowerOn = true;
@@ -8192,13 +8429,70 @@ namespace Thetis
             udVAC2Latency.Enabled = chkVAC2LatencyManual.Checked;
             Audio.VAC2LatencyManual = chkVAC2LatencyManual.Checked;
 
-            if (!chkVAC2LatencyManual.Checked)
-                Audio.Latency3 = 120;
+            //if (!chkVAC2LatencyManual.Checked)
+            //    Audio.Latency3 = 120;
 
             if (power && chkVAC2Enable.Checked)
                 console.PowerOn = true;
         }
 
+        private void chkVAC2LatencyOutManual_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkVAC2Enable.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            udVAC2LatencyOut.Enabled = chkVAC2LatencyOutManual.Checked;
+            Audio.VAC2LatencyOutManual = chkVAC2LatencyOutManual.Checked;
+
+            //if (!chkVAC2LatencyOutManual.Checked)
+            //    Audio.VAC2LatencyOut = 120;
+
+            if (power && chkVAC2Enable.Checked)
+                console.PowerOn = true;
+        }
+
+        private void chkVAC2LatencyPAInManual_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkVAC2Enable.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            udVAC2LatencyPAIn.Enabled = chkVAC2LatencyPAInManual.Checked;
+            Audio.VAC2LatencyPAInManual = chkVAC2LatencyPAInManual.Checked;
+
+            //if (!chkVAC2LatencyPAInManual.Checked)
+            //    Audio.VAC2LatencyPAIn = 120;
+
+            if (power && chkVAC2Enable.Checked)
+                console.PowerOn = true;
+        }
+
+        private void chkVAC2LatencyPAOutManual_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkVAC2Enable.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            udVAC2LatencyPAOut.Enabled = chkVAC2LatencyPAOutManual.Checked;
+            Audio.VAC2LatencyPAOutManual = chkVAC2LatencyPAOutManual.Checked;
+
+            //if (!chkVAC2LatencyPAOutManual.Checked)
+            //    Audio.VAC2LatencyPAOut = 120;
+
+            if (power && chkVAC2Enable.Checked)
+                console.PowerOn = true;
+        }
+        
         private void chkAudioMicBoost_CheckedChanged(object sender, System.EventArgs e)
         {
             console.MicBoost = chkAudioMicBoost.Checked;
@@ -8267,595 +8561,595 @@ namespace Thetis
 
             switch (card)
             {
-                case SoundCard.SANTA_CRUZ:
-                    grpAudioDetails1.Enabled = false;
-                    if (comboAudioSampleRate1.Items.Contains(96000))
-                        comboAudioSampleRate1.Items.Remove(96000);
-                    if (comboAudioSampleRate1.Items.Contains(192000))
-                        comboAudioSampleRate1.Items.Remove(192000);
-                    if (!comboAudioSampleRate1.Items.Contains(384000))
-                        comboAudioSampleRate1.Items.Add(384000);
-                    comboAudioSampleRate1.Text = "48000";
-                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
-                    {
-                        if (p.Name == "ASIO")
-                        {
-                            comboAudioDriver1.SelectedItem = p;
-                            break;
-                        }
-                    }
+                //case SoundCard.SANTA_CRUZ:
+                //    grpAudioDetails1.Enabled = false;
+                //    if (comboAudioSampleRate1.Items.Contains(96000))
+                //        comboAudioSampleRate1.Items.Remove(96000);
+                //    if (comboAudioSampleRate1.Items.Contains(192000))
+                //        comboAudioSampleRate1.Items.Remove(192000);
+                //    if (!comboAudioSampleRate1.Items.Contains(384000))
+                //        comboAudioSampleRate1.Items.Add(384000);
+                //    comboAudioSampleRate1.Text = "48000";
+                //    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                //    {
+                //        if (p.Name == "ASIO")
+                //        {
+                //            comboAudioDriver1.SelectedItem = p;
+                //            break;
+                //        }
+                //    }
 
-                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                    {
-                        if (dev.Name == "Wuschel's ASIO4ALL")
-                        {
-                            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
-                            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
-                        }
-                    }
-                    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-                    {
-                        foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                        {
-                            if (dev.Name == "ASIO4ALL v2")
-                            {
-                                comboAudioInput1.Text = "ASIO4ALL v2";
-                                comboAudioOutput1.Text = "ASIO4ALL v2";
-                            }
-                        }
-                    }
+                //    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //    {
+                //        if (dev.Name == "Wuschel's ASIO4ALL")
+                //        {
+                //            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
+                //            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
+                //        }
+                //    }
+                //    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                //    {
+                //        foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //        {
+                //            if (dev.Name == "ASIO4ALL v2")
+                //            {
+                //                comboAudioInput1.Text = "ASIO4ALL v2";
+                //                comboAudioOutput1.Text = "ASIO4ALL v2";
+                //            }
+                //        }
+                //    }
 
-                    comboAudioMixer1.Text = "Santa Cruz(tm)";
-                    comboAudioReceive1.Text = "Line In";
+                //    comboAudioMixer1.Text = "Santa Cruz(tm)";
+                //    comboAudioReceive1.Text = "Line In";
 
-                    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
-                    {
-                        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
-                        {
-                            comboAudioTransmit1.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                //    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
+                //    {
+                //        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
+                //        {
+                //            comboAudioTransmit1.SelectedIndex = i;
+                //            break;
+                //        }
+                //    }
 
-                    if (comboAudioMixer1.SelectedIndex < 0 ||
-                        comboAudioMixer1.Text != "Santa Cruz(tm)")
-                    {
-                        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
-                            "Please verify that this specific sound card is installed " +
-                            "and functioning and try again.  \nIf your sound card is not " +
-                            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
-                            "list, use the Unsupported Card selection.  \nFor more support, " +
-                            "email support@flex-radio.com.",
-                            comboAudioSoundCard.Text + " Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
-                       comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-                    {
-                        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
-                            "www.asio4all.com, download and install the driver, " +
-                            "and try again.  Alternatively, you can use the Unsupported " +
-                            "Card selection and setup the sound interface manually.  For " +
-                            "more support, email support@flex-radio.com.",
-                            "ASIO4ALL Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else
-                    {
-                        udAudioLineIn1.Value = 20;
-                        console.PowerEnabled = true;
-                        grpAudioMicInGain1.Enabled = true;
-                        grpAudioLineInGain1.Enabled = true;
-                        comboAudioChannels1.Text = "2";
-                        comboAudioChannels1.Enabled = false;
-                        Audio.IN_RX1_L = 0;
-                        Audio.IN_RX1_R = 1;
-                        Audio.IN_TX_L = 0;
-                        Audio.IN_TX_R = 1;
-                    }
-                    break;
-                case SoundCard.AUDIGY:
-                case SoundCard.AUDIGY_2:
-                    grpAudioDetails1.Enabled = false;
-                    if (comboAudioSampleRate1.Items.Contains(96000))
-                        comboAudioSampleRate1.Items.Remove(96000);
-                    if (comboAudioSampleRate1.Items.Contains(192000))
-                        comboAudioSampleRate1.Items.Remove(192000);
-                    if (!comboAudioSampleRate1.Items.Contains(384000))
-                        comboAudioSampleRate1.Items.Add(384000);
-                    comboAudioSampleRate1.Text = "48000";
-                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
-                    {
-                        if (p.Name == "ASIO")
-                        {
-                            comboAudioDriver1.SelectedItem = p;
-                            break;
-                        }
-                    }
+                //    if (comboAudioMixer1.SelectedIndex < 0 ||
+                //        comboAudioMixer1.Text != "Santa Cruz(tm)")
+                //    {
+                //        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
+                //            "Please verify that this specific sound card is installed " +
+                //            "and functioning and try again.  \nIf your sound card is not " +
+                //            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
+                //            "list, use the Unsupported Card selection.  \nFor more support, " +
+                //            "email support@flex-radio.com.",
+                //            comboAudioSoundCard.Text + " Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
+                //       comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                //    {
+                //        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
+                //            "www.asio4all.com, download and install the driver, " +
+                //            "and try again.  Alternatively, you can use the Unsupported " +
+                //            "Card selection and setup the sound interface manually.  For " +
+                //            "more support, email support@flex-radio.com.",
+                //            "ASIO4ALL Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else
+                //    {
+                //        udAudioLineIn1.Value = 20;
+                //        console.PowerEnabled = true;
+                //        grpAudioMicInGain1.Enabled = true;
+                //        grpAudioLineInGain1.Enabled = true;
+                //        comboAudioChannels1.Text = "2";
+                //        comboAudioChannels1.Enabled = false;
+                //        Audio.IN_RX1_L = 0;
+                //        Audio.IN_RX1_R = 1;
+                //        Audio.IN_TX_L = 0;
+                //        Audio.IN_TX_R = 1;
+                //    }
+                //    break;
+                //case SoundCard.AUDIGY:
+                //case SoundCard.AUDIGY_2:
+                //    grpAudioDetails1.Enabled = false;
+                //    if (comboAudioSampleRate1.Items.Contains(96000))
+                //        comboAudioSampleRate1.Items.Remove(96000);
+                //    if (comboAudioSampleRate1.Items.Contains(192000))
+                //        comboAudioSampleRate1.Items.Remove(192000);
+                //    if (!comboAudioSampleRate1.Items.Contains(384000))
+                //        comboAudioSampleRate1.Items.Add(384000);
+                //    comboAudioSampleRate1.Text = "48000";
+                //    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                //    {
+                //        if (p.Name == "ASIO")
+                //        {
+                //            comboAudioDriver1.SelectedItem = p;
+                //            break;
+                //        }
+                //    }
 
-                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                    {
-                        if (dev.Name == "Wuschel's ASIO4ALL")
-                        {
-                            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
-                            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
-                        }
-                    }
-                    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-                    {
-                        foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                        {
-                            if (dev.Name == "ASIO4ALL v2")
-                            {
-                                comboAudioInput1.Text = "ASIO4ALL v2";
-                                comboAudioOutput1.Text = "ASIO4ALL v2";
-                            }
-                        }
-                    }
+                //    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //    {
+                //        if (dev.Name == "Wuschel's ASIO4ALL")
+                //        {
+                //            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
+                //            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
+                //        }
+                //    }
+                //    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                //    {
+                //        foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //        {
+                //            if (dev.Name == "ASIO4ALL v2")
+                //            {
+                //                comboAudioInput1.Text = "ASIO4ALL v2";
+                //                comboAudioOutput1.Text = "ASIO4ALL v2";
+                //            }
+                //        }
+                //    }
 
-                    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
-                    {
-                        if (((string)comboAudioMixer1.Items[i]).StartsWith("SB Audigy"))
-                        {
-                            comboAudioMixer1.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                //    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
+                //    {
+                //        if (((string)comboAudioMixer1.Items[i]).StartsWith("SB Audigy"))
+                //        {
+                //            comboAudioMixer1.SelectedIndex = i;
+                //            break;
+                //        }
+                //    }
 
-                    for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
-                    {
-                        if (((string)comboAudioReceive1.Items[i]).StartsWith("Analog"))
-                        {
-                            comboAudioReceive1.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                //    for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
+                //    {
+                //        if (((string)comboAudioReceive1.Items[i]).StartsWith("Analog"))
+                //        {
+                //            comboAudioReceive1.SelectedIndex = i;
+                //            break;
+                //        }
+                //    }
 
-                    if (comboAudioReceive1.SelectedIndex < 0 ||
-                        !comboAudioReceive1.Text.StartsWith("Analog"))
-                    {
-                        for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
-                        {
-                            if (((string)comboAudioReceive1.Items[i]).StartsWith("Mix ana"))
-                            {
-                                comboAudioReceive1.SelectedIndex = i;
-                                break;
-                            }
-                        }
-                    }
+                //    if (comboAudioReceive1.SelectedIndex < 0 ||
+                //        !comboAudioReceive1.Text.StartsWith("Analog"))
+                //    {
+                //        for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
+                //        {
+                //            if (((string)comboAudioReceive1.Items[i]).StartsWith("Mix ana"))
+                //            {
+                //                comboAudioReceive1.SelectedIndex = i;
+                //                break;
+                //            }
+                //        }
+                //    }
 
-                    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
-                    {
-                        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
-                        {
-                            comboAudioTransmit1.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                //    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
+                //    {
+                //        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
+                //        {
+                //            comboAudioTransmit1.SelectedIndex = i;
+                //            break;
+                //        }
+                //    }
 
-                    if (comboAudioMixer1.SelectedIndex < 0 ||
-                        !comboAudioMixer1.Text.StartsWith("SB Audigy"))
-                    {
-                        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
-                            "Please verify that this specific sound card is installed " +
-                            "and functioning and try again.  \nIf your sound card is not " +
-                            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
-                            "list, use the Unsupported Card selection.  \nFor more support, " +
-                            "email support@flex-radio.com.",
-                            comboAudioSoundCard.Text + " Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
-                      comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-                    {
-                        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
-                            "www.asio4all.com, download and install the driver, " +
-                            "and try again.  Alternatively, you can use the Unsupported " +
-                            "Card selection and setup the sound interface manually.  For " +
-                            "more support, email support@flex-radio.com.",
-                            "ASIO4ALL Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else
-                    {
-                        udAudioLineIn1.Value = 1;
-                        console.PowerEnabled = true;
-                        grpAudioMicInGain1.Enabled = true;
-                        grpAudioLineInGain1.Enabled = true;
-                        comboAudioChannels1.Text = "2";
-                        comboAudioChannels1.Enabled = false;
-                        Audio.IN_RX1_L = 0;
-                        Audio.IN_RX1_R = 1;
-                        Audio.IN_TX_L = 0;
-                        Audio.IN_TX_R = 1;
-                    }
-                    break;
-                case SoundCard.AUDIGY_2_ZS:
-                    grpAudioDetails1.Enabled = false;
-                    if (comboAudioSampleRate1.Items.Contains(96000))
-                        comboAudioSampleRate1.Items.Remove(96000);
-                    if (comboAudioSampleRate1.Items.Contains(192000))
-                        comboAudioSampleRate1.Items.Remove(192000);
-                    if (!comboAudioSampleRate1.Items.Contains(384000))
-                        comboAudioSampleRate1.Items.Add(384000);
-                    comboAudioSampleRate1.Text = "48000";
-                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
-                    {
-                        if (p.Name == "ASIO")
-                        {
-                            comboAudioDriver1.SelectedItem = p;
-                            break;
-                        }
-                    }
+                //    if (comboAudioMixer1.SelectedIndex < 0 ||
+                //        !comboAudioMixer1.Text.StartsWith("SB Audigy"))
+                //    {
+                //        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
+                //            "Please verify that this specific sound card is installed " +
+                //            "and functioning and try again.  \nIf your sound card is not " +
+                //            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
+                //            "list, use the Unsupported Card selection.  \nFor more support, " +
+                //            "email support@flex-radio.com.",
+                //            comboAudioSoundCard.Text + " Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
+                //      comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                //    {
+                //        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
+                //            "www.asio4all.com, download and install the driver, " +
+                //            "and try again.  Alternatively, you can use the Unsupported " +
+                //            "Card selection and setup the sound interface manually.  For " +
+                //            "more support, email support@flex-radio.com.",
+                //            "ASIO4ALL Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else
+                //    {
+                //        udAudioLineIn1.Value = 1;
+                //        console.PowerEnabled = true;
+                //        grpAudioMicInGain1.Enabled = true;
+                //        grpAudioLineInGain1.Enabled = true;
+                //        comboAudioChannels1.Text = "2";
+                //        comboAudioChannels1.Enabled = false;
+                //        Audio.IN_RX1_L = 0;
+                //        Audio.IN_RX1_R = 1;
+                //        Audio.IN_TX_L = 0;
+                //        Audio.IN_TX_R = 1;
+                //    }
+                //    break;
+                //case SoundCard.AUDIGY_2_ZS:
+                //    grpAudioDetails1.Enabled = false;
+                //    if (comboAudioSampleRate1.Items.Contains(96000))
+                //        comboAudioSampleRate1.Items.Remove(96000);
+                //    if (comboAudioSampleRate1.Items.Contains(192000))
+                //        comboAudioSampleRate1.Items.Remove(192000);
+                //    if (!comboAudioSampleRate1.Items.Contains(384000))
+                //        comboAudioSampleRate1.Items.Add(384000);
+                //    comboAudioSampleRate1.Text = "48000";
+                //    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                //    {
+                //        if (p.Name == "ASIO")
+                //        {
+                //            comboAudioDriver1.SelectedItem = p;
+                //            break;
+                //        }
+                //    }
 
-                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                    {
-                        if (dev.Name == "Wuschel's ASIO4ALL")
-                        {
-                            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
-                            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
-                        }
-                    }
-                    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-                    {
-                        foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                        {
-                            if (dev.Name == "ASIO4ALL v2")
-                            {
-                                comboAudioInput1.Text = "ASIO4ALL v2";
-                                comboAudioOutput1.Text = "ASIO4ALL v2";
-                            }
-                        }
-                    }
+                //    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //    {
+                //        if (dev.Name == "Wuschel's ASIO4ALL")
+                //        {
+                //            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
+                //            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
+                //        }
+                //    }
+                //    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                //    {
+                //        foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //        {
+                //            if (dev.Name == "ASIO4ALL v2")
+                //            {
+                //                comboAudioInput1.Text = "ASIO4ALL v2";
+                //                comboAudioOutput1.Text = "ASIO4ALL v2";
+                //            }
+                //        }
+                //    }
 
-                    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
-                    {
-                        if (((string)comboAudioMixer1.Items[i]).StartsWith("SB Audigy"))
-                        {
-                            comboAudioMixer1.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                //    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
+                //    {
+                //        if (((string)comboAudioMixer1.Items[i]).StartsWith("SB Audigy"))
+                //        {
+                //            comboAudioMixer1.SelectedIndex = i;
+                //            break;
+                //        }
+                //    }
 
-                    for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
-                    {
-                        if (((string)comboAudioReceive1.Items[i]).StartsWith("Analog"))
-                        {
-                            comboAudioReceive1.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                //    for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
+                //    {
+                //        if (((string)comboAudioReceive1.Items[i]).StartsWith("Analog"))
+                //        {
+                //            comboAudioReceive1.SelectedIndex = i;
+                //            break;
+                //        }
+                //    }
 
-                    if (comboAudioReceive1.SelectedIndex < 0 ||
-                        !comboAudioReceive1.Text.StartsWith("Analog"))
-                    {
-                        for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
-                        {
-                            if (((string)comboAudioReceive1.Items[i]).StartsWith("Mix ana"))
-                            {
-                                comboAudioReceive1.SelectedIndex = i;
-                                break;
-                            }
-                        }
-                    }
+                //    if (comboAudioReceive1.SelectedIndex < 0 ||
+                //        !comboAudioReceive1.Text.StartsWith("Analog"))
+                //    {
+                //        for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
+                //        {
+                //            if (((string)comboAudioReceive1.Items[i]).StartsWith("Mix ana"))
+                //            {
+                //                comboAudioReceive1.SelectedIndex = i;
+                //                break;
+                //            }
+                //        }
+                //    }
 
-                    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
-                    {
-                        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
-                        {
-                            comboAudioTransmit1.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                //    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
+                //    {
+                //        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
+                //        {
+                //            comboAudioTransmit1.SelectedIndex = i;
+                //            break;
+                //        }
+                //    }
 
-                    if (comboAudioMixer1.SelectedIndex < 0 ||
-                        !comboAudioMixer1.Text.StartsWith("SB Audigy"))
-                    {
-                        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
-                            "Please verify that this specific sound card is installed " +
-                            "and functioning and try again.  \nIf your sound card is not " +
-                            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
-                            "list, use the Unsupported Card selection.  \nFor more support, " +
-                            "email support@flex-radio.com.",
-                            comboAudioSoundCard.Text + " Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
-                       comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-                    {
-                        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
-                            "www.asio4all.com, download and install the driver, " +
-                            "and try again.  Alternatively, you can use the Unsupported " +
-                            "Card selection and setup the sound interface manually.  For " +
-                            "more support, email support@flex-radio.com.",
-                            "ASIO4ALL Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else
-                    {
-                        udAudioLineIn1.Value = 1;
-                        console.PowerEnabled = true;
-                        grpAudioMicInGain1.Enabled = true;
-                        grpAudioLineInGain1.Enabled = true;
-                        comboAudioChannels1.Text = "2";
-                        comboAudioChannels1.Enabled = false;
-                        Audio.IN_RX1_L = 0;
-                        Audio.IN_RX1_R = 1;
-                        Audio.IN_TX_L = 0;
-                        Audio.IN_TX_R = 1;
-                    }
-                    break;
-                case SoundCard.EXTIGY:
-                    grpAudioDetails1.Enabled = false;
-                    if (!comboAudioSampleRate1.Items.Contains(96000))
-                        comboAudioSampleRate1.Items.Add(96000);
-                    if (comboAudioSampleRate1.Items.Contains(192000))
-                        comboAudioSampleRate1.Items.Remove(192000);
-                    if (!comboAudioSampleRate1.Items.Contains(384000))
-                        comboAudioSampleRate1.Items.Add(384000);
-                    comboAudioSampleRate1.Text = "48000";
-                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
-                    {
-                        if (p.Name == "ASIO")
-                        {
-                            comboAudioDriver1.SelectedItem = p;
-                            break;
-                        }
-                    }
+                //    if (comboAudioMixer1.SelectedIndex < 0 ||
+                //        !comboAudioMixer1.Text.StartsWith("SB Audigy"))
+                //    {
+                //        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
+                //            "Please verify that this specific sound card is installed " +
+                //            "and functioning and try again.  \nIf your sound card is not " +
+                //            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
+                //            "list, use the Unsupported Card selection.  \nFor more support, " +
+                //            "email support@flex-radio.com.",
+                //            comboAudioSoundCard.Text + " Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
+                //       comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                //    {
+                //        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
+                //            "www.asio4all.com, download and install the driver, " +
+                //            "and try again.  Alternatively, you can use the Unsupported " +
+                //            "Card selection and setup the sound interface manually.  For " +
+                //            "more support, email support@flex-radio.com.",
+                //            "ASIO4ALL Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else
+                //    {
+                //        udAudioLineIn1.Value = 1;
+                //        console.PowerEnabled = true;
+                //        grpAudioMicInGain1.Enabled = true;
+                //        grpAudioLineInGain1.Enabled = true;
+                //        comboAudioChannels1.Text = "2";
+                //        comboAudioChannels1.Enabled = false;
+                //        Audio.IN_RX1_L = 0;
+                //        Audio.IN_RX1_R = 1;
+                //        Audio.IN_TX_L = 0;
+                //        Audio.IN_TX_R = 1;
+                //    }
+                //    break;
+                //case SoundCard.EXTIGY:
+                //    grpAudioDetails1.Enabled = false;
+                //    if (!comboAudioSampleRate1.Items.Contains(96000))
+                //        comboAudioSampleRate1.Items.Add(96000);
+                //    if (comboAudioSampleRate1.Items.Contains(192000))
+                //        comboAudioSampleRate1.Items.Remove(192000);
+                //    if (!comboAudioSampleRate1.Items.Contains(384000))
+                //        comboAudioSampleRate1.Items.Add(384000);
+                //    comboAudioSampleRate1.Text = "48000";
+                //    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                //    {
+                //        if (p.Name == "ASIO")
+                //        {
+                //            comboAudioDriver1.SelectedItem = p;
+                //            break;
+                //        }
+                //    }
 
-                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                    {
-                        if (dev.Name == "Wuschel's ASIO4ALL")
-                        {
-                            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
-                            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
-                        }
-                    }
-                    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-                    {
-                        foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                        {
-                            if (dev.Name == "ASIO4ALL v2")
-                            {
-                                comboAudioInput1.Text = "ASIO4ALL v2";
-                                comboAudioOutput1.Text = "ASIO4ALL v2";
-                            }
-                        }
-                    }
+                //    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //    {
+                //        if (dev.Name == "Wuschel's ASIO4ALL")
+                //        {
+                //            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
+                //            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
+                //        }
+                //    }
+                //    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                //    {
+                //        foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //        {
+                //            if (dev.Name == "ASIO4ALL v2")
+                //            {
+                //                comboAudioInput1.Text = "ASIO4ALL v2";
+                //                comboAudioOutput1.Text = "ASIO4ALL v2";
+                //            }
+                //        }
+                //    }
 
-                    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
-                    {
-                        if (((string)comboAudioMixer1.Items[i]).StartsWith("Creative SB Extigy"))
-                        {
-                            comboAudioMixer1.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                //    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
+                //    {
+                //        if (((string)comboAudioMixer1.Items[i]).StartsWith("Creative SB Extigy"))
+                //        {
+                //            comboAudioMixer1.SelectedIndex = i;
+                //            break;
+                //        }
+                //    }
 
-                    comboAudioReceive1.Text = "Line In";
-                    comboAudioTransmit1.Text = "Microphone";
+                //    comboAudioReceive1.Text = "Line In";
+                //    comboAudioTransmit1.Text = "Microphone";
 
-                    if (comboAudioMixer1.SelectedIndex < 0 ||
-                        comboAudioMixer1.Text != "Creative SB Extigy")
-                    {
-                        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
-                            "Please verify that this specific sound card is installed " +
-                            "and functioning and try again.  \nIf your sound card is not " +
-                            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
-                            "list, use the Unsupported Card selection.  \nFor more support, " +
-                            "email support@flex-radio.com.",
-                            comboAudioSoundCard.Text + " Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
-                       comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-                    {
-                        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
-                            "www.asio4all.com, download and install the driver, " +
-                            "and try again.  Alternatively, you can use the Unsupported " +
-                            "Card selection and setup the sound interface manually.  For " +
-                            "more support, email support@flex-radio.com.",
-                            "ASIO4ALL Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else
-                    {
-                        udAudioLineIn1.Value = 20;
-                        console.PowerEnabled = true;
-                        grpAudioMicInGain1.Enabled = true;
-                        grpAudioLineInGain1.Enabled = true;
-                        comboAudioChannels1.Text = "2";
-                        comboAudioChannels1.Enabled = false;
-                        Audio.IN_RX1_L = 0;
-                        Audio.IN_RX1_R = 1;
-                        Audio.IN_TX_L = 0;
-                        Audio.IN_TX_R = 1;
-                    }
-                    break;
-                case SoundCard.MP3_PLUS:
-                    grpAudioDetails1.Enabled = false;
-                    if (comboAudioSampleRate1.Items.Contains(96000))
-                        comboAudioSampleRate1.Items.Remove(96000);
-                    if (comboAudioSampleRate1.Items.Contains(192000))
-                        comboAudioSampleRate1.Items.Remove(192000);
-                    if (!comboAudioSampleRate1.Items.Contains(384000))
-                        comboAudioSampleRate1.Items.Add(384000);
-                    comboAudioSampleRate1.Text = "48000";
-                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
-                    {
-                        if (p.Name == "ASIO")
-                        {
-                            comboAudioDriver1.SelectedItem = p;
-                            break;
-                        }
-                    }
+                //    if (comboAudioMixer1.SelectedIndex < 0 ||
+                //        comboAudioMixer1.Text != "Creative SB Extigy")
+                //    {
+                //        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
+                //            "Please verify that this specific sound card is installed " +
+                //            "and functioning and try again.  \nIf your sound card is not " +
+                //            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
+                //            "list, use the Unsupported Card selection.  \nFor more support, " +
+                //            "email support@flex-radio.com.",
+                //            comboAudioSoundCard.Text + " Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
+                //       comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                //    {
+                //        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
+                //            "www.asio4all.com, download and install the driver, " +
+                //            "and try again.  Alternatively, you can use the Unsupported " +
+                //            "Card selection and setup the sound interface manually.  For " +
+                //            "more support, email support@flex-radio.com.",
+                //            "ASIO4ALL Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else
+                //    {
+                //        udAudioLineIn1.Value = 20;
+                //        console.PowerEnabled = true;
+                //        grpAudioMicInGain1.Enabled = true;
+                //        grpAudioLineInGain1.Enabled = true;
+                //        comboAudioChannels1.Text = "2";
+                //        comboAudioChannels1.Enabled = false;
+                //        Audio.IN_RX1_L = 0;
+                //        Audio.IN_RX1_R = 1;
+                //        Audio.IN_TX_L = 0;
+                //        Audio.IN_TX_R = 1;
+                //    }
+                //    break;
+                //case SoundCard.MP3_PLUS:
+                //    grpAudioDetails1.Enabled = false;
+                //    if (comboAudioSampleRate1.Items.Contains(96000))
+                //        comboAudioSampleRate1.Items.Remove(96000);
+                //    if (comboAudioSampleRate1.Items.Contains(192000))
+                //        comboAudioSampleRate1.Items.Remove(192000);
+                //    if (!comboAudioSampleRate1.Items.Contains(384000))
+                //        comboAudioSampleRate1.Items.Add(384000);
+                //    comboAudioSampleRate1.Text = "48000";
+                //    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                //    {
+                //        if (p.Name == "ASIO")
+                //        {
+                //            comboAudioDriver1.SelectedItem = p;
+                //            break;
+                //        }
+                //    }
 
-                    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
-                    {
-                        if (((string)comboAudioMixer1.Items[i]).StartsWith("Sound Blaster"))
-                        {
-                            comboAudioMixer1.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                //    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
+                //    {
+                //        if (((string)comboAudioMixer1.Items[i]).StartsWith("Sound Blaster"))
+                //        {
+                //            comboAudioMixer1.SelectedIndex = i;
+                //            break;
+                //        }
+                //    }
 
-                    if (comboAudioMixer1.SelectedIndex < 0 ||
-                        (string)comboAudioMixer1.SelectedItem != "Sound Blaster")
-                    {
-                        for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
-                        {
-                            if (((string)comboAudioMixer1.Items[i]).StartsWith("USB Audio"))
-                            {
-                                comboAudioMixer1.SelectedIndex = i;
-                                break;
-                            }
-                        }
-                    }
+                //    if (comboAudioMixer1.SelectedIndex < 0 ||
+                //        (string)comboAudioMixer1.SelectedItem != "Sound Blaster")
+                //    {
+                //        for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
+                //        {
+                //            if (((string)comboAudioMixer1.Items[i]).StartsWith("USB Audio"))
+                //            {
+                //                comboAudioMixer1.SelectedIndex = i;
+                //                break;
+                //            }
+                //        }
+                //    }
 
-                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                    {
-                        if (dev.Name == "Wuschel's ASIO4ALL")
-                        {
-                            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
-                            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
-                        }
-                    }
-                    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-                    {
-                        foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                        {
-                            if (dev.Name == "ASIO4ALL v2")
-                            {
-                                comboAudioInput1.Text = "ASIO4ALL v2";
-                                comboAudioOutput1.Text = "ASIO4ALL v2";
-                            }
-                        }
-                    }
+                //    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //    {
+                //        if (dev.Name == "Wuschel's ASIO4ALL")
+                //        {
+                //            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
+                //            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
+                //        }
+                //    }
+                //    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                //    {
+                //        foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //        {
+                //            if (dev.Name == "ASIO4ALL v2")
+                //            {
+                //                comboAudioInput1.Text = "ASIO4ALL v2";
+                //                comboAudioOutput1.Text = "ASIO4ALL v2";
+                //            }
+                //        }
+                //    }
 
-                    comboAudioReceive1.Text = "Line In";
+                //    comboAudioReceive1.Text = "Line In";
 
-                    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
-                    {
-                        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
-                        {
-                            comboAudioTransmit1.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                //    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
+                //    {
+                //        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
+                //        {
+                //            comboAudioTransmit1.SelectedIndex = i;
+                //            break;
+                //        }
+                //    }
 
-                    if (comboAudioMixer1.SelectedIndex < 0 ||
-                        (comboAudioMixer1.Text != "Sound Blaster" &&
-                        comboAudioMixer1.Text != "USB Audio"))
-                    {
-                        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
-                            "Please verify that this specific sound card is installed " +
-                            "and functioning and try again.  \nIf your sound card is not " +
-                            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
-                            "list, use the Unsupported Card selection.  \nFor more support, " +
-                            "email support@flex-radio.com.",
-                            comboAudioSoundCard.Text + " Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
-                       comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-                    {
-                        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
-                            "www.asio4all.com, download and install the driver, " +
-                            "and try again.  Alternatively, you can use the Unsupported " +
-                            "Card selection and setup the sound interface manually.  For " +
-                            "more support, email support@flex-radio.com.",
-                            "ASIO4ALL Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else
-                    {
-                        udAudioLineIn1.Value = 6;
-                        console.PowerEnabled = true;
-                        grpAudioMicInGain1.Enabled = true;
-                        grpAudioLineInGain1.Enabled = true;
-                        comboAudioChannels1.Text = "2";
-                        comboAudioChannels1.Enabled = false;
-                        Audio.IN_RX1_L = 0;
-                        Audio.IN_RX1_R = 1;
-                        Audio.IN_TX_L = 0;
-                        Audio.IN_TX_R = 1;
-                    }
-                    break;
-                case SoundCard.DELTA_44:
-                    grpAudioDetails1.Enabled = false;
-                    if (!comboAudioSampleRate1.Items.Contains(96000))
-                        comboAudioSampleRate1.Items.Add(96000);
-                    if (comboAudioSampleRate1.Items.Contains(192000))
-                        comboAudioSampleRate1.Items.Remove(192000);
-                    if (!comboAudioSampleRate1.Items.Contains(384000))
-                        comboAudioSampleRate1.Items.Add(384000);
-                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
-                        comboAudioSampleRate1.Text = "48000";
-                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
-                    {
-                        if (p.Name == "ASIO")
-                        {
-                            comboAudioDriver1.SelectedItem = p;
-                            break;
-                        }
-                    }
+                //    if (comboAudioMixer1.SelectedIndex < 0 ||
+                //        (comboAudioMixer1.Text != "Sound Blaster" &&
+                //        comboAudioMixer1.Text != "USB Audio"))
+                //    {
+                //        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
+                //            "Please verify that this specific sound card is installed " +
+                //            "and functioning and try again.  \nIf your sound card is not " +
+                //            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
+                //            "list, use the Unsupported Card selection.  \nFor more support, " +
+                //            "email support@flex-radio.com.",
+                //            comboAudioSoundCard.Text + " Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
+                //       comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                //    {
+                //        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
+                //            "www.asio4all.com, download and install the driver, " +
+                //            "and try again.  Alternatively, you can use the Unsupported " +
+                //            "Card selection and setup the sound interface manually.  For " +
+                //            "more support, email support@flex-radio.com.",
+                //            "ASIO4ALL Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else
+                //    {
+                //        udAudioLineIn1.Value = 6;
+                //        console.PowerEnabled = true;
+                //        grpAudioMicInGain1.Enabled = true;
+                //        grpAudioLineInGain1.Enabled = true;
+                //        comboAudioChannels1.Text = "2";
+                //        comboAudioChannels1.Enabled = false;
+                //        Audio.IN_RX1_L = 0;
+                //        Audio.IN_RX1_R = 1;
+                //        Audio.IN_TX_L = 0;
+                //        Audio.IN_TX_R = 1;
+                //    }
+                //    break;
+                //case SoundCard.DELTA_44:
+                //    grpAudioDetails1.Enabled = false;
+                //    if (!comboAudioSampleRate1.Items.Contains(96000))
+                //        comboAudioSampleRate1.Items.Add(96000);
+                //    if (comboAudioSampleRate1.Items.Contains(192000))
+                //        comboAudioSampleRate1.Items.Remove(192000);
+                //    if (!comboAudioSampleRate1.Items.Contains(384000))
+                //        comboAudioSampleRate1.Items.Add(384000);
+                //    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                //        comboAudioSampleRate1.Text = "48000";
+                //    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                //    {
+                //        if (p.Name == "ASIO")
+                //        {
+                //            comboAudioDriver1.SelectedItem = p;
+                //            break;
+                //        }
+                //    }
 
-                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                    {
-                        if (dev.Name == "M-Audio Delta ASIO")
-                        {
-                            comboAudioInput1.Text = "M-Audio Delta ASIO";
-                            comboAudioOutput1.Text = "M-Audio Delta ASIO";
-                        }
-                    }
+                //    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //    {
+                //        if (dev.Name == "M-Audio Delta ASIO")
+                //        {
+                //            comboAudioInput1.Text = "M-Audio Delta ASIO";
+                //            comboAudioOutput1.Text = "M-Audio Delta ASIO";
+                //        }
+                //    }
 
-                    comboAudioMixer1.Text = "None";
+                //    comboAudioMixer1.Text = "None";
 
-                    if (comboAudioInput1.Text != "M-Audio Delta ASIO")
-                    {
-                        MessageBox.Show("M-Audio Delta ASIO driver not found.  Please visit " +
-                            "www.m-audio.com, download and install the latest driver, " +
-                            "and try again.  For more support, email support@flex-radio.com.",
-                            "Delta 44 Driver Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else
-                    {
-                        InitDelta44();
-                        chkAudioEnableVAC.Enabled = true;
-                        grpAudioMicInGain1.Enabled = false;
-                        grpAudioLineInGain1.Enabled = false;
-                        console.PowerEnabled = true;
-                        comboAudioChannels1.Text = "4";
-                        comboAudioChannels1.Enabled = false;
-                        Audio.IN_RX1_L = 0;
-                        Audio.IN_RX1_R = 1;
-                        Audio.IN_TX_L = 2;
-                        Audio.IN_TX_R = 3;
-                    }
-                    break;
+                //    if (comboAudioInput1.Text != "M-Audio Delta ASIO")
+                //    {
+                //        MessageBox.Show("M-Audio Delta ASIO driver not found.  Please visit " +
+                //            "www.m-audio.com, download and install the latest driver, " +
+                //            "and try again.  For more support, email support@flex-radio.com.",
+                //            "Delta 44 Driver Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else
+                //    {
+                //        InitDelta44();
+                //        chkAudioEnableVAC.Enabled = true;
+                //        grpAudioMicInGain1.Enabled = false;
+                //        grpAudioLineInGain1.Enabled = false;
+                //        console.PowerEnabled = true;
+                //        comboAudioChannels1.Text = "4";
+                //        comboAudioChannels1.Enabled = false;
+                //        Audio.IN_RX1_L = 0;
+                //        Audio.IN_RX1_R = 1;
+                //        Audio.IN_TX_L = 2;
+                //        Audio.IN_TX_R = 3;
+                //    }
+                //    break;
 
                 case SoundCard.HPSDR:
                     grpAudioDetails1.Enabled = false;
@@ -8914,155 +9208,155 @@ namespace Thetis
                     break; // Janus Ozy 
 
 
-                case SoundCard.FIREBOX:
-                    grpAudioDetails1.Enabled = false;
-                    if (!comboAudioSampleRate1.Items.Contains(96000))
-                        comboAudioSampleRate1.Items.Add(96000);
-                    if (comboAudioSampleRate1.Items.Contains(192000))
-                        comboAudioSampleRate1.Items.Remove(192000);
-                    if (!comboAudioSampleRate1.Items.Contains(384000))
-                        comboAudioSampleRate1.Items.Add(384000);
-                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
-                        comboAudioSampleRate1.Text = "48000";
-                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
-                    {
-                        if (p.Name == "ASIO")
-                        {
-                            comboAudioDriver1.SelectedItem = p;
-                            break;
-                        }
-                    }
+                //case SoundCard.FIREBOX:
+                //    grpAudioDetails1.Enabled = false;
+                //    if (!comboAudioSampleRate1.Items.Contains(96000))
+                //        comboAudioSampleRate1.Items.Add(96000);
+                //    if (comboAudioSampleRate1.Items.Contains(192000))
+                //        comboAudioSampleRate1.Items.Remove(192000);
+                //    if (!comboAudioSampleRate1.Items.Contains(384000))
+                //        comboAudioSampleRate1.Items.Add(384000);
+                //    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                //        comboAudioSampleRate1.Text = "48000";
+                //    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                //    {
+                //        if (p.Name == "ASIO")
+                //        {
+                //            comboAudioDriver1.SelectedItem = p;
+                //            break;
+                //        }
+                //    }
 
-                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                    {
-                        if (dev.Name.IndexOf("FireBox") >= 0)
-                        {
-                            comboAudioInput1.Text = dev.Name;
-                            comboAudioOutput1.Text = dev.Name;
-                        }
-                    }
+                //    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //    {
+                //        if (dev.Name.IndexOf("FireBox") >= 0)
+                //        {
+                //            comboAudioInput1.Text = dev.Name;
+                //            comboAudioOutput1.Text = dev.Name;
+                //        }
+                //    }
 
-                    comboAudioMixer1.Text = "None";
+                //    comboAudioMixer1.Text = "None";
 
-                    if (comboAudioInput1.Text.IndexOf("FireBox") < 0)
-                    {
-                        MessageBox.Show("PreSonus FireBox ASIO driver not found.  Please visit " +
-                            "www.presonus.com, download and install the latest driver, " +
-                            "and try again.  For more support, email support@flex-radio.com.",
-                            "PreSonus FireBox Driver Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else
-                    {
-                        chkAudioEnableVAC.Enabled = true;
-                        grpAudioMicInGain1.Enabled = false;
-                        grpAudioLineInGain1.Enabled = false;
-                        console.PowerEnabled = true;
-                        comboAudioChannels1.Text = "4";
-                        comboAudioChannels1.Enabled = false;
-                        Audio.IN_RX1_L = 2;
-                        Audio.IN_RX1_R = 3;
-                        Audio.IN_TX_L = 0;
-                        Audio.IN_TX_R = 1;
-                    }
-                    break;
-                case SoundCard.EDIROL_FA_66:
-                    grpAudioDetails1.Enabled = false;
-                    if (!comboAudioSampleRate1.Items.Contains(96000))
-                        comboAudioSampleRate1.Items.Add(96000);
-                    if (!comboAudioSampleRate1.Items.Contains(192000))
-                        comboAudioSampleRate1.Items.Add(192000);
-                    if (!comboAudioSampleRate1.Items.Contains(384000))
-                        comboAudioSampleRate1.Items.Add(384000);
-                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
-                        comboAudioSampleRate1.Text = "192000";
-                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
-                    {
-                        if (p.Name == "ASIO")
-                        {
-                            comboAudioDriver1.SelectedItem = p;
-                            break;
-                        }
-                    }
+                //    if (comboAudioInput1.Text.IndexOf("FireBox") < 0)
+                //    {
+                //        MessageBox.Show("PreSonus FireBox ASIO driver not found.  Please visit " +
+                //            "www.presonus.com, download and install the latest driver, " +
+                //            "and try again.  For more support, email support@flex-radio.com.",
+                //            "PreSonus FireBox Driver Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else
+                //    {
+                //        chkAudioEnableVAC.Enabled = true;
+                //        grpAudioMicInGain1.Enabled = false;
+                //        grpAudioLineInGain1.Enabled = false;
+                //        console.PowerEnabled = true;
+                //        comboAudioChannels1.Text = "4";
+                //        comboAudioChannels1.Enabled = false;
+                //        Audio.IN_RX1_L = 2;
+                //        Audio.IN_RX1_R = 3;
+                //        Audio.IN_TX_L = 0;
+                //        Audio.IN_TX_R = 1;
+                //    }
+                //    break;
+                //case SoundCard.EDIROL_FA_66:
+                //    grpAudioDetails1.Enabled = false;
+                //    if (!comboAudioSampleRate1.Items.Contains(96000))
+                //        comboAudioSampleRate1.Items.Add(96000);
+                //    if (!comboAudioSampleRate1.Items.Contains(192000))
+                //        comboAudioSampleRate1.Items.Add(192000);
+                //    if (!comboAudioSampleRate1.Items.Contains(384000))
+                //        comboAudioSampleRate1.Items.Add(384000);
+                //    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                //        comboAudioSampleRate1.Text = "192000";
+                //    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                //    {
+                //        if (p.Name == "ASIO")
+                //        {
+                //            comboAudioDriver1.SelectedItem = p;
+                //            break;
+                //        }
+                //    }
 
-                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                    {
-                        if (dev.Name == "EDIROL FA-66")
-                        {
-                            comboAudioInput1.Text = "EDIROL FA-66";
-                            comboAudioOutput1.Text = "EDIROL FA-66";
-                        }
-                    }
+                //    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                //    {
+                //        if (dev.Name == "EDIROL FA-66")
+                //        {
+                //            comboAudioInput1.Text = "EDIROL FA-66";
+                //            comboAudioOutput1.Text = "EDIROL FA-66";
+                //        }
+                //    }
 
-                    comboAudioMixer1.Text = "None";
+                //    comboAudioMixer1.Text = "None";
 
-                    if (comboAudioInput1.Text != "EDIROL FA-66")
-                    {
-                        MessageBox.Show("Edirol FA-66 ASIO driver not found.  Please visit " +
-                            "www.rolandus.com, download and install the latest driver, " +
-                            "and try again.  For more support, email support@flex-radio.com.",
-                            "Edirol FA-66 Driver Not Found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
-                        console.PowerEnabled = false;
-                    }
-                    else
-                    {
-                        chkAudioEnableVAC.Enabled = true;
-                        grpAudioMicInGain1.Enabled = false;
-                        grpAudioLineInGain1.Enabled = false;
-                        console.PowerEnabled = true;
-                        comboAudioChannels1.Text = "4";
-                        comboAudioChannels1.Enabled = false;
-                        Audio.IN_RX1_L = 2;
-                        Audio.IN_RX1_R = 3;
-                        Audio.IN_TX_L = 0;
-                        Audio.IN_TX_R = 1;
-                    }
-                    break;
-                case SoundCard.UNSUPPORTED_CARD:
-                    if (comboAudioSoundCard.Focused)
-                    {
-                        MessageBox.Show("Proper operation of the SDR-1000 depends on the use of a sound card that is\n" +
-                            "officially recommended by FlexRadio Systems.  Refer to the Specifications page on\n" +
-                            "www.flex-radio.com to determine which sound cards are currently recommended.  Use only\n" +
-                            "the specific model numbers stated on the website because other models within the same\n" +
-                            "family may not work properly with the radio.  Officially supported sound cards may be\n" +
-                            "updated on the website without notice.  If you have any question about the sound card\n" +
-                            "you would like to use with the radio, please email support@flex-radio.com or call us at\n" +
-                            "512-250-8595.\n\n" +
+                //    if (comboAudioInput1.Text != "EDIROL FA-66")
+                //    {
+                //        MessageBox.Show("Edirol FA-66 ASIO driver not found.  Please visit " +
+                //            "www.rolandus.com, download and install the latest driver, " +
+                //            "and try again.  For more support, email support@flex-radio.com.",
+                //            "Edirol FA-66 Driver Not Found",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Exclamation);
+                //        console.PowerEnabled = false;
+                //    }
+                //    else
+                //    {
+                //        chkAudioEnableVAC.Enabled = true;
+                //        grpAudioMicInGain1.Enabled = false;
+                //        grpAudioLineInGain1.Enabled = false;
+                //        console.PowerEnabled = true;
+                //        comboAudioChannels1.Text = "4";
+                //        comboAudioChannels1.Enabled = false;
+                //        Audio.IN_RX1_L = 2;
+                //        Audio.IN_RX1_R = 3;
+                //        Audio.IN_TX_L = 0;
+                //        Audio.IN_TX_R = 1;
+                //    }
+                //    break;
+                //case SoundCard.UNSUPPORTED_CARD:
+                //    if (comboAudioSoundCard.Focused)
+                //    {
+                //        MessageBox.Show("Proper operation of the SDR-1000 depends on the use of a sound card that is\n" +
+                //            "officially recommended by FlexRadio Systems.  Refer to the Specifications page on\n" +
+                //            "www.flex-radio.com to determine which sound cards are currently recommended.  Use only\n" +
+                //            "the specific model numbers stated on the website because other models within the same\n" +
+                //            "family may not work properly with the radio.  Officially supported sound cards may be\n" +
+                //            "updated on the website without notice.  If you have any question about the sound card\n" +
+                //            "you would like to use with the radio, please email support@flex-radio.com or call us at\n" +
+                //            "512-250-8595.\n\n" +
 
-                            "NO WARRANTY IS IMPLIED WHEN THE SDR-1000 IS USED WITH ANY SOUND CARD OTHER\n" +
-                            "THAN THOSE CURRENTLY RECOMMENDED AS STATED ON THE FLEXRADIO SYSTEMS WEBSITE.\n" +
-                            "UNSUPPORTED SOUND CARDS MAY OR MAY NOT WORK WITH THE SDR-1000.  USE OF\n" +
-                            "UNSUPPORTED SOUND CARDS IS AT THE CUSTOMERS OWN RISK.",
-                            "Warning: Unsupported Card",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning);
-                    }
-                    if (comboAudioSoundCard.Focused)
-                        chkGeneralRXOnly.Checked = true;
-                    if (!comboAudioSampleRate1.Items.Contains(96000))
-                        comboAudioSampleRate1.Items.Add(96000);
-                    if (!comboAudioSampleRate1.Items.Contains(192000))
-                        comboAudioSampleRate1.Items.Add(192000);
-                    if (!comboAudioSampleRate1.Items.Contains(384000))
-                        comboAudioSampleRate1.Items.Add(384000);
-                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
-                        comboAudioSampleRate1.Text = "48000";
-                    grpAudioDetails1.Enabled = true;
-                    grpAudioMicInGain1.Enabled = true;
-                    grpAudioLineInGain1.Enabled = true;
-                    console.PowerEnabled = true;
-                    comboAudioChannels1.Text = "2";
-                    comboAudioChannels1.Enabled = true;
-                    Audio.IN_RX1_L = 0;
-                    Audio.IN_RX1_R = 1;
-                    Audio.IN_TX_L = 0;
-                    Audio.IN_TX_R = 1;
-                    break;
+                //            "NO WARRANTY IS IMPLIED WHEN THE SDR-1000 IS USED WITH ANY SOUND CARD OTHER\n" +
+                //            "THAN THOSE CURRENTLY RECOMMENDED AS STATED ON THE FLEXRADIO SYSTEMS WEBSITE.\n" +
+                //            "UNSUPPORTED SOUND CARDS MAY OR MAY NOT WORK WITH THE SDR-1000.  USE OF\n" +
+                //            "UNSUPPORTED SOUND CARDS IS AT THE CUSTOMERS OWN RISK.",
+                //            "Warning: Unsupported Card",
+                //            MessageBoxButtons.OK,
+                //            MessageBoxIcon.Warning);
+                //    }
+                //    if (comboAudioSoundCard.Focused)
+                //        chkGeneralRXOnly.Checked = true;
+                //    if (!comboAudioSampleRate1.Items.Contains(96000))
+                //        comboAudioSampleRate1.Items.Add(96000);
+                //    if (!comboAudioSampleRate1.Items.Contains(192000))
+                //        comboAudioSampleRate1.Items.Add(192000);
+                //    if (!comboAudioSampleRate1.Items.Contains(384000))
+                //        comboAudioSampleRate1.Items.Add(384000);
+                //    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                //        comboAudioSampleRate1.Text = "48000";
+                //    grpAudioDetails1.Enabled = true;
+                //    grpAudioMicInGain1.Enabled = true;
+                //    grpAudioLineInGain1.Enabled = true;
+                //    console.PowerEnabled = true;
+                //    comboAudioChannels1.Text = "2";
+                //    comboAudioChannels1.Enabled = true;
+                //    Audio.IN_RX1_L = 0;
+                //    Audio.IN_RX1_R = 1;
+                //    Audio.IN_TX_L = 0;
+                //    Audio.IN_TX_R = 1;
+                //    break;
             }
 
             console.PWR = console.PWR;
@@ -16560,171 +16854,6 @@ namespace Thetis
             Display.RX2FFTSizeOffset = tbRX2DisplayFFTSize.Value * 2;
         }
 
-        private void radDispWeightedLog_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radDispWeightedLog.Checked)
-            {
-                console.specRX.GetSpecRX(0).AverageMode = 2;
-                console.specRX.GetSpecRX(cmaster.inid(1, 0)).AverageMode = 2;
-            }
-            else if (radDispWindowLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 4;
-            else if (radDispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 1;
-            else if (radDispWindowLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 3;
-            else if (radDispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 6;
-            console.UpdateRXSpectrumDisplayVars();
-            console.UpdateTXSpectrumDisplayVars();
-        }
-
-        private void radDispWindowLog_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radDispWeightedLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 2;
-            else if (radDispWindowLog.Checked)
-            {
-                console.specRX.GetSpecRX(0).AverageMode = 4;
-                console.specRX.GetSpecRX(cmaster.inid(1, 0)).AverageMode = 4;
-            }
-            else if (radDispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 1;
-            else if (radDispWindowLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 3;
-            else if (radDispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 6;
-            console.UpdateRXSpectrumDisplayVars();
-            console.UpdateTXSpectrumDisplayVars();
-        }
-
-        private void radDispWeightedLinear_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radDispWeightedLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 2;
-            else if (radDispWindowLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 4;
-            else if (radDispWeightedLinear.Checked)
-            {
-                console.specRX.GetSpecRX(0).AverageMode = 1;
-                console.specRX.GetSpecRX(cmaster.inid(1, 0)).AverageMode = 1;
-            }
-            else if (radDispWindowLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 3;
-            else if (radDispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 6;
-            console.UpdateRXSpectrumDisplayVars();
-            console.UpdateTXSpectrumDisplayVars();
-        }
-
-        private void radDispWindowLinear_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radDispWeightedLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 2;
-            else if (radDispWindowLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 4;
-            else if (radDispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 1;
-            else if (radDispWindowLinear.Checked)
-            {
-                console.specRX.GetSpecRX(0).AverageMode = 3;
-                console.specRX.GetSpecRX(cmaster.inid(1, 0)).AverageMode = 3;
-            }
-            else if (radDispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 6;
-            console.UpdateRXSpectrumDisplayVars();
-            console.UpdateTXSpectrumDisplayVars();
-        }
-
-        private void radDispLowNoiseFloor_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radDispWeightedLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 2;
-            else if (radDispWindowLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 4;
-            else if (radDispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 1;
-            else if (radDispWindowLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 3;
-            else if (radDispLowNoiseFloor.Checked)
-            {
-                console.specRX.GetSpecRX(0).AverageMode = 6;
-                console.specRX.GetSpecRX(cmaster.inid(1, 0)).AverageMode = 6;
-            }
-            console.UpdateRXSpectrumDisplayVars();
-            console.UpdateTXSpectrumDisplayVars();
-        }
-
-        private void radRX2DispWeightedLog_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radRX2DispWeightedLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 2;
-            else if (radRX2DispWindowLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 4;
-            else if (radRX2DispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 1;
-            else if (radRX2DispWindowLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 3;
-            else if (radRX2DispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 6;
-        }
-
-        private void radRX2DispWindowLog_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radRX2DispWeightedLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 2;
-            else if (radRX2DispWindowLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 4;
-            else if (radRX2DispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 1;
-            else if (radRX2DispWindowLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 3;
-            else if (radRX2DispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 6;
-        }
-
-        private void radRX2DispWeightedLinear_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radRX2DispWeightedLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 2;
-            else if (radRX2DispWindowLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 4;
-            else if (radRX2DispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 1;
-            else if (radRX2DispWindowLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 3;
-            else if (radRX2DispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 6;
-        }
-
-        private void radRX2DispWindowLinear_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radRX2DispWeightedLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 2;
-            else if (radRX2DispWindowLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 4;
-            else if (radRX2DispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 1;
-            else if (radRX2DispWindowLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 3;
-            else if (radRX2DispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 6;
-        }
-
-        private void radRX2DispLowNoiseFloor_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radRX2DispWeightedLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 2;
-            else if (radRX2DispWindowLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 4;
-            else if (radRX2DispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 1;
-            else if (radRX2DispWindowLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 3;
-            else if (radRX2DispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 6;
-        }
-
         private void comboDispWinType_SelectedIndexChanged(object sender, EventArgs e)
         {
             console.specRX.GetSpecRX(0).WindowType = comboDispWinType.SelectedIndex;
@@ -18229,6 +18358,121 @@ namespace Thetis
         private void chkAudioExpert_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void chkNetworkWDT_CheckedChanged(object sender, EventArgs e)
+        {
+            NetworkIO.SetWatchdogTimer(Convert.ToInt32(chkNetworkWDT.Checked));
+        }
+
+        private void comboRX2DispPanDetector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).DetTypePan = comboRX2DispPanDetector.SelectedIndex;
+        }
+
+        private void comboRX2DispPanAveraging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).AverageMode = comboRX2DispPanAveraging.SelectedIndex;
+        }
+
+        private void comboRX2DispWFDetector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).DetTypeWF = comboRX2DispWFDetector.SelectedIndex;
+        }
+
+        private void comboRX2DispWFAveraging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).AverageModeWF = comboRX2DispWFAveraging.SelectedIndex;
+        }
+
+        private void udRX2DisplayWFAVTime_ValueChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).AvTauWF = 0.001 * (double)udRX2DisplayWFAVTime.Value;
+        }
+
+        private void comboDispPanDetector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).DetTypePan = comboDispPanDetector.SelectedIndex;
+        }
+
+        private void comboDispWFDetector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).DetTypeWF = comboDispWFDetector.SelectedIndex;
+        }
+
+        private void comboDispPanAveraging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).AverageMode = comboDispPanAveraging.SelectedIndex;
+			console.UpdateRXSpectrumDisplayVars();
+            console.UpdateTXSpectrumDisplayVars();
+        }
+
+        private void comboDispWFAveraging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).AverageModeWF = comboDispWFAveraging.SelectedIndex;
+        }
+
+        private void udDisplayAVTimeWF_ValueChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).AvTauWF = 0.001 * (double)udDisplayAVTimeWF.Value;
+        }
+
+        private void chkDispRX2Normalize_CheckedChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).NormOneHzPan = chkDispRX2Normalize.Checked;
+        }
+
+        private void chkDispNormalize_CheckedChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).NormOneHzPan = chkDispNormalize.Checked;
+        }
+
+        private void comboTXDispPanDetector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(cmaster.inid(1, 0)).DetTypePan = comboTXDispPanDetector.SelectedIndex;
+        }
+
+        private void comboTXDispPanAveraging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(cmaster.inid(1, 0)).AverageMode = comboTXDispPanAveraging.SelectedIndex;
+        }
+
+        private void udTXDisplayAVGTime_ValueChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(cmaster.inid(1, 0)).AvTau = 0.001 * (double)udTXDisplayAVGTime.Value;
+        }
+
+        private void chkDispTXNormalize_CheckedChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(cmaster.inid(1, 0)).NormOneHzPan = chkDispTXNormalize.Checked;
+        }
+
+        private void tbTXDisplayFFTSize_Scroll(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(cmaster.inid(1, 0)).FFTSize = (int)(4096 * Math.Pow(2, Math.Floor((double)(tbTXDisplayFFTSize.Value))));
+            double bin_width = (double)console.specRX.GetSpecRX(cmaster.inid(1, 0)).SampleRate / (double)console.specRX.GetSpecRX(cmaster.inid(1, 0)).FFTSize;
+            lblTXDispBinWidth.Text = bin_width.ToString("N3");
+            // Display.TXFFTSizeOffset = tbTXDisplayFFTSize.Value * 2;
+        }
+
+        private void comboTXDispWinType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(cmaster.inid(1, 0)).WindowType = comboTXDispWinType.SelectedIndex;
+        }
+
+        private void comboTXDispWFDetector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(cmaster.inid(1, 0)).DetTypeWF = comboTXDispWFDetector.SelectedIndex;
+        }
+
+        private void comboTXDispWFAveraging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(cmaster.inid(1, 0)).AverageModeWF = comboTXDispWFAveraging.SelectedIndex;
+        }
+
+        private void udTXDisplayAVTime_ValueChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(cmaster.inid(1, 0)).AvTauWF = 0.001 * (double)udTXDisplayAVTime.Value;
         }
     }
 

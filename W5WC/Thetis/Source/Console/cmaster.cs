@@ -301,6 +301,7 @@ namespace Thetis
             SetPSRxIdx(0, 0);   // txid = 0, all current models use Stream0 for RX feedback
             SetPSTxIdx(0, 1);   // txid = 0, all current models use Stream1 for TX feedback
             puresignal.SetPSFeedbackRate(txch, 192000);
+            puresignal.SetPSHWPeak(txch, 0.2899);
 
             // setup transmitter display
             wdsp.TXASetSipMode(txch, 1);            // 1=>call the appropriate 'analyzer'
@@ -332,6 +333,7 @@ namespace Thetis
                 {
                     case HPSDRModel.ANAN100D:
                     case HPSDRModel.ANAN200D:
+                    case HPSDRModel.ANAN400D:
                         // This ANGELIA table is for test purposes and it routes Rx0 and Rx1 to RX1 and RX2, 
                         //      respectively, (as well as to PureSignal) when transmitting with PureSignal 
                         //      Enabled in Setup.
@@ -419,6 +421,7 @@ namespace Thetis
                 {
                     case HPSDRModel.ANAN100D:
                     case HPSDRModel.ANAN200D:
+                    case HPSDRModel.ANAN400D:
                         // control bits are { MOX, Diversity_Enabled, PureSignal_Enabled }
                         int[] Angelia_Function = new int[56] 
                         { 

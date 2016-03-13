@@ -585,6 +585,27 @@ namespace Thetis
             get { return vac1_latency_manual; }
         }
 
+        private static bool vac1_latency_manual_out = false;
+        public static bool VAC1LatencyManualOut
+        {
+            set { vac1_latency_manual_out = value; }
+            get { return vac1_latency_manual_out; }
+        }
+        
+        private static bool vac1_latency_pa_in_manual = false;
+        public static bool VAC1LatencyPAInManual
+        {
+            set { vac1_latency_pa_in_manual = value; }
+            get { return vac1_latency_pa_in_manual; }
+        }
+
+        private static bool vac1_latency_pa_out_manual = false;
+        public static bool VAC1LatencyPAOutManual
+        {
+            set { vac1_latency_pa_out_manual = value; }
+            get { return vac1_latency_pa_out_manual; }
+        }
+
         private static bool vac2_latency_manual = false;
         public static bool VAC2LatencyManual
         {
@@ -592,6 +613,26 @@ namespace Thetis
             get { return vac2_latency_manual; }
         }
 
+        private static bool vac2_latency_out_manual = false;
+        public static bool VAC2LatencyOutManual
+        {
+            set { vac2_latency_out_manual = value; }
+            get { return vac2_latency_out_manual; }
+        }
+
+        private static bool vac2_latency_pa_in_manual = false;
+        public static bool VAC2LatencyPAInManual
+        {
+            set { vac2_latency_pa_in_manual = value; }
+            get { return vac2_latency_pa_in_manual; }
+        }
+
+        private static bool vac2_latency_pa_out_manual = false;
+        public static bool VAC2LatencyPAOutManual
+        {
+            set { vac2_latency_pa_out_manual = value; }
+            get { return vac2_latency_pa_out_manual; }
+        }
 
         private static bool vac2_rx2 = true;
         public static bool VAC2RX2
@@ -1002,6 +1043,42 @@ namespace Thetis
             set { latency2 = value; }
         }
 
+        private static int latency2_out = 120;
+        public static int Latency2_Out
+        {
+            set { latency2_out = value; }
+        }
+        
+        private static int latency_pa_in = 120;
+        public static int LatencyPAIn
+        {
+            set { latency_pa_in = value; }
+        }
+
+        private static int latency_pa_out = 120;
+        public static int LatencyPAOut
+        {
+            set { latency_pa_out = value; }
+        }
+
+        private static int vac2_latency_out = 120;
+        public static int VAC2LatencyOut
+        {
+            set { vac2_latency_out = value; }
+        }
+
+        private static int vac2_latency_pa_in = 120;
+        public static int VAC2LatencyPAIn
+        {
+            set { vac2_latency_pa_in = value; }
+        }
+
+        private static int vac2_latency_pa_out = 120;
+        public static int VAC2LatencyPAOut
+        {
+            set { vac2_latency_pa_out = value; }
+        }
+
         private static int latency3 = 120;
         public static int Latency3
         {
@@ -1075,6 +1152,7 @@ namespace Thetis
                 unsafe
                 {
                     cmaster.SetAAudioMixWhat((void*)0, 0, 0, !mute_rx1);
+                    cmaster.SetAAudioMixWhat((void*)0, 0, 1, !mute_rx1);
                 }
             }
         }
@@ -1325,7 +1403,10 @@ namespace Thetis
                     int sample_rate = sample_rate2;
                     int block_size = block_size_vac;
                     double in_latency = vac1_latency_manual ? latency2/1000.0 : PA19.PA_GetDeviceInfo(input_dev2).defaultLowInputLatency;
-                    double out_latency = vac1_latency_manual ? latency2/1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
+                    double out_latency = vac1_latency_manual_out ? latency2_out/1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
+                    double pa_in_latency = vac1_latency_pa_in_manual ? latency_pa_in / 1000.0 : PA19.PA_GetDeviceInfo(input_dev2).defaultLowInputLatency;
+                    double pa_out_latency = vac1_latency_pa_out_manual ? latency_pa_out / 1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
+
                     if (vac_output_iq)
                     {
                         num_chan = 2;
@@ -1333,8 +1414,7 @@ namespace Thetis
                         block_size = block_size1;
                         //latency = 250;
                     }
-                    else if (vac_stereo) num_chan = 2;
-                    // ehr end				
+                    else if (vac_stereo) num_chan = 2;			
                     vac_rb_reset = true;
 
                     ivac.SetIVAChostAPIindex(0, host2);
@@ -1343,6 +1423,9 @@ namespace Thetis
                     ivac.SetIVACnumChannels(0, num_chan);
                     ivac.SetIVACInLatency(0, in_latency);
                     ivac.SetIVACOutLatency(0, out_latency);
+                    ivac.SetIVACPAInLatency(0, pa_in_latency);
+                    ivac.SetIVACPAOutLatency(0, pa_out_latency);
+
                     try
                     {
                         //retval = StartAudio_NonJanus(ref callbackVAC, (uint)block_size, sample_rate, host2, input_dev2,
@@ -1373,7 +1456,9 @@ namespace Thetis
                     int block_size = block_size_vac2;
 
                     double in_latency = vac2_latency_manual ? latency3/1000.0 : PA19.PA_GetDeviceInfo(input_dev3).defaultLowInputLatency;
-                    double out_latency = vac2_latency_manual ? latency3/1000.0 : PA19.PA_GetDeviceInfo(output_dev3).defaultLowOutputLatency;
+                    double out_latency = vac2_latency_out_manual ? vac2_latency_out/1000.0 : PA19.PA_GetDeviceInfo(output_dev3).defaultLowOutputLatency;
+                    double pa_in_latency = vac2_latency_pa_in_manual ? vac2_latency_pa_in / 1000.0 : PA19.PA_GetDeviceInfo(input_dev3).defaultLowInputLatency;
+                    double pa_out_latency = vac2_latency_pa_out_manual ? vac2_latency_pa_out / 1000.0 : PA19.PA_GetDeviceInfo(output_dev3).defaultLowOutputLatency;
 
                     if (vac2_output_iq)
                     {
@@ -1392,6 +1477,8 @@ namespace Thetis
                     ivac.SetIVACnumChannels(1, num_chan);
                     ivac.SetIVACInLatency(1, in_latency);
                     ivac.SetIVACOutLatency(1, out_latency);
+                    ivac.SetIVACPAInLatency(1, pa_in_latency);
+                    ivac.SetIVACPAOutLatency(1, pa_out_latency);
 
                     try
                     {

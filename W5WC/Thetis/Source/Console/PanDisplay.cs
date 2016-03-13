@@ -3569,7 +3569,7 @@ namespace Thetis
                     flag = 0;
 
                     fixed (float* ptr = &new_display_data[0])
-                        SpecHPSDRDLL.GetPixels(rx-2, ptr, ref flag);
+                        SpecHPSDRDLL.GetPixels(rx-2, 0, ptr, ref flag);
 
                     this.DataReady = true;
                 }
@@ -4740,6 +4740,7 @@ namespace Thetis
             }
 
             SpecHPSDRDLL.SetAnalyzer(display_id, //dispid,                    // id of this display unit
+                        1,                                      // number of outputs for this display
                         1,                                      // spur elimination FFTs:  not used for simple console display
                         data_type,                              // 0 for real data, 1 for complex data
                         h_flip,                                 // no spur elimination:  only one spur_elim_fft and it's spectrum is not flipped
@@ -4753,9 +4754,6 @@ namespace Thetis
                         span_clip_h,                            // number of additional bins to clip from HIGH side
                         pixels,                                 // number of pixels to output
                         1,                                      // stitches:  no display stitching used
-                        avm,                                    // averaging mode (peak = -1, OFF = 0, low_noise time_weighted lob_data = 6)
-                        1,                                      // frames to average for window averaging:  NOT USED
-                        avb,                                    // multiplier for time_weighted averaging
                         0,                                      // calibration_data_set:  not using calibration
                         0.0,                                    // span_min_freq:  not using calibration
                         0.0,                                    // span_max_freq:  not using calibration

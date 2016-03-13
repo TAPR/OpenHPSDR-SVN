@@ -3493,7 +3493,7 @@ namespace Thetis
                     flag = 0;
 
                     fixed (float* ptr = &new_display_data[0])
-                        SpecHPSDRDLL.GetPixels(rx, ptr, ref flag);
+                        SpecHPSDRDLL.GetPixels(rx, 0, ptr, ref flag);
 
                     this.DataReady = true;
                 
@@ -4626,6 +4626,7 @@ namespace Thetis
 
             SpecHPSDRDLL.SetAnalyzer(
                 wbid,                       // id of this analyzer
+                2,                          // number of outputs desired for this display
                 1,                          // one fft, no spur elimination for this application
                 0,                          // REAL data
                 h_flip,                     // flip settings for spur elimination ffts
@@ -4639,9 +4640,6 @@ namespace Thetis
                 span_clip_h,                // additional bins to clip on the high side
                 pixels,                     // number of pixel values to generate
                 1,                          // number of sub-spans to stitch
-                avm,                        // averaging mode
-                1,                          // number of ffts to average for window-averaging
-                avb,                        // back multiplier for time-averaging
                 0,                          // calibration set
                 0.0,                        // calibration fmin
                 0.0,                        // calibration fmax

@@ -23,6 +23,7 @@ typedef struct CACHE_ALIGN _radionet
 	double* syncrxbuff[2];
 	int rx_base_port;
 	int run;
+	int wdt;
 	int sendHighPriority;
 	int num_adc;
 	int num_dac;

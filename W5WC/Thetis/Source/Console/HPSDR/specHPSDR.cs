@@ -242,19 +242,24 @@ namespace Thetis
             }
         }
 
-        private int avm;
         private bool average_on;						// True if the Average button is pressed
         public bool AverageOn
         {
             get { return average_on; }
             set
             {
+                int avm;
+                int avm_wf;
                 average_on = value;
-                if (peak_on) avm = -1;
-                else if (average_on) avm = av_mode;
-                else avm = 0;
-
-                if (update) initAnalyzer();
+                if (peak_on) avm = avm_wf = -1;
+                else if (average_on)
+                {
+                    avm = av_mode;
+                    avm_wf = av_mode_wf;
+                }
+                else avm = avm_wf = 0;
+                SpecHPSDRDLL.SetDisplayAverageMode(disp, 0, avm);
+                SpecHPSDRDLL.SetDisplayAverageMode(disp, 1, avm_wf);
             }
         }
 
@@ -264,12 +269,60 @@ namespace Thetis
             get { return peak_on; }
             set
             {
+                int avm;
+                int avm_wf;
                 peak_on = value;
-                if (peak_on) avm = -1;
-                else if (average_on) avm = av_mode;
-                else avm = 0;
+                if (peak_on) avm = avm_wf = -1;
+                else if (average_on)
+                {
+                    avm = av_mode;
+                    avm_wf = av_mode_wf;
+                }
+                else avm = avm_wf = 0;
+                SpecHPSDRDLL.SetDisplayAverageMode(disp, 0, avm);
+                SpecHPSDRDLL.SetDisplayAverageMode(disp, 1, avm_wf);
+            }
+        }
 
-                if (update) initAnalyzer();
+        void updateNormalizePan()
+        {
+            if (norm_oneHz_pan && (det_type_pan == 2 || det_type_pan == 3))
+                SpecHPSDRDLL.SetDisplayNormOneHz(disp, 0, true);
+            else
+                SpecHPSDRDLL.SetDisplayNormOneHz(disp, 0, false);
+        }
+
+        private int det_type_pan;
+        public int DetTypePan
+        {
+            get { return det_type_pan; }
+            set
+            { 
+                det_type_pan = value;
+                SpecHPSDRDLL.SetDisplayDetectorMode(disp, 0, value);
+                updateNormalizePan();
+            }
+        }
+
+        private int det_type_wf;
+        public int DetTypeWF
+        {
+            get { return det_type_wf; }
+            set
+            { 
+                det_type_wf = value;
+                SpecHPSDRDLL.SetDisplayDetectorMode(disp, 1, value);
+            }
+        }
+
+        private bool norm_oneHz_pan;
+        public bool NormOneHzPan
+        {
+            get { return norm_oneHz_pan; }
+            set 
+            {
+                norm_oneHz_pan = value;
+                updateNormalizePan();
             }
         }
 
@@ -285,30 +338,76 @@ namespace Thetis
             }
         }
 
-        private double tau;                             //time-constant for averaging
+        //maximum number of frames of pixels to average
+        const int MAX_AV_FRAMES = 60;
+
+        private double tau;                             //time-constant for averaging panadapter
         public double AvTau
         {
             get { return tau; }
             set
             {
                 tau = value;
-
-                if (update) initAnalyzer();
+                //compute multiplier for weighted averaging
+                double avb = Math.Exp(-1.0 / (frame_rate * tau));
+                //compute number of frames to average for window averaging
+                int display_average = Math.Max(2, (int)Math.Min(MAX_AV_FRAMES, frame_rate * tau));
+                SpecHPSDRDLL.SetDisplayAvBackmult(disp, 0, avb);
+                SpecHPSDRDLL.SetDisplayNumAverage(disp, 0, display_average);
             }
         }
 
-        private int av_mode;
+        private double tau_wf;                             //time-constant for averaging waterfall
+        public double AvTauWF
+        {
+            get { return tau_wf; }
+            set
+            {
+                tau_wf = value;
+                //compute multiplier for weighted averaging
+                double avb = Math.Exp(-1.0 / (frame_rate * tau_wf));
+                //compute number of frames to average for window averaging
+                int display_average = Math.Max(2, (int)Math.Min(MAX_AV_FRAMES, frame_rate * tau_wf));
+                SpecHPSDRDLL.SetDisplayAvBackmult(disp, 1, avb);
+                SpecHPSDRDLL.SetDisplayNumAverage(disp, 1, display_average);
+            }
+        }
+
+        private int av_mode;                            // Averaging Mode for panadapter
         public int AverageMode
         {
             get { return av_mode; }
             set
             {
+                int avm;
                 av_mode = value;
                 if (peak_on) avm = -1;
                 else if (average_on) avm = av_mode;
                 else avm = 0;
 
-                if (update) initAnalyzer();
+                if (update)
+                {
+                    SpecHPSDRDLL.SetDisplayAverageMode(disp, 0, avm);
+                }
+            }
+        }
+
+        private int av_mode_wf;                            // Averaging Mode for waterfall
+        public int AverageModeWF
+        {
+            get { return av_mode_wf; }
+            set
+            {
+                int avm;
+                av_mode_wf = value;
+                if (peak_on) avm = -1;
+                else if (average_on) avm = av_mode_wf;
+                else avm = 0;
+
+                if (update)
+                {
+                    SpecHPSDRDLL.SetDisplayAverageMode(disp, 1, avm);
+                }
             }
         }
 
@@ -345,27 +444,7 @@ namespace Thetis
                 sample_rate = value;
 
                 if (update) initAnalyzer();
-                if (disp == 0)
-                    {
-                        // cmaster.SetRCVRANBSamplerate(0, 0, sample_rate);
-                        // cmaster.SetRCVRANBSamplerate(2, 0, sample_rate);
-                        // cmaster.SetRCVRANBSamplerate(2, 1, sample_rate);
-                        // cmaster.SetRCVRNOBSamplerate(0, 0, sample_rate);
-                        // cmaster.SetRCVRNOBSamplerate(2, 0, sample_rate);
-                        // cmaster.SetRCVRNOBSamplerate(2, 1, sample_rate);
-                    // for (int i = 0; i < 3; i++)
-                    // {
-                        // SpecHPSDRDLL.SetEXTANBSamplerate(i, sample_rate);
-                        // SpecHPSDRDLL.SetEXTNOBSamplerate(i, sample_rate);
-                    // }
-                    }
-                if (disp == 1)
-                {
-                    // cmaster.SetRCVRANBSamplerate(0, 1, sample_rate);
-                    // cmaster.SetRCVRNOBSamplerate(0, 1, sample_rate);
-                    // SpecHPSDRDLL.SetEXTANBSamplerate(3, sample_rate);
-                    // SpecHPSDRDLL.SetEXTNOBSamplerate(3, sample_rate);
-                }
+                SpecHPSDRDLL.SetDisplaySampleRate(disp, sample_rate);
             }
         }
 
@@ -393,14 +472,6 @@ namespace Thetis
 
         public void initAnalyzer()
         {
-            //maximum number of frames of pixels to average
-            const int MAX_AV_FRAMES = 60;
-
-            //compute multiplier for weighted averaging
-            double avb = Math.Exp(-1.0 / (frame_rate * tau));
-            //compute number of frames to average for window averaging
-            int display_average = Math.Max(2, (int)Math.Min(MAX_AV_FRAMES, frame_rate * tau));
-
             //no spur elimination => only one spur_elim_fft and it's spectrum is not flipped
             int[] flip = { 0 };
             GCHandle handle = GCHandle.Alloc(flip, GCHandleType.Pinned);
@@ -507,7 +578,9 @@ namespace Thetis
                     return;
             }
      
-            SpecHPSDRDLL.SetAnalyzer(disp,
+            SpecHPSDRDLL.SetAnalyzer(
+                        disp,
+                        2,
                         spur_eliminationtion_ffts,
                         data_type,
                         h_flip,
@@ -521,9 +594,6 @@ namespace Thetis
                         span_clip_h,
                         pixels,
                         stitches,
-                        avm,
-                        display_average,
-                        avb,
                         calibration_data_set,
                         span_min_freq,
                         span_max_freq,
@@ -536,14 +606,6 @@ namespace Thetis
             //filter_high is the high frequency setting for the filter
             //samplerate is the current samplerate
             //fft_size is the current FFT size
-
-            //maximum number of frames of pixels to average
-            const int MAX_AV_FRAMES = 60;
-
-            //compute multiplier for weighted averaging
-            double avb = Math.Exp(-1.0 / (frame_rate * tau));
-            //compute number of frames to average for window averaging
-            int display_average = Math.Max(2, (int)Math.Min(MAX_AV_FRAMES, frame_rate * tau));
 
             //no spur elimination => only one spur_elim_fft and it's spectrum is not flipped
             int[] flip = { 0 };
@@ -586,27 +648,26 @@ namespace Thetis
             // set overlap as needed to achieve the desired frame rate
             overlap = (int)Math.Max(0.0, Math.Ceiling(fft_size - (double)sample_rate / (double)frame_rate));
 
-            SpecHPSDRDLL.SetAnalyzer(disp,
-          spur_eliminationtion_ffts,
-          data_type,
-          h_flip,
-          fft_size,
-          spec_blocksize,
-          window_type,
-          kaiser_pi,
-          overlap,
-          sclip,
-          fsclipL,
-          fsclipH,
-          pixels,
-          stitch,
-          avm,
-          display_average,
-          avb,
-          calibration_data_set,
-          span_min_freq,
-          span_max_freq,
-          max_w);
+            SpecHPSDRDLL.SetAnalyzer (
+              disp,
+              2,
+              spur_eliminationtion_ffts,
+              data_type,
+              h_flip,
+              fft_size,
+              spec_blocksize,
+              window_type,
+              kaiser_pi,
+              overlap,
+              sclip,
+              fsclipL,
+              fsclipH,
+              pixels,
+              stitch,
+              calibration_data_set,
+              span_min_freq,
+              span_max_freq,
+              max_w);
         }
     }
 
@@ -614,8 +675,27 @@ namespace Thetis
     {
         #region DLL Method Declarations
         [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetAnalyzer(int disp, int n_fft, int type, IntPtr flp, int sz, int buff_size, int win_type, double pi, int ovrlp, int clp,
-            int fsclipL, int fsclipH, int n_pix, int n_stch, int av_mode, int n_av, double avb, int cal_set, double fmin, double fmax, int max_w);
+        public static extern void SetAnalyzer(
+                    int disp,           // display identifier
+                    int n_pixout,       // number of pixel outputs per display
+                    int n_fft,			// number of LO frequencies = number of ffts used in elimination
+                    int typ,			// 0 for real input data (I only); 1 for complex input data (I & Q)
+                    IntPtr flp,			// vector with one elt for each LO frequency, 1 if high-side LO, 0 otherwise 
+                    int sz,				// size of the fft, i.e., number of input samples
+                    int bf_sz,			// number of samples transferred for each OpenBuffer()/CloseBuffer()
+                    int win_type,		// integer specifying which window function to use
+                    double pi,			// PiAlpha parameter for Kaiser window
+                    int ovrlp,			// number of samples each fft (other than the first) is to re-use from the previous 
+                    int clp,			// number of fft output bins to be clipped from EACH side of each sub-span
+                    int fscLin,			// number of bins to clip from low end of entire span
+                    int fscHin,			// number of bins to clip from high end of entire span
+                    int n_pix,			// number of pixel values to return.  may be either <= or > number of bins 
+                    int n_stch,			// number of sub-spans to concatenate to form a complete span 
+                    int calset,			// identifier of which set of calibration data to use 
+                    double fmin,		// frequency at first pixel value 
+                    double fmax,		// frequency at last pixel value
+                    int max_w
+                 );
 
         [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void XCreateAnalyzer(int disp, ref int success, int m_size, int m_LO, int m_stitch, string app_data_path);
@@ -625,16 +705,10 @@ namespace Thetis
         public static extern void DestroyAnalyzer(int disp);
 
         [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetPixels(int disp, IntPtr pix, ref int flag);
+        public static extern void GetPixels(int disp, int pixout, IntPtr pix, ref int flag);
 
         [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetNAPixels(int disp, IntPtr pix, ref int flag);
-
-        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetPixels(int disp, float* pix, ref int flag);
-
-        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetNAPixels(int disp, float* pix, ref int flag);
+        public static extern void GetPixels(int disp, int pixout, float* pix, ref int flag);
 
         [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Spectrum(int disp, int ss, int LO, float* pI, float* pQ);
@@ -644,6 +718,24 @@ namespace Thetis
 
         [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SnapSpectrum(int disp, int ss, int LO, double* snap_buff);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetDisplayDetectorMode (int disp, int pixout, int mode);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetDisplayAverageMode (int disp, int pixout, int mode);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetDisplayNumAverage (int disp, int pixout, int num);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetDisplayAvBackmult(int disp, int pixout, double mult);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetDisplayNormOneHz(int disp, int pixout, bool norm);
+
+        [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetDisplaySampleRate (int disp, int rate);
 
         [DllImport("wdsp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void create_nobEXT(
