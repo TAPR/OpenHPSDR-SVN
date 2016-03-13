@@ -873,6 +873,8 @@ void CmdGeneral() {
 	packetbuf[36] = prn->tx[0].epwm_min & 0xff; // [7:0]
 	// Bits - [0]Time stamp, [1]VITA-49, [2]VNA mode [3] freq or phase word
 	packetbuf[37] = 0x04; // send phase word
+	// Watchdog Timer default = 0 disabled
+	packetbuf[38] = prn->wdt;
 	// Bits - Atlas bus configuration
 	packetbuf[56] = 0x00;
 	// Bits - 10MHz ref source
@@ -1310,7 +1312,7 @@ void KeepAliveLoop(void)
 		//return 1;
 	}
 
-	if (!SetWaitableTimer(prn->hTimer, &prn->liDueTime, 100, NULL, NULL, 0))
+	if (!SetWaitableTimer(prn->hTimer, &prn->liDueTime, 300, NULL, NULL, 0))
 	{
 		printf("SetWaitableTimer failed (%d)\n", GetLastError());
 		//return 2;

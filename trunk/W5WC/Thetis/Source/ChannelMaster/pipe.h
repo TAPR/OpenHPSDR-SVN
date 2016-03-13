@@ -33,6 +33,7 @@ warren@wpratt.com
 
 typedef struct _pipe
 {
+	double** rbuff;																// receiver audio buffers
 	void (__stdcall *create_Scope)(int id);
 	void (__stdcall *create_WaveRecord)(int id);
 	void (__stdcall *create_WavePlay)(int id);
@@ -56,6 +57,6 @@ void create_pipe();
 
 void destroy_pipe();
 
-void xpipe (int stream, int pos, double* buff);
+void xpipe (int stream, int pos, double** buff);
 
 #endif

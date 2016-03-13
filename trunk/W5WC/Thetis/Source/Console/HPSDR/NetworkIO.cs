@@ -925,6 +925,9 @@ namespace Thetis
                 high_freq_offset = value;
             }
         }
+     
+        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
+        unsafe public static extern void SetWatchdogTimer(int bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern void SetMicBoost(int bits);

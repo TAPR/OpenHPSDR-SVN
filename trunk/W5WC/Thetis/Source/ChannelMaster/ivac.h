@@ -50,6 +50,8 @@ typedef struct _ivac
 	int num_channels;
 	double in_latency;
 	double out_latency;
+	double pa_in_latency;
+	double pa_out_latency;
 	int vox;
 	int mox;
 	int mon;
@@ -62,6 +64,7 @@ typedef struct _ivac
 void combinebuff (int n, double* a, double* combined);
 void scalebuff (int n, double* in, double k, double* out);
 void xvac_out(int id, int nsamples, double* buff);
+void SetRingBufferSize(int id);
 
 extern __declspec(dllexport) void *create_resampleV (int samplerate_in, int samplerate_out);
 extern __declspec(dllexport) void xresampleV (double *input, double *output, int numsamps, int *outsamps, void *ptr);

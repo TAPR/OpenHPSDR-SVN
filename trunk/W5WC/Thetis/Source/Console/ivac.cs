@@ -69,6 +69,12 @@
         [DllImport("ChannelMaster.dll", EntryPoint = "SetIVACOutLatency", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetIVACOutLatency(int id, double lat);
 
+        [DllImport("ChannelMaster.dll", EntryPoint = "SetIVACPAInLatency", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetIVACPAInLatency(int id, double lat);
+
+        [DllImport("ChannelMaster.dll", EntryPoint = "SetIVACPAOutLatency", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetIVACPAOutLatency(int id, double lat);
+
         [DllImport("ChannelMaster.dll", EntryPoint = "SetIVACpreamp", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetIVACpreamp(int id, double preamp);
 

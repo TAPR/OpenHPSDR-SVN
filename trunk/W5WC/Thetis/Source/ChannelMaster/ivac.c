@@ -52,9 +52,9 @@ PORT void create_ivac (
 	a->txmon_size = txmon_size;
 	a->vac_size = vac_size;
 
-	a->rb_vacIN = ringbuffer_create(4 * 65536);
-	ringbuffer_restart(a->rb_vacIN, 2 * a->vac_size);
-	a->rb_vacOUT = ringbuffer_create(4 * 65536);
+	a->rb_vacIN = ringbuffer_create(16384);
+	ringbuffer_restart(a->rb_vacIN, 2 * a->vac_size); 
+	a->rb_vacOUT = ringbuffer_create(16384);
 	ringbuffer_restart(a->rb_vacOUT, a->iq_type ? 2 * a->iq_size : 2 * a->vac_size);
 
 	// create fixed buffers
@@ -298,19 +298,19 @@ PORT int StartAudioIVAC (int id)
 
 	a->inParam.device = in_dev;
 	a->inParam.channelCount = 2; 
-	a->inParam.suggestedLatency = a->in_latency;
+	a->inParam.suggestedLatency = a->pa_in_latency;
 	a->inParam.sampleFormat = paFloat64;
 
 	a->outParam.device = out_dev;
 	a->outParam.channelCount = 2;
-	a->outParam.suggestedLatency = a->out_latency;
+	a->outParam.suggestedLatency = a->pa_out_latency;
 	a->outParam.sampleFormat = paFloat64;
 
 	error = Pa_OpenStream ( &a->Stream, 
 		&a->inParam, 
 		&a->outParam, 
 		a->vac_rate, 
-		a->vac_size, 
+		paFramesPerBufferUnspecified, //a->vac_size,
 		0, 
 		CallbackIVAC, 
 		(void *)id);	// pass 'id' as userData
@@ -350,7 +350,8 @@ PORT void SetIVACiqType (int id, int type)
 	if (type != a->iq_type)
 	{
 		a->iq_type = type;
-		ringbuffer_restart(a->rb_vacOUT, a->iq_type ? 2 * a->iq_size : 2 * a->vac_size); 
+		//ringbuffer_restart(a->rb_vacOUT, a->iq_type ? 2 * a->iq_size : 2 * a->vac_size); 
+		SetRingBufferSize(id);
 	}
 }
 
@@ -366,6 +367,7 @@ PORT void SetIVACvacRate (int id, int rate)
 	if (rate != a->vac_rate)
 	{
 		a->vac_rate = rate;
+		SetRingBufferSize(id);
 		destroy_resamps (a);
 		create_resamps (a);
 	}
@@ -418,12 +420,14 @@ PORT void SetIVACvacSize (int id, int size)
 	if (size != a->vac_size)
 	{
 		a->vac_size = (unsigned int)size;
-		ringbuffer_restart(a->rb_vacIN, 2 * a->vac_size);
+		//ringbuffer_restart(a->rb_vacIN, 2 * a->vac_size);
 
-		if (!a->iq_type)
-		{
-			ringbuffer_restart(a->rb_vacOUT, 2 * a->vac_size);
-		}
+		//if (!a->iq_type)
+		//{
+		//	ringbuffer_restart(a->rb_vacOUT, 2 * a->vac_size);
+		//}
+
+		SetRingBufferSize(id);
 	}
 }
 
@@ -493,16 +497,48 @@ PORT void SetIVACnumChannels (int id, int n)
 PORT void SetIVACInLatency (int id, double lat)
 {
 	IVAC a = pvac[id];
-	a->in_latency = lat;
+
+	if (a->in_latency != lat)
+	{
+		a->in_latency = lat;
+		SetRingBufferSize(id);
+	}
 }
 
 PORT void SetIVACOutLatency (int id, double lat)
 {
 	IVAC a = pvac[id];
-	a->out_latency = lat;
+
+	if (a->out_latency != lat)
+	{
+	    a->out_latency = lat;
+	    SetRingBufferSize(id);
+	}
 }
 
-PORT void SetIVACvox (int id, int vox)
+PORT void SetIVACPAInLatency(int id, double lat)
+{
+	IVAC a = pvac[id];
+
+	if (a->pa_in_latency != lat)
+	{
+		a->pa_in_latency = lat;
+		SetRingBufferSize(id);
+	}
+}
+
+PORT void SetIVACPAOutLatency(int id, double lat)
+{
+	IVAC a = pvac[id];
+
+	if (a->pa_out_latency != lat)
+	{
+		a->pa_out_latency = lat;
+		SetRingBufferSize(id);
+	}
+}
+
+PORT void SetIVACvox(int id, int vox)
 {
 	IVAC a = pvac[id];
 	a->vox = vox;
@@ -588,3 +624,42 @@ void scalebuff (int size, double* in, double scale, double* out)
 	for (i = 0; i < 2 * size; i++)
 		out[i] = scale * in[i];
 }
+
+void SetRingBufferSize(int id)
+{
+	IVAC a = pvac[id];
+
+	int rb_vacIN_size = 2 * a->vac_rate * a->in_latency;
+	if (a->vac_size * 2 > rb_vacIN_size) 
+		rb_vacIN_size = 2 * a->vac_size;
+	else if (rb_vacIN_size % a->vac_size > 0) 
+	{
+		rb_vacIN_size = rb_vacIN_size + a->vac_size -
+			(rb_vacIN_size % a->vac_size);
+	}
+
+	int rb_vacOUT_size = 2 * a->vac_rate * a->out_latency;
+	if (a->vac_size * 2 > rb_vacOUT_size) 
+		rb_vacOUT_size = 2 * a->vac_size;
+	else if (rb_vacOUT_size % a->vac_size > 0) 
+	{
+		rb_vacOUT_size = rb_vacOUT_size + a->vac_size -
+			(rb_vacOUT_size % a->vac_size);
+	}
+
+	if (a->rb_vacIN != 0)
+	{
+		ringbuffer_free(a->rb_vacIN);
+		a->rb_vacIN = 0;
+		a->rb_vacIN = ringbuffer_create(rb_vacIN_size);
+		ringbuffer_restart(a->rb_vacIN, 2 * a->vac_size);
+	}
+	if (a->rb_vacOUT != 0)
+	{
+	   ringbuffer_free(a->rb_vacOUT);
+	   a->rb_vacOUT = 0;
+	   a->rb_vacOUT = ringbuffer_create(rb_vacOUT_size);
+	   ringbuffer_restart(a->rb_vacOUT, a->iq_type ? 2 * a->iq_size : 2 * a->vac_size);
+    }
+}
+

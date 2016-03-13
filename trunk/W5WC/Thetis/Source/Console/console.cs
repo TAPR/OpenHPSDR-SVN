@@ -28,13 +28,6 @@
 //    USA
 //=================================================================
 
-//
-// SoftRock and HPSDR Modifications Copyright (C) 2005, 2006, 2007, 2008, 2009, 2010, 2011 Bill Tracey (kd5tfd)
-//
-//#define INTERLEAVED
-//#define SPLIT_INTERLEAVED
-//#define SDRX
-
 namespace Thetis
 {
     using System;
@@ -163,7 +156,8 @@ namespace Thetis
         ANAN100,
         ANAN100B,
         ANAN100D,
-        ANAN200D
+        ANAN200D,
+        ANAN400D
     }
 
     public enum HPSDRModel
@@ -177,6 +171,7 @@ namespace Thetis
         ANAN100B,
         ANAN100D,
         ANAN200D,
+        ANAN400D,
         LAST
     }
 
@@ -497,10 +492,10 @@ namespace Thetis
     {
         Atlas = 0,
         Hermes = 1,
-        HermesII = 2,
-        Angelia = 3,
-        Orion = 4,
-        OrionMKII = 5
+        HermesII = 2, // ANAN-10E ANAN-100B
+        Angelia = 3,  // ANAN-100D
+        Orion = 4,    // ANAN-200D
+        OrionMKII = 5 // ANAN-400D
     }
 
     public enum DisplayRegion
@@ -1909,7 +1904,7 @@ namespace Thetis
             //mod DH1TW
             if (DJConsoleObj != null) DJConsoleObj.Close();
 
-           // USB.Exit();
+            // USB.Exit();
             if (disposing)
             {
                 if (components != null)
@@ -13063,6 +13058,91 @@ namespace Thetis
                 }
             }
 
+            if (current_hpsdr_model == HPSDRModel.ANAN400D)
+            {
+                switch (b)
+                {
+                    case Band.B160M:
+                        retval = SetupForm.OrionPAGain160;
+                        break;
+                    case Band.B80M:
+                        retval = SetupForm.OrionPAGain80;
+                        break;
+                    case Band.B60M:
+                        retval = SetupForm.OrionPAGain60;
+                        break;
+                    case Band.B40M:
+                        retval = SetupForm.OrionPAGain40;
+                        break;
+                    case Band.B30M:
+                        retval = SetupForm.OrionPAGain30;
+                        break;
+                    case Band.B20M:
+                        retval = SetupForm.OrionPAGain20;
+                        break;
+                    case Band.B17M:
+                        retval = SetupForm.OrionPAGain17;
+                        break;
+                    case Band.B15M:
+                        retval = SetupForm.OrionPAGain15;
+                        break;
+                    case Band.B12M:
+                        retval = SetupForm.OrionPAGain12;
+                        break;
+                    case Band.B10M:
+                        retval = SetupForm.OrionPAGain10;
+                        break;
+                    case Band.B6M:
+                        retval = SetupForm.OrionPAGain6;
+                        break;
+                    case Band.VHF0:
+                        retval = SetupForm.OrionPAGainVHF0;
+                        break;
+                    case Band.VHF1:
+                        retval = SetupForm.OrionPAGainVHF1;
+                        break;
+                    case Band.VHF2:
+                        retval = SetupForm.OrionPAGainVHF2;
+                        break;
+                    case Band.VHF3:
+                        retval = SetupForm.OrionPAGainVHF3;
+                        break;
+                    case Band.VHF4:
+                        retval = SetupForm.OrionPAGainVHF4;
+                        break;
+                    case Band.VHF5:
+                        retval = SetupForm.OrionPAGainVHF5;
+                        break;
+                    case Band.VHF6:
+                        retval = SetupForm.OrionPAGainVHF6;
+                        break;
+                    case Band.VHF7:
+                        retval = SetupForm.OrionPAGainVHF7;
+                        break;
+                    case Band.VHF8:
+                        retval = SetupForm.OrionPAGainVHF8;
+                        break;
+                    case Band.VHF9:
+                        retval = SetupForm.OrionPAGainVHF9;
+                        break;
+                    case Band.VHF10:
+                        retval = SetupForm.OrionPAGainVHF10;
+                        break;
+                    case Band.VHF11:
+                        retval = SetupForm.OrionPAGainVHF11;
+                        break;
+                    case Band.VHF12:
+                        retval = SetupForm.OrionPAGainVHF12;
+                        break;
+                    case Band.VHF13:
+                        retval = SetupForm.OrionPAGainVHF13;
+                        break;
+                    default:
+                        retval = 1000;
+                        break;
+                }
+            }
+
             if (current_hpsdr_model == HPSDRModel.HERMES)
             {
                 switch (b)
@@ -14401,7 +14481,7 @@ namespace Thetis
 
         private void UpdateRXADCCtrl()
         {
-            if (current_hpsdr_hardware != HPSDRHW.Angelia && 
+            if (current_hpsdr_hardware != HPSDRHW.Angelia &&
                 current_hpsdr_hardware != HPSDRHW.Orion &&
                 current_hpsdr_hardware != HPSDRHW.OrionMKII)
             {
@@ -14419,18 +14499,18 @@ namespace Thetis
             }
             else
             {
-            if (psform.PSEnabled && mox)
-            {
-                int num_adc = 2;        // REQUIRES SOME CLEANUP!!!
-                NetworkIO.SetADC_cntrl1((rx_adc_ctrl1 & 0xf3) | (num_adc << 2));
-                NetworkIO.SetADC_cntrl2(rx_adc_ctrl2 & 0x3f);
+                if (psform.PSEnabled && mox)
+                {
+                    int num_adc = 2;        // REQUIRES SOME CLEANUP!!!
+                    NetworkIO.SetADC_cntrl1((rx_adc_ctrl1 & 0xf3) | (num_adc << 2));
+                    NetworkIO.SetADC_cntrl2(rx_adc_ctrl2 & 0x3f);
+                }
+                else
+                {
+                    NetworkIO.SetADC_cntrl1(rx_adc_ctrl1 & 0xff);
+                    NetworkIO.SetADC_cntrl2(rx_adc_ctrl2 & 0x3f);
+                }
             }
-            else
-            {
-                NetworkIO.SetADC_cntrl1(rx_adc_ctrl1 & 0xff);
-                NetworkIO.SetADC_cntrl2(rx_adc_ctrl2 & 0x3f);
-            }
-        }
         }
 
         // Added 06/24/05 BT for CAT commands
@@ -15121,8 +15201,8 @@ namespace Thetis
                     }
                     else if (radio.GetDSPTX(0).TXFMDeviation == 2500)
                     {
-                        l = -4000;
-                        h = 4000;
+                        l = -5500;
+                        h = 5500;
                     }
                     break;
                 case DSPMode.DRM:
@@ -15180,6 +15260,7 @@ namespace Thetis
             {
                 case HPSDRModel.ANAN100D:
                 case HPSDRModel.ANAN200D:
+                case HPSDRModel.ANAN400D:
                     if (!mox)
                     {
                         if (diversity2)
@@ -17376,7 +17457,7 @@ namespace Thetis
             set
             {
                 vhf_tr_relay = value;
-               // txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+                // txtVFOAFreq_LostFocus(this, EventArgs.Empty);
             }
         }
 
@@ -17767,7 +17848,8 @@ namespace Thetis
                 if (value)
                 {
                     if (current_hpsdr_model != HPSDRModel.ANAN100D &&
-                        current_hpsdr_model != HPSDRModel.ANAN200D) return;
+                        current_hpsdr_model != HPSDRModel.ANAN200D &&
+                        current_hpsdr_model != HPSDRModel.ANAN400D) return;
                     if (diversityForm == null || diversityForm.IsDisposed)
                         diversityForm = new DiversityForm(this);
                     diversityForm.Focus();
@@ -18005,6 +18087,11 @@ namespace Thetis
             get { return new_meter_data; }
         }
 
+        public float Rx2MeterData
+        {
+            get { return rx2_meter_new_data; }
+        }
+
         private bool all_mode_mic_ptt = true;
         public bool AllModeMicPTT
         {
@@ -18178,14 +18265,20 @@ namespace Thetis
             if (rx1_step_att_present)
             {
                 Display.RX1PreampOffset = rx1_attenuator_data;
-                if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ANAN200D && !rx2_preamp_present || mox)
+                if (current_hpsdr_model != HPSDRModel.ANAN100D &&
+                    current_hpsdr_model != HPSDRModel.ANAN200D &&
+                    current_hpsdr_model != HPSDRModel.ANAN400D &&
+                    !rx2_preamp_present || mox)
                     Display.RX2PreampOffset = rx1_attenuator_data;
             }
             else
             {
                 Display.RX1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
 
-                if (current_hpsdr_model != HPSDRModel.ANAN100D && current_hpsdr_model != HPSDRModel.ANAN200D && !rx2_preamp_present)
+                if (current_hpsdr_model != HPSDRModel.ANAN100D &&
+                    current_hpsdr_model != HPSDRModel.ANAN200D &&
+                    current_hpsdr_model != HPSDRModel.ANAN400D &&
+                    !rx2_preamp_present)
                     Display.RX2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
             }
 
@@ -18217,7 +18310,10 @@ namespace Thetis
             }
             else
             {
-                if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ANAN200D || rx2_preamp_present)
+                if (current_hpsdr_model == HPSDRModel.ANAN100D ||
+                    current_hpsdr_model == HPSDRModel.ANAN200D ||
+                    current_hpsdr_model == HPSDRModel.ANAN400D ||
+                    rx2_preamp_present)
                 {
                     Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
                 }
@@ -20572,6 +20668,7 @@ namespace Thetis
                         break;
                     case HPSDRModel.ANAN100D:
                     case HPSDRModel.ANAN200D:
+                    case HPSDRModel.ANAN400D:
                         if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
                             comboMeterTXMode.Items.Insert(1, "Ref Pwr");
                         if (!comboMeterTXMode.Items.Contains("SWR"))
@@ -21187,7 +21284,8 @@ namespace Thetis
                     NetworkIO.VFOfreq(2, rx1_dds_freq_mhz, 0);
                     break;
             }
-
+            //wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 0), rx1_dds_freq_mhz * 1.0e6);
+            // wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 1), rx1_dds_freq_mhz * 1.0e6);
             // if (RX2Enabled && stereo_diversity)
             //  psform.RX2freq = rx1_dds_freq_mhz;
         }
@@ -21221,7 +21319,7 @@ namespace Thetis
                         NetworkIO.VFOfreq(3, rx2_dds_freq_mhz, 0);
                         break;
                 }
-
+                //wdsp.RXANBPSetTuneFrequency(wdsp.id(2, 0), rx2_dds_freq_mhz * 1.0e6);
             }
         }
 
@@ -24383,6 +24481,17 @@ namespace Thetis
             }
         }
 
+        private bool orionmkiipresent = false;
+        public bool OrionMKIIPresent
+        {
+            get { return orionmkiipresent; }
+            set
+            {
+                orionmkiipresent = value;
+                current_hpsdr_hardware = HPSDRHW.OrionMKII;
+            }
+        }
+
         private bool apollopresent = false;
         public bool ApolloPresent
         {
@@ -24681,7 +24790,8 @@ namespace Thetis
                 }
 
                 if (current_hpsdr_model == HPSDRModel.ANAN100D ||
-                    current_hpsdr_model == HPSDRModel.ANAN200D)
+                    current_hpsdr_model == HPSDRModel.ANAN200D ||
+                    current_hpsdr_model == HPSDRModel.ANAN400D)
                 {
                     NetworkIO.EnableADC2StepAtten(1);
                     NetworkIO.SetADC2StepAttenData(rx2_att_value);
@@ -29329,7 +29439,8 @@ namespace Thetis
                     else if (chkVFOBTX.Checked && chkRX2.Checked) bottom_thread = 1;
                 }
 
-                if (!Display.DataReady || !Display.WaterfallDataReady || (chkSplitDisplay.Checked && !Display.DataReadyBottom))
+                if ((!Display.DataReady || !Display.WaterfallDataReady) ||
+                    (chkSplitDisplay.Checked && (!Display.DataReadyBottom || !Display.WaterfallDataReadyBottom)))
                 {
 
                     if (calibration_running)
@@ -29338,56 +29449,61 @@ namespace Thetis
                         displaydidit = true;
                     }
 
-                    if (!pause_DisplayThread && (!Display.DataReady || !Display.WaterfallDataReady) && Display.CurrentDisplayMode != DisplayMode.OFF)
+                    if (!pause_DisplayThread && (!Display.DataReady || !Display.WaterfallDataReady) &&
+                        Display.CurrentDisplayMode != DisplayMode.OFF)
                     {
                         flag = 0;
                         switch (Display.CurrentDisplayMode)
                         {
-                            //  case DisplayMode.SPECTRUM:
-                            // case DisplayMode.HISTOGRAM:
-                            // case DisplayMode.SPECTRASCOPE:
-                            //  fixed (float* ptr = &Display.new_display_data[0])
-                            //   DttSP.GetSpectrum(top_thread, ptr);
-                            //  break;
                             case DisplayMode.WATERFALL:
                             case DisplayMode.PANAFALL:
-                                /*  if (current_display_engine == DisplayEngine.GDI_PLUS)
-                                  {
-                                      fixed (float* ptr = &Display.new_display_data[0])
-                                          SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
-                                  }
-                                  else
-                                  {
-                                      fixed (float* ptr = &Display.new_waterfall_data[0])
-                                          SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
-                                      Display.WaterfallDataReady = true;
-                                  } */
-
-                                if (mox && !display_duplex /* && (NReceivers <= 2)*/)
+                                if (mox && !display_duplex)
                                 {
                                     if (chkVFOATX.Checked || !chkRX2.Checked)
                                     {
-                                        fixed (float* ptr = &Display.new_display_data[0])
-                                            //DttSP.GetPanadapter(top_thread, ptr);
-                                            SpecHPSDRDLL.GetPixels(2, ptr, ref flag);
+                                        if (!Display.DataReady)
+                                        {
+                                            fixed (float* ptr = &Display.new_display_data[0])
+                                                SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 0, ptr, ref flag);
+                                            Display.DataReady = true;
+                                        }
+                                        if (!Display.WaterfallDataReady)
+                                        {
+                                            fixed (float* ptr = &Display.new_waterfall_data[0])
+                                                SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 1, ptr, ref flag); 
+                                            Display.WaterfallDataReady = true;
+                                        }
                                     }
                                     else
                                     {
-                                        fixed (float* ptr = &Display.new_display_data[0])
-                                            SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
+                                        if (!Display.DataReady)
+                                        {
+                                            fixed (float* ptr = &Display.new_display_data[0])
+                                               // SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 0, ptr, ref flag);
+                                                SpecHPSDRDLL.GetPixels(0, 0, ptr, ref flag);
+                                            Display.DataReady = true;
+                                        }
+                                        if (!Display.WaterfallDataReady)
+                                        {
+                                            fixed (float* ptr = &Display.new_waterfall_data[0])
+                                                //SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 1, ptr, ref flag); 
+                                                SpecHPSDRDLL.GetPixels(0, 1, ptr, ref flag); 
+                                            Display.WaterfallDataReady = true;
+                                        }
                                     }
                                 }
                                 else //rx
                                 {
-                                    if (current_display_engine == DisplayEngine.GDI_PLUS)
+                                    if (!Display.DataReady)
                                     {
                                         fixed (float* ptr = &Display.new_display_data[0])
-                                            SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
+                                            SpecHPSDRDLL.GetPixels(0, 0, ptr, ref flag);
+                                        Display.DataReady = true;
                                     }
-                                    else
+                                    if (!Display.WaterfallDataReady)
                                     {
                                         fixed (float* ptr = &Display.new_waterfall_data[0])
-                                            SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
+                                            SpecHPSDRDLL.GetPixels(0, 1, ptr, ref flag); 
                                         Display.WaterfallDataReady = true;
                                     }
                                 }
@@ -29403,18 +29519,18 @@ namespace Thetis
                                     {
                                         fixed (float* ptr = &Display.new_display_data[0])
                                             //DttSP.GetPanadapter(top_thread, ptr);
-                                            SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), ptr, ref flag);
+                                            SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 0, ptr, ref flag);
                                     }
                                     else
                                     {
                                         fixed (float* ptr = &Display.new_display_data[0])
-                                            SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
+                                            SpecHPSDRDLL.GetPixels(0, 0, ptr, ref flag);
                                     }
                                 }
                                 else
                                 {
                                     fixed (float* ptr = &Display.new_display_data[0])
-                                        SpecHPSDRDLL.GetPixels(0, ptr, ref flag);
+                                        SpecHPSDRDLL.GetPixels(0, 0, ptr, ref flag);
                                 }
                                 break;
                             case DisplayMode.SCOPE:
@@ -29448,31 +29564,49 @@ namespace Thetis
                                 //Audio.phase_mutex.ReleaseMutex();
                                 break;
                         }
-                        Display.DataReady = true;
+
+                        if (Display.CurrentDisplayMode != DisplayMode.PANAFALL &&
+                            Display.CurrentDisplayMode != DisplayMode.WATERFALL)
+                            Display.DataReady = true;
                     }
 
-                    if (!pause_DisplayThread && chkSplitDisplay.Checked && !Display.DataReadyBottom && Display.CurrentDisplayModeBottom != DisplayMode.OFF)
+                    if (!pause_DisplayThread && chkSplitDisplay.Checked &&
+                        (!Display.DataReadyBottom || !Display.WaterfallDataReadyBottom) &&
+                        Display.CurrentDisplayModeBottom != DisplayMode.OFF)
                     {
                         flag = 0;
                         switch (Display.CurrentDisplayModeBottom)
                         {
                             case DisplayMode.SPECTRUM:
                             case DisplayMode.HISTOGRAM:
-                                //fixed (float* ptr = &Display.new_display_data_bottom[0])
-                                //    DttSP.GetSpectrum(bottom_thread, ptr);
                                 break;
                             case DisplayMode.WATERFALL:
+                                if (mox && VFOBTX)
+                                {
+
+                                    fixed (float* ptr = &Display.new_waterfall_data_bottom[0])
+                                        //wdsp.TXAGetSpecF1(wdsp.id(bottom_thread, 0), ptr);
+                                    SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 1, ptr, ref flag);
+                                }
+                                else
+                                {
+                                    fixed (float* ptr = &Display.new_waterfall_data_bottom[0])
+                                        SpecHPSDRDLL.GetPixels(1, 1, ptr, ref flag); // new pixel call here
+                                }
+                                Display.WaterfallDataReadyBottom = true;
+                                break;
                             case DisplayMode.PANADAPTER:
                                 if (mox && VFOBTX)
                                 {
+
                                     fixed (float* ptr = &Display.new_display_data_bottom[0])
-                                        //DttSP.GetPanadapter(bottom_thread, ptr);
-                                        wdsp.TXAGetSpecF1(wdsp.id(bottom_thread, 0), ptr);
+                                        //wdsp.TXAGetSpecF1(wdsp.id(bottom_thread, 0), ptr); 
+                                        SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 0, ptr, ref flag);
                                 }
                                 else
                                 {
                                     fixed (float* ptr = &Display.new_display_data_bottom[0])
-                                        SpecHPSDRDLL.GetPixels(1, ptr, ref flag);
+                                        SpecHPSDRDLL.GetPixels(1, 0, ptr, ref flag);
                                 }
                                 break;
                             case DisplayMode.SCOPE:
@@ -29506,7 +29640,8 @@ namespace Thetis
                                 //Audio.phase_mutex.ReleaseMutex();
                                 break;
                         }
-                        Display.DataReadyBottom = true;
+                        if (Display.CurrentDisplayModeBottom != DisplayMode.WATERFALL)
+                            Display.DataReadyBottom = true;
                     }
                     if (displaydidit)
                     {
@@ -29515,20 +29650,14 @@ namespace Thetis
                     }
                 }
 
-                if (current_display_engine == DisplayEngine.GDI_PLUS)
-                {
-                    //  picDisplay.Invalidate();
-                    //  picDisplay.Update();
-                    if ((Display.CurrentDisplayMode != DisplayMode.OFF) ||
-                        (RX2Enabled && Display.CurrentDisplayModeBottom != DisplayMode.OFF))
-                        picDisplay.Refresh();
-                }
-                // else
-                // Display.RenderDirectX();
+                if ((Display.CurrentDisplayMode != DisplayMode.OFF) ||
+                    (RX2Enabled && Display.CurrentDisplayModeBottom != DisplayMode.OFF))
+                    picDisplay.Refresh();
+
 
                 if (chkPower.Checked)
                     Thread.Sleep(display_delay);
-                //			display_running = false;
+
             }
         }
 
@@ -29723,7 +29852,10 @@ namespace Thetis
                           else 
                           rx2PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
                           */
-                    if (current_hpsdr_model == HPSDRModel.ANAN100D || current_hpsdr_model == HPSDRModel.ANAN200D || rx2_preamp_present)
+                    if (current_hpsdr_model == HPSDRModel.ANAN100D ||
+                        current_hpsdr_model == HPSDRModel.ANAN200D ||
+                        current_hpsdr_model == HPSDRModel.ANAN400D ||
+                        rx2_preamp_present)
                     {
                         if (rx2_step_att_present)
                             rx2PreampOffset = (float)rx2_attenuator_data;
@@ -29841,12 +29973,14 @@ namespace Thetis
             float refvoltage = 3.3f;
             int adc_cal_offset = 10;
             if (tx_band == Band.B6M) adc_cal_offset = 200;
-            if (current_hpsdr_model == HPSDRModel.ANAN200D) refvoltage = 5.0f;
+            if (current_hpsdr_model == HPSDRModel.ANAN200D ||
+                current_hpsdr_model == HPSDRModel.ANAN400D) refvoltage = 5.0f;
             if (current_hpsdr_model == HPSDRModel.ANAN100 ||
+                current_hpsdr_model == HPSDRModel.ANAN100B ||
                 current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.095f;
 
             if (current_hpsdr_model == HPSDRModel.ANAN200D) bridge_volt = 0.108f;
-
+            if (current_hpsdr_model == HPSDRModel.ANAN400D) bridge_volt = 0.108f;
             int adc = NetworkIO.getRevPower();
             if (adc < adc_cal_offset) adc = adc_cal_offset = 0;
             float volts = (float)((adc - adc_cal_offset) / 4095.0 * refvoltage);
@@ -29874,10 +30008,13 @@ namespace Thetis
 
             float bridge_volt = 0.09f;
             float refvoltage = 3.3f;
-            if (current_hpsdr_model == HPSDRModel.ANAN200D) refvoltage = 5.0f;
+            if (current_hpsdr_model == HPSDRModel.ANAN200D ||
+                current_hpsdr_model == HPSDRModel.ANAN400D) refvoltage = 5.0f;
             if (current_hpsdr_model == HPSDRModel.ANAN100 ||
+                current_hpsdr_model == HPSDRModel.ANAN100B ||
                 current_hpsdr_model == HPSDRModel.ANAN100D) bridge_volt = 0.095f;
             if (current_hpsdr_model == HPSDRModel.ANAN200D) bridge_volt = 0.108f; // 0.083f;
+            if (current_hpsdr_model == HPSDRModel.ANAN400D) bridge_volt = 0.108f;
 
             for (int count = 0; count < 3; count++)
             {
@@ -30478,7 +30615,8 @@ namespace Thetis
                     SetupForm.HermesAttenuatorData = old_satt_data;
 
                     if (current_hpsdr_model == HPSDRModel.ANAN100D ||
-                        current_hpsdr_model == HPSDRModel.ANAN200D)
+                        current_hpsdr_model == HPSDRModel.ANAN200D ||
+                        current_hpsdr_model == HPSDRModel.ANAN400D)
                     {
                         RX2PreampMode = rx2_preamp;
                         // RX2StepAttPresent = old_rx2_satt;
@@ -30498,7 +30636,8 @@ namespace Thetis
                     old_satt = rx1_step_att_present;
 
                     if (current_hpsdr_model == HPSDRModel.ANAN100D ||
-                        current_hpsdr_model == HPSDRModel.ANAN200D)
+                        current_hpsdr_model == HPSDRModel.ANAN200D ||
+                        current_hpsdr_model == HPSDRModel.ANAN400D)
                     {
                         rx2_preamp = RX2PreampMode;
                         old_rx2_satt_data = rx2_attenuator_data;// RX2AttenuatorData;
@@ -30885,6 +31024,8 @@ namespace Thetis
 
                     if (current_hpsdr_model == HPSDRModel.ANAN200D)
                         drivepwr = computeOrionFwdPower();
+                    else if (current_hpsdr_model == HPSDRModel.ANAN400D)
+                        drivepwr = computeOrionMkIIFwdPower();
                     else
                         drivepwr = computeFwdPower(); // low power
 
@@ -32479,10 +32620,10 @@ namespace Thetis
 
         public void UpdateAAudioMixerStates()
         {
-            int RX1  = 1 << wdsp.id(0, 0);
+            int RX1 = 1 << wdsp.id(0, 0);
             int RX1S = 1 << wdsp.id(0, 1);
-            int RX2  = 1 << wdsp.id(2, 0);
-            int MON  = 1 << wdsp.id(1, 0);
+            int RX2 = 1 << wdsp.id(2, 0);
+            int MON = 1 << wdsp.id(1, 0);
             int RX2EN;
             if (rx2_enabled)
                 RX2EN = 1 << wdsp.id(2, 0);
@@ -32559,6 +32700,7 @@ namespace Thetis
                 // 4-DDC Models
                 case HPSDRModel.ANAN100D:
                 case HPSDRModel.ANAN200D:
+                case HPSDRModel.ANAN400D:
                     if (chkPower.Checked)
                     {
                         // If POWER is ON, we always have data flow for RX1 and RX1-Sub; we have data flow for
@@ -35515,7 +35657,8 @@ namespace Thetis
 
         private void txtVFOAFreq_LostFocus(object sender, System.EventArgs e)
         {
-            if (current_hpsdr_model == HPSDRModel.ANAN200D) UpdateRXADCCtrl();
+            if (current_hpsdr_model == HPSDRModel.ANAN200D ||
+                current_hpsdr_model == HPSDRModel.ANAN400D) UpdateRXADCCtrl();
 
             if (txtVFOAFreq.Text == "." || txtVFOAFreq.Text == "")
             {
@@ -35742,9 +35885,12 @@ namespace Thetis
             }
 
             saved_vfoa_freq = freq;
-
+            double f_LO = 0.0;
             if (rx1_xvtr_index >= 0)
-                freq = XVTRForm.TranslateFreq(freq);
+            {
+                f_LO = freq - XVTRForm.TranslateFreq(freq);
+                freq -= f_LO;
+            }
             else
             {
                 if (freq < min_freq)
@@ -35923,7 +36069,8 @@ namespace Thetis
             last_tx_xvtr_index = tx_xvtr_index;
 
             // UpdateRX1Notches();
-
+            wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 0), (FWCDDSFreq + f_LO) * 1.0e6);
+            wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 1), (FWCDDSFreq + f_LO) * 1.0e6);
             UpdatePreamps();
 
         }
@@ -36540,9 +36687,12 @@ namespace Thetis
                 SetRX2Band(band);
 
             // SetRX2Band(BandByFreq(freq, rx2_xvtr_index, false, current_region));
-
-            if (rx2_xvtr_index >= 0) freq = XVTRForm.TranslateFreq(freq);
-
+            double f_LO = 0.0;
+            if (rx2_xvtr_index >= 0)
+            {
+                f_LO = freq - XVTRForm.TranslateFreq(freq);
+                freq = f_LO;
+            }
             if (rx2_xvtr_index < 0)
             {
                 RX2XVTRGainOffset = 0.0f;
@@ -36575,6 +36725,7 @@ namespace Thetis
 
             set_rx2_freq = false;
             // UpdateRX2Notches();
+            wdsp.RXANBPSetTuneFrequency(wdsp.id(2, 0), (RX2DDSFreq + f_LO) * 1.0e6);
             goto end;
 
         end:
@@ -42826,6 +42977,7 @@ namespace Thetis
                 chkRX2.Checked = value;
                 if (rx2_enabled)
                 {
+                    Display.Init();
                     old_rx1_display_mode = comboDisplayMode.Text;
                     UpdateRXADCCtrl();
                     chkDX_CheckedChanged(this, EventArgs.Empty); // stereo_diversity
@@ -42930,6 +43082,7 @@ namespace Thetis
                 }
 
                 Audio.RX2Enabled = rx2_enabled;
+                Display.RX2Enabled = rx2_enabled;
                 chkSplitDisplay.Checked = rx2_enabled;
             }
         }
@@ -45051,7 +45204,7 @@ namespace Thetis
 
         public void EnableDup()
         {
-            if (RX2PreampPresent || (!RX2PreampPresent && !psform.PSEnabled)) 
+            if (RX2PreampPresent || (!RX2PreampPresent && !psform.PSEnabled))
                 chkRX2SR.Visible = true;
 
             if (!RX2PreampPresent && psform.PSEnabled)
@@ -45061,8 +45214,8 @@ namespace Thetis
 
         private void DisableDup()
         {
-                chkRX2SR.Checked = false;
-                chkRX2SR.Visible = false;
+            chkRX2SR.Checked = false;
+            chkRX2SR.Visible = false;
         }
 
         private void BroadcastVFOChange(string ndx)
@@ -45078,6 +45231,7 @@ namespace Thetis
         private void chkVFOBTX_CheckedChanged(object sender, System.EventArgs e)
         {
             if (chkVFOBTX.Focused && !chkVFOBTX.Checked) chkVFOBTX.Checked = true;
+            Display.TXOnVFOB = chkVFOBTX.Checked;
             if (chkVFOBTX.Checked)
             {
                 //psform.RXrcvr = 2;
@@ -45097,7 +45251,7 @@ namespace Thetis
                     radio.GetDSPTX(0).CurrentDSPMode = rx2_dsp_mode;
 
                     SetRX2Mode(rx2_dsp_mode);
-                    Display.TXOnVFOB = true;
+                   // Display.TXOnVFOB = true;
                     if (chkVFOSplit.Checked && chkRX2.Checked)
                         chkVFOSplit.Checked = false;
 
@@ -45127,7 +45281,7 @@ namespace Thetis
                     Audio.RX2AutoMuteTX = mute_rx2_on_vfoa_tx;
                     Audio.FullDuplex = false;
 
-                    Display.TXOnVFOB = false;
+                    //Display.TXOnVFOB = false;
 
                     if (chkRX2.Checked && chkVAC2.Checked)
                     {
@@ -48068,7 +48222,7 @@ namespace Thetis
         private void RAtoolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (raForm == null || raForm.IsDisposed)
-                raForm = new RAForm();
+                raForm = new RAForm(this);
             raForm.Show();
             raForm.Focus();
 

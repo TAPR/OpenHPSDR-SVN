@@ -1127,6 +1127,7 @@ namespace Thetis
 					if(value != rx_osc_dsp || force)
 					{
                         wdsp.SetRXAShiftFreq(wdsp.id(thread, subrx), -value);
+                        wdsp.RXANBPSetShiftFrequency(wdsp.id(thread, subrx), -value);
 						rx_osc_dsp = value;
 					}
 				}
@@ -1346,6 +1347,7 @@ namespace Thetis
                     if (value != rx_bandpass_window_dsp || force)
                     {
                         wdsp.SetRXABandpassWindow(wdsp.id(thread, subrx), value);
+                        wdsp.RXANBPSetWindow(wdsp.id(thread, subrx), value);
                         rx_bandpass_window_dsp = value;
                     }
                 }
