@@ -2358,7 +2358,6 @@ namespace Thetis
             comboAudioSampleRate1_SelectedIndexChanged(this, e);
             comboAudioSampleRateRX2_SelectedIndexChanged(this, e);
             comboAudioSampleRate2_SelectedIndexChanged(this, e);
-            udAudioLatency1_ValueChanged(this, e);
             udAudioLatency2_ValueChanged(this, e);
             udAudioLatency2_Out_ValueChanged(this, e);
             udAudioLatencyPAIn_ValueChanged(this, e);
@@ -7652,13 +7651,13 @@ namespace Thetis
             // bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(1).FFTSize;
             // lblRX2DisplayBinWidth.Text = bin_width.ToString("N3");
 
-            bool power = console.PowerOn;
+          //  bool power = console.PowerOn;
 
-            if (power && new_rate != old_rate)
-            {
-                console.PowerOn = false;
-                Thread.Sleep(100);
-            }
+            //if (power && new_rate != old_rate)
+            //{
+            //    console.PowerOn = false;
+            //    Thread.Sleep(100);
+            //}
 
             console.SampleRate1 = new_rate;
             int new_size = cmaster.GetBuffSize(new_rate);
@@ -7667,36 +7666,36 @@ namespace Thetis
 
             //Display.DrawBackground();
 
-            if (!initializing)
-            {
-                // RadioDSP.SyncStatic();
+            //if (!initializing)
+            //{
+            //    // RadioDSP.SyncStatic();
 
-                // for (int i = 0; i < 2; i++)
-                // {
-                for (int j = 0; j < 2; j++)
-                {
-                    RadioDSPRX dsp_rx = console.radio.GetDSPRX(0, j);
-                    dsp_rx.Update = false;
-                    dsp_rx.Force = true;
-                    dsp_rx.Update = true;
-                    dsp_rx.Force = false;
-                }
-                // }
+            //    // for (int i = 0; i < 2; i++)
+            //    // {
+            //    for (int j = 0; j < 2; j++)
+            //    {
+            //        RadioDSPRX dsp_rx = console.radio.GetDSPRX(0, j);
+            //        dsp_rx.Update = false;
+            //        dsp_rx.Force = true;
+            //        dsp_rx.Update = true;
+            //        dsp_rx.Force = false;
+            //    }
+            //    // }
 
-                //for (int i = 0; i < 1; i++)
-                //{
-                //    RadioDSPTX dsp_tx = console.radio.GetDSPTX(i);
-                //    dsp_tx.Update = false;
-                //    dsp_tx.Force = true;
-                //    dsp_tx.Update = true;
-                //    dsp_tx.Force = false;
-                //}
-            }
+            //    //for (int i = 0; i < 1; i++)
+            //    //{
+            //    //    RadioDSPTX dsp_tx = console.radio.GetDSPTX(i);
+            //    //    dsp_tx.Update = false;
+            //    //    dsp_tx.Force = true;
+            //    //    dsp_tx.Update = true;
+            //    //    dsp_tx.Force = false;
+            //    //}
+            //}
 
-            if (power && new_rate != old_rate)
-            {
-                console.PowerOn = true;
-            }
+            //if (power && new_rate != old_rate)
+            //{
+            //    console.PowerOn = true;
+            //}
         }
         //#endif
 
@@ -7714,13 +7713,13 @@ namespace Thetis
             bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(1).FFTSize;
             lblRX2DisplayBinWidth.Text = bin_width.ToString("N3");
 
-            bool power = console.PowerOn;
+            //bool power = console.PowerOn;
 
-            if (power && new_rate != old_rate)
-            {
-                console.PowerOn = false;
-                Thread.Sleep(100);
-            }
+            //if (power && new_rate != old_rate)
+            //{
+            //    console.PowerOn = false;
+            //    Thread.Sleep(100);
+            //}
 
             console.SampleRateRX2 = new_rate;
             int new_size = cmaster.GetBuffSize(new_rate);
@@ -7729,36 +7728,36 @@ namespace Thetis
 
             //Display.DrawBackground();
 
-            if (!initializing)
-            {
-                // RadioDSP.SyncStatic();
+            //if (!initializing)
+            //{
+            //    // RadioDSP.SyncStatic();
 
-                //  for (int i = 0; i < 2; i++)
-                // {
-                for (int j = 0; j < 2; j++)
-                {
-                    RadioDSPRX dsp_rx = console.radio.GetDSPRX(1, j);
-                    dsp_rx.Update = false;
-                    dsp_rx.Force = true;
-                    dsp_rx.Update = true;
-                    dsp_rx.Force = false;
-                }
-                //  }
+            //    //  for (int i = 0; i < 2; i++)
+            //    // {
+            //    for (int j = 0; j < 2; j++)
+            //    {
+            //        RadioDSPRX dsp_rx = console.radio.GetDSPRX(1, j);
+            //        dsp_rx.Update = false;
+            //        dsp_rx.Force = true;
+            //        dsp_rx.Update = true;
+            //        dsp_rx.Force = false;
+            //    }
+            //    //  }
 
-                //for (int i = 0; i < 1; i++)
-                //{
-                //    RadioDSPTX dsp_tx = console.radio.GetDSPTX(i);
-                //    dsp_tx.Update = false;
-                //    dsp_tx.Force = true;
-                //    dsp_tx.Update = true;
-                //    dsp_tx.Force = false;
-                //}
-            }
+            //    //for (int i = 0; i < 1; i++)
+            //    //{
+            //    //    RadioDSPTX dsp_tx = console.radio.GetDSPTX(i);
+            //    //    dsp_tx.Update = false;
+            //    //    dsp_tx.Force = true;
+            //    //    dsp_tx.Update = true;
+            //    //    dsp_tx.Force = false;
+            //    //}
+            //}
 
-            if (power && new_rate != old_rate)
-            {
-                console.PowerOn = true;
-            }
+            //if (power && new_rate != old_rate)
+            //{
+            //    console.PowerOn = true;
+            //}
         }
 
         private void comboAudioSampleRate2_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -7884,18 +7883,6 @@ namespace Thetis
                 //Thread.Sleep(100);
                 Audio.VAC2Enabled = chkVAC2Enable.Checked;
             }
-        }
-
-        private void udAudioLatency1_ValueChanged(object sender, System.EventArgs e)
-        {
-            bool power = console.PowerOn;
-            if (power)
-            {
-                console.PowerOn = false;
-                Thread.Sleep(100);
-            }
-
-            if (power) console.PowerOn = true;
         }
 
         private void udAudioLatency2_ValueChanged(object sender, System.EventArgs e)
