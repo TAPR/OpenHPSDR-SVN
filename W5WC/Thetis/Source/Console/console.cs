@@ -1820,7 +1820,6 @@ namespace Thetis
 
             Splash.SetStatus("Initializing PortAudio");			// Set progress point
             PA19.PA_Initialize();								// Initialize the audio interface
-            //  if (fwc_init) Thread.Sleep(500);
 
             Splash.SetStatus("Loading Main Form");				// Set progress point
             Splash.SplashForm.Owner = this;						// So that main form will show/focus when splash disappears
@@ -7587,18 +7586,6 @@ namespace Thetis
             }
         }
 
-        private bool swap_af = false;
-        public bool SwapAF
-        {
-            get { return swap_af; }
-            set
-            {
-                swap_af = value;
-                //ptbAF_Scroll(this, EventArgs.Empty);
-                // ptbRX0Gain_Scroll(this, EventArgs.Empty);
-            }
-        }
-
         private bool fwc_rca_ptt = false;
         public bool FWCRCAPTT
         {
@@ -8036,10 +8023,10 @@ namespace Thetis
                             this.Text = this.Text + " *** EerXmit ***";
                             break;
 
-                        case "--no-send-to-Janus":
-                            NoJanusSend = true;
-                            this.Text = this.Text + "*** NoJanusSend ***";
-                            break;
+                        //case "--no-send-to-Janus":
+                        //    NoJanusSend = true;
+                        //    this.Text = this.Text + "*** NoJanusSend ***";
+                        //    break;
 
                         case "--allowOOBxmit":
                             Extended = true;
@@ -8191,7 +8178,7 @@ namespace Thetis
         }
 
         public bool Force16bitIQ = false;
-        public bool NoJanusSend = false;
+       // public bool NoJanusSend = false;
         public void ExitConsole()
         {
             /*  try
@@ -16748,17 +16735,17 @@ namespace Thetis
             int on_time = 2500;
             int off_time = 2500;
 
-            switch (current_soundcard)
-            {
-                case SoundCard.AUDIGY_2_ZS:
-                    on_time = 3000;
-                    off_time = 4000;
-                    break;
-                case SoundCard.DELTA_44:
-                    on_time = 2000;
-                    off_time = 2000;
-                    break;
-            }
+            //switch (current_soundcard)
+            //{
+            //    case SoundCard.AUDIGY_2_ZS:
+            //        on_time = 3000;
+            //        off_time = 4000;
+            //        break;
+            //    case SoundCard.DELTA_44:
+            //        on_time = 2000;
+            //        off_time = 2000;
+            //        break;
+            //}
 
             progress.SetPercent(0.0f);
 
@@ -20626,18 +20613,18 @@ namespace Thetis
             set { save_txprofile_on_exit = value; }
         }
 
-        private SoundCard current_soundcard = SoundCard.UNSUPPORTED_CARD;
-        public SoundCard CurrentSoundCard
-        {
-            get { return current_soundcard; }
-            set
-            {
-                current_soundcard = value;
-                Audio.CurSoundCard = value;
-                if (SetupForm != null && SetupForm.CurrentSoundCard != current_soundcard)
-                    SetupForm.CurrentSoundCard = current_soundcard;
-            }
-        }
+        //private SoundCard current_soundcard = SoundCard.HPSDR;
+        //public SoundCard CurrentSoundCard
+        //{
+        //    get { return current_soundcard; }
+        //    set
+        //    {
+        //        current_soundcard = value;
+        //        Audio.CurSoundCard = value;
+        //        if (SetupForm != null && SetupForm.CurrentSoundCard != current_soundcard)
+        //            SetupForm.CurrentSoundCard = current_soundcard;
+        //    }
+        //}
 
         private HPSDRModel current_hpsdr_model = HPSDRModel.HPSDR;
         public HPSDRModel CurrentHPSDRModel
@@ -25097,13 +25084,6 @@ namespace Thetis
             }
         }
 
-        private int audio_driver_index1 = 0;
-        public int AudioDriverIndex1
-        {
-            get { return audio_driver_index1; }
-            set { audio_driver_index1 = value; }
-        }
-
         private int audio_driver_index2 = 0;
         public int AudioDriverIndex2
         {
@@ -25118,13 +25098,6 @@ namespace Thetis
             set { audio_driver_index3 = value; }
         }
 
-        private int audio_input_index1 = 0;
-        public int AudioInputIndex1
-        {
-            get { return audio_input_index1; }
-            set { audio_input_index1 = value; }
-        }
-
         private int audio_input_index2 = 0;
         public int AudioInputIndex2
         {
@@ -25137,13 +25110,6 @@ namespace Thetis
         {
             get { return audio_input_index3; }
             set { audio_input_index3 = value; }
-        }
-
-        private int audio_output_index1 = 0;
-        public int AudioOutputIndex1
-        {
-            get { return audio_output_index1; }
-            set { audio_output_index1 = value; }
         }
 
         private int audio_output_index2 = 0;
@@ -25170,48 +25136,6 @@ namespace Thetis
                 Audio.AudioVolts1 = audio_volts1;
                 ptbPWR_Scroll(this, EventArgs.Empty);
             }
-        }
-
-        private int mixer_id1 = 0;
-        public int MixerID1
-        {
-            get { return mixer_id1; }
-            set { mixer_id1 = value; }
-        }
-
-        private int mixer_id2 = 0;
-        public int MixerID2
-        {
-            get { return mixer_id2; }
-            set { mixer_id2 = value; }
-        }
-
-        private int mixer_rx_mux_id1 = 0;
-        public int MixerRXMuxID1
-        {
-            get { return mixer_rx_mux_id1; }
-            set { mixer_rx_mux_id1 = value; }
-        }
-
-        private int mixer_tx_mux_id1 = 0;
-        public int MixerTXMuxID1
-        {
-            get { return mixer_tx_mux_id1; }
-            set { mixer_tx_mux_id1 = value; }
-        }
-
-        private int mixer_rx_mux_id2 = 0;
-        public int MixerRXMuxID2
-        {
-            get { return mixer_rx_mux_id2; }
-            set { mixer_rx_mux_id2 = value; }
-        }
-
-        private int mixer_tx_mux_id2 = 0;
-        public int MixerTXMuxID2
-        {
-            get { return mixer_tx_mux_id2; }
-            set { mixer_tx_mux_id2 = value; }
         }
 
         private int sample_rate1 = 48000;
@@ -32344,23 +32268,21 @@ namespace Thetis
                     //Debug.WriteLine("Forcing property set on PTTBitBangEnabled"); 
                     PTTBitBangEnabled = true; // force creation of serial ptt 
                 }
-                // wjt added ends 
-                SetupForm.AudioReceiveMux1 = SetupForm.AudioReceiveMux1;		// set receive mux
 
                 Audio.CurrentAudioState1 = Audio.AudioState.DTTSP;
                 Audio.callback_return = 0;
 
-                if (vac_enabled)
-                {
-                    Audio.VACRBReset = true;
-                    Audio.VACEnabled = true;
-                }
+                //if (vac_enabled)
+                //{
+                //    Audio.VACRBReset = true;
+                //    Audio.VACEnabled = true;
+                //}
 
-                if (vac2_enabled)
-                {
-                    Audio.VAC2RBReset = true;
-                    Audio.VAC2Enabled = true;
-                }
+                //if (vac2_enabled)
+                //{
+                //    Audio.VAC2RBReset = true;
+                //    Audio.VAC2Enabled = true;
+                //}
 
                 Thread.Sleep(100); // wait for hardware to settle before starting audio (possible sample rate change)
                 psform.ForcePS();
@@ -32510,6 +32432,18 @@ namespace Thetis
                 DataFlowing = true;
                 SetupForm.UpdateGeneraHardware();
                 // cmaster.Getwb(0).WBdisplay.StartDisplay(32);
+
+                if (vac_enabled)
+                {
+                    Audio.VACRBReset = true;
+                    Audio.VACEnabled = true;
+                }
+
+                if (vac2_enabled)
+                {
+                    Audio.VAC2RBReset = true;
+                    Audio.VAC2Enabled = true;
+                }
             }
             else
             {

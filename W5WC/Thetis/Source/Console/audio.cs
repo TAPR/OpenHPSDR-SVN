@@ -564,6 +564,8 @@ namespace Thetis
             {
                 vac_enabled = value;
                 cmaster.CMSetTXAPanelGain1(wdsp.id(1, 0));
+                if (console.PowerOn)
+                EnableVAC1(value);
             }
             get { return vac_enabled; }
         }
@@ -574,6 +576,8 @@ namespace Thetis
             set
             {
                 vac2_enabled = value;
+                if (console.PowerOn)
+                EnableVAC2(value);
             }
             get { return vac2_enabled; }
         }
@@ -830,7 +834,7 @@ namespace Thetis
             }
         }
 
-        private static int block_size_vac = 2048;
+        private static int block_size_vac = 1024;
         public static int BlockSizeVAC
         {
             get { return block_size_vac; }
@@ -841,7 +845,7 @@ namespace Thetis
             }
         }
 
-        private static int block_size_vac2 = 2048;
+        private static int block_size_vac2 = 1024;
         public static int BlockSizeVAC2
         {
             get { return block_size_vac2; }
@@ -947,31 +951,17 @@ namespace Thetis
             set { vac2_correct_iq = value; }
         }
 
-        private static SoundCard soundcard = SoundCard.UNSUPPORTED_CARD;
-        public static SoundCard CurSoundCard
-        {
-            set { soundcard = value; }
-        }
+        //private static SoundCard soundcard = SoundCard.HPSDR;
+        //public static SoundCard CurSoundCard
+        //{
+        //    set { soundcard = value; }
+        //}
 
         private static bool vox_active = false;
         public static bool VOXActive
         {
             get { return vox_active; }
             set { vox_active = value; }
-        }
-
-        private static int num_channels = 2;
-        public static int NumChannels
-        {
-            get { return num_channels; }
-            set { num_channels = value; }
-        }
-
-        private static int host1 = 0;
-        public static int Host1
-        {
-            get { return host1; }
-            set { host1 = value; }
         }
 
         private static int host2 = 0;
@@ -988,13 +978,6 @@ namespace Thetis
             set { host3 = value; }
         }
 
-        private static int input_dev1 = 0;
-        public static int Input1
-        {
-            get { return input_dev1; }
-            set { input_dev1 = value; }
-        }
-
         private static int input_dev2 = 0;
         public static int Input2
         {
@@ -1009,13 +992,6 @@ namespace Thetis
             set { input_dev3 = value; }
         }
 
-        private static int output_dev1 = 0;
-        public static int Output1
-        {
-            get { return output_dev1; }
-            set { output_dev1 = value; }
-        }
-
         private static int output_dev2 = 0;
         public static int Output2
         {
@@ -1028,13 +1004,6 @@ namespace Thetis
         {
             get { return output_dev3; }
             set { output_dev3 = value; }
-        }
-
-        private static int latency1 = 0;
-        public static int Latency1
-        {
-            get { return latency1; }
-            set { latency1 = value; }
         }
 
         private static int latency2 = 120;
@@ -1380,30 +1349,19 @@ namespace Thetis
             return false;
         }
 
-        public static bool Start()
+        public static void EnableVAC1(bool enable)
         {
             bool retval = false;
-            phase_buf_l = new float[block_size1];
-            phase_buf_r = new float[block_size1];
 
-            unsafe
-            {
-                retval = StartAudio(ref callback3port,
-                                    (uint)block_size1,
-                                    sample_rate1);
-            }
-
-            if (!retval) return retval;
-
-            if (vac_enabled)
+            if (enable)
                 unsafe
                 {
                     int num_chan = 1;
                     // ehr add for multirate iq to vac
                     int sample_rate = sample_rate2;
                     int block_size = block_size_vac;
-                    double in_latency = vac1_latency_manual ? latency2/1000.0 : PA19.PA_GetDeviceInfo(input_dev2).defaultLowInputLatency;
-                    double out_latency = vac1_latency_manual_out ? latency2_out/1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
+                    double in_latency = vac1_latency_manual ? latency2 / 1000.0 : PA19.PA_GetDeviceInfo(input_dev2).defaultLowInputLatency;
+                    double out_latency = vac1_latency_manual_out ? latency2_out / 1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
                     double pa_in_latency = vac1_latency_pa_in_manual ? latency_pa_in / 1000.0 : PA19.PA_GetDeviceInfo(input_dev2).defaultLowInputLatency;
                     double pa_out_latency = vac1_latency_pa_out_manual ? latency_pa_out / 1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
 
@@ -1414,24 +1372,20 @@ namespace Thetis
                         block_size = block_size1;
                         //latency = 250;
                     }
-                    else if (vac_stereo) num_chan = 2;			
+                    else if (vac_stereo) num_chan = 2;
                     vac_rb_reset = true;
 
                     ivac.SetIVAChostAPIindex(0, host2);
                     ivac.SetIVACinputDEVindex(0, input_dev2);
                     ivac.SetIVACoutputDEVindex(0, output_dev2);
                     ivac.SetIVACnumChannels(0, num_chan);
-                    ivac.SetIVACInLatency(0, in_latency);
-                    ivac.SetIVACOutLatency(0, out_latency);
-                    ivac.SetIVACPAInLatency(0, pa_in_latency);
-                    ivac.SetIVACPAOutLatency(0, pa_out_latency);
+                    ivac.SetIVACInLatency(0, in_latency, 0);
+                    ivac.SetIVACOutLatency(0, out_latency, 0);
+                    ivac.SetIVACPAInLatency(0, pa_in_latency, 0);
+                    ivac.SetIVACPAOutLatency(0, pa_out_latency, 1);
 
                     try
                     {
-                        //retval = StartAudio_NonJanus(ref callbackVAC, (uint)block_size, sample_rate, host2, input_dev2,
-                        //output_dev2, num_chan, 0, latency);
-                        // retval = JanusAudio.StartAudioVAC(block_size, sample_rate, host2, input_dev2,
-                        //  output_dev2, num_chan, 0, latency) == 1;
                         retval = ivac.StartAudioIVAC(0) == 1;
                         if (retval && console.PowerOn)
                             ivac.SetIVACrun(0, 1);
@@ -1443,11 +1397,22 @@ namespace Thetis
                             "VAC Audio Stream Startup Error",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
-                        return false;
+                        //return false;
                     }
                 }
+            else
+            {
+                ivac.SetIVACrun(0, 0);
+                ivac.StopAudioIVAC(0);
+           }
 
-            if (vac2_enabled)
+        }
+
+        public static void EnableVAC2(bool enable)
+        {
+            bool retval = false;
+
+            if (enable)
                 unsafe
                 {
                     int num_chan = 1;
@@ -1471,21 +1436,17 @@ namespace Thetis
                     // ehr end				
                     vac2_rb_reset = true;
 
-                    ivac.SetIVAChostAPIindex(1, host2);
+                    ivac.SetIVAChostAPIindex(1, host3);
                     ivac.SetIVACinputDEVindex(1, input_dev3);
                     ivac.SetIVACoutputDEVindex(1, output_dev3);
                     ivac.SetIVACnumChannels(1, num_chan);
-                    ivac.SetIVACInLatency(1, in_latency);
-                    ivac.SetIVACOutLatency(1, out_latency);
-                    ivac.SetIVACPAInLatency(1, pa_in_latency);
-                    ivac.SetIVACPAOutLatency(1, pa_out_latency);
+                    ivac.SetIVACInLatency(1, in_latency, 0);
+                    ivac.SetIVACOutLatency(1, out_latency, 0);
+                    ivac.SetIVACPAInLatency(1, pa_in_latency, 0);
+                    ivac.SetIVACPAOutLatency(1, pa_out_latency, 1);
 
                     try
                     {
-                        //retval = StartAudio_NonJanus(ref callbackVAC, (uint)block_size, sample_rate, host2, input_dev2,
-                        //output_dev2, num_chan, 0, latency);
-                        // retval = JanusAudio.StartAudioVAC(block_size, sample_rate, host2, input_dev2,
-                        //  output_dev2, num_chan, 0, latency) == 1;
                         retval = ivac.StartAudioIVAC(1) == 1;
                         if (retval && console.PowerOn)
                             ivac.SetIVACrun(1, 1);
@@ -1498,11 +1459,133 @@ namespace Thetis
                             "VAC2 Audio Stream Startup Error",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
-                        return false;
+                       // return false;
                     }
                 }
+            else
+            {
+                ivac.SetIVACrun(1, 0);
+                ivac.StopAudioIVAC(1);
+           }
 
-            return retval;
+        }
+
+        public static bool Start()
+        {
+            bool retval = false;
+            phase_buf_l = new float[block_size1];
+            phase_buf_r = new float[block_size1];
+
+            unsafe
+            {
+                retval = StartAudio(ref callback3port,
+                                    (uint)block_size1,
+                                    sample_rate1);
+            }
+
+            //if (!retval)
+                return retval;
+
+            //if (vac_enabled)
+            //    unsafe
+            //    {
+            //        int num_chan = 1;
+            //        // ehr add for multirate iq to vac
+            //        int sample_rate = sample_rate2;
+            //        int block_size = block_size_vac;
+            //        double in_latency = vac1_latency_manual ? latency2/1000.0 : PA19.PA_GetDeviceInfo(input_dev2).defaultLowInputLatency;
+            //        double out_latency = vac1_latency_manual_out ? latency2_out/1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
+            //        double pa_in_latency = vac1_latency_pa_in_manual ? latency_pa_in / 1000.0 : PA19.PA_GetDeviceInfo(input_dev2).defaultLowInputLatency;
+            //        double pa_out_latency = vac1_latency_pa_out_manual ? latency_pa_out / 1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
+
+            //        if (vac_output_iq)
+            //        {
+            //            num_chan = 2;
+            //            sample_rate = sample_rate1;
+            //            block_size = block_size1;
+            //            //latency = 250;
+            //        }
+            //        else if (vac_stereo) num_chan = 2;			
+            //        vac_rb_reset = true;
+
+            //        ivac.SetIVAChostAPIindex(0, host2);
+            //        ivac.SetIVACinputDEVindex(0, input_dev2);
+            //        ivac.SetIVACoutputDEVindex(0, output_dev2);
+            //        ivac.SetIVACnumChannels(0, num_chan);
+            //        ivac.SetIVACInLatency(0, in_latency);
+            //        ivac.SetIVACOutLatency(0, out_latency);
+            //        ivac.SetIVACPAInLatency(0, pa_in_latency);
+            //        ivac.SetIVACPAOutLatency(0, pa_out_latency);
+
+            //        try
+            //        {
+            //            retval = ivac.StartAudioIVAC(0) == 1;
+            //            if (retval && console.PowerOn)
+            //                ivac.SetIVACrun(0, 1);
+            //        }
+            //        catch (Exception)
+            //        {
+            //            MessageBox.Show("The program is having trouble starting the VAC audio streams.\n" +
+            //                "Please examine the VAC related settings on the Setup Form -> Audio Tab and try again.",
+            //                "VAC Audio Stream Startup Error",
+            //                MessageBoxButtons.OK,
+            //                MessageBoxIcon.Error);
+            //            return false;
+            //        }
+            //    }
+
+        //    if (vac2_enabled)
+        //        unsafe
+        //        {
+        //            int num_chan = 1;
+        //            // ehr add for multirate iq to vac
+        //            int sample_rate = sample_rate3;
+        //            int block_size = block_size_vac2;
+
+        //            double in_latency = vac2_latency_manual ? latency3/1000.0 : PA19.PA_GetDeviceInfo(input_dev3).defaultLowInputLatency;
+        //            double out_latency = vac2_latency_out_manual ? vac2_latency_out/1000.0 : PA19.PA_GetDeviceInfo(output_dev3).defaultLowOutputLatency;
+        //            double pa_in_latency = vac2_latency_pa_in_manual ? vac2_latency_pa_in / 1000.0 : PA19.PA_GetDeviceInfo(input_dev3).defaultLowInputLatency;
+        //            double pa_out_latency = vac2_latency_pa_out_manual ? vac2_latency_pa_out / 1000.0 : PA19.PA_GetDeviceInfo(output_dev3).defaultLowOutputLatency;
+
+        //            if (vac2_output_iq)
+        //            {
+        //                num_chan = 2;
+        //                sample_rate = sample_rate_rx2;
+        //                block_size = block_size_rx2;
+        //                //latency = 250;
+        //            }
+        //            else if (vac2_stereo) num_chan = 2;
+        //            // ehr end				
+        //            vac2_rb_reset = true;
+
+        //            ivac.SetIVAChostAPIindex(1, host3);
+        //            ivac.SetIVACinputDEVindex(1, input_dev3);
+        //            ivac.SetIVACoutputDEVindex(1, output_dev3);
+        //            ivac.SetIVACnumChannels(1, num_chan);
+        //            ivac.SetIVACInLatency(1, in_latency);
+        //            ivac.SetIVACOutLatency(1, out_latency);
+        //            ivac.SetIVACPAInLatency(1, pa_in_latency);
+        //            ivac.SetIVACPAOutLatency(1, pa_out_latency);
+
+        //            try
+        //            {
+        //                retval = ivac.StartAudioIVAC(1) == 1;
+        //                if (retval && console.PowerOn)
+        //                    ivac.SetIVACrun(1, 1);
+
+        //            }
+        //            catch (Exception)
+        //            {
+        //                MessageBox.Show("The program is having trouble starting the VAC audio streams.\n" +
+        //                    "Please examine the VAC related settings on the Setup Form -> Audio Tab and try again.",
+        //                    "VAC2 Audio Stream Startup Error",
+        //                    MessageBoxButtons.OK,
+        //                    MessageBoxIcon.Error);
+        //                return false;
+        //            }
+        //        }
+
+           // return retval;
         }
 
         public static unsafe bool StartAudio(ref PA19.PaStreamCallback callback,
@@ -1510,17 +1593,17 @@ namespace Thetis
         {
             // System.Console.WriteLine("using Ozy/Janus callback");
             int rc;
-            int no_send = 0;
+           // int no_send = 0;
             int sample_bits = 24;
             if (console.Force16bitIQ)
             {
                 sample_bits = 16;
             }
-            if (console.NoJanusSend)
-            {
-                no_send = 1;
-            }
-            rc = NetworkIO.StartAudio((int)sample_rate, (int)block_size, callback, sample_bits, no_send);
+            //if (console.NoJanusSend)
+            //{
+            //    no_send = 1;
+            //}
+            rc = NetworkIO.StartAudio((int)sample_rate, (int)block_size, callback, sample_bits);
             if (rc != 0)
             {
                 //System.Console.WriteLine("JanusAudio.StartAudio failed w/ rc: " + rc);

@@ -2,7 +2,7 @@
 
 __declspec (align (16))			IVAC pvac[MAX_EXT_VACS];
 
-void create_resamps (IVAC a)
+void create_resamps(IVAC a)
 {
 	// data FROM VAC TO TX MIC INPUT
 	if (a->vac_rate != a->mic_rate && !a->iq_type)
@@ -16,13 +16,13 @@ void create_resamps (IVAC a)
 	if (a->vac_rate != a->audio_rate && !a->iq_type)
 	{
 		a->out_resamp = 1;
-		a->resampPtrOut = create_resampleV (a->audio_rate, a->vac_rate);
+		a->resampPtrOut = create_resampleV(a->audio_rate, a->vac_rate);
 	}
 	else
 		a->out_resamp = 0;
 }
 
-PORT void create_ivac (
+PORT void create_ivac(
 	int id,
 	int run,
 	int iq_type,				// 1 if using raw IQ samples, 0 for audio
@@ -38,7 +38,7 @@ PORT void create_ivac (
 	int vac_size				// VAC buffer size
 	)
 {
-	IVAC a = (IVAC) calloc (1, sizeof (ivac));
+	IVAC a = (IVAC)calloc(1, sizeof(ivac));
 	a->run = run;
 	a->iq_type = iq_type;
 	a->stereo = stereo;
@@ -53,61 +53,61 @@ PORT void create_ivac (
 	a->vac_size = vac_size;
 
 	a->rb_vacIN = ringbuffer_create(16384);
-	ringbuffer_restart(a->rb_vacIN, 2 * a->vac_size); 
+	ringbuffer_restart(a->rb_vacIN, 2 * a->vac_size);
 	a->rb_vacOUT = ringbuffer_create(16384);
 	ringbuffer_restart(a->rb_vacOUT, a->iq_type ? 2 * a->iq_size : 2 * a->vac_size);
 
 	// create fixed buffers
-	a->res_in = (double *) calloc (4, 65536);
-	a->res_out = (double *) calloc (4, 65536);
+	a->res_in = (double *)calloc(4, 65536);
+	a->res_out = (double *)calloc(4, 65536);
 
 	// create resamplers as needed
-	create_resamps (a);
+	create_resamps(a);
 	// create audio mixer
 	{
-		int inrate[2] = {a->audio_rate, a->txmon_rate};
-		a->mixer = create_aamix (-1, id, a->audio_size, a->audio_size, 2, 3, 3, 1.0, 4096, inrate, a->audio_rate, xvac_out, 0.0, 0.0, 0.0, 0.0);
+		int inrate[2] = { a->audio_rate, a->txmon_rate };
+		a->mixer = create_aamix(-1, id, a->audio_size, a->audio_size, 2, 3, 3, 1.0, 4096, inrate, a->audio_rate, xvac_out, 0.0, 0.0, 0.0, 0.0);
 	}
 
 	// initialize other items
-	InitializeCriticalSectionAndSpinCount (&a->cs_vac,  2500);
-	InitializeCriticalSectionAndSpinCount (&a->cs_vacw, 2500);
+	InitializeCriticalSectionAndSpinCount(&a->cs_vac, 2500);
+	InitializeCriticalSectionAndSpinCount(&a->cs_vacw, 2500);
 	a->reset = 0;
 	pvac[id] = a;
 }
 
-void destroy_resamps (IVAC a)
+void destroy_resamps(IVAC a)
 {
-	if (a->resampPtrOut != 0) 
+	if (a->resampPtrOut != 0)
 	{
-		destroy_resampleV (a->resampPtrOut);
+		destroy_resampleV(a->resampPtrOut);
 		a->resampPtrOut = 0;
 	}
-	if (a->resampPtrIn != 0) 
+	if (a->resampPtrIn != 0)
 	{
-		destroy_resampleV (a->resampPtrIn);
+		destroy_resampleV(a->resampPtrIn);
 		a->resampPtrIn = 0;
 	}
 }
 
 PORT void destroy_ivac(int id)
-{	
+{
 	IVAC a = pvac[id];
-	DeleteCriticalSection (&a->cs_vacw);
-	DeleteCriticalSection (&a->cs_vac);
+	DeleteCriticalSection(&a->cs_vacw);
+	DeleteCriticalSection(&a->cs_vac);
 
 	// destroy resamplers
-	destroy_resamps (a);
+	destroy_resamps(a);
 
 	// destroy fixed buffers
 	if (a->res_out != 0)
 	{
-		free (a->res_out);
+		free(a->res_out);
 		a->res_out = 0;
 	}
 	if (a->res_in != 0)
 	{
-		free (a->res_in);
+		free(a->res_in);
 		a->res_in = 0;
 	}
 
@@ -123,10 +123,10 @@ PORT void destroy_ivac(int id)
 		a->rb_vacIN = 0;
 	}
 
-	free (a);
+	free(a);
 }
 
-PORT void xvacIN (int id, double* in_tx)
+PORT void xvacIN(int id, double* in_tx)
 {
 	IVAC a = pvac[id];
 	if (a->run)
@@ -139,7 +139,7 @@ PORT void xvacIN (int id, double* in_tx)
 		}
 		else	// zero output if not enough samples
 		{
-			memset (in_tx, 0, a->mic_size * sizeof (complex));
+			memset(in_tx, 0, a->mic_size * sizeof(complex));
 		}
 
 		if (a->vac_combine_input)
@@ -147,13 +147,13 @@ PORT void xvacIN (int id, double* in_tx)
 			combinebuff(a->mic_size, in_tx, in_tx);
 		}
 
-		if (a->vox || a->mox) 
+		if (a->vox || a->mox)
 		{
 			scalebuff(a->mic_size, in_tx, a->vac_preamp, in_tx);
 		}
 		else
 		{
-			memset (in_tx, 0, a->mic_size * sizeof (complex));
+			memset(in_tx, 0, a->mic_size * sizeof(complex));
 		}
 	}
 }
@@ -168,7 +168,7 @@ PORT void xvacOUT(int id, int stream, double* data)
 	{
 		if (a->iq_type && stream == 0)				// iq data, never resampled
 		{
-			if ((int)ringbuffer_write_space(a->rb_vacOUT) >= 2 * a->iq_size) 
+			if ((int)ringbuffer_write_space(a->rb_vacOUT) >= 2 * a->iq_size)
 			{	// copy IQ samples from buffer to ring
 				EnterCriticalSection(&a->cs_vac);
 				ringbuffer_write(a->rb_vacOUT, data, 2 * a->iq_size);
@@ -180,9 +180,9 @@ PORT void xvacOUT(int id, int stream, double* data)
 		if (!a->iq_type)
 		{	// call mixer to synchronize the two streams
 			if (stream == 1)
-				xMixAudio (a->mixer, -1, 0, data);
+				xMixAudio(a->mixer, -1, 0, data);
 			else if (stream == 2)
-				xMixAudio (a->mixer, -1, 1, data);
+				xMixAudio(a->mixer, -1, 1, data);
 		}
 	}
 }
@@ -192,7 +192,7 @@ void xvac_out(int id, int nsamples, double* buff)
 	IVAC a = pvac[id];
 	if (!a->out_resamp)
 	{	// no need to resample
-		if ((int)ringbuffer_write_space(a->rb_vacOUT) >= 2 * a->audio_size) 
+		if ((int)ringbuffer_write_space(a->rb_vacOUT) >= 2 * a->audio_size)
 		{	// copy IQ samples from buffer to ring
 			EnterCriticalSection(&a->cs_vac);
 			ringbuffer_write(a->rb_vacOUT, buff, 2 * a->audio_size);
@@ -204,7 +204,7 @@ void xvac_out(int id, int nsamples, double* buff)
 	else
 	{	// must resample to the VAC sampling rate
 		int outsamps = 0;
-		xresampleV (buff, a->res_out, a->audio_size, &outsamps, a->resampPtrOut);
+		xresampleV(buff, a->res_out, a->audio_size, &outsamps, a->resampPtrOut);
 		if (ringbuffer_write_space(a->rb_vacOUT) >= (unsigned int)outsamps * 2)
 		{
 			EnterCriticalSection(&a->cs_vac);
@@ -216,19 +216,19 @@ void xvac_out(int id, int nsamples, double* buff)
 	}
 }
 
-int CallbackIVAC (	const void *input, 
-					void *output, 
-					unsigned long frameCount,
-					const PaStreamCallbackTimeInfo* timeInfo, 
-					PaStreamCallbackFlags statusFlags, 
-					void *userData	)
+int CallbackIVAC(const void *input,
+	void *output,
+	unsigned long frameCount,
+	const PaStreamCallbackTimeInfo* timeInfo,
+	PaStreamCallbackFlags statusFlags,
+	void *userData)
 {
 	int id = (int)userData;		// use 'userData' to pass in the id of this VAC
 	IVAC a = pvac[id];
-	double* out_ptr = (double*) output;
-	double* in_ptr = (double*) input;
-	(void) timeInfo;
-	(void) statusFlags;
+	double* out_ptr = (double*)output;
+	double* in_ptr = (double*)input;
+	(void)timeInfo;
+	(void)statusFlags;
 	//(void) userData;
 
 	if (!a->run) return 0;
@@ -236,7 +236,7 @@ int CallbackIVAC (	const void *input,
 	if (a->reset)
 	{
 		a->reset = 0;
-		memset (out_ptr, 0, frameCount * sizeof (complex));
+		memset(out_ptr, 0, frameCount * sizeof(complex));
 
 		EnterCriticalSection(&a->cs_vacw);
 		ringbuffer_reset(a->rb_vacIN);
@@ -249,55 +249,55 @@ int CallbackIVAC (	const void *input,
 		return 0;
 	}
 
-		if (a->in_resamp)
-		{
-			int outsamps = 0;
-			xresampleV(in_ptr, a->res_in, frameCount, &outsamps, a->resampPtrIn);
+	if (a->in_resamp)
+	{
+		int outsamps = 0;
+		xresampleV(in_ptr, a->res_in, frameCount, &outsamps, a->resampPtrIn);
 
-			if (ringbuffer_write_space(a->rb_vacIN) >= (unsigned int)outsamps * 2) 
-			{
-				EnterCriticalSection(&a->cs_vacw);
-				ringbuffer_write(a->rb_vacIN, a->res_in, (unsigned int)outsamps * 2);
-				LeaveCriticalSection(&a->cs_vacw);
-			}
-			else
-			{
-				a->reset = 1;
-			}
+		if (ringbuffer_write_space(a->rb_vacIN) >= (unsigned int)outsamps * 2)
+		{
+			EnterCriticalSection(&a->cs_vacw);
+			ringbuffer_write(a->rb_vacIN, a->res_in, (unsigned int)outsamps * 2);
+			LeaveCriticalSection(&a->cs_vacw);
 		}
 		else
 		{
-			if (ringbuffer_write_space(a->rb_vacIN) >= 2 * frameCount) 
-			{
-				EnterCriticalSection(&a->cs_vacw);
-				ringbuffer_write(a->rb_vacIN, in_ptr, 2 * frameCount);
-				LeaveCriticalSection(&a->cs_vacw);
-			}
+			a->reset = 1;
 		}
+	}
+	else
+	{
+		if (ringbuffer_write_space(a->rb_vacIN) >= 2 * frameCount)
+		{
+			EnterCriticalSection(&a->cs_vacw);
+			ringbuffer_write(a->rb_vacIN, in_ptr, 2 * frameCount);
+			LeaveCriticalSection(&a->cs_vacw);
+		}
+	}
 
-		if (ringbuffer_read_space(a->rb_vacOUT) >= 2 * frameCount) 
-		{
-			EnterCriticalSection(&a->cs_vac);
-			ringbuffer_read(a->rb_vacOUT, out_ptr, 2 * frameCount);
-			LeaveCriticalSection(&a->cs_vac);
-		}
-		else
-		{
-			memset(out_ptr, 0, frameCount * sizeof (complex));
-		}
+	if (ringbuffer_read_space(a->rb_vacOUT) >= 2 * frameCount)
+	{
+		EnterCriticalSection(&a->cs_vac);
+		ringbuffer_read(a->rb_vacOUT, out_ptr, 2 * frameCount);
+		LeaveCriticalSection(&a->cs_vac);
+	}
+	else
+	{
+		memset(out_ptr, 0, frameCount * sizeof(complex));
+	}
 
 	return 0;
 }
 
-PORT int StartAudioIVAC (int id)
+PORT int StartAudioIVAC(int id)
 {
 	IVAC a = pvac[id];
 	int error = 0;
-	int in_dev  = Pa_HostApiDeviceIndexToDeviceIndex(a->host_api_index, a->input_dev_index);
+	int in_dev = Pa_HostApiDeviceIndexToDeviceIndex(a->host_api_index, a->input_dev_index);
 	int out_dev = Pa_HostApiDeviceIndexToDeviceIndex(a->host_api_index, a->output_dev_index);
 
 	a->inParam.device = in_dev;
-	a->inParam.channelCount = 2; 
+	a->inParam.channelCount = 2;
 	a->inParam.suggestedLatency = a->pa_in_latency;
 	a->inParam.sampleFormat = paFloat64;
 
@@ -306,13 +306,13 @@ PORT int StartAudioIVAC (int id)
 	a->outParam.suggestedLatency = a->pa_out_latency;
 	a->outParam.sampleFormat = paFloat64;
 
-	error = Pa_OpenStream ( &a->Stream, 
-		&a->inParam, 
-		&a->outParam, 
-		a->vac_rate, 
-		paFramesPerBufferUnspecified, //a->vac_size,
-		0, 
-		CallbackIVAC, 
+	error = Pa_OpenStream(&a->Stream,
+		&a->inParam,
+		&a->outParam,
+		a->vac_rate,
+		paFramesPerBufferUnspecified, // a->vac_size, 
+		0,
+		CallbackIVAC,
 		(void *)id);	// pass 'id' as userData
 
 	if (error != 0) return -1;
@@ -324,7 +324,7 @@ PORT int StartAudioIVAC (int id)
 	return 1;
 }
 
-PORT void SetIVACRBReset (int id, int reset)
+PORT void SetIVACRBReset(int id, int reset)
 {
 	IVAC a = pvac[id];
 	a->reset = reset;
@@ -333,18 +333,16 @@ PORT void SetIVACRBReset (int id, int reset)
 PORT void StopAudioIVAC(int id)
 {
 	IVAC a = pvac[id];
-	Pa_AbortStream(a->Stream);
 	Pa_CloseStream(a->Stream);
-	a->Stream = 0;
 }
 
-PORT void SetIVACrun (int id, int run)
+PORT void SetIVACrun(int id, int run)
 {
 	IVAC a = pvac[id];
 	a->run = run;
 }
 
-PORT void SetIVACiqType (int id, int type)
+PORT void SetIVACiqType(int id, int type)
 {
 	IVAC a = pvac[id];
 	if (type != a->iq_type)
@@ -355,66 +353,66 @@ PORT void SetIVACiqType (int id, int type)
 	}
 }
 
-PORT void SetIVACstereo (int id, int stereo)
+PORT void SetIVACstereo(int id, int stereo)
 {
 	IVAC a = pvac[id];
 	a->stereo = stereo;
 }
 
-PORT void SetIVACvacRate (int id, int rate)
+PORT void SetIVACvacRate(int id, int rate)
 {
 	IVAC a = pvac[id];
 	if (rate != a->vac_rate)
 	{
 		a->vac_rate = rate;
 		SetRingBufferSize(id);
-		destroy_resamps (a);
-		create_resamps (a);
+		destroy_resamps(a);
+		create_resamps(a);
 	}
 }
 
-PORT void SetIVACmicRate (int id, int rate)
+PORT void SetIVACmicRate(int id, int rate)
 {
 	IVAC a = pvac[id];
 	if (rate != a->mic_rate)
 	{
 		a->mic_rate = rate;
-		destroy_resamps (a);
-		create_resamps (a);
+		destroy_resamps(a);
+		create_resamps(a);
 	}
 }
 
-PORT void SetIVACaudioRate (int id, int rate)
+PORT void SetIVACaudioRate(int id, int rate)
 {
 	IVAC a = pvac[id];
 	if (rate != a->audio_rate)
 	{
 		a->audio_rate = rate;
-		destroy_aamix (a->mixer, 0);
+		destroy_aamix(a->mixer, 0);
 		{
-			int inrate[2] = {a->audio_rate, a->txmon_rate};
-			a->mixer = create_aamix (-1, id, a->audio_size, a->audio_size, 2, 3, 3, 1.0, 4096, inrate, a->audio_rate, xvac_out, 0.0, 0.0, 0.0, 0.0);
+			int inrate[2] = { a->audio_rate, a->txmon_rate };
+			a->mixer = create_aamix(-1, id, a->audio_size, a->audio_size, 2, 3, 3, 1.0, 4096, inrate, a->audio_rate, xvac_out, 0.0, 0.0, 0.0, 0.0);
 		}
-		destroy_resamps (a);
-		create_resamps (a);
+		destroy_resamps(a);
+		create_resamps(a);
 	}
 }
 
-void SetIVACtxmonRate (int id, int rate)
+void SetIVACtxmonRate(int id, int rate)
 {
 	IVAC a = pvac[id];
 	if (rate != a->txmon_rate)
 	{
 		a->txmon_rate = rate;
-		destroy_aamix (a->mixer, 0);
+		destroy_aamix(a->mixer, 0);
 		{
-			int inrate[2] = {a->audio_rate, a->txmon_rate};
-			a->mixer = create_aamix (-1, id, a->audio_size, a->audio_size, 2, 3, 3, 1.0, 4096, inrate, a->audio_rate, xvac_out, 0.0, 0.0, 0.0, 0.0);
+			int inrate[2] = { a->audio_rate, a->txmon_rate };
+			a->mixer = create_aamix(-1, id, a->audio_size, a->audio_size, 2, 3, 3, 1.0, 4096, inrate, a->audio_rate, xvac_out, 0.0, 0.0, 0.0, 0.0);
 		}
 	}
 }
 
-PORT void SetIVACvacSize (int id, int size)
+PORT void SetIVACvacSize(int id, int size)
 {
 	IVAC a = pvac[id];
 	if (size != a->vac_size)
@@ -431,7 +429,7 @@ PORT void SetIVACvacSize (int id, int size)
 	}
 }
 
-PORT void SetIVACmicSize (int id, int size)
+PORT void SetIVACmicSize(int id, int size)
 {
 	IVAC a = pvac[id];
 	if (size != a->mic_size)
@@ -440,7 +438,7 @@ PORT void SetIVACmicSize (int id, int size)
 	}
 }
 
-PORT void SetIVACiqSize (int id, int size)
+PORT void SetIVACiqSize(int id, int size)
 {
 	IVAC a = pvac[id];
 	if (size != a->iq_size)
@@ -453,88 +451,92 @@ PORT void SetIVACiqSize (int id, int size)
 	}
 }
 
-PORT void SetIVACaudioSize (int id, int size)
+PORT void SetIVACaudioSize(int id, int size)
 {
 	IVAC a = pvac[id];
 	a->audio_size = (unsigned int)size;
-	destroy_aamix (a->mixer, 0);
+	destroy_aamix(a->mixer, 0);
 	{
-		int inrate[2] = {a->audio_rate, a->txmon_rate};
-		a->mixer = create_aamix (-1, id, a->audio_size, a->audio_size, 2, 3, 3, 1.0, 4096, inrate, a->audio_rate, xvac_out, 0.0, 0.0, 0.0, 0.0);
+		int inrate[2] = { a->audio_rate, a->txmon_rate };
+		a->mixer = create_aamix(-1, id, a->audio_size, a->audio_size, 2, 3, 3, 1.0, 4096, inrate, a->audio_rate, xvac_out, 0.0, 0.0, 0.0, 0.0);
 	}
 }
 
-void SetIVACtxmonSize (int id, int size)
+void SetIVACtxmonSize(int id, int size)
 {
 	IVAC a = pvac[id];
 	a->txmon_size = (unsigned int)size;
 }
 
-PORT void SetIVAChostAPIindex (int id, int index)
+PORT void SetIVAChostAPIindex(int id, int index)
 {
 	IVAC a = pvac[id];
 	a->host_api_index = index;
 }
 
-PORT void SetIVACinputDEVindex (int id, int index)
+PORT void SetIVACinputDEVindex(int id, int index)
 {
 	IVAC a = pvac[id];
 	a->input_dev_index = index;
 }
 
-PORT void SetIVACoutputDEVindex (int id, int index)
+PORT void SetIVACoutputDEVindex(int id, int index)
 {
 	IVAC a = pvac[id];
 	a->output_dev_index = index;
 }
 
-PORT void SetIVACnumChannels (int id, int n)
+PORT void SetIVACnumChannels(int id, int n)
 {
 	IVAC a = pvac[id];
 	a->num_channels = n;
 }
 
-PORT void SetIVACInLatency (int id, double lat)
+PORT void SetIVACInLatency(int id, double lat, int reset)
 {
 	IVAC a = pvac[id];
 
 	if (a->in_latency != lat)
 	{
 		a->in_latency = lat;
+		if (reset)
 		SetRingBufferSize(id);
 	}
 }
 
-PORT void SetIVACOutLatency (int id, double lat)
+PORT void SetIVACOutLatency(int id, double lat, int reset)
 {
 	IVAC a = pvac[id];
 
 	if (a->out_latency != lat)
 	{
-	    a->out_latency = lat;
-	    SetRingBufferSize(id);
+		a->out_latency = lat;
+		if (reset)
+			SetRingBufferSize(id);
 	}
 }
 
-PORT void SetIVACPAInLatency(int id, double lat)
+PORT void SetIVACPAInLatency(int id, double lat, int reset)
 {
 	IVAC a = pvac[id];
 
 	if (a->pa_in_latency != lat)
 	{
 		a->pa_in_latency = lat;
-		SetRingBufferSize(id);
+		if (reset)
+			SetRingBufferSize(id);
 	}
 }
 
-PORT void SetIVACPAOutLatency(int id, double lat)
+PORT void SetIVACPAOutLatency(int id, double lat, int reset)
 {
 	IVAC a = pvac[id];
 
 	if (a->pa_out_latency != lat)
 	{
 		a->pa_out_latency = lat;
-		SetRingBufferSize(id);
+		if (reset)
+			SetRingBufferSize(id);
 	}
 }
 
@@ -544,81 +546,81 @@ PORT void SetIVACvox(int id, int vox)
 	a->vox = vox;
 }
 
-PORT void SetIVACmox (int id, int mox)
+PORT void SetIVACmox(int id, int mox)
 {
 	IVAC a = pvac[id];
 	a->mox = mox;
 	if (!a->mox)
 	{
-		SetAAudioMixWhat (a->mixer, 0, 1, 0);
-		SetAAudioMixWhat (a->mixer, 0, 0, 1);
+		SetAAudioMixWhat(a->mixer, 0, 1, 0);
+		SetAAudioMixWhat(a->mixer, 0, 0, 1);
 	}
 	else if (a->mon)
 	{
-		SetAAudioMixWhat (a->mixer, 0, 0, 0);
-		SetAAudioMixWhat (a->mixer, 0, 1, 1);
+		SetAAudioMixWhat(a->mixer, 0, 0, 0);
+		SetAAudioMixWhat(a->mixer, 0, 1, 1);
 	}
 	else
 	{
-		SetAAudioMixWhat (a->mixer, 0, 0, 0);
-		SetAAudioMixWhat (a->mixer, 0, 1, 0);
+		SetAAudioMixWhat(a->mixer, 0, 0, 0);
+		SetAAudioMixWhat(a->mixer, 0, 1, 0);
 	}
 }
 
-PORT void SetIVACmon (int id, int mon)
+PORT void SetIVACmon(int id, int mon)
 {
 	IVAC a = pvac[id];
 	a->mon = mon;
 	if (!a->mox)
 	{
-		SetAAudioMixWhat (a->mixer, 0, 1, 0);
-		SetAAudioMixWhat (a->mixer, 0, 0, 1);
+		SetAAudioMixWhat(a->mixer, 0, 1, 0);
+		SetAAudioMixWhat(a->mixer, 0, 0, 1);
 	}
 	else if (a->mon)
 	{
-		SetAAudioMixWhat (a->mixer, 0, 0, 0);
-		SetAAudioMixWhat (a->mixer, 0, 1, 1);
+		SetAAudioMixWhat(a->mixer, 0, 0, 0);
+		SetAAudioMixWhat(a->mixer, 0, 1, 1);
 	}
 	else
 	{
-		SetAAudioMixWhat (a->mixer, 0, 0, 0);
-		SetAAudioMixWhat (a->mixer, 0, 1, 0);
+		SetAAudioMixWhat(a->mixer, 0, 0, 0);
+		SetAAudioMixWhat(a->mixer, 0, 1, 0);
 	}
 }
 
-PORT void SetIVACpreamp (int id, double preamp)
+PORT void SetIVACpreamp(int id, double preamp)
 {
 	IVAC a = pvac[id];
 	a->vac_preamp = preamp;
 }
 
-PORT void SetIVACrxscale (int id, double scale)
+PORT void SetIVACrxscale(int id, double scale)
 {
 	IVAC a = pvac[id];
 	a->vac_rx_scale = scale;
-	SetAAudioMixVolume (a->mixer, 0, a->vac_rx_scale);
+	SetAAudioMixVolume(a->mixer, 0, a->vac_rx_scale);
 }
 
-PORT void SetIVACbypass (int id, int bypass)
+PORT void SetIVACbypass(int id, int bypass)
 {
 	IVAC a = pvac[id];
 	a->vac_bypass = bypass;
 }
 
-PORT void SetIVACcombine (int id, int combine)
+PORT void SetIVACcombine(int id, int combine)
 {
 	IVAC a = pvac[id];
 	a->vac_combine_input = combine;
 }
 
-void combinebuff (int n, double* a, double* combined)
+void combinebuff(int n, double* a, double* combined)
 {
 	int i;
 	for (i = 0; i < 2 * n; i += 2)
-	combined[i] = combined[i + 1] = a[i] + a[i + 1];
+		combined[i] = combined[i + 1] = a[i] + a[i + 1];
 }
 
-void scalebuff (int size, double* in, double scale, double* out)
+void scalebuff(int size, double* in, double scale, double* out)
 {
 	int i;
 	for (i = 0; i < 2 * size; i++)
@@ -630,18 +632,18 @@ void SetRingBufferSize(int id)
 	IVAC a = pvac[id];
 
 	int rb_vacIN_size = 2 * a->vac_rate * a->in_latency;
-	if (a->vac_size * 2 > rb_vacIN_size) 
+	if (a->vac_size * 2 > rb_vacIN_size)
 		rb_vacIN_size = 2 * a->vac_size;
-	else if (rb_vacIN_size % a->vac_size > 0) 
+	else if (rb_vacIN_size % a->vac_size > 0)
 	{
 		rb_vacIN_size = rb_vacIN_size + a->vac_size -
 			(rb_vacIN_size % a->vac_size);
 	}
 
 	int rb_vacOUT_size = 2 * a->vac_rate * a->out_latency;
-	if (a->vac_size * 2 > rb_vacOUT_size) 
+	if (a->vac_size * 2 > rb_vacOUT_size)
 		rb_vacOUT_size = 2 * a->vac_size;
-	else if (rb_vacOUT_size % a->vac_size > 0) 
+	else if (rb_vacOUT_size % a->vac_size > 0)
 	{
 		rb_vacOUT_size = rb_vacOUT_size + a->vac_size -
 			(rb_vacOUT_size % a->vac_size);
@@ -656,10 +658,10 @@ void SetRingBufferSize(int id)
 	}
 	if (a->rb_vacOUT != 0)
 	{
-	   ringbuffer_free(a->rb_vacOUT);
-	   a->rb_vacOUT = 0;
-	   a->rb_vacOUT = ringbuffer_create(rb_vacOUT_size);
-	   ringbuffer_restart(a->rb_vacOUT, a->iq_type ? 2 * a->iq_size : 2 * a->vac_size);
-    }
+		ringbuffer_free(a->rb_vacOUT);
+		a->rb_vacOUT = 0;
+		a->rb_vacOUT = ringbuffer_create(rb_vacOUT_size);
+		ringbuffer_restart(a->rb_vacOUT, a->iq_type ? 2 * a->iq_size : 2 * a->vac_size);
+	}
 }
 

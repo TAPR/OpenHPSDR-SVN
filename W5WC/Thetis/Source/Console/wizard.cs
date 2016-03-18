@@ -1715,49 +1715,49 @@ namespace Thetis
                     console.SetupForm.forceAudioSampleRate1("192000");
                     break;
 
-					if(sound_card_index >= 0)
-					{
-						SoundCard card = SoundCard.FIRST;
-						switch(comboBox3.Text)
-						{
-							case "M-Audio Delta 44 (PCI)":
-								card = SoundCard.DELTA_44;
-								break;
-							case "PreSonus FireBox (FireWire)":
-								card = SoundCard.FIREBOX;
-								break;
-							case "Edirol FA-66 (FireWire)":
-								card = SoundCard.EDIROL_FA_66;
-								break;
-							case "SB Audigy (PCI)":
-								card = SoundCard.AUDIGY;
-								break;
-							case "SB Audigy 2 (PCI)":
-								card = SoundCard.AUDIGY_2;
-								break;
-							case "SB Audigy 2 ZS (PCI)":
-								card = SoundCard.AUDIGY_2_ZS;
-								break;
-							case "Sound Blaster Extigy (USB)":
-								card = SoundCard.EXTIGY;
-								break;
-							case "Sound Blaster MP3+ (USB)":
-								card = SoundCard.MP3_PLUS;
-								break;
-							case "Turtle Beach Santa Cruz (PCI)":
-								card = SoundCard.SANTA_CRUZ;
-								break;
-							case "Unsupported Card":
-								card = SoundCard.UNSUPPORTED_CARD;
-                                break;
-                            case "HPSDR":
-                                card = SoundCard.HPSDR;
-                                break;
+                    //if(sound_card_index >= 0)
+                    //{
+                    //    SoundCard card = SoundCard.FIRST;
+                    //    switch(comboBox3.Text)
+                    //    {
+                    //        case "M-Audio Delta 44 (PCI)":
+                    //            card = SoundCard.DELTA_44;
+                    //            break;
+                    //        case "PreSonus FireBox (FireWire)":
+                    //            card = SoundCard.FIREBOX;
+                    //            break;
+                    //        case "Edirol FA-66 (FireWire)":
+                    //            card = SoundCard.EDIROL_FA_66;
+                    //            break;
+                    //        case "SB Audigy (PCI)":
+                    //            card = SoundCard.AUDIGY;
+                    //            break;
+                    //        case "SB Audigy 2 (PCI)":
+                    //            card = SoundCard.AUDIGY_2;
+                    //            break;
+                    //        case "SB Audigy 2 ZS (PCI)":
+                    //            card = SoundCard.AUDIGY_2_ZS;
+                    //            break;
+                    //        case "Sound Blaster Extigy (USB)":
+                    //            card = SoundCard.EXTIGY;
+                    //            break;
+                    //        case "Sound Blaster MP3+ (USB)":
+                    //            card = SoundCard.MP3_PLUS;
+                    //            break;
+                    //        case "Turtle Beach Santa Cruz (PCI)":
+                    //            card = SoundCard.SANTA_CRUZ;
+                    //            break;
+                    //        case "Unsupported Card":
+                    //            card = SoundCard.UNSUPPORTED_CARD;
+                    //            break;
+                    //        case "HPSDR":
+                    //            card = SoundCard.HPSDR;
+                    //            break;
                                 
-						}
-						console.CurrentSoundCard = card;
+                    //    }
+						//console.CurrentSoundCard = card;
 						
-					}
+					//}
 				
 					//if(xvtr_present)
 					//	console.SetupForm.XVTRSelection = xvtr_index;					
