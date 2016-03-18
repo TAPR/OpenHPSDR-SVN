@@ -44493,45 +44493,45 @@ namespace Thetis
             if (radio.GetDSPRX(0, 0).BufferSize != size ||
                 radio.GetDSPRX(0, 1).BufferSize != size)
             {
-                bool poweron = PowerOn;
-                if (poweron)
-                {
-                    PowerOn = false;
-                    Thread.Sleep(100);
-                }
+                //bool poweron = PowerOn;
+                //if (poweron)
+                //{
+                //    PowerOn = false;
+                //    Thread.Sleep(100);
+                //}
 
                 // RX1FilterSizeCalOffset = (float)offset;
                 radio.GetDSPRX(0, 0).BufferSize = size;
                 radio.GetDSPRX(0, 1).BufferSize = size;
 
-                if (!initializing)
-                {
-                    RadioDSP.SyncStatic();
+                //if (!initializing)
+                //{
+                //    RadioDSP.SyncStatic();
 
-                    for (int i = 0; i < 1; i++)
-                    {
-                        for (int j = 0; j < 2; j++)
-                        {
-                            RadioDSPRX dsp_rx = radio.GetDSPRX(i, j);
-                            dsp_rx.Update = false;
-                            dsp_rx.Force = true;
-                            dsp_rx.Update = true;
-                            dsp_rx.Force = false;
-                        }
-                    }
+                //    for (int i = 0; i < 1; i++)
+                //    {
+                //        for (int j = 0; j < 2; j++)
+                //        {
+                //            RadioDSPRX dsp_rx = radio.GetDSPRX(i, j);
+                //            dsp_rx.Update = false;
+                //            dsp_rx.Force = true;
+                //            dsp_rx.Update = true;
+                //            dsp_rx.Force = false;
+                //        }
+                //    }
 
-                    for (int i = 0; i < 1; i++)
-                    {
-                        RadioDSPTX dsp_tx = radio.GetDSPTX(i);
-                        dsp_tx.Update = false;
-                        dsp_tx.Force = true;
-                        dsp_tx.Update = true;
-                        dsp_tx.Force = false;
-                    }
-                }
+                //    for (int i = 0; i < 1; i++)
+                //    {
+                //        RadioDSPTX dsp_tx = radio.GetDSPTX(i);
+                //        dsp_tx.Update = false;
+                //        dsp_tx.Force = true;
+                //        dsp_tx.Update = true;
+                //        dsp_tx.Force = false;
+                //    }
+                //}
 
                 UpdateRXSpectrumDisplayVars();
-                if (poweron) PowerOn = true;
+               // if (poweron) PowerOn = true;
             }
         }
 
@@ -44581,44 +44581,44 @@ namespace Thetis
             if (radio.GetDSPRX(1, 0).BufferSize != size ||
                radio.GetDSPRX(1, 1).BufferSize != size)
             {
-                bool poweron = PowerOn;
-                if (poweron)
-                {
-                    PowerOn = false;
-                    Thread.Sleep(100);
-                }
+                //bool poweron = PowerOn;
+                //if (poweron)
+                //{
+                //    PowerOn = false;
+                //    Thread.Sleep(100);
+                //}
 
                 // RX2FilterSizeCalOffset = (float)offset;
                 radio.GetDSPRX(1, 0).BufferSize = size;
                 radio.GetDSPRX(1, 1).BufferSize = size;
 
-                if (!initializing)
-                {
-                    RadioDSP.SyncStatic();
+                //if (!initializing)
+                //{
+                //    RadioDSP.SyncStatic();
 
-                    for (int i = 1; i < 2; i++)
-                    {
-                        for (int j = 0; j < 2; j++)
-                        {
-                            RadioDSPRX dsp_rx = radio.GetDSPRX(i, 0);
-                            dsp_rx.Update = false;
-                            dsp_rx.Force = true;
-                            dsp_rx.Update = true;
-                            dsp_rx.Force = false;
-                        }
-                    }
+                //    for (int i = 1; i < 2; i++)
+                //    {
+                //        for (int j = 0; j < 2; j++)
+                //        {
+                //            RadioDSPRX dsp_rx = radio.GetDSPRX(i, 0);
+                //            dsp_rx.Update = false;
+                //            dsp_rx.Force = true;
+                //            dsp_rx.Update = true;
+                //            dsp_rx.Force = false;
+                //        }
+                //    }
 
-                    // for (int i = 0; i < 1; i++)
-                    //  {
-                    RadioDSPTX dsp_tx = radio.GetDSPTX(0);
-                    dsp_tx.Update = false;
-                    dsp_tx.Force = true;
-                    dsp_tx.Update = true;
-                    dsp_tx.Force = false;
-                    // }
-                }
+                //    // for (int i = 0; i < 1; i++)
+                //    //  {
+                //    RadioDSPTX dsp_tx = radio.GetDSPTX(0);
+                //    dsp_tx.Update = false;
+                //    dsp_tx.Force = true;
+                //    dsp_tx.Update = true;
+                //    dsp_tx.Force = false;
+                //    // }
+                //}
 
-                if (poweron) PowerOn = true;
+                //if (poweron) PowerOn = true;
 
             }
         }
@@ -44651,43 +44651,43 @@ namespace Thetis
 
             if (radio.GetDSPTX(0).BufferSize != size)
             {
-                bool poweron = PowerOn;
-                if (poweron)
-                {
-                    PowerOn = false;
-                    Thread.Sleep(100);
-                }
+                //bool poweron = PowerOn;
+                //if (poweron)
+                //{
+                //    PowerOn = false;
+                //    Thread.Sleep(100);
+                //}
 
                 radio.GetDSPTX(0).BufferSize = size;
 
-                if (!initializing)
-                {
-                    RadioDSP.SyncStatic();
+                //if (!initializing)
+                //{
+                //    RadioDSP.SyncStatic();
 
-                    for (int i = 0; i < 2; i++)
-                    {
-                        for (int j = 0; j < 2; j++)
-                        {
-                            RadioDSPRX dsp_rx = radio.GetDSPRX(i, j);
-                            dsp_rx.Update = false;
-                            dsp_rx.Force = true;
-                            dsp_rx.Update = true;
-                            dsp_rx.Force = false;
-                        }
-                    }
+                //    for (int i = 0; i < 2; i++)
+                //    {
+                //        for (int j = 0; j < 2; j++)
+                //        {
+                //            RadioDSPRX dsp_rx = radio.GetDSPRX(i, j);
+                //            dsp_rx.Update = false;
+                //            dsp_rx.Force = true;
+                //            dsp_rx.Update = true;
+                //            dsp_rx.Force = false;
+                //        }
+                //    }
 
-                    for (int i = 0; i < 1; i++)
-                    {
-                        RadioDSPTX dsp_tx = radio.GetDSPTX(i);
-                        dsp_tx.Update = false;
-                        dsp_tx.Force = true;
-                        dsp_tx.Update = true;
-                        dsp_tx.Force = false;
-                    }
-                }
+                //    for (int i = 0; i < 1; i++)
+                //    {
+                //        RadioDSPTX dsp_tx = radio.GetDSPTX(i);
+                //        dsp_tx.Update = false;
+                //        dsp_tx.Force = true;
+                //        dsp_tx.Update = true;
+                //        dsp_tx.Force = false;
+                //    }
+                //}
 
                 UpdateTXSpectrumDisplayVars();
-                if (poweron) PowerOn = true;
+                //if (poweron) PowerOn = true;
             }
         }
 
