@@ -209,6 +209,7 @@ void GetMetisBoardID(char addr_bytes[]) {
 int SendStartToMetis(void) 	 {
 	prn->run = 1;
 	CmdGeneral(); //1024
+	Sleep(25); // delay for Steve, AD0ES
 	CmdRx(); //1025
 	CmdTx(); //1026
 	CmdHighPriority(); //1027
