@@ -80,10 +80,10 @@ namespace Thetis
 
 	public class RadioDSP
 	{
-		public static void SyncStatic()
-		{
+		//public static void SyncStatic()
+		//{
 			//RadioDSP.SampleRate = RadioDSP.SampleRate;
-		}
+		//}
 
 		#region Static Properties and Routines
 

@@ -8153,7 +8153,7 @@ namespace Thetis
                 dsp_tx.Force = false;
             }
 
-            RadioDSP.SyncStatic();
+           // RadioDSP.SyncStatic();
 
             for (int i = 0; i < 2; i++)
             {
@@ -44506,7 +44506,7 @@ namespace Thetis
 
                 //if (!initializing)
                 //{
-                //    RadioDSP.SyncStatic();
+                   // RadioDSP.SyncStatic();
 
                 //    for (int i = 0; i < 1; i++)
                 //    {
@@ -44654,7 +44654,7 @@ namespace Thetis
                 //bool poweron = PowerOn;
                 //if (poweron)
                 //{
-                //    PowerOn = false;
+                   // PowerOn = false;
                 //    Thread.Sleep(100);
                 //}
 

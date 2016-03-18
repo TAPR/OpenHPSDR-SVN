@@ -1085,7 +1085,9 @@ void SetSampleRate(int id, int rate)
 		}
 
 		if (listenSock != (SOCKET)0)
+		{
 			CmdRx();
+		}
 	}
 
 }
