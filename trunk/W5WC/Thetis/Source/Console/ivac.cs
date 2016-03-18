@@ -64,16 +64,16 @@
         public static extern void SetIVACnumChannels(int id, int n);
 
         [DllImport("ChannelMaster.dll", EntryPoint = "SetIVACInLatency", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetIVACInLatency(int id, double lat);
+        public static extern void SetIVACInLatency(int id, double lat, int reset);
 
         [DllImport("ChannelMaster.dll", EntryPoint = "SetIVACOutLatency", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetIVACOutLatency(int id, double lat);
+        public static extern void SetIVACOutLatency(int id, double lat, int reset);
 
         [DllImport("ChannelMaster.dll", EntryPoint = "SetIVACPAInLatency", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetIVACPAInLatency(int id, double lat);
+        public static extern void SetIVACPAInLatency(int id, double lat, int reset);
 
         [DllImport("ChannelMaster.dll", EntryPoint = "SetIVACPAOutLatency", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetIVACPAOutLatency(int id, double lat);
+        public static extern void SetIVACPAOutLatency(int id, double lat, int reset);
 
         [DllImport("ChannelMaster.dll", EntryPoint = "SetIVACpreamp", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetIVACpreamp(int id, double preamp);

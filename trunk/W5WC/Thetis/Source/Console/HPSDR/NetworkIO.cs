@@ -681,14 +681,14 @@ namespace Thetis
         }
 
         // returns -101 for firmware version error 
-        unsafe public static int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits, int no_send)
+        unsafe public static int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits)
         {
             if (initOzy() != 0)
             {
                 return 1;
             }
             //Thread.Sleep(500);
-            int result = StartAudioNative(sample_rate, samples_per_block, cb, sample_bits, no_send);
+            int result = StartAudioNative(sample_rate, samples_per_block, cb, sample_bits);
 
             if (result == 0 && !fwVersionsChecked)
             {
@@ -740,7 +740,7 @@ namespace Thetis
         public static extern void GetMetisBoardID(byte[] addr_bytes);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int StartAudioNative(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits, int no_send);
+        unsafe public static extern int StartAudioNative(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int StopAudio();

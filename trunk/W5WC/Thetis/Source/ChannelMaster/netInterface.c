@@ -32,7 +32,7 @@ const int numInputBuffs = 12;
 PORT
 int StartAudioNative(int sample_rate, int samples_per_block,
 	int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata),
-	int sample_bits, int no_send)
+	int sample_bits)
 {
 	int rc = 0;
 	int myrc = 0;
