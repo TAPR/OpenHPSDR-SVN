@@ -226,46 +226,6 @@
     <Compile Include="Channel.cs" />
     <Compile Include="cmaster.cs" />
     <Compile Include="CW\CWInput.cs" />
-    <Compile Include="DJConsoleUI\Database.cs" />
-    <Compile Include="DJConsoleUI\DJConsole.cs" />
-    <Compile Include="DJConsoleUI\DJConsoleMidi.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DJConsoleUI\DJConsoleSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DJConsoleUI\DJConsoleSelect.designer.cs">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DJConsoleUI\DJConsole_MK2.cs" />
-    <Compile Include="DJConsoleUI\DJConsole_MP3e2.cs" />
-    <Compile Include="DJConsoleUI\DJConsole_MP3LE.cs" />
-    <Compile Include="DJConsoleUI\DJConsole_Rmx.cs" />
-    <Compile Include="DJConsoleUI\GeneralSettings1.Designer.cs" />
-    <Compile Include="DJConsoleUI\MappingMK21.Designer.cs" />
-    <Compile Include="DJConsoleUI\MappingMP3e21.Designer.cs" />
-    <Compile Include="DJConsoleUI\Setup_MK2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_MK2.designer.cs">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_MP3e2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_MP3e2.designer.cs">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_MP3LE.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_MP3LE.designer.cs">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_RMX.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_RMX.designer.cs" />
     <Compile Include="GlobalMouseHandler.cs" />
     <Compile Include="HPSDR\Alex.cs" />
     <Compile Include="AssemblyInfo.cs">
@@ -391,6 +351,7 @@
     </Compile>
     <Compile Include="Memory\MemoryList.cs" />
     <Compile Include="Memory\MemoryRecord.cs" />
+    <Compile Include="Midi2CatCommands.cs" />
     <Compile Include="notch.cs" />
     <Compile Include="notchlist.cs" />
     <Compile Include="HPSDR\Penny.cs" />
@@ -519,19 +480,6 @@
       <DependentUpon>DiversityForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.resx">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.resx">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.resx">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.resx">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_RMX.resx" />
     <EmbeddedResource Include="eqform.resx">
       <DependentUpon>eqform.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -653,6 +601,10 @@
     <ProjectReference Include="..\..\lib\WinFormsUI\WinFormsUI.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>WinFormsUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Midi2Cat\Midi2Cat.csproj">
+      <Project>{66ade184-31ba-4f5b-8007-f39ef1b90f95}</Project>
+      <Name>Midi2Cat</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

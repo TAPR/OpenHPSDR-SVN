@@ -8605,8 +8605,8 @@ namespace Thetis
                 {
                     // draw Sub RX 0Hz line
                     int x = (int)((float)(vfoa_sub_hz - vfoa_hz - low) / (high - low) * W);
-                    g.DrawLine(new Pen(sub_rx_zero_line_color), x, 0, x, top);
-                    g.DrawLine(new Pen(sub_rx_zero_line_color), x - 1, 0, x - 1, top);
+                    g.DrawLine(sub_rx_zero_line_pen, x, 0, x, top);
+                    g.DrawLine(sub_rx_zero_line_pen, x - 1, 0, x - 1, top);
 
                     // draw Sub RX filter
                     // get filter screen coordinates
@@ -8617,7 +8617,7 @@ namespace Thetis
                     if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
 
                     // draw rx filter
-                    g.FillRectangle(new SolidBrush(sub_rx_filter_color),	// draw filter overlay
+                    g.FillRectangle(display_filter_brush,	// draw filter overlay
                     filter_left_x, 0, filter_right_x - filter_left_x, top);
                 }
 
@@ -8631,8 +8631,6 @@ namespace Thetis
                     if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
 
                     // draw rx filter
-                    // g.FillRectangle(new SolidBrush(display_filter_color),	// draw filter overlay
-                    // filter_left_x, 0, filter_right_x-filter_left_x, top);
                     g.FillRectangle(display_filter_brush,	// draw filter overlay
                      filter_left_x, 0, filter_right_x - filter_left_x, top + 10);
 
@@ -8691,8 +8689,6 @@ namespace Thetis
                     if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
 
                     // draw rx filter
-                    // g.FillRectangle(new SolidBrush(display_filter_color),	// draw filter overlay
-                    // filter_left_x, 0, filter_right_x - filter_left_x, top);
                     g.FillRectangle(display_filter_brush, filter_left_x, H,
                         filter_right_x - filter_left_x, top);
 
@@ -10480,21 +10476,21 @@ namespace Thetis
                     if (rx == 1) timer_waterfall.Start();
                     else if (rx == 2) timer_waterfall2.Start();
 
-                    num_samples = (High - Low);
-                    start_sample_index = (BUFFER_SIZE >> 1) + ((Low * BUFFER_SIZE) / sample_rate);
-                    num_samples = ((High - Low) * BUFFER_SIZE / sample_rate);
-                    if (start_sample_index < 0) start_sample_index += 4096;
-                    if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
-                        num_samples = BUFFER_SIZE - start_sample_index;
+                   // num_samples = (High - Low);
+                   // start_sample_index = (BUFFER_SIZE >> 1) + ((Low * BUFFER_SIZE) / sample_rate);
+                   // num_samples = ((High - Low) * BUFFER_SIZE / sample_rate);
+                    //if (start_sample_index < 0) start_sample_index += 4096;
+                   // if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
+                     //   num_samples = BUFFER_SIZE - start_sample_index;
 
-                    slope = (float)num_samples / (float)W;
+                  //  slope = (float)num_samples / (float)W;
 
                     for (int i = 0; i < W; i++)
                     {
                         float max = float.MinValue;
-                        float dval = i * slope + start_sample_index;
-                        int lindex = (int)Math.Floor(dval);
-                        int rindex = (int)Math.Floor(dval + slope);
+                      //  float dval = i * slope + start_sample_index;
+                      //  int lindex = (int)Math.Floor(dval);
+                      //  int rindex = (int)Math.Floor(dval + slope);
 
                         if (rx == 1)
                         {

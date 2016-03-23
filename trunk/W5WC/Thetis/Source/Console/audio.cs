@@ -951,12 +951,6 @@ namespace Thetis
             set { vac2_correct_iq = value; }
         }
 
-        //private static SoundCard soundcard = SoundCard.HPSDR;
-        //public static SoundCard CurSoundCard
-        //{
-        //    set { soundcard = value; }
-        //}
-
         private static bool vox_active = false;
         public static bool VOXActive
         {
@@ -1473,15 +1467,46 @@ namespace Thetis
         public static bool Start()
         {
             bool retval = false;
+            int rc;
             phase_buf_l = new float[block_size1];
             phase_buf_r = new float[block_size1];
 
-            unsafe
+            //unsafe
+            //{
+            //    retval = StartAudio(ref callback3port); //,
+            //                       // (uint)block_size1,
+            //                       // sample_rate1);
+            //}
+
+            rc = NetworkIO.initRadio();
+            if (rc != 0)
             {
-                retval = StartAudio(ref callback3port,
-                                    (uint)block_size1,
-                                    sample_rate1);
+                //System.Console.WriteLine("JanusAudio.StartAudio failed w/ rc: " + rc);
+                if (rc == -101) // firmware version error; 
+                {
+                    string fw_err = NetworkIO.getFWVersionErrorMsg();
+                    if (fw_err == null)
+                    {
+                        fw_err = "Bad Firmware levels";
+                    }
+                    MessageBox.Show(fw_err, "HPSDR Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    return false;
+                }
+                else
+                {
+                    MessageBox.Show("Error starting HPSDR hardware, is it connected and powered?", "HPSDR Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    return false;
+                }
             }
+
+
+            int result = NetworkIO.StartAudioNative(callback3port);
+
+            if (result == 0) retval = true;
 
             //if (!retval)
                 return retval;
@@ -1588,22 +1613,22 @@ namespace Thetis
            // return retval;
         }
 
-        public static unsafe bool StartAudio(ref PA19.PaStreamCallback callback,
-                                               uint block_size, double sample_rate)
+        public static unsafe bool StartAudio(ref PA19.PaStreamCallback callback) //,
+                                              // uint block_size, double sample_rate)
         {
             // System.Console.WriteLine("using Ozy/Janus callback");
             int rc;
            // int no_send = 0;
-            int sample_bits = 24;
-            if (console.Force16bitIQ)
-            {
-                sample_bits = 16;
-            }
+           // int sample_bits = 24;
+            //if (console.Force16bitIQ)
+           // {
+               // sample_bits = 16;
+            //}
             //if (console.NoJanusSend)
             //{
             //    no_send = 1;
             //}
-            rc = NetworkIO.StartAudio((int)sample_rate, (int)block_size, callback, sample_bits);
+            rc = NetworkIO.StartAudio(/*(int)sample_rate, (int)block_size,*/ callback); //, sample_bits);
             if (rc != 0)
             {
                 //System.Console.WriteLine("JanusAudio.StartAudio failed w/ rc: " + rc);
@@ -1627,6 +1652,7 @@ namespace Thetis
                     return false;
                 }
             }
+
             return true;
         }
 

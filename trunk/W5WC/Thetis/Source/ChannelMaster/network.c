@@ -873,7 +873,7 @@ void CmdGeneral() {
 	packetbuf[35] = prn->tx[0].epwm_min >> 8; // [15:8]
 	packetbuf[36] = prn->tx[0].epwm_min & 0xff; // [7:0]
 	// Bits - [0]Time stamp, [1]VITA-49, [2]VNA mode [3] freq or phase word
-	packetbuf[37] = 0x04; // send phase word
+	packetbuf[37] = 0x08; // send phase word
 	// Watchdog Timer default = 0 disabled
 	packetbuf[38] = prn->wdt;
 	// Bits - Atlas bus configuration

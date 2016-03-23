@@ -681,18 +681,18 @@ namespace Thetis
         }
 
         // returns -101 for firmware version error 
-        unsafe public static int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits)
+        unsafe public static int StartAudio(/*int sample_rate, int samples_per_block,*/ PA19.PaStreamCallback cb) //, int sample_bits)
         {
-            if (initOzy() != 0)
+            if (initRadio() != 0)
             {
                 return 1;
             }
-            //Thread.Sleep(500);
-            int result = StartAudioNative(sample_rate, samples_per_block, cb, sample_bits);
+
+            int result = StartAudioNative(/*sample_rate, samples_per_block ,*/ cb); //, sample_bits);
 
             if (result == 0 && !fwVersionsChecked)
             {
-                Thread.Sleep(100); // wait for frames 
+               // Thread.Sleep(100); // wait for frames 
                 if (!fwVersionsGood())
                 {
                     result = -101;
@@ -702,7 +702,7 @@ namespace Thetis
                     fwVersionsChecked = true;
                 }
             }
-            //  InitMic();
+
             return result;
         }
 
@@ -740,7 +740,7 @@ namespace Thetis
         public static extern void GetMetisBoardID(byte[] addr_bytes);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int StartAudioNative(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits);
+        unsafe public static extern int StartAudioNative(/*int sample_rate, int samples_per_block,*/ PA19.PaStreamCallback cb); //, int sample_bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int StopAudio();
@@ -1343,10 +1343,10 @@ namespace Thetis
                                 System.Console.WriteLine("Not on subnet of host adapter! Adapter IP {0}, Adapter mask {1}",
                                     hostPortIPAddress.ToString(), hostPortMask.ToString());
                             }
-                            else if (receivedIPAddr.Equals(hostPortIPAddress))
-                            {
-                                System.Console.WriteLine("Rejected: contains same IP address as the host adapter; not from a Metis/Hermes/Griffin");
-                            }
+                           // else if (receivedIPAddr.Equals(hostPortIPAddress))
+                           // {
+                             //   System.Console.WriteLine("Rejected: contains same IP address as the host adapter; not from a Metis/Hermes/Griffin");
+                            //}
                             else if (MAC.Equals("00-00-00-00-00-00"))
                             {
                                 System.Console.WriteLine("Rejected: contains bogus MAC address of all-zeroes");
