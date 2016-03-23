@@ -40,11 +40,10 @@ namespace Thetis
     using System.ComponentModel;
     using System.Threading;
     using System.Windows.Forms;
-    // using SDRSerialSupportII;
     using System.Text;
     using System.IO;
     using System.IO.Ports;
-    //using TDxInput;
+    using Midi2Cat;
 
     public partial class Setup : Form
     {
@@ -1323,6 +1322,7 @@ namespace Thetis
         private LabelTS lblMercury2FWVer;
         private PanelTS panelRX2LevelCal;
         private System.ComponentModel.IContainer components;
+        private Midi2Cat.Midi2CatSetupForm ConfigMidi2Cat;
 
         #endregion
 
@@ -1594,14 +1594,7 @@ namespace Thetis
             else
                 AllowFreqBroadcast = false;
 
-            //tkbarTestGenFreq.Value = console.CWPitch;
-
-            // Mod DH1TW
-
-            InitDJConsoles();
-
-            // End MOD
-        }
+          }
 #if false
         protected override void Dispose(bool disposing)
         {
@@ -7651,13 +7644,16 @@ namespace Thetis
             // bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(1).FFTSize;
             // lblRX2DisplayBinWidth.Text = bin_width.ToString("N3");
 
-          //  bool power = console.PowerOn;
+            bool power = console.PowerOn;
 
-            //if (power && new_rate != old_rate)
-            //{
-            //    console.PowerOn = false;
-            //    Thread.Sleep(100);
-            //}
+            if (power && new_rate != old_rate)
+            {
+                //console.PowerOn = false;
+                //Thread.Sleep(100);
+                //wdsp.SetChannelState(wdsp.id(0, 0), 0, 1);
+                //if (console.radio.GetDSPRX(0, 1).Active) wdsp.SetChannelState(wdsp.id(0, 1), 0, 1);
+                //if (console.radio.GetDSPRX(1, 0).Active) wdsp.SetChannelState(wdsp.id(2, 0), 0, 1);
+            }
 
             console.SampleRate1 = new_rate;
             int new_size = cmaster.GetBuffSize(new_rate);
@@ -7692,10 +7688,14 @@ namespace Thetis
             //    //}
             //}
 
-            //if (power && new_rate != old_rate)
-            //{
-            //    console.PowerOn = true;
-            //}
+            if (power && new_rate != old_rate)
+            {
+                //console.PowerOn = true;
+                //wdsp.SetChannelState(wdsp.id(0, 0), 1, 1);
+                //if (console.radio.GetDSPRX(0, 1).Active) wdsp.SetChannelState(wdsp.id(0, 1), 1, 1);
+                //if (console.radio.GetDSPRX(1, 0).Active) wdsp.SetChannelState(wdsp.id(2, 0), 1, 1);
+
+            }
         }
         //#endif
 
@@ -15818,157 +15818,28 @@ namespace Thetis
             }
         }
 
-        //mod DH1TW
-
-        private DJConsoleMK2Config ConfigWindowMK2;
-        private DJConsoleMP3e2Config ConfigWindowMP3e2;
-        private DJConsoleMP3LEConfig ConfigWindowMP3LE;
-
-        private void btnSelectUserInterface_Click(object sender, EventArgs e)
-        {
-            if (console.DJConsoleObj.DeviceInCount > 0)
-            {
-                if (console.DJConsoleConfigurator == null)
-                {
-                    console.DJConsoleConfigurator = new DJConsoleUI.DJConsoleSelect(console);
-                    console.DJConsoleConfigurator.FormClosed += new FormClosedEventHandler(DJConfiguratorClosed);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Sorry, no compatible device detected", "Error");
-            }
-        }
-
-        private void DJConfiguratorClosed(object sender, FormClosedEventArgs e)
-        {
-            console.DJConsoleConfigurator = null;
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void InitDJConsoles()
-        {
-            if (console.DJConsoleObj == null) return;
-            if (console.DJConsoleObj.connectedConsoles.Count > 0)
-            {
-                cbConsoleSelect.DataSource = new BindingSource(console.DJConsoleObj.connectedConsoles, null);
-                cbConsoleSelect.DisplayMember = "Value";
-                cbConsoleSelect.ValueMember = "Key";
-                console.DJConsoleObj.SelectedConsole = (int)cbConsoleSelect.SelectedValue;
-                this.cbConsoleSelect.SelectedIndexChanged += new System.EventHandler(this.cbConsoleSelect_SelectedIndexChanged);
-            }
-            else
-            {
-                //MessageBox.Show("Sorry, no compatible device detected", "Error");
-                //this.Dispose();
-            }
-
-        }
-
         private void btnConfigure_Click(object sender, EventArgs e)
         {
-            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.NotSupported)
+            if (ConfigMidi2Cat == null)
             {
-                // MessageBox.Show("not supported");
-                return;
+                console.Midi2Cat.CloseMidi2Cat();
+                ConfigMidi2Cat = new Midi2Cat.Midi2CatSetupForm(console.Midi2Cat.Midi2CatDbFile);
+                ConfigMidi2Cat.Show();
+                ConfigMidi2Cat.Focus();
+                ConfigMidi2Cat.FormClosed += new FormClosedEventHandler(ConfigMidi2CatSetupClosed);
             }
-
-
-            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.HerculesMP3e2)
-            {
-                if (ConfigWindowMP3e2 == null)
-                {
-                    ConfigWindowMP3e2 = new DJConsoleMP3e2Config(console);
-                    ConfigWindowMP3e2.Show();
-                    ConfigWindowMP3e2.Focus();
-                    ConfigWindowMP3e2.FormClosed += new FormClosedEventHandler(ConfigWindowMP3e2Closed);
-                }
-                return;
-            }
-
-
-            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.HerculesMK2)
-            {
-                if (ConfigWindowMK2 == null)
-                {
-                    ConfigWindowMK2 = new DJConsoleMK2Config(console);
-                    ConfigWindowMK2.Show();
-                    ConfigWindowMK2.Focus();
-                    ConfigWindowMK2.FormClosed += new FormClosedEventHandler(ConfigWindowMK2Closed);
-                }
-                return;
-            }
-
-            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.HerculesMP3LE)
-            {
-                if (ConfigWindowMP3LE == null)
-                {
-                    ConfigWindowMP3LE = new DJConsoleMP3LEConfig(console);
-                    ConfigWindowMP3LE.Show();
-                    ConfigWindowMP3LE.Focus();
-                    ConfigWindowMP3LE.FormClosed += new FormClosedEventHandler(ConfigWindowMP3LEClosed);
-                }
-                return;
-
-            }
-
-            else
-            {
-                MessageBox.Show("Please select a Console", "Error");
-            }
+            return;
         }
 
-        private void ConfigWindowMK2Closed(object sender, FormClosedEventArgs e)
+        private void ConfigMidi2CatSetupClosed(object sender, FormClosedEventArgs e) 
         {
-            if (ConfigWindowMK2 != null)
+            if (ConfigMidi2Cat != null)
             {
-                ConfigWindowMK2 = null;
+                ConfigMidi2Cat.Dispose();
+                ConfigMidi2Cat = null;
+                console.Midi2Cat.OpenMidi2Cat();
             }
         }
-
-        private void ConfigWindowMP3e2Closed(object sender, FormClosedEventArgs e)
-        {
-            if (ConfigWindowMP3e2 != null)
-            {
-                ConfigWindowMP3e2 = null;
-            }
-        }
-
-        private void ConfigWindowMP3LEClosed(object sender, FormClosedEventArgs e)
-        {
-            if (ConfigWindowMP3LE != null)
-            {
-                ConfigWindowMP3LE = null;
-            }
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (cbConsoleSelect.SelectedItem != null)
-            {
-                console.DJConsoleObj.SelectedConsole = (int)cbConsoleSelect.SelectedValue;
-                console.DJConsoleObj.Reload();
-            }
-        }
-
-        private void cbConsoleSelect_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbConsoleSelect.SelectedItem != null)
-            {
-                console.DJConsoleObj.SelectedConsole = (int)cbConsoleSelect.SelectedValue;
-                console.DJConsoleObj.Reload();
-            }
-        }
-        // end mod DH1TW\
 
         private void btnSetIPAddr_Click(object sender, EventArgs e)
         {

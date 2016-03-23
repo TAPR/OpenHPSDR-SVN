@@ -30,16 +30,15 @@ const int numInputBuffs = 12;
 //
 
 PORT
-int StartAudioNative(int sample_rate, int samples_per_block,
-	int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata),
-	int sample_bits)
+int StartAudioNative(//int sample_rate, int samples_per_block,
+	int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata)) //,int sample_bits)
 {
 	int rc = 0;
 	int myrc = 0;
-	int nchannels = 2 * nreceivers + 2;
+	//int nchannels = 2 * nreceivers + 2;
 
 	HaveSync = 1;
-	SampleBits = sample_bits;
+	//SampleBits = sample_bits;
 
 	//IQConversionDivisor = (double)8388607.0;  // (2**23)-1
 	//if ( SampleBits == 16 ) {
@@ -1085,9 +1084,7 @@ void SetSampleRate(int id, int rate)
 		}
 
 		if (listenSock != (SOCKET)0)
-		{
 			CmdRx();
-		}
 	}
 
 }

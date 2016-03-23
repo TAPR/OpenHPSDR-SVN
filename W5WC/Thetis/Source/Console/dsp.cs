@@ -59,7 +59,7 @@ namespace Thetis
         public static extern void SetAllRates(int channel, int in_rate, int dsp_rate, int out_rate);
 
         [DllImport("wdsp.dll", EntryPoint = "SetChannelState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetChannelState(int channel, int state, int dmode);
+        public static extern int SetChannelState(int channel, int state, int dmode);
 
         [DllImport("wdsp.dll", EntryPoint = "SetChannelTDelayUp", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetChannelTDelayUp(int channel, double time);

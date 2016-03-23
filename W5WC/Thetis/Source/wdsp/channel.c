@@ -169,12 +169,14 @@ void SetDSPBuffsize (int channel, int dsp_size)
 {
 	if (dsp_size != ch[channel].dsp_size)
 	{
+		int oldstate = SetChannelState (channel, 0, 1);
 		pre_main_destroy (channel);
 		post_main_destroy (channel);
 		ch[channel].dsp_size = dsp_size;
 		pre_main_build (channel);
 		setDSPBuffsize_main (channel);
 		post_main_build (channel);
+		SetChannelState (channel, oldstate, 0);
 	}
 }
 
@@ -238,10 +240,18 @@ void SetAllRates (int channel, int in_rate, int dsp_rate, int out_rate)
 	}
 }
 
+void TimeOut (void *ptimeout)
+{
+	Sleep (50);
+	InterlockedBitTestAndSet ((int *)ptimeout, 0);
+}
+
 PORT
-void SetChannelState (int channel, int state, int dmode)
+int SetChannelState (int channel, int state, int dmode)
 {
 	IOB a = ch[channel].iob.pc;
+	int prior_state = ch[channel].state;
+	volatile long timeout = 0;//
 	if (ch[channel].state != state)
 	{
 		ch[channel].state = state;
@@ -251,16 +261,22 @@ void SetChannelState (int channel, int state, int dmode)
 			InterlockedBitTestAndSet (&a->slew.downflag, 0);
 			InterlockedBitTestAndSet (&ch[channel].flushflag, 0);
 			if (dmode)
-				while (_InterlockedAnd (&ch[channel].flushflag, 1)) Sleep(1);
+			{
+				_beginthread (TimeOut, 0, (void *)&timeout);
+				while (_InterlockedAnd (&ch[channel].flushflag, 1) && !_InterlockedAnd (&timeout, 1)) Sleep(1);
+			}
 			break;
 		case 1:
-			while (_InterlockedAnd (&ch[channel].flushflag, 1)) Sleep(1);
+			if (_InterlockedAnd (&ch[channel].flushflag, 1))
+				_beginthread (TimeOut, 0, (void *)&timeout);
+			while (_InterlockedAnd (&ch[channel].flushflag, 1) && !_InterlockedAnd (&timeout, 1)) Sleep(1);
 			InterlockedBitTestAndSet (&a->slew.upflag, 0);
 			InterlockedBitTestAndSet (&ch[channel].iob.ch_upslew, 0);
 			InterlockedBitTestAndSet (&ch[channel].exchange, 0);
 			break;
 		}
 	}
+	return prior_state;
 }
 
 PORT

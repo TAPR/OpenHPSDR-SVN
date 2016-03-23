@@ -537,6 +537,7 @@ namespace Thetis
 
         public Radio radio;
         public SpecRX specRX;
+        public Midi2CatCommands Midi2Cat;
 
         private SIOListenerII siolisten = null;
         private SIO2ListenerII sio2listen = null;
@@ -1018,10 +1019,6 @@ namespace Thetis
         private Point rad_mode_digu_basis = new Point(100, 100);
         private Point rad_mode_drm_basis = new Point(100, 100);
         // private bool dax_audio_enum = false;
-
-        //mod DH1TW
-        public DJConsole DJConsoleObj;
-        public DJConsoleUI.DJConsoleSelect DJConsoleConfigurator;
 
         #endregion
 
@@ -1825,8 +1822,7 @@ namespace Thetis
             Splash.SplashForm.Owner = this;						// So that main form will show/focus when splash disappears
             break_in_timer = new HiPerfTimer();
 
-            //mod DH1TW
-            DJConsoleObj = new DJConsole(this);
+            Midi2Cat = new Midi2CatCommands(this);
 
             Init60mChannels();
             InitConsole();										// Initialize all forms and main variables
@@ -1900,10 +1896,7 @@ namespace Thetis
         public bool reset_db = false;
         protected override void Dispose(bool disposing)
         {
-            //mod DH1TW
-            if (DJConsoleObj != null) DJConsoleObj.Close();
-
-            // USB.Exit();
+            if (Midi2Cat != null) Midi2Cat.CloseMidi2Cat();
             if (disposing)
             {
                 if (components != null)
@@ -7507,38 +7500,11 @@ namespace Thetis
 
             try
             {
-                // if (!File.Exists(app_data_path + "wisdom"))
                 {
                     // Need to create the directory in %appdata% before we go run wisdom
                     if (!Directory.Exists(app_data_path))
                         Directory.CreateDirectory(app_data_path);
-                    //Process p = Process.Start(Application.StartupPath + "\\fftw_wisdom.exe", "\"" + app_data_path);
-                    /*  MessageBox.Show("Running DttSP optimization.  Please wait patiently for " +
-                          "this process to finish.\nTypically the optimization takes no more than 3-5 minutes.",
-                          "Optimizing...",
-                          MessageBoxButtons.OK,
-                          MessageBoxIcon.Information); */
-                    //p.WaitForExit();
                 }
-
-                /*  if (!File.Exists(app_data_path + "specWisdom"))
-                  {
-                      appdatapath = app_data_path;
-                      // Need to create the directory in %appdata% before we go run wisdom
-                      if (!Directory.Exists(app_data_path))
-                          Directory.CreateDirectory(app_data_path);
-                      //  Process p = Process.Start(Application.StartupPath + "\\fftw_specWisdom.exe", "\"" + app_data_path);
-                      // MessageBox.Show("Running specHPSDR optimization.  Please wait patiently for " +
-                      //   "this process to finish.\nTypically the optimization takes no more than 15-20 minutes.",
-                      //  "Optimizing...",
-                      //  MessageBoxButtons.OK,
-                      //  MessageBoxIcon.Information);
-                      //  p.WaitForExit();
-                  } */
-
-                //int rc = 0;
-                //SpecHPSDRDLL.XCreateAnalyzer(0, ref rc, 262144, 1, 3, app_data_path + "specWisdom");
-                //SpecHPSDRDLL.XCreateAnalyzer(1, ref rc, 262144, 1, 1, app_data_path + "specWisdom");
 
                 try
                 {
@@ -7550,11 +7516,10 @@ namespace Thetis
 
                 }
 
+                Win32.TimeBeginPeriod(1); // set timer resolution to 1ms => freq=1000Hz
                 Application.EnableVisualStyles();
                 Application.DoEvents();
 
-                //Application.Run(new Console(args));
-                // wjt hacked
                 theConsole = new Console(args);
                 Application.Run(theConsole);
             }
@@ -8153,7 +8118,7 @@ namespace Thetis
                 dsp_tx.Force = false;
             }
 
-           // RadioDSP.SyncStatic();
+            // RadioDSP.SyncStatic();
 
             for (int i = 0; i < 2; i++)
             {
@@ -8178,7 +8143,7 @@ namespace Thetis
         }
 
         public bool Force16bitIQ = false;
-       // public bool NoJanusSend = false;
+        // public bool NoJanusSend = false;
         public void ExitConsole()
         {
             /*  try
@@ -8220,6 +8185,7 @@ namespace Thetis
             //wdsp.CloseChannel(wdsp.id(0, 1));
             //wdsp.CloseChannel(wdsp.id(0, 0));
             NetworkIO.DestroyRNet();
+            Win32.TimeEndPeriod(1); // return to previous timing precision
         }
 
         public void SaveState()
@@ -15064,11 +15030,6 @@ namespace Thetis
             {
                 Display.RefreshPanadapterGrid = true;
             }
-        }
-
-        public void UpdateDJConsole(int byte1, int byte2)
-        {
-            DJConsoleObj.inDevice_ChannelMessageReceived(byte1, byte2);
         }
 
         public void UpdateRXSpectrumDisplayVars()
@@ -25183,7 +25144,7 @@ namespace Thetis
             set
             {
                 sample_rate_rx2 = value;
-
+                RadioDSP.SampleRate = value;
                 Audio.SampleRateRX2 = value;
                 Display.SampleRateRX2 = value;
                 NetworkIO.SetSampleRate(1, value, 0);
@@ -29394,7 +29355,7 @@ namespace Thetis
                                         if (!Display.WaterfallDataReady)
                                         {
                                             fixed (float* ptr = &Display.new_waterfall_data[0])
-                                                SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 1, ptr, ref flag); 
+                                                SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 1, ptr, ref flag);
                                             Display.WaterfallDataReady = true;
                                         }
                                     }
@@ -29403,7 +29364,7 @@ namespace Thetis
                                         if (!Display.DataReady)
                                         {
                                             fixed (float* ptr = &Display.new_display_data[0])
-                                               // SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 0, ptr, ref flag);
+                                                // SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 0, ptr, ref flag);
                                                 SpecHPSDRDLL.GetPixels(0, 0, ptr, ref flag);
                                             Display.DataReady = true;
                                         }
@@ -29411,7 +29372,7 @@ namespace Thetis
                                         {
                                             fixed (float* ptr = &Display.new_waterfall_data[0])
                                                 //SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 1, ptr, ref flag); 
-                                                SpecHPSDRDLL.GetPixels(0, 1, ptr, ref flag); 
+                                                SpecHPSDRDLL.GetPixels(0, 1, ptr, ref flag);
                                             Display.WaterfallDataReady = true;
                                         }
                                     }
@@ -29427,7 +29388,7 @@ namespace Thetis
                                     if (!Display.WaterfallDataReady)
                                     {
                                         fixed (float* ptr = &Display.new_waterfall_data[0])
-                                            SpecHPSDRDLL.GetPixels(0, 1, ptr, ref flag); 
+                                            SpecHPSDRDLL.GetPixels(0, 1, ptr, ref flag);
                                         Display.WaterfallDataReady = true;
                                     }
                                 }
@@ -29509,13 +29470,12 @@ namespace Thetis
                                 {
 
                                     fixed (float* ptr = &Display.new_waterfall_data_bottom[0])
-                                        //wdsp.TXAGetSpecF1(wdsp.id(bottom_thread, 0), ptr);
-                                    SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 1, ptr, ref flag);
+                                        SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 1, ptr, ref flag);
                                 }
                                 else
                                 {
                                     fixed (float* ptr = &Display.new_waterfall_data_bottom[0])
-                                        SpecHPSDRDLL.GetPixels(1, 1, ptr, ref flag); // new pixel call here
+                                        SpecHPSDRDLL.GetPixels(1, 1, ptr, ref flag);
                                 }
                                 Display.WaterfallDataReadyBottom = true;
                                 break;
@@ -29524,7 +29484,6 @@ namespace Thetis
                                 {
 
                                     fixed (float* ptr = &Display.new_display_data_bottom[0])
-                                        //wdsp.TXAGetSpecF1(wdsp.id(bottom_thread, 0), ptr); 
                                         SpecHPSDRDLL.GetPixels(cmaster.inid(1, 0), 0, ptr, ref flag);
                                 }
                                 else
@@ -42909,9 +42868,9 @@ namespace Thetis
                 cmaster.CMSetSRXWavePlayRun(1);
                 cmaster.CMSetSRXWaveRecordRun(1);
                 chkRX2.Checked = value;
+                Display.Init();
                 if (rx2_enabled)
                 {
-                    Display.Init();
                     old_rx1_display_mode = comboDisplayMode.Text;
                     UpdateRXADCCtrl();
                     chkDX_CheckedChanged(this, EventArgs.Empty); // stereo_diversity
@@ -44496,8 +44455,9 @@ namespace Thetis
                 //bool poweron = PowerOn;
                 //if (poweron)
                 //{
-                //    PowerOn = false;
-                //    Thread.Sleep(100);
+                //    //PowerOn = false;
+                //    //Thread.Sleep(100);
+                //   // cmaster.SetAAudioMixStates((void*)0, 0, 0xf, 0);
                 //}
 
                 // RX1FilterSizeCalOffset = (float)offset;
@@ -44506,7 +44466,7 @@ namespace Thetis
 
                 //if (!initializing)
                 //{
-                   // RadioDSP.SyncStatic();
+                // RadioDSP.SyncStatic();
 
                 //    for (int i = 0; i < 1; i++)
                 //    {
@@ -44531,7 +44491,7 @@ namespace Thetis
                 //}
 
                 UpdateRXSpectrumDisplayVars();
-               // if (poweron) PowerOn = true;
+                // if (poweron) UpdateAAudioMixerStates(); //PowerOn = true;
             }
         }
 
@@ -44584,8 +44544,9 @@ namespace Thetis
                 //bool poweron = PowerOn;
                 //if (poweron)
                 //{
-                //    PowerOn = false;
-                //    Thread.Sleep(100);
+                //    //PowerOn = false;
+                //    //Thread.Sleep(100);
+                //    cmaster.SetAAudioMixStates((void*)0, 0, 0xf, 0);
                 //}
 
                 // RX2FilterSizeCalOffset = (float)offset;
@@ -44618,7 +44579,7 @@ namespace Thetis
                 //    // }
                 //}
 
-                //if (poweron) PowerOn = true;
+                // if (poweron) UpdateAAudioMixerStates(); //PowerOn = true;
 
             }
         }
@@ -44654,7 +44615,7 @@ namespace Thetis
                 //bool poweron = PowerOn;
                 //if (poweron)
                 //{
-                   // PowerOn = false;
+                // PowerOn = false;
                 //    Thread.Sleep(100);
                 //}
 
@@ -45185,7 +45146,7 @@ namespace Thetis
                     radio.GetDSPTX(0).CurrentDSPMode = rx2_dsp_mode;
 
                     SetRX2Mode(rx2_dsp_mode);
-                   // Display.TXOnVFOB = true;
+                    // Display.TXOnVFOB = true;
                     if (chkVFOSplit.Checked && chkRX2.Checked)
                         chkVFOSplit.Checked = false;
 

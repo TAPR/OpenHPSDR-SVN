@@ -253,7 +253,7 @@ int IOThreadRunning;   // non zero if IOThread is running
 int DotDashBits;
 int XmitBit;
 int SampleRate;
-int SampleBits;  // how many bits in a sample
+//int SampleBits;  // how many bits in a sample
 
 unsigned char ControlBytesIn[5];
 unsigned char ControlBytesOut[5];

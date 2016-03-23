@@ -2343,11 +2343,6 @@
             this.btnCATTest = new System.Windows.Forms.ButtonTS();
             this.lblCATRigType = new System.Windows.Forms.LabelTS();
             this.comboCATRigType = new System.Windows.Forms.ComboBoxTS();
-            this.tpMidiCat = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.btnConfigure = new System.Windows.Forms.Button();
-            this.cbConsoleSelect = new System.Windows.Forms.ComboBox();
             this.tpCAT2 = new System.Windows.Forms.TabPage();
             this.txtCAT4 = new System.Windows.Forms.TextBoxTS();
             this.txtCAT3 = new System.Windows.Forms.TextBoxTS();
@@ -2501,6 +2496,8 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnConfigure = new System.Windows.Forms.Button();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -3207,8 +3204,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udRTTYU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRTTYL)).BeginInit();
             this.grpPTTBitBang.SuspendLayout();
-            this.tpMidiCat.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tpCAT2.SuspendLayout();
             this.grpCat4ControlBox.SuspendLayout();
             this.grpCat3ControlBox.SuspendLayout();
@@ -3275,6 +3270,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS35)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS36)).BeginInit();
             this.panelTS4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tpAlexAntCtrl
@@ -6251,7 +6247,6 @@
             this.radGenModelANAN400D.Text = "ANAN-400D";
             this.toolTip1.SetToolTip(this.radGenModelANAN400D, "Orion MKII");
             this.radGenModelANAN400D.UseVisualStyleBackColor = true;
-            this.radGenModelANAN400D.Visible = false;
             this.radGenModelANAN400D.CheckedChanged += new System.EventHandler(this.radGenModelANAN400D_CheckedChanged);
             // 
             // radGenModelANAN10E
@@ -38099,7 +38094,6 @@
             // tcCAT
             // 
             this.tcCAT.Controls.Add(this.tpCAT);
-            this.tcCAT.Controls.Add(this.tpMidiCat);
             this.tcCAT.Controls.Add(this.tpCAT2);
             this.tcCAT.Location = new System.Drawing.Point(0, 3);
             this.tcCAT.Name = "tcCAT";
@@ -38110,6 +38104,7 @@
             // tpCAT
             // 
             this.tpCAT.BackColor = System.Drawing.SystemColors.Control;
+            this.tpCAT.Controls.Add(this.groupBox1);
             this.tpCAT.Controls.Add(this.grpFocusMaster);
             this.tpCAT.Controls.Add(this.labelTS323);
             this.tpCAT.Controls.Add(this.txtZZSN);
@@ -38232,7 +38227,7 @@
             // 
             this.labelTS323.AutoSize = true;
             this.labelTS323.Image = null;
-            this.labelTS323.Location = new System.Drawing.Point(502, 244);
+            this.labelTS323.Location = new System.Drawing.Point(332, 285);
             this.labelTS323.Name = "labelTS323";
             this.labelTS323.Size = new System.Drawing.Size(36, 13);
             this.labelTS323.TabIndex = 100;
@@ -38240,7 +38235,7 @@
             // 
             // txtZZSN
             // 
-            this.txtZZSN.Location = new System.Drawing.Point(490, 261);
+            this.txtZZSN.Location = new System.Drawing.Point(320, 302);
             this.txtZZSN.Name = "txtZZSN";
             this.txtZZSN.Size = new System.Drawing.Size(65, 20);
             this.txtZZSN.TabIndex = 99;
@@ -38418,7 +38413,7 @@
             this.grpRTTYOffset.Controls.Add(this.udRTTYL);
             this.grpRTTYOffset.Controls.Add(this.chkRTTYOffsetEnableB);
             this.grpRTTYOffset.Controls.Add(this.chkRTTYOffsetEnableA);
-            this.grpRTTYOffset.Location = new System.Drawing.Point(390, 121);
+            this.grpRTTYOffset.Location = new System.Drawing.Point(403, 204);
             this.grpRTTYOffset.Name = "grpRTTYOffset";
             this.grpRTTYOffset.Size = new System.Drawing.Size(168, 120);
             this.grpRTTYOffset.TabIndex = 97;
@@ -38599,7 +38594,7 @@
             // btnCATTest
             // 
             this.btnCATTest.Image = null;
-            this.btnCATTest.Location = new System.Drawing.Point(403, 64);
+            this.btnCATTest.Location = new System.Drawing.Point(430, 135);
             this.btnCATTest.Name = "btnCATTest";
             this.btnCATTest.Size = new System.Drawing.Size(77, 40);
             this.btnCATTest.TabIndex = 92;
@@ -38610,7 +38605,7 @@
             // lblCATRigType
             // 
             this.lblCATRigType.Image = null;
-            this.lblCATRigType.Location = new System.Drawing.Point(400, 27);
+            this.lblCATRigType.Location = new System.Drawing.Point(388, 111);
             this.lblCATRigType.Name = "lblCATRigType";
             this.lblCATRigType.Size = new System.Drawing.Size(40, 23);
             this.lblCATRigType.TabIndex = 95;
@@ -38625,63 +38620,12 @@
             "TS-2000",
             "TS-50S",
             "TS-480"});
-            this.comboCATRigType.Location = new System.Drawing.Point(442, 24);
+            this.comboCATRigType.Location = new System.Drawing.Point(430, 108);
             this.comboCATRigType.Name = "comboCATRigType";
             this.comboCATRigType.Size = new System.Drawing.Size(88, 21);
             this.comboCATRigType.TabIndex = 94;
             this.toolTip1.SetToolTip(this.comboCATRigType, "Sets the CAT protocol for programs that do not have SDR-1000 specific setups.");
             this.comboCATRigType.SelectedIndexChanged += new System.EventHandler(this.comboCATRigType_SelectedIndexChanged);
-            // 
-            // tpMidiCat
-            // 
-            this.tpMidiCat.BackColor = System.Drawing.SystemColors.Control;
-            this.tpMidiCat.Controls.Add(this.groupBox1);
-            this.tpMidiCat.Location = new System.Drawing.Point(4, 22);
-            this.tpMidiCat.Name = "tpMidiCat";
-            this.tpMidiCat.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMidiCat.Size = new System.Drawing.Size(579, 338);
-            this.tpMidiCat.TabIndex = 1;
-            this.tpMidiCat.Text = "MIDI";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.btnConfigure);
-            this.groupBox1.Controls.Add(this.cbConsoleSelect);
-            this.groupBox1.Location = new System.Drawing.Point(13, 17);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(307, 135);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "User Interface Controller";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(20, 37);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(54, 13);
-            this.label14.TabIndex = 6;
-            this.label14.Text = "Controller:";
-            // 
-            // btnConfigure
-            // 
-            this.btnConfigure.Location = new System.Drawing.Point(23, 86);
-            this.btnConfigure.Name = "btnConfigure";
-            this.btnConfigure.Size = new System.Drawing.Size(272, 30);
-            this.btnConfigure.TabIndex = 5;
-            this.btnConfigure.Text = "Configure ";
-            this.btnConfigure.UseVisualStyleBackColor = true;
-            this.btnConfigure.Click += new System.EventHandler(this.btnConfigure_Click);
-            // 
-            // cbConsoleSelect
-            // 
-            this.cbConsoleSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbConsoleSelect.FormattingEnabled = true;
-            this.cbConsoleSelect.Location = new System.Drawing.Point(80, 34);
-            this.cbConsoleSelect.Name = "cbConsoleSelect";
-            this.cbConsoleSelect.Size = new System.Drawing.Size(215, 21);
-            this.cbConsoleSelect.TabIndex = 4;
             // 
             // tpCAT2
             // 
@@ -41257,6 +41201,26 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnConfigure);
+            this.groupBox1.Location = new System.Drawing.Point(390, 17);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(140, 65);
+            this.groupBox1.TabIndex = 105;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "User Interface Controller";
+            // 
+            // btnConfigure
+            // 
+            this.btnConfigure.Location = new System.Drawing.Point(15, 19);
+            this.btnConfigure.Name = "btnConfigure";
+            this.btnConfigure.Size = new System.Drawing.Size(100, 30);
+            this.btnConfigure.TabIndex = 5;
+            this.btnConfigure.Text = "Configure MIDI";
+            this.btnConfigure.UseVisualStyleBackColor = true;
+            this.btnConfigure.Click += new System.EventHandler(this.btnConfigure_Click);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -42058,9 +42022,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udRTTYU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRTTYL)).EndInit();
             this.grpPTTBitBang.ResumeLayout(false);
-            this.tpMidiCat.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tpCAT2.ResumeLayout(false);
             this.tpCAT2.PerformLayout();
             this.grpCat4ControlBox.ResumeLayout(false);
@@ -42134,6 +42095,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS36)).EndInit();
             this.panelTS4.ResumeLayout(false);
             this.panelTS4.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -42497,11 +42459,6 @@
         private System.Windows.Forms.CheckBoxTS chkRX2CBlock;
         private System.Windows.Forms.TabControl tcCAT;
         private System.Windows.Forms.TabPage tpCAT;
-        private System.Windows.Forms.TabPage tpMidiCat;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button btnConfigure;
-        private System.Windows.Forms.ComboBox cbConsoleSelect;
         private System.Windows.Forms.PanelTS panelTS7;
         private System.Windows.Forms.ButtonTS btnSetIPAddr;
         private System.Windows.Forms.NumericUpDownTS udStaticIP4;
@@ -43372,5 +43329,7 @@
         private System.Windows.Forms.ComboBoxTS comboTXDispWFDetector;
         private System.Windows.Forms.NumericUpDownTS udTXDisplayAVTime;
         private System.Windows.Forms.LabelTS labelTS388;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnConfigure;
     }
 }
