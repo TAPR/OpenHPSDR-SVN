@@ -187,7 +187,7 @@ namespace Thetis
         public static extern void DeInitMetisSockets();
 
         [DllImport("ChannelMaster.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int nativeInitMetis(String netaddr);
+        unsafe public static extern int nativeInitMetis(String netaddr, String localaddr, int localport);
 
         // get the name of this PC and, using it, the IP address of the first adapter
         //static string strHostName = Dns.GetHostName();
@@ -205,6 +205,7 @@ namespace Thetis
         public static HPSDRHW BoardID = HPSDRHW.Hermes;
         public static byte FWCodeVersion = 0;
         public static string EthernetHostIPAddress = "";
+        public static int EthernetHostPort = 0;
         public static string HpSdrHwIpAddress = "";
         public static string HpSdrHwMacAddress = "";
         public static byte NumRxs = 0;
@@ -386,9 +387,10 @@ namespace Thetis
             HpSdrHwIpAddress = hpsdrd[chosenDevice].IPAddress;
             HpSdrHwMacAddress = hpsdrd[chosenDevice].MACAddress;
             EthernetHostIPAddress = hpsdrd[chosenDevice].hostPortIPAddress.ToString();
+            EthernetHostPort = hpsdrd[chosenDevice].localPort;
             NumRxs = hpsdrd[chosenDevice].numRxs;
 
-            rc = nativeInitMetis(HpSdrHwIpAddress);
+            rc = nativeInitMetis(HpSdrHwIpAddress, EthernetHostIPAddress, EthernetHostPort);
             return -rc;
         }
 
@@ -1334,6 +1336,8 @@ namespace Thetis
                             IPEndPoint ripep = (IPEndPoint)remoteEP;
                             IPAddress receivedIPAddr = ripep.Address;
                             receivedIP = receivedIPAddr.ToString();
+                            IPEndPoint localEndPoint = (IPEndPoint)socket.LocalEndPoint;
+                            //System.Console.WriteLine("Looking for Metis boards using host adapter IP {0}, port {1}", localEndPoint.Address, localEndPoint.Port);
 
                             System.Console.WriteLine("Metis IP from IP Header = " + receivedIP);
                             System.Console.WriteLine("Metis MAC address from payload = " + MAC);
@@ -1359,6 +1363,7 @@ namespace Thetis
                                 hpsdrd.deviceType = (HPSDRHW)data[11];
                                 hpsdrd.codeVersion = data[13];
                                 hpsdrd.hostPortIPAddress = hostPortIPAddress;
+                                hpsdrd.localPort = localEndPoint.Port;
                                 hpsdrd.MercuryVersion_0 = data[14];
                                 hpsdrd.MercuryVersion_1 = data[15];
                                 hpsdrd.MercuryVersion_2 = data[16];
@@ -1491,6 +1496,7 @@ namespace Thetis
         public string IPAddress;        // currently, an IPV4 address
         public string MACAddress;       // a physical (MAC) address
         public IPAddress hostPortIPAddress;
+        public int localPort;
         public byte MercuryVersion_0;
         public byte MercuryVersion_1;
         public byte MercuryVersion_2;

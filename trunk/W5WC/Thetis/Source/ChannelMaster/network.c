@@ -123,16 +123,15 @@ void DeInitMetisSockets(void) {
 
 /* returns 0 on success, != 0 otherwise */
 PORT
-int nativeInitMetis(char *netaddr) {
+int nativeInitMetis(char *netaddr, char *localaddr, int localport) {
 	DWORD dwRetVal;
 	IPAddr DestIp = 0;
 	IPAddr SrcIp = 0;       /* default for src ip */
 	ULONG MacAddr[2];       /* for 6-byte hardware addresses */
 	ULONG PhysAddrLen = 6;  /* default to length of six bytes */
-	// int rcv_timeo;
 	int rc;
 	int sndbufsize;
-	//u_long addrs[10];
+	struct sockaddr_in local = { 0 };
 
 	if (!WSA_inited) {
 		rc = initWSA();
@@ -143,13 +142,18 @@ int nativeInitMetis(char *netaddr) {
 		printf("initWSA ok!");
 	}
 
-	//listenSock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+	local.sin_port = htons((u_short)localport);
+	local.sin_family = AF_INET;
+	local.sin_addr.s_addr = inet_addr(localaddr);
 
 	if ((listenSock = socket(AF_INET, SOCK_DGRAM, 0)) == INVALID_SOCKET) {
 		printf("createSocket Error: socket failed %ld\n", WSAGetLastError());
 		WSACleanup();
 		return INVALID_SOCKET;
 	}
+
+	// bind to the local address
+	bind(listenSock, (SOCKADDR *)&local, sizeof(local));
 
 	MetisAddr = inet_addr(netaddr);
 
@@ -1279,17 +1283,16 @@ void WriteUDPFrame(int id, char *bufp, int buflen) {
 void sendPacket(SOCKET sock, char *data, int length, int port)
 {
 	int ret;
-	struct sockaddr_in sendToAddress;
+	struct sockaddr_in dest = { 0 };
 
 	EnterCriticalSection(&prn->sndpkt);
 
-	memset((char *)&sendToAddress, 0, sizeof(sendToAddress));
+	dest.sin_port = htons((u_short)port);
+	dest.sin_family = AF_INET;
+	dest.sin_addr.s_addr = MetisAddr;
 
-	sendToAddress.sin_port = htons((u_short)port);
-	sendToAddress.sin_family = AF_INET;
-	sendToAddress.sin_addr.s_addr = MetisAddr;
+	ret = sendto(sock, data, length, 0, (SOCKADDR *)&dest, sizeof(dest));
 
-	ret = sendto(sock, data, length, 0, (SOCKADDR *)&sendToAddress, sizeof(sendToAddress));
 	LeaveCriticalSection(&prn->sndpkt);
 
 	if (ret == SOCKET_ERROR)
