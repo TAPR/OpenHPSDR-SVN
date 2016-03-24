@@ -112,7 +112,7 @@ namespace Midi2Cat.Data
         TXEQOnOff = 42,
         [CatCommandAttribute("Squelch On Off", ControlType.Button, true)]
         SquelchOnOff = 43,
-        [CatCommandAttribute("Spectral Noise Blanker On Off", ControlType.Button)]
+        [CatCommandAttribute("Spectral Noise Blanker On Off", ControlType.Button, true)]
         SpectralNoiseBlankerOnOff = 44,
         [CatCommandAttribute("AGC Mode Up", ControlType.Button)]
         AGCModeUp = 45,
