@@ -119,6 +119,8 @@ namespace PowerSDR
 
         public static float[] new_waterfall_data;
         public static float[] current_waterfall_data;
+        public static float[] new_waterfall_data_bottom;
+        public static float[] current_waterfall_data_bottom;
         public static float[] waterfall_display_data;
         public static float[] average_waterfall_buffer;
 
@@ -1057,6 +1059,13 @@ namespace PowerSDR
                 rx2_avg_on = value;
                 if (!rx2_avg_on) ResetRX2DisplayAverage();
             }
+        }
+
+        private static bool rx2_enabled;
+        public static bool RX2Enabled
+        {
+            get { return rx2_enabled; }
+            set { rx2_enabled = value; }
         }
 
         private static bool peak_on;							// True if the Peak button is pressed
@@ -6150,6 +6159,10 @@ namespace PowerSDR
             current_display_data = new float[BUFFER_SIZE];
             new_display_data_bottom = new float[BUFFER_SIZE];
             current_display_data_bottom = new float[BUFFER_SIZE];
+            new_waterfall_data = new float[BUFFER_SIZE];
+            current_waterfall_data = new float[BUFFER_SIZE];
+            new_waterfall_data_bottom = new float[BUFFER_SIZE];
+            current_waterfall_data_bottom = new float[BUFFER_SIZE];
 
             for (int i = 0; i < BUFFER_SIZE; i++)
             {
@@ -6157,6 +6170,10 @@ namespace PowerSDR
                 current_display_data[i] = -200.0f;
                 new_display_data_bottom[i] = -200.0f;
                 current_display_data_bottom[i] = -200.0f;
+                new_waterfall_data[i] = -200.0f;
+                current_waterfall_data[i] = -200.0f;
+                new_waterfall_data_bottom[i] = -200.0f;
+                current_waterfall_data_bottom[i] = -200.0f;
             }
         }
 
@@ -8517,6 +8534,7 @@ namespace PowerSDR
             bool local_mox = false;
             int grid_max = 0;
             int grid_min = 0;
+            int f_diff = 0;
 
             if (rx == 1 && !tx_on_vfob && mox) local_mox = true;
             if (rx == 2 && tx_on_vfob && mox) local_mox = true;
@@ -8525,10 +8543,10 @@ namespace PowerSDR
             {
                 if (local_mox)// && tx_on_vfob)
                 {
-                    // low = tx_display_low;
-                    // high = tx_display_high;
-                    low = rx2_display_low;
-                    high = rx2_display_high;
+                     low = tx_display_low;
+                     high = tx_display_high;
+                    //low = rx2_display_low;
+                    //high = rx2_display_high;
                     grid_max = tx_spectrum_grid_max;
                     grid_min = tx_spectrum_grid_min;
                 }
@@ -8537,9 +8555,10 @@ namespace PowerSDR
                     low = rx2_display_low;
                     high = rx2_display_high;
                     grid_max = rx2_spectrum_grid_max;
-                    grid_min = rx2_spectrum_grid_min;
+                    grid_min = rx2_spectrum_grid_min; 
                 }
-            }
+                     f_diff = rx2_freq_diff;
+           }
             else
             {
                 if (local_mox) // && !tx_on_vfob)
@@ -8565,25 +8584,56 @@ namespace PowerSDR
                     grid_max = spectrum_grid_max;
                     grid_min = spectrum_grid_min;
                 }
+                    f_diff = freq_diff;
             }
 
-            int center_line_x = (int)(-(double)low / (high - low) * W);
+            int center_line_x;// = (int)(-(double)low / (high - low) * W);
             int y_range = grid_max - grid_min;
 
-            if (mox) // get filter limits
+            //if (mox) // get filter limits
+            //{
+            //    filter_low = tx_filter_low;
+            //    filter_high = tx_filter_high;
+            //}
+            //else if (rx == 1)
+            //{
+            //    filter_low = rx1_filter_low;
+            //    filter_high = rx1_filter_high;
+            //}
+            //else //if(rx==2)
+            //{
+            //    filter_low = rx2_filter_low;
+            //    filter_high = rx2_filter_high;
+            //}
+
+            if (rx == 1)
             {
-                filter_low = tx_filter_low;
-                filter_high = tx_filter_high;
-            }
-            else if (rx == 1)
-            {
-                filter_low = rx1_filter_low;
-                filter_high = rx1_filter_high;
+                //if (mox)
+                if (local_mox ||
+                    mox && tx_on_vfob && !rx2_enabled)
+                {
+                    filter_low = tx_filter_low;
+                    filter_high = tx_filter_high;
+                }
+                else
+                {
+                    filter_low = rx1_filter_low;
+                    filter_high = rx1_filter_high;
+                }
+
             }
             else //if(rx==2)
             {
-                filter_low = rx2_filter_low;
-                filter_high = rx2_filter_high;
+                if (!local_mox)
+                {
+                    filter_low = rx2_filter_low;
+                    filter_high = rx2_filter_high;
+                }
+                else
+                {
+                    filter_low = tx_filter_low;
+                    filter_high = tx_filter_high;
+                }
             }
 
             if ((rx1_dsp_mode == DSPMode.DRM && rx == 1) ||
@@ -8616,8 +8666,8 @@ namespace PowerSDR
                 {
                     // draw Sub RX 0Hz line
                     int x = (int)((float)(vfoa_sub_hz - vfoa_hz - low) / (high - low) * W);
-                    //g.DrawLine(new Pen(sub_rx_zero_line_color), x, 0, x, top);
-                    //g.DrawLine(new Pen(sub_rx_zero_line_color), x-1, 0, x-1, top);
+                    g.DrawLine(sub_rx_zero_line_pen, x, 0, x, top);
+                    g.DrawLine(sub_rx_zero_line_pen, x - 1, 0, x - 1, top);
 
                     // draw Sub RX filter
                     // get filter screen coordinates
@@ -8628,22 +8678,22 @@ namespace PowerSDR
                     if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
 
                     // draw rx filter
-                    //g.FillRectangle(new SolidBrush(sub_rx_filter_color),	// draw filter overlay
-                    //filter_left_x, 0, filter_right_x-filter_left_x, top);
+                    g.FillRectangle(display_filter_brush,	// draw filter overlay
+                    filter_left_x, 0, filter_right_x-filter_left_x, top);
                 }
 
                 if (!(mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)))
                 {
                     // get filter screen coordinates
-                    int filter_left_x = (int)((float)(filter_low - low) / (high - low) * W);
-                    int filter_right_x = (int)((float)(filter_high - low) / (high - low) * W);
+                    int filter_left_x = (int)((float)(filter_low - low - f_diff) / (high - low) * W);
+                    int filter_right_x = (int)((float)(filter_high - low - f_diff) / (high - low) * W);
 
                     // make the filter display at least one pixel wide.
                     if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
 
                     // draw rx filter
-                    //  g.FillRectangle(new SolidBrush(display_filter_color),	// draw filter overlay
-                    //  filter_left_x, 0, filter_right_x-filter_left_x, top);
+                    g.FillRectangle(display_filter_brush,	// draw filter overlay
+                      filter_left_x, 0, filter_right_x-filter_left_x, top + 10);
                 }
 
                 if (!mox && draw_tx_filter &&
@@ -8664,10 +8714,10 @@ namespace PowerSDR
                         filter_right_x = (int)((float)(tx_filter_high - low + xit_hz + (vfoa_sub_hz - vfoa_hz)) / (high - low) * W);
                     }
 
-                    //g.DrawLine(tx_filter_pen, filter_left_x, H, filter_left_x, H+top);		// draw tx filter overlay
-                    //g.DrawLine(tx_filter_pen, filter_left_x+1, H, filter_left_x+1, H+top);	// draw tx filter overlay
-                    //g.DrawLine(tx_filter_pen, filter_right_x, H, filter_right_x, H+top);		// draw tx filter overlay
-                    //g.DrawLine(tx_filter_pen, filter_right_x+1, H, filter_right_x+1, H+top);	// draw tx filter overlay
+                    g.DrawLine(tx_filter_pen, filter_left_x, H, filter_left_x, H + top);		// draw tx filter overlay
+                    g.DrawLine(tx_filter_pen, filter_left_x + 1, H, filter_left_x + 1, H + top);	// draw tx filter overlay
+                    g.DrawLine(tx_filter_pen, filter_right_x, H, filter_right_x, H + top);		// draw tx filter overlay
+                    g.DrawLine(tx_filter_pen, filter_right_x + 1, H, filter_right_x + 1, H + top);	// draw tx filter overlay
                 }
 
                 if (!mox && draw_tx_cw_freq &&
@@ -8683,9 +8733,27 @@ namespace PowerSDR
                     else
                         cw_line_x = (int)((float)(pitch - low + xit_hz + (vfoa_sub_hz - vfoa_hz)) / (high - low) * W);
 
-                    // g.DrawLine(tx_filter_pen, cw_line_x, top, cw_line_x, H);
-                    // g.DrawLine(tx_filter_pen, cw_line_x + 1, top, cw_line_x + 1, H);
+                    g.DrawLine(tx_filter_pen, cw_line_x, top, cw_line_x, H);
+                    g.DrawLine(tx_filter_pen, cw_line_x + 1, top, cw_line_x + 1, H);
                 }
+            }
+            else
+            {
+                if (!(mox && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU)))
+                {
+                    // get filter screen coordinates
+                    int filter_left_x = (int)((float)(filter_low - low - f_diff) / (high - low) * W);
+                    int filter_right_x = (int)((float)(filter_high - low - f_diff) / (high - low) * W);
+
+                    // make the filter display at least one pixel wide.
+                    if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
+
+                    // draw rx filter
+                    g.FillRectangle(display_filter_brush, filter_left_x, H,
+                        filter_right_x - filter_left_x, top);
+
+                }
+
             }
 
             double vfo;
@@ -9118,8 +9186,8 @@ namespace PowerSDR
                                 }
                                 switch (current_display_mode)  //w3sz added switch for waterfall frequency labels
                                 {
-                                    case DisplayMode.PANAFALL:
-                                        break;
+                                   // case DisplayMode.PANAFALL:
+                                     //   break;
                                     default:
                                         if (bottom) g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
                                         else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
@@ -9214,21 +9282,56 @@ namespace PowerSDR
             }*/
 
             // Draw 0Hz vertical line if visible
-            /* if(center_line_x >= 0 && center_line_x <= W)
+            center_line_x = (int)((float)(-f_diff - low) / width * W); // locked 0 line
+
+             if(center_line_x >= 0 && center_line_x <= W)
             {
                 if(!bottom)
                 {
-                    g.DrawLine(new Pen(grid_zero_color), center_line_x, 0, center_line_x, top);
-                    g.DrawLine(new Pen(grid_zero_color), center_line_x+1, 0, center_line_x+1, top);
+                    g.DrawLine(grid_zero_pen, center_line_x, 0, center_line_x, top);
+                    g.DrawLine(grid_zero_pen, center_line_x + 1, 0, center_line_x + 1, top + 10);
                 }
                 else
                 {
-                    g.DrawLine(new Pen(grid_zero_color), center_line_x, H, center_line_x, H+top);
-                    g.DrawLine(new Pen(grid_zero_color), center_line_x+1, H, center_line_x+1, H+top);
+                    g.DrawLine(grid_zero_pen, center_line_x, H, center_line_x, H + top);
+                    g.DrawLine(grid_zero_pen, center_line_x + 1, H, center_line_x + 1, H + top);
                 }
-            } */
+            }
 
-            if (show_freq_offset)
+             // Draw 0Hz vertical line if visible
+            // center_line_x = (int)((float)(-f_diff - Low) / width * W); // locked 0 line
+
+             //if (center_line_x >= 0 && center_line_x <= W)
+             //{
+             //    if (bottom)
+             //    {
+             //        if (local_mox)
+             //        {
+             //            g.DrawLine(tx_grid_zero_pen, center_line_x, H + top, center_line_x, H + H);
+             //            g.DrawLine(tx_grid_zero_pen, center_line_x + 1, H + top, center_line_x + 1, H + H);
+             //        }
+             //        else
+             //        {
+             //            g.DrawLine(grid_zero_pen, center_line_x, H + top, center_line_x, H + H);
+             //            g.DrawLine(grid_zero_pen, center_line_x + 1, H + top, center_line_x + 1, H + H);
+             //        }
+             //    }
+             //    else
+             //    {
+             //        if (local_mox)
+             //        {
+             //            g.DrawLine(tx_grid_zero_pen, center_line_x, top, center_line_x, H);
+             //            g.DrawLine(tx_grid_zero_pen, center_line_x + 1, top, center_line_x + 1, H);
+             //        }
+             //        else
+             //        {
+             //            g.DrawLine(grid_zero_pen, center_line_x, top, center_line_x, H);
+             //            g.DrawLine(grid_zero_pen, center_line_x + 1, top, center_line_x + 1, H);
+             //        }
+             //    }
+             //}
+
+             if (show_freq_offset)
             {
                 if (bottom) g.DrawString("0", font9, grid_zero_pen.Brush, center_line_x - 5, H + (float)Math.Floor(H * .01));
                 else g.DrawString("0", font9, grid_zero_pen.Brush, center_line_x - 5, (float)Math.Floor(H * .01));
@@ -10358,8 +10461,12 @@ namespace PowerSDR
                 {
                     grid_max = tx_spectrum_grid_max;
                     grid_min = tx_spectrum_grid_min;
-                    //if (!display_duplex)
-                    // sample_rate = tx_sample_rate;
+                    if (!display_duplex)
+                    {
+                        sample_rate = tx_sample_rate;
+                        Low = tx_display_low;
+                        High = tx_display_high;
+                    }
                 }
                 else
                 {
@@ -10433,46 +10540,46 @@ namespace PowerSDR
                     High += 12000;
                 }
 
-                if (rx == 1 && data_ready)
+                if (rx == 1 && waterfall_data_ready)
                 {
                     if (!displayduplex && local_mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
                     {
-                        for (int i = 0; i < current_display_data.Length; i++)
-                            current_display_data[i] = -200.0f;
+                        for (int i = 0; i < current_waterfall_data.Length; i++)
+                            current_waterfall_data[i] = -200.0f;
                     }
                     else
                     {
-                        fixed (void* rptr = &new_display_data[0])
-                        fixed (void* wptr = &current_display_data[0])
+                        fixed (void* rptr = &new_waterfall_data[0])
+                        fixed (void* wptr = &current_waterfall_data[0])
                             Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
 
                     }
-                    data_ready = false;
+                    waterfall_data_ready = false;
                 }
-                else if (rx == 2 && data_ready_bottom)
+                else if (rx == 2 && waterfall_data_ready_bottom)
                 {
                     if (local_mox && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU))
                     {
-                        for (int i = 0; i < current_display_data_bottom.Length; i++)
-                            current_display_data_bottom[i] = -200.0f;
+                        for (int i = 0; i < current_waterfall_data_bottom.Length; i++)
+                            current_waterfall_data_bottom[i] = -200.0f;
                     }
                     else
                     {
-                        fixed (void* rptr = &new_display_data_bottom[0])
-                        fixed (void* wptr = &current_display_data_bottom[0])
+                        fixed (void* rptr = &new_waterfall_data_bottom[0])
+                        fixed (void* wptr = &current_waterfall_data_bottom[0])
                             Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
                     }
 
-                    data_ready_bottom = false;
+                    waterfall_data_ready_bottom = false;
                 }
 
                 if (rx == 1 && average_on && local_mox && !displayduplex)
-                    console.UpdateRX1DisplayAverage(rx1_average_buffer, current_display_data);
+                    console.UpdateRX1DisplayAverage(rx1_average_buffer, current_waterfall_data);
                 // else if (rx == 2)
                 //   console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
 
                 if (rx == 1 && peak_on && local_mox && !displayduplex)
-                    UpdateDisplayPeak(rx1_peak_buffer, current_display_data);
+                    UpdateDisplayPeak(rx1_peak_buffer, current_waterfall_data);
                 // else if (rx == 2 && rx2_peak_on)
                 // UpdateDisplayPeak(rx2_peak_buffer, current_display_data_bottom);
 
@@ -10521,33 +10628,35 @@ namespace PowerSDR
                             {
                                 if (slope <= 1.0 || lindex == rindex)
                                 {
-                                    max = current_display_data[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data[(lindex + 1) % 4096] * (dval - (float)lindex);
+                                    max = current_waterfall_data[lindex % 4096] * ((float)lindex - dval + 1) + current_waterfall_data[(lindex + 1) % 4096] * (dval - (float)lindex);
                                 }
                                 else
                                 {
                                     for (int j = lindex; j < rindex; j++)
-                                        if (current_display_data[j % 4096] > max) max = current_display_data[j % 4096];
+                                        if (current_waterfall_data[j % 4096] > max) max = current_waterfall_data[j % 4096];
                                 }
                             }
                             else
-                                max = current_display_data[i];
+                                max = current_waterfall_data[i];
                         }
                         else if (rx == 2)
                         {
-                            if (!mox) max = current_display_data_bottom[i];
+                            //if (!mox) max = current_waterfall_data_bottom[i];
 
-                            if (mox && tx_on_vfob)
+                            if (local_mox && tx_on_vfob)
                             {
                                 if (slope <= 1.0 || lindex == rindex)
                                 {
-                                    max = current_display_data_bottom[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data_bottom[(lindex + 1) % 4096] * (dval - (float)lindex);
+                                    max = current_waterfall_data_bottom[lindex % 4096] * ((float)lindex - dval + 1) + current_waterfall_data_bottom[(lindex + 1) % 4096] * (dval - (float)lindex);
                                 }
                                 else
                                 {
                                     for (int j = lindex; j < rindex; j++)
-                                        if (current_display_data_bottom[j % 4096] > max) max = current_display_data_bottom[j % 4096];
+                                        if (current_waterfall_data_bottom[j % 4096] > max) max = current_waterfall_data_bottom[j % 4096];
                                 }
                             }
+                            else
+                                max = current_waterfall_data_bottom[i];
                         }
 
                         if (!local_mox)
@@ -10606,7 +10715,7 @@ namespace PowerSDR
                                 if (console.RX2Enabled)
                                 {
                                     bitmapData = waterfall_bmp.LockBits(
-                                        new Rectangle(0, 0, waterfall_bmp2.Width, waterfall_bmp.Height / 2),
+                                        new Rectangle(0, 0, waterfall_bmp.Width, waterfall_bmp.Height / 2 - 10),
                                         ImageLockMode.ReadWrite,
                                         waterfall_bmp.PixelFormat);
                                 }

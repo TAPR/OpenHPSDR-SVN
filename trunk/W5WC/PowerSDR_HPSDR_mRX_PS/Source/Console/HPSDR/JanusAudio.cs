@@ -31,14 +31,14 @@ namespace PowerSDR
     //
     // routines to access audio from kd5tfd/vk6aph fpga based audio 
     // 
-    public partial class JanusAudio
+    partial class JanusAudio
     {
-        public JanusAudio()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
+        //public JanusAudio()
+        //{
+        //    //
+        //    // TODO: Add constructor logic here
+        //    //
+        //}
 
         public static bool isFirmwareLoaded = false;
 
@@ -762,8 +762,8 @@ namespace PowerSDR
         private static double lastVFORX1freq = 0.0;
         unsafe public static void SetVFOfreqRX1(double f, bool offset)
         {
-            wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 0), f * 1e6);
-            wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 1), f * 1e6);
+            // wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 0), f * 1e6);
+            // wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 1), f * 1e6);
             lastVFORX1freq = f;
             int f_freq;
             f_freq = (int)((f * 1e6) * freq_correction_factor);
@@ -773,7 +773,7 @@ namespace PowerSDR
         private static double lastVFORX2freq = 0.0;
         unsafe public static void SetVFOfreqRX2(double f, bool offset)
         {
-            wdsp.RXANBPSetTuneFrequency(wdsp.id(2, 0), f * 1e6);
+            // wdsp.RXANBPSetTuneFrequency(wdsp.id(2, 0), f * 1e6);
             lastVFORX2freq = f;
             int f_freq;
             f_freq = (int)((f * 1e6) * freq_correction_factor);
