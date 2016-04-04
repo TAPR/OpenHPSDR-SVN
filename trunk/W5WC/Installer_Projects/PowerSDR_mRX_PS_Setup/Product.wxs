@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
       xmlns:fire="http://schemas.microsoft.com/wix/FirewallExtension">
-	<Product Id="*" Name="PowerSDR mRX PS" Language="1033" Version="3.2.20.0" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="234FB74A-174D-418A-B2C9-4E4F369B60F5">
+	<Product Id="*" Name="PowerSDR mRX PS" Language="1033" Version="3.3.7.0" Manufacturer="OpenHPSDR/TAPR" UpgradeCode="234FB74A-174D-418A-B2C9-4E4F369B60F5">
 		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -18,10 +18,23 @@
 			<ComponentGroupRef Id="ProductComponents" />
       <ComponentRef Id="StartMenuShortcut" />
        <ComponentRef Id="DesktopShortcut" />
+      <ComponentRef Id="delrdll" />
+      <ComponentRef Id="jalrdll" />
+      <ComponentRef Id="eslrdll" />
+      <ComponentRef Id="frlrdll" />
+      <ComponentRef Id="itlrdll" />
+      <ComponentRef Id="kolrdll" />
+      <ComponentRef Id="rulrdll" />
+      <ComponentRef Id="hanslrdll" />
+      <ComponentRef Id="hantlrdll" />
     </Feature>
     
     <Feature Id="VC10Redist" Title="Visual C++ 10.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
       <MergeRef Id="VC10Redist"/>
+    </Feature>
+
+    <Feature Id="VC12Redist" Title="Visual C++ 12.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
+      <MergeRef Id="VC12Redist"/>
     </Feature>
 
     <Feature Id="OzyDriver" Title="LibUSB0 Driver for Ozy" AllowAdvertise="no" Display="hidden" Level="1">
@@ -37,6 +50,7 @@
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
       <Merge Id="VC10Redist" SourceFile="Microsoft_VC100_CRT_x86.msm" DiskId="1" Language="0"/>
+      <Merge Id="VC12Redist" SourceFile="Microsoft_VC120_CRT_x86.msm" DiskId="1" Language="0"/>
       
       <Directory Id="ProgramFilesFolder">
         <Directory Id="HPSDRFolder" Name="OpenHPSDR">
@@ -44,7 +58,17 @@
             <Merge Id="LibUSB0DriverForOzy" SourceFile="LibUSB0DriverMergeModule.msm" DiskId="1" Language="1033"/>
           </Directory>
 
-          <Directory Id="INSTALLFOLDER" Name="PowerSDR mRX PS" />
+          <Directory Id="INSTALLFOLDER" Name="PowerSDR mRX PS">
+            <Directory Id="GermanFolder" Name="de" />
+            <Directory Id="JapaneseFolder" Name="ja" />
+            <Directory Id="SpanishFolder" Name="es" />
+            <Directory Id="FrenchFolder" Name="fr" />
+            <Directory Id="ItalianFolder" Name="it" />
+            <Directory Id="KoreanFolder" Name="ko" />
+            <Directory Id="RussianFolder" Name="ru" />
+            <Directory Id="ChineseSFolder" Name="zh-Hans" />
+            <Directory Id="ChineseTFolder" Name="zh-Hant" />
+          </Directory>
 			  </Directory>
       </Directory>
 
@@ -301,6 +325,27 @@
               />
       </Component>
 
+      <Component Guid="*">
+        <File Id="calculus"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\calculus"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="*">
+        <File Id="Midi2Cat.dll"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\Midi2Cat.dll"
+              KeyPath="yes"
+              />
+      </Component>
+
+      <Component Guid="*">
+        <File Id="Midi2Cat_Instructions_V3.PDF"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\Midi2Cat_Instructions_V3.pdf"
+              KeyPath="yes"
+              />
+      </Component>
+
       <!--
       <Component Guid="795964DC-2354-445B-B236-B01B742D5AE3">
         <File Id="OpenHPSDR_Skins.exe"
@@ -309,6 +354,87 @@
               />
       </Component>
       -->
+    </ComponentGroup>
+
+    <ComponentGroup Id="GermanFiles" Directory="GermanFolder">
+      <Component Id ="delrdll" Guid="*">
+        <File Id="deresources"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\de\PowerSDR.resources.dll"
+              KeyPath="yes"
+              />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="JapaneseFiles" Directory="JapaneseFolder">
+      <Component Id ="jalrdll" Guid="*">
+        <File Id="jaresources"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\ja\PowerSDR.resources.dll"
+              KeyPath="yes"
+              />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="SpanishFiles" Directory="SpanishFolder">
+      <Component Id ="eslrdll" Guid="*">
+        <File Id="esresources"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\es\PowerSDR.resources.dll"
+              KeyPath="yes"
+              />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="FrenchFiles" Directory="FrenchFolder">
+      <Component Id ="frlrdll" Guid="*">
+        <File Id="frresources"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\fr\PowerSDR.resources.dll"
+              KeyPath="yes"
+              />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="ItalianFiles" Directory="ItalianFolder">
+      <Component Id ="itlrdll" Guid="*">
+        <File Id="itresources"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\it\PowerSDR.resources.dll"
+              KeyPath="yes"
+              />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="KoreanFiles" Directory="KoreanFolder">
+      <Component Id ="kolrdll" Guid="*">
+        <File Id="koresources"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\ko\PowerSDR.resources.dll"
+              KeyPath="yes"
+              />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="RussianFiles" Directory="RussianFolder">
+      <Component Id ="rulrdll" Guid="*">
+        <File Id="ruresources"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\ru\PowerSDR.resources.dll"
+              KeyPath="yes"
+              />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="ChineseSFiles" Directory="ChineseSFolder">
+      <Component Id ="hanslrdll" Guid="*">
+        <File Id="hansresources"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\zh-Hans\PowerSDR.resources.dll"
+              KeyPath="yes"
+              />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="ChineseTFiles" Directory="ChineseTFolder">
+      <Component Id ="hantlrdll" Guid="*">
+        <File Id="hantresources"
+              Source="..\..\PowerSDR_HPSDR_mRX_PS\Bin\Release\zh-Hant\PowerSDR.resources.dll"
+              KeyPath="yes"
+              />
+      </Component>
     </ComponentGroup>
 
     <!-- Had a problem.  The initial version of this SFX required/asked for Admin rights, which caused
