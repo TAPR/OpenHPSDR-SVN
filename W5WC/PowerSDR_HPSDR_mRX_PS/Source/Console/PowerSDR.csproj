@@ -173,41 +173,6 @@
     <Compile Include="Channel.cs" />
     <Compile Include="Clock.cs" />
     <Compile Include="CW\CWInput.cs" />
-    <Compile Include="DJConsoleUI\Database.cs" />
-    <Compile Include="DJConsoleUI\DJConsole.cs" />
-    <Compile Include="DJConsoleUI\DJConsoleMidi.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DJConsoleUI\DJConsoleSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DJConsoleUI\DJConsoleSelect.designer.cs">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DJConsoleUI\DJConsole_MK2.cs" />
-    <Compile Include="DJConsoleUI\DJConsole_MP3e2.cs" />
-    <Compile Include="DJConsoleUI\DJConsole_MP3LE.cs" />
-    <Compile Include="DJConsoleUI\GeneralSettings1.Designer.cs" />
-    <Compile Include="DJConsoleUI\MappingMK21.Designer.cs" />
-    <Compile Include="DJConsoleUI\MappingMP3e21.Designer.cs" />
-    <Compile Include="DJConsoleUI\Setup_MK2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_MK2.designer.cs">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_MP3e2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_MP3e2.designer.cs">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_MP3LE.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DJConsoleUI\Setup_MP3LE.designer.cs">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </Compile>
     <Compile Include="GlobalMouseHandler.cs" />
     <Compile Include="HPSDR\Alex.cs" />
     <Compile Include="alphawarnform.cs">
@@ -346,6 +311,7 @@
     </Compile>
     <Compile Include="Memory\MemoryList.cs" />
     <Compile Include="Memory\MemoryRecord.cs" />
+    <Compile Include="Midi2CatCommands.cs" />
     <Compile Include="mixer.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -677,114 +643,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DiversityForm.zh-Hant.resx">
       <DependentUpon>DiversityForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.de.resx">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.es.resx">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.fr.resx">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.it.resx">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.ja.resx">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.ko.resx">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.ru.resx">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.zh-Hans.resx">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.zh-Hant.resx">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.de.resx">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.es.resx">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.fr.resx">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.it.resx">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.ja.resx">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.ko.resx">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.ru.resx">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.zh-Hans.resx">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.zh-Hant.resx">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.de.resx">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.es.resx">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.fr.resx">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.it.resx">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.ja.resx">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.ko.resx">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.ru.resx">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.zh-Hans.resx">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.zh-Hant.resx">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.de.resx">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.es.resx">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.fr.resx">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.it.resx">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.ja.resx">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.ko.resx">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.ru.resx">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.zh-Hans.resx">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.zh-Hant.resx">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="eqform.de.resx">
       <DependentUpon>eqform.cs</DependentUpon>
@@ -1188,18 +1046,6 @@
       <DependentUpon>DiversityForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.resx">
-      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.resx">
-      <DependentUpon>Setup_MK2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.resx">
-      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.resx">
-      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="eqform.resx">
       <DependentUpon>eqform.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1370,7 +1216,12 @@
     <None Include="PowerSDR_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Midi2Cat\Midi2Cat.csproj">
+      <Project>{66ade184-31ba-4f5b-8007-f39ef1b90f95}</Project>
+      <Name>Midi2Cat</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\PowerSDR.de.xlf" />
     <XliffResource Include="MultilingualResources\PowerSDR.es.xlf" />

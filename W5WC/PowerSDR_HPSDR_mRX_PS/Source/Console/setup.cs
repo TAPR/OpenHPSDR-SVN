@@ -3,7 +3,7 @@
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
 // Copyright (C) 2004-2009  FlexRadio Systems
-// Copyright (C) 2010-2015  Doug Wigley
+// Copyright (C) 2010-2016  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -45,6 +45,7 @@ namespace PowerSDR
     using System.IO;
     using System.IO.Ports;
     //using TDxInput;
+    using Midi2Cat;
 
     public partial class Setup : Form
     {
@@ -231,21 +232,6 @@ namespace PowerSDR
         private LabelTS lblTestToneFreq2;
         private LabelTS lblTestToneFreq1;
         private TabPage tpCATControl;
-        private GroupBoxTS grpPTTBitBang;
-        private LabelTS lblCATPTTPort;
-        private CheckBoxTS chkCATPTT_RTS;
-        private CheckBoxTS chkCATPTT_DTR;
-        private GroupBoxTS grpCatControlBox;
-        private ComboBoxTS comboCATbaud;
-        private LabelTS lblCATBaud;
-        private CheckBoxTS chkCATEnable;
-        private LabelTS lblCATParity;
-        private LabelTS lblCATData;
-        private LabelTS lblCATStop;
-        private ComboBoxTS comboCATparity;
-        private ComboBoxTS comboCATdatabits;
-        private ComboBoxTS comboCATstopbits;
-        private GroupBoxTS grpKBCW;
         private LabelTS lblKBCWDot;
         private LabelTS lblKBCWDash;
         private ComboBoxTS comboKBCWDot;
@@ -261,7 +247,6 @@ namespace PowerSDR
         private ComboBoxTS comboKBXITUp;
         private ComboBoxTS comboKBXITDown;
         private CheckBoxTS chkDCBlock;
-        private ButtonTS btnCATTest;
         private TabControl tcAudio;
         private NumericUpDownTS udAudioLineIn1;
         private ButtonTS btnAudioVoltTest1;
@@ -306,8 +291,6 @@ namespace PowerSDR
         private GroupBoxTS grpAudioLatency2;
         private CheckBoxTS chkAudioLatencyManual2;
         private GroupBoxTS grpAudioVolts1;
-        private ComboBoxTS comboCATRigType;
-        private LabelTS lblCATRigType;
         private TabPage tpAudioCard1;
         private TabPage tpDSPKeyer;
         private CheckBoxTS chkCWKeyerIambic;
@@ -425,10 +408,6 @@ namespace PowerSDR
         private ComboBoxTS comboKeyerConnPTTLine;
         private LabelTS lblKeyerConnPTTLine;
         private LabelTS lblKeyerConnKeyLine;
-        private LabelTS lblCATPort;
-        private ComboBoxTS comboCATPort;
-        private ComboBoxTS comboCATPTTPort;
-        private CheckBoxTS chkCATPTTEnabled;
         private GroupBoxTS grpAudioChannels;
         private ComboBoxTS comboAudioChannels1;
         private GroupBoxTS grpAudioVACGain;
@@ -567,7 +546,6 @@ namespace PowerSDR
         private CheckBoxTS ckEnableSigGen;
         private CheckBoxTS chkCalExpert;
         private CheckBoxTS chkGenAllModeMicPTT;
-        private CheckBoxTS chkDigUIsUSB;
         private GroupBoxTS grpGenCustomTitleText;
         private TextBoxTS txtGenCustomTitle;
         private NumericUpDownTS udLMSNRLeak;
@@ -575,7 +553,6 @@ namespace PowerSDR
         private LabelTS lblLMSNRLeak;
         private LabelTS lblLMSANFLeak;
         private MainMenu mainMenu1;
-        private CheckBoxTS chkKWAI;
         private CheckBoxTS chkSplitOff;
         private CheckBoxTS chkEnableRFEPATR;
         private CheckBoxTS chkVACAllowBypass;
@@ -604,13 +581,6 @@ namespace PowerSDR
         private LabelTS lblDSPDigBufferRX;
         private LabelTS lblDSPDigBufferTX;
         private CheckBoxTS chkDisplayMeterShowDecimal;
-        private GroupBoxTS grpRTTYOffset;
-        private CheckBoxTS chkRTTYOffsetEnableA;
-        private CheckBoxTS chkRTTYOffsetEnableB;
-        private NumericUpDownTS udRTTYL;
-        private NumericUpDownTS udRTTYU;
-        private LabelTS labelTS3;
-        private LabelTS labelTS4;
         private TabPage tpRX2;
         private CheckBoxTS chkRX2AutoMuteTX;
         private GroupBoxTS grpDirectIQOutput;
@@ -1507,6 +1477,7 @@ namespace PowerSDR
         private System.ComponentModel.IContainer components;
         private CheckBoxTS chkStrictCharSpacing;
         private CheckBoxTS chkDSPKeyerSidetone;
+        private Midi2Cat.Midi2CatSetupForm ConfigMidi2Cat;
 
         #endregion
 
@@ -1570,6 +1541,14 @@ namespace PowerSDR
             comboDSPDigTXBuf.Text = "2048";
             comboDispWinType.Text = "Kaiser";
             comboRX2DispWinType.Text = "Kaiser";
+            comboDispPanDetector.Text = "Peak";
+            comboDispWFDetector.Text = "Peak";
+            comboDispPanAveraging.Text = "Log Recursive";
+            comboDispWFAveraging.Text = "Log Recursive";
+            comboRX2DispPanDetector.Text = "Peak";
+            comboRX2DispPanAveraging.Text = "Log Recursive";
+            comboRX2DispWFDetector.Text = "Peak";
+            comboRX2DispWFAveraging.Text = "Log Recursive";
             comboKeyerConnKeyLine.SelectedIndex = 0;
             comboKeyerConnSecondary.SelectedIndex = 0;
             comboKeyerConnPTTLine.SelectedIndex = 0;
@@ -1781,12 +1760,6 @@ namespace PowerSDR
                 AllowFreqBroadcast = false;
 
             //tkbarTestGenFreq.Value = console.CWPitch;
-
-            // Mod DH1TW
-
-            InitDJConsoles();
-
-            // End MOD
         }
 #if false
         protected override void Dispose(bool disposing)
@@ -1958,6 +1931,10 @@ namespace PowerSDR
             // set CW keys
             comboKBCWDot.Text = KeyToString(console.KeyCWDot);
             comboKBCWDash.Text = KeyToString(console.KeyCWDash);
+
+            // set PTT keys
+            comboKBPTTTx.Text = KeyToString(console.KeyPTTTx);
+            comboKBPTTRx.Text = KeyToString(console.KeyPTTRx);
         }
 
         private void InitAppearanceTab()
@@ -2808,6 +2785,7 @@ namespace PowerSDR
             udTXFilterHigh_ValueChanged(this, e);
             udTXFilterLow_ValueChanged(this, e);
             udTransmitTunePower_ValueChanged(this, e);
+            chkTXTunePower_CheckedChanged(this, e);
             udPAGain_ValueChanged(this, e);
             radMicIn_CheckedChanged(this, e);
             radLineIn_CheckedChanged(this, e);
@@ -2835,6 +2813,10 @@ namespace PowerSDR
             comboKBFilterDown_SelectedIndexChanged(this, e);
             comboKBModeUp_SelectedIndexChanged(this, e);
             comboKBModeDown_SelectedIndexChanged(this, e);
+            comboKBCWDash_SelectedIndexChanged(this, e);
+            comboKBCWDot_SelectedIndexChanged(this, e);
+            comboKBPTTTx_SelectedIndexChanged(this, e);
+            comboKBPTTRx_SelectedIndexChanged(this, e);
             // Appearance Tab
             clrbtnBtnSel_Changed(this, e);
             clrbtnVFODark_Changed(this, e);
@@ -2866,16 +2848,18 @@ namespace PowerSDR
             tbDisplayFFTSize_Scroll(this, e);
             tbRX2DisplayFFTSize_Scroll(this, e);
             //radDisplayWindow_CheckedChanged(this, e);
-            radDispWeightedLog_CheckedChanged(this, e);
-            radDispWeightedLinear_CheckedChanged(this, e);
-            radDispWindowLog_CheckedChanged(this, e);
-            radDispWindowLinear_CheckedChanged(this, e);
-            radDispLowNoiseFloor_CheckedChanged(this, e);
-            radRX2DispWeightedLog_CheckedChanged(this, e);
-            radRX2DispWeightedLinear_CheckedChanged(this, e);
-            radRX2DispWindowLog_CheckedChanged(this, e);
-            radRX2DispWindowLinear_CheckedChanged(this, e);
-            radRX2DispLowNoiseFloor_CheckedChanged(this, e);
+            comboDispPanDetector_SelectedIndexChanged(this, e);
+            comboDispWFDetector_SelectedIndexChanged(this, e);
+            comboDispPanAveraging_SelectedIndexChanged(this, e);
+            comboDispWFAveraging_SelectedIndexChanged(this, e);
+            udDisplayAVTimeWF_ValueChanged(this, e);
+            comboRX2DispPanDetector_SelectedIndexChanged(this, e);
+            comboRX2DispPanAveraging_SelectedIndexChanged(this, e);
+            comboRX2DispWFDetector_SelectedIndexChanged(this, e);
+            comboRX2DispWFAveraging_SelectedIndexChanged(this, e);
+            udRX2DisplayWFAVTime_ValueChanged(this, e);
+            chkDispRX2Normalize_CheckedChanged(this, e);
+            chkDispNormalize_CheckedChanged(this, e);
             comboDispWinType_SelectedIndexChanged(this, e);
             comboRX2DispWinType_SelectedIndexChanged(this, e);
             udDSPNBTransition_ValueChanged(this, e);
@@ -12348,6 +12332,16 @@ namespace PowerSDR
             console.KeyXITDown = (Keys)KeyList[comboKBXITDown.SelectedIndex];
         }
 
+        private void comboKBPTTTx_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyPTTTx = (Keys)KeyList[comboKBPTTTx.SelectedIndex];
+        }
+
+        private void comboKBPTTRx_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyPTTRx = (Keys)KeyList[comboKBPTTRx.SelectedIndex];
+        }
+
         #endregion
 
         #region CAT Setup event handlers
@@ -17798,151 +17792,6 @@ namespace PowerSDR
             Display.RX2FFTSizeOffset = tbRX2DisplayFFTSize.Value * 2;
         }
 
-        private void radDispWeightedLog_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radDispWeightedLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 2;
-            else if (radDispWindowLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 4;
-            else if (radDispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 1;
-            else if (radDispWindowLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 3;
-            else if (radDispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 6;
-            console.UpdateRXSpectrumDisplayVars();
-        }
-
-        private void radDispWindowLog_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radDispWeightedLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 2;
-            else if (radDispWindowLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 4;
-            else if (radDispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 1;
-            else if (radDispWindowLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 3;
-            else if (radDispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 6;
-            console.UpdateRXSpectrumDisplayVars();
-        }
-
-        private void radDispWeightedLinear_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radDispWeightedLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 2;
-            else if (radDispWindowLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 4;
-            else if (radDispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 1;
-            else if (radDispWindowLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 3;
-            else if (radDispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 6;
-            console.UpdateRXSpectrumDisplayVars();
-        }
-
-        private void radDispWindowLinear_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radDispWeightedLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 2;
-            else if (radDispWindowLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 4;
-            else if (radDispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 1;
-            else if (radDispWindowLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 3;
-            else if (radDispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 6;
-            console.UpdateRXSpectrumDisplayVars();
-        }
-
-        private void radDispLowNoiseFloor_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radDispWeightedLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 2;
-            else if (radDispWindowLog.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 4;
-            else if (radDispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 1;
-            else if (radDispWindowLinear.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 3;
-            else if (radDispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(0).AverageMode = 6;
-            console.UpdateRXSpectrumDisplayVars();
-        }
-
-        private void radRX2DispWeightedLog_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radRX2DispWeightedLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 2;
-            else if (radRX2DispWindowLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 4;
-            else if (radRX2DispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 1;
-            else if (radRX2DispWindowLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 3;
-            else if (radRX2DispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 6;
-        }
-
-        private void radRX2DispWindowLog_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radRX2DispWeightedLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 2;
-            else if (radRX2DispWindowLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 4;
-            else if (radRX2DispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 1;
-            else if (radRX2DispWindowLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 3;
-            else if (radRX2DispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 6;
-        }
-
-        private void radRX2DispWeightedLinear_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radRX2DispWeightedLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 2;
-            else if (radRX2DispWindowLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 4;
-            else if (radRX2DispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 1;
-            else if (radRX2DispWindowLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 3;
-            else if (radRX2DispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 6;
-        }
-
-        private void radRX2DispWindowLinear_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radRX2DispWeightedLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 2;
-            else if (radRX2DispWindowLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 4;
-            else if (radRX2DispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 1;
-            else if (radRX2DispWindowLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 3;
-            else if (radRX2DispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 6;
-        }
-
-        private void radRX2DispLowNoiseFloor_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radRX2DispWeightedLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 2;
-            else if (radRX2DispWindowLog.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 4;
-            else if (radRX2DispWeightedLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 1;
-            else if (radRX2DispWindowLinear.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 3;
-            else if (radRX2DispLowNoiseFloor.Checked)
-                console.specRX.GetSpecRX(1).AverageMode = 6;
-        }
-
         private void comboDispWinType_SelectedIndexChanged(object sender, EventArgs e)
         {
             console.specRX.GetSpecRX(0).WindowType = comboDispWinType.SelectedIndex;
@@ -18030,157 +17879,28 @@ namespace PowerSDR
             }
         }
 
-        //mod DH1TW
-
-        private DJConsoleMK2Config ConfigWindowMK2;
-        private DJConsoleMP3e2Config ConfigWindowMP3e2;
-        private DJConsoleMP3LEConfig ConfigWindowMP3LE;
-
-        private void btnSelectUserInterface_Click(object sender, EventArgs e)
-        {
-            if (console.DJConsoleObj.DeviceInCount > 0)
-            {
-                if (console.DJConsoleConfigurator == null)
-                {
-                    console.DJConsoleConfigurator = new DJConsoleUI.DJConsoleSelect(console);
-                    console.DJConsoleConfigurator.FormClosed += new FormClosedEventHandler(DJConfiguratorClosed);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Sorry, no compatible device detected", "Error");
-            }
-        }
-
-        private void DJConfiguratorClosed(object sender, FormClosedEventArgs e)
-        {
-            console.DJConsoleConfigurator = null;
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void InitDJConsoles()
-        {
-            if (console.DJConsoleObj == null) return;
-            if (console.DJConsoleObj.connectedConsoles.Count > 0)
-            {
-                cbConsoleSelect.DataSource = new BindingSource(console.DJConsoleObj.connectedConsoles, null);
-                cbConsoleSelect.DisplayMember = "Value";
-                cbConsoleSelect.ValueMember = "Key";
-                console.DJConsoleObj.SelectedConsole = (int)cbConsoleSelect.SelectedValue;
-                this.cbConsoleSelect.SelectedIndexChanged += new System.EventHandler(this.cbConsoleSelect_SelectedIndexChanged);
-            }
-            else
-            {
-                //MessageBox.Show("Sorry, no compatible device detected", "Error");
-                //this.Dispose();
-            }
-
-        }
-
         private void btnConfigure_Click(object sender, EventArgs e)
         {
-            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.NotSupported)
+            if (ConfigMidi2Cat == null)
             {
-                // MessageBox.Show("not supported");
-                return;
+                console.Midi2Cat.CloseMidi2Cat();
+                ConfigMidi2Cat = new Midi2Cat.Midi2CatSetupForm(console.Midi2Cat.Midi2CatDbFile);
+                ConfigMidi2Cat.Show();
+                ConfigMidi2Cat.Focus();
+                ConfigMidi2Cat.FormClosed += new FormClosedEventHandler(ConfigMidi2CatSetupClosed);
             }
-
-
-            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.HerculesMP3e2)
-            {
-                if (ConfigWindowMP3e2 == null)
-                {
-                    ConfigWindowMP3e2 = new DJConsoleMP3e2Config(console);
-                    ConfigWindowMP3e2.Show();
-                    ConfigWindowMP3e2.Focus();
-                    ConfigWindowMP3e2.FormClosed += new FormClosedEventHandler(ConfigWindowMP3e2Closed);
-                }
-                return;
-            }
-
-
-            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.HerculesMK2)
-            {
-                if (ConfigWindowMK2 == null)
-                {
-                    ConfigWindowMK2 = new DJConsoleMK2Config(console);
-                    ConfigWindowMK2.Show();
-                    ConfigWindowMK2.Focus();
-                    ConfigWindowMK2.FormClosed += new FormClosedEventHandler(ConfigWindowMK2Closed);
-                }
-                return;
-            }
-
-            if (console.DJConsoleObj.SelectedConsole == (int)DJConsoleModels.HerculesMP3LE)
-            {
-                if (ConfigWindowMP3LE == null)
-                {
-                    ConfigWindowMP3LE = new DJConsoleMP3LEConfig(console);
-                    ConfigWindowMP3LE.Show();
-                    ConfigWindowMP3LE.Focus();
-                    ConfigWindowMP3LE.FormClosed += new FormClosedEventHandler(ConfigWindowMP3LEClosed);
-                }
-                return;
-
-            }
-
-            else
-            {
-                MessageBox.Show("Please select a Console", "Error");
-            }
+            return;
         }
 
-        private void ConfigWindowMK2Closed(object sender, FormClosedEventArgs e)
+        private void ConfigMidi2CatSetupClosed(object sender, FormClosedEventArgs e) 
         {
-            if (ConfigWindowMK2 != null)
+            if (ConfigMidi2Cat != null)
             {
-                ConfigWindowMK2 = null;
+                ConfigMidi2Cat.Dispose();
+                ConfigMidi2Cat = null;
+                console.Midi2Cat.OpenMidi2Cat();
             }
         }
-
-        private void ConfigWindowMP3e2Closed(object sender, FormClosedEventArgs e)
-        {
-            if (ConfigWindowMP3e2 != null)
-            {
-                ConfigWindowMP3e2 = null;
-            }
-        }
-
-        private void ConfigWindowMP3LEClosed(object sender, FormClosedEventArgs e)
-        {
-            if (ConfigWindowMP3LE != null)
-            {
-                ConfigWindowMP3LE = null;
-            }
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (cbConsoleSelect.SelectedItem != null)
-            {
-                console.DJConsoleObj.SelectedConsole = (int)cbConsoleSelect.SelectedValue;
-                console.DJConsoleObj.Reload();
-            }
-        }
-
-        private void cbConsoleSelect_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbConsoleSelect.SelectedItem != null)
-            {
-                console.DJConsoleObj.SelectedConsole = (int)cbConsoleSelect.SelectedValue;
-                console.DJConsoleObj.Reload();
-            }
-        }
-        // end mod DH1TW\
 
         private void btnSetIPAddr_Click(object sender, EventArgs e)
         {
@@ -19567,6 +19287,67 @@ namespace PowerSDR
             if (console.RIT) vfo += (double)console.RITValue * 1e-6; // check for RIT
             udMNFFreq.Value = (decimal)vfo;
         }
+
+        private void comboDispPanDetector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).DetTypePan = comboDispPanDetector.SelectedIndex;
+        }
+
+        private void comboDispWFDetector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).DetTypeWF = comboDispWFDetector.SelectedIndex;
+        }
+
+        private void comboDispPanAveraging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).AverageMode = comboDispPanAveraging.SelectedIndex;
+        }
+
+        private void comboDispWFAveraging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).AverageModeWF = comboDispWFAveraging.SelectedIndex;
+        }
+
+        private void udDisplayAVTimeWF_ValueChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).AvTauWF = 0.001 * (double)udDisplayAVTimeWF.Value;
+        }
+
+        private void comboRX2DispPanDetector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).DetTypePan = comboRX2DispPanDetector.SelectedIndex;
+        }
+
+        private void comboRX2DispPanAveraging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).AverageMode = comboRX2DispPanAveraging.SelectedIndex;
+        }
+
+        private void comboRX2DispWFDetector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).DetTypeWF = comboRX2DispWFDetector.SelectedIndex;
+        }
+
+        private void comboRX2DispWFAveraging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).AverageModeWF = comboRX2DispWFAveraging.SelectedIndex;
+        }
+
+        private void udRX2DisplayWFAVTime_ValueChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).AvTauWF = 0.001 * (double)udRX2DisplayWFAVTime.Value;
+        }
+
+        private void chkDispRX2Normalize_CheckedChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(1).NormOneHzPan = chkDispRX2Normalize.Checked;
+        }
+
+        private void chkDispNormalize_CheckedChanged(object sender, EventArgs e)
+        {
+            console.specRX.GetSpecRX(0).NormOneHzPan = chkDispNormalize.Checked;
+        }
+
 
     }
 

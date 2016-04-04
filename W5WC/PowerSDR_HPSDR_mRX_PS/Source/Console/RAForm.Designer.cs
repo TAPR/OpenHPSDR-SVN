@@ -33,6 +33,12 @@
             this.picRAGraph = new System.Windows.Forms.PictureBox();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.textBox_file_date_time = new System.Windows.Forms.TextBox();
+            this.textBox_file_comment = new System.Windows.Forms.TextBox();
+            this.groupBox_Rx_select = new System.Windows.Forms.GroupBoxTS();
+            this.radioButton_Rx2_only = new System.Windows.Forms.RadioButtonTS();
+            this.radioButton_Rx1_only = new System.Windows.Forms.RadioButtonTS();
+            this.radioButton_both = new System.Windows.Forms.RadioButtonTS();
             this.groupBox_Rx2 = new System.Windows.Forms.GroupBoxTS();
             this.textBox_Rx2 = new System.Windows.Forms.TextBoxTS();
             this.button_writeFile = new System.Windows.Forms.ButtonTS();
@@ -68,19 +74,16 @@
             this.groupBoxTS4 = new System.Windows.Forms.GroupBoxTS();
             this.textBoxTS3 = new System.Windows.Forms.TextBoxTS();
             this.groupBoxTS3 = new System.Windows.Forms.GroupBoxTS();
-            this.numericUpDownTS2 = new System.Windows.Forms.NumericUpDownTS();
+            this.numericUpDown_mSec_between_measurements = new System.Windows.Forms.NumericUpDownTS();
             this.groupBoxTS2 = new System.Windows.Forms.GroupBoxTS();
             this.labelTS1 = new System.Windows.Forms.LabelTS();
             this.textBox_pts_collected = new System.Windows.Forms.TextBoxTS();
             this.groupBoxTS1 = new System.Windows.Forms.GroupBoxTS();
-            this.numericUpDownTS1 = new System.Windows.Forms.NumericUpDownTS();
+            this.numericUpDown_measurements_per_point = new System.Windows.Forms.NumericUpDownTS();
             this.groupBox2 = new System.Windows.Forms.GroupBoxTS();
             this.RArecordCheckBox = new System.Windows.Forms.CheckBoxTS();
-            this.groupBox_Rx_select = new System.Windows.Forms.GroupBoxTS();
-            this.radioButton_Rx2_only = new System.Windows.Forms.RadioButtonTS();
-            this.radioButton_Rx1_only = new System.Windows.Forms.RadioButtonTS();
-            this.radioButton_both = new System.Windows.Forms.RadioButtonTS();
             ((System.ComponentModel.ISupportInitialize)(this.picRAGraph)).BeginInit();
+            this.groupBox_Rx_select.SuspendLayout();
             this.groupBox_Rx2.SuspendLayout();
             this.groupBoxTS8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.manual_xmin)).BeginInit();
@@ -94,12 +97,11 @@
             this.groupBox_signal.SuspendLayout();
             this.groupBoxTS4.SuspendLayout();
             this.groupBoxTS3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_mSec_between_measurements)).BeginInit();
             this.groupBoxTS2.SuspendLayout();
             this.groupBoxTS1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_measurements_per_point)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox_Rx_select.SuspendLayout();
             this.SuspendLayout();
             // 
             // RA_timer
@@ -123,6 +125,72 @@
             // openFileDialog3
             // 
             this.openFileDialog3.FileName = "openFileDialog3";
+            // 
+            // textBox_file_date_time
+            // 
+            this.textBox_file_date_time.Location = new System.Drawing.Point(226, 77);
+            this.textBox_file_date_time.Name = "textBox_file_date_time";
+            this.textBox_file_date_time.Size = new System.Drawing.Size(181, 20);
+            this.textBox_file_date_time.TabIndex = 40;
+            this.textBox_file_date_time.Visible = false;
+            // 
+            // textBox_file_comment
+            // 
+            this.textBox_file_comment.Location = new System.Drawing.Point(226, 98);
+            this.textBox_file_comment.Multiline = true;
+            this.textBox_file_comment.Name = "textBox_file_comment";
+            this.textBox_file_comment.Size = new System.Drawing.Size(707, 20);
+            this.textBox_file_comment.TabIndex = 41;
+            this.textBox_file_comment.Visible = false;
+            // 
+            // groupBox_Rx_select
+            // 
+            this.groupBox_Rx_select.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.groupBox_Rx_select.Controls.Add(this.radioButton_Rx2_only);
+            this.groupBox_Rx_select.Controls.Add(this.radioButton_Rx1_only);
+            this.groupBox_Rx_select.Controls.Add(this.radioButton_both);
+            this.groupBox_Rx_select.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBox_Rx_select.Location = new System.Drawing.Point(12, 271);
+            this.groupBox_Rx_select.Name = "groupBox_Rx_select";
+            this.groupBox_Rx_select.Size = new System.Drawing.Size(90, 83);
+            this.groupBox_Rx_select.TabIndex = 39;
+            this.groupBox_Rx_select.TabStop = false;
+            this.groupBox_Rx_select.Text = "display";
+            // 
+            // radioButton_Rx2_only
+            // 
+            this.radioButton_Rx2_only.AutoSize = true;
+            this.radioButton_Rx2_only.Image = null;
+            this.radioButton_Rx2_only.Location = new System.Drawing.Point(6, 55);
+            this.radioButton_Rx2_only.Name = "radioButton_Rx2_only";
+            this.radioButton_Rx2_only.Size = new System.Drawing.Size(66, 17);
+            this.radioButton_Rx2_only.TabIndex = 10;
+            this.radioButton_Rx2_only.Text = "Rx2 only";
+            this.radioButton_Rx2_only.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Rx1_only
+            // 
+            this.radioButton_Rx1_only.AutoSize = true;
+            this.radioButton_Rx1_only.Image = null;
+            this.radioButton_Rx1_only.Location = new System.Drawing.Point(5, 33);
+            this.radioButton_Rx1_only.Name = "radioButton_Rx1_only";
+            this.radioButton_Rx1_only.Size = new System.Drawing.Size(66, 17);
+            this.radioButton_Rx1_only.TabIndex = 9;
+            this.radioButton_Rx1_only.Text = "Rx1 only";
+            this.radioButton_Rx1_only.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_both
+            // 
+            this.radioButton_both.AutoSize = true;
+            this.radioButton_both.Checked = true;
+            this.radioButton_both.Image = null;
+            this.radioButton_both.Location = new System.Drawing.Point(4, 14);
+            this.radioButton_both.Name = "radioButton_both";
+            this.radioButton_both.Size = new System.Drawing.Size(47, 17);
+            this.radioButton_both.TabIndex = 3;
+            this.radioButton_both.TabStop = true;
+            this.radioButton_both.Text = "Both";
+            this.radioButton_both.UseVisualStyleBackColor = true;
             // 
             // groupBox_Rx2
             // 
@@ -268,7 +336,7 @@
             0});
             this.manual_xmin.Location = new System.Drawing.Point(15, 81);
             this.manual_xmin.Maximum = new decimal(new int[] {
-            9999,
+            99999,
             0,
             0,
             0});
@@ -306,7 +374,7 @@
             0});
             this.manual_xmax.Location = new System.Drawing.Point(14, 35);
             this.manual_xmax.Maximum = new decimal(new int[] {
-            10000,
+            100000,
             0,
             0,
             0});
@@ -594,7 +662,7 @@
             // groupBoxTS3
             // 
             this.groupBoxTS3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBoxTS3.Controls.Add(this.numericUpDownTS2);
+            this.groupBoxTS3.Controls.Add(this.numericUpDown_mSec_between_measurements);
             this.groupBoxTS3.ForeColor = System.Drawing.SystemColors.Control;
             this.groupBoxTS3.Location = new System.Drawing.Point(12, 121);
             this.groupBoxTS3.Name = "groupBoxTS3";
@@ -603,34 +671,34 @@
             this.groupBoxTS3.TabStop = false;
             this.groupBoxTS3.Text = "mSec between measurements";
             // 
-            // numericUpDownTS2
+            // numericUpDown_mSec_between_measurements
             // 
-            this.numericUpDownTS2.Increment = new decimal(new int[] {
+            this.numericUpDown_mSec_between_measurements.Increment = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDownTS2.Location = new System.Drawing.Point(27, 31);
-            this.numericUpDownTS2.Maximum = new decimal(new int[] {
+            this.numericUpDown_mSec_between_measurements.Location = new System.Drawing.Point(27, 31);
+            this.numericUpDown_mSec_between_measurements.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numericUpDownTS2.Minimum = new decimal(new int[] {
+            this.numericUpDown_mSec_between_measurements.Minimum = new decimal(new int[] {
             50,
             0,
             0,
             0});
-            this.numericUpDownTS2.Name = "numericUpDownTS2";
-            this.numericUpDownTS2.Size = new System.Drawing.Size(63, 20);
-            this.numericUpDownTS2.TabIndex = 11;
-            this.numericUpDownTS2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDownTS2.Value = new decimal(new int[] {
+            this.numericUpDown_mSec_between_measurements.Name = "numericUpDown_mSec_between_measurements";
+            this.numericUpDown_mSec_between_measurements.Size = new System.Drawing.Size(63, 20);
+            this.numericUpDown_mSec_between_measurements.TabIndex = 11;
+            this.numericUpDown_mSec_between_measurements.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_mSec_between_measurements.Value = new decimal(new int[] {
             50,
             0,
             0,
             0});
-            this.numericUpDownTS2.ValueChanged += new System.EventHandler(this.numericUpDownTS2_ValueChanged);
+            this.numericUpDown_mSec_between_measurements.ValueChanged += new System.EventHandler(this.numericUpDownTS2_ValueChanged);
             // 
             // groupBoxTS2
             // 
@@ -649,11 +717,11 @@
             // 
             this.labelTS1.AutoSize = true;
             this.labelTS1.Image = null;
-            this.labelTS1.Location = new System.Drawing.Point(29, 53);
+            this.labelTS1.Location = new System.Drawing.Point(22, 53);
             this.labelTS1.Name = "labelTS1";
-            this.labelTS1.Size = new System.Drawing.Size(68, 13);
+            this.labelTS1.Size = new System.Drawing.Size(83, 13);
             this.labelTS1.TabIndex = 20;
-            this.labelTS1.Text = "(10,000 max)";
+            this.labelTS1.Text = "(2,000,000 max)";
             // 
             // textBox_pts_collected
             // 
@@ -666,7 +734,7 @@
             // groupBoxTS1
             // 
             this.groupBoxTS1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBoxTS1.Controls.Add(this.numericUpDownTS1);
+            this.groupBoxTS1.Controls.Add(this.numericUpDown_measurements_per_point);
             this.groupBoxTS1.ForeColor = System.Drawing.SystemColors.Control;
             this.groupBoxTS1.Location = new System.Drawing.Point(12, 187);
             this.groupBoxTS1.Name = "groupBoxTS1";
@@ -675,34 +743,34 @@
             this.groupBoxTS1.TabStop = false;
             this.groupBoxTS1.Text = "# of measurements to average per point";
             // 
-            // numericUpDownTS1
+            // numericUpDown_measurements_per_point
             // 
-            this.numericUpDownTS1.Increment = new decimal(new int[] {
+            this.numericUpDown_measurements_per_point.Increment = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDownTS1.Location = new System.Drawing.Point(27, 35);
-            this.numericUpDownTS1.Maximum = new decimal(new int[] {
+            this.numericUpDown_measurements_per_point.Location = new System.Drawing.Point(27, 35);
+            this.numericUpDown_measurements_per_point.Maximum = new decimal(new int[] {
             2000,
             0,
             0,
             0});
-            this.numericUpDownTS1.Minimum = new decimal(new int[] {
+            this.numericUpDown_measurements_per_point.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDownTS1.Name = "numericUpDownTS1";
-            this.numericUpDownTS1.Size = new System.Drawing.Size(69, 20);
-            this.numericUpDownTS1.TabIndex = 0;
-            this.numericUpDownTS1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDownTS1.Value = new decimal(new int[] {
+            this.numericUpDown_measurements_per_point.Name = "numericUpDown_measurements_per_point";
+            this.numericUpDown_measurements_per_point.Size = new System.Drawing.Size(69, 20);
+            this.numericUpDown_measurements_per_point.TabIndex = 0;
+            this.numericUpDown_measurements_per_point.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_measurements_per_point.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDownTS1.ValueChanged += new System.EventHandler(this.numericUpDownTS1_ValueChanged);
+            this.numericUpDown_measurements_per_point.ValueChanged += new System.EventHandler(this.numericUpDownTS1_ValueChanged);
             // 
             // groupBox2
             // 
@@ -730,55 +798,6 @@
             this.RArecordCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RArecordCheckBox.CheckedChanged += new System.EventHandler(this.RArecordCheckBox_CheckedChanged);
             // 
-            // groupBox_Rx_select
-            // 
-            this.groupBox_Rx_select.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox_Rx_select.Controls.Add(this.radioButton_Rx2_only);
-            this.groupBox_Rx_select.Controls.Add(this.radioButton_Rx1_only);
-            this.groupBox_Rx_select.Controls.Add(this.radioButton_both);
-            this.groupBox_Rx_select.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox_Rx_select.Location = new System.Drawing.Point(12, 271);
-            this.groupBox_Rx_select.Name = "groupBox_Rx_select";
-            this.groupBox_Rx_select.Size = new System.Drawing.Size(90, 83);
-            this.groupBox_Rx_select.TabIndex = 39;
-            this.groupBox_Rx_select.TabStop = false;
-            this.groupBox_Rx_select.Text = "display";
-            // 
-            // radioButton_Rx2_only
-            // 
-            this.radioButton_Rx2_only.AutoSize = true;
-            this.radioButton_Rx2_only.Image = null;
-            this.radioButton_Rx2_only.Location = new System.Drawing.Point(6, 55);
-            this.radioButton_Rx2_only.Name = "radioButton_Rx2_only";
-            this.radioButton_Rx2_only.Size = new System.Drawing.Size(66, 17);
-            this.radioButton_Rx2_only.TabIndex = 10;
-            this.radioButton_Rx2_only.Text = "Rx2 only";
-            this.radioButton_Rx2_only.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_Rx1_only
-            // 
-            this.radioButton_Rx1_only.AutoSize = true;
-            this.radioButton_Rx1_only.Image = null;
-            this.radioButton_Rx1_only.Location = new System.Drawing.Point(5, 33);
-            this.radioButton_Rx1_only.Name = "radioButton_Rx1_only";
-            this.radioButton_Rx1_only.Size = new System.Drawing.Size(66, 17);
-            this.radioButton_Rx1_only.TabIndex = 9;
-            this.radioButton_Rx1_only.Text = "Rx1 only";
-            this.radioButton_Rx1_only.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_both
-            // 
-            this.radioButton_both.AutoSize = true;
-            this.radioButton_both.Checked = true;
-            this.radioButton_both.Image = null;
-            this.radioButton_both.Location = new System.Drawing.Point(4, 14);
-            this.radioButton_both.Name = "radioButton_both";
-            this.radioButton_both.Size = new System.Drawing.Size(47, 17);
-            this.radioButton_both.TabIndex = 3;
-            this.radioButton_both.TabStop = true;
-            this.radioButton_both.Text = "Both";
-            this.radioButton_both.UseVisualStyleBackColor = true;
-            // 
             // RAForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -786,6 +805,8 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1088, 562);
+            this.Controls.Add(this.textBox_file_comment);
+            this.Controls.Add(this.textBox_file_date_time);
             this.Controls.Add(this.groupBox_Rx_select);
             this.Controls.Add(this.groupBox_Rx2);
             this.Controls.Add(this.button_writeFile);
@@ -811,10 +832,12 @@
             this.ForeColor = System.Drawing.SystemColors.Control;
             this.MaximizeBox = false;
             this.Name = "RAForm";
-            this.Text = "Radio Astromony data collection utility   v1.2 (29 Aug 2014)";
+            this.Text = "Radio Astromony data collection utility   v1.3 (16 Feb 2016)";
             this.Load += new System.EventHandler(this.RAForm_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.RAForm_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.picRAGraph)).EndInit();
+            this.groupBox_Rx_select.ResumeLayout(false);
+            this.groupBox_Rx_select.PerformLayout();
             this.groupBox_Rx2.ResumeLayout(false);
             this.groupBox_Rx2.PerformLayout();
             this.groupBoxTS8.ResumeLayout(false);
@@ -835,14 +858,12 @@
             this.groupBoxTS4.ResumeLayout(false);
             this.groupBoxTS4.PerformLayout();
             this.groupBoxTS3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_mSec_between_measurements)).EndInit();
             this.groupBoxTS2.ResumeLayout(false);
             this.groupBoxTS2.PerformLayout();
             this.groupBoxTS1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_measurements_per_point)).EndInit();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox_Rx_select.ResumeLayout(false);
-            this.groupBox_Rx_select.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -854,11 +875,11 @@
         private System.Windows.Forms.CheckBoxTS RArecordCheckBox;
         private System.Windows.Forms.GroupBoxTS groupBoxTS1;
         private System.ComponentModel.IContainer components;
-        private System.Windows.Forms.NumericUpDownTS numericUpDownTS1;
+        private System.Windows.Forms.NumericUpDownTS numericUpDown_measurements_per_point;
         private System.Windows.Forms.Timer RA_timer;
         private System.Windows.Forms.TextBoxTS textBox_pts_collected;
         private System.Windows.Forms.GroupBoxTS groupBoxTS2;
-        private System.Windows.Forms.NumericUpDownTS numericUpDownTS2;
+        private System.Windows.Forms.NumericUpDownTS numericUpDown_mSec_between_measurements;
         private System.Windows.Forms.GroupBoxTS groupBoxTS3;
         private System.Windows.Forms.TextBoxTS textBox_Rx1;
         private System.Windows.Forms.TextBoxTS textBoxTS3;
@@ -902,6 +923,8 @@
         private System.Windows.Forms.RadioButtonTS radioButton_Rx2_only;
         private System.Windows.Forms.RadioButtonTS radioButton_Rx1_only;
         private System.Windows.Forms.RadioButtonTS radioButton_both;
+        private System.Windows.Forms.TextBox textBox_file_date_time;
+        private System.Windows.Forms.TextBox textBox_file_comment;
 
     }
 }

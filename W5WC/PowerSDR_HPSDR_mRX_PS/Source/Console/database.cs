@@ -1681,7 +1681,7 @@ namespace PowerSDR
 								// 144 - 146 MHz
                                 144.000000, 144.034999, "2M CW & SSB EME",		        true,
                                 144.035000, 144.049999, "2M CW",                        true,
-                                144.050000, 144.005000, "2M CW Calling",                true,
+                                144.050000, 144.050000, "2M CW Calling",                true,
                                 144.050001, 144.149999, "2M CW",                        true,
                                 144.150000, 144.299999, "2M SSB",                       true,
                                 144.300000, 144.300000, "2M SSB Calling",               true,
