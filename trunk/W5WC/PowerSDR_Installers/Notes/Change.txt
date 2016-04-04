@@ -58,3 +58,43 @@ This new control has been added in Setup on the DSP -> AM/SAM tab.
 - Improved Russian language translation for the ToolTips by Michael, R2AGG.
 - Corrected a problem with the VFO not updating when dragging the panadapter in CW mode
 
+3.3.7 (2016-4-3)
+* Added a completely new MIDI mapping interface from Andrew, M0YGG. This new interface is called Midi2Cat and replaces the DJ Console midi controller interface. It has the ability to map any midi device. We want to give Andrew a huge thanks for sharing this very nice project.
+The User Guide for MidiCat is located in the PowerSDR program folder or can be downloaded from the Yahoo Apache Labs group files folder. Look for 'Midi2Cat_Instructions_V3.pdf'. One change to note that has changed since the user guide was written is the Midi Interface is located on the 'CAT' page within the Setup Form.
+
+* Our Spectral Noise Reduction, NR2 has some significant audio improvements.  If you haven't tried it in a while, please take a moment to do so.  Just as a reminder, Noise Reduction is for Random Noise, which we all have.  Also, be sure to set your AGC Gain properly when using noise reduction --- AGC is the "enemy" of noise reduction if the gain is set too high, i.e., if the green "G" line is set too low.
+
+* MNF, the Multi-Notch Filter, is now functional on transverter frequencies.
+
+* There are some enhancements and changes to the Display controls.  
+- First, you'll find that you can now set averaging and choice of detector separately for the panadapter and the waterfall. 
+ 
+- There is now a choice of "detectors."  For a digital "spectrum analyzer" like your SDR display, a "detector" can be defined as the algorithm used to convert FFT bins into the values displayed for the pixels across the screen.  The "Peak" detector (default) is best for signals; however, it consistently overstates noise.  If you're interested in noise measurements (band noise, phase noise, etc.), the "Average" detector would be the optimum choice and I recommend one of the larger FFT sizes.  A "Sample" detector and "Rosenfell" detector are also provided.  To learn more about detectors, see Agilent Application Note 150, "Spectrum Analyzer Basics," which you can find with Google's help.
+- Multiple averaging modes are provided.  For general signal display and operation, the "Log Recursive" mode (default) may be your favorite choice as it has a visual appearance of being very responsive.  For noise measurements, you should choose one of the other modes for accuracy, probably the "Recursive" mode is optimum.  The "Log Recursive" mode will NOT be accurate for noise measurement.
+- For convenience, when either the Average or Sample detector is selected for doing noise measurements, checking the "1 Hz BW:  Av / Sa" box will automatically normalize the displayed result to that of a 1 Hz bandwidth, i.e., this yields the "dBm/Hz" level.  This check box has no effect if either the Peak or Rosenfell detector is selected.
+
+Several changes to the RAForm were made to this release.
+- fixed signal level discrepancies between PowerSDR S-meter readings and RA utility readings.
+- corrected the signal averaging code to take the logarithm of the averaged power values instead of the incorrect average of the logarithms of the power values
+- added global region support to make file read/write functions operate correctly in all country regions
+- increased the maximum number of data points limit to 2,000,000 for each of the time, RX1, and RX2 data arrays
+- increased the maximum selectable value for x-axis display range to 100,000 seconds
+- the above two new limits permit more than 27 hours of continuous data recording                         
+- added control value updates on file read/write for the "numericUpDown_mSec_between_measurements" control and the "numericUpDown_measurements_per_point” control
+- added display of Date/Time and Comment information on file READ
+
+Other additions and fix that were added are:
+- While PowerSDR is running, the Windows system timer will be set to a 1mS precision. On exiting PowerSDR the system timer will revert back to its previous setting.
+- The 60m band frequency for the Netherlands region was changed to allow transmit between 5.35MHz and 5.45MHz.
+- Removed the DJ Console project.
+- Removed the transmit low filter cutoff restriction.
+- Corrected a problem when using CTUN when Stereo Diversity (SD) is enabled.
+- Added a Keyboard mapping for Transmit and Receive.
+- Corrected several issues with the Waterfall display.
+
+
+
+
+
+
+
