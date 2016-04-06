@@ -493,6 +493,7 @@ int ReadUDPFrame(unsigned char *bufp) {
 			printf("Error code %d: recvfrom() : %s\n", errno, strerror(errno));
 			fflush(stdout);
 		}
+		LeaveCriticalSection(&prn->rcvpkt);
 		return rc;
 	}
 
@@ -887,7 +888,7 @@ void CmdGeneral() {
 	// Bits - PA, Apollo, Mercury, Clock source
 	packetbuf[58] = 0x01;
 	// Bits - Alex(n) enable, 1 = enable, 0 = disable
-	packetbuf[59] = prbpfilter->enable;
+	packetbuf[59] = prbpfilter[0]->enable;
 	// sendto port 1024
 	sendPacket(listenSock, packetbuf, sizeof(packetbuf), 1024);
 
@@ -1006,14 +1007,17 @@ void CmdHighPriority() {
 	packetbuf[1403] = prn->rx[1].preamp << 1 |
 		prn->rx[0].preamp;
 
+	// Alex1 data [7:0]
+	packetbuf[1431] = prbpfilter[1]->bpfilter & 0xff;
+
 	// Alex0 data
-	packetbuf[1432] = (prbpfilter->bpfilter >> 24) & 0xff;
-	packetbuf[1433] = (prbpfilter->bpfilter >> 16) & 0xff;
-	packetbuf[1434] = (prbpfilter->bpfilter >> 8) & 0xff;
-	packetbuf[1435] = prbpfilter->bpfilter & 0xff;
+	packetbuf[1432] = (prbpfilter[0]->bpfilter >> 24) & 0xff;
+	packetbuf[1433] = (prbpfilter[0]->bpfilter >> 16) & 0xff;
+	packetbuf[1434] = (prbpfilter[0]->bpfilter >> 8) & 0xff;
+	packetbuf[1435] = prbpfilter[0]->bpfilter & 0xff;
 
 	// Step Attenuator 2
-	packetbuf[1441] = prn->adc[2].rx_step_attn;
+	//packetbuf[1441] = prn->adc[2].rx_step_attn;
 	// Step Attenuator 1
 	packetbuf[1442] = prn->adc[1].rx_step_attn;
 	// Step Attenuator 0
@@ -1310,26 +1314,28 @@ void KeepAliveLoop(void)
 	prn->liDueTime.QuadPart = -10000000LL;
 
 	prn->hTimer = CreateWaitableTimer(NULL, FALSE, NULL);
-	if (NULL == prn->hTimer)
+	if (prn->hTimer == NULL)
 	{
 		printf("CreateWaitableTimer failed (%d)\n", GetLastError());
 		//return 1;
 	}
-
-	if (!SetWaitableTimer(prn->hTimer, &prn->liDueTime, 300, NULL, NULL, 0))
+	else
 	{
-		printf("SetWaitableTimer failed (%d)\n", GetLastError());
-		//return 2;
-	}
+		if (!SetWaitableTimer(prn->hTimer, &prn->liDueTime, 300, NULL, NULL, 0))
+		{
+			printf("SetWaitableTimer failed (%d)\n", GetLastError());
+			//return 2;
+		}
 
-	while (io_keep_running)
-	{
-		WaitForSingleObject(prn->hTimer, INFINITE);
-		if (prn->run) CmdGeneral();
-	}
+		while (io_keep_running)
+		{
+			WaitForSingleObject(prn->hTimer, INFINITE);
+			if (prn->run) CmdGeneral();
+		}
 
-	CancelWaitableTimer(prn->hTimer);
-	CloseHandle(prn->hTimer);
+		CancelWaitableTimer(prn->hTimer);
+		CloseHandle(prn->hTimer);
+	}
 }
 
 

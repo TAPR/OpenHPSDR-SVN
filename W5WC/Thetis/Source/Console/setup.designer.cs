@@ -2239,6 +2239,11 @@
             this.chkShowBandControls = new System.Windows.Forms.CheckBoxTS();
             this.chkShowTopControls = new System.Windows.Forms.CheckBoxTS();
             this.tpKeyboard = new System.Windows.Forms.TabPage();
+            this.grpKBPTT = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS389 = new System.Windows.Forms.LabelTS();
+            this.labelTS390 = new System.Windows.Forms.LabelTS();
+            this.comboKBPTTTx = new System.Windows.Forms.ComboBoxTS();
+            this.comboKBPTTRx = new System.Windows.Forms.ComboBoxTS();
             this.grpBoxSpaceBarPTT = new System.Windows.Forms.GroupBoxTS();
             this.radSpaceBarLastBtn = new System.Windows.Forms.RadioButtonTS();
             this.radSpaceBarMicMute = new System.Windows.Forms.RadioButtonTS();
@@ -2302,6 +2307,8 @@
             this.tpCATControl = new System.Windows.Forms.TabPage();
             this.tcCAT = new System.Windows.Forms.TabControl();
             this.tpCAT = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnConfigure = new System.Windows.Forms.Button();
             this.grpFocusMaster = new System.Windows.Forms.GroupBoxTS();
             this.txtFocusMasterDelay = new System.Windows.Forms.TextBoxTS();
             this.labelTS359 = new System.Windows.Forms.LabelTS();
@@ -2496,8 +2503,6 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnConfigure = new System.Windows.Forms.Button();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             numericUpDownTS3 = new System.Windows.Forms.NumericUpDownTS();
             numericUpDownTS4 = new System.Windows.Forms.NumericUpDownTS();
@@ -3187,6 +3192,7 @@
             this.tpAppearanceCollapsible.SuspendLayout();
             this.grpBoxCollapsible.SuspendLayout();
             this.tpKeyboard.SuspendLayout();
+            this.grpKBPTT.SuspendLayout();
             this.grpBoxSpaceBarPTT.SuspendLayout();
             this.grpKBXIT.SuspendLayout();
             this.grpKBRIT.SuspendLayout();
@@ -3198,6 +3204,7 @@
             this.tpCATControl.SuspendLayout();
             this.tcCAT.SuspendLayout();
             this.tpCAT.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.grpFocusMaster.SuspendLayout();
             this.grpCatControlBox.SuspendLayout();
             this.grpRTTYOffset.SuspendLayout();
@@ -3270,7 +3277,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS35)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS36)).BeginInit();
             this.panelTS4.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tpAlexAntCtrl
@@ -6247,6 +6253,7 @@
             this.radGenModelANAN400D.Text = "ANAN-400D";
             this.toolTip1.SetToolTip(this.radGenModelANAN400D, "Orion MKII");
             this.radGenModelANAN400D.UseVisualStyleBackColor = true;
+            this.radGenModelANAN400D.Visible = false;
             this.radGenModelANAN400D.CheckedChanged += new System.EventHandler(this.radGenModelANAN400D_CheckedChanged);
             // 
             // radGenModelANAN10E
@@ -15277,12 +15284,12 @@
             // 
             this.lblAlex2HPF6m.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlex2HPF6m.Image = null;
-            this.lblAlex2HPF6m.Location = new System.Drawing.Point(28, 158);
+            this.lblAlex2HPF6m.Location = new System.Drawing.Point(39, 158);
             this.lblAlex2HPF6m.Name = "lblAlex2HPF6m";
-            this.lblAlex2HPF6m.Size = new System.Drawing.Size(70, 16);
+            this.lblAlex2HPF6m.Size = new System.Drawing.Size(56, 16);
             this.lblAlex2HPF6m.TabIndex = 203;
-            this.lblAlex2HPF6m.Text = "6m BPF/LNA";
-            this.lblAlex2HPF6m.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblAlex2HPF6m.Text = "55 MHz";
+            this.lblAlex2HPF6m.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // udAlex26BPFStart
             // 
@@ -15346,9 +15353,9 @@
             this.chkAlex2HPFBypass.Image = null;
             this.chkAlex2HPFBypass.Location = new System.Drawing.Point(140, 188);
             this.chkAlex2HPFBypass.Name = "chkAlex2HPFBypass";
-            this.chkAlex2HPFBypass.Size = new System.Drawing.Size(127, 17);
+            this.chkAlex2HPFBypass.Size = new System.Drawing.Size(126, 17);
             this.chkAlex2HPFBypass.TabIndex = 200;
-            this.chkAlex2HPFBypass.Text = "ByPass/55 MHz HPF";
+            this.chkAlex2HPFBypass.Text = "ByPass/55 MHz BPF";
             this.chkAlex2HPFBypass.UseVisualStyleBackColor = true;
             this.chkAlex2HPFBypass.CheckedChanged += new System.EventHandler(this.chkAlex2HPFBypass_CheckedChanged);
             // 
@@ -15503,7 +15510,7 @@
             this.lblAlex2HPF.Name = "lblAlex2HPF";
             this.lblAlex2HPF.Size = new System.Drawing.Size(56, 16);
             this.lblAlex2HPF.TabIndex = 186;
-            this.lblAlex2HPF.Text = "HPF";
+            this.lblAlex2HPF.Text = "BPF";
             this.lblAlex2HPF.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // udAlex210mLPFEnd
@@ -17403,6 +17410,7 @@
             this.labelTS364.Size = new System.Drawing.Size(27, 13);
             this.labelTS364.TabIndex = 48;
             this.labelTS364.Text = "Out:";
+            this.labelTS364.Visible = false;
             // 
             // labelTS365
             // 
@@ -17413,6 +17421,7 @@
             this.labelTS365.Size = new System.Drawing.Size(19, 13);
             this.labelTS365.TabIndex = 47;
             this.labelTS365.Text = "In:";
+            this.labelTS365.Visible = false;
             // 
             // chkAudioLatencyPAOutManual
             // 
@@ -17422,6 +17431,7 @@
             this.chkAudioLatencyPAOutManual.Size = new System.Drawing.Size(64, 16);
             this.chkAudioLatencyPAOutManual.TabIndex = 46;
             this.chkAudioLatencyPAOutManual.Text = "Manual";
+            this.chkAudioLatencyPAOutManual.Visible = false;
             this.chkAudioLatencyPAOutManual.CheckedChanged += new System.EventHandler(this.chkAudioLatencyPAOutManual_CheckedChanged);
             // 
             // udAudioLatencyPAOut
@@ -17451,6 +17461,7 @@
             0,
             0,
             0});
+            this.udAudioLatencyPAOut.Visible = false;
             this.udAudioLatencyPAOut.ValueChanged += new System.EventHandler(this.udAudioLatencyPAOut_ValueChanged);
             // 
             // chkAudioLatencyPAInManual
@@ -17521,6 +17532,7 @@
             this.labelTS361.Size = new System.Drawing.Size(27, 13);
             this.labelTS361.TabIndex = 40;
             this.labelTS361.Text = "Out:";
+            this.labelTS361.Visible = false;
             // 
             // labelTS360
             // 
@@ -17531,6 +17543,7 @@
             this.labelTS360.Size = new System.Drawing.Size(19, 13);
             this.labelTS360.TabIndex = 39;
             this.labelTS360.Text = "In:";
+            this.labelTS360.Visible = false;
             // 
             // chkAudioLatencyManual2_Out
             // 
@@ -17540,6 +17553,7 @@
             this.chkAudioLatencyManual2_Out.Size = new System.Drawing.Size(64, 16);
             this.chkAudioLatencyManual2_Out.TabIndex = 38;
             this.chkAudioLatencyManual2_Out.Text = "Manual";
+            this.chkAudioLatencyManual2_Out.Visible = false;
             this.chkAudioLatencyManual2_Out.CheckedChanged += new System.EventHandler(this.chkAudioLatencyManual2_Out_CheckedChanged);
             // 
             // udAudioLatency2_Out
@@ -17569,6 +17583,7 @@
             0,
             0,
             0});
+            this.udAudioLatency2_Out.Visible = false;
             this.udAudioLatency2_Out.ValueChanged += new System.EventHandler(this.udAudioLatency2_Out_ValueChanged);
             // 
             // chkAudioLatencyManual2
@@ -18007,6 +18022,7 @@
             this.labelTS369.Size = new System.Drawing.Size(27, 13);
             this.labelTS369.TabIndex = 55;
             this.labelTS369.Text = "Out:";
+            this.labelTS369.Visible = false;
             // 
             // labelTS370
             // 
@@ -18017,6 +18033,7 @@
             this.labelTS370.Size = new System.Drawing.Size(19, 13);
             this.labelTS370.TabIndex = 54;
             this.labelTS370.Text = "In:";
+            this.labelTS370.Visible = false;
             // 
             // chkVAC2LatencyPAOutManual
             // 
@@ -18026,6 +18043,7 @@
             this.chkVAC2LatencyPAOutManual.Size = new System.Drawing.Size(64, 16);
             this.chkVAC2LatencyPAOutManual.TabIndex = 53;
             this.chkVAC2LatencyPAOutManual.Text = "Manual";
+            this.chkVAC2LatencyPAOutManual.Visible = false;
             this.chkVAC2LatencyPAOutManual.CheckedChanged += new System.EventHandler(this.chkVAC2LatencyPAOutManual_CheckedChanged);
             // 
             // udVAC2LatencyPAOut
@@ -18055,6 +18073,7 @@
             0,
             0,
             0});
+            this.udVAC2LatencyPAOut.Visible = false;
             this.udVAC2LatencyPAOut.ValueChanged += new System.EventHandler(this.udVAC2LatencyPAOut_ValueChanged);
             // 
             // chkVAC2LatencyPAInManual
@@ -18114,6 +18133,7 @@
             this.chkVAC2LatencyOutManual.Size = new System.Drawing.Size(64, 16);
             this.chkVAC2LatencyOutManual.TabIndex = 46;
             this.chkVAC2LatencyOutManual.Text = "Manual";
+            this.chkVAC2LatencyOutManual.Visible = false;
             this.chkVAC2LatencyOutManual.CheckedChanged += new System.EventHandler(this.chkVAC2LatencyOutManual_CheckedChanged);
             // 
             // udVAC2LatencyOut
@@ -18143,6 +18163,7 @@
             0,
             0,
             0});
+            this.udVAC2LatencyOut.Visible = false;
             this.udVAC2LatencyOut.ValueChanged += new System.EventHandler(this.udVAC2LatencyOut_ValueChanged);
             // 
             // labelTS368
@@ -18154,6 +18175,7 @@
             this.labelTS368.Size = new System.Drawing.Size(27, 13);
             this.labelTS368.TabIndex = 44;
             this.labelTS368.Text = "Out:";
+            this.labelTS368.Visible = false;
             // 
             // labelTS367
             // 
@@ -18164,6 +18186,7 @@
             this.labelTS367.Size = new System.Drawing.Size(19, 13);
             this.labelTS367.TabIndex = 43;
             this.labelTS367.Text = "In:";
+            this.labelTS367.Visible = false;
             // 
             // labelTS366
             // 
@@ -37384,6 +37407,7 @@
             // 
             // tpKeyboard
             // 
+            this.tpKeyboard.Controls.Add(this.grpKBPTT);
             this.tpKeyboard.Controls.Add(this.grpBoxSpaceBarPTT);
             this.tpKeyboard.Controls.Add(this.grpKBXIT);
             this.tpKeyboard.Controls.Add(this.grpKBRIT);
@@ -37397,6 +37421,59 @@
             this.tpKeyboard.Size = new System.Drawing.Size(584, 364);
             this.tpKeyboard.TabIndex = 4;
             this.tpKeyboard.Text = "Keyboard";
+            // 
+            // grpKBPTT
+            // 
+            this.grpKBPTT.Controls.Add(this.labelTS389);
+            this.grpKBPTT.Controls.Add(this.labelTS390);
+            this.grpKBPTT.Controls.Add(this.comboKBPTTTx);
+            this.grpKBPTT.Controls.Add(this.comboKBPTTRx);
+            this.grpKBPTT.Location = new System.Drawing.Point(264, 192);
+            this.grpKBPTT.Name = "grpKBPTT";
+            this.grpKBPTT.Size = new System.Drawing.Size(112, 72);
+            this.grpKBPTT.TabIndex = 43;
+            this.grpKBPTT.TabStop = false;
+            this.grpKBPTT.Text = "PTT";
+            // 
+            // labelTS389
+            // 
+            this.labelTS389.Image = null;
+            this.labelTS389.Location = new System.Drawing.Point(8, 16);
+            this.labelTS389.Name = "labelTS389";
+            this.labelTS389.Size = new System.Drawing.Size(40, 16);
+            this.labelTS389.TabIndex = 10;
+            this.labelTS389.Text = "Tx:";
+            this.labelTS389.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // labelTS390
+            // 
+            this.labelTS390.Image = null;
+            this.labelTS390.Location = new System.Drawing.Point(8, 40);
+            this.labelTS390.Name = "labelTS390";
+            this.labelTS390.Size = new System.Drawing.Size(40, 16);
+            this.labelTS390.TabIndex = 9;
+            this.labelTS390.Text = "Rx:";
+            this.labelTS390.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // comboKBPTTTx
+            // 
+            this.comboKBPTTTx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboKBPTTTx.DropDownWidth = 56;
+            this.comboKBPTTTx.Location = new System.Drawing.Point(48, 16);
+            this.comboKBPTTTx.Name = "comboKBPTTTx";
+            this.comboKBPTTTx.Size = new System.Drawing.Size(56, 21);
+            this.comboKBPTTTx.TabIndex = 6;
+            this.comboKBPTTTx.SelectedIndexChanged += new System.EventHandler(this.comboKBPTTTx_SelectedIndexChanged);
+            // 
+            // comboKBPTTRx
+            // 
+            this.comboKBPTTRx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboKBPTTRx.DropDownWidth = 56;
+            this.comboKBPTTRx.Location = new System.Drawing.Point(48, 40);
+            this.comboKBPTTRx.Name = "comboKBPTTRx";
+            this.comboKBPTTRx.Size = new System.Drawing.Size(56, 21);
+            this.comboKBPTTRx.TabIndex = 5;
+            this.comboKBPTTRx.RightToLeftChanged += new System.EventHandler(this.comboKBPTTRx_SelectedIndexChanged);
             // 
             // grpBoxSpaceBarPTT
             // 
@@ -38032,7 +38109,7 @@
             this.grpKBCW.Controls.Add(this.lblKBCWDash);
             this.grpKBCW.Controls.Add(this.comboKBCWDot);
             this.grpKBCW.Controls.Add(this.comboKBCWDash);
-            this.grpKBCW.Location = new System.Drawing.Point(264, 192);
+            this.grpKBCW.Location = new System.Drawing.Point(8, 270);
             this.grpKBCW.Name = "grpKBCW";
             this.grpKBCW.Size = new System.Drawing.Size(112, 72);
             this.grpKBCW.TabIndex = 13;
@@ -38123,6 +38200,26 @@
             this.tpCAT.Size = new System.Drawing.Size(579, 338);
             this.tpCAT.TabIndex = 0;
             this.tpCAT.Text = "CAT";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnConfigure);
+            this.groupBox1.Location = new System.Drawing.Point(390, 17);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(140, 65);
+            this.groupBox1.TabIndex = 105;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "User Interface Controller";
+            // 
+            // btnConfigure
+            // 
+            this.btnConfigure.Location = new System.Drawing.Point(15, 19);
+            this.btnConfigure.Name = "btnConfigure";
+            this.btnConfigure.Size = new System.Drawing.Size(100, 30);
+            this.btnConfigure.TabIndex = 5;
+            this.btnConfigure.Text = "Configure MIDI";
+            this.btnConfigure.UseVisualStyleBackColor = true;
+            this.btnConfigure.Click += new System.EventHandler(this.btnConfigure_Click);
             // 
             // grpFocusMaster
             // 
@@ -41201,26 +41298,6 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnConfigure);
-            this.groupBox1.Location = new System.Drawing.Point(390, 17);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(140, 65);
-            this.groupBox1.TabIndex = 105;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "User Interface Controller";
-            // 
-            // btnConfigure
-            // 
-            this.btnConfigure.Location = new System.Drawing.Point(15, 19);
-            this.btnConfigure.Name = "btnConfigure";
-            this.btnConfigure.Size = new System.Drawing.Size(100, 30);
-            this.btnConfigure.TabIndex = 5;
-            this.btnConfigure.Text = "Configure MIDI";
-            this.btnConfigure.UseVisualStyleBackColor = true;
-            this.btnConfigure.Click += new System.EventHandler(this.btnConfigure_Click);
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -42002,6 +42079,7 @@
             this.grpBoxCollapsible.ResumeLayout(false);
             this.grpBoxCollapsible.PerformLayout();
             this.tpKeyboard.ResumeLayout(false);
+            this.grpKBPTT.ResumeLayout(false);
             this.grpBoxSpaceBarPTT.ResumeLayout(false);
             this.grpBoxSpaceBarPTT.PerformLayout();
             this.grpKBXIT.ResumeLayout(false);
@@ -42015,6 +42093,7 @@
             this.tcCAT.ResumeLayout(false);
             this.tpCAT.ResumeLayout(false);
             this.tpCAT.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.grpFocusMaster.ResumeLayout(false);
             this.grpFocusMaster.PerformLayout();
             this.grpCatControlBox.ResumeLayout(false);
@@ -42095,7 +42174,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS36)).EndInit();
             this.panelTS4.ResumeLayout(false);
             this.panelTS4.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -43331,5 +43409,10 @@
         private System.Windows.Forms.LabelTS labelTS388;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnConfigure;
+        private System.Windows.Forms.GroupBoxTS grpKBPTT;
+        private System.Windows.Forms.LabelTS labelTS389;
+        private System.Windows.Forms.LabelTS labelTS390;
+        private System.Windows.Forms.ComboBoxTS comboKBPTTTx;
+        private System.Windows.Forms.ComboBoxTS comboKBPTTRx;
     }
 }

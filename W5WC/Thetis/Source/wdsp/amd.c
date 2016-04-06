@@ -108,7 +108,8 @@ void init_amd(AMD a)
 
 void flush_amd (AMD a)
 {
-
+	a->dc = 0.0;
+	a->dc_insert = 0.0;
 }
 
 void xamd (AMD a)

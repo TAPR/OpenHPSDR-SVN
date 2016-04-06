@@ -4138,7 +4138,7 @@ namespace Thetis
                                 //}
                             }
 
-                            break;
+                            //break;
                     //    case DisplayMode.WATERFALL:
                     //        break;
                    // }

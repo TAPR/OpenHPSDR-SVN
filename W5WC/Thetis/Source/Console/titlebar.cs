@@ -35,13 +35,13 @@ namespace Thetis
     class TitleBar
     {
         public const string BUILD_NAME = "";
-        public const string BUILD_DATE = "(3/23/16)";
+        public const string BUILD_DATE = "(4/5/16)";
 
         public static string GetString()
         {
             string version = GetVerNum();
             string s = "Thetis";
-            if (BUILD_NAME != "") s += " " + BUILD_NAME;
+           // if (BUILD_NAME != "") s += " " + BUILD_NAME;
             s += " v" + version;
             if (BUILD_DATE != "") s += " " + BUILD_DATE;
 

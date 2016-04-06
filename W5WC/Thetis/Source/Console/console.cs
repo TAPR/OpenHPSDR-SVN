@@ -583,6 +583,7 @@ namespace Thetis
         public FilterForm filterRX2Form;
         public DiversityForm diversityForm;
         public RAForm raForm;
+        public Path_Illustrator path_Illustrator;
         public RadioInfo radio_info;
         public ContactInfo contact_info;
 
@@ -1510,6 +1511,7 @@ namespace Thetis
         private LabelTS lblRX1APF;
         private LabelTS lblRX2APF;
         private ToolStripMenuItem wBToolStripMenuItem;
+        private ToolStripMenuItem pIToolStripMenuItem;
         public PictureBox picWaterfall;
 
         #endregion
@@ -2244,6 +2246,7 @@ namespace Thetis
             this.linearityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RAtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerNotchZoom = new System.Windows.Forms.Timer(this.components);
             this.picRX2Squelch = new System.Windows.Forms.PictureBox();
             this.panelRX2RF = new System.Windows.Forms.PanelTS();
@@ -4841,7 +4844,8 @@ namespace Thetis
             this.rX2ToolStripMenuItem,
             this.linearityToolStripMenuItem,
             this.RAtoolStripMenuItem,
-            this.wBToolStripMenuItem});
+            this.wBToolStripMenuItem,
+            this.pIToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
@@ -5580,6 +5584,13 @@ namespace Thetis
             this.wBToolStripMenuItem.Name = "wBToolStripMenuItem";
             resources.ApplyResources(this.wBToolStripMenuItem, "wBToolStripMenuItem");
             this.wBToolStripMenuItem.Click += new System.EventHandler(this.wBToolStripMenuItem_Click);
+            // 
+            // pIToolStripMenuItem
+            // 
+            this.pIToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pIToolStripMenuItem.Name = "pIToolStripMenuItem";
+            resources.ApplyResources(this.pIToolStripMenuItem, "pIToolStripMenuItem");
+            this.pIToolStripMenuItem.Click += new System.EventHandler(this.pIToolStripMenuItem_Click);
             // 
             // timerNotchZoom
             // 
@@ -15199,7 +15210,7 @@ namespace Thetis
             if (name != "") comboTXProfile.Text = name;
         }
 
-        public void UpdateReceivers()
+        public void UpdateReceivers(bool rx2_enabled)
         {
             int rxs = 0;
             int Rx0 = 1, Rx1 = 2, Rx2 = 4, Rx3 = 8, enablesync = 0;
@@ -17230,6 +17241,7 @@ namespace Thetis
 
                 if (!initializing && RX2Enabled && !value)
                 {
+                    if (click_tune_display) chkDX.Enabled = false;
                     txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                     txtVFOBFreq_LostFocus(this, EventArgs.Empty);
                 }
@@ -17306,7 +17318,7 @@ namespace Thetis
                 {
                     txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                     UpdateAAudioMixerStates();
-                    UpdateReceivers();
+                    UpdateReceivers(rx2_enabled);
                     if (RX1StepAttPresent) udRX1StepAttData_ValueChanged(this, EventArgs.Empty);
                     else comboPreamp_SelectedIndexChanged(this, EventArgs.Empty);
                     wdsp.SetEXTDIVRun(0, 1);
@@ -17314,7 +17326,7 @@ namespace Thetis
                 }
                 else
                 {
-                    UpdateReceivers();
+                    UpdateReceivers(rx2_enabled);
                     if (RX2StepAttPresent) udRX2StepAttData_ValueChanged(this, EventArgs.Empty);
                     else comboRX2Preamp_SelectedIndexChanged(this, EventArgs.Empty);
                     wdsp.SetEXTDIVRun(0, 0);
@@ -17385,6 +17397,8 @@ namespace Thetis
             set
             {
                 click_tune_display = value;
+                if (!stereo_diversity && value) chkDX.Enabled = false;
+                else chkDX.Enabled = true;
             }
         }
 
@@ -20629,7 +20643,7 @@ namespace Thetis
                 }
 
                 SetComboPreampForHPSDR();
-                UpdateReceivers();
+                UpdateReceivers(rx2_enabled);
             }
         }
 
@@ -21214,9 +21228,6 @@ namespace Thetis
 
             if (initializing) return;
 
-            // psform.RX1freq = rx1_dds_freq_mhz;
-            // psform.RX3freq = rx1_dds_freq_mhz;
-            // psform.RX4freq = rx1_dds_freq_mhz;
             switch (CurrentHPSDRModel)
             {
                 case HPSDRModel.HERMES:
@@ -21232,10 +21243,9 @@ namespace Thetis
                     NetworkIO.VFOfreq(2, rx1_dds_freq_mhz, 0);
                     break;
             }
-            //wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 0), rx1_dds_freq_mhz * 1.0e6);
-            // wdsp.RXANBPSetTuneFrequency(wdsp.id(0, 1), rx1_dds_freq_mhz * 1.0e6);
-            // if (RX2Enabled && stereo_diversity)
-            //  psform.RX2freq = rx1_dds_freq_mhz;
+
+            //if (RX2Enabled && stereo_diversity)
+            //    psform.RX2freq = rx1_dds_freq_mhz;
         }
 
         bool rx2_dds_freq_updated = false;
@@ -21267,7 +21277,9 @@ namespace Thetis
                         NetworkIO.VFOfreq(3, rx2_dds_freq_mhz, 0);
                         break;
                 }
-                //wdsp.RXANBPSetTuneFrequency(wdsp.id(2, 0), rx2_dds_freq_mhz * 1.0e6);
+
+                //if (!stereo_diversity)
+                //    psform.RX2freq = rx2_dds_freq_mhz;
             }
         }
 
@@ -25144,7 +25156,7 @@ namespace Thetis
             set
             {
                 sample_rate_rx2 = value;
-                RadioDSP.SampleRate = value;
+
                 Audio.SampleRateRX2 = value;
                 Display.SampleRateRX2 = value;
                 NetworkIO.SetSampleRate(1, value, 0);
@@ -25739,18 +25751,32 @@ namespace Thetis
             set { key_mode_down = value; }
         }
 
-        private Keys key_cw_dot = Keys.OemPeriod;
+        private Keys key_cw_dot = Keys.None;
         public Keys KeyCWDot
         {
             get { return key_cw_dot; }
             set { key_cw_dot = value; }
         }
 
-        private Keys key_cw_dash = Keys.OemQuestion;
+        private Keys key_cw_dash = Keys.None;
         public Keys KeyCWDash
         {
             get { return key_cw_dash; }
             set { key_cw_dash = value; }
+        }
+
+        private Keys key_ptt_tx = Keys.None;
+        public Keys KeyPTTTx
+        {
+            get { return key_ptt_tx; }
+            set { key_ptt_tx = value; }
+        }
+
+        private Keys key_ptt_rx = Keys.None;
+        public Keys KeyPTTRx
+        {
+            get { return key_ptt_rx; }
+            set { key_ptt_rx = value; }
         }
 
         private bool rfe_pa_tr_enable = false;
@@ -25787,6 +25813,9 @@ namespace Thetis
                     MaxFreq = 146.0;
                 else
                     MaxFreq = 65.0;
+
+                if (path_Illustrator != null)
+                    path_Illustrator.pi_Changed();
             }
         }
 
@@ -32201,7 +32230,7 @@ namespace Thetis
                 txtVFOALSD.ForeColor = small_vfo_color;
                 // cmaster.CMSetAudioMixerRX2();
                 UpdateRXADCCtrl();
-                UpdateReceivers();
+                UpdateReceivers(rx2_enabled);
                 UpdateVFOASub();
 
                 if (rx2_enabled)
@@ -32379,7 +32408,7 @@ namespace Thetis
                 chkVFOLock.Enabled = true;
                 timer_peak_text.Enabled = true;
                 current_hpsdr_hardware = NetworkIO.BoardID;
-                UpdateReceivers();
+                UpdateReceivers(rx2_enabled);
                 UpdateAAudioMixerStates();
                 // cmaster.SetAAudioMixState((void*)0, 0, 0, true);
                 // cmaster.SetAAudioMixState((void*)0, 0, 2, radio.GetDSPRX(1, 0).Active);
@@ -32419,7 +32448,7 @@ namespace Thetis
                 // cmaster.SetAAudioMixState((void*)0, 0, 2, false);
                 // cmaster.SetAAudioMixState((void*)0, 0, 0, false);
                 UpdateAAudioMixerStates();
-                UpdateReceivers();
+                UpdateReceivers(rx2_enabled);
 
                 chkMOX.Checked = false;
                 chkMOX.Enabled = false;
@@ -33156,6 +33185,8 @@ namespace Thetis
             if (chkMUT.Focused)
                 btnHidden.Focus();
 
+            if (path_Illustrator != null)
+                path_Illustrator.pi_Changed();
         }
 
         public bool ModelIsHPSDRorHermes()
@@ -33491,6 +33522,9 @@ namespace Thetis
 
             if (!(chkMON.Checked == false && mox))
                 ptbAF_Scroll(this, EventArgs.Empty);
+
+            if (path_Illustrator != null)
+                path_Illustrator.pi_Changed();
         }
 
         private void AudioMOXChanged(bool tx)
@@ -34006,7 +34040,7 @@ namespace Thetis
                 }
                 else NetworkIO.SetTxAttenData(0);
                 UpdateAAudioMixerStates();
-                UpdateReceivers();
+                UpdateReceivers(rx2_enabled);
                 UpdateRXADCCtrl();
                 // AudioMOXChanged(tx);    // set MOX in audio.cs
                 HdwMOXChanged(tx, freq);// flip the hardware
@@ -34041,7 +34075,7 @@ namespace Thetis
                 {
                     if (mox_delay > 0) Thread.Sleep(mox_delay); // default 10
                 }
-                UpdateReceivers();
+                UpdateReceivers(rx2_enabled);
                 UpdateAAudioMixerStates();
                 UpdateRXADCCtrl();
                 AudioMOXChanged(tx);    // set audio.cs to RX
@@ -35597,6 +35631,11 @@ namespace Thetis
                 {
                     radio.GetDSPRX(0, 0).RXOsc = rx1_osc; // keep tuning
                     Display.FreqDiff = (int)radio.GetDSPRX(0, 0).RXOsc;
+                    if (stereo_diversity)
+                    {
+                        radio.GetDSPRX(1, 0).RXOsc = rx1_osc; // keep tuning
+                        Display.RX2FreqDiff = (int)radio.GetDSPRX(1, 0).RXOsc;
+                    }
                 }
 
             }
@@ -38860,7 +38899,7 @@ namespace Thetis
                     //       // Display.DirectXInit();
                     //        // Display.RenderDirectX();
                     //    }
-                    break;
+                    //break;
             }
             pause_DisplayThread = false;
 
@@ -39513,6 +39552,22 @@ namespace Thetis
 
             DSPMode old_mode = rx1_dsp_mode;
             bool old_sd = stereo_diversity;
+
+            wdsp.SetChannelState(wdsp.id(0, 1), 0, 0);              // turn off the DSP channels
+            wdsp.SetChannelState(wdsp.id(0, 0), 0, 1);
+            Thread.Sleep(1);
+
+            if (new_mode == DSPMode.FM)                             // set DSP samplerate
+            {
+                wdsp.SetDSPSamplerate(wdsp.id(0, 0), 192000);
+                wdsp.SetDSPSamplerate(wdsp.id(0, 1), 192000);
+            }
+            else
+            {
+                wdsp.SetDSPSamplerate(wdsp.id(0, 0), 48000);
+                wdsp.SetDSPSamplerate(wdsp.id(0, 1), 48000);
+            }
+
             StereoDiversity = false;
 
             radio.GetDSPRX(0, 0).DSPMode = new_mode;				// set new DSP mode
@@ -40120,6 +40175,10 @@ namespace Thetis
             }
 
             StereoDiversity = old_sd;
+
+            wdsp.SetChannelState(wdsp.id(0, 0), 1, 0);              // turn on the DSP channels
+            if (radio.GetDSPRX(0, 1).Active) 
+                wdsp.SetChannelState(wdsp.id(0, 1), 1, 0);
 
         }
 
@@ -42857,10 +42916,14 @@ namespace Thetis
                 rx2_enabled = value;
                 if (DataFlowing)
                 {
-                    if (rx2_enabled) UpdateReceivers();
+                    if (rx2_enabled)
+                    {
+                        UpdateReceivers(rx2_enabled);
+                        // Thread.Sleep(20);
+                    }
                     // cmaster.SetAAudioMixState((void*)0, 0, 2, rx2_enabled);
                     UpdateAAudioMixerStates();          // What is the 'DataFlowing' thing all about????
-                    if (!rx2_enabled) UpdateReceivers();
+                    if (!rx2_enabled) UpdateReceivers(rx2_enabled);
                 }
                 cmaster.CMSetFRXNBRun(1);
                 cmaster.CMSetFRXNB2Run(1);
@@ -43052,6 +43115,10 @@ namespace Thetis
             // RX2SpurReduction = chkRX2SR.Checked;
             DisplayDuplex = chkRX2SR.Checked;
             Display.DisplayDuplex = chkRX2SR.Checked;
+
+            if (path_Illustrator != null)
+                path_Illustrator.pi_Changed();
+
         }
 
         private void panelVFOASubHover_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -43158,11 +43225,18 @@ namespace Thetis
             if (new_mode == DSPMode.FIRST || new_mode == DSPMode.LAST) return;
             DSPMode old_mode = rx2_dsp_mode;
 
+            wdsp.SetChannelState(wdsp.id(2, 0), 0, 1);              // turn OFF the DSP channel
+
+            if (new_mode == DSPMode.FM)                             // set DSP samplerate
+                wdsp.SetDSPSamplerate(wdsp.id(2, 0), 192000);
+            else
+                wdsp.SetDSPSamplerate(wdsp.id(2, 0), 48000);
+
+            radio.GetDSPRX(1, 0).DSPMode = new_mode;			    // set new DSP mode
+            // radio.GetDSPRX(1, 1).DSPMode = new_mode;
+
             if (rx2_enabled)
             {
-                radio.GetDSPRX(1, 0).DSPMode = new_mode;				// set new DSP mode
-                radio.GetDSPRX(1, 1).DSPMode = new_mode;
-
                 if (chkVFOBTX.Checked)
                 {
                     Audio.TXDSPMode = new_mode;
@@ -43676,6 +43750,9 @@ namespace Thetis
             {
                 SetupForm.ForceReset = true;
             }
+
+            if (rx2_enabled) 
+                wdsp.SetChannelState(wdsp.id(2, 0), 1, 0);              // turn ON the DSP channel
         }
 
         private void radRX2ModeButton_CheckedChanged(object sender, System.EventArgs e)
@@ -44317,6 +44394,10 @@ namespace Thetis
             }
             if (chkRX2Mute.Focused)
                 btnHidden.Focus();
+
+            if (path_Illustrator != null)
+                path_Illustrator.pi_Changed();
+
         }
 
         private void comboRX2DisplayMode_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -48050,7 +48131,7 @@ namespace Thetis
                     //        Display.DirectXInit();
                     //        //  Display.RenderDirectX();
                     //    }
-                    break;
+                   // break;
             }
             pause_DisplayThread = false;
         }
@@ -48102,7 +48183,8 @@ namespace Thetis
             // if (chkX2TR.Checked) chkX2TR.BackColor = button_selected_color;
             // else chkX2TR.BackColor = SystemColors.Control;
             txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-            // txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+            if (stereo_diversity)
+                txtVFOBFreq_LostFocus(this, EventArgs.Empty);
         }
 
         private void linearityToolStripMenuItem_Click(object sender, EventArgs e)
@@ -48276,6 +48358,14 @@ namespace Thetis
             else NetworkIO.SetWBPacketsPerFrame(32);
             NetworkIO.SetWBEnable(0, 1);
             cmaster.Getwb(0).WBdisplay.StartDisplay(32);
+        }
+
+        private void pIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (path_Illustrator == null || path_Illustrator.IsDisposed)
+                path_Illustrator = new Path_Illustrator(this);
+            path_Illustrator.Show();
+            path_Illustrator.Focus();
         }
 
         private void chkNB_CheckStateChanged(object sender, EventArgs e)

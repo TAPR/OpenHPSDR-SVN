@@ -8355,6 +8355,12 @@
   <data name="wBToolStripMenuItem.Text" xml:space="preserve">
     <value>WB</value>
   </data>
+   <data name="pIToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 20</value>
+  </data>
+  <data name="pIToolStripMenuItem.Text" xml:space="preserve">
+    <value>PI</value>
+  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
