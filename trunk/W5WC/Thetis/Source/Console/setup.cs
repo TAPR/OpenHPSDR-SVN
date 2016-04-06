@@ -1594,7 +1594,7 @@ namespace Thetis
             else
                 AllowFreqBroadcast = false;
 
-          }
+        }
 #if false
         protected override void Dispose(bool disposing)
         {
@@ -1736,6 +1736,10 @@ namespace Thetis
             // set CW keys
             comboKBCWDot.Text = KeyToString(console.KeyCWDot);
             comboKBCWDash.Text = KeyToString(console.KeyCWDash);
+
+            // set PTT keys
+            comboKBPTTTx.Text = KeyToString(console.KeyPTTTx);
+            comboKBPTTRx.Text = KeyToString(console.KeyPTTRx);
         }
 
         private void InitAppearanceTab()
@@ -2514,6 +2518,10 @@ namespace Thetis
             comboKBFilterDown_SelectedIndexChanged(this, e);
             comboKBModeUp_SelectedIndexChanged(this, e);
             comboKBModeDown_SelectedIndexChanged(this, e);
+            comboKBCWDash_SelectedIndexChanged(this, e);
+            comboKBCWDot_SelectedIndexChanged(this, e);
+            comboKBPTTTx_SelectedIndexChanged(this, e);
+            comboKBPTTRx_SelectedIndexChanged(this, e);
             // Appearance Tab
             clrbtnBtnSel_Changed(this, e);
             clrbtnVFODark_Changed(this, e);
@@ -6763,6 +6771,9 @@ namespace Thetis
                 console.diversityForm.Dispose();
 
             console.EnableDup();
+
+            if (console.path_Illustrator != null)
+                console.path_Illustrator.pi_Changed();
         }
 
         public void UpdateDisplayMeter()
@@ -6901,29 +6912,29 @@ namespace Thetis
                 }
             }
 
-            /*   if (console.RX2PreampPresent)
+            if (console.CurrentHPSDRModel == HPSDRModel.ANAN400D)
+            {
+                if (!tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
                 {
-                    if (!tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
+                    Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 8);
+                }
+                else
+                {
+                    if (tcAlexControl.TabPages.IndexOf(tpAlex2FilterControl) != 8)
                     {
+                        tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
                         Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 8);
                     }
-                    else
-                    {
-                        if (tcAlexControl.TabPages.IndexOf(tpAlex2FilterControl) != 8)
-                        {
-                            tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
-                            Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 8);
-                        }
-                    }
-                } */
-            // else // if (!console.RX2PreampPresent)
-            // {
-            if (tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
-            {
-                tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
-                tcAlexControl.SelectedIndex = 0;
+                }
             }
-            // }
+            else 
+            {
+                if (tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
+                {
+                    tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
+                    tcAlexControl.SelectedIndex = 0;
+                }
+            }
 
             // now make sure enablements are correct 
             if (!chkAlexPresent.Checked)
@@ -7632,33 +7643,31 @@ namespace Thetis
         //#if false      
         private void comboAudioSampleRate1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            /*
             if (comboAudioSampleRate1.SelectedIndex < 0) return;
 
             int old_rate = console.SampleRate1;
             int new_rate = Int32.Parse(comboAudioSampleRate1.Text);
             double bin_width;
             console.specRX.GetSpecRX(0).SampleRate = new_rate;
-            //  console.specRX.GetSpecRX(1).SampleRate = new_rate;
             bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(0).FFTSize;
             lblDisplayBinWidth.Text = bin_width.ToString("N3");
-            // bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(1).FFTSize;
-            // lblRX2DisplayBinWidth.Text = bin_width.ToString("N3");
+            */
 
-            bool power = console.PowerOn;
+            //  bool power = console.PowerOn;
 
-            if (power && new_rate != old_rate)
-            {
-                //console.PowerOn = false;
-                //Thread.Sleep(100);
-                //wdsp.SetChannelState(wdsp.id(0, 0), 0, 1);
-                //if (console.radio.GetDSPRX(0, 1).Active) wdsp.SetChannelState(wdsp.id(0, 1), 0, 1);
-                //if (console.radio.GetDSPRX(1, 0).Active) wdsp.SetChannelState(wdsp.id(2, 0), 0, 1);
-            }
+            //if (power && new_rate != old_rate)
+            //{
+            //console.PowerOn = false;
+            //Thread.Sleep(100);
+            //}
 
+            /*
             console.SampleRate1 = new_rate;
             int new_size = cmaster.GetBuffSize(new_rate);
             console.specRX.GetSpecRX(0).BlockSize = new_size;
             console.BlockSize1 = new_size;
+            */
 
             //Display.DrawBackground();
 
@@ -7688,14 +7697,73 @@ namespace Thetis
             //    //}
             //}
 
-            if (power && new_rate != old_rate)
-            {
-                //console.PowerOn = true;
-                //wdsp.SetChannelState(wdsp.id(0, 0), 1, 1);
-                //if (console.radio.GetDSPRX(0, 1).Active) wdsp.SetChannelState(wdsp.id(0, 1), 1, 1);
-                //if (console.radio.GetDSPRX(1, 0).Active) wdsp.SetChannelState(wdsp.id(2, 0), 1, 1);
+            //if (power && new_rate != old_rate)
+            //{
+            //    console.PowerOn = true;
+            //}
 
+            // ********** BEGIN PROPOSED CODE **********
+            if (comboAudioSampleRate1.SelectedIndex < 0) return;
+
+            int old_rate = console.SampleRate1;
+            int new_rate = Int32.Parse(comboAudioSampleRate1.Text);
+            bool was_enabled = true;
+            if (new_rate != old_rate)
+            {
+                // turn OFF the DSP channels so they get flushed out (must do while data is flowing to get slew-down and flush)
+                wdsp.SetChannelState(wdsp.id(0, 1), 0, 0);
+                wdsp.SetChannelState(wdsp.id(0, 0), 0, 1);
+                Thread.Sleep(10);
+
+                // remove the RX1 main and sub audio streams from the mix set
+                unsafe { cmaster.SetAAudioMixStates((void*)0, 0, 3, 0); }
+
+                // turn OFF the DDC(s) 
+                NetworkIO.EnableRx(0, 0);
+                NetworkIO.EnableRx(1, 0);
+                NetworkIO.EnableRx(2, 0);
+
+                //wait for all inflight packets to arrive - need to experiment with this delay value
+                Thread.Sleep(20);
+
+                // flush any buffers where these old-rate packets may be stored ... this is done via operations in SetXcmInrate()
+
+                // in the property SampleRate1:
+                //    (1) the new samplerate will be sent to the DDC
+                //    (2) SetXcmInrate() is called by Audio.SampleRate1 which is called by console.SampleRate1
+                console.SampleRate1 = new_rate;
+
+                // set the corresponding new buffer size
+                int new_size = cmaster.GetBuffSize(new_rate);
+                console.BlockSize1 = new_size;
+
+                // set rate and size for the display too; could move this to SetXcmInrate() in cmaster.c
+                console.specRX.GetSpecRX(0).SampleRate = new_rate;
+                console.specRX.GetSpecRX(0).BlockSize = new_size;
+
+                if (was_enabled)
+                {
+                    // turn on the DDC(s)
+                    console.UpdateReceivers(true);
+                    // wait for samples at the new rate to be received
+                    Thread.Sleep(1);
+                    // add the audio streams to the mix set
+                    unsafe { cmaster.SetAAudioMixStates((void*)0, 0, 3, 3); }
+                }
+
+                // turn ON the DSP channels
+                int w_enable = 0;
+                if (was_enabled) w_enable = 1;
+                wdsp.SetChannelState(wdsp.id(0, 0), w_enable, 0);
+                if (console.radio.GetDSPRX(0, 1).Active) wdsp.SetChannelState(wdsp.id(0, 1), w_enable, 0);
+
+                // calculate and display the new bin_width
+                double bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(0).FFTSize;
+                lblDisplayBinWidth.Text = bin_width.ToString("N3");
             }
+
+            // ********** END PROPOSED CODE **********
+
         }
         //#endif
 
@@ -7705,6 +7773,50 @@ namespace Thetis
 
             int old_rate = console.SampleRateRX2;
             int new_rate = Int32.Parse(comboAudioSampleRateRX2.Text);
+            // BEGIN WCP CODE
+            bool was_enabled = console.RX2Enabled;
+            if (new_rate != old_rate)
+            {
+                // turn OFF the DSP channel so it gets flushed out (must do while data is flowing to get slew-down and flush)
+                wdsp.SetChannelState(wdsp.id(2, 0), 0, 1);
+                // remove the RX2 audio stream from the mix set
+                unsafe { cmaster.SetAAudioMixState((void*)0, 0, 2, false); }
+                // turn OFF the DDC for RX2; had to add rx2_enabled as a parameter to UpdateReceivers() to do this --- THIS IS S HACK.  BETTER WAY?
+                console.UpdateReceivers(false);
+                // wait for all inflight packets to arrive
+                Thread.Sleep(20);   // need to experiment with this time
+
+                // flush any buffers where these old-rate packets may be stored ... this is done via operations in SetXcmInrate()
+
+                // in the property SampleRateRX2:
+                //    (1) the new samplerate will be sent to the DDC
+                //    (2) SetXcmInrate() is called by Audio.SampleRateRX2 which is called by console.SampleRateRX2
+                console.SampleRateRX2 = new_rate;
+                // set the corresponding new buffer size
+                int new_size = cmaster.GetBuffSize(new_rate);
+                console.BlockSizeRX2 = new_size;
+                // set rate and size for the display too; could move this to SetXcmInrate() in cmaster.c
+                console.specRX.GetSpecRX(1).SampleRate = new_rate;
+                console.specRX.GetSpecRX(1).BlockSize = new_size;
+                // turn the DDC for RX2 back ON; had to add rx2_enabled as a parameter to UpdateReceivers() to do this
+                if (was_enabled)
+                {
+                    console.UpdateReceivers(true);
+                    // wait for samples at the new rate to be received
+                    Thread.Sleep(1);   // need to experiment with this time
+                    // add the RX2 audio stream to the mix set
+                    unsafe { cmaster.SetAAudioMixState((void*)0, 0, 2, true); }
+                }
+                // turn ON the DSP channel if it was ON before
+                int w_enable = 0;
+                if (was_enabled) w_enable = 1;
+                wdsp.SetChannelState(wdsp.id(2, 0), w_enable, 0);
+                // calculate and display the new bin_width
+                double bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(1).FFTSize;
+                lblRX2DisplayBinWidth.Text = bin_width.ToString("N3");
+            }
+            // END WCP CODE
+            /* BEGIN WCP EXCLUDE
             double bin_width;
             // console.specRX.GetSpecRX(0).SampleRate = new_rate;
             console.specRX.GetSpecRX(1).SampleRate = new_rate;
@@ -7725,7 +7837,7 @@ namespace Thetis
             int new_size = cmaster.GetBuffSize(new_rate);
             console.specRX.GetSpecRX(1).BlockSize = new_size;
             console.BlockSizeRX2 = new_size;
-
+            END WCP EXCLUDE */
             //Display.DrawBackground();
 
             //if (!initializing)
@@ -7772,8 +7884,8 @@ namespace Thetis
             {
                 //console.PowerOn = false;
                 //Thread.Sleep(100);
-                Audio.EnableVAC1(false); 
-               // Thread.Sleep(10);
+                Audio.EnableVAC1(false);
+                // Thread.Sleep(10);
             }
 
             console.SampleRate2 = new_rate;
@@ -7782,7 +7894,7 @@ namespace Thetis
             if (poweron && chkAudioEnableVAC.Checked && new_rate != old_rate)
             {
                 // console.PowerOn = true;
-               // Thread.Sleep(10);
+                // Thread.Sleep(10);
                 Audio.VACEnabled = chkAudioEnableVAC.Checked;
             }
         }
@@ -7799,7 +7911,7 @@ namespace Thetis
             {
                 //console.PowerOn = false;
                 //Thread.Sleep(100);
-                Audio.EnableVAC2(false); 
+                Audio.EnableVAC2(false);
                 //Thread.Sleep(10);
             }
 
@@ -7809,7 +7921,7 @@ namespace Thetis
             if (poweron && chkVAC2Enable.Checked && new_rate != old_rate)
             {
                 //console.PowerOn = true;
-               // Thread.Sleep(10);
+                // Thread.Sleep(10);
                 Audio.VAC2Enabled = chkVAC2Enable.Checked;
             }
         }
@@ -10543,6 +10655,16 @@ namespace Thetis
         private void comboKBXITDown_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             console.KeyXITDown = (Keys)KeyList[comboKBXITDown.SelectedIndex];
+        }
+
+        private void comboKBPTTTx_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyPTTTx = (Keys)KeyList[comboKBPTTTx.SelectedIndex];
+        }
+
+        private void comboKBPTTRx_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyPTTRx = (Keys)KeyList[comboKBPTTRx.SelectedIndex];
         }
 
         #endregion
@@ -14161,7 +14283,12 @@ namespace Thetis
             }
 
             Alex.getAlex().setRxOnlyAnt(band, (byte)ant);
-            console.AlexAntCtrlEnabled = true; // need side effect of prop set to push data down to C code 
+ 
+            if (console.path_Illustrator != null)
+                console.path_Illustrator.pi_Changed();
+
+           console.AlexAntCtrlEnabled = true; // need side effect of prop set to push data down to C code 
+
             return;
         }
 
@@ -14209,10 +14336,12 @@ namespace Thetis
             if (is_xmit)
             {
                 Alex.getAlex().setTxAnt(band, (byte)ant);
+                pi_TxAnt = ant;                                 // Path_Illustrator support
             }
             else
             {
                 Alex.getAlex().setRxAnt(band, (byte)ant);
+                pi_RxAnt = ant;                                 // Path_Illustrator support
             }
 
             console.AlexAntCtrlEnabled = true; // need side effect of prop set to push data down to C code 
@@ -15173,11 +15302,15 @@ namespace Thetis
         private void chkDisableHPFonTX_CheckedChanged(object sender, EventArgs e)
         {
             console.DisableHPFonTX = chkDisableHPFonTX.Checked;
+            if (console.path_Illustrator != null)
+                console.path_Illustrator.pi_Changed();
         }
 
         private void chkAlexHPFBypass_CheckedChanged(object sender, EventArgs e)
         {
             console.AlexHPFBypass = chkAlexHPFBypass.Checked;
+            if (console.path_Illustrator != null)
+                console.path_Illustrator.pi_Changed();
         }
 
         private void chkAlex2HPFBypass_CheckedChanged(object sender, EventArgs e)
@@ -15258,6 +15391,8 @@ namespace Thetis
                 chkEXT2OutOnTx.Checked = false;
             }
             Alex.RxOutOnTx = chkRxOutOnTx.Checked;
+            if (console.path_Illustrator != null)
+                console.path_Illustrator.pi_Changed();
         }
 
         private void chkSWRProtection_CheckedChanged(object sender, EventArgs e)
@@ -15831,7 +15966,7 @@ namespace Thetis
             return;
         }
 
-        private void ConfigMidi2CatSetupClosed(object sender, FormClosedEventArgs e) 
+        private void ConfigMidi2CatSetupClosed(object sender, FormClosedEventArgs e)
         {
             if (ConfigMidi2Cat != null)
             {
@@ -15927,7 +16062,7 @@ namespace Thetis
             {
                 psDisabled = true;
                 NetworkIO.SetPureSignal(0);
-                console.UpdateReceivers();
+                console.UpdateReceivers(console.RX2Enabled);
                 console.UpdateAAudioMixerStates();
                 unsafe { cmaster.LoadRouterControlBit((void*)0, 0, 0, 0); }
                 console.radio.GetDSPTX(0).PSRunCal = false;
@@ -15936,7 +16071,7 @@ namespace Thetis
             {
                 NetworkIO.SetPureSignal(1);
                 console.UpdateAAudioMixerStates();
-                console.UpdateReceivers();
+                console.UpdateReceivers(console.RX2Enabled);
                 unsafe { cmaster.LoadRouterControlBit((void*)0, 0, 0, 1); }
                 console.radio.GetDSPTX(0).PSRunCal = true;
             }
@@ -15945,6 +16080,8 @@ namespace Thetis
                 psDisabled = false;
 
             console.EnableDup();
+            if (console.path_Illustrator != null)
+                console.path_Illustrator.pi_Changed();
         }
 
         private void comboDSPRxWindow_SelectedIndexChanged(object sender, EventArgs e)
@@ -15998,6 +16135,8 @@ namespace Thetis
                 chkEXT2OutOnTx.Checked = false;
             }
             Alex.Ext1OutOnTx = chkEXT1OutOnTx.Checked;
+            if (console.path_Illustrator != null)
+                console.path_Illustrator.pi_Changed();
         }
 
         private void chkEXT2OutOnTx_CheckedChanged(object sender, EventArgs e)
@@ -16008,6 +16147,8 @@ namespace Thetis
                 chkEXT1OutOnTx.Checked = false;
             }
             Alex.Ext2OutOnTx = chkEXT2OutOnTx.Checked;
+            if (console.path_Illustrator != null)
+                console.path_Illustrator.pi_Changed();
         }
 
         private void udTXGenScale_ValueChanged(object sender, EventArgs e)
@@ -16203,6 +16344,189 @@ namespace Thetis
             NetworkIO.SetCWPTTDelay((int)udHWKeyDownDelay.Value);
         }
 
+        // Path_Illustrator Properties added
+
+        public bool RadBPHPFled
+        {
+            get { return radBPHPFled.Checked; }
+        }
+
+        public bool ChkDisableHPFOnTx
+        {
+            get { return chkDisableHPFonTX.Checked; }
+        }
+
+        public bool RadRX1ADC1
+        {
+            get { return radRX1ADC1.Checked; }
+        }
+
+        public bool RadRX1ADC2
+        {
+            get { return radRX1ADC2.Checked; }
+        }
+
+        public bool RadRX1ADC3
+        {
+            get { return radRX1ADC3.Checked; }
+        }
+
+        public bool RadRX2ADC1
+        {
+            get { return radRX2ADC1.Checked; }
+        }
+
+        public bool RadRX2ADC2
+        {
+            get { return radRX2ADC2.Checked; }
+        }
+
+        public bool RadRX2ADC3
+        {
+            get { return radRX2ADC3.Checked; }
+        }
+
+        public bool RadRX3ADC1
+        {
+            get { return radRX3ADC1.Checked; }
+        }
+
+        public bool RadRX3ADC2
+        {
+            get { return radRX3ADC2.Checked; }
+        }
+
+        public bool RadRX3ADC3
+        {
+            get { return radRX3ADC3.Checked; }
+        }
+
+        public bool RadRX4ADC1
+        {
+            get { return radRX4ADC1.Checked; }
+        }
+
+        public bool RadRX4ADC2
+        {
+            get { return radRX4ADC2.Checked; }
+        }
+
+        public bool RadRX4ADC3
+        {
+            get { return radRX4ADC3.Checked; }
+        }
+
+        public bool RadRX5ADC1
+        {
+            get { return radRX5ADC1.Checked; }
+        }
+
+        public bool RadRX5ADC2
+        {
+            get { return radRX5ADC2.Checked; }
+        }
+
+        public bool RadRX5ADC3
+        {
+            get { return radRX5ADC3.Checked; }
+        }
+
+        public bool RadRX6ADC1
+        {
+            get { return radRX6ADC1.Checked; }
+        }
+
+        public bool RadRX6ADC2
+        {
+            get { return radRX6ADC2.Checked; }
+        }
+
+        public bool RadRX6ADC3
+        {
+            get { return radRX6ADC3.Checked; }
+        }
+
+        public bool RadRX7ADC1
+        {
+            get { return radRX7ADC1.Checked; }
+        }
+
+        public bool RadRX7ADC2
+        {
+            get { return radRX7ADC2.Checked; }
+        }
+
+        public bool RadRX7ADC3
+        {
+            get { return radRX7ADC3.Checked; }
+        }
+
+        public bool RadGenModelANAN10
+        {
+            get { return (radGenModelANAN10.Checked || radGenModelANAN10E.Checked); }
+        }
+
+        public bool RadGenModelANAN100
+        {
+            get { return (radGenModelANAN100.Checked || radGenModelANAN100B.Checked); }
+        }
+
+        public bool RadGenModelANAN100D
+        {
+            get { return radGenModelANAN100D.Checked || radGenModelOrion.Checked; }
+        }
+
+        public bool RadGenModelHPSDR
+        {
+            get { return radGenModelHPSDR.Checked; }
+        }
+
+        public bool RadGenModelHermes
+        {
+            get { return radGenModelHermes.Checked; }
+        }
+
+        private int pi_RxAnt;
+        public int PI_RxAnt
+        {
+            get { return pi_RxAnt; }
+        }
+
+        private int pi_TxAnt;
+        public int PI_TxAnt
+        {
+            get { return pi_TxAnt; }
+        }
+
+        private int alex_EXT2EXT1XVTR = 0;
+        public int Alex_EXT2EXT1XVTR
+        {
+            get { return alex_EXT2EXT1XVTR; }
+        }
+
+
+        public bool ChkDisableRXOut
+        {
+            get { return chkDisableRXOut.Checked; }
+        }
+
+        public bool ChkRxOutOnTx
+        {
+            get { return chkRxOutOnTx.Checked; }
+        }
+
+        public bool ChkRx1InOnTx
+        {
+            get { return chkEXT2OutOnTx.Checked; }
+        }
+
+        public bool ChkRx2InOnTx
+        {
+            get { return chkEXT1OutOnTx.Checked; }
+        }
+
+        // end of Path_Illustrator Properties support
+
         private void radRXADC_CheckedChanged(object sender, EventArgs e)
         {
             int val = 0;
@@ -16243,6 +16567,8 @@ namespace Thetis
 
             console.RXADCCtrl2 = val;
             // JanusAudio.SetADC_cntrl2(val);
+            if (console.path_Illustrator != null)
+                console.path_Illustrator.pi_Changed();
         }
 
         private void comboDSPNOBmode_SelectedIndexChanged(object sender, EventArgs e)
@@ -16779,6 +17105,8 @@ namespace Thetis
         private void chkDisableRXOut_CheckedChanged(object sender, EventArgs e)
         {
             console.RxOutOverride = chkDisableRXOut.Checked;
+            if (console.path_Illustrator != null)
+                console.path_Illustrator.pi_Changed();
         }
 
         private void chkSplitPins_CheckedChanged(object sender, EventArgs e)

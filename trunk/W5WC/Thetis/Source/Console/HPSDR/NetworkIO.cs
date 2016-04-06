@@ -29,7 +29,7 @@ namespace Thetis
     using System.Net.Sockets;
     using System.Net.NetworkInformation;
 
-    public class NetworkIO
+    class NetworkIO
     {
         public NetworkIO()
         {

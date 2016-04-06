@@ -1355,9 +1355,9 @@ namespace Thetis
                     int sample_rate = sample_rate2;
                     int block_size = block_size_vac;
                     double in_latency = vac1_latency_manual ? latency2 / 1000.0 : PA19.PA_GetDeviceInfo(input_dev2).defaultLowInputLatency;
-                    double out_latency = vac1_latency_manual_out ? latency2_out / 1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
+                    double out_latency = vac1_latency_manual ? latency2 / 1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
                     double pa_in_latency = vac1_latency_pa_in_manual ? latency_pa_in / 1000.0 : PA19.PA_GetDeviceInfo(input_dev2).defaultLowInputLatency;
-                    double pa_out_latency = vac1_latency_pa_out_manual ? latency_pa_out / 1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
+                    double pa_out_latency = vac1_latency_pa_in_manual ? latency_pa_in / 1000.0 : PA19.PA_GetDeviceInfo(output_dev2).defaultLowOutputLatency;
 
                     if (vac_output_iq)
                     {
@@ -1415,9 +1415,9 @@ namespace Thetis
                     int block_size = block_size_vac2;
 
                     double in_latency = vac2_latency_manual ? latency3/1000.0 : PA19.PA_GetDeviceInfo(input_dev3).defaultLowInputLatency;
-                    double out_latency = vac2_latency_out_manual ? vac2_latency_out/1000.0 : PA19.PA_GetDeviceInfo(output_dev3).defaultLowOutputLatency;
+                    double out_latency = vac2_latency_manual ? latency3/1000.0 : PA19.PA_GetDeviceInfo(output_dev3).defaultLowOutputLatency;
                     double pa_in_latency = vac2_latency_pa_in_manual ? vac2_latency_pa_in / 1000.0 : PA19.PA_GetDeviceInfo(input_dev3).defaultLowInputLatency;
-                    double pa_out_latency = vac2_latency_pa_out_manual ? vac2_latency_pa_out / 1000.0 : PA19.PA_GetDeviceInfo(output_dev3).defaultLowOutputLatency;
+                    double pa_out_latency = vac2_latency_pa_in_manual ? vac2_latency_pa_in / 1000.0 : PA19.PA_GetDeviceInfo(output_dev3).defaultLowOutputLatency;
 
                     if (vac2_output_iq)
                     {

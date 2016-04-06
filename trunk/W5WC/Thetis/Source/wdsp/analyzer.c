@@ -517,7 +517,6 @@ void stitch(int disp)
 	int i, j, k, n, m;
 	double* ptr;
 
-	EnterCriticalSection(&a->ResampleSection);
 	// stitch
 	m = 0;
 	ptr = a->pre_av_out;
@@ -529,6 +528,7 @@ void stitch(int disp)
 	}
 	for (i = 0; i < a->num_pixout; i++)	// for each output
 	{
+		EnterCriticalSection(&a->ResampleSection);
 		// if a detection of the same 'det_type' has already been done, use that result
 		j = i - 1;
 		k = i;
