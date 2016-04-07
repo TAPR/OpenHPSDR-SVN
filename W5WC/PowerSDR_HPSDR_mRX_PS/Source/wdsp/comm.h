@@ -80,7 +80,7 @@ warren@wpratt.com
 #include "wcpAGC.h"
 
 // manage differences among consoles
-//#define _Thetis
+#define _Thetis
 
 // channel definitions
 #define MAX_CHANNELS					32					// maximum number of supported channels
