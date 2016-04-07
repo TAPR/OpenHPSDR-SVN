@@ -202,12 +202,14 @@ void SetDSPSamplerate (int channel, int dsp_rate)
 {
 	if (dsp_rate != ch[channel].dsp_rate)
 	{
+		int oldstate = SetChannelState (channel, 0, 1);
 		pre_main_destroy (channel);
 		post_main_destroy (channel);
 		ch[channel].dsp_rate = dsp_rate;
 		pre_main_build (channel);
 		setDSPSamplerate_main (channel);
 		post_main_build (channel);
+		SetChannelState (channel, oldstate, 0);
 	}
 }
 

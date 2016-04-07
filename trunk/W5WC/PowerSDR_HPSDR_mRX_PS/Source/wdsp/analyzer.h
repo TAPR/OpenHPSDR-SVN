@@ -134,7 +134,7 @@ typedef struct _dp
 	double inv_enb;
 	double norm_oneHz;										// dB factor to normalize to one Hz bandwidth
 	int sample_rate;										// sample rate; used for normalization calculations
-	int normalize;
+	int normalize[dMAX_PIXOUTS];
 }  dp, *DP;
 
 DP pdisp[dMAX_DISPLAYS];									// array of pointers to instance data
