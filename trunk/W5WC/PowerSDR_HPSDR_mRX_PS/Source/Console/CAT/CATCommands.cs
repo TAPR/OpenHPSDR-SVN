@@ -2757,13 +2757,13 @@ namespace PowerSDR
 			if(s.Length == parser.nSet)
 			{
 				int width = Index2Width(s);
-				console.DSPBufCWTX = width;
-				console.SetupForm.DSPCWTXBuffer = width;
+				//console.DSPBufCWTX = width;
+				//console.SetupForm.DSPCWTXBuffer = width;
 				return "";
 			}
 			else if(s.Length == parser.nGet)
 			{
-				return Width2Index(console.DSPBufCWTX);
+				return Width2Index(console.DSPBufCWRX);
 			}
 			else
 				return parser.Error1;

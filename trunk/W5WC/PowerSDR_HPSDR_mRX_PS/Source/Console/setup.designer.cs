@@ -1288,42 +1288,63 @@
             this.tpDSP = new System.Windows.Forms.TabPage();
             this.tcDSP = new System.Windows.Forms.TabControl();
             this.tpDSPOptions = new System.Windows.Forms.TabPage();
-            this.grpDSPSNB = new System.Windows.Forms.GroupBoxTS();
-            this.udDSPSNBThresh2 = new System.Windows.Forms.NumericUpDownTS();
-            this.lblDSPSNBThresh2 = new System.Windows.Forms.LabelTS();
-            this.udDSPSNBThresh1 = new System.Windows.Forms.NumericUpDownTS();
-            this.lblDSPSNBThresh1 = new System.Windows.Forms.LabelTS();
-            this.grpDSPSpeechProcessor = new System.Windows.Forms.GroupBoxTS();
-            this.chkDSPCESSB = new System.Windows.Forms.CheckBoxTS();
-            this.chkDSPTXMeterPeak = new System.Windows.Forms.CheckBoxTS();
+            this.grpDSPFilterType = new System.Windows.Forms.GroupBoxTS();
+            this.grpDSPFiltTypeFM = new System.Windows.Forms.GroupBoxTS();
+            this.comboDSPFMTXFiltType = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS378 = new System.Windows.Forms.LabelTS();
+            this.comboDSPFMRXFiltType = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS379 = new System.Windows.Forms.LabelTS();
+            this.grpDSPFiltTypeDig = new System.Windows.Forms.GroupBoxTS();
+            this.comboDSPDigTXFiltType = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS380 = new System.Windows.Forms.LabelTS();
+            this.comboDSPDigRXFiltType = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS381 = new System.Windows.Forms.LabelTS();
+            this.grpDSPFiltTypeCW = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS382 = new System.Windows.Forms.LabelTS();
+            this.comboDSPCWRXFiltType = new System.Windows.Forms.ComboBoxTS();
+            this.grpDSPFiltTypePhone = new System.Windows.Forms.GroupBoxTS();
+            this.comboDSPPhoneTXFiltType = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS384 = new System.Windows.Forms.LabelTS();
+            this.comboDSPPhoneRXFiltType = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS385 = new System.Windows.Forms.LabelTS();
+            this.grpDSPFilterSize = new System.Windows.Forms.GroupBoxTS();
+            this.grpDSPFiltSizeFM = new System.Windows.Forms.GroupBoxTS();
+            this.comboDSPFMTXFiltSize = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS370 = new System.Windows.Forms.LabelTS();
+            this.comboDSPFMRXFiltSize = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS371 = new System.Windows.Forms.LabelTS();
+            this.grpDSPFiltSizeDig = new System.Windows.Forms.GroupBoxTS();
+            this.comboDSPDigTXFiltSize = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS372 = new System.Windows.Forms.LabelTS();
+            this.comboDSPDigRXFiltSize = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS373 = new System.Windows.Forms.LabelTS();
+            this.grpDSPFiltSizeCW = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS374 = new System.Windows.Forms.LabelTS();
+            this.comboDSPCWRXFiltSize = new System.Windows.Forms.ComboBoxTS();
+            this.grpDSPFiltSizePhone = new System.Windows.Forms.GroupBoxTS();
+            this.comboDSPPhoneTXFiltSize = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS376 = new System.Windows.Forms.LabelTS();
+            this.comboDSPPhoneRXFiltSize = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS377 = new System.Windows.Forms.LabelTS();
             this.grpDSPBufferSize = new System.Windows.Forms.GroupBoxTS();
+            this.grpDSPBufFM = new System.Windows.Forms.GroupBoxTS();
+            this.comboDSPFMTXBuf = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS368 = new System.Windows.Forms.LabelTS();
+            this.comboDSPFMRXBuf = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS369 = new System.Windows.Forms.LabelTS();
             this.grpDSPBufDig = new System.Windows.Forms.GroupBoxTS();
             this.comboDSPDigTXBuf = new System.Windows.Forms.ComboBoxTS();
             this.lblDSPDigBufferRX = new System.Windows.Forms.LabelTS();
             this.comboDSPDigRXBuf = new System.Windows.Forms.ComboBoxTS();
             this.lblDSPDigBufferTX = new System.Windows.Forms.LabelTS();
             this.grpDSPBufCW = new System.Windows.Forms.GroupBoxTS();
-            this.comboDSPCWTXBuf = new System.Windows.Forms.ComboBoxTS();
             this.lblDSPCWBufferRX = new System.Windows.Forms.LabelTS();
             this.comboDSPCWRXBuf = new System.Windows.Forms.ComboBoxTS();
-            this.lblDSPCWBufferTX = new System.Windows.Forms.LabelTS();
             this.grpDSPBufPhone = new System.Windows.Forms.GroupBoxTS();
             this.comboDSPPhoneTXBuf = new System.Windows.Forms.ComboBoxTS();
             this.lblDSPPhoneBufferRX = new System.Windows.Forms.LabelTS();
             this.comboDSPPhoneRXBuf = new System.Windows.Forms.ComboBoxTS();
             this.lblDSPPhoneBufferTX = new System.Windows.Forms.LabelTS();
-            this.grpDSPNB = new System.Windows.Forms.GroupBoxTS();
-            this.labelTS326 = new System.Windows.Forms.LabelTS();
-            this.comboDSPNOBmode = new System.Windows.Forms.ComboBoxTS();
-            this.labelTS154 = new System.Windows.Forms.LabelTS();
-            this.udDSPNBLag = new System.Windows.Forms.NumericUpDownTS();
-            this.labelTS153 = new System.Windows.Forms.LabelTS();
-            this.udDSPNBLead = new System.Windows.Forms.NumericUpDownTS();
-            this.labelTS152 = new System.Windows.Forms.LabelTS();
-            this.udDSPNBTransition = new System.Windows.Forms.NumericUpDownTS();
-            this.labelTS151 = new System.Windows.Forms.LabelTS();
-            this.udDSPNB = new System.Windows.Forms.NumericUpDownTS();
-            this.lblDSPNBThreshold = new System.Windows.Forms.LabelTS();
             this.grpDSPWintype = new System.Windows.Forms.GroupBoxTS();
             this.labelTS144 = new System.Windows.Forms.LabelTS();
             this.labelTS302 = new System.Windows.Forms.LabelTS();
@@ -1598,12 +1619,33 @@
             this.udMNFWidth = new System.Windows.Forms.NumericUpDownTS();
             this.udMNFFreq = new System.Windows.Forms.NumericUpDownTS();
             this.udMNFNotch = new System.Windows.Forms.NumericUpDownTS();
+            this.tpDSPNB = new System.Windows.Forms.TabPage();
+            this.grpDSPSNB = new System.Windows.Forms.GroupBoxTS();
+            this.udDSPSNBThresh2 = new System.Windows.Forms.NumericUpDownTS();
+            this.lblDSPSNBThresh2 = new System.Windows.Forms.LabelTS();
+            this.udDSPSNBThresh1 = new System.Windows.Forms.NumericUpDownTS();
+            this.lblDSPSNBThresh1 = new System.Windows.Forms.LabelTS();
+            this.grpDSPNB = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS326 = new System.Windows.Forms.LabelTS();
+            this.comboDSPNOBmode = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS154 = new System.Windows.Forms.LabelTS();
+            this.udDSPNBLag = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS153 = new System.Windows.Forms.LabelTS();
+            this.udDSPNBLead = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS152 = new System.Windows.Forms.LabelTS();
+            this.udDSPNBTransition = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS151 = new System.Windows.Forms.LabelTS();
+            this.udDSPNB = new System.Windows.Forms.NumericUpDownTS();
+            this.lblDSPNBThreshold = new System.Windows.Forms.LabelTS();
             this.tpTransmit = new System.Windows.Forms.TabPage();
             this.chkLimitExtAmpOnOverload = new System.Windows.Forms.CheckBoxTS();
             this.grpExtTXInhibit = new System.Windows.Forms.GroupBoxTS();
             this.chkTXInhibit = new System.Windows.Forms.CheckBoxTS();
             this.chkTXInhibitSense = new System.Windows.Forms.CheckBoxTS();
+            this.chkDSPTXMeterPeak = new System.Windows.Forms.CheckBoxTS();
             this.chkSaveTXProfileOnExit = new System.Windows.Forms.CheckBoxTS();
+            this.grpDSPSpeechProcessor = new System.Windows.Forms.GroupBoxTS();
+            this.chkDSPCESSB = new System.Windows.Forms.CheckBoxTS();
             this.chkAutoSaveTXProfile = new System.Windows.Forms.CheckBoxTS();
             this.udTXFilterLowSave = new System.Windows.Forms.NumericUpDownTS();
             this.udTXFilterHighSave = new System.Windows.Forms.NumericUpDownTS();
@@ -2816,19 +2858,21 @@
             this.tpDSP.SuspendLayout();
             this.tcDSP.SuspendLayout();
             this.tpDSPOptions.SuspendLayout();
-            this.grpDSPSNB.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh1)).BeginInit();
-            this.grpDSPSpeechProcessor.SuspendLayout();
+            this.grpDSPFilterType.SuspendLayout();
+            this.grpDSPFiltTypeFM.SuspendLayout();
+            this.grpDSPFiltTypeDig.SuspendLayout();
+            this.grpDSPFiltTypeCW.SuspendLayout();
+            this.grpDSPFiltTypePhone.SuspendLayout();
+            this.grpDSPFilterSize.SuspendLayout();
+            this.grpDSPFiltSizeFM.SuspendLayout();
+            this.grpDSPFiltSizeDig.SuspendLayout();
+            this.grpDSPFiltSizeCW.SuspendLayout();
+            this.grpDSPFiltSizePhone.SuspendLayout();
             this.grpDSPBufferSize.SuspendLayout();
+            this.grpDSPBufFM.SuspendLayout();
             this.grpDSPBufDig.SuspendLayout();
             this.grpDSPBufCW.SuspendLayout();
             this.grpDSPBufPhone.SuspendLayout();
-            this.grpDSPNB.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBLag)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBLead)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBTransition)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPNB)).BeginInit();
             this.grpDSPWintype.SuspendLayout();
             this.tpDSPKeyer.SuspendLayout();
             this.grpKeyerConnections.SuspendLayout();
@@ -2943,8 +2987,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.udMNFWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMNFFreq)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMNFNotch)).BeginInit();
+            this.tpDSPNB.SuspendLayout();
+            this.grpDSPSNB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh1)).BeginInit();
+            this.grpDSPNB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBLag)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBLead)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBTransition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPNB)).BeginInit();
             this.tpTransmit.SuspendLayout();
             this.grpExtTXInhibit.SuspendLayout();
+            this.grpDSPSpeechProcessor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udTXFilterHighSave)).BeginInit();
             this.grpBoxMic.SuspendLayout();
@@ -5470,6 +5524,8 @@
             // 
             // chkDisablePureSignal
             // 
+            this.chkDisablePureSignal.Checked = true;
+            this.chkDisablePureSignal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkDisablePureSignal.Image = null;
             this.chkDisablePureSignal.Location = new System.Drawing.Point(6, 21);
             this.chkDisablePureSignal.Name = "chkDisablePureSignal";
@@ -5491,6 +5547,8 @@
             // 
             // chkLimitRX
             // 
+            this.chkLimitRX.Checked = true;
+            this.chkLimitRX.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkLimitRX.Image = null;
             this.chkLimitRX.Location = new System.Drawing.Point(24, 19);
             this.chkLimitRX.Name = "chkLimitRX";
@@ -21132,6 +21190,7 @@
             this.tcDSP.Controls.Add(this.tpDSPEER);
             this.tcDSP.Controls.Add(this.tpDSPNR);
             this.tcDSP.Controls.Add(this.tpDSPMNF);
+            this.tcDSP.Controls.Add(this.tpDSPNB);
             this.tcDSP.Location = new System.Drawing.Point(0, 0);
             this.tcDSP.Name = "tcDSP";
             this.tcDSP.SelectedIndex = 0;
@@ -21140,11 +21199,9 @@
             // 
             // tpDSPOptions
             // 
-            this.tpDSPOptions.Controls.Add(this.grpDSPSNB);
-            this.tpDSPOptions.Controls.Add(this.grpDSPSpeechProcessor);
-            this.tpDSPOptions.Controls.Add(this.chkDSPTXMeterPeak);
+            this.tpDSPOptions.Controls.Add(this.grpDSPFilterType);
+            this.tpDSPOptions.Controls.Add(this.grpDSPFilterSize);
             this.tpDSPOptions.Controls.Add(this.grpDSPBufferSize);
-            this.tpDSPOptions.Controls.Add(this.grpDSPNB);
             this.tpDSPOptions.Controls.Add(this.grpDSPWintype);
             this.tpDSPOptions.Location = new System.Drawing.Point(4, 22);
             this.tpDSPOptions.Name = "tpDSPOptions";
@@ -21152,142 +21209,561 @@
             this.tpDSPOptions.TabIndex = 2;
             this.tpDSPOptions.Text = "Options";
             // 
-            // grpDSPSNB
+            // grpDSPFilterType
             // 
-            this.grpDSPSNB.Controls.Add(this.udDSPSNBThresh2);
-            this.grpDSPSNB.Controls.Add(this.lblDSPSNBThresh2);
-            this.grpDSPSNB.Controls.Add(this.udDSPSNBThresh1);
-            this.grpDSPSNB.Controls.Add(this.lblDSPSNBThresh1);
-            this.grpDSPSNB.Location = new System.Drawing.Point(364, 8);
-            this.grpDSPSNB.Name = "grpDSPSNB";
-            this.grpDSPSNB.Size = new System.Drawing.Size(138, 80);
-            this.grpDSPSNB.TabIndex = 44;
-            this.grpDSPSNB.TabStop = false;
-            this.grpDSPSNB.Text = "SNB";
+            this.grpDSPFilterType.Controls.Add(this.grpDSPFiltTypeFM);
+            this.grpDSPFilterType.Controls.Add(this.grpDSPFiltTypeDig);
+            this.grpDSPFilterType.Controls.Add(this.grpDSPFiltTypeCW);
+            this.grpDSPFilterType.Controls.Add(this.grpDSPFiltTypePhone);
+            this.grpDSPFilterType.Location = new System.Drawing.Point(260, 8);
+            this.grpDSPFilterType.Name = "grpDSPFilterType";
+            this.grpDSPFilterType.Size = new System.Drawing.Size(153, 320);
+            this.grpDSPFilterType.TabIndex = 45;
+            this.grpDSPFilterType.TabStop = false;
+            this.grpDSPFilterType.Text = "Filter Type";
             // 
-            // udDSPSNBThresh2
+            // grpDSPFiltTypeFM
             // 
-            this.udDSPSNBThresh2.DecimalPlaces = 1;
-            this.udDSPSNBThresh2.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDSPSNBThresh2.Location = new System.Drawing.Point(76, 48);
-            this.udDSPSNBThresh2.Maximum = new decimal(new int[] {
-            600,
-            0,
-            0,
-            65536});
-            this.udDSPSNBThresh2.Minimum = new decimal(new int[] {
-            40,
-            0,
-            0,
-            65536});
-            this.udDSPSNBThresh2.Name = "udDSPSNBThresh2";
-            this.udDSPSNBThresh2.Size = new System.Drawing.Size(56, 20);
-            this.udDSPSNBThresh2.TabIndex = 12;
-            this.toolTip1.SetToolTip(this.udDSPSNBThresh2, "Controls the detection threshold for impulse noise.  ");
-            this.udDSPSNBThresh2.Value = new decimal(new int[] {
-            200,
-            0,
-            0,
-            65536});
-            this.udDSPSNBThresh2.ValueChanged += new System.EventHandler(this.udDSPSNBThresh2_ValueChanged);
+            this.grpDSPFiltTypeFM.Controls.Add(this.comboDSPFMTXFiltType);
+            this.grpDSPFiltTypeFM.Controls.Add(this.labelTS378);
+            this.grpDSPFiltTypeFM.Controls.Add(this.comboDSPFMRXFiltType);
+            this.grpDSPFiltTypeFM.Controls.Add(this.labelTS379);
+            this.grpDSPFiltTypeFM.Location = new System.Drawing.Point(8, 88);
+            this.grpDSPFiltTypeFM.Name = "grpDSPFiltTypeFM";
+            this.grpDSPFiltTypeFM.Size = new System.Drawing.Size(139, 72);
+            this.grpDSPFiltTypeFM.TabIndex = 42;
+            this.grpDSPFiltTypeFM.TabStop = false;
+            this.grpDSPFiltTypeFM.Text = "FM";
             // 
-            // lblDSPSNBThresh2
+            // comboDSPFMTXFiltType
             // 
-            this.lblDSPSNBThresh2.Image = null;
-            this.lblDSPSNBThresh2.Location = new System.Drawing.Point(6, 49);
-            this.lblDSPSNBThresh2.Name = "lblDSPSNBThresh2";
-            this.lblDSPSNBThresh2.Size = new System.Drawing.Size(64, 16);
-            this.lblDSPSNBThresh2.TabIndex = 13;
-            this.lblDSPSNBThresh2.Text = "Threshold 2";
+            this.comboDSPFMTXFiltType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPFMTXFiltType.DropDownWidth = 64;
+            this.comboDSPFMTXFiltType.Items.AddRange(new object[] {
+            "Linear Phase",
+            "Low Latency"});
+            this.comboDSPFMTXFiltType.Location = new System.Drawing.Point(32, 48);
+            this.comboDSPFMTXFiltType.Name = "comboDSPFMTXFiltType";
+            this.comboDSPFMTXFiltType.Size = new System.Drawing.Size(95, 21);
+            this.comboDSPFMTXFiltType.TabIndex = 20;
+            this.comboDSPFMTXFiltType.SelectedIndexChanged += new System.EventHandler(this.comboDSPFMTXFiltType_SelectedIndexChanged);
             // 
-            // udDSPSNBThresh1
+            // labelTS378
             // 
-            this.udDSPSNBThresh1.DecimalPlaces = 1;
-            this.udDSPSNBThresh1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDSPSNBThresh1.Location = new System.Drawing.Point(76, 24);
-            this.udDSPSNBThresh1.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            65536});
-            this.udDSPSNBThresh1.Minimum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            65536});
-            this.udDSPSNBThresh1.Name = "udDSPSNBThresh1";
-            this.udDSPSNBThresh1.Size = new System.Drawing.Size(56, 20);
-            this.udDSPSNBThresh1.TabIndex = 10;
-            this.toolTip1.SetToolTip(this.udDSPSNBThresh1, "Controls the detection threshold for impulse noise.  ");
-            this.udDSPSNBThresh1.Value = new decimal(new int[] {
-            80,
-            0,
-            0,
-            65536});
-            this.udDSPSNBThresh1.ValueChanged += new System.EventHandler(this.udDSPSNBThresh1_ValueChanged);
+            this.labelTS378.Image = null;
+            this.labelTS378.Location = new System.Drawing.Point(8, 24);
+            this.labelTS378.Name = "labelTS378";
+            this.labelTS378.Size = new System.Drawing.Size(24, 16);
+            this.labelTS378.TabIndex = 19;
+            this.labelTS378.Text = "RX:";
             // 
-            // lblDSPSNBThresh1
+            // comboDSPFMRXFiltType
             // 
-            this.lblDSPSNBThresh1.Image = null;
-            this.lblDSPSNBThresh1.Location = new System.Drawing.Point(6, 25);
-            this.lblDSPSNBThresh1.Name = "lblDSPSNBThresh1";
-            this.lblDSPSNBThresh1.Size = new System.Drawing.Size(64, 16);
-            this.lblDSPSNBThresh1.TabIndex = 11;
-            this.lblDSPSNBThresh1.Text = "Threshold 1";
+            this.comboDSPFMRXFiltType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPFMRXFiltType.DropDownWidth = 64;
+            this.comboDSPFMRXFiltType.Items.AddRange(new object[] {
+            "Linear Phase",
+            "Low Latency"});
+            this.comboDSPFMRXFiltType.Location = new System.Drawing.Point(32, 24);
+            this.comboDSPFMRXFiltType.Name = "comboDSPFMRXFiltType";
+            this.comboDSPFMRXFiltType.Size = new System.Drawing.Size(95, 21);
+            this.comboDSPFMRXFiltType.TabIndex = 18;
+            this.comboDSPFMRXFiltType.SelectedIndexChanged += new System.EventHandler(this.comboDSPFMRXFiltType_SelectedIndexChanged);
             // 
-            // grpDSPSpeechProcessor
+            // labelTS379
             // 
-            this.grpDSPSpeechProcessor.Controls.Add(this.chkDSPCESSB);
-            this.grpDSPSpeechProcessor.Location = new System.Drawing.Point(170, 278);
-            this.grpDSPSpeechProcessor.Name = "grpDSPSpeechProcessor";
-            this.grpDSPSpeechProcessor.Size = new System.Drawing.Size(200, 48);
-            this.grpDSPSpeechProcessor.TabIndex = 43;
-            this.grpDSPSpeechProcessor.TabStop = false;
-            this.grpDSPSpeechProcessor.Text = "Speech Processor";
+            this.labelTS379.Image = null;
+            this.labelTS379.Location = new System.Drawing.Point(8, 48);
+            this.labelTS379.Name = "labelTS379";
+            this.labelTS379.Size = new System.Drawing.Size(24, 16);
+            this.labelTS379.TabIndex = 21;
+            this.labelTS379.Text = "TX:";
             // 
-            // chkDSPCESSB
+            // grpDSPFiltTypeDig
             // 
-            this.chkDSPCESSB.AutoSize = true;
-            this.chkDSPCESSB.Image = null;
-            this.chkDSPCESSB.Location = new System.Drawing.Point(7, 20);
-            this.chkDSPCESSB.Name = "chkDSPCESSB";
-            this.chkDSPCESSB.Size = new System.Drawing.Size(149, 17);
-            this.chkDSPCESSB.TabIndex = 0;
-            this.chkDSPCESSB.Text = "CESSB Overshoot Control";
-            this.chkDSPCESSB.UseVisualStyleBackColor = true;
-            this.chkDSPCESSB.CheckedChanged += new System.EventHandler(this.chkDSPCESSB_CheckedChanged);
+            this.grpDSPFiltTypeDig.Controls.Add(this.comboDSPDigTXFiltType);
+            this.grpDSPFiltTypeDig.Controls.Add(this.labelTS380);
+            this.grpDSPFiltTypeDig.Controls.Add(this.comboDSPDigRXFiltType);
+            this.grpDSPFiltTypeDig.Controls.Add(this.labelTS381);
+            this.grpDSPFiltTypeDig.Location = new System.Drawing.Point(8, 232);
+            this.grpDSPFiltTypeDig.Name = "grpDSPFiltTypeDig";
+            this.grpDSPFiltTypeDig.Size = new System.Drawing.Size(139, 72);
+            this.grpDSPFiltTypeDig.TabIndex = 41;
+            this.grpDSPFiltTypeDig.TabStop = false;
+            this.grpDSPFiltTypeDig.Text = "Digital";
             // 
-            // chkDSPTXMeterPeak
+            // comboDSPDigTXFiltType
             // 
-            this.chkDSPTXMeterPeak.Checked = true;
-            this.chkDSPTXMeterPeak.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDSPTXMeterPeak.Image = null;
-            this.chkDSPTXMeterPeak.Location = new System.Drawing.Point(8, 278);
-            this.chkDSPTXMeterPeak.Name = "chkDSPTXMeterPeak";
-            this.chkDSPTXMeterPeak.Size = new System.Drawing.Size(144, 57);
-            this.chkDSPTXMeterPeak.TabIndex = 38;
-            this.chkDSPTXMeterPeak.Text = "Use Peak Meter Reading for TX COMP and ALC";
-            this.chkDSPTXMeterPeak.CheckedChanged += new System.EventHandler(this.chkDSPTXMeterPeak_CheckedChanged);
+            this.comboDSPDigTXFiltType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPDigTXFiltType.DropDownWidth = 64;
+            this.comboDSPDigTXFiltType.Items.AddRange(new object[] {
+            "Linear Phase",
+            "Low Latency"});
+            this.comboDSPDigTXFiltType.Location = new System.Drawing.Point(32, 48);
+            this.comboDSPDigTXFiltType.Name = "comboDSPDigTXFiltType";
+            this.comboDSPDigTXFiltType.Size = new System.Drawing.Size(95, 21);
+            this.comboDSPDigTXFiltType.TabIndex = 20;
+            this.comboDSPDigTXFiltType.SelectedIndexChanged += new System.EventHandler(this.comboDSPDigTXFiltType_SelectedIndexChanged);
+            // 
+            // labelTS380
+            // 
+            this.labelTS380.Image = null;
+            this.labelTS380.Location = new System.Drawing.Point(8, 24);
+            this.labelTS380.Name = "labelTS380";
+            this.labelTS380.Size = new System.Drawing.Size(24, 16);
+            this.labelTS380.TabIndex = 19;
+            this.labelTS380.Text = "RX:";
+            // 
+            // comboDSPDigRXFiltType
+            // 
+            this.comboDSPDigRXFiltType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPDigRXFiltType.DropDownWidth = 64;
+            this.comboDSPDigRXFiltType.Items.AddRange(new object[] {
+            "Linear Phase",
+            "Low Latency"});
+            this.comboDSPDigRXFiltType.Location = new System.Drawing.Point(32, 24);
+            this.comboDSPDigRXFiltType.Name = "comboDSPDigRXFiltType";
+            this.comboDSPDigRXFiltType.Size = new System.Drawing.Size(95, 21);
+            this.comboDSPDigRXFiltType.TabIndex = 18;
+            this.comboDSPDigRXFiltType.SelectedIndexChanged += new System.EventHandler(this.comboDSPDigRXFiltType_SelectedIndexChanged);
+            // 
+            // labelTS381
+            // 
+            this.labelTS381.Image = null;
+            this.labelTS381.Location = new System.Drawing.Point(8, 48);
+            this.labelTS381.Name = "labelTS381";
+            this.labelTS381.Size = new System.Drawing.Size(24, 16);
+            this.labelTS381.TabIndex = 21;
+            this.labelTS381.Text = "TX:";
+            // 
+            // grpDSPFiltTypeCW
+            // 
+            this.grpDSPFiltTypeCW.Controls.Add(this.labelTS382);
+            this.grpDSPFiltTypeCW.Controls.Add(this.comboDSPCWRXFiltType);
+            this.grpDSPFiltTypeCW.Location = new System.Drawing.Point(8, 160);
+            this.grpDSPFiltTypeCW.Name = "grpDSPFiltTypeCW";
+            this.grpDSPFiltTypeCW.Size = new System.Drawing.Size(139, 72);
+            this.grpDSPFiltTypeCW.TabIndex = 40;
+            this.grpDSPFiltTypeCW.TabStop = false;
+            this.grpDSPFiltTypeCW.Text = "CW";
+            // 
+            // labelTS382
+            // 
+            this.labelTS382.Image = null;
+            this.labelTS382.Location = new System.Drawing.Point(8, 24);
+            this.labelTS382.Name = "labelTS382";
+            this.labelTS382.Size = new System.Drawing.Size(24, 16);
+            this.labelTS382.TabIndex = 19;
+            this.labelTS382.Text = "RX:";
+            // 
+            // comboDSPCWRXFiltType
+            // 
+            this.comboDSPCWRXFiltType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPCWRXFiltType.DropDownWidth = 64;
+            this.comboDSPCWRXFiltType.Items.AddRange(new object[] {
+            "Linear Phase",
+            "Low Latency"});
+            this.comboDSPCWRXFiltType.Location = new System.Drawing.Point(32, 24);
+            this.comboDSPCWRXFiltType.Name = "comboDSPCWRXFiltType";
+            this.comboDSPCWRXFiltType.Size = new System.Drawing.Size(95, 21);
+            this.comboDSPCWRXFiltType.TabIndex = 18;
+            this.comboDSPCWRXFiltType.SelectedIndexChanged += new System.EventHandler(this.comboDSPCWRXFiltType_SelectedIndexChanged);
+            // 
+            // grpDSPFiltTypePhone
+            // 
+            this.grpDSPFiltTypePhone.Controls.Add(this.comboDSPPhoneTXFiltType);
+            this.grpDSPFiltTypePhone.Controls.Add(this.labelTS384);
+            this.grpDSPFiltTypePhone.Controls.Add(this.comboDSPPhoneRXFiltType);
+            this.grpDSPFiltTypePhone.Controls.Add(this.labelTS385);
+            this.grpDSPFiltTypePhone.Location = new System.Drawing.Point(8, 16);
+            this.grpDSPFiltTypePhone.Name = "grpDSPFiltTypePhone";
+            this.grpDSPFiltTypePhone.Size = new System.Drawing.Size(139, 72);
+            this.grpDSPFiltTypePhone.TabIndex = 39;
+            this.grpDSPFiltTypePhone.TabStop = false;
+            this.grpDSPFiltTypePhone.Text = "SSB/AM";
+            // 
+            // comboDSPPhoneTXFiltType
+            // 
+            this.comboDSPPhoneTXFiltType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPPhoneTXFiltType.DropDownWidth = 64;
+            this.comboDSPPhoneTXFiltType.Items.AddRange(new object[] {
+            "Linear Phase",
+            "Low Latency"});
+            this.comboDSPPhoneTXFiltType.Location = new System.Drawing.Point(32, 48);
+            this.comboDSPPhoneTXFiltType.Name = "comboDSPPhoneTXFiltType";
+            this.comboDSPPhoneTXFiltType.Size = new System.Drawing.Size(95, 21);
+            this.comboDSPPhoneTXFiltType.TabIndex = 20;
+            this.comboDSPPhoneTXFiltType.SelectedIndexChanged += new System.EventHandler(this.comboDSPPhoneTXFiltType_SelectedIndexChanged);
+            // 
+            // labelTS384
+            // 
+            this.labelTS384.Image = null;
+            this.labelTS384.Location = new System.Drawing.Point(8, 24);
+            this.labelTS384.Name = "labelTS384";
+            this.labelTS384.Size = new System.Drawing.Size(24, 16);
+            this.labelTS384.TabIndex = 19;
+            this.labelTS384.Text = "RX:";
+            // 
+            // comboDSPPhoneRXFiltType
+            // 
+            this.comboDSPPhoneRXFiltType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPPhoneRXFiltType.DropDownWidth = 64;
+            this.comboDSPPhoneRXFiltType.Items.AddRange(new object[] {
+            "Linear Phase",
+            "Low Latency"});
+            this.comboDSPPhoneRXFiltType.Location = new System.Drawing.Point(32, 24);
+            this.comboDSPPhoneRXFiltType.Name = "comboDSPPhoneRXFiltType";
+            this.comboDSPPhoneRXFiltType.Size = new System.Drawing.Size(95, 21);
+            this.comboDSPPhoneRXFiltType.TabIndex = 18;
+            this.comboDSPPhoneRXFiltType.SelectedIndexChanged += new System.EventHandler(this.comboDSPPhoneRXFiltType_SelectedIndexChanged);
+            // 
+            // labelTS385
+            // 
+            this.labelTS385.Image = null;
+            this.labelTS385.Location = new System.Drawing.Point(8, 48);
+            this.labelTS385.Name = "labelTS385";
+            this.labelTS385.Size = new System.Drawing.Size(24, 16);
+            this.labelTS385.TabIndex = 21;
+            this.labelTS385.Text = "TX:";
+            // 
+            // grpDSPFilterSize
+            // 
+            this.grpDSPFilterSize.Controls.Add(this.grpDSPFiltSizeFM);
+            this.grpDSPFilterSize.Controls.Add(this.grpDSPFiltSizeDig);
+            this.grpDSPFilterSize.Controls.Add(this.grpDSPFiltSizeCW);
+            this.grpDSPFilterSize.Controls.Add(this.grpDSPFiltSizePhone);
+            this.grpDSPFilterSize.Location = new System.Drawing.Point(134, 8);
+            this.grpDSPFilterSize.Name = "grpDSPFilterSize";
+            this.grpDSPFilterSize.Size = new System.Drawing.Size(120, 320);
+            this.grpDSPFilterSize.TabIndex = 44;
+            this.grpDSPFilterSize.TabStop = false;
+            this.grpDSPFilterSize.Text = "Filter Size";
+            // 
+            // grpDSPFiltSizeFM
+            // 
+            this.grpDSPFiltSizeFM.Controls.Add(this.comboDSPFMTXFiltSize);
+            this.grpDSPFiltSizeFM.Controls.Add(this.labelTS370);
+            this.grpDSPFiltSizeFM.Controls.Add(this.comboDSPFMRXFiltSize);
+            this.grpDSPFiltSizeFM.Controls.Add(this.labelTS371);
+            this.grpDSPFiltSizeFM.Location = new System.Drawing.Point(8, 88);
+            this.grpDSPFiltSizeFM.Name = "grpDSPFiltSizeFM";
+            this.grpDSPFiltSizeFM.Size = new System.Drawing.Size(104, 72);
+            this.grpDSPFiltSizeFM.TabIndex = 42;
+            this.grpDSPFiltSizeFM.TabStop = false;
+            this.grpDSPFiltSizeFM.Text = "FM";
+            // 
+            // comboDSPFMTXFiltSize
+            // 
+            this.comboDSPFMTXFiltSize.DisplayMember = "2048";
+            this.comboDSPFMTXFiltSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPFMTXFiltSize.DropDownWidth = 64;
+            this.comboDSPFMTXFiltSize.Items.AddRange(new object[] {
+            "1024",
+            "2048",
+            "4096",
+            "8192",
+            "16384"});
+            this.comboDSPFMTXFiltSize.Location = new System.Drawing.Point(32, 48);
+            this.comboDSPFMTXFiltSize.Name = "comboDSPFMTXFiltSize";
+            this.comboDSPFMTXFiltSize.Size = new System.Drawing.Size(64, 21);
+            this.comboDSPFMTXFiltSize.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.comboDSPFMTXFiltSize, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
+            this.comboDSPFMTXFiltSize.ValueMember = "1024";
+            this.comboDSPFMTXFiltSize.SelectedIndexChanged += new System.EventHandler(this.comboDSPFMTXFiltSize_SelectedIndexChanged);
+            // 
+            // labelTS370
+            // 
+            this.labelTS370.Image = null;
+            this.labelTS370.Location = new System.Drawing.Point(8, 24);
+            this.labelTS370.Name = "labelTS370";
+            this.labelTS370.Size = new System.Drawing.Size(24, 16);
+            this.labelTS370.TabIndex = 19;
+            this.labelTS370.Text = "RX:";
+            // 
+            // comboDSPFMRXFiltSize
+            // 
+            this.comboDSPFMRXFiltSize.DisplayMember = "4096";
+            this.comboDSPFMRXFiltSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPFMRXFiltSize.DropDownWidth = 64;
+            this.comboDSPFMRXFiltSize.Items.AddRange(new object[] {
+            "1024",
+            "2048",
+            "4096",
+            "8192",
+            "16384"});
+            this.comboDSPFMRXFiltSize.Location = new System.Drawing.Point(32, 24);
+            this.comboDSPFMRXFiltSize.Name = "comboDSPFMRXFiltSize";
+            this.comboDSPFMRXFiltSize.Size = new System.Drawing.Size(64, 21);
+            this.comboDSPFMRXFiltSize.TabIndex = 18;
+            this.toolTip1.SetToolTip(this.comboDSPFMRXFiltSize, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
+            this.comboDSPFMRXFiltSize.ValueMember = "256";
+            this.comboDSPFMRXFiltSize.SelectedIndexChanged += new System.EventHandler(this.comboDSPFMRXFiltSize_SelectedIndexChanged);
+            // 
+            // labelTS371
+            // 
+            this.labelTS371.Image = null;
+            this.labelTS371.Location = new System.Drawing.Point(8, 48);
+            this.labelTS371.Name = "labelTS371";
+            this.labelTS371.Size = new System.Drawing.Size(24, 16);
+            this.labelTS371.TabIndex = 21;
+            this.labelTS371.Text = "TX:";
+            // 
+            // grpDSPFiltSizeDig
+            // 
+            this.grpDSPFiltSizeDig.Controls.Add(this.comboDSPDigTXFiltSize);
+            this.grpDSPFiltSizeDig.Controls.Add(this.labelTS372);
+            this.grpDSPFiltSizeDig.Controls.Add(this.comboDSPDigRXFiltSize);
+            this.grpDSPFiltSizeDig.Controls.Add(this.labelTS373);
+            this.grpDSPFiltSizeDig.Location = new System.Drawing.Point(8, 232);
+            this.grpDSPFiltSizeDig.Name = "grpDSPFiltSizeDig";
+            this.grpDSPFiltSizeDig.Size = new System.Drawing.Size(104, 72);
+            this.grpDSPFiltSizeDig.TabIndex = 41;
+            this.grpDSPFiltSizeDig.TabStop = false;
+            this.grpDSPFiltSizeDig.Text = "Digital";
+            // 
+            // comboDSPDigTXFiltSize
+            // 
+            this.comboDSPDigTXFiltSize.DisplayMember = "2048";
+            this.comboDSPDigTXFiltSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPDigTXFiltSize.DropDownWidth = 64;
+            this.comboDSPDigTXFiltSize.Items.AddRange(new object[] {
+            "1024",
+            "2048",
+            "4096",
+            "8192",
+            "16384"});
+            this.comboDSPDigTXFiltSize.Location = new System.Drawing.Point(32, 48);
+            this.comboDSPDigTXFiltSize.Name = "comboDSPDigTXFiltSize";
+            this.comboDSPDigTXFiltSize.Size = new System.Drawing.Size(64, 21);
+            this.comboDSPDigTXFiltSize.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.comboDSPDigTXFiltSize, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
+            this.comboDSPDigTXFiltSize.ValueMember = "1024";
+            this.comboDSPDigTXFiltSize.SelectedIndexChanged += new System.EventHandler(this.comboDSPDigTXFiltSize_SelectedIndexChanged);
+            // 
+            // labelTS372
+            // 
+            this.labelTS372.Image = null;
+            this.labelTS372.Location = new System.Drawing.Point(8, 24);
+            this.labelTS372.Name = "labelTS372";
+            this.labelTS372.Size = new System.Drawing.Size(24, 16);
+            this.labelTS372.TabIndex = 19;
+            this.labelTS372.Text = "RX:";
+            // 
+            // comboDSPDigRXFiltSize
+            // 
+            this.comboDSPDigRXFiltSize.DisplayMember = "2048";
+            this.comboDSPDigRXFiltSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPDigRXFiltSize.DropDownWidth = 64;
+            this.comboDSPDigRXFiltSize.Items.AddRange(new object[] {
+            "1024",
+            "2048",
+            "4096",
+            "8192",
+            "16384"});
+            this.comboDSPDigRXFiltSize.Location = new System.Drawing.Point(32, 24);
+            this.comboDSPDigRXFiltSize.Name = "comboDSPDigRXFiltSize";
+            this.comboDSPDigRXFiltSize.Size = new System.Drawing.Size(64, 21);
+            this.comboDSPDigRXFiltSize.TabIndex = 18;
+            this.toolTip1.SetToolTip(this.comboDSPDigRXFiltSize, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
+            this.comboDSPDigRXFiltSize.ValueMember = "1024";
+            this.comboDSPDigRXFiltSize.SelectedIndexChanged += new System.EventHandler(this.comboDSPDigRXFiltSize_SelectedIndexChanged);
+            // 
+            // labelTS373
+            // 
+            this.labelTS373.Image = null;
+            this.labelTS373.Location = new System.Drawing.Point(8, 48);
+            this.labelTS373.Name = "labelTS373";
+            this.labelTS373.Size = new System.Drawing.Size(24, 16);
+            this.labelTS373.TabIndex = 21;
+            this.labelTS373.Text = "TX:";
+            // 
+            // grpDSPFiltSizeCW
+            // 
+            this.grpDSPFiltSizeCW.Controls.Add(this.labelTS374);
+            this.grpDSPFiltSizeCW.Controls.Add(this.comboDSPCWRXFiltSize);
+            this.grpDSPFiltSizeCW.Location = new System.Drawing.Point(8, 160);
+            this.grpDSPFiltSizeCW.Name = "grpDSPFiltSizeCW";
+            this.grpDSPFiltSizeCW.Size = new System.Drawing.Size(104, 72);
+            this.grpDSPFiltSizeCW.TabIndex = 40;
+            this.grpDSPFiltSizeCW.TabStop = false;
+            this.grpDSPFiltSizeCW.Text = "CW";
+            // 
+            // labelTS374
+            // 
+            this.labelTS374.Image = null;
+            this.labelTS374.Location = new System.Drawing.Point(8, 24);
+            this.labelTS374.Name = "labelTS374";
+            this.labelTS374.Size = new System.Drawing.Size(24, 16);
+            this.labelTS374.TabIndex = 19;
+            this.labelTS374.Text = "RX:";
+            // 
+            // comboDSPCWRXFiltSize
+            // 
+            this.comboDSPCWRXFiltSize.DisplayMember = "2048";
+            this.comboDSPCWRXFiltSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPCWRXFiltSize.DropDownWidth = 64;
+            this.comboDSPCWRXFiltSize.Items.AddRange(new object[] {
+            "1024",
+            "2048",
+            "4096",
+            "8192",
+            "16384"});
+            this.comboDSPCWRXFiltSize.Location = new System.Drawing.Point(32, 24);
+            this.comboDSPCWRXFiltSize.Name = "comboDSPCWRXFiltSize";
+            this.comboDSPCWRXFiltSize.Size = new System.Drawing.Size(64, 21);
+            this.comboDSPCWRXFiltSize.TabIndex = 18;
+            this.toolTip1.SetToolTip(this.comboDSPCWRXFiltSize, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
+            this.comboDSPCWRXFiltSize.ValueMember = "1024";
+            this.comboDSPCWRXFiltSize.SelectedIndexChanged += new System.EventHandler(this.comboDSPCWRXFiltSize_SelectedIndexChanged);
+            // 
+            // grpDSPFiltSizePhone
+            // 
+            this.grpDSPFiltSizePhone.Controls.Add(this.comboDSPPhoneTXFiltSize);
+            this.grpDSPFiltSizePhone.Controls.Add(this.labelTS376);
+            this.grpDSPFiltSizePhone.Controls.Add(this.comboDSPPhoneRXFiltSize);
+            this.grpDSPFiltSizePhone.Controls.Add(this.labelTS377);
+            this.grpDSPFiltSizePhone.Location = new System.Drawing.Point(8, 16);
+            this.grpDSPFiltSizePhone.Name = "grpDSPFiltSizePhone";
+            this.grpDSPFiltSizePhone.Size = new System.Drawing.Size(104, 72);
+            this.grpDSPFiltSizePhone.TabIndex = 39;
+            this.grpDSPFiltSizePhone.TabStop = false;
+            this.grpDSPFiltSizePhone.Text = "SSB/AM";
+            // 
+            // comboDSPPhoneTXFiltSize
+            // 
+            this.comboDSPPhoneTXFiltSize.DisplayMember = "2048";
+            this.comboDSPPhoneTXFiltSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPPhoneTXFiltSize.DropDownWidth = 64;
+            this.comboDSPPhoneTXFiltSize.Items.AddRange(new object[] {
+            "1024",
+            "2048",
+            "4096",
+            "8192",
+            "16384"});
+            this.comboDSPPhoneTXFiltSize.Location = new System.Drawing.Point(32, 48);
+            this.comboDSPPhoneTXFiltSize.Name = "comboDSPPhoneTXFiltSize";
+            this.comboDSPPhoneTXFiltSize.Size = new System.Drawing.Size(64, 21);
+            this.comboDSPPhoneTXFiltSize.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.comboDSPPhoneTXFiltSize, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
+            this.comboDSPPhoneTXFiltSize.ValueMember = "128";
+            this.comboDSPPhoneTXFiltSize.SelectedIndexChanged += new System.EventHandler(this.comboDSPPhoneTXFiltSize_SelectedIndexChanged);
+            // 
+            // labelTS376
+            // 
+            this.labelTS376.Image = null;
+            this.labelTS376.Location = new System.Drawing.Point(8, 24);
+            this.labelTS376.Name = "labelTS376";
+            this.labelTS376.Size = new System.Drawing.Size(24, 16);
+            this.labelTS376.TabIndex = 19;
+            this.labelTS376.Text = "RX:";
+            // 
+            // comboDSPPhoneRXFiltSize
+            // 
+            this.comboDSPPhoneRXFiltSize.DisplayMember = "2048";
+            this.comboDSPPhoneRXFiltSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPPhoneRXFiltSize.DropDownWidth = 64;
+            this.comboDSPPhoneRXFiltSize.Items.AddRange(new object[] {
+            "1024",
+            "2048",
+            "4096",
+            "8192",
+            "16384"});
+            this.comboDSPPhoneRXFiltSize.Location = new System.Drawing.Point(32, 24);
+            this.comboDSPPhoneRXFiltSize.Name = "comboDSPPhoneRXFiltSize";
+            this.comboDSPPhoneRXFiltSize.Size = new System.Drawing.Size(64, 21);
+            this.comboDSPPhoneRXFiltSize.TabIndex = 18;
+            this.comboDSPPhoneRXFiltSize.SelectedIndexChanged += new System.EventHandler(this.comboDSPPhoneRXFiltSize_SelectedIndexChanged);
+            // 
+            // labelTS377
+            // 
+            this.labelTS377.Image = null;
+            this.labelTS377.Location = new System.Drawing.Point(8, 48);
+            this.labelTS377.Name = "labelTS377";
+            this.labelTS377.Size = new System.Drawing.Size(24, 16);
+            this.labelTS377.TabIndex = 21;
+            this.labelTS377.Text = "TX:";
             // 
             // grpDSPBufferSize
             // 
+            this.grpDSPBufferSize.Controls.Add(this.grpDSPBufFM);
             this.grpDSPBufferSize.Controls.Add(this.grpDSPBufDig);
             this.grpDSPBufferSize.Controls.Add(this.grpDSPBufCW);
             this.grpDSPBufferSize.Controls.Add(this.grpDSPBufPhone);
             this.grpDSPBufferSize.Location = new System.Drawing.Point(8, 8);
             this.grpDSPBufferSize.Name = "grpDSPBufferSize";
-            this.grpDSPBufferSize.Size = new System.Drawing.Size(120, 248);
+            this.grpDSPBufferSize.Size = new System.Drawing.Size(120, 320);
             this.grpDSPBufferSize.TabIndex = 37;
             this.grpDSPBufferSize.TabStop = false;
             this.grpDSPBufferSize.Text = "Buffer Size";
+            // 
+            // grpDSPBufFM
+            // 
+            this.grpDSPBufFM.Controls.Add(this.comboDSPFMTXBuf);
+            this.grpDSPBufFM.Controls.Add(this.labelTS368);
+            this.grpDSPBufFM.Controls.Add(this.comboDSPFMRXBuf);
+            this.grpDSPBufFM.Controls.Add(this.labelTS369);
+            this.grpDSPBufFM.Location = new System.Drawing.Point(8, 88);
+            this.grpDSPBufFM.Name = "grpDSPBufFM";
+            this.grpDSPBufFM.Size = new System.Drawing.Size(104, 72);
+            this.grpDSPBufFM.TabIndex = 42;
+            this.grpDSPBufFM.TabStop = false;
+            this.grpDSPBufFM.Text = "FM";
+            // 
+            // comboDSPFMTXBuf
+            // 
+            this.comboDSPFMTXBuf.DisplayMember = "128";
+            this.comboDSPFMTXBuf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPFMTXBuf.DropDownWidth = 64;
+            this.comboDSPFMTXBuf.Items.AddRange(new object[] {
+            "64",
+            "128",
+            "256",
+            "512",
+            "1024"});
+            this.comboDSPFMTXBuf.Location = new System.Drawing.Point(32, 48);
+            this.comboDSPFMTXBuf.Name = "comboDSPFMTXBuf";
+            this.comboDSPFMTXBuf.Size = new System.Drawing.Size(64, 21);
+            this.comboDSPFMTXBuf.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.comboDSPFMTXBuf, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
+            this.comboDSPFMTXBuf.ValueMember = "1024";
+            this.comboDSPFMTXBuf.SelectedIndexChanged += new System.EventHandler(this.comboDSPFMTXBuf_SelectedIndexChanged);
+            // 
+            // labelTS368
+            // 
+            this.labelTS368.Image = null;
+            this.labelTS368.Location = new System.Drawing.Point(8, 24);
+            this.labelTS368.Name = "labelTS368";
+            this.labelTS368.Size = new System.Drawing.Size(24, 16);
+            this.labelTS368.TabIndex = 19;
+            this.labelTS368.Text = "RX:";
+            // 
+            // comboDSPFMRXBuf
+            // 
+            this.comboDSPFMRXBuf.DisplayMember = "256";
+            this.comboDSPFMRXBuf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPFMRXBuf.DropDownWidth = 64;
+            this.comboDSPFMRXBuf.Items.AddRange(new object[] {
+            "64",
+            "128",
+            "256",
+            "512",
+            "1024"});
+            this.comboDSPFMRXBuf.Location = new System.Drawing.Point(32, 24);
+            this.comboDSPFMRXBuf.Name = "comboDSPFMRXBuf";
+            this.comboDSPFMRXBuf.Size = new System.Drawing.Size(64, 21);
+            this.comboDSPFMRXBuf.TabIndex = 18;
+            this.toolTip1.SetToolTip(this.comboDSPFMRXBuf, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
+            this.comboDSPFMRXBuf.ValueMember = "1024";
+            this.comboDSPFMRXBuf.SelectedIndexChanged += new System.EventHandler(this.comboDSPFMRXBuf_SelectedIndexChanged);
+            // 
+            // labelTS369
+            // 
+            this.labelTS369.Image = null;
+            this.labelTS369.Location = new System.Drawing.Point(8, 48);
+            this.labelTS369.Name = "labelTS369";
+            this.labelTS369.Size = new System.Drawing.Size(24, 16);
+            this.labelTS369.TabIndex = 21;
+            this.labelTS369.Text = "TX:";
             // 
             // grpDSPBufDig
             // 
@@ -21295,7 +21771,7 @@
             this.grpDSPBufDig.Controls.Add(this.lblDSPDigBufferRX);
             this.grpDSPBufDig.Controls.Add(this.comboDSPDigRXBuf);
             this.grpDSPBufDig.Controls.Add(this.lblDSPDigBufferTX);
-            this.grpDSPBufDig.Location = new System.Drawing.Point(8, 160);
+            this.grpDSPBufDig.Location = new System.Drawing.Point(8, 232);
             this.grpDSPBufDig.Name = "grpDSPBufDig";
             this.grpDSPBufDig.Size = new System.Drawing.Size(104, 72);
             this.grpDSPBufDig.TabIndex = 41;
@@ -21304,17 +21780,15 @@
             // 
             // comboDSPDigTXBuf
             // 
-            this.comboDSPDigTXBuf.DisplayMember = "2048";
+            this.comboDSPDigTXBuf.DisplayMember = "128";
             this.comboDSPDigTXBuf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDSPDigTXBuf.DropDownWidth = 64;
             this.comboDSPDigTXBuf.Items.AddRange(new object[] {
+            "64",
+            "128",
             "256",
             "512",
-            "1024",
-            "2048",
-            "4096",
-            "8192",
-            "16384"});
+            "1024"});
             this.comboDSPDigTXBuf.Location = new System.Drawing.Point(32, 48);
             this.comboDSPDigTXBuf.Name = "comboDSPDigTXBuf";
             this.comboDSPDigTXBuf.Size = new System.Drawing.Size(64, 21);
@@ -21334,17 +21808,15 @@
             // 
             // comboDSPDigRXBuf
             // 
-            this.comboDSPDigRXBuf.DisplayMember = "2048";
+            this.comboDSPDigRXBuf.DisplayMember = "64";
             this.comboDSPDigRXBuf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDSPDigRXBuf.DropDownWidth = 64;
             this.comboDSPDigRXBuf.Items.AddRange(new object[] {
+            "64",
+            "128",
             "256",
             "512",
-            "1024",
-            "2048",
-            "4096",
-            "8192",
-            "16384"});
+            "1024"});
             this.comboDSPDigRXBuf.Location = new System.Drawing.Point(32, 24);
             this.comboDSPDigRXBuf.Name = "comboDSPDigRXBuf";
             this.comboDSPDigRXBuf.Size = new System.Drawing.Size(64, 21);
@@ -21364,37 +21836,14 @@
             // 
             // grpDSPBufCW
             // 
-            this.grpDSPBufCW.Controls.Add(this.comboDSPCWTXBuf);
             this.grpDSPBufCW.Controls.Add(this.lblDSPCWBufferRX);
             this.grpDSPBufCW.Controls.Add(this.comboDSPCWRXBuf);
-            this.grpDSPBufCW.Controls.Add(this.lblDSPCWBufferTX);
-            this.grpDSPBufCW.Location = new System.Drawing.Point(8, 88);
+            this.grpDSPBufCW.Location = new System.Drawing.Point(8, 160);
             this.grpDSPBufCW.Name = "grpDSPBufCW";
             this.grpDSPBufCW.Size = new System.Drawing.Size(104, 72);
             this.grpDSPBufCW.TabIndex = 40;
             this.grpDSPBufCW.TabStop = false;
             this.grpDSPBufCW.Text = "CW";
-            // 
-            // comboDSPCWTXBuf
-            // 
-            this.comboDSPCWTXBuf.DisplayMember = "2048";
-            this.comboDSPCWTXBuf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboDSPCWTXBuf.DropDownWidth = 64;
-            this.comboDSPCWTXBuf.Items.AddRange(new object[] {
-            "256",
-            "512",
-            "1024",
-            "2048",
-            "4096",
-            "8192",
-            "16384"});
-            this.comboDSPCWTXBuf.Location = new System.Drawing.Point(32, 48);
-            this.comboDSPCWTXBuf.Name = "comboDSPCWTXBuf";
-            this.comboDSPCWTXBuf.Size = new System.Drawing.Size(64, 21);
-            this.comboDSPCWTXBuf.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.comboDSPCWTXBuf, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
-            this.comboDSPCWTXBuf.ValueMember = "1024";
-            this.comboDSPCWTXBuf.SelectedIndexChanged += new System.EventHandler(this.comboDSPCWTXBuf_SelectedIndexChanged);
             // 
             // lblDSPCWBufferRX
             // 
@@ -21407,17 +21856,15 @@
             // 
             // comboDSPCWRXBuf
             // 
-            this.comboDSPCWRXBuf.DisplayMember = "2048";
+            this.comboDSPCWRXBuf.DisplayMember = "64";
             this.comboDSPCWRXBuf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDSPCWRXBuf.DropDownWidth = 64;
             this.comboDSPCWRXBuf.Items.AddRange(new object[] {
+            "64",
+            "128",
             "256",
             "512",
-            "1024",
-            "2048",
-            "4096",
-            "8192",
-            "16384"});
+            "1024"});
             this.comboDSPCWRXBuf.Location = new System.Drawing.Point(32, 24);
             this.comboDSPCWRXBuf.Name = "comboDSPCWRXBuf";
             this.comboDSPCWRXBuf.Size = new System.Drawing.Size(64, 21);
@@ -21425,15 +21872,6 @@
             this.toolTip1.SetToolTip(this.comboDSPCWRXBuf, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
             this.comboDSPCWRXBuf.ValueMember = "1024";
             this.comboDSPCWRXBuf.SelectedIndexChanged += new System.EventHandler(this.comboDSPCWRXBuf_SelectedIndexChanged);
-            // 
-            // lblDSPCWBufferTX
-            // 
-            this.lblDSPCWBufferTX.Image = null;
-            this.lblDSPCWBufferTX.Location = new System.Drawing.Point(8, 48);
-            this.lblDSPCWBufferTX.Name = "lblDSPCWBufferTX";
-            this.lblDSPCWBufferTX.Size = new System.Drawing.Size(24, 16);
-            this.lblDSPCWBufferTX.TabIndex = 21;
-            this.lblDSPCWBufferTX.Text = "TX:";
             // 
             // grpDSPBufPhone
             // 
@@ -21446,27 +21884,25 @@
             this.grpDSPBufPhone.Size = new System.Drawing.Size(104, 72);
             this.grpDSPBufPhone.TabIndex = 39;
             this.grpDSPBufPhone.TabStop = false;
-            this.grpDSPBufPhone.Text = "Phone";
+            this.grpDSPBufPhone.Text = "SSB/AM";
             // 
             // comboDSPPhoneTXBuf
             // 
-            this.comboDSPPhoneTXBuf.DisplayMember = "2048";
+            this.comboDSPPhoneTXBuf.DisplayMember = "128";
             this.comboDSPPhoneTXBuf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDSPPhoneTXBuf.DropDownWidth = 64;
             this.comboDSPPhoneTXBuf.Items.AddRange(new object[] {
+            "64",
+            "128",
             "256",
             "512",
-            "1024",
-            "2048",
-            "4096",
-            "8192",
-            "16384"});
+            "1024"});
             this.comboDSPPhoneTXBuf.Location = new System.Drawing.Point(32, 48);
             this.comboDSPPhoneTXBuf.Name = "comboDSPPhoneTXBuf";
             this.comboDSPPhoneTXBuf.Size = new System.Drawing.Size(64, 21);
             this.comboDSPPhoneTXBuf.TabIndex = 20;
             this.toolTip1.SetToolTip(this.comboDSPPhoneTXBuf, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
-            this.comboDSPPhoneTXBuf.ValueMember = "1024";
+            this.comboDSPPhoneTXBuf.ValueMember = "128";
             this.comboDSPPhoneTXBuf.SelectedIndexChanged += new System.EventHandler(this.comboDSPPhoneTXBuf_SelectedIndexChanged);
             // 
             // lblDSPPhoneBufferRX
@@ -21480,23 +21916,21 @@
             // 
             // comboDSPPhoneRXBuf
             // 
-            this.comboDSPPhoneRXBuf.DisplayMember = "4096";
+            this.comboDSPPhoneRXBuf.DisplayMember = "64";
             this.comboDSPPhoneRXBuf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDSPPhoneRXBuf.DropDownWidth = 64;
             this.comboDSPPhoneRXBuf.Items.AddRange(new object[] {
+            "64",
+            "128",
             "256",
             "512",
-            "1024",
-            "2048",
-            "4096",
-            "8192",
-            "16384"});
+            "1024"});
             this.comboDSPPhoneRXBuf.Location = new System.Drawing.Point(32, 24);
             this.comboDSPPhoneRXBuf.Name = "comboDSPPhoneRXBuf";
             this.comboDSPPhoneRXBuf.Size = new System.Drawing.Size(64, 21);
             this.comboDSPPhoneRXBuf.TabIndex = 18;
             this.toolTip1.SetToolTip(this.comboDSPPhoneRXBuf, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
-            this.comboDSPPhoneRXBuf.ValueMember = "1024";
+            this.comboDSPPhoneRXBuf.ValueMember = "64";
             this.comboDSPPhoneRXBuf.SelectedIndexChanged += new System.EventHandler(this.comboDSPPhoneRXBuf_SelectedIndexChanged);
             // 
             // lblDSPPhoneBufferTX
@@ -21508,225 +21942,13 @@
             this.lblDSPPhoneBufferTX.TabIndex = 21;
             this.lblDSPPhoneBufferTX.Text = "TX:";
             // 
-            // grpDSPNB
-            // 
-            this.grpDSPNB.Controls.Add(this.labelTS326);
-            this.grpDSPNB.Controls.Add(this.comboDSPNOBmode);
-            this.grpDSPNB.Controls.Add(this.labelTS154);
-            this.grpDSPNB.Controls.Add(this.udDSPNBLag);
-            this.grpDSPNB.Controls.Add(this.labelTS153);
-            this.grpDSPNB.Controls.Add(this.udDSPNBLead);
-            this.grpDSPNB.Controls.Add(this.labelTS152);
-            this.grpDSPNB.Controls.Add(this.udDSPNBTransition);
-            this.grpDSPNB.Controls.Add(this.labelTS151);
-            this.grpDSPNB.Controls.Add(this.udDSPNB);
-            this.grpDSPNB.Controls.Add(this.lblDSPNBThreshold);
-            this.grpDSPNB.Location = new System.Drawing.Point(249, 8);
-            this.grpDSPNB.Name = "grpDSPNB";
-            this.grpDSPNB.Size = new System.Drawing.Size(109, 211);
-            this.grpDSPNB.TabIndex = 35;
-            this.grpDSPNB.TabStop = false;
-            this.grpDSPNB.Text = "NB / NB2";
-            // 
-            // labelTS326
-            // 
-            this.labelTS326.AutoSize = true;
-            this.labelTS326.Image = null;
-            this.labelTS326.Location = new System.Drawing.Point(6, 161);
-            this.labelTS326.Name = "labelTS326";
-            this.labelTS326.Size = new System.Drawing.Size(63, 13);
-            this.labelTS326.TabIndex = 18;
-            this.labelTS326.Text = "NB2 MODE";
-            // 
-            // comboDSPNOBmode
-            // 
-            this.comboDSPNOBmode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboDSPNOBmode.FormattingEnabled = true;
-            this.comboDSPNOBmode.Items.AddRange(new object[] {
-            "Zero",
-            "Sample & Hold",
-            "Mean-Hold",
-            "Hold & Sample",
-            "Linear Interpolate"});
-            this.comboDSPNOBmode.Location = new System.Drawing.Point(9, 180);
-            this.comboDSPNOBmode.Name = "comboDSPNOBmode";
-            this.comboDSPNOBmode.Size = new System.Drawing.Size(95, 21);
-            this.comboDSPNOBmode.TabIndex = 17;
-            this.comboDSPNOBmode.SelectedIndexChanged += new System.EventHandler(this.comboDSPNOBmode_SelectedIndexChanged);
-            // 
-            // labelTS154
-            // 
-            this.labelTS154.AutoSize = true;
-            this.labelTS154.Image = null;
-            this.labelTS154.Location = new System.Drawing.Point(6, 58);
-            this.labelTS154.Name = "labelTS154";
-            this.labelTS154.Size = new System.Drawing.Size(65, 13);
-            this.labelTS154.TabIndex = 16;
-            this.labelTS154.Text = "TIMES (ms):";
-            // 
-            // udDSPNBLag
-            // 
-            this.udDSPNBLag.DecimalPlaces = 2;
-            this.udDSPNBLag.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.udDSPNBLag.Location = new System.Drawing.Point(40, 127);
-            this.udDSPNBLag.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            65536});
-            this.udDSPNBLag.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.udDSPNBLag.Name = "udDSPNBLag";
-            this.udDSPNBLag.Size = new System.Drawing.Size(64, 20);
-            this.udDSPNBLag.TabIndex = 14;
-            this.toolTip1.SetToolTip(this.udDSPNBLag, "Controls the detection threshold for impulse noise.  ");
-            this.udDSPNBLag.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.udDSPNBLag.ValueChanged += new System.EventHandler(this.udDSPNBLag_ValueChanged);
-            // 
-            // labelTS153
-            // 
-            this.labelTS153.Image = null;
-            this.labelTS153.Location = new System.Drawing.Point(6, 129);
-            this.labelTS153.Name = "labelTS153";
-            this.labelTS153.Size = new System.Drawing.Size(64, 16);
-            this.labelTS153.TabIndex = 15;
-            this.labelTS153.Text = "Lag";
-            // 
-            // udDSPNBLead
-            // 
-            this.udDSPNBLead.DecimalPlaces = 2;
-            this.udDSPNBLead.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.udDSPNBLead.Location = new System.Drawing.Point(40, 103);
-            this.udDSPNBLead.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            65536});
-            this.udDSPNBLead.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.udDSPNBLead.Name = "udDSPNBLead";
-            this.udDSPNBLead.Size = new System.Drawing.Size(64, 20);
-            this.udDSPNBLead.TabIndex = 12;
-            this.toolTip1.SetToolTip(this.udDSPNBLead, "Controls the detection threshold for impulse noise.  ");
-            this.udDSPNBLead.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.udDSPNBLead.ValueChanged += new System.EventHandler(this.udDSPNBLead_ValueChanged);
-            // 
-            // labelTS152
-            // 
-            this.labelTS152.Image = null;
-            this.labelTS152.Location = new System.Drawing.Point(6, 105);
-            this.labelTS152.Name = "labelTS152";
-            this.labelTS152.Size = new System.Drawing.Size(64, 16);
-            this.labelTS152.TabIndex = 13;
-            this.labelTS152.Text = "Lead";
-            // 
-            // udDSPNBTransition
-            // 
-            this.udDSPNBTransition.DecimalPlaces = 2;
-            this.udDSPNBTransition.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.udDSPNBTransition.Location = new System.Drawing.Point(40, 77);
-            this.udDSPNBTransition.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            65536});
-            this.udDSPNBTransition.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.udDSPNBTransition.Name = "udDSPNBTransition";
-            this.udDSPNBTransition.Size = new System.Drawing.Size(64, 20);
-            this.udDSPNBTransition.TabIndex = 10;
-            this.toolTip1.SetToolTip(this.udDSPNBTransition, "Controls the detection threshold for impulse noise.  ");
-            this.udDSPNBTransition.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.udDSPNBTransition.ValueChanged += new System.EventHandler(this.udDSPNBTransition_ValueChanged);
-            // 
-            // labelTS151
-            // 
-            this.labelTS151.Image = null;
-            this.labelTS151.Location = new System.Drawing.Point(6, 79);
-            this.labelTS151.Name = "labelTS151";
-            this.labelTS151.Size = new System.Drawing.Size(64, 16);
-            this.labelTS151.TabIndex = 11;
-            this.labelTS151.Text = "Slew";
-            // 
-            // udDSPNB
-            // 
-            this.udDSPNB.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDSPNB.Location = new System.Drawing.Point(64, 24);
-            this.udDSPNB.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.udDSPNB.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDSPNB.Name = "udDSPNB";
-            this.udDSPNB.Size = new System.Drawing.Size(40, 20);
-            this.udDSPNB.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.udDSPNB, "Controls the detection threshold for impulse noise.  ");
-            this.udDSPNB.Value = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.udDSPNB.ValueChanged += new System.EventHandler(this.udDSPNB_ValueChanged);
-            this.udDSPNB.LostFocus += new System.EventHandler(this.udDSPNB_LostFocus);
-            // 
-            // lblDSPNBThreshold
-            // 
-            this.lblDSPNBThreshold.Image = null;
-            this.lblDSPNBThreshold.Location = new System.Drawing.Point(5, 25);
-            this.lblDSPNBThreshold.Name = "lblDSPNBThreshold";
-            this.lblDSPNBThreshold.Size = new System.Drawing.Size(64, 16);
-            this.lblDSPNBThreshold.TabIndex = 9;
-            this.lblDSPNBThreshold.Text = "Threshold";
-            // 
             // grpDSPWintype
             // 
             this.grpDSPWintype.Controls.Add(this.labelTS144);
             this.grpDSPWintype.Controls.Add(this.labelTS302);
             this.grpDSPWintype.Controls.Add(this.comboDSPTxWindow);
             this.grpDSPWintype.Controls.Add(this.comboDSPRxWindow);
-            this.grpDSPWintype.Location = new System.Drawing.Point(134, 8);
+            this.grpDSPWintype.Location = new System.Drawing.Point(419, 8);
             this.grpDSPWintype.Name = "grpDSPWintype";
             this.grpDSPWintype.Size = new System.Drawing.Size(109, 85);
             this.grpDSPWintype.TabIndex = 34;
@@ -26052,11 +26274,328 @@
             0});
             this.udMNFNotch.ValueChanged += new System.EventHandler(this.udMNFNotch_ValueChanged);
             // 
+            // tpDSPNB
+            // 
+            this.tpDSPNB.BackColor = System.Drawing.SystemColors.Control;
+            this.tpDSPNB.Controls.Add(this.grpDSPSNB);
+            this.tpDSPNB.Controls.Add(this.grpDSPNB);
+            this.tpDSPNB.Location = new System.Drawing.Point(4, 22);
+            this.tpDSPNB.Name = "tpDSPNB";
+            this.tpDSPNB.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDSPNB.Size = new System.Drawing.Size(592, 338);
+            this.tpDSPNB.TabIndex = 10;
+            this.tpDSPNB.Text = "NB/SNB";
+            // 
+            // grpDSPSNB
+            // 
+            this.grpDSPSNB.Controls.Add(this.udDSPSNBThresh2);
+            this.grpDSPSNB.Controls.Add(this.lblDSPSNBThresh2);
+            this.grpDSPSNB.Controls.Add(this.udDSPSNBThresh1);
+            this.grpDSPSNB.Controls.Add(this.lblDSPSNBThresh1);
+            this.grpDSPSNB.Location = new System.Drawing.Point(121, 6);
+            this.grpDSPSNB.Name = "grpDSPSNB";
+            this.grpDSPSNB.Size = new System.Drawing.Size(138, 80);
+            this.grpDSPSNB.TabIndex = 44;
+            this.grpDSPSNB.TabStop = false;
+            this.grpDSPSNB.Text = "SNB";
+            // 
+            // udDSPSNBThresh2
+            // 
+            this.udDSPSNBThresh2.DecimalPlaces = 1;
+            this.udDSPSNBThresh2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDSPSNBThresh2.Location = new System.Drawing.Point(76, 48);
+            this.udDSPSNBThresh2.Maximum = new decimal(new int[] {
+            600,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh2.Minimum = new decimal(new int[] {
+            40,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh2.Name = "udDSPSNBThresh2";
+            this.udDSPSNBThresh2.Size = new System.Drawing.Size(56, 20);
+            this.udDSPSNBThresh2.TabIndex = 12;
+            this.toolTip1.SetToolTip(this.udDSPSNBThresh2, "Controls the detection threshold for impulse noise.  ");
+            this.udDSPSNBThresh2.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh2.ValueChanged += new System.EventHandler(this.udDSPSNBThresh2_ValueChanged);
+            // 
+            // lblDSPSNBThresh2
+            // 
+            this.lblDSPSNBThresh2.Image = null;
+            this.lblDSPSNBThresh2.Location = new System.Drawing.Point(6, 49);
+            this.lblDSPSNBThresh2.Name = "lblDSPSNBThresh2";
+            this.lblDSPSNBThresh2.Size = new System.Drawing.Size(64, 16);
+            this.lblDSPSNBThresh2.TabIndex = 13;
+            this.lblDSPSNBThresh2.Text = "Threshold 2";
+            // 
+            // udDSPSNBThresh1
+            // 
+            this.udDSPSNBThresh1.DecimalPlaces = 1;
+            this.udDSPSNBThresh1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDSPSNBThresh1.Location = new System.Drawing.Point(76, 24);
+            this.udDSPSNBThresh1.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh1.Minimum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh1.Name = "udDSPSNBThresh1";
+            this.udDSPSNBThresh1.Size = new System.Drawing.Size(56, 20);
+            this.udDSPSNBThresh1.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.udDSPSNBThresh1, "Controls the detection threshold for impulse noise.  ");
+            this.udDSPSNBThresh1.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            65536});
+            this.udDSPSNBThresh1.ValueChanged += new System.EventHandler(this.udDSPSNBThresh1_ValueChanged);
+            // 
+            // lblDSPSNBThresh1
+            // 
+            this.lblDSPSNBThresh1.Image = null;
+            this.lblDSPSNBThresh1.Location = new System.Drawing.Point(6, 25);
+            this.lblDSPSNBThresh1.Name = "lblDSPSNBThresh1";
+            this.lblDSPSNBThresh1.Size = new System.Drawing.Size(64, 16);
+            this.lblDSPSNBThresh1.TabIndex = 11;
+            this.lblDSPSNBThresh1.Text = "Threshold 1";
+            // 
+            // grpDSPNB
+            // 
+            this.grpDSPNB.Controls.Add(this.labelTS326);
+            this.grpDSPNB.Controls.Add(this.comboDSPNOBmode);
+            this.grpDSPNB.Controls.Add(this.labelTS154);
+            this.grpDSPNB.Controls.Add(this.udDSPNBLag);
+            this.grpDSPNB.Controls.Add(this.labelTS153);
+            this.grpDSPNB.Controls.Add(this.udDSPNBLead);
+            this.grpDSPNB.Controls.Add(this.labelTS152);
+            this.grpDSPNB.Controls.Add(this.udDSPNBTransition);
+            this.grpDSPNB.Controls.Add(this.labelTS151);
+            this.grpDSPNB.Controls.Add(this.udDSPNB);
+            this.grpDSPNB.Controls.Add(this.lblDSPNBThreshold);
+            this.grpDSPNB.Location = new System.Drawing.Point(6, 6);
+            this.grpDSPNB.Name = "grpDSPNB";
+            this.grpDSPNB.Size = new System.Drawing.Size(109, 211);
+            this.grpDSPNB.TabIndex = 35;
+            this.grpDSPNB.TabStop = false;
+            this.grpDSPNB.Text = "NB / NB2";
+            // 
+            // labelTS326
+            // 
+            this.labelTS326.AutoSize = true;
+            this.labelTS326.Image = null;
+            this.labelTS326.Location = new System.Drawing.Point(6, 161);
+            this.labelTS326.Name = "labelTS326";
+            this.labelTS326.Size = new System.Drawing.Size(63, 13);
+            this.labelTS326.TabIndex = 18;
+            this.labelTS326.Text = "NB2 MODE";
+            // 
+            // comboDSPNOBmode
+            // 
+            this.comboDSPNOBmode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDSPNOBmode.FormattingEnabled = true;
+            this.comboDSPNOBmode.Items.AddRange(new object[] {
+            "Zero",
+            "Sample & Hold",
+            "Mean-Hold",
+            "Hold & Sample",
+            "Linear Interpolate"});
+            this.comboDSPNOBmode.Location = new System.Drawing.Point(9, 180);
+            this.comboDSPNOBmode.Name = "comboDSPNOBmode";
+            this.comboDSPNOBmode.Size = new System.Drawing.Size(95, 21);
+            this.comboDSPNOBmode.TabIndex = 17;
+            this.comboDSPNOBmode.SelectedIndexChanged += new System.EventHandler(this.comboDSPNOBmode_SelectedIndexChanged);
+            // 
+            // labelTS154
+            // 
+            this.labelTS154.AutoSize = true;
+            this.labelTS154.Image = null;
+            this.labelTS154.Location = new System.Drawing.Point(6, 58);
+            this.labelTS154.Name = "labelTS154";
+            this.labelTS154.Size = new System.Drawing.Size(65, 13);
+            this.labelTS154.TabIndex = 16;
+            this.labelTS154.Text = "TIMES (ms):";
+            // 
+            // udDSPNBLag
+            // 
+            this.udDSPNBLag.DecimalPlaces = 2;
+            this.udDSPNBLag.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.udDSPNBLag.Location = new System.Drawing.Point(40, 127);
+            this.udDSPNBLag.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            65536});
+            this.udDSPNBLag.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.udDSPNBLag.Name = "udDSPNBLag";
+            this.udDSPNBLag.Size = new System.Drawing.Size(64, 20);
+            this.udDSPNBLag.TabIndex = 14;
+            this.toolTip1.SetToolTip(this.udDSPNBLag, "Controls the detection threshold for impulse noise.  ");
+            this.udDSPNBLag.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.udDSPNBLag.ValueChanged += new System.EventHandler(this.udDSPNBLag_ValueChanged);
+            // 
+            // labelTS153
+            // 
+            this.labelTS153.Image = null;
+            this.labelTS153.Location = new System.Drawing.Point(6, 129);
+            this.labelTS153.Name = "labelTS153";
+            this.labelTS153.Size = new System.Drawing.Size(64, 16);
+            this.labelTS153.TabIndex = 15;
+            this.labelTS153.Text = "Lag";
+            // 
+            // udDSPNBLead
+            // 
+            this.udDSPNBLead.DecimalPlaces = 2;
+            this.udDSPNBLead.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.udDSPNBLead.Location = new System.Drawing.Point(40, 103);
+            this.udDSPNBLead.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            65536});
+            this.udDSPNBLead.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.udDSPNBLead.Name = "udDSPNBLead";
+            this.udDSPNBLead.Size = new System.Drawing.Size(64, 20);
+            this.udDSPNBLead.TabIndex = 12;
+            this.toolTip1.SetToolTip(this.udDSPNBLead, "Controls the detection threshold for impulse noise.  ");
+            this.udDSPNBLead.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.udDSPNBLead.ValueChanged += new System.EventHandler(this.udDSPNBLead_ValueChanged);
+            // 
+            // labelTS152
+            // 
+            this.labelTS152.Image = null;
+            this.labelTS152.Location = new System.Drawing.Point(6, 105);
+            this.labelTS152.Name = "labelTS152";
+            this.labelTS152.Size = new System.Drawing.Size(64, 16);
+            this.labelTS152.TabIndex = 13;
+            this.labelTS152.Text = "Lead";
+            // 
+            // udDSPNBTransition
+            // 
+            this.udDSPNBTransition.DecimalPlaces = 2;
+            this.udDSPNBTransition.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.udDSPNBTransition.Location = new System.Drawing.Point(40, 77);
+            this.udDSPNBTransition.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            65536});
+            this.udDSPNBTransition.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.udDSPNBTransition.Name = "udDSPNBTransition";
+            this.udDSPNBTransition.Size = new System.Drawing.Size(64, 20);
+            this.udDSPNBTransition.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.udDSPNBTransition, "Controls the detection threshold for impulse noise.  ");
+            this.udDSPNBTransition.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.udDSPNBTransition.ValueChanged += new System.EventHandler(this.udDSPNBTransition_ValueChanged);
+            // 
+            // labelTS151
+            // 
+            this.labelTS151.Image = null;
+            this.labelTS151.Location = new System.Drawing.Point(6, 79);
+            this.labelTS151.Name = "labelTS151";
+            this.labelTS151.Size = new System.Drawing.Size(64, 16);
+            this.labelTS151.TabIndex = 11;
+            this.labelTS151.Text = "Slew";
+            // 
+            // udDSPNB
+            // 
+            this.udDSPNB.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDSPNB.Location = new System.Drawing.Point(64, 24);
+            this.udDSPNB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.udDSPNB.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDSPNB.Name = "udDSPNB";
+            this.udDSPNB.Size = new System.Drawing.Size(40, 20);
+            this.udDSPNB.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.udDSPNB, "Controls the detection threshold for impulse noise.  ");
+            this.udDSPNB.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.udDSPNB.ValueChanged += new System.EventHandler(this.udDSPNB_ValueChanged);
+            this.udDSPNB.LostFocus += new System.EventHandler(this.udDSPNB_LostFocus);
+            // 
+            // lblDSPNBThreshold
+            // 
+            this.lblDSPNBThreshold.Image = null;
+            this.lblDSPNBThreshold.Location = new System.Drawing.Point(5, 25);
+            this.lblDSPNBThreshold.Name = "lblDSPNBThreshold";
+            this.lblDSPNBThreshold.Size = new System.Drawing.Size(64, 16);
+            this.lblDSPNBThreshold.TabIndex = 9;
+            this.lblDSPNBThreshold.Text = "Threshold";
+            // 
             // tpTransmit
             // 
             this.tpTransmit.Controls.Add(this.chkLimitExtAmpOnOverload);
             this.tpTransmit.Controls.Add(this.grpExtTXInhibit);
+            this.tpTransmit.Controls.Add(this.chkDSPTXMeterPeak);
             this.tpTransmit.Controls.Add(this.chkSaveTXProfileOnExit);
+            this.tpTransmit.Controls.Add(this.grpDSPSpeechProcessor);
             this.tpTransmit.Controls.Add(this.chkAutoSaveTXProfile);
             this.tpTransmit.Controls.Add(this.udTXFilterLowSave);
             this.tpTransmit.Controls.Add(this.udTXFilterHighSave);
@@ -26081,7 +26620,7 @@
             // 
             this.chkLimitExtAmpOnOverload.AutoSize = true;
             this.chkLimitExtAmpOnOverload.Image = null;
-            this.chkLimitExtAmpOnOverload.Location = new System.Drawing.Point(306, 230);
+            this.chkLimitExtAmpOnOverload.Location = new System.Drawing.Point(312, 316);
             this.chkLimitExtAmpOnOverload.Name = "chkLimitExtAmpOnOverload";
             this.chkLimitExtAmpOnOverload.Size = new System.Drawing.Size(184, 17);
             this.chkLimitExtAmpOnOverload.TabIndex = 72;
@@ -26122,12 +26661,24 @@
             this.toolTip1.SetToolTip(this.chkTXInhibitSense, "High Level on TX Inhibit line = Active");
             this.chkTXInhibitSense.CheckedChanged += new System.EventHandler(this.chkTXInhibitSense_CheckedChanged);
             // 
+            // chkDSPTXMeterPeak
+            // 
+            this.chkDSPTXMeterPeak.Checked = true;
+            this.chkDSPTXMeterPeak.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDSPTXMeterPeak.Image = null;
+            this.chkDSPTXMeterPeak.Location = new System.Drawing.Point(312, 265);
+            this.chkDSPTXMeterPeak.Name = "chkDSPTXMeterPeak";
+            this.chkDSPTXMeterPeak.Size = new System.Drawing.Size(144, 52);
+            this.chkDSPTXMeterPeak.TabIndex = 38;
+            this.chkDSPTXMeterPeak.Text = "Use Peak Meter Reading for TX COMP and ALC";
+            this.chkDSPTXMeterPeak.CheckedChanged += new System.EventHandler(this.chkDSPTXMeterPeak_CheckedChanged);
+            // 
             // chkSaveTXProfileOnExit
             // 
             this.chkSaveTXProfileOnExit.Checked = true;
             this.chkSaveTXProfileOnExit.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSaveTXProfileOnExit.Image = null;
-            this.chkSaveTXProfileOnExit.Location = new System.Drawing.Point(306, 280);
+            this.chkSaveTXProfileOnExit.Location = new System.Drawing.Point(75, 316);
             this.chkSaveTXProfileOnExit.Name = "chkSaveTXProfileOnExit";
             this.chkSaveTXProfileOnExit.Size = new System.Drawing.Size(235, 26);
             this.chkSaveTXProfileOnExit.TabIndex = 67;
@@ -26135,10 +26686,32 @@
             this.toolTip1.SetToolTip(this.chkSaveTXProfileOnExit, "Automatically saves the current TX Profile when PowerSDR is closed");
             this.chkSaveTXProfileOnExit.CheckedChanged += new System.EventHandler(this.chkSaveTXProfileOnExit_CheckedChanged);
             // 
+            // grpDSPSpeechProcessor
+            // 
+            this.grpDSPSpeechProcessor.Controls.Add(this.chkDSPCESSB);
+            this.grpDSPSpeechProcessor.Location = new System.Drawing.Point(306, 220);
+            this.grpDSPSpeechProcessor.Name = "grpDSPSpeechProcessor";
+            this.grpDSPSpeechProcessor.Size = new System.Drawing.Size(165, 48);
+            this.grpDSPSpeechProcessor.TabIndex = 43;
+            this.grpDSPSpeechProcessor.TabStop = false;
+            this.grpDSPSpeechProcessor.Text = "Speech Processor";
+            // 
+            // chkDSPCESSB
+            // 
+            this.chkDSPCESSB.AutoSize = true;
+            this.chkDSPCESSB.Image = null;
+            this.chkDSPCESSB.Location = new System.Drawing.Point(7, 20);
+            this.chkDSPCESSB.Name = "chkDSPCESSB";
+            this.chkDSPCESSB.Size = new System.Drawing.Size(149, 17);
+            this.chkDSPCESSB.TabIndex = 0;
+            this.chkDSPCESSB.Text = "CESSB Overshoot Control";
+            this.chkDSPCESSB.UseVisualStyleBackColor = true;
+            this.chkDSPCESSB.CheckedChanged += new System.EventHandler(this.chkDSPCESSB_CheckedChanged);
+            // 
             // chkAutoSaveTXProfile
             // 
             this.chkAutoSaveTXProfile.Image = null;
-            this.chkAutoSaveTXProfile.Location = new System.Drawing.Point(306, 309);
+            this.chkAutoSaveTXProfile.Location = new System.Drawing.Point(75, 338);
             this.chkAutoSaveTXProfile.Name = "chkAutoSaveTXProfile";
             this.chkAutoSaveTXProfile.Size = new System.Drawing.Size(189, 23);
             this.chkAutoSaveTXProfile.TabIndex = 66;
@@ -26216,7 +26789,7 @@
             this.grpBoxMic.Controls.Add(this.lblLineInBoost);
             this.grpBoxMic.Location = new System.Drawing.Point(152, 190);
             this.grpBoxMic.Name = "grpBoxMic";
-            this.grpBoxMic.Size = new System.Drawing.Size(144, 116);
+            this.grpBoxMic.Size = new System.Drawing.Size(144, 91);
             this.grpBoxMic.TabIndex = 58;
             this.grpBoxMic.TabStop = false;
             this.grpBoxMic.Text = "Mic    Gain         Source";
@@ -26536,7 +27109,7 @@
             this.grpTXVOX.Controls.Add(this.udTXVOXThreshold);
             this.grpTXVOX.Location = new System.Drawing.Point(8, 205);
             this.grpTXVOX.Name = "grpTXVOX";
-            this.grpTXVOX.Size = new System.Drawing.Size(136, 141);
+            this.grpTXVOX.Size = new System.Drawing.Size(136, 112);
             this.grpTXVOX.TabIndex = 50;
             this.grpTXVOX.TabStop = false;
             this.grpTXVOX.Text = "VOX";
@@ -26901,7 +27474,7 @@
             // chkDCBlock
             // 
             this.chkDCBlock.Image = null;
-            this.chkDCBlock.Location = new System.Drawing.Point(501, 312);
+            this.chkDCBlock.Location = new System.Drawing.Point(361, 341);
             this.chkDCBlock.Name = "chkDCBlock";
             this.chkDCBlock.Size = new System.Drawing.Size(72, 16);
             this.chkDCBlock.TabIndex = 48;
@@ -41521,7 +42094,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(603, 439);
+            this.ClientSize = new System.Drawing.Size(604, 439);
             this.Controls.Add(this.btnExportDB);
             this.Controls.Add(this.btnImportDB);
             this.Controls.Add(this.btnResetDB);
@@ -41877,21 +42450,21 @@
             this.tpDSP.ResumeLayout(false);
             this.tcDSP.ResumeLayout(false);
             this.tpDSPOptions.ResumeLayout(false);
-            this.grpDSPSNB.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh1)).EndInit();
-            this.grpDSPSpeechProcessor.ResumeLayout(false);
-            this.grpDSPSpeechProcessor.PerformLayout();
+            this.grpDSPFilterType.ResumeLayout(false);
+            this.grpDSPFiltTypeFM.ResumeLayout(false);
+            this.grpDSPFiltTypeDig.ResumeLayout(false);
+            this.grpDSPFiltTypeCW.ResumeLayout(false);
+            this.grpDSPFiltTypePhone.ResumeLayout(false);
+            this.grpDSPFilterSize.ResumeLayout(false);
+            this.grpDSPFiltSizeFM.ResumeLayout(false);
+            this.grpDSPFiltSizeDig.ResumeLayout(false);
+            this.grpDSPFiltSizeCW.ResumeLayout(false);
+            this.grpDSPFiltSizePhone.ResumeLayout(false);
             this.grpDSPBufferSize.ResumeLayout(false);
+            this.grpDSPBufFM.ResumeLayout(false);
             this.grpDSPBufDig.ResumeLayout(false);
             this.grpDSPBufCW.ResumeLayout(false);
             this.grpDSPBufPhone.ResumeLayout(false);
-            this.grpDSPNB.ResumeLayout(false);
-            this.grpDSPNB.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBLag)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBLead)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBTransition)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPNB)).EndInit();
             this.grpDSPWintype.ResumeLayout(false);
             this.tpDSPKeyer.ResumeLayout(false);
             this.grpKeyerConnections.ResumeLayout(false);
@@ -42031,9 +42604,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.udMNFWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMNFFreq)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMNFNotch)).EndInit();
+            this.tpDSPNB.ResumeLayout(false);
+            this.grpDSPSNB.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPSNBThresh1)).EndInit();
+            this.grpDSPNB.ResumeLayout(false);
+            this.grpDSPNB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBLag)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBLead)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPNBTransition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPNB)).EndInit();
             this.tpTransmit.ResumeLayout(false);
             this.tpTransmit.PerformLayout();
             this.grpExtTXInhibit.ResumeLayout(false);
+            this.grpDSPSpeechProcessor.ResumeLayout(false);
+            this.grpDSPSpeechProcessor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTXFilterLowSave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udTXFilterHighSave)).EndInit();
             this.grpBoxMic.ResumeLayout(false);
@@ -43510,5 +44095,49 @@
         private System.Windows.Forms.ComboBoxTS comboCAT2parity;
         private System.Windows.Forms.ComboBoxTS comboCAT2databits;
         private System.Windows.Forms.ComboBoxTS comboCAT2stopbits;
+        private System.Windows.Forms.GroupBoxTS grpDSPFilterType;
+        private System.Windows.Forms.GroupBoxTS grpDSPFiltTypeFM;
+        private System.Windows.Forms.ComboBoxTS comboDSPFMTXFiltType;
+        private System.Windows.Forms.LabelTS labelTS378;
+        private System.Windows.Forms.ComboBoxTS comboDSPFMRXFiltType;
+        private System.Windows.Forms.LabelTS labelTS379;
+        private System.Windows.Forms.GroupBoxTS grpDSPFiltTypeDig;
+        private System.Windows.Forms.ComboBoxTS comboDSPDigTXFiltType;
+        private System.Windows.Forms.LabelTS labelTS380;
+        private System.Windows.Forms.ComboBoxTS comboDSPDigRXFiltType;
+        private System.Windows.Forms.LabelTS labelTS381;
+        private System.Windows.Forms.GroupBoxTS grpDSPFiltTypeCW;
+        private System.Windows.Forms.LabelTS labelTS382;
+        private System.Windows.Forms.ComboBoxTS comboDSPCWRXFiltType;
+        private System.Windows.Forms.GroupBoxTS grpDSPFiltTypePhone;
+        private System.Windows.Forms.ComboBoxTS comboDSPPhoneTXFiltType;
+        private System.Windows.Forms.LabelTS labelTS384;
+        private System.Windows.Forms.ComboBoxTS comboDSPPhoneRXFiltType;
+        private System.Windows.Forms.LabelTS labelTS385;
+        private System.Windows.Forms.GroupBoxTS grpDSPFilterSize;
+        private System.Windows.Forms.GroupBoxTS grpDSPFiltSizeFM;
+        private System.Windows.Forms.ComboBoxTS comboDSPFMTXFiltSize;
+        private System.Windows.Forms.LabelTS labelTS370;
+        private System.Windows.Forms.ComboBoxTS comboDSPFMRXFiltSize;
+        private System.Windows.Forms.LabelTS labelTS371;
+        private System.Windows.Forms.GroupBoxTS grpDSPFiltSizeDig;
+        private System.Windows.Forms.ComboBoxTS comboDSPDigTXFiltSize;
+        private System.Windows.Forms.LabelTS labelTS372;
+        private System.Windows.Forms.ComboBoxTS comboDSPDigRXFiltSize;
+        private System.Windows.Forms.LabelTS labelTS373;
+        private System.Windows.Forms.GroupBoxTS grpDSPFiltSizeCW;
+        private System.Windows.Forms.LabelTS labelTS374;
+        private System.Windows.Forms.ComboBoxTS comboDSPCWRXFiltSize;
+        private System.Windows.Forms.GroupBoxTS grpDSPFiltSizePhone;
+        private System.Windows.Forms.ComboBoxTS comboDSPPhoneTXFiltSize;
+        private System.Windows.Forms.LabelTS labelTS376;
+        private System.Windows.Forms.ComboBoxTS comboDSPPhoneRXFiltSize;
+        private System.Windows.Forms.LabelTS labelTS377;
+        private System.Windows.Forms.GroupBoxTS grpDSPBufFM;
+        private System.Windows.Forms.ComboBoxTS comboDSPFMTXBuf;
+        private System.Windows.Forms.LabelTS labelTS368;
+        private System.Windows.Forms.ComboBoxTS comboDSPFMRXBuf;
+        private System.Windows.Forms.LabelTS labelTS369;
+        private System.Windows.Forms.TabPage tpDSPNB;
    }
 }

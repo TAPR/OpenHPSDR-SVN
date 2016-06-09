@@ -883,10 +883,16 @@ setSize_emnr (EMNR a, int size)
 PORT
 void SetRXAEMNRRun (int channel, int run)
 {
-	EnterCriticalSection (&ch[channel].csDSP);
-	rxa[channel].emnr.p->run = run;
-	RXAbp1Check (channel);
-	LeaveCriticalSection (&ch[channel].csDSP);
+	EMNR a = rxa[channel].emnr.p;
+	if (a->run != run)
+	{
+		RXAbp1Check (channel, rxa[channel].amd.p->run, rxa[channel].snba.p->run, 
+			run, rxa[channel].anf.p->run, rxa[channel].anr.p->run);
+		EnterCriticalSection (&ch[channel].csDSP);
+		a->run = run;
+		RXAbp1Set (channel);
+		LeaveCriticalSection (&ch[channel].csDSP);
+	}
 }
 
 PORT

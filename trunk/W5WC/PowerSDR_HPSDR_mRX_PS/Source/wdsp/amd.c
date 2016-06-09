@@ -264,11 +264,16 @@ void setSize_amd (AMD a, int size)
 PORT void
 SetRXAAMDRun(int channel, int run)
 {
-	EnterCriticalSection (&ch[channel].csDSP);
-	rxa[channel].amd.p->run = run;
-	// turn OFF / ON second bandpass as needed
-	RXAbp1Check (channel);
-	LeaveCriticalSection (&ch[channel].csDSP);
+	AMD a = rxa[channel].amd.p;
+	if (a->run != run)
+	{
+		RXAbp1Check (channel, run, rxa[channel].snba.p->run, rxa[channel].emnr.p->run, 
+			rxa[channel].anf.p->run, rxa[channel].anr.p->run);
+		EnterCriticalSection (&ch[channel].csDSP);
+		a->run = run;
+		RXAbp1Set (channel);
+		LeaveCriticalSection (&ch[channel].csDSP);
+	}
 }
 
 PORT void
