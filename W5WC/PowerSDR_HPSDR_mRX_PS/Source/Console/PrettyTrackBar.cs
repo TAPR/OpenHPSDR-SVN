@@ -407,6 +407,7 @@ namespace PowerSDR
                 Value -= large_change;
                 OnScroll(this, EventArgs.Empty);
             }
+
             base.OnMouseWheel(e);
         }
 

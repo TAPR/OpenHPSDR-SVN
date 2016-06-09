@@ -76,6 +76,9 @@
       <AdditionalOptions>/D_ATL_XP_TARGETING %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -162,6 +165,7 @@
     <ClInclude Include="fcurve.h" />
     <ClInclude Include="fftw3.h" />
     <ClInclude Include="fir.h" />
+    <ClInclude Include="firmin.h" />
     <ClInclude Include="fmd.h" />
     <ClInclude Include="fmmod.h" />
     <ClInclude Include="gain.h" />
@@ -210,6 +214,7 @@
     <ClCompile Include="eq.c" />
     <ClCompile Include="channel.c" />
     <ClCompile Include="fcurve.c" />
+    <ClCompile Include="firmin.c" />
     <ClCompile Include="fmd.c" />
     <ClCompile Include="gain.c" />
     <ClCompile Include="gen.c" />

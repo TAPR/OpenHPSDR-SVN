@@ -173,7 +173,7 @@ extern __declspec( dllexport )
 void Spectrum(int disp, int ss, int LO, dINREAL* pI, dINREAL* pQ);
 
 extern __declspec( dllexport )
-void Spectrum2(int disp, int ss, int LO, dINREAL* pbuff);
+void Spectrum2(int run, int disp, int ss, int LO, dINREAL* pbuff);
 
 extern __declspec( dllexport )
 void Spectrum0(int run, int disp, int ss, int LO, double* pbuff);

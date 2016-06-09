@@ -1353,46 +1353,49 @@ void Spectrum(int disp, int ss, int LO, dINREAL* pI, dINREAL* pQ)
 }
 
 PORT
-void Spectrum2(int disp, int ss, int LO, dINREAL* pbuff)
+void Spectrum2(int run, int disp, int ss, int LO, dINREAL* pbuff)
 {
-	int i;
-	dINREAL *Ipointer;
-	dINREAL *Qpointer;
-	DP a = pdisp[disp];
-	EnterCriticalSection(&a->SetAnalyzerSection);
-	Ipointer = &((a->I_samples[ss][LO])[a->IQin_index[ss][LO]]);
-	Qpointer = &((a->Q_samples[ss][LO])[a->IQin_index[ss][LO]]);
-	LeaveCriticalSection(&a->SetAnalyzerSection);
-
-	for (i = 0; i < a->buff_size; i++)
+	if (run)
 	{
-		Ipointer[i] = pbuff[2 * i];
-		Qpointer[i] = pbuff[2 * i + 1];
-	}
-
-	EnterCriticalSection(&a->SetAnalyzerSection);
-	EnterCriticalSection(&(a->BufferControlSection[ss][LO]));
-		if (a->have_samples[ss][LO] > a->max_writeahead)
-			{
-				//if we're receiving samples too much faster than we're consuming them, skip some
-				if ((a->IQout_index[ss][LO] += a->have_samples[ss][LO] - a->max_writeahead) >= a->bsize)
-						a->IQout_index[ss][LO] -= a->bsize;
-				a->have_samples[ss][LO] = a->max_writeahead;
-			}
-		if ((a->have_samples[ss][LO] += a->buff_size) >= a->size)
-			InterlockedBitTestAndSet(&(a->buff_ready[ss][LO]), 0);
-	LeaveCriticalSection(&(a->BufferControlSection[ss][LO]));
-	if((a->IQin_index[ss][LO] += a->buff_size) >= a->bsize)	//REQUIRES buff_size IS A SUB-MULTIPLE OF SIZE OF INPUT SAMPLE BUFFS!
-		a->IQin_index[ss][LO] = 0;
-
-	if (!a->dispatcher)
-	{
-		a->dispatcher = 1;
+		int i;
+		dINREAL *Ipointer;
+		dINREAL *Qpointer;
+		DP a = pdisp[disp];
+		EnterCriticalSection(&a->SetAnalyzerSection);
+		Ipointer = &((a->I_samples[ss][LO])[a->IQin_index[ss][LO]]);
+		Qpointer = &((a->Q_samples[ss][LO])[a->IQin_index[ss][LO]]);
 		LeaveCriticalSection(&a->SetAnalyzerSection);
-		_beginthread(sendbuf, 0, (void *)disp);
+
+		for (i = 0; i < a->buff_size; i++)
+		{
+			Ipointer[i] = pbuff[2 * i + 1];
+			Qpointer[i] = pbuff[2 * i + 0];
+		}
+
+		EnterCriticalSection(&a->SetAnalyzerSection);
+		EnterCriticalSection(&(a->BufferControlSection[ss][LO]));
+			if (a->have_samples[ss][LO] > a->max_writeahead)
+				{
+					//if we're receiving samples too much faster than we're consuming them, skip some
+					if ((a->IQout_index[ss][LO] += a->have_samples[ss][LO] - a->max_writeahead) >= a->bsize)
+							a->IQout_index[ss][LO] -= a->bsize;
+					a->have_samples[ss][LO] = a->max_writeahead;
+				}
+			if ((a->have_samples[ss][LO] += a->buff_size) >= a->size)
+				InterlockedBitTestAndSet(&(a->buff_ready[ss][LO]), 0);
+		LeaveCriticalSection(&(a->BufferControlSection[ss][LO]));
+		if((a->IQin_index[ss][LO] += a->buff_size) >= a->bsize)	//REQUIRES buff_size IS A SUB-MULTIPLE OF SIZE OF INPUT SAMPLE BUFFS!
+			a->IQin_index[ss][LO] = 0;
+
+		if (!a->dispatcher)
+		{
+			a->dispatcher = 1;
+			LeaveCriticalSection(&a->SetAnalyzerSection);
+			_beginthread(sendbuf, 0, (void *)disp);
+		}
+		else
+			LeaveCriticalSection(&a->SetAnalyzerSection);
 	}
-	else
-		LeaveCriticalSection(&a->SetAnalyzerSection);
 }
 
 PORT

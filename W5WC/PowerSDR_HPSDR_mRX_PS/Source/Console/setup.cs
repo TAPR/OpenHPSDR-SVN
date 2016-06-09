@@ -569,14 +569,12 @@ namespace PowerSDR
         private GroupBoxTS grpDSPBufCW;
         private ComboBoxTS comboDSPPhoneTXBuf;
         private ComboBoxTS comboDSPPhoneRXBuf;
-        private ComboBoxTS comboDSPCWTXBuf;
         private ComboBoxTS comboDSPCWRXBuf;
         private ComboBoxTS comboDSPDigTXBuf;
         private ComboBoxTS comboDSPDigRXBuf;
         private LabelTS lblDSPPhoneBufferTX;
         private LabelTS lblDSPPhoneBufferRX;
         private LabelTS lblDSPCWBufferRX;
-        private LabelTS lblDSPCWBufferTX;
         private GroupBoxTS grpDSPBufDig;
         private LabelTS lblDSPDigBufferRX;
         private LabelTS lblDSPDigBufferTX;
@@ -1533,12 +1531,31 @@ namespace PowerSDR
             comboRX2ColorPalette.Text = "enhanced";
             comboTXLabelAlign.Text = "Auto";
             comboDisplayDriver.Text = "GDI+";
-            comboDSPPhoneRXBuf.Text = "4096";
-            comboDSPPhoneTXBuf.Text = "2048";
-            comboDSPCWRXBuf.Text = "4096";
-            comboDSPCWTXBuf.Text = "2048";
-            comboDSPDigRXBuf.Text = "4096";
-            comboDSPDigTXBuf.Text = "2048";
+
+            comboDSPPhoneRXBuf.Text = "1024";
+            comboDSPPhoneTXBuf.Text = "1024";
+            comboDSPFMRXBuf.Text = "1024";
+            comboDSPFMTXBuf.Text = "1024";
+            comboDSPCWRXBuf.Text = "1024";
+            comboDSPDigRXBuf.Text = "1024";
+            comboDSPDigTXBuf.Text = "1024";
+
+            comboDSPPhoneRXFiltSize.Text = "4096";
+            comboDSPPhoneTXFiltSize.Text = "4096";
+            comboDSPFMRXFiltSize.Text = "4096";
+            comboDSPFMTXFiltSize.Text = "4096";
+            comboDSPCWRXFiltSize.Text = "4096";
+            comboDSPDigRXFiltSize.Text = "4096";
+            comboDSPDigTXFiltSize.Text = "4096";
+
+            comboDSPPhoneRXFiltType.SelectedIndex = 0;
+            comboDSPPhoneTXFiltType.SelectedIndex = 0;
+            comboDSPFMRXFiltType.SelectedIndex = 0;
+            comboDSPFMTXFiltType.SelectedIndex = 0;
+            comboDSPCWRXFiltType.SelectedIndex = 0;
+            comboDSPDigRXFiltType.SelectedIndex = 0;
+            comboDSPDigTXFiltType.SelectedIndex = 0;
+
             comboDispWinType.Text = "Kaiser";
             comboRX2DispWinType.Text = "Kaiser";
             comboDispPanDetector.Text = "Peak";
@@ -1597,8 +1614,6 @@ namespace PowerSDR
                 comboDSPPhoneTXBuf.SelectedIndex = comboDSPPhoneTXBuf.Items.Count - 1;
             if (comboDSPCWRXBuf.SelectedIndex < 0 || comboDSPCWRXBuf.SelectedIndex >= comboDSPCWRXBuf.Items.Count)
                 comboDSPCWRXBuf.SelectedIndex = comboDSPCWRXBuf.Items.Count - 1;
-            if (comboDSPCWTXBuf.SelectedIndex < 0 || comboDSPCWTXBuf.SelectedIndex >= comboDSPCWTXBuf.Items.Count)
-                comboDSPCWTXBuf.SelectedIndex = comboDSPCWTXBuf.Items.Count - 1;
             if (comboDSPDigRXBuf.SelectedIndex < 0 || comboDSPDigRXBuf.SelectedIndex >= comboDSPDigRXBuf.Items.Count)
                 comboDSPDigRXBuf.SelectedIndex = comboDSPDigRXBuf.Items.Count - 1;
             if (comboDSPDigTXBuf.SelectedIndex < 0 || comboDSPDigTXBuf.SelectedIndex >= comboDSPDigTXBuf.Items.Count)
@@ -1748,7 +1763,25 @@ namespace PowerSDR
                     console.radio.GetDSPRX(i, j).Update = true;
             comboDSPPhoneRXBuf_SelectedIndexChanged(this, EventArgs.Empty);
             comboDSPPhoneTXBuf_SelectedIndexChanged(this, EventArgs.Empty);
-
+            comboDSPFMRXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPFMTXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPCWRXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigRXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigTXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPPhoneRXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPPhoneTXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPFMRXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPFMTXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPCWRXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigRXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigTXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPPhoneRXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPPhoneTXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPFMRXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPFMTXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPCWRXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigRXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigTXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
             console.specRX.GetSpecRX(0).Update = true;
             console.specRX.GetSpecRX(1).Update = true;
 
@@ -3091,18 +3124,37 @@ namespace PowerSDR
 
             dr["Phone_RX_DSP_Buffer"] = (string)comboDSPPhoneRXBuf.Text;
             dr["Phone_TX_DSP_Buffer"] = (string)comboDSPPhoneTXBuf.Text;
+            dr["FM_RX_DSP_Buffer"] = (string)comboDSPFMRXBuf.Text;
+            dr["FM_TX_DSP_Buffer"] = (string)comboDSPFMTXBuf.Text;
             dr["Digi_RX_DSP_Buffer"] = (string)comboDSPDigRXBuf.Text;
             dr["Digi_TX_DSP_Buffer"] = (string)comboDSPDigTXBuf.Text;
             dr["CW_RX_DSP_Buffer"] = (string)comboDSPCWRXBuf.Text;
 
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Filter_Size"] = (string)comboDSPPhoneRXFiltSize.Text;
+            dr["Phone_TX_DSP_Filter_Size"] = (string)comboDSPPhoneTXFiltSize.Text;
+            dr["FM_RX_DSP_Filter_Size"] = (string)comboDSPFMRXFiltSize.Text;
+            dr["FM_TX_DSP_Filter_Size"] = (string)comboDSPFMTXFiltSize.Text;
+            dr["Digi_RX_DSP_Filter_Size"] = (string)comboDSPDigRXFiltSize.Text;
+            dr["Digi_TX_DSP_Filter_Size"] = (string)comboDSPDigTXFiltSize.Text;
+            dr["CW_RX_DSP_Filter_Size"] = (string)comboDSPCWRXFiltSize.Text;
+
+            dr["Phone_RX_DSP_Filter_Type"] = (string)comboDSPPhoneRXFiltType.Text;
+            dr["Phone_TX_DSP_Filter_Type"] = (string)comboDSPPhoneTXFiltType.Text;
+            dr["FM_RX_DSP_Filter_Type"] = (string)comboDSPFMRXFiltType.Text;
+            dr["FM_TX_DSP_Filter_Type"] = (string)comboDSPFMTXFiltType.Text;
+            dr["Digi_RX_DSP_Filter_Type"] = (string)comboDSPDigRXFiltType.Text;
+            dr["Digi_TX_DSP_Filter_Type"] = (string)comboDSPDigTXFiltType.Text;
+            dr["CW_RX_DSP_Filter_Type"] = (string)comboDSPCWRXFiltType.Text;
+
+            dr["Mic_Input_On"] = (bool)radMicIn.Checked;
+            dr["Mic_Input_Boost"] = (bool)chk20dbMicBoost.Checked;
+            dr["Line_Input_On"] = (bool)radLineIn.Checked;
+            dr["Line_Input_Level"] = udLineInBoost.Value;
+
+            dr["CESSB_On"] = chkDSPCESSB.Checked;
+            dr["Disable_Pure_Signal"] = chkDisablePureSignal.Checked;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
         }
 
         public void UpdateWaterfallBandInfo()
@@ -4605,11 +4657,6 @@ namespace PowerSDR
             }
         }
 
-        public void ResetFLEX5000()
-        {
-            radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
-        }
-
         public bool RXOnly
         {
             get { return chkGeneralRXOnly.Checked; }
@@ -4670,13 +4717,6 @@ namespace PowerSDR
             }
         }
 
-
-        //public bool SpurRedEnabled
-        //{
-        //    get { return chkGeneralSpurRed.Enabled; }
-        //    set { chkGeneralSpurRed.Enabled = value; }
-        //}
-
         public double HPSDRFreqCorrectFactor
         {
             get { return (double)udHPSDRFreqCorrectFactor.Value; }
@@ -4687,6 +4727,17 @@ namespace PowerSDR
             }
         }
 
+        public bool CESSB
+        {
+            get { return chkDSPCESSB.Checked; }
+            set { chkDSPCESSB.Checked = value; }
+        }
+
+       public bool DisablePureSignal
+        {
+            get { return chkDisablePureSignal.Checked; }
+            set { chkDisablePureSignal.Checked = value; }
+        }
 
         public bool AlexPresent
         {
@@ -6090,17 +6141,6 @@ namespace PowerSDR
             }
         }
 
-        public int DSPCWTXBuffer
-        {
-            get { return Int32.Parse(comboDSPCWTXBuf.Text); }
-            set
-            {
-                string temp = value.ToString();
-                if (comboDSPCWTXBuf.Items.Contains(temp))
-                    comboDSPCWTXBuf.SelectedItem = temp;
-            }
-        }
-
         public int DSPDigRXBuffer
         {
             get { return Int32.Parse(comboDSPDigRXBuf.Text); }
@@ -6907,7 +6947,7 @@ namespace PowerSDR
                 chkPennyLane.Visible = false;
                 radPenny10MHz.Checked = true;
                 rad12288MHzPenny.Checked = true;
-                chkAlexPresent.Checked = true;
+                chkAlexPresent.Visible = true;
                 chkAlexPresent.Enabled = true;
                 chkApolloPresent.Checked = false;
                 chkApolloPresent.Enabled = true;
@@ -8433,6 +8473,9 @@ namespace PowerSDR
             }
 
             console.VACEnabled = val;
+            if (radMicIn.Checked) radMicIn_CheckedChanged(this, EventArgs.Empty);
+            else radLineIn_CheckedChanged(this, EventArgs.Empty);
+
             if (power && val != old_val) console.PowerOn = true;
         }
 
@@ -8456,6 +8499,9 @@ namespace PowerSDR
             }
 
             console.VAC2Enabled = val;
+            if (radMicIn.Checked) radMicIn_CheckedChanged(this, EventArgs.Empty);
+            else radLineIn_CheckedChanged(this, EventArgs.Empty);
+
             if (power && val != old_val) console.PowerOn = true;
         }
 
@@ -8691,31 +8737,31 @@ namespace PowerSDR
 
             //Display.DrawBackground();
 
-            if (!initializing)
-            {
-                RadioDSP.SyncStatic();
+            //if (!initializing)
+            //{
+            //    RadioDSP.SyncStatic();
 
-                for (int i = 0; i < 2; i++)
-                {
-                    for (int j = 0; j < 2; j++)
-                    {
-                        RadioDSPRX dsp_rx = console.radio.GetDSPRX(i, j);
-                        dsp_rx.Update = false;
-                        dsp_rx.Force = true;
-                        dsp_rx.Update = true;
-                        dsp_rx.Force = false;
-                    }
-                }
+            //    for (int i = 0; i < 2; i++)
+            //    {
+            //        for (int j = 0; j < 2; j++)
+            //        {
+            //            RadioDSPRX dsp_rx = console.radio.GetDSPRX(i, j);
+            //            dsp_rx.Update = false;
+            //            dsp_rx.Force = true;
+            //            dsp_rx.Update = true;
+            //            dsp_rx.Force = false;
+            //        }
+            //    }
 
-                for (int i = 0; i < 1; i++)
-                {
-                    RadioDSPTX dsp_tx = console.radio.GetDSPTX(i);
-                    dsp_tx.Update = false;
-                    dsp_tx.Force = true;
-                    dsp_tx.Update = true;
-                    dsp_tx.Force = false;
-                }
-            }
+            //    for (int i = 0; i < 1; i++)
+            //    {
+            //        RadioDSPTX dsp_tx = console.radio.GetDSPTX(i);
+            //        dsp_tx.Update = false;
+            //        dsp_tx.Force = true;
+            //        dsp_tx.Update = true;
+            //        dsp_tx.Force = false;
+            //    }
+            //}
 
             if (power && (new_rate != old_rate || force_reset))
             {
@@ -10877,14 +10923,19 @@ namespace PowerSDR
             console.DSPBufPhoneTX = int.Parse(comboDSPPhoneTXBuf.Text);
         }
 
+        private void comboDSPFMRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPBufFMRX = int.Parse(comboDSPFMRXBuf.Text);
+        }
+
+        private void comboDSPFMTXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPBufFMTX = int.Parse(comboDSPFMTXBuf.Text);
+        }
+        
         private void comboDSPCWRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             console.DSPBufCWRX = int.Parse(comboDSPCWRXBuf.Text);
-        }
-
-        private void comboDSPCWTXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-            console.DSPBufCWTX = int.Parse(comboDSPCWTXBuf.Text);
         }
 
         private void comboDSPDigRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -10897,6 +10948,75 @@ namespace PowerSDR
             console.DSPBufDigTX = int.Parse(comboDSPDigTXBuf.Text);
         }
 
+        private void comboDSPPhoneRXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizePhoneRX = int.Parse(comboDSPPhoneRXFiltSize.Text);
+        }
+
+        private void comboDSPPhoneTXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizePhoneTX = int.Parse(comboDSPPhoneTXFiltSize.Text);
+        }
+
+        private void comboDSPFMRXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizeFMRX = int.Parse(comboDSPFMRXFiltSize.Text);
+        }
+
+        private void comboDSPFMTXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizeFMTX = int.Parse(comboDSPFMTXFiltSize.Text);
+        }
+
+        private void comboDSPCWRXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizeCWRX = int.Parse(comboDSPCWRXFiltSize.Text);
+        }
+
+        private void comboDSPDigRXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizeDigRX = int.Parse(comboDSPDigRXFiltSize.Text);
+        }
+
+        private void comboDSPDigTXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizeDigTX = int.Parse(comboDSPDigTXFiltSize.Text);
+        }
+
+        private void comboDSPPhoneRXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypePhoneRX =  (DSPFilterType)comboDSPPhoneRXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPPhoneTXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypePhoneTX = (DSPFilterType)comboDSPPhoneTXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPFMRXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypeFMRX = (DSPFilterType)comboDSPFMRXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPFMTXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypeFMTX = (DSPFilterType)comboDSPFMTXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPCWRXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypeCWRX = (DSPFilterType)comboDSPCWRXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPDigRXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypeDigRX = (DSPFilterType)comboDSPDigRXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPDigTXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypeDigTX = (DSPFilterType)comboDSPDigTXFiltType.SelectedIndex;
+        }
 
         #region Image Reject
 
@@ -11466,9 +11586,34 @@ namespace PowerSDR
 
             comboDSPPhoneRXBuf.Text = (string)dr["Phone_RX_DSP_Buffer"];
             comboDSPPhoneTXBuf.Text = (string)dr["Phone_TX_DSP_Buffer"];
+            comboDSPFMRXBuf.Text = (string)dr["FM_RX_DSP_Buffer"];
+            comboDSPFMTXBuf.Text = (string)dr["FM_TX_DSP_Buffer"];
             comboDSPDigRXBuf.Text = (string)dr["Digi_RX_DSP_Buffer"];
             comboDSPDigTXBuf.Text = (string)dr["Digi_TX_DSP_Buffer"];
             comboDSPCWRXBuf.Text = (string)dr["CW_RX_DSP_Buffer"];
+
+            comboDSPPhoneRXFiltSize.Text = (string)dr["Phone_RX_DSP_Filter_Size"];
+            comboDSPPhoneTXFiltSize.Text = (string)dr["Phone_TX_DSP_Filter_Size"];
+            comboDSPFMRXFiltSize.Text = (string)dr["FM_RX_DSP_Filter_Size"];
+            comboDSPFMTXFiltSize.Text = (string)dr["FM_TX_DSP_Filter_Size"];
+            comboDSPDigRXFiltSize.Text = (string)dr["Digi_RX_DSP_Filter_Size"];
+            comboDSPDigTXFiltSize.Text = (string)dr["Digi_TX_DSP_Filter_Size"];
+            comboDSPCWRXFiltSize.Text = (string)dr["CW_RX_DSP_Filter_Size"];
+
+            comboDSPPhoneRXFiltType.Text = (string)dr["Phone_RX_DSP_Filter_Type"];
+            comboDSPPhoneTXFiltType.Text = (string)dr["Phone_TX_DSP_Filter_Type"];
+            comboDSPFMRXFiltType.Text = (string)dr["FM_RX_DSP_Filter_Type"];
+            comboDSPFMTXFiltType.Text = (string)dr["FM_TX_DSP_Filter_Type"];
+            comboDSPDigRXFiltType.Text = (string)dr["Digi_RX_DSP_Filter_Type"];
+            comboDSPDigTXFiltType.Text = (string)dr["Digi_TX_DSP_Filter_Type"];
+            comboDSPCWRXFiltType.Text = (string)dr["CW_RX_DSP_Filter_Type"];
+
+            radMicIn.Checked = (bool)dr["Mic_Input_On"];
+            chk20dbMicBoost.Checked = (bool)dr["Mic_Input_Boost"];
+            radLineIn.Checked = (bool)dr["Line_Input_On"];
+            udLineInBoost.Value = (decimal)dr["Line_Input_Level"];
+            chkDSPCESSB.Checked = (bool)dr["CESSB_On"];
+            chkDisablePureSignal.Checked = (bool)dr["Disable_Pure_Signal"];
 
             current_profile = comboTXProfileName.Text;
         }
@@ -11595,18 +11740,36 @@ namespace PowerSDR
 
             dr["Phone_RX_DSP_Buffer"] = (string)comboDSPPhoneRXBuf.Text;
             dr["Phone_TX_DSP_Buffer"] = (string)comboDSPPhoneTXBuf.Text;
+            dr["FM_RX_DSP_Buffer"] = (string)comboDSPFMRXBuf.Text;
+            dr["FM_TX_DSP_Buffer"] = (string)comboDSPFMTXBuf.Text;
             dr["Digi_RX_DSP_Buffer"] = (string)comboDSPDigRXBuf.Text;
             dr["Digi_TX_DSP_Buffer"] = (string)comboDSPDigTXBuf.Text;
             dr["CW_RX_DSP_Buffer"] = (string)comboDSPCWRXBuf.Text;
 
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Filter_Size"] = (string)comboDSPPhoneRXFiltSize.Text;
+            dr["Phone_TX_DSP_Filter_Size"] = (string)comboDSPPhoneTXFiltSize.Text;
+            dr["FM_RX_DSP_Filter_Size"] = (string)comboDSPFMRXFiltSize.Text;
+            dr["FM_TX_DSP_Filter_Size"] = (string)comboDSPFMTXFiltSize.Text;
+            dr["Digi_RX_DSP_Filter_Size"] = (string)comboDSPDigRXFiltSize.Text;
+            dr["Digi_TX_DSP_Filter_Size"] = (string)comboDSPDigTXFiltSize.Text;
+            dr["CW_RX_DSP_Filter_Size"] = (string)comboDSPCWRXFiltSize.Text;
+
+            dr["Phone_RX_DSP_Filter_Type"] = (string)comboDSPPhoneRXFiltType.Text;
+            dr["Phone_TX_DSP_Filter_Type"] = (string)comboDSPPhoneTXFiltType.Text;
+            dr["FM_RX_DSP_Filter_Type"] = (string)comboDSPFMRXFiltType.Text;
+            dr["FM_TX_DSP_Filter_Type"] = (string)comboDSPFMTXFiltType.Text;
+            dr["Digi_RX_DSP_Filter_Type"] = (string)comboDSPDigRXFiltType.Text;
+            dr["Digi_TX_DSP_Filter_Type"] = (string)comboDSPDigTXFiltType.Text;
+            dr["CW_RX_DSP_Filter_Type"] = (string)comboDSPCWRXFiltType.Text;
+
+            dr["Mic_Input_On"] = (bool)radMicIn.Checked;
+            dr["Mic_Input_Boost"] = (bool)chk20dbMicBoost.Checked;
+            dr["Line_Input_On"] = (bool)radLineIn.Checked;
+            dr["Line_Input_Level"] = udLineInBoost.Value;
+            dr["CESSB_On"] = chkDSPCESSB.Checked;
+            dr["Disable_Pure_Signal"] = chkDisablePureSignal.Checked;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             if (!comboTXProfileName.Items.Contains(name))
             {
@@ -16518,8 +16681,8 @@ namespace PowerSDR
                 radMetis.Checked = false;
                 console.HPSDRisMetis = false;
                 grpMetisAddr.Visible = false;
-                radMicIn_CheckedChanged(this, EventArgs.Empty);
-                radLineIn_CheckedChanged(this, EventArgs.Empty);
+                if (radMicIn.Checked) radMicIn_CheckedChanged(this, EventArgs.Empty);
+                else radLineIn_CheckedChanged(this, EventArgs.Empty);
                 // if (comboAudioSampleRate1.Items.Contains(384000))
                 // comboAudioSampleRate1.Items.Remove(384000);
                 if (!comboAudioSampleRate1.Items.Contains(384000))
@@ -16540,8 +16703,8 @@ namespace PowerSDR
                 radOzyUSB.Checked = false;
                 console.HPSDRisMetis = true;
                 grpMetisAddr.Visible = true;
-                radMicIn_CheckedChanged(this, EventArgs.Empty);
-                radLineIn_CheckedChanged(this, EventArgs.Empty);
+                if (radMicIn.Checked) radMicIn_CheckedChanged(this, EventArgs.Empty);
+                else radLineIn_CheckedChanged(this, EventArgs.Empty);
                 //  lblLineInBoost.Visible = false;
                 //  udLineInBoost.Visible = false;
                 //  chk20dbMicBoost.Visible = true;
@@ -18026,7 +18189,7 @@ namespace PowerSDR
         private void chkDisablePureSignal_CheckedChanged(object sender, EventArgs e)
         {
             int nr;
-            if (console.CurrentHPSDRModel == HPSDRModel.HPSDR)
+            if (console.CurrentHPSDRModel == HPSDRModel.HPSDR && !console.initializing)
                 chkDisablePureSignal.Checked = true;
             console.psform.PSEnabled = !chkDisablePureSignal.Checked;
             if (chkDisablePureSignal.Checked)
@@ -19347,7 +19510,6 @@ namespace PowerSDR
         {
             console.specRX.GetSpecRX(0).NormOneHzPan = chkDispNormalize.Checked;
         }
-
 
     }
 

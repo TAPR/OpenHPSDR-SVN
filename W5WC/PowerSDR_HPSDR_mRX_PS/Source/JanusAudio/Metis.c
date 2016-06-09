@@ -298,7 +298,7 @@ int MetisReadDirect(char *bufp, int buflen) {
 			}
 		}
 		else {
-			printf("MRD: ignoring right sized frame bad header!\n", rc);
+			printf("MRD: ignoring right sized frame bad header! %d\n", rc);
 		}
 	}
 	else {
