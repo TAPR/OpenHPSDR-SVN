@@ -35,7 +35,7 @@ namespace PowerSDR
     class TitleBar
     {
         public const string BUILD_NAME = "mRX PS";
-        public const string BUILD_DATE = "(6/9/16)";
+        public const string BUILD_DATE = "(6/15/16)";
 
         public static string GetString()
         {

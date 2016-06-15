@@ -424,6 +424,9 @@ namespace PowerSDR
             // t.Columns.Add("TX", typeof(bool));
 
             object[] data = {
+                               // 0.135700, 0.137799, "2200M CW/DATA",   true,                                
+                               // 0.472000, 0.478999, "630M CW/DATA",    true,
+
 								1.800000, 1.809999, "160M CW/Digital Modes",	true,
 								1.810000, 1.810000, "160M CW QRP",				true,
 								1.810001, 1.842999, "160M CW",					true,
