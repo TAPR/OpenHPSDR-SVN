@@ -108,6 +108,7 @@ void setSize_sender (SENDER a, int size)
 *																										*
 ********************************************************************************************************/
 
+PORT
 void SetRXASpectrum (int channel, int flag, int disp, int ss, int LO)
 {
 	SENDER a;

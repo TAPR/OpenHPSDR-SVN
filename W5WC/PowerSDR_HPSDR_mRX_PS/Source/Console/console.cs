@@ -1801,6 +1801,7 @@ namespace PowerSDR
             Midi2Cat = new Midi2CatCommands(this);
 
             Init60mChannels();
+            LoadLEDFont();
             InitConsole();										// Initialize all forms and main variables
 
             Splash.SetStatus("Finished");						// Set progress point
@@ -1866,8 +1867,6 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
-
-            LoadLEDFont();
         }
 
 
@@ -33325,6 +33324,7 @@ namespace PowerSDR
                 if (attontx) JanusAudio.SetTxAttenData(tx_step_attenuator_by_band[(int)rx1_band]);
                 else JanusAudio.SetTxAttenData(rx1_attenuator_data);
                 SetupForm.UpdateGeneraHardware();
+                SetMicGain();
             }
             else
             {
@@ -33456,7 +33456,7 @@ namespace PowerSDR
                     break;
                 case "Waterfall":
                     Display.CurrentDisplayMode = DisplayMode.WATERFALL;
-                    wdsp.SetRXASpectrum(wdsp.id(0, 0), 1, 0, 0, 0);
+                    wdsp.SetRXASpectrum(wdsp.id(0, 0), 0, 0, 0, 0);
                     CalcDisplayFreq();
                     CalcRX2DisplayFreq();
                     spec_display = true;
@@ -34083,8 +34083,13 @@ namespace PowerSDR
             //      Audio.RadioVolume = (double)Math.Sqrt((double)ptbPWR.Value / 100.0) / audio_volts1 * TARGET;
             //  }
 
-           // if (ptbPWR.Focused) btnHidden.Focus();
-            ptbPWR.Focus();
+            // if (ptbPWR.Focused) btnHidden.Focus();
+
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbPWR.Focus();
+            }
+
         }
 
         private void ptbAF_Scroll(object sender, System.EventArgs e)
@@ -34113,7 +34118,12 @@ namespace PowerSDR
             if (!MOX) RXAF = ptbAF.Value;
             else TXAF = ptbAF.Value;
 
-            ptbAF.Focus();
+
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbAF.Focus();
+            }
+            
             //if (ptbAF.Focused) btnHidden.Focus();
         }
 
@@ -34134,8 +34144,11 @@ namespace PowerSDR
             }
 
             rx1_agct_by_band[(int)rx1_band] = ptbRF.Value;
-           // if (ptbRF.Focused) btnHidden.Focus();
-            ptbRF.Focus();
+            // if (ptbRF.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbRF.Focus();
+            }
         }
 
         private void chkMicMute_CheckedChanged(object sender, System.EventArgs e)
@@ -34176,9 +34189,12 @@ namespace PowerSDR
                 //double gain_db = (double)ptbMic.Value;
                 Audio.MicPreamp = Math.Pow(10.0, gain_db / 20.0); // convert to scalar 
             }
-           // if (ptbMic.Focused) btnHidden.Focus();
-            ptbMic.Focus();
-            
+            // if (ptbMic.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbMic.Focus();
+            }
+
         }
 
         private void ptbCWSpeed_Scroll(object sender, System.EventArgs e)
@@ -34186,7 +34202,10 @@ namespace PowerSDR
             lblCWSpeed.Text = "Speed:  " + ptbCWSpeed.Value.ToString() + " WPM";
             JanusAudio.SetCWKeyerSpeed(ptbCWSpeed.Value);
             //if (ptbCWSpeed.Focused) btnHidden.Focus();
-            ptbCWSpeed.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbCWSpeed.Focus();
+            }
         }
 
         private void chkVOX_CheckedChanged(object sender, System.EventArgs e)
@@ -34232,8 +34251,11 @@ namespace PowerSDR
                     (-alex_preamp_offset);
             }
 
-           // if (ptbSquelch.Focused) btnHidden.Focus();
-            ptbSquelch.Focus();
+            // if (ptbSquelch.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbSquelch.Focus();
+            }
         }
 
         private void picSquelch_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -34273,8 +34295,11 @@ namespace PowerSDR
                     SetupForm.VAC2RXGain = ptbVACRXGain.Value;
                     vac2_rx_gain = ptbVACRXGain.Value;
                 }
-           // if (ptbVACRXGain.Focused) btnHidden.Focus();
-            ptbVACRXGain.Focus();
+            // if (ptbVACRXGain.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbVACRXGain.Focus();
+            }
         }
 
         private void ptbVACTXGain_Scroll(object sender, System.EventArgs e)
@@ -34297,16 +34322,22 @@ namespace PowerSDR
                     vac2_tx_gain = ptbVACTXGain.Value;
                 }
             }
-           // if (ptbVACTXGain.Focused) btnHidden.Focus();
-            ptbVACTXGain.Focus();
+            // if (ptbVACTXGain.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbVACTXGain.Focus();
+            }
         }
 
         private void ptbVOX_Scroll(object sender, System.EventArgs e)
         {
             lblVOXVal.Text = ptbVOX.Value.ToString();
             if (SetupForm != null) SetupForm.VOXSens = ptbVOX.Value;
-           // if (ptbVOX.Focused) btnHidden.Focus();
-            ptbVOX.Focus();
+            // if (ptbVOX.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbVOX.Focus();
+            }
         }
 
         private void picVOX_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -34324,8 +34355,11 @@ namespace PowerSDR
         {
             lblNoiseGateVal.Text = ptbNoiseGate.Value.ToString();
             if (SetupForm != null) SetupForm.NoiseGate = ptbNoiseGate.Value;
-           // if (ptbNoiseGate.Focused) btnHidden.Focus();
-            ptbNoiseGate.Focus();
+            // if (ptbNoiseGate.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbNoiseGate.Focus();
+            }
         }
 
         private void picNoiseGate_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -36072,7 +36106,10 @@ namespace PowerSDR
                     SetupForm.RX2APFFreq = ptbCWAPFFreq.Value;
             }
             lblCWAPFTune.Text = "Tune:  " + ptbCWAPFFreq.Value.ToString();
-            ptbCWAPFFreq.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbCWAPFFreq.Focus();
+            }
         }
 
         private void ptbCWAPFBandwidth_Scroll(object sender, System.EventArgs e)
@@ -36089,7 +36126,10 @@ namespace PowerSDR
             }
             lblCWAPFBandwidth.Text = "Bandwidth:  " + ptbCWAPFBandwidth.Value.ToString();
 
-            ptbCWAPFBandwidth.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbCWAPFBandwidth.Focus();
+            }
         }
 
         private void ptbCWAPFGain_Scroll(object sender, System.EventArgs e)
@@ -36107,8 +36147,11 @@ namespace PowerSDR
             double gain_value = Math.Round(ptbCWAPFGain.Value / 10.0, 0);
             // lblCWAPFGain.Text = "Gain:  " + ptbCWAPFGain.Value.ToString();
             lblCWAPFGain.Text = "Gain:  " + gain_value.ToString();
-           // if (ptbCWAPFGain.Focused) btnHidden.Focus();
-            ptbCWAPFGain.Focus();
+            // if (ptbCWAPFGain.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbCWAPFGain.Focus();
+            }
         }
 
         public void DisableDAX()
@@ -36305,7 +36348,7 @@ namespace PowerSDR
                 btnHidden.Focus();
                 return;
             }
-            
+
             if (this.ActiveControl is TextBoxTS ||
                 this.ActiveControl is NumericUpDownTS ||
                 this.ActiveControl is TrackBarTS ||
@@ -36473,7 +36516,7 @@ namespace PowerSDR
 
             return null; // Couldn't find any, darn!
         }
-        
+
         /// <summary>
         /// Calculates a "Snapped" frequency that lies on an integer multiple of the Tune Step.
         /// </summary>
@@ -40093,8 +40136,11 @@ namespace PowerSDR
             specRX.GetSpecRX(1).PanSlider = (double)ptbDisplayPan.Value / 1000.0;
             CalcDisplayFreq();
             CalcRX2DisplayFreq();
-           // if (ptbDisplayPan.Focused) btnHidden.Focus();
-            ptbDisplayPan.Focus();
+            // if (ptbDisplayPan.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbDisplayPan.Focus();
+            }
         }
 
         private void btnDisplayPanCenter_Click(object sender, System.EventArgs e)
@@ -40150,7 +40196,10 @@ namespace PowerSDR
             CalcRX2DisplayFreq();
 
             //if (ptbDisplayZoom.Focused) btnHidden.Focus();
-            ptbDisplayZoom.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbDisplayZoom.Focus();
+            }
         }
 
         private void radDisplayZoom05_CheckedChanged(object sender, System.EventArgs e)
@@ -42066,9 +42115,12 @@ namespace PowerSDR
 
             btnFilterShiftReset.BackColor = button_selected_color;
 
-           // if (ptbFilterShift.Focused)
-               // btnHidden.Focus();
-            ptbFilterShift.Focus();
+            // if (ptbFilterShift.Focused)
+            // btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbFilterShift.Focus();
+            }
         }
 
         private void ptbFilterShift_Update(int low, int high)
@@ -42278,7 +42330,7 @@ namespace PowerSDR
             if (new_val > ptbFilterWidth.Maximum) new_val = ptbFilterWidth.Maximum;
             if (new_val < ptbFilterWidth.Minimum) new_val = ptbFilterWidth.Minimum;
             ptbFilterWidth.Value = new_val;
-           // ptbFilterWidth.Focus();
+            // ptbFilterWidth.Focus();
         }
 
         private void ptbFilterWidth_Scroll(object sender, System.EventArgs e)
@@ -42377,9 +42429,12 @@ namespace PowerSDR
             }
             UpdateRX1Filters(low, high);
 
-           // if (ptbFilterWidth.Focused)
-               // btnHidden.Focus();
-            ptbFilterWidth.Focus();
+            // if (ptbFilterWidth.Focused)
+            // btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbFilterWidth.Focus();
+            }
         }
 
         private void tbFilterWidthScroll_newMode()
@@ -42859,7 +42914,7 @@ namespace PowerSDR
             if (chkXIT.Checked) Display.XIT = (int)udXIT.Value;
 
             //if(udXIT.Focused)
-                //btnHidden.Focus();
+            //btnHidden.Focus();
         }
 
         private void btnXITReset_Click(object sender, System.EventArgs e)
@@ -43218,7 +43273,10 @@ namespace PowerSDR
                 radio.GetDSPTX(0).TXCompandLevel = (double)ptbCPDR.Value;
 
             //if (ptbCPDR.Focused) btnHidden.Focus();
-            ptbCPDR.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbCPDR.Focus();
+            }
         }
 
         private void chkDX_CheckedChanged(object sender, System.EventArgs e)
@@ -43258,7 +43316,10 @@ namespace PowerSDR
         private void ptbDX_Scroll(object sender, System.EventArgs e)
         {
             lblDXVal.Text = ptbDX.Value.ToString();
-            ptbDX.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbDX.Focus();
+            }
             //if (chkDX.Checked)
             //    radio.GetDSPTX(0).TXCompandLevel = 1.0 + 0.4 * (double)ptbDX.Value;
             //if (ptbDX.Focused) btnHidden.Focus();
@@ -43412,7 +43473,10 @@ namespace PowerSDR
             //	btnHidden.Focus();
             // if (ptbRX0Gain.Focused)
             //   btnHidden.Focus();
-            ptbPanMainRX.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbPanMainRX.Focus();
+            }
         }
 
         private void ptbPanSubRX_Scroll(object sender, System.EventArgs e)
@@ -43421,9 +43485,12 @@ namespace PowerSDR
             if (chkPanSwap.Checked) val = 1.0f - val;
             radio.GetDSPRX(0, 1).Pan = val;
 
-           // if (ptbPanSubRX.Focused)
-               // btnHidden.Focus();
-            ptbPanSubRX.Focus();
+            // if (ptbPanSubRX.Focused)
+            // btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbPanSubRX.Focus();
+            }
         }
 
         private void chkEnableMultiRX_CheckedChanged(object sender, System.EventArgs e)
@@ -43525,17 +43592,20 @@ namespace PowerSDR
             }
 
             lblRX1AF.Text = "RX1 AF:  " + ptbRX0Gain.Value.ToString();
-           // if (ptbRX0Gain.Focused)
-              //  btnHidden.Focus();
-            ptbRX0Gain.Focus();
+            // if (ptbRX0Gain.Focused)
+            //  btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbRX0Gain.Focus();
+            }
         }
 
         private void ptbRX1Gain_Scroll(object sender, System.EventArgs e)
         {
             radio.GetDSPRX(0, 1).RXOutputGain = (double)ptbRX1Gain.Value / ptbRX1Gain.Maximum;
 
-           // if (ptbRX1Gain.Focused)
-               // btnHidden.Focus();
+            // if (ptbRX1Gain.Focused)
+            // btnHidden.Focus();
             ptbRX1Gain.Focus();
         }
 
@@ -45424,8 +45494,11 @@ namespace PowerSDR
             }
 
             rx2_agct_by_band[(int)rx2_band] = ptbRX2RF.Value;
-           // if (ptbRX2RF.Focused) btnHidden.Focus();
-            ptbRX2RF.Focus();
+            // if (ptbRX2RF.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbRX2RF.Focus();
+            }
         }
 
         private void chkRX2Squelch_CheckedChanged(object sender, System.EventArgs e)
@@ -45489,8 +45562,11 @@ namespace PowerSDR
                     rx2_path_offset);
             }
 
-           // if (ptbRX2Squelch.Focused) btnHidden.Focus();
-            ptbRX2Squelch.Focus();
+            // if (ptbRX2Squelch.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbRX2Squelch.Focus();
+            }
         }
 
         private void picRX2Squelch_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -45525,9 +45601,12 @@ namespace PowerSDR
             float val = (int)ptbRX2Pan.Value / 100.0f;
             radio.GetDSPRX(1, 0).Pan = val;
 
-           // if (ptbRX2Pan.Focused)
-               // btnHidden.Focus();
-            ptbRX2Pan.Focus();
+            // if (ptbRX2Pan.Focused)
+            // btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbRX2Pan.Focus();
+            }
         }
 
         private void ptbRX2Gain_Scroll(object sender, System.EventArgs e)
@@ -45537,9 +45616,12 @@ namespace PowerSDR
             ptbRX2AF.Value = ptbRX2Gain.Value;
             lblRX2AF.Text = "RX2 AF:  " + ptbRX2Gain.Value.ToString();
 
-           // if (ptbRX2Gain.Focused)
-               // btnHidden.Focus();
-            ptbRX2Gain.Focus();
+            // if (ptbRX2Gain.Focused)
+            // btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbRX2Gain.Focus();
+            }
         }
 
         private void chkRX2Mute_CheckedChanged(object sender, System.EventArgs e)
@@ -45746,67 +45828,67 @@ namespace PowerSDR
                     break;
             }
 
-                // buffer size
-                if (radio.GetDSPRX(0, 0).BufferSize != bufsizerx1 ||
-                    radio.GetDSPRX(0, 1).BufferSize != bufsizerx1)
-                {
-                    radio.GetDSPRX(0, 0).BufferSize = bufsizerx1;
-                    radio.GetDSPRX(0, 1).BufferSize = bufsizerx1;
-                }
+            // buffer size
+            if (radio.GetDSPRX(0, 0).BufferSize != bufsizerx1 ||
+                radio.GetDSPRX(0, 1).BufferSize != bufsizerx1)
+            {
+                radio.GetDSPRX(0, 0).BufferSize = bufsizerx1;
+                radio.GetDSPRX(0, 1).BufferSize = bufsizerx1;
+            }
 
-                if (radio.GetDSPRX(1, 0).BufferSize != bufsizerx2 ||
-                    radio.GetDSPRX(1, 1).BufferSize != bufsizerx2)
-                {
-                    radio.GetDSPRX(1, 0).BufferSize = bufsizerx2;
-                    radio.GetDSPRX(1, 1).BufferSize = bufsizerx2;
-                }
+            if (radio.GetDSPRX(1, 0).BufferSize != bufsizerx2 ||
+                radio.GetDSPRX(1, 1).BufferSize != bufsizerx2)
+            {
+                radio.GetDSPRX(1, 0).BufferSize = bufsizerx2;
+                radio.GetDSPRX(1, 1).BufferSize = bufsizerx2;
+            }
 
-                if (radio.GetDSPTX(0).BufferSize != bufsizetx)
-                {
-                    radio.GetDSPTX(0).BufferSize = bufsizetx;
-                }
+            if (radio.GetDSPTX(0).BufferSize != bufsizetx)
+            {
+                radio.GetDSPTX(0).BufferSize = bufsizetx;
+            }
 
-                // filter size
-                if (radio.GetDSPRX(0, 0).FilterSize != filtsizerx1 ||
-                    radio.GetDSPRX(0, 1).FilterSize != filtsizerx1)
-                {
-                    radio.GetDSPRX(0, 0).FilterSize = filtsizerx1;
-                    radio.GetDSPRX(0, 1).FilterSize = filtsizerx1;
-                }
+            // filter size
+            if (radio.GetDSPRX(0, 0).FilterSize != filtsizerx1 ||
+                radio.GetDSPRX(0, 1).FilterSize != filtsizerx1)
+            {
+                radio.GetDSPRX(0, 0).FilterSize = filtsizerx1;
+                radio.GetDSPRX(0, 1).FilterSize = filtsizerx1;
+            }
 
-                if (radio.GetDSPRX(1, 0).FilterSize != filtsizerx2 ||
-                    radio.GetDSPRX(1, 1).FilterSize != filtsizerx2)
-                {
-                    radio.GetDSPRX(1, 0).FilterSize = filtsizerx2;
-                    radio.GetDSPRX(1, 1).FilterSize = filtsizerx2;
-                }
+            if (radio.GetDSPRX(1, 0).FilterSize != filtsizerx2 ||
+                radio.GetDSPRX(1, 1).FilterSize != filtsizerx2)
+            {
+                radio.GetDSPRX(1, 0).FilterSize = filtsizerx2;
+                radio.GetDSPRX(1, 1).FilterSize = filtsizerx2;
+            }
 
-                if (radio.GetDSPTX(0).FilterSize != filtsizetx)
-                {
-                    radio.GetDSPTX(0).FilterSize = filtsizetx;
-                }
+            if (radio.GetDSPTX(0).FilterSize != filtsizetx)
+            {
+                radio.GetDSPTX(0).FilterSize = filtsizetx;
+            }
 
-                // filter type
-                if (radio.GetDSPRX(0, 0).FilterType != filttyperx1 ||
-                    radio.GetDSPRX(0, 1).FilterType != filttyperx1)
-                {
-                    radio.GetDSPRX(0, 0).FilterType = filttyperx1;
-                    radio.GetDSPRX(0, 1).FilterType = filttyperx1;
-                }
+            // filter type
+            if (radio.GetDSPRX(0, 0).FilterType != filttyperx1 ||
+                radio.GetDSPRX(0, 1).FilterType != filttyperx1)
+            {
+                radio.GetDSPRX(0, 0).FilterType = filttyperx1;
+                radio.GetDSPRX(0, 1).FilterType = filttyperx1;
+            }
 
-                if (radio.GetDSPRX(1, 0).FilterType != filttyperx2 ||
-                    radio.GetDSPRX(1, 1).FilterType != filttyperx2)
-                {
-                    radio.GetDSPRX(1, 0).FilterType = filttyperx2;
-                    radio.GetDSPRX(1, 1).FilterType = filttyperx2;
-                }
+            if (radio.GetDSPRX(1, 0).FilterType != filttyperx2 ||
+                radio.GetDSPRX(1, 1).FilterType != filttyperx2)
+            {
+                radio.GetDSPRX(1, 0).FilterType = filttyperx2;
+                radio.GetDSPRX(1, 1).FilterType = filttyperx2;
+            }
 
-                if (radio.GetDSPTX(0).FilterType != filttypetx)
-                {
-                    radio.GetDSPTX(0).FilterType = filttypetx;
-                }
+            if (radio.GetDSPTX(0).FilterType != filttypetx)
+            {
+                radio.GetDSPTX(0).FilterType = filttypetx;
+            }
 
-                UpdateRXSpectrumDisplayVars();            
+            UpdateRXSpectrumDisplayVars();
         }
 
 
@@ -47246,8 +47328,11 @@ namespace PowerSDR
                 }
                 Audio.MicPreamp = Math.Pow(10.0, gain_db / 20.0); // convert to scalar
             }
-           // if (ptbFMMic.Focused) btnHidden.Focus();
-            ptbFMMic.Focus();
+            // if (ptbFMMic.Focused) btnHidden.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbFMMic.Focus();
+            }
         }
 
         private void chkFMCTCSS_CheckedChanged(object sender, EventArgs e)
@@ -47841,7 +47926,7 @@ namespace PowerSDR
         private byte[] Penny_TLV320_data = new byte[18];
         public bool SetMicGain()
         {
-            if ((chkPower.Checked) && (PennyPresent || pennylanepresent))
+            if (PennyPresent || pennylanepresent)
             {
                 if (HPSDRisMetis)
                 {
@@ -47861,17 +47946,19 @@ namespace PowerSDR
                 else
                 {
 
-                    var oz_hdev = JanusAudio.OzyOpen();
-                    var usb_hdev = JanusAudio.OzyHandleToRealHandle(oz_hdev);
-
-                    // need to select the config data depending on the Mic Gain (20dB) or line in selected
-                    if (line_in)
+                    if (chkPower.Checked)
                     {
-                        if (!lineinarrayfill) MakeLineInList();
+                        var oz_hdev = JanusAudio.OzyOpen();
+                        var usb_hdev = JanusAudio.OzyHandleToRealHandle(oz_hdev);
 
-                        var lineboost = Array.IndexOf(lineinboost, line_in_boost.ToString());
+                        // need to select the config data depending on the Mic Gain (20dB) or line in selected
+                        if (line_in)
+                        {
+                            if (!lineinarrayfill) MakeLineInList();
 
-                        Penny_TLV320_data = new byte[] { 0x1e, 0x00,                    
+                            var lineboost = Array.IndexOf(lineinboost, line_in_boost.ToString());
+
+                            Penny_TLV320_data = new byte[] { 0x1e, 0x00,                    
                                                          0x12, 0x01, 
                                                          0x08, 0x12, // DAC on, line input, mic muted
                                                          0x0c, 0x00, 
@@ -47880,10 +47967,10 @@ namespace PowerSDR
                                                          0x0a, 0x00, 
                                                          0x00, (byte)lineboost,//0x17, // left input, 0dB gain
                                                          0x02, 0x80}; // right input muted
-                    }
-                    else if (mic_boost)
-                    {
-                        Penny_TLV320_data = new byte[] { 0x1e, 0x00, 
+                        }
+                        else if (mic_boost)
+                        {
+                            Penny_TLV320_data = new byte[] { 0x1e, 0x00, 
                                                          0x12, 0x01, 
                                                          0x08, 0x15, // DAC on, mic input, 20dB gain
                                                          0x0c, 0x00, 
@@ -47892,10 +47979,10 @@ namespace PowerSDR
                                                          0x0a, 0x00, 
                                                          0x00, 0x80,
                                                          0x02, 0x80};
-                    }
-                    else
-                    {
-                        Penny_TLV320_data = new byte[] { 0x1e, 0x00, // reset DAC registers
+                        }
+                        else
+                        {
+                            Penny_TLV320_data = new byte[] { 0x1e, 0x00, // reset DAC registers
                                                          0x12, 0x01, // digital interface active
                                                          0x08, 0x14, // DAC on, mic input, 0dB gain
                                                          0x0c, 0x00, // all devices powered on
@@ -47904,41 +47991,42 @@ namespace PowerSDR
                                                          0x0a, 0x00, // ADC high pass filter
                                                          0x00, 0x80, // mute left line in
                                                          0x02, 0x80}; // mute right line in
-                    }
-                    // set the I2C interface speed to 400kHZ
-                    if (!(JanusAudio.Set_I2C_Speed(usb_hdev, 1)))
-                    // if (!(OZY.Set_I2C_Speed(usb_hdev, 1)))
-                    {
-                        MessageBox.Show(@"Unable to set I2C speed to 400kHz", @"System Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
+                        }
+                        // set the I2C interface speed to 400kHZ
+                        if (!(JanusAudio.Set_I2C_Speed(usb_hdev, 1)))
+                        // if (!(OZY.Set_I2C_Speed(usb_hdev, 1)))
+                        {
+                            MessageBox.Show(@"Unable to set I2C speed to 400kHz", @"System Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
 
-                    // send the configuration data to the TLV320 on Penelope or PennyLane 
-                    for (var x = 0; x < 16; x += 2)
-                    {
-                        Penny_TLV320[0] = Penny_TLV320_data[x]; Penny_TLV320[1] = Penny_TLV320_data[x + 1];
-                        // if ((OZY.Write_I2C(usb_hdev, 0x1b, Penny_TLV320))) continue;
-                        if ((JanusAudio.WriteI2C(usb_hdev, 0x1b, Penny_TLV320, Penny_TLV320.Length))) continue;
-                        MessageBox.Show(@"Unable to configure TLV320 on Penelope via I2C", @"System Eror!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        // break out of the configuration loop 
-                        break;
+                        // send the configuration data to the TLV320 on Penelope or PennyLane 
+                        for (var x = 0; x < 16; x += 2)
+                        {
+                            Penny_TLV320[0] = Penny_TLV320_data[x]; Penny_TLV320[1] = Penny_TLV320_data[x + 1];
+                            // if ((OZY.Write_I2C(usb_hdev, 0x1b, Penny_TLV320))) continue;
+                            if ((JanusAudio.WriteI2C(usb_hdev, 0x1b, Penny_TLV320, Penny_TLV320.Length))) continue;
+                            MessageBox.Show(@"Unable to configure TLV320 on Penelope via I2C", @"System Eror!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            // break out of the configuration loop 
+                            break;
+                        }
+
+                        // temporary location...K5SO
+                        // trigger the Ozy FX2 to issue commands for Mercury(s) and Penny to transmit their firmware version numbers
+                        // on the i2c bus for interception by the Ozy FPGA "i2c_monitor" module
+                        /*  if (!HPSDRisMetis)
+                           {
+                               bool dummy;
+                               byte[] dummy2 = { 0, 0 };
+                               dummy = JanusAudio.ReadI2C(usb_hdev, 0x10, dummy2, 2);      //i2c adr for Merc1 firmware version number 
+                               dummy = JanusAudio.ReadI2C(usb_hdev, 0x11, dummy2, 2);      //i2c adr for Merc2 firmware version number
+                               dummy = JanusAudio.ReadI2C(usb_hdev, 0x12, dummy2, 2);      //i2c adr for Merc3 firmware version number
+                               dummy = JanusAudio.ReadI2C(usb_hdev, 0x13, dummy2, 2);      //i2c adr for Merc4 firmware version number
+                               dummy = JanusAudio.ReadI2C(usb_hdev, 0x15, dummy2, 2);      //i2c adr for Penny(Lane) firmware version number
+                           }  */
+
+                        JanusAudio.OzyClose(oz_hdev);
                     }
-
-                    // temporary location...K5SO
-                    // trigger the Ozy FX2 to issue commands for Mercury(s) and Penny to transmit their firmware version numbers
-                    // on the i2c bus for interception by the Ozy FPGA "i2c_monitor" module
-                    /*  if (!HPSDRisMetis)
-                       {
-                           bool dummy;
-                           byte[] dummy2 = { 0, 0 };
-                           dummy = JanusAudio.ReadI2C(usb_hdev, 0x10, dummy2, 2);      //i2c adr for Merc1 firmware version number 
-                           dummy = JanusAudio.ReadI2C(usb_hdev, 0x11, dummy2, 2);      //i2c adr for Merc2 firmware version number
-                           dummy = JanusAudio.ReadI2C(usb_hdev, 0x12, dummy2, 2);      //i2c adr for Merc3 firmware version number
-                           dummy = JanusAudio.ReadI2C(usb_hdev, 0x13, dummy2, 2);      //i2c adr for Merc4 firmware version number
-                           dummy = JanusAudio.ReadI2C(usb_hdev, 0x15, dummy2, 2);      //i2c adr for Penny(Lane) firmware version number
-                       }  */
-
-                    JanusAudio.OzyClose(oz_hdev);
                 }
             }
             return true;
@@ -49464,13 +49552,19 @@ namespace PowerSDR
         private void ptbRX1AF_Scroll(object sender, EventArgs e)
         {
             RX0Gain = ptbRX1AF.Value;
-            ptbRX1AF.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbRX1AF.Focus();
+            }
         }
 
         private void ptbRX2AF_Scroll(object sender, EventArgs e)
         {
             RX2Gain = ptbRX2AF.Value;
-            ptbRX2AF.Focus();
+            if (sender.GetType() == typeof(PrettyTrackBar))
+            {
+                ptbRX2AF.Focus();
+            }
         }
 
         private void radRX1Show_CheckedChanged(object sender, EventArgs e)
