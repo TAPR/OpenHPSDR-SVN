@@ -3,7 +3,7 @@
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
 // Copyright (C) 2004-2009  FlexRadio Systems
-// Copyright (C) 2010-2014 Doug Wigley (W5WC)
+// Copyright (C) 2010-2016 Doug Wigley (W5WC)
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -419,7 +419,7 @@ namespace Thetis
             }
         }
 
-        private Model current_model = Model.FLEX5000;
+        private Model current_model = Model.HERMES;
         public Model CurrentModel
         {
             get { return current_model; }

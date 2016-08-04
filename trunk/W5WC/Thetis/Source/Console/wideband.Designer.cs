@@ -61,7 +61,7 @@
             this.wbdisplay.cOnsole = null;
             this.wbdisplay.CurrentClickTuneMode = Thetis.ClickTuneMode.Off;
             this.wbdisplay.CurrentDisplayMode = Thetis.DisplayMode.PANADAPTER;
-            this.wbdisplay.CurrentModel = Thetis.Model.FLEX5000;
+            this.wbdisplay.CurrentModel = Thetis.Model.HERMES;
             this.wbdisplay.CurrentRegion = Thetis.FRSRegion.US;
             this.wbdisplay.CWPitch = 600;
             this.wbdisplay.DataLineColor = System.Drawing.Color.White;

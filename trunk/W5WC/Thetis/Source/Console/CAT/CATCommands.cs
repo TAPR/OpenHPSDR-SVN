@@ -1314,7 +1314,7 @@ namespace Thetis
 		//Sets or reads the BCI Rejection button status
 		public string ZZBR(string s)
 		{
-			if(console.CurrentModel == Model.HPSDR)
+			if(console.CurrentHPSDRModel == HPSDRModel.HPSDR)
 			{
 				int sx = 0;
 
@@ -2757,13 +2757,13 @@ namespace Thetis
 			if(s.Length == parser.nSet)
 			{
 				int width = Index2Width(s);
-				console.DSPBufCWTX = width;
-				console.SetupForm.DSPCWTXBuffer = width;
+				//console.DSPBufCWTX = width;
+				//console.SetupForm.DSPCWTXBuffer = width;
 				return "";
 			}
 			else if(s.Length == parser.nGet)
 			{
-				return Width2Index(console.DSPBufCWTX);
+				return Width2Index(console.DSPBufCWRX);
 			}
 			else
 				return parser.Error1;
@@ -4806,7 +4806,7 @@ namespace Thetis
         //Reads the primary input voltate
         public string ZZRV()
         {
-            if (console.CurrentModel == Model.FLEX5000)
+            if (console.CurrentHPSDRModel != HPSDRModel.HPSDR)
             {
                 int val = 0;
                 decimal volts = 0.0m;
@@ -4919,10 +4919,17 @@ namespace Thetis
                     else
                         num = wdsp.CalculateRXMeter(2, 0, wdsp.MeterType.SIGNAL_STRENGTH);
 
-                switch (console.CurrentModel)
+                switch (console.CurrentHPSDRModel)
                 {
-                    case Model.HERMES:
-                        if (s == "0")
+                     case HPSDRModel.HPSDR:
+                        num = num +
+                        console.MultiMeterCalOffset +
+                        Display.RX1PreampOffset +
+                        //console.RX1FilterSizeCalOffset +
+                        console.RX1XVTRGainOffset;
+                        break;
+                    default:
+                          if (s == "0")
                         {
                             num = num +
                             console.MultiMeterCalOffset +
@@ -4939,13 +4946,7 @@ namespace Thetis
                             console.RX2XVTRGainOffset;
                          }
                         break;
-                    case Model.HPSDR:
-                        num = num +
-                        console.MultiMeterCalOffset +
-                        Display.RX1PreampOffset +
-                        //console.RX1FilterSizeCalOffset +
-                        console.RX1XVTRGainOffset;
-                        break;
+                     
                 }
 				num = Math.Max(-140, num);
 				num = Math.Min(-10, num);
@@ -5449,7 +5450,7 @@ namespace Thetis
 		// Reads the Flex 5000 temperature sensor
         public string ZZTS()
         {
-            if (console.CurrentModel == Model.FLEX5000)
+            if (console.CurrentHPSDRModel == HPSDRModel.HERMES)
             {
                 int val = 0;
                 float volts = 0.0f;

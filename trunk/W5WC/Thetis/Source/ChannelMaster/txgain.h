@@ -36,11 +36,10 @@ typedef struct _txgain
 	double* out;
 	double Igain;
 	double Qgain;
-	int ain4Value;
+	int adc_value;
 	int adc_supply;
 	volatile long amp_protect_warning;
-	int (*GetAIN4Value) ();
-	CRITICAL_SECTION cs_update;
+	CRITICAL_SECTION cs_update0, cs_update1;
 } txgain, *TXGAIN;
 
 TXGAIN create_txgain(
@@ -51,9 +50,8 @@ TXGAIN create_txgain(
 	double* out,
 	double Igain,
 	double Qgain,
-	int ain4Value,
-	int adc_supply,
-	int (*GetAIN4Value) ()
+	int adc_value,
+	int adc_supply
 	);
 
 void destroy_txgain(TXGAIN a);
@@ -61,5 +59,7 @@ void destroy_txgain(TXGAIN a);
 void xtxgain(TXGAIN a);
 
 void SetTXGainSize(TXGAIN p, int size);
+
+void SetAmpProtectADCValue (int txid, int value);
 
 #endif

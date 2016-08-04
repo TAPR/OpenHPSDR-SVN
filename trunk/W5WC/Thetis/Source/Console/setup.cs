@@ -3,7 +3,7 @@
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
 // Copyright (C) 2004-2009  FlexRadio Systems
-// Copyright (C) 2010-2015  Doug Wigley
+// Copyright (C) 2010-2016  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,1277 +52,8 @@ namespace Thetis
         private Console console;
         private Progress progress;
         private ArrayList KeyList;
-        private int sound_card;
         private bool initializing;
         public bool alex_fw_good = false;
-        private TabPage tpDSP;
-        private TabPage tpDisplay;
-        private TabPage tpGeneral;
-        private ButtonTS btnOK;
-        private ButtonTS btnCancel;
-        private ButtonTS btnApply;
-        public TabControl tcSetup;
-        private TabPage tpKeyboard;
-        private LabelTS lblKBTuneDown;
-        private LabelTS lblKBTuneUp;
-        private ComboBoxTS comboKBTuneDown1;
-        private ComboBoxTS comboKBTuneDown3;
-        private ComboBoxTS comboKBTuneDown2;
-        private ComboBoxTS comboKBTuneUp1;
-        private ComboBoxTS comboKBTuneUp2;
-        private ComboBoxTS comboKBTuneUp3;
-        private ComboBoxTS comboKBTuneUp4;
-        private ComboBoxTS comboKBTuneDown4;
-        private ComboBoxTS comboKBTuneUp5;
-        private ComboBoxTS comboKBTuneDown5;
-        private ComboBoxTS comboKBTuneDown6;
-        private ComboBoxTS comboKBTuneUp7;
-        private ComboBoxTS comboKBTuneDown7;
-        private ComboBoxTS comboKBTuneUp6;
-        private GroupBoxTS grpKBTune;
-        private LabelTS lblKBTuneDigit;
-        private LabelTS lblKBTune7;
-        private LabelTS lblKBTune6;
-        private LabelTS lblKBTune5;
-        private LabelTS lblKBTune4;
-        private LabelTS lblKBTune3;
-        private LabelTS lblKBTune2;
-        private LabelTS lblKBTune1;
-        private GroupBoxTS grpKBBand;
-        private LabelTS lblKBBandUp;
-        private LabelTS lblKBBandDown;
-        private GroupBoxTS grpKBFilter;
-        private LabelTS lblKBFilterUp;
-        private LabelTS lblKBFilterDown;
-        private GroupBoxTS grpKBMode;
-        private LabelTS lblKBModeUp;
-        private LabelTS lblKBModeDown;
-        private ComboBoxTS comboKBBandUp;
-        private ComboBoxTS comboKBBandDown;
-        private ComboBoxTS comboKBFilterUp;
-        private ComboBoxTS comboKBFilterDown;
-        private ComboBoxTS comboKBModeUp;
-        private ComboBoxTS comboKBModeDown;
-        private LabelTS lblDisplayFPS;
-        private NumericUpDownTS udDisplayFPS;
-        private NumericUpDownTS udDDSIFFreq;
-        public TabPage tpAudio;
-        private TabPage tpTransmit;
-        private NumericUpDownTS udTXFilterHigh;
-        private LabelTS lblTXFilterLow;
-        private LabelTS lblTXFilterHigh;
-        private NumericUpDownTS udTXFilterLow;
-        private GroupBoxTS grpTXFilter;
-        private GroupBoxTS grpDisplayPhase;
-        private NumericUpDownTS udDisplayPhasePts;
-        private GroupBoxTS grpDisplayAverage;
-        private LabelTS lblDisplayPhasePts;
-        private GroupBoxTS grpGeneralCalibration;
-        private LabelTS lblGeneralCalFrequency;
-        private LabelTS lblGeneralCalLevel;
-        private NumericUpDownTS udGeneralCalLevel;
-        private GroupBoxTS grpDisplayRefreshRates;
-        private LabelTS lblDisplayMeterDelay;
-        private NumericUpDownTS udDisplayMeterDelay;
-        private TabPage tpAppearance;
-        private LabelTS lblDisplayFilterColor;
-        private LabelTS lblDisplayLineWidth;
-        private NumericUpDownTS udDisplayLineWidth;
-        private LabelTS lblDisplayDataLineColor;
-        private LabelTS lblDisplayTextColor;
-        private LabelTS lblDisplayZeroLineColor;
-        private LabelTS lblDisplayGridColor;
-        private LabelTS lblDisplayBackgroundColor;
-        private GroupBoxTS grpAppearanceMeter;
-        private LabelTS lblAppearanceMeterRight;
-        private LabelTS lblAppearanceMeterLeft;
-        private LabelTS lblAppearanceGenBtnSel;
-        private GroupBoxTS grpGeneralOptions;
-        private CheckBoxTS chkGeneralDisablePTT;
-        private LabelTS lblDisplayPeakText;
-        private NumericUpDownTS udDisplayPeakText;
-        private NumericUpDownTS udDisplayCPUMeter;
-        private LabelTS lblDisplayCPUMeter;
-        private GroupBoxTS grpDisplayWaterfall;
-        public NumericUpDownTS udDisplayWaterfallHighLevel;
-        private LabelTS lblDisplayWaterfallHighLevel;
-        private LabelTS lblDisplayWaterfallLowLevel;
-        public NumericUpDownTS udDisplayWaterfallLowLevel;
-        private LabelTS lblDisplayWaterfallLowColor;
-        private ButtonTS btnGeneralCalLevelStart;
-        private ButtonTS btnGeneralCalFreqStart;
-        private ButtonTS btnGeneralCalImageStart;
-        private LabelTS lblBandLight;
-        private LabelTS lblBandDark;
-        private LabelTS lblPeakText;
-        private ButtonTS btnWizard;
-        private ButtonTS btnImportDB;
-        private OpenFileDialog openFileDialog1;
-        private TabPage tpTests;
-        private LabelTS lblPAGainByBand160;
-        private LabelTS lblPAGainByBand80;
-        private LabelTS lblPAGainByBand60;
-        private LabelTS lblPAGainByBand40;
-        private LabelTS lblPAGainByBand30;
-        private LabelTS lblPAGainByBand10;
-        private LabelTS lblPAGainByBand12;
-        private LabelTS lblPAGainByBand15;
-        private LabelTS lblPAGainByBand17;
-        private LabelTS lblPAGainByBand20;
-        private TabPage tpPowerAmplifier;
-        private ToolTip toolTip1;
-        private NumericUpDownTS udPAGain10;
-        private NumericUpDownTS udPAGain12;
-        private NumericUpDownTS udPAGain15;
-        private NumericUpDownTS udPAGain17;
-        private NumericUpDownTS udPAGain20;
-        private NumericUpDownTS udPAGain30;
-        private NumericUpDownTS udPAGain40;
-        private NumericUpDownTS udPAGain60;
-        private NumericUpDownTS udPAGain80;
-        private NumericUpDownTS udPAGain160;
-        private GroupBoxTS grpPAGainByBand;
-        private ButtonTS btnPAGainCalibration;
-        private ButtonTS btnPAGainReset;
-        private ComboBoxTS comboGeneralProcessPriority;
-        private GroupBoxTS grpGeneralProcessPriority;
-        private GroupBoxTS grpTestTXIMD;
-        private ColorButton clrbtnBtnSel;
-        private ColorButton clrbtnVFODark;
-        private ColorButton clrbtnVFOLight;
-        private ColorButton clrbtnBandDark;
-        private ColorButton clrbtnBandLight;
-        private ColorButton clrbtnPeakText;
-        private ColorButton clrbtnBackground;
-        private ColorButton clrbtnGrid;
-        private ColorButton clrbtnZeroLine;
-        private ColorButton clrbtnFilter;
-        public ColorButton clrbtnText;
-        private ColorButton clrbtnDataLine;
-        private ColorButton clrbtnMeterLeft;
-        private ColorButton clrbtnMeterRight;
-        private ColorButton clrbtnWaterfallLow;
-        private LabelTS lblTestIMDPower;
-        private NumericUpDownTS udTestIMDPower;
-        private NumericUpDownTS udTestIMDFreq1;
-        private NumericUpDownTS udTestIMDFreq2;
-        private ButtonTS btnTestAudioBalStart;
-        private NumericUpDownTS udDisplayAVGTime;
-        private LabelTS lblDisplayAVGTime;
-        private GroupBoxTS grpTestAudioBalance;
-        private GroupBoxTS grpPATune;
-        private LabelTS lblTransmitTunePower;
-        private NumericUpDownTS udTXTunePower;
-        private GroupBoxTS grpDisplayMultimeter;
-        private LabelTS lblDisplayMultiPeakHoldTime;
-        private NumericUpDownTS udDisplayMultiPeakHoldTime;
-        private NumericUpDownTS udDisplayMultiTextHoldTime;
-        private LabelTS lblDisplayMeterTextHoldTime;
-        private CheckBoxTS chkGeneralRXOnly;
-        private LabelTS lblTestToneFreq2;
-        private LabelTS lblTestToneFreq1;
-        private TabPage tpCATControl;
-        private GroupBoxTS grpPTTBitBang;
-        private LabelTS lblCATPTTPort;
-        private CheckBoxTS chkCATPTT_RTS;
-        private CheckBoxTS chkCATPTT_DTR;
-        private GroupBoxTS grpCatControlBox;
-        private ComboBoxTS comboCATbaud;
-        private LabelTS lblCATBaud;
-        private CheckBoxTS chkCATEnable;
-        private LabelTS lblCATParity;
-        private LabelTS lblCATData;
-        private LabelTS lblCATStop;
-        private ComboBoxTS comboCATparity;
-        private ComboBoxTS comboCATdatabits;
-        private ComboBoxTS comboCATstopbits;
-        private GroupBoxTS grpKBCW;
-        private LabelTS lblKBCWDot;
-        private LabelTS lblKBCWDash;
-        private ComboBoxTS comboKBCWDot;
-        private ComboBoxTS comboKBCWDash;
-        private GroupBoxTS grpKBRIT;
-        private LabelTS lblKBRitUp;
-        private LabelTS lblKBRITDown;
-        private ComboBoxTS comboKBRITUp;
-        private ComboBoxTS comboKBRITDown;
-        private GroupBoxTS grpKBXIT;
-        private LabelTS lblKBXITUp;
-        private LabelTS lblKBXITDown;
-        private ComboBoxTS comboKBXITUp;
-        private ComboBoxTS comboKBXITDown;
-        private ButtonTS btnCATTest;
-        private TabControl tcAudio;
-        private ComboBoxTS comboAudioSampleRate1;
-        private GroupBoxTS grpAudioSampleRate1;
-        private GroupBoxTS grpAudioDetails2;
-        public LabelTS lblAudioOutput2;
-        private ComboBoxTS comboAudioOutput2;
-        public LabelTS lblAudioInput2;
-        public LabelTS lblAudioDriver2;
-        private ComboBoxTS comboAudioInput2;
-        private ComboBoxTS comboAudioDriver2;
-        private NumericUpDownTS udAudioLatency2;
-        private ComboBoxTS comboAudioBuffer2;
-        private ComboBoxTS comboAudioSampleRate2;
-        private GroupBoxTS grpAudioBuffer2;
-        private GroupBoxTS grpAudioSampleRate2;
-        private GroupBoxTS grpAudioLatency2;
-        private CheckBoxTS chkAudioLatencyManual2;
-        private ComboBoxTS comboCATRigType;
-        private LabelTS lblCATRigType;
-        private TabPage tpAudioCard1;
-        private GroupBoxTS grpTXProfile;
-        private ButtonTS btnTXProfileSave;
-        private ComboBoxTS comboTXProfileName;
-        private ButtonTS btnTXProfileDelete;
-        private GroupBoxTS grpTXNoiseGate;
-        private LabelTS lblTXNoiseGateThreshold;
-        private NumericUpDownTS udTXNoiseGate;
-        private CheckBoxTS chkTXNoiseGateEnabled;
-        private GroupBoxTS grpTXVOX;
-        private LabelTS lblTXVOXThreshold;
-        private NumericUpDownTS udTXVOXThreshold;
-        private CheckBoxTS chkTXVOXEnabled;
-        private LabelTS lblTXVOXHangTime;
-        private NumericUpDownTS udTXVOXHangTime;
-        private ButtonTS btnImpulse;
-        private NumericUpDownTS udImpulseNum;
-        private GroupBoxTS grpTXMonitor;
-        private LabelTS lblTXAF;
-        private NumericUpDownTS udTXAF;
-        private GroupBoxTS grpGeneralModel;
-        private TabControl tcGeneral;
-        private TabPage tpGeneralHardware;
-        private TabPage tpGeneralOptions;
-        private TabPage tpGeneralCalibration;
-        private NumericUpDownTS udGeneralCalFreq1;
-        private NumericUpDownTS udGeneralCalFreq3;
-        private NumericUpDownTS udGeneralCalFreq2;
-        private TabPage tpVAC;
-        public CheckBoxTS chkAudioEnableVAC;
-        private GroupBoxTS grpAudio2Stereo;
-        private GroupBoxTS grpBoxTS1;
-        private LabelTS lblCATPort;
-        private ComboBoxTS comboCATPort;
-        private ComboBoxTS comboCATPTTPort;
-        private CheckBoxTS chkCATPTTEnabled;
-        private GroupBoxTS grpAudioVACGain;
-        private NumericUpDownTS udAudioVACGainRX;
-        public LabelTS lblAudioVACGainRX;
-        public LabelTS lblAudioVACGainTX;
-        private NumericUpDownTS udAudioVACGainTX;
-        private GroupBoxTS grpGenTuningOptions;
-        private GroupBoxTS grpAudioVACAutoEnable;
-        private CheckBoxTS chkAudioVACAutoEnable;
-        private GroupBoxTS grpImpulseTest;
-        private GroupBoxTS grpDisplayScopeMode;
-        private NumericUpDownTS udDisplayScopeTime;
-        private LabelTS lblDisplayScopeTime;
-        private NumericUpDownTS udDisplayMeterAvg;
-        private LabelTS lblDisplayMeterAvg;
-        private ComboBoxTS comboDisplayDriver;
-        private GroupBoxTS grpDisplayDriverEngine;
-        private Thetis.ColorButton clrbtnOutOfBand;
-        private LabelTS lblOutOfBand;
-        private CheckBoxTS chkAudio2Stereo;
-        private GroupBoxTS grpTXAM;
-        private LabelTS lblTXAMCarrierLevel;
-        private NumericUpDownTS udTXAMCarrierLevel;
-        private GroupBoxTS grpOptQuickQSY;
-        private CheckBoxTS chkOptQuickQSY;
-        private CheckBoxTS chkOptAlwaysOnTop;
-        private NumericUpDownTS udOptClickTuneOffsetDIGL;
-        private NumericUpDownTS udOptClickTuneOffsetDIGU;
-        private LabelTS lblOptClickTuneDIGL;
-        private LabelTS lblOptClickTuneDIGU;
-        private GroupBoxTS grpOptFilterControls;
-        private LabelTS lblOptMaxFilter;
-        private NumericUpDownTS udOptMaxFilterWidth;
-        private LabelTS lblOptWidthSliderMode;
-        private ComboBoxTS comboOptFilterWidthMode;
-        private NumericUpDownTS udOptMaxFilterShift;
-        private LabelTS lblOptMaxFilterShift;
-        private CheckBoxTS chkOptFilterSaveChanges;
-        private CheckBoxTS chkOptEnableKBShortcuts;
-        private TabControl tcAppearance;
-        private TabPage tpAppearanceGeneral;
-        private TabPage tpAppearanceDisplay;
-        private TabPage tpAppearanceMeter;
-        private GroupBoxTS grpAppearanceVFO;
-        private LabelTS lblVFOPowerOn;
-        private LabelTS lblVFOPowerOff;
-        private GroupBoxTS grpAppearanceBand;
-        private TabPage tpFilters;
-        private LabelTS lblDefaultLowCut;
-        private NumericUpDownTS udFilterDefaultLowCut;
-        private CheckBoxTS chkVFOSmallLSD;
-        private Thetis.ColorButton clrbtnVFOSmallColor;
-        private Thetis.ColorButton clrbtnBandBackground;
-        private LabelTS lblBandBackground;
-        private Thetis.ColorButton clrbtnVFOBackground;
-        private LabelTS lblVFOBackground;
-        private GroupBoxTS grpDisplayPeakCursor;
-        private Thetis.ColorButton clrbtnPeakBackground;
-        private LabelTS lblPeakBackground;
-        private Thetis.ColorButton clrbtnMeterBackground;
-        private LabelTS lblMeterBackground;
-        private Thetis.ColorButton clrbtnTXFilter;
-        private GroupBoxTS grpAppPanadapter;
-        private Thetis.ColorButton clrbtnBandEdge;
-        private LabelTS lblBandEdge;
-        private CheckBoxTS chkShowFreqOffset;
-        public ComboBoxTS comboMeterType;
-        private Thetis.ColorButton clrbtnMeterEdgeBackground;
-        private Thetis.ColorButton clrbtnMeterEdgeHigh;
-        private Thetis.ColorButton clrbtnMeterEdgeLow;
-        private GroupBoxTS grpGenCalRXImage;
-        private LabelTS lblGenCalRXImageFreq;
-        private GroupBoxTS grpGenCalLevel;
-        private LabelTS lblGenCalLevelFreq;
-        private LabelTS lblVFOSmallColor;
-        private LabelTS lblTXFilterColor;
-        private LabelTS lblMeterType;
-        private CheckBoxTS chkTestIMD;
-        private GroupBoxTS grpMeterEdge;
-        private LabelTS lblMeterEdgeBackground;
-        private LabelTS lblMeterEdgeHigh;
-        private LabelTS lblMeterEdgeLow;
-        private Thetis.ColorButton clrbtnEdgeIndicator;
-        private LabelTS labelTS1;
-        private LabelTS lblMeterDigitalText;
-        private Thetis.ColorButton clrbtnMeterDigText;
-        private LabelTS labelTS2;
-        private Thetis.ColorButton clrbtnMeterDigBackground;
-        private Thetis.ColorButton clrbtnSubRXFilter;
-        private LabelTS lblSubRXFilterColor;
-        private Thetis.ColorButton clrbtnSubRXZero;
-        private LabelTS lblSubRXZeroLine;
-        private GroupBoxTS grpOptMisc;
-        private CheckBoxTS chkDisableToolTips;
-        private NumericUpDownTS udDisplayWaterfallAvgTime;
-        private LabelTS lblDisplayWaterfallAverageTime;
-        private NumericUpDownTS udDisplayWaterfallUpdatePeriod;
-        private LabelTS lblDisplayWaterfallUpdatePeriod;
-        private CheckBoxTS chkSnapClickTune;
-        private RadioButtonTS radPACalAllBands;
-        private CheckBoxTS chkPA160;
-        private CheckBoxTS chkPA80;
-        private CheckBoxTS chkPA60;
-        private CheckBoxTS chkPA40;
-        private CheckBoxTS chkPA30;
-        private CheckBoxTS chkPA20;
-        private CheckBoxTS chkPA17;
-        private CheckBoxTS chkPA15;
-        private CheckBoxTS chkPA12;
-        private CheckBoxTS chkPA10;
-        private RadioButtonTS radPACalSelBands;
-        private NumericUpDownTS udPACalPower;
-        private CheckBoxTS chkZeroBeatRIT;
-        private CheckBoxTS chkPANewCal;
-        private LabelTS lblPACalTarget;
-        private ComboBoxTS cmboSigGenRXMode;
-        private LabelTS lblSigGenRXMode;
-        private GroupBoxTS grpSigGenReceive;
-        private GroupBoxTS grpSigGenTransmit;
-        private LabelTS lblSigGenTXMode;
-        private ComboBoxTS cmboSigGenTXMode;
-        private NumericUpDownTS udMeterDigitalDelay;
-        private LabelTS lblMultimeterDigitalDelay;
-        private RadioButtonTS radGenModelFLEX5000;
-        private CheckBoxTS chkPA6;
-        private CheckBoxTS chkMouseTuneStep;
-        private CheckBoxTS chkCalExpert;
-        private CheckBoxTS chkGenAllModeMicPTT;
-        private CheckBoxTS chkDigUIsUSB;
-        private GroupBoxTS grpGenCustomTitleText;
-        private TextBoxTS txtGenCustomTitle;
-        private MainMenu mainMenu1;
-        private CheckBoxTS chkKWAI;
-        private CheckBoxTS chkSplitOff;
-        private CheckBoxTS chkEnableRFEPATR;
-        private CheckBoxTS chkVACAllowBypass;
-        private CheckBoxTS chkVACCombine;
-        private CheckBoxTS chkSigGenRX2;
-        private LabelTS lblGenBackground;
-        private Thetis.ColorButton clrbtnGenBackground;
-        private ComboBoxTS comboTXTUNMeter;
-        private LabelTS lblTXTUNMeter;
-        private ButtonTS btnResetDB;
-        private CheckBoxTS chkDisplayMeterShowDecimal;
-        private GroupBoxTS grpRTTYOffset;
-        private CheckBoxTS chkRTTYOffsetEnableA;
-        private CheckBoxTS chkRTTYOffsetEnableB;
-        private NumericUpDownTS udRTTYL;
-        private NumericUpDownTS udRTTYU;
-        private LabelTS labelTS3;
-        private LabelTS labelTS4;
-        private TabPage tpRX2;
-        private CheckBoxTS chkRX2AutoMuteTX;
-        private GroupBoxTS grpDirectIQOutput;
-        private CheckBoxTS chkAudioCorrectIQ;
-        private CheckBoxTS chkAudioIQtoVAC;
-        private CheckBoxTS chkRX2AutoMuteRX1OnVFOBTX;
-        private ListBox lstTXProfileDef;
-        private GroupBoxTS grpTXProfileDef;
-        private CheckBoxTS chkTXExpert;
-        private ButtonTS btnTXProfileDefImport;
-        private CheckBoxTS chkDisplayPanFill;
-        private GroupBoxTS grpAppSkins;
-        private ComboBoxTS comboAppSkin;
-        private ButtonTS btnSkinExport;
-        private CheckBoxTS chkAudioRX2toVAC;
-        private TabPage tpGeneralNavigation;
-        private GroupBoxTS grpOptSpaceNav;
-        private CheckBoxTS chkSpaceNavFlyPanadapter;
-        private CheckBoxTS chkSpaceNavControlVFOs;
-        private TrackBarTS tbRX1FilterAlpha;
-        private LabelTS lblRX1FilterAlpha;
-        private NumericUpDownTS udTXNoiseGateAttenuate;
-        private LabelTS lblTXNoiseGateAttenuate;
-        private LabelTS lblMultiRXFilterAlpha;
-        private TrackBarTS tbMultiRXFilterAlpha;
-        private CheckBoxTS chkWheelTuneVFOB;
-        private ButtonTS btnExportDB;
-        private SaveFileDialog saveFileDialog1;
-        private RadioButtonTS radGenModelHermes;
-        private RadioButtonTS radGenModelHPSDR;
-        private CheckBoxTS chkAlexPresent;
-        private CheckBoxTS chkExcaliburPresent;
-        private CheckBoxTS chkPennyPresent;
-        private CheckBoxTS chkMercuryPresent;
-        private GroupBoxTS grpHPSDRFreqCalDbg;
-        private LabelTS labelTS10;
-        private NumericUpDownTS udHPSDRFreqCorrectFactor;
-        private Button btnHPSDRFreqCalReset;
-        private TabPage tpPennyCtrl;
-        private TabPage tpHPSDR;
-        private TabPage tpAlexControl;
-        private GroupBoxTS grpPennyExtCtrl;
-        private LabelTS lblHFTxControl;
-        private LabelTS lblHFRxControl;
-        private LabelTS labelTS43;
-        private LabelTS labelTS23;
-        private LabelTS labelTS24;
-        private LabelTS labelTS25;
-        private LabelTS labelTS26;
-        private LabelTS labelTS27;
-        private LabelTS labelTS42;
-        private LabelTS labelTS44;
-        private LabelTS labelTS45;
-        private LabelTS labelTS46;
-        private LabelTS labelTS47;
-        private LabelTS labelTS48;
-        private LabelTS labelTS49;
-        private LabelTS labelTS51;
-        private LabelTS labelTS40;
-        private CheckBoxTS chkPenOCrcv1601;
-        private CheckBoxTS chkPenOCxmit1607;
-        private CheckBoxTS chkPenOCxmit1606;
-        private CheckBoxTS chkPenOCxmit1605;
-        private CheckBoxTS chkPenOCxmit1604;
-        private CheckBoxTS chkPenOCxmit1603;
-        private CheckBoxTS chkPenOCxmit1602;
-        private CheckBoxTS chkPenOCxmit1601;
-        private CheckBoxTS chkPenOCrcv1607;
-        private CheckBoxTS chkPenOCrcv1606;
-        private CheckBoxTS chkPenOCrcv1605;
-        private CheckBoxTS chkPenOCrcv1604;
-        private CheckBoxTS chkPenOCrcv1603;
-        private CheckBoxTS chkPenOCrcv1602;
-        private CheckBoxTS chkPenOCxmit807;
-        private CheckBoxTS chkPenOCxmit806;
-        private CheckBoxTS chkPenOCxmit805;
-        private CheckBoxTS chkPenOCxmit804;
-        private CheckBoxTS chkPenOCxmit803;
-        private CheckBoxTS chkPenOCxmit802;
-        private CheckBoxTS chkPenOCxmit801;
-        private CheckBoxTS chkPenOCrcv807;
-        private CheckBoxTS chkPenOCrcv806;
-        private CheckBoxTS chkPenOCrcv805;
-        private CheckBoxTS chkPenOCrcv804;
-        private CheckBoxTS chkPenOCrcv803;
-        private CheckBoxTS chkPenOCrcv802;
-        private CheckBoxTS chkPenOCrcv801;
-        private CheckBoxTS chkPenOCxmit207;
-        private CheckBoxTS chkPenOCxmit206;
-        private CheckBoxTS chkPenOCxmit205;
-        private CheckBoxTS chkPenOCxmit204;
-        private CheckBoxTS chkPenOCxmit203;
-        private CheckBoxTS chkPenOCxmit202;
-        private CheckBoxTS chkPenOCxmit201;
-        private CheckBoxTS chkPenOCrcv207;
-        private CheckBoxTS chkPenOCrcv206;
-        private CheckBoxTS chkPenOCrcv205;
-        private CheckBoxTS chkPenOCrcv204;
-        private CheckBoxTS chkPenOCrcv203;
-        private CheckBoxTS chkPenOCrcv202;
-        private CheckBoxTS chkPenOCrcv201;
-        private CheckBoxTS chkPenOCxmit307;
-        private CheckBoxTS chkPenOCxmit306;
-        private CheckBoxTS chkPenOCxmit305;
-        private CheckBoxTS chkPenOCxmit304;
-        private CheckBoxTS chkPenOCxmit303;
-        private CheckBoxTS chkPenOCxmit302;
-        private CheckBoxTS chkPenOCxmit301;
-        private CheckBoxTS chkPenOCrcv307;
-        private CheckBoxTS chkPenOCrcv306;
-        private CheckBoxTS chkPenOCrcv305;
-        private CheckBoxTS chkPenOCrcv304;
-        private CheckBoxTS chkPenOCrcv303;
-        private CheckBoxTS chkPenOCrcv302;
-        private CheckBoxTS chkPenOCrcv301;
-        private CheckBoxTS chkPenOCxmit407;
-        private CheckBoxTS chkPenOCxmit406;
-        private CheckBoxTS chkPenOCxmit405;
-        private CheckBoxTS chkPenOCxmit404;
-        private CheckBoxTS chkPenOCxmit403;
-        private CheckBoxTS chkPenOCxmit402;
-        private CheckBoxTS chkPenOCxmit401;
-        private CheckBoxTS chkPenOCrcv407;
-        private CheckBoxTS chkPenOCrcv406;
-        private CheckBoxTS chkPenOCrcv405;
-        private CheckBoxTS chkPenOCrcv404;
-        private CheckBoxTS chkPenOCrcv403;
-        private CheckBoxTS chkPenOCrcv402;
-        private CheckBoxTS chkPenOCrcv401;
-        private CheckBoxTS chkPenOCxmit607;
-        private CheckBoxTS chkPenOCxmit606;
-        private CheckBoxTS chkPenOCxmit605;
-        private CheckBoxTS chkPenOCxmit604;
-        private CheckBoxTS chkPenOCxmit603;
-        private CheckBoxTS chkPenOCxmit602;
-        private CheckBoxTS chkPenOCxmit601;
-        private CheckBoxTS chkPenOCrcv607;
-        private CheckBoxTS chkPenOCrcv606;
-        private CheckBoxTS chkPenOCrcv605;
-        private CheckBoxTS chkPenOCrcv604;
-        private CheckBoxTS chkPenOCrcv603;
-        private CheckBoxTS chkPenOCrcv602;
-        private CheckBoxTS chkPenOCrcv601;
-        private CheckBoxTS chkPenOCxmit27;
-        private CheckBoxTS chkPenOCxmit26;
-        private CheckBoxTS chkPenOCxmit25;
-        private CheckBoxTS chkPenOCxmit24;
-        private CheckBoxTS chkPenOCxmit23;
-        private CheckBoxTS chkPenOCxmit22;
-        private CheckBoxTS chkPenOCxmit21;
-        private CheckBoxTS chkPenOCrcv27;
-        private CheckBoxTS chkPenOCrcv26;
-        private CheckBoxTS chkPenOCrcv25;
-        private CheckBoxTS chkPenOCrcv24;
-        private CheckBoxTS chkPenOCrcv23;
-        private CheckBoxTS chkPenOCrcv22;
-        private CheckBoxTS chkPenOCrcv21;
-        private CheckBoxTS chkPenOCxmit67;
-        private CheckBoxTS chkPenOCxmit66;
-        private CheckBoxTS chkPenOCxmit65;
-        private CheckBoxTS chkPenOCxmit64;
-        private CheckBoxTS chkPenOCxmit63;
-        private CheckBoxTS chkPenOCxmit62;
-        private CheckBoxTS chkPenOCxmit61;
-        private CheckBoxTS chkPenOCrcv67;
-        private CheckBoxTS chkPenOCrcv66;
-        private CheckBoxTS chkPenOCrcv65;
-        private CheckBoxTS chkPenOCrcv64;
-        private CheckBoxTS chkPenOCrcv63;
-        private CheckBoxTS chkPenOCrcv62;
-        private CheckBoxTS chkPenOCrcv61;
-        private CheckBoxTS chkPenOCxmit107;
-        private CheckBoxTS chkPenOCxmit106;
-        private CheckBoxTS chkPenOCxmit105;
-        private CheckBoxTS chkPenOCxmit104;
-        private CheckBoxTS chkPenOCxmit103;
-        private CheckBoxTS chkPenOCxmit102;
-        private CheckBoxTS chkPenOCxmit101;
-        private CheckBoxTS chkPenOCrcv107;
-        private CheckBoxTS chkPenOCrcv106;
-        private CheckBoxTS chkPenOCrcv105;
-        private CheckBoxTS chkPenOCrcv104;
-        private CheckBoxTS chkPenOCrcv103;
-        private CheckBoxTS chkPenOCrcv102;
-        private CheckBoxTS chkPenOCrcv101;
-        private CheckBoxTS chkPenOCxmit127;
-        private CheckBoxTS chkPenOCxmit126;
-        private CheckBoxTS chkPenOCxmit125;
-        private CheckBoxTS chkPenOCxmit124;
-        private CheckBoxTS chkPenOCxmit123;
-        private CheckBoxTS chkPenOCxmit122;
-        private CheckBoxTS chkPenOCxmit121;
-        private CheckBoxTS chkPenOCrcv127;
-        private CheckBoxTS chkPenOCrcv126;
-        private CheckBoxTS chkPenOCrcv125;
-        private CheckBoxTS chkPenOCrcv124;
-        private CheckBoxTS chkPenOCrcv123;
-        private CheckBoxTS chkPenOCrcv122;
-        private CheckBoxTS chkPenOCrcv121;
-        private CheckBoxTS chkPenOCxmit157;
-        private CheckBoxTS chkPenOCxmit156;
-        private CheckBoxTS chkPenOCxmit155;
-        private CheckBoxTS chkPenOCxmit154;
-        private CheckBoxTS chkPenOCxmit153;
-        private CheckBoxTS chkPenOCxmit152;
-        private CheckBoxTS chkPenOCxmit151;
-        private CheckBoxTS chkPenOCrcv157;
-        private CheckBoxTS chkPenOCrcv156;
-        private CheckBoxTS chkPenOCrcv155;
-        private CheckBoxTS chkPenOCrcv154;
-        private CheckBoxTS chkPenOCrcv153;
-        private CheckBoxTS chkPenOCrcv152;
-        private CheckBoxTS chkPenOCrcv151;
-        private CheckBoxTS chkPenOCxmit177;
-        private CheckBoxTS chkPenOCxmit176;
-        private CheckBoxTS chkPenOCxmit175;
-        private CheckBoxTS chkPenOCxmit174;
-        private CheckBoxTS chkPenOCxmit173;
-        private CheckBoxTS chkPenOCxmit172;
-        private CheckBoxTS chkPenOCxmit171;
-        private CheckBoxTS chkPenOCrcv177;
-        private CheckBoxTS chkPenOCrcv176;
-        private CheckBoxTS chkPenOCrcv175;
-        private CheckBoxTS chkPenOCrcv174;
-        private CheckBoxTS chkPenOCrcv173;
-        private CheckBoxTS chkPenOCrcv172;
-        private CheckBoxTS chkPenOCrcv171;
-        private LabelTS labelTS28;
-        private LabelTS labelTS29;
-        private LabelTS labelTS30;
-        private LabelTS labelTS31;
-        private LabelTS labelTS32;
-        private LabelTS labelTS33;
-        private LabelTS labelTS34;
-        private LabelTS labelTS35;
-        private LabelTS labelTS36;
-        private LabelTS labelTS37;
-        private LabelTS labelTS38;
-        private LabelTS labelTS41;
-        private CheckBoxTS chkPennyExtCtrl;
-        private GroupBoxTS groupBox10MhzClock;
-        private RadioButtonTS radPenny10MHz;
-        private RadioButtonTS radMercury10MHz;
-        private RadioButtonTS radAtlas10MHz;
-        private GroupBoxTS groupBox122MHz;
-        private RadioButtonTS radMercury12288MHz;
-        private RadioButtonTS rad12288MHzPenny;
-        private LabelTS label1;
-        private GroupBoxTS groupBoxMicSource;
-        private RadioButtonTS radPennyMic;
-        private RadioButtonTS radJanusMic;
-        private GroupBoxTS groupBoxRXOptions;
-        private CheckBoxTS chkMercRandom;
-        private CheckBoxTS chkMercDither;
-        private NumericUpDownTS udMaxFreq;
-        private LabelTS labelTS57;
-        private GroupBoxTS grpVersion;
-        private LabelTS lblPenelopeFWVer;
-        private LabelTS lblMercuryFWVer;
-        private LabelTS lblOzyFWVer;
-        private LabelTS lblOzyFX2;
-        private GroupBoxTS grpAlexAntCtrl;
-        private CheckBoxTS chkAlex160XV;
-        private CheckBoxTS chkAlex160R2;
-        private CheckBoxTS chkAlex160R1;
-        private RadioButtonTS radAlexR3_160;
-        private RadioButtonTS radAlexR2_160;
-        private RadioButtonTS radAlexR1_160;
-        private PanelTS panel1;
-        private CheckBoxTS chkAlex12XV;
-        private CheckBoxTS chkAlex12R2;
-        private CheckBoxTS chkAlex12R1;
-        private CheckBoxTS chkAlex15XV;
-        private CheckBoxTS chkAlex15R2;
-        private CheckBoxTS chkAlex15R1;
-        private CheckBoxTS chkAlex17XV;
-        private CheckBoxTS chkAlex17R2;
-        private CheckBoxTS chkAlex17R1;
-        private CheckBoxTS chkAlex20XV;
-        private CheckBoxTS chkAlex20R2;
-        private CheckBoxTS chkAlex20R1;
-        private CheckBoxTS chkAlex30XV;
-        private CheckBoxTS chkAlex30R2;
-        private CheckBoxTS chkAlex30R1;
-        private CheckBoxTS chkAlex40XV;
-        private CheckBoxTS chkAlex40R2;
-        private CheckBoxTS chkAlex40R1;
-        private CheckBoxTS chkAlex60XV;
-        private CheckBoxTS chkAlex60R2;
-        private CheckBoxTS chkAlex60R1;
-        private CheckBoxTS chkAlex80XV;
-        private CheckBoxTS chkAlex80R2;
-        private CheckBoxTS chkAlex80R1;
-        private CheckBoxTS chkAlex6XV;
-        private CheckBoxTS chkAlex6R2;
-        private CheckBoxTS chkAlex6R1;
-        private CheckBoxTS chkAlex10XV;
-        private CheckBoxTS chkAlex10R2;
-        private CheckBoxTS chkAlex10R1;
-        private PanelTS panel10;
-        private RadioButtonTS radAlexR2_10;
-        private RadioButtonTS radAlexR1_10;
-        private RadioButtonTS radAlexR3_10;
-        private PanelTS panel8;
-        private PanelTS panel9;
-        private RadioButtonTS radAlexR2_12;
-        private RadioButtonTS radAlexR1_12;
-        private RadioButtonTS radAlexR3_12;
-        private RadioButtonTS radAlexR2_15;
-        private RadioButtonTS radAlexR1_15;
-        private RadioButtonTS radAlexR3_15;
-        private PanelTS panel7;
-        private RadioButtonTS radAlexR2_17;
-        private RadioButtonTS radAlexR1_17;
-        private RadioButtonTS radAlexR3_17;
-        private PanelTS panel6;
-        private RadioButtonTS radAlexR2_20;
-        private RadioButtonTS radAlexR1_20;
-        private RadioButtonTS radAlexR3_20;
-        private PanelTS panel5;
-        private RadioButtonTS radAlexR2_30;
-        private RadioButtonTS radAlexR1_30;
-        private RadioButtonTS radAlexR3_30;
-        private PanelTS panel4;
-        private RadioButtonTS radAlexR2_40;
-        private RadioButtonTS radAlexR1_40;
-        private RadioButtonTS radAlexR3_40;
-        private PanelTS panel3;
-        private RadioButtonTS radAlexR2_60;
-        private RadioButtonTS radAlexR1_60;
-        private RadioButtonTS radAlexR3_60;
-        private PanelTS panel2;
-        private RadioButtonTS radAlexR2_80;
-        private RadioButtonTS radAlexR1_80;
-        private RadioButtonTS radAlexR3_80;
-        private PanelTS panel11;
-        private RadioButtonTS radAlexR2_6;
-        private RadioButtonTS radAlexR1_6;
-        private RadioButtonTS radAlexR3_6;
-        private LabelTS label12;
-        private LabelTS labelTS5;
-        private LabelTS labelTS6;
-        private LabelTS labelTS7;
-        private LabelTS label17;
-        private LabelTS label18;
-        private LabelTS label19;
-        private LabelTS labelTS11;
-        private LabelTS labelTS12;
-        private LabelTS labelTS13;
-        private LabelTS labelTS14;
-        private LabelTS labelTS56;
-        private LabelTS labelTS22;
-        private LabelTS label4;
-        private LabelTS label3;
-        private LabelTS label2;
-        private LabelTS label7;
-        private LabelTS label6;
-        private LabelTS label5;
-        private LabelTS labelRXAntControl;
-        private CheckBoxTS chkAlexAntCtrl;
-        private GroupBoxTS groupBoxHPSDRHW;
-        private LabelTS lblPAGainByBand6;
-        private NumericUpDownTS udPAGain6;
-        private CheckBoxTS chkHERCULES;
-        private ButtonTS btnPennyCtrlReset;
-        private GroupBoxTS grpFRSRegion;
-        public ComboBoxTS comboFRSRegion;
-        private LabelTS lblPAGainByBandVHF9;
-        private NumericUpDownTS udPAGainVHF9;
-        private LabelTS lblPAGainByBandVHF8;
-        private NumericUpDownTS udPAGainVHF8;
-        private LabelTS lblPAGainByBandVHF7;
-        private NumericUpDownTS udPAGainVHF7;
-        private LabelTS lblPAGainByBandVHF6;
-        private NumericUpDownTS udPAGainVHF6;
-        private LabelTS lblPAGainByBandVHF5;
-        private NumericUpDownTS udPAGainVHF5;
-        private LabelTS lblPAGainByBandVHF4;
-        private NumericUpDownTS udPAGainVHF4;
-        private LabelTS lblPAGainByBandVHF3;
-        private NumericUpDownTS udPAGainVHF3;
-        private LabelTS lblPAGainByBandVHF2;
-        private NumericUpDownTS udPAGainVHF2;
-        private LabelTS lblPAGainByBandVHF1;
-        private NumericUpDownTS udPAGainVHF1;
-        private LabelTS lblPAGainByBandVHF0;
-        private NumericUpDownTS udPAGainVHF0;
-        private LabelTS lblPAGainByBandVHF13;
-        private NumericUpDownTS udPAGainVHF13;
-        private LabelTS lblPAGainByBandVHF12;
-        private NumericUpDownTS udPAGainVHF12;
-        private LabelTS lblPAGainByBandVHF11;
-        private NumericUpDownTS udPAGainVHF11;
-        private LabelTS lblPAGainByBandVHF10;
-        private NumericUpDownTS udPAGainVHF10;
-        private GroupBoxTS grpOzyType;
-        private GroupBoxTS grpMetisAddr;
-        private LabelTS lblMetisIP;
-        private LabelTS lblMetisMAC;
-        private LabelTS labelTS9;
-        private LabelTS labelTS16;
-        private CheckBoxTS chkPennyLane;
-        private LabelTS lblPTTOutDelay;
-        private NumericUpDownTS udGenPTTOutDelay;
-        private GroupBoxTS grpDiagInfo;
-        private LabelTS lblSyncData;
-        private LabelTS lblMoxDelay;
-        private NumericUpDownTS udMoxDelay;
-        private LabelTS lblRFDelay;
-        private NumericUpDownTS udRFDelay;
-        private NumericUpDownTS udVOXGain;
-        private LabelTS lblVOXGain;
-        private GroupBoxTS grpBoxMic;
-        private NumericUpDownTS udMicGainMin;
-        private NumericUpDownTS udMicGainMax;
-        private LabelTS labelTS21;
-        private LabelTS labelTS20;
-        private CheckBoxTS chk20dbMicBoost;
-        private NumericUpDownTS udTwoToneLevel;
-        private LabelTS lblTwoToneLevel;
-        private NumericUpDownTS udTXDisplayCalOffset;
-        private GroupBoxTS grpBoxTXDisplayCal;
-        private TextBox txtDisplayOffset;
-        private TextBox txtMeterOffset;
-        private LabelTS labelTS54;
-        private LabelTS labelTS53;
-        private CheckBoxTS chkSMeter;
-        private GroupBoxTS grpAppGrid;
-        private ColorButton clrbtnGridFine;
-        private LabelTS lblGridFine;
-        private TrackBarTS tbGridFineAlpha;
-        private TrackBarTS tbGridCourseAlpha;
-        private TrackBarTS tbBackgroundAlpha;
-        private LabelTS lblGridFineAlpha;
-        private LabelTS lblGridCourseAlpha;
-        private LabelTS lblBackgroundAlpha;
-        private TrackBarTS tbHGridColorAlpha;
-        private ColorButton clrbtnHGridColor;
-        private LabelTS lblHGrid;
-        private CheckBoxTS chkGridControl;
-        private TabPage tcAppearanceTXDisplay;
-        private GroupBoxTS groupBoxTS3;
-        private CheckBoxTS chkTXGridControl;
-        private TrackBarTS tbTXFilterAlpha;
-        private ColorButton clrbtnTXBandEdge;
-        private LabelTS lblTXBandEdge;
-        private LabelTS lblDispTXFilterColor;
-        private ColorButton clrbtnGridTXFilter;
-        private GroupBoxTS groupBoxTS2;
-        private TrackBarTS tbTXHGridColorAlpha;
-        private ColorButton clrbtnTXHGridColor;
-        private LabelTS lblTXHGridColor;
-        private TrackBarTS tbTXVGridFineAlpha;
-        private TrackBarTS tbTXVGridCourseAlpha;
-        private TrackBarTS tbTXBackgroundAlpha;
-        private ColorButton clrbtnTXVGridFine;
-        private LabelTS lblTXVGridFine;
-        private LabelTS lblTXVGridColor;
-        private ColorButton clrbtnTXBackground;
-        private NumericUpDownTS udTXLineWidth;
-        private ColorButton clrbtnTXVGrid;
-        private LabelTS lblTXLineWidth;
-        private LabelTS lblTXBackgroundColor;
-        private ColorButton clrbtnTXDataLine;
-        private ColorButton clrbtnTXZeroLine;
-        private LabelTS lblTXDataLineColor;
-        private LabelTS lblTXZeroLineColor;
-        private ColorButton clrbtnTXText;
-        private LabelTS lblTXTextColor;
-        private GroupBoxTS grpTXSpectrumGrid;
-        private CheckBoxTS chkTXPanFill;
-        private ComboBoxTS comboTXLabelAlign;
-        private LabelTS lblTXAlign;
-        private NumericUpDownTS udTXGridStep;
-        public NumericUpDownTS udTXGridMin;
-        public NumericUpDownTS udTXGridMax;
-        private LabelTS lblTXGridStep;
-        private LabelTS lblTXGridMin;
-        private LabelTS lblTXGridMax;
-        private TrackBarTS tbTXTextAlpha;
-        private TrackBarTS tbTXZeroLineAlpha;
-        private LabelTS labelTS55;
-        private TabPage tpAppearanceCollapsible;
-        private TextBoxTS txtCollapsedHeight;
-        private TextBoxTS txtCollapsedWidth;
-        private GroupBox grpBoxCollapsible;
-        public CheckBoxTS chkShowModeControls;
-        public CheckBoxTS chkShowBandControls;
-        public CheckBoxTS chkShowTopControls;
-        private GroupBoxTS grpBoxSpaceBarPTT;
-        private TrackBarTS tbMeterEdgeBackgroundAlpha;
-        private ColorButton clrbtnInfoButtonsColor;
-        private LabelTS labelTS58;
-        private RadioButtonTS radSpaceBarLastBtn;
-        private RadioButtonTS radSpaceBarMicMute;
-        private RadioButtonTS radSpaceBarVOX;
-        private RadioButtonTS radSpaceBarPTT;
-        private NumericUpDownTS udLineInBoost;
-        private LabelTS lblLineInBoost;
-        private GroupBoxTS grpPennyExtCtrlVHF;
-        private LabelTS labelTS71;
-        private LabelTS labelTS72;
-        private LabelTS labelTS73;
-        private LabelTS labelTS74;
-        private LabelTS labelTS75;
-        private LabelTS labelTS76;
-        private LabelTS labelTS77;
-        private LabelTS labelTS78;
-        private LabelTS labelTS79;
-        private LabelTS labelTS80;
-        private LabelTS labelTS81;
-        private LabelTS labelTS82;
-        private LabelTS labelTS83;
-        private LabelTS labelTS84;
-        private LabelTS labelTS85;
-        private LabelTS lblVHFTxControl;
-        private LabelTS lblVHFRxControl;
-        private LabelTS labelTS59;
-        private LabelTS labelTS60;
-        private LabelTS labelTS61;
-        private LabelTS labelTS62;
-        private LabelTS labelTS63;
-        private LabelTS labelTS64;
-        private LabelTS labelTS65;
-        private LabelTS labelTS66;
-        private LabelTS labelTS67;
-        private LabelTS labelTS68;
-        private LabelTS labelTS69;
-        private LabelTS labelTS70;
-        private CheckBoxTS chkPenOCxmitVHF117;
-        private CheckBoxTS chkPenOCxmitVHF116;
-        private CheckBoxTS chkPenOCxmitVHF115;
-        private CheckBoxTS chkPenOCxmitVHF114;
-        private CheckBoxTS chkPenOCxmitVHF113;
-        private CheckBoxTS chkPenOCxmitVHF112;
-        private CheckBoxTS chkPenOCxmitVHF111;
-        private CheckBoxTS chkPenOCrcvVHF117;
-        private CheckBoxTS chkPenOCrcvVHF116;
-        private CheckBoxTS chkPenOCrcvVHF115;
-        private CheckBoxTS chkPenOCrcvVHF114;
-        private CheckBoxTS chkPenOCrcvVHF113;
-        private CheckBoxTS chkPenOCrcvVHF112;
-        private CheckBoxTS chkPenOCrcvVHF111;
-        private CheckBoxTS chkPenOCxmitVHF107;
-        private CheckBoxTS chkPenOCxmitVHF106;
-        private CheckBoxTS chkPenOCxmitVHF105;
-        private CheckBoxTS chkPenOCxmitVHF104;
-        private CheckBoxTS chkPenOCxmitVHF103;
-        private CheckBoxTS chkPenOCxmitVHF102;
-        private CheckBoxTS chkPenOCxmitVHF101;
-        private CheckBoxTS chkPenOCrcvVHF107;
-        private CheckBoxTS chkPenOCrcvVHF106;
-        private CheckBoxTS chkPenOCrcvVHF105;
-        private CheckBoxTS chkPenOCrcvVHF104;
-        private CheckBoxTS chkPenOCrcvVHF103;
-        private CheckBoxTS chkPenOCrcvVHF102;
-        private CheckBoxTS chkPenOCrcvVHF101;
-        private CheckBoxTS chkPenOCxmitVHF97;
-        private CheckBoxTS chkPenOCxmitVHF96;
-        private CheckBoxTS chkPenOCxmitVHF95;
-        private CheckBoxTS chkPenOCxmitVHF94;
-        private CheckBoxTS chkPenOCxmitVHF93;
-        private CheckBoxTS chkPenOCxmitVHF92;
-        private CheckBoxTS chkPenOCxmitVHF91;
-        private CheckBoxTS chkPenOCrcvVHF97;
-        private CheckBoxTS chkPenOCrcvVHF96;
-        private CheckBoxTS chkPenOCrcvVHF95;
-        private CheckBoxTS chkPenOCrcvVHF94;
-        private CheckBoxTS chkPenOCrcvVHF93;
-        private CheckBoxTS chkPenOCrcvVHF92;
-        private CheckBoxTS chkPenOCrcvVHF91;
-        private CheckBoxTS chkPenOCxmitVHF87;
-        private CheckBoxTS chkPenOCxmitVHF86;
-        private CheckBoxTS chkPenOCxmitVHF85;
-        private CheckBoxTS chkPenOCxmitVHF84;
-        private CheckBoxTS chkPenOCxmitVHF83;
-        private CheckBoxTS chkPenOCxmitVHF82;
-        private CheckBoxTS chkPenOCxmitVHF81;
-        private CheckBoxTS chkPenOCrcvVHF87;
-        private CheckBoxTS chkPenOCrcvVHF86;
-        private CheckBoxTS chkPenOCrcvVHF85;
-        private CheckBoxTS chkPenOCrcvVHF84;
-        private CheckBoxTS chkPenOCrcvVHF83;
-        private CheckBoxTS chkPenOCrcvVHF82;
-        private CheckBoxTS chkPenOCrcvVHF81;
-        private CheckBoxTS chkPenOCxmitVHF77;
-        private CheckBoxTS chkPenOCxmitVHF76;
-        private CheckBoxTS chkPenOCxmitVHF75;
-        private CheckBoxTS chkPenOCxmitVHF74;
-        private CheckBoxTS chkPenOCxmitVHF73;
-        private CheckBoxTS chkPenOCxmitVHF72;
-        private CheckBoxTS chkPenOCxmitVHF71;
-        private CheckBoxTS chkPenOCrcvVHF77;
-        private CheckBoxTS chkPenOCrcvVHF76;
-        private CheckBoxTS chkPenOCrcvVHF75;
-        private CheckBoxTS chkPenOCrcvVHF74;
-        private CheckBoxTS chkPenOCrcvVHF73;
-        private CheckBoxTS chkPenOCrcvVHF72;
-        private CheckBoxTS chkPenOCrcvVHF71;
-        private CheckBoxTS chkPenOCxmitVHF67;
-        private CheckBoxTS chkPenOCxmitVHF66;
-        private CheckBoxTS chkPenOCxmitVHF65;
-        private CheckBoxTS chkPenOCxmitVHF64;
-        private CheckBoxTS chkPenOCxmitVHF63;
-        private CheckBoxTS chkPenOCxmitVHF62;
-        private CheckBoxTS chkPenOCxmitVHF61;
-        private CheckBoxTS chkPenOCrcvVHF67;
-        private CheckBoxTS chkPenOCrcvVHF66;
-        private CheckBoxTS chkPenOCrcvVHF65;
-        private CheckBoxTS chkPenOCrcvVHF64;
-        private CheckBoxTS chkPenOCrcvVHF63;
-        private CheckBoxTS chkPenOCrcvVHF62;
-        private CheckBoxTS chkPenOCrcvVHF61;
-        private CheckBoxTS chkPenOCxmitVHF57;
-        private CheckBoxTS chkPenOCxmitVHF56;
-        private CheckBoxTS chkPenOCxmitVHF55;
-        private CheckBoxTS chkPenOCxmitVHF54;
-        private CheckBoxTS chkPenOCxmitVHF53;
-        private CheckBoxTS chkPenOCxmitVHF52;
-        private CheckBoxTS chkPenOCxmitVHF51;
-        private CheckBoxTS chkPenOCrcvVHF57;
-        private CheckBoxTS chkPenOCrcvVHF56;
-        private CheckBoxTS chkPenOCrcvVHF55;
-        private CheckBoxTS chkPenOCrcvVHF54;
-        private CheckBoxTS chkPenOCrcvVHF53;
-        private CheckBoxTS chkPenOCrcvVHF52;
-        private CheckBoxTS chkPenOCrcvVHF51;
-        private CheckBoxTS chkPenOCxmitVHF47;
-        private CheckBoxTS chkPenOCxmitVHF46;
-        private CheckBoxTS chkPenOCxmitVHF45;
-        private CheckBoxTS chkPenOCxmitVHF44;
-        private CheckBoxTS chkPenOCxmitVHF43;
-        private CheckBoxTS chkPenOCxmitVHF42;
-        private CheckBoxTS chkPenOCxmitVHF41;
-        private CheckBoxTS chkPenOCrcvVHF47;
-        private CheckBoxTS chkPenOCrcvVHF46;
-        private CheckBoxTS chkPenOCrcvVHF45;
-        private CheckBoxTS chkPenOCrcvVHF44;
-        private CheckBoxTS chkPenOCrcvVHF43;
-        private CheckBoxTS chkPenOCrcvVHF42;
-        private CheckBoxTS chkPenOCrcvVHF41;
-        private CheckBoxTS chkPenOCxmitVHF37;
-        private CheckBoxTS chkPenOCxmitVHF36;
-        private CheckBoxTS chkPenOCxmitVHF35;
-        private CheckBoxTS chkPenOCxmitVHF34;
-        private CheckBoxTS chkPenOCxmitVHF33;
-        private CheckBoxTS chkPenOCxmitVHF32;
-        private CheckBoxTS chkPenOCxmitVHF31;
-        private CheckBoxTS chkPenOCrcvVHF37;
-        private CheckBoxTS chkPenOCrcvVHF36;
-        private CheckBoxTS chkPenOCrcvVHF35;
-        private CheckBoxTS chkPenOCrcvVHF34;
-        private CheckBoxTS chkPenOCrcvVHF33;
-        private CheckBoxTS chkPenOCrcvVHF32;
-        private CheckBoxTS chkPenOCrcvVHF31;
-        private CheckBoxTS chkPenOCxmitVHF27;
-        private CheckBoxTS chkPenOCxmitVHF26;
-        private CheckBoxTS chkPenOCxmitVHF25;
-        private CheckBoxTS chkPenOCxmitVHF24;
-        private CheckBoxTS chkPenOCxmitVHF23;
-        private CheckBoxTS chkPenOCxmitVHF22;
-        private CheckBoxTS chkPenOCxmitVHF21;
-        private CheckBoxTS chkPenOCrcvVHF27;
-        private CheckBoxTS chkPenOCrcvVHF26;
-        private CheckBoxTS chkPenOCrcvVHF25;
-        private CheckBoxTS chkPenOCrcvVHF24;
-        private CheckBoxTS chkPenOCrcvVHF23;
-        private CheckBoxTS chkPenOCrcvVHF22;
-        private CheckBoxTS chkPenOCrcvVHF21;
-        private CheckBoxTS chkPenOCxmitVHF17;
-        private CheckBoxTS chkPenOCxmitVHF16;
-        private CheckBoxTS chkPenOCxmitVHF15;
-        private CheckBoxTS chkPenOCxmitVHF14;
-        private CheckBoxTS chkPenOCxmitVHF13;
-        private CheckBoxTS chkPenOCxmitVHF12;
-        private CheckBoxTS chkPenOCxmitVHF11;
-        private CheckBoxTS chkPenOCrcvVHF17;
-        private CheckBoxTS chkPenOCrcvVHF16;
-        private CheckBoxTS chkPenOCrcvVHF15;
-        private CheckBoxTS chkPenOCrcvVHF14;
-        private CheckBoxTS chkPenOCrcvVHF13;
-        private CheckBoxTS chkPenOCrcvVHF12;
-        private CheckBoxTS chkPenOCrcvVHF11;
-        private CheckBoxTS chkPenOCxmitVHF07;
-        private CheckBoxTS chkPenOCxmitVHF06;
-        private CheckBoxTS chkPenOCxmitVHF05;
-        private CheckBoxTS chkPenOCxmitVHF04;
-        private CheckBoxTS chkPenOCxmitVHF03;
-        private CheckBoxTS chkPenOCxmitVHF02;
-        private CheckBoxTS chkPenOCxmitVHF01;
-        private CheckBoxTS chkPenOCrcvVHF07;
-        private CheckBoxTS chkPenOCrcvVHF06;
-        private CheckBoxTS chkPenOCrcvVHF05;
-        private CheckBoxTS chkPenOCrcvVHF04;
-        private CheckBoxTS chkPenOCrcvVHF03;
-        private CheckBoxTS chkPenOCrcvVHF02;
-        private CheckBoxTS chkPenOCrcvVHF01;
-        private ButtonTS btnPennyCtrlVHFReset;
-        private CheckBoxTS checkBoxTS1;
-        private CheckBoxTS chkShowCTHLine;
-        private CheckBoxTS chkClickTuneFilter;
-        private Label label11;
-        private ComboBoxTS comboColorPalette;
-        private ColorButton clrbtnWaterfallMid;
-        private ColorButton clrbtnWaterfallHigh;
-        private LabelTS lblDisplayWaterfallMidColor;
-        private LabelTS lblDisplayWaterfallHighColor;
-        private LabelTS lblMetisBoardID;
-        private LabelTS labelTS88;
-        private LabelTS lblMetisCodeVersion;
-        private LabelTS lblMetisVer;
-        private TabPage tpInfo;
-        public TextBoxTS textAlexFwdPower;
-        public TextBoxTS textRX1VFO;
-        public TextBoxTS textAlexRevPower;
-        public TextBoxTS textFwdPower;
-        private LabelTS labelTS92;
-        private LabelTS labelTS91;
-        private LabelTS labelTS90;
-        private LabelTS labelTS89;
-        public TextBoxTS textTXVFO;
-        public TextBoxTS textRX2VFO;
-        public TextBoxTS textRX1DisplayOffset;
-        public TextBoxTS textRX2MeterOffset;
-        public TextBoxTS textRX1MeterOffset;
-        public TextBoxTS textAlexRevADC;
-        public TextBoxTS textCalcMeterData;
-        public TextBoxTS textRX2RawMeterData;
-        public TextBoxTS textRX1CalcMeterData;
-        public TextBoxTS textRX1RawMeterData;
-        public TextBoxTS textRX1PreampOffset;
-        public TextBoxTS textRX2DisplayOffset;
-        public TextBoxTS textAlexFwdADC;
-        public TextBoxTS textFwdADC;
-        private LabelTS labelTS103;
-        private LabelTS labelTS102;
-        private LabelTS labelTS101;
-        private LabelTS labelTS100;
-        private LabelTS labelTS99;
-        private LabelTS labelTS98;
-        private LabelTS labelTS97;
-        private LabelTS labelTS96;
-        private LabelTS labelTS95;
-        private LabelTS labelTS94;
-        private LabelTS labelTS93;
-        private LabelTS labelTS19;
-        private LabelTS labelTS18;
-        private LabelTS labelTS17;
-        private TabControl tcAlexControl;
-        private TabPage tpAlexFilterControl;
-        public NumericUpDownTS udAlex10mLPFEnd;
-        public NumericUpDownTS udAlex10mLPFStart;
-        public NumericUpDownTS udAlex6mLPFEnd;
-        public NumericUpDownTS udAlex6mLPFStart;
-        public NumericUpDownTS udAlex20mLPFStart;
-        public NumericUpDownTS udAlex15mLPFStart;
-        public NumericUpDownTS udAlex20mLPFEnd;
-        public NumericUpDownTS udAlex15mLPFEnd;
-        public NumericUpDownTS udAlex40mLPFEnd;
-        public NumericUpDownTS udAlex40mLPFStart;
-        public NumericUpDownTS udAlex80mLPFEnd;
-        public NumericUpDownTS udAlex80mLPFStart;
-        public NumericUpDownTS udAlex160mLPFEnd;
-        public NumericUpDownTS udAlex160mLPFStart;
-        public NumericUpDownTS udAlex13HPFStart;
-        public NumericUpDownTS udAlex20HPFStart;
-        public NumericUpDownTS udAlex13HPFEnd;
-        public NumericUpDownTS udAlex20HPFEnd;
-        public NumericUpDownTS udAlex9_5HPFEnd;
-        public NumericUpDownTS udAlex9_5HPFStart;
-        public NumericUpDownTS udAlex6_5HPFEnd;
-        public NumericUpDownTS udAlex6_5HPFStart;
-        public NumericUpDownTS udAlex1_5HPFEnd;
-        public NumericUpDownTS udAlex1_5HPFStart;
-        private NumericUpDownTS numericUpDownTS5;
-        private NumericUpDownTS numericUpDownTS7;
-        private NumericUpDownTS numericUpDownTS8;
-        private PanelTS panelTS2;
-        private RadioButtonTS radioButtonTS1;
-        private RadioButtonTS radioButtonTS2;
-        private NumericUpDownTS numericUpDownTS11;
-        private NumericUpDownTS numericUpDownTS13;
-        private NumericUpDownTS numericUpDownTS14;
-        private PanelTS panelTS3;
-        private RadioButtonTS radioButtonTS3;
-        private RadioButtonTS radioButtonTS4;
-        private LabelTS labelTS117;
-        private LabelTS labelTS116;
-        private LabelTS labelTS126;
-        private LabelTS labelTS125;
-        private LabelTS labelTS124;
-        private LabelTS labelTS123;
-        private LabelTS labelTS122;
-        private LabelTS labelTS121;
-        private LabelTS labelTS120;
-        private LabelTS labelTS118;
-        private LabelTS labelTS119;
-        private NumericUpDownTS numericUpDownTS1;
-        private NumericUpDownTS numericUpDownTS2;
-        private NumericUpDownTS numericUpDownTS15;
-        private NumericUpDownTS numericUpDownTS16;
-        private NumericUpDownTS numericUpDownTS17;
-        private NumericUpDownTS numericUpDownTS18;
-        private NumericUpDownTS numericUpDownTS19;
-        private NumericUpDownTS numericUpDownTS20;
-        private NumericUpDownTS numericUpDownTS21;
-        private NumericUpDownTS numericUpDownTS22;
-        private NumericUpDownTS numericUpDownTS23;
-        private NumericUpDownTS numericUpDownTS24;
-        private NumericUpDownTS numericUpDownTS25;
-        private NumericUpDownTS numericUpDownTS26;
-        private NumericUpDownTS numericUpDownTS27;
-        private NumericUpDownTS numericUpDownTS28;
-        private NumericUpDownTS numericUpDownTS29;
-        private NumericUpDownTS numericUpDownTS30;
-        private NumericUpDownTS numericUpDownTS31;
-        private NumericUpDownTS numericUpDownTS32;
-        private NumericUpDownTS numericUpDownTS33;
-        private NumericUpDownTS numericUpDownTS34;
-        private NumericUpDownTS numericUpDownTS35;
-        private NumericUpDownTS numericUpDownTS36;
-        private PanelTS panelTS4;
-        private RadioButtonTS radioButtonTS5;
-        private RadioButtonTS radioButtonTS6;
-        private LabelTS labelTS131;
-        private LabelTS labelTS130;
-        private LabelTS labelTS129;
-        private LabelTS labelTS128;
-        private LabelTS labelTS127;
-        private CheckBoxTS chkAlexHPFBypass;
-        private LabelTS labelTS132;
-        public NumericUpDownTS udAlex6BPFStart;
-        public NumericUpDownTS udAlex6BPFEnd;
-        private PanelTS panelTS5;
-        public RadioButtonTS rad1_5HPFled;
-        public RadioButtonTS rad6_5HPFled;
-        public RadioButtonTS rad9_5HPFled;
-        public RadioButtonTS rad13HPFled;
-        public RadioButtonTS rad20HPFled;
-        public RadioButtonTS rad6BPFled;
-        public RadioButtonTS radBPHPFled;
-        private PanelTS panelTS6;
-        public RadioButtonTS rad6LPFled;
-        public RadioButtonTS rad80LPFled;
-        public RadioButtonTS rad40LPFled;
-        public RadioButtonTS rad20LPFled;
-        public RadioButtonTS rad15LPFled;
-        public RadioButtonTS rad10LPFled;
-        public RadioButtonTS rad160LPFled;
-        private LabelTS labelTS134;
-        private LabelTS labelAlexFilterActive;
-        public CheckBoxTS chkAlex20BPHPF;
-        public CheckBoxTS chkAlex6_5BPHPF;
-        public CheckBoxTS chkAlex9_5BPHPF;
-        public CheckBoxTS chkAlex6BPHPF;
-        public CheckBoxTS chkAlex13BPHPF;
-        public CheckBoxTS chkAlex1_5BPHPF;
-        private NumericUpDownTS udGeneralCalRX2Level;
-        private NumericUpDownTS udGeneralCalRX2Freq2;
-        private LabelTS labelTS135;
-        private LabelTS labelTS136;
-        private ButtonTS btnCalLevel;
-        private LabelTS lblMercury2FWVer;
-        private PanelTS panelRX2LevelCal;
-        private System.ComponentModel.IContainer components;
-        private Midi2Cat.Midi2CatSetupForm ConfigMidi2Cat;
 
         #endregion
 
@@ -1354,11 +85,14 @@ namespace Thetis
             RefreshCOMPortLists();
 
             RefreshSkinList();
-
+            InitAudioTab();
+            CurrentModel = Model.HERMES;
             comboGeneralProcessPriority.Text = "Normal";
             comboOptFilterWidthMode.Text = "Linear";
-            comboAudioSampleRate1.SelectedIndex = 0;
-            comboAudioSampleRateRX2.SelectedIndex = 0;
+          //  comboAudioSampleRate1.SelectedIndex = 0;
+          //  comboAudioSampleRateRX2.SelectedIndex = 0;
+            comboAudioSampleRate1.Text = "192000";
+            comboAudioSampleRateRX2.Text = "192000";
             comboAudioSampleRate2.Text = "48000";
             comboAudioSampleRate3.Text = "48000";
             comboAudioBuffer2.Text = "1024";
@@ -1369,12 +103,32 @@ namespace Thetis
             comboRX2ColorPalette.Text = "enhanced";
             comboTXLabelAlign.Text = "Auto";
             comboDisplayDriver.Text = "GDI+";
-            comboDSPPhoneRXBuf.Text = "4096";
-            comboDSPPhoneTXBuf.Text = "2048";
-            comboDSPCWRXBuf.Text = "4096";
-            comboDSPCWTXBuf.Text = "2048";
-            comboDSPDigRXBuf.Text = "4096";
-            comboDSPDigTXBuf.Text = "2048";
+            comboFRSRegion.Text = "United States";
+
+            comboDSPPhoneRXBuf.Text = "1024";
+            comboDSPPhoneTXBuf.Text = "1024";
+            comboDSPFMRXBuf.Text = "1024";
+            comboDSPFMTXBuf.Text = "1024";
+            comboDSPCWRXBuf.Text = "1024";
+            comboDSPDigRXBuf.Text = "1024";
+            comboDSPDigTXBuf.Text = "1024";
+
+            comboDSPPhoneRXFiltSize.Text = "1024";
+            comboDSPPhoneTXFiltSize.Text = "1024";
+            comboDSPFMRXFiltSize.Text = "1024";
+            comboDSPFMTXFiltSize.Text = "1024";
+            comboDSPCWRXFiltSize.Text = "1024";
+            comboDSPDigRXFiltSize.Text = "1024";
+            comboDSPDigTXFiltSize.Text = "1024";
+
+            comboDSPPhoneRXFiltType.SelectedIndex = 0;
+            comboDSPPhoneTXFiltType.SelectedIndex = 0;
+            comboDSPFMRXFiltType.SelectedIndex = 0;
+            comboDSPFMTXFiltType.SelectedIndex = 0;
+            comboDSPCWRXFiltType.SelectedIndex = 0;
+            comboDSPDigRXFiltType.SelectedIndex = 0;
+            comboDSPDigTXFiltType.SelectedIndex = 0;
+
             comboDispWinType.Text = "Kaiser";
             comboRX2DispWinType.Text = "Kaiser";
             comboDispPanDetector.Text = "Peak";
@@ -1437,8 +191,6 @@ namespace Thetis
                 comboDSPPhoneTXBuf.SelectedIndex = comboDSPPhoneTXBuf.Items.Count - 1;
             if (comboDSPCWRXBuf.SelectedIndex < 0 || comboDSPCWRXBuf.SelectedIndex >= comboDSPCWRXBuf.Items.Count)
                 comboDSPCWRXBuf.SelectedIndex = comboDSPCWRXBuf.Items.Count - 1;
-            if (comboDSPCWTXBuf.SelectedIndex < 0 || comboDSPCWTXBuf.SelectedIndex >= comboDSPCWTXBuf.Items.Count)
-                comboDSPCWTXBuf.SelectedIndex = comboDSPCWTXBuf.Items.Count - 1;
             if (comboDSPDigRXBuf.SelectedIndex < 0 || comboDSPDigRXBuf.SelectedIndex >= comboDSPDigRXBuf.Items.Count)
                 comboDSPDigRXBuf.SelectedIndex = comboDSPDigRXBuf.Items.Count - 1;
             if (comboDSPDigTXBuf.SelectedIndex < 0 || comboDSPDigTXBuf.SelectedIndex >= comboDSPDigTXBuf.Items.Count)
@@ -1491,12 +243,6 @@ namespace Thetis
             cmboSigGenRXMode.Text = "Radio";
             cmboSigGenTXMode.Text = "Radio";
 
-            /* K5IT - vestigal code throws exception in debug - HPSDR audio is the only allowed option
-            if (comboAudioDriver1.SelectedIndex < 0 &&
-                comboAudioDriver1.Items.Count > 0)
-                comboAudioDriver1.SelectedIndex = 0;
-             */
-
             if (comboAudioDriver2.SelectedIndex < 0 &&
                 comboAudioDriver2.Items.Count > 0)
                 comboAudioDriver2.SelectedIndex = 0;
@@ -1504,12 +250,6 @@ namespace Thetis
             if (comboAudioDriver3.SelectedIndex < 0 &&
                 comboAudioDriver3.Items.Count > 0)
                 comboAudioDriver3.SelectedIndex = 0;
-
-            /* K5IT - vestigal code throws exception in debug - HPSDR audio is the only allowed option
-            if (comboAudioMixer1.SelectedIndex < 0 &&
-                comboAudioMixer1.Items.Count > 0)
-                comboAudioMixer1.SelectedIndex = 0;
-            */
 
             comboAudioBuffer1_SelectedIndexChanged(this, EventArgs.Empty);
 
@@ -1548,14 +288,14 @@ namespace Thetis
 
             comboKeyerConnSecondary_SelectedIndexChanged(this, EventArgs.Empty);
 
-            if (radGenModelFLEX5000.Checked && DB.GetVars("Options").Count != 0)
-                radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
+            //if (radGenModelFLEX5000.Checked && DB.GetVars("Options").Count != 0)
+            //    radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
 
             ForceAllEvents();
 
             EventArgs e = EventArgs.Empty;
-            comboGeneralLPTAddr_LostFocus(this, e);
-            udDDSCorrection_ValueChanged(this, e);
+            //comboGeneralLPTAddr_LostFocus(this, e);
+            //udDDSCorrection_ValueChanged(this, e);
             udDSPCWPitch_ValueChanged(this, e);
             udTXFilterHigh_ValueChanged(this, e);
             udTXFilterLow_ValueChanged(this, e);
@@ -1580,8 +320,28 @@ namespace Thetis
             for (int i = 0; i < 2; i++)
                 for (int j = 0; j < 2; j++)
                     console.radio.GetDSPRX(i, j).Update = true;
+
             comboDSPPhoneRXBuf_SelectedIndexChanged(this, EventArgs.Empty);
             comboDSPPhoneTXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPFMRXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPFMTXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPCWRXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigRXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigTXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPPhoneRXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPPhoneTXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPFMRXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPFMTXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPCWRXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigRXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigTXFiltSize_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPPhoneRXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPPhoneTXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPFMRXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPFMTXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPCWRXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigRXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPDigTXFiltType_SelectedIndexChanged(this, EventArgs.Empty);
 
             console.specRX.GetSpecRX(0).Update = true;
             console.specRX.GetSpecRX(1).Update = true;
@@ -1617,23 +377,9 @@ namespace Thetis
 
         private void InitGeneralTab()
         {
-            // if (console.Hdw != null)
-            //  comboGeneralLPTAddr.Text = Convert.ToString(console.Hdw.LPTAddr, 16);
-            //  if (console.Hdw != null)
-            //  chkPTTOutDelay.Checked = console.PTTODelayControl;
-            // udGeneralLPTDelay.Value = console.LatchDelay;
-            chkGeneralRXOnly.Checked = console.RXOnly;
-            // chkGeneralUSBPresent.Checked = console.USBPresent;
-            // chkBoxJanusOzyControl.Checked = console.OzyControl;
-            // chkGeneralPAPresent.Checked = console.PAPresent;
-            // chkGeneralXVTRPresent.Checked = console.XVTRPresent;
-            // comboGeneralXVTR.SelectedItem = (int)console.CurrentXVTRTRMode;
-            // chkGeneralSpurRed.Checked = true;
-            chkGeneralDisablePTT.Checked = console.DisablePTT;
-            // chkGeneralSoftwareGainCorr.Checked = console.NoHardwareOffset;
-            // chkGeneralEnableX2.Checked = console.X2Enabled;
-            // chkGeneralCustomFilter.Checked = console.EnableLPF0;
-        }
+             chkGeneralRXOnly.Checked = console.RXOnly;
+             chkGeneralDisablePTT.Checked = console.DisablePTT;
+         }
 
         private void InitAudioTab()
         {
@@ -1769,14 +515,6 @@ namespace Thetis
         // ======================================================
         // Misc Routines
         // ======================================================
-
-        private void InitDelta44()
-        {
-            int retval = DeltaCP.Init();
-            if (retval != 0) return;
-            DeltaCP.SetLevels();
-            DeltaCP.Close();
-        }
 
         private void RefreshCOMPortLists()
         {
@@ -2038,7 +776,7 @@ namespace Thetis
                 InitKeyboardTab();
                 InitAppearanceTab();
             }
-
+            //InitAudioTab();
             // restore saved values to the controls
             foreach (string s in a)				// string is in the format "name,value"
             {
@@ -2323,17 +1061,17 @@ namespace Thetis
 
             // General Tab
             chkAlexAntCtrl_CheckedChanged(this, e);
-            comboGeneralLPTAddr_SelectedIndexChanged(this, e);
+            //comboGeneralLPTAddr_SelectedIndexChanged(this, e);
             udGeneralLPTDelay_ValueChanged(this, e);
             chkGeneralRXOnly_CheckedChanged(this, e);
-            chkGeneralUSBPresent_CheckedChanged(this, e);
-            chkGeneralPAPresent_CheckedChanged(this, e);
-            chkGeneralATUPresent_CheckedChanged(this, e);
-            chkXVTRPresent_CheckedChanged(this, e);
+            //chkGeneralUSBPresent_CheckedChanged(this, e);
+           // chkGeneralPAPresent_CheckedChanged(this, e);
+           // chkGeneralATUPresent_CheckedChanged(this, e);
+           // chkXVTRPresent_CheckedChanged(this, e);
             comboGeneralXVTR_SelectedIndexChanged(this, e);
-            udDDSCorrection_ValueChanged(this, e);
-            udDDSPLLMult_ValueChanged(this, e);
-            udDDSIFFreq_ValueChanged(this, e);
+           // udDDSCorrection_ValueChanged(this, e);
+            //udDDSPLLMult_ValueChanged(this, e);
+           // udDDSIFFreq_ValueChanged(this, e);
             // chkGeneralSpurRed_CheckedChanged(this, e);
             chkGeneralDisablePTT_CheckedChanged(this, e);
             //chkGeneralSoftwareGainCorr_CheckedChanged(this, e);
@@ -2798,18 +1536,35 @@ namespace Thetis
 
             dr["Phone_RX_DSP_Buffer"] = (string)comboDSPPhoneRXBuf.Text;
             dr["Phone_TX_DSP_Buffer"] = (string)comboDSPPhoneTXBuf.Text;
+            dr["FM_RX_DSP_Buffer"] = (string)comboDSPFMRXBuf.Text;
+            dr["FM_TX_DSP_Buffer"] = (string)comboDSPFMTXBuf.Text;
             dr["Digi_RX_DSP_Buffer"] = (string)comboDSPDigRXBuf.Text;
             dr["Digi_TX_DSP_Buffer"] = (string)comboDSPDigTXBuf.Text;
             dr["CW_RX_DSP_Buffer"] = (string)comboDSPCWRXBuf.Text;
 
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Filter_Size"] = (string)comboDSPPhoneRXFiltSize.Text;
+            dr["Phone_TX_DSP_Filter_Size"] = (string)comboDSPPhoneTXFiltSize.Text;
+            dr["FM_RX_DSP_Filter_Size"] = (string)comboDSPFMRXFiltSize.Text;
+            dr["FM_TX_DSP_Filter_Size"] = (string)comboDSPFMTXFiltSize.Text;
+            dr["Digi_RX_DSP_Filter_Size"] = (string)comboDSPDigRXFiltSize.Text;
+            dr["Digi_TX_DSP_Filter_Size"] = (string)comboDSPDigTXFiltSize.Text;
+            dr["CW_RX_DSP_Filter_Size"] = (string)comboDSPCWRXFiltSize.Text;
+
+            dr["Phone_RX_DSP_Filter_Type"] = (string)comboDSPPhoneRXFiltType.Text;
+            dr["Phone_TX_DSP_Filter_Type"] = (string)comboDSPPhoneTXFiltType.Text;
+            dr["FM_RX_DSP_Filter_Type"] = (string)comboDSPFMRXFiltType.Text;
+            dr["FM_TX_DSP_Filter_Type"] = (string)comboDSPFMTXFiltType.Text;
+            dr["Digi_RX_DSP_Filter_Type"] = (string)comboDSPDigRXFiltType.Text;
+            dr["Digi_TX_DSP_Filter_Type"] = (string)comboDSPDigTXFiltType.Text;
+            dr["CW_RX_DSP_Filter_Type"] = (string)comboDSPCWRXFiltType.Text;
+
+            dr["Mic_Input_On"] = (bool)radMicIn.Checked;
+            dr["Mic_Input_Boost"] = (bool)chk20dbMicBoost.Checked;
+            dr["Line_Input_On"] = (bool)radLineIn.Checked;
+            dr["Line_Input_Level"] = udLineInBoost.Value;
+
+            dr["CESSB_On"] = chkDSPCESSB.Checked;
+            dr["Disable_Pure_Signal"] = chkDisablePureSignal.Checked;
         }
 
         public void UpdateWaterfallBandInfo()
@@ -3302,32 +2057,6 @@ namespace Thetis
             }
         }
 
-        public double IFFreq
-        {
-            get
-            {
-                if (udDDSIFFreq != null) return (double)udDDSIFFreq.Value * 1e-6;
-                else return 0.0;
-            }
-            set
-            {
-                if (udDDSIFFreq != null) udDDSIFFreq.Value = (int)(value * 1e6);
-            }
-        }
-
-        //public bool X2TR
-        //{
-        //    get
-        //    {
-        //        if (chkGeneralEnableX2 != null) return chkGeneralEnableX2.Checked;
-        //        else return false;
-        //    }
-        //    set
-        //    {
-        //        if (chkGeneralEnableX2 != null) chkGeneralEnableX2.Checked = value;
-        //    }
-        //}
-
         private float display_contrast = 1.0f;
         public float DisplayContrast
         {
@@ -3525,19 +2254,6 @@ namespace Thetis
                 if (chkAudioStereo3 != null) chkAudioStereo3.Checked = value;
             }
         }
-
-        //public bool SpurReduction
-        //{
-        //    get
-        //    {
-        //        if (chkGeneralSpurRed != null) return chkGeneralSpurRed.Checked;
-        //        else return true;
-        //    }
-        //    set
-        //    {
-        //        if (chkGeneralSpurRed != null) chkGeneralSpurRed.Checked = value;
-        //    }
-        //}
 
         public int NoiseGate
         {
@@ -3896,52 +2612,7 @@ namespace Thetis
             }
         }
 
-        //private SoundCard current_sound_card = SoundCard.UNSUPPORTED_CARD;
-        //public SoundCard CurrentSoundCard
-        //{
-        //    get { return current_sound_card; }
-        //    set
-        //    {
-        //        current_sound_card = value;
-        //        switch (value)
-        //        {
-        //            case SoundCard.DELTA_44:
-        //                comboAudioSoundCard.Text = "M-Audio Delta 44 (PCI)";
-        //                break;
-        //            case SoundCard.FIREBOX:
-        //                comboAudioSoundCard.Text = "PreSonus FireBox (FireWire)";
-        //                break;
-        //            case SoundCard.EDIROL_FA_66:
-        //                comboAudioSoundCard.Text = "Edirol FA-66 (FireWire)";
-        //                break;
-        //            case SoundCard.AUDIGY:
-        //                comboAudioSoundCard.Text = "SB Audigy (PCI)";
-        //                break;
-        //            case SoundCard.AUDIGY_2:
-        //                comboAudioSoundCard.Text = "SB Audigy 2 (PCI)";
-        //                break;
-        //            case SoundCard.AUDIGY_2_ZS:
-        //                comboAudioSoundCard.Text = "SB Audigy 2 ZS (PCI)";
-        //                break;
-        //            case SoundCard.EXTIGY:
-        //                comboAudioSoundCard.Text = "Sound Blaster Extigy (USB)";
-        //                break;
-        //            case SoundCard.MP3_PLUS:
-        //                comboAudioSoundCard.Text = "Sound Blaster MP3+ (USB)";
-        //                break;
-        //            case SoundCard.SANTA_CRUZ:
-        //                comboAudioSoundCard.Text = "Turtle Beach Santa Cruz (PCI)";
-        //                break;
-        //            case SoundCard.UNSUPPORTED_CARD:
-        //                comboAudioSoundCard.Text = "Unsupported Card";
-        //                break;
-        //            case SoundCard.HPSDR:
-        //                comboAudioSoundCard.Text = "HPSDR";
-        //                break;
-        //        }
-        //    }
-        //}
-
+ 
         public bool VOXEnable
         {
             get
@@ -4191,27 +2862,6 @@ namespace Thetis
             }
         }
 
-        public bool DirectX
-        {
-            set
-            {
-                if (value)
-                {
-                    if (!comboDisplayDriver.Items.Contains("DirectX"))
-                        comboDisplayDriver.Items.Add("DirectX");
-                }
-                else
-                {
-                    if (comboDisplayDriver.Items.Contains("DirectX"))
-                    {
-                        comboDisplayDriver.Items.Remove("DirectX");
-                        if (comboDisplayDriver.SelectedIndex < 0)
-                            comboDisplayDriver.SelectedIndex = 0;
-                    }
-                }
-            }
-        }
-
         public bool VACEnable
         {
             get { return chkAudioEnableVAC.Checked; }
@@ -4238,6 +2888,7 @@ namespace Thetis
                     case Model.HERMES:
                         force_model = true;
                         radGenModelHermes.Checked = true;
+                        radGenModelHermes_CheckedChanged(this, EventArgs.Empty);
                         break;
                     case Model.ANAN10:
                         force_model = true;
@@ -4261,16 +2912,11 @@ namespace Thetis
                         break;
                     case Model.ANAN200D:
                         force_model = true;
-                        radGenModelOrion.Checked = true;
+                        radGenModelANAN200D.Checked = true;
                         break;
 
                 }
             }
-        }
-
-        public void ResetFLEX5000()
-        {
-            radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
         }
 
         public bool RXOnly
@@ -4286,11 +2932,6 @@ namespace Thetis
             set
             {
                 mox = value;
-                // grpGeneralHardwareSDR1000.Enabled = !mox;
-                // if (comboAudioSoundCard.SelectedIndex == (int)SoundCard.UNSUPPORTED_CARD)
-                //grpAudioDetails1.Enabled = !mox;
-                //grpAudioCard.Enabled = !mox;
-                //grpAudioLatency1.Enabled = !mox;
                 chkAudioEnableVAC.Enabled = !mox;
                 if (chkAudioEnableVAC.Checked)
                 {
@@ -4309,9 +2950,6 @@ namespace Thetis
                     grpAudio2Stereo.Enabled = true;
                 }
                 grpDSPBufferSize.Enabled = !mox;
-                // grpTestAudioBalance.Enabled = !mox;
-                //if (!mox && !chekTestIMD.Checked && !chkGeneralRXOnly.Checked)
-                //   grpTestTXIMD.Enabled = !mox;
             }
         }
 
@@ -4329,6 +2967,18 @@ namespace Thetis
                 udHPSDRFreqCorrectFactor.Value = (decimal)value;
                 NetworkIO.FreqCorrectionFactor = (double)value;
             }
+        }
+
+        public bool CESSB
+        {
+            get { return chkDSPCESSB.Checked; }
+            set { chkDSPCESSB.Checked = value; }
+        }
+
+        public bool DisablePureSignal
+        {
+            get { return chkDisablePureSignal.Checked; }
+            set { chkDisablePureSignal.Checked = value; }
         }
 
         public bool AlexPresent
@@ -5417,6 +4067,310 @@ namespace Thetis
             set { udOrionPAGainVHF13.Value = (decimal)value; }
         }
 
+        //PAGain ANAN-200DMKII
+        public float ANAN200DIIPAGain160
+        {
+            get { return (float)udANAN200DIIPAGain160.Value; }
+            set { udANAN200DIIPAGain160.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGain80
+        {
+            get { return (float)udANAN200DIIPAGain80.Value; }
+            set { udANAN200DIIPAGain80.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGain60
+        {
+            get { return (float)udANAN200DIIPAGain60.Value; }
+            set { udANAN200DIIPAGain60.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGain40
+        {
+            get { return (float)udANAN200DIIPAGain40.Value; }
+            set { udANAN200DIIPAGain40.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGain30
+        {
+            get { return (float)udANAN200DIIPAGain30.Value; }
+            set { udANAN200DIIPAGain30.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGain20
+        {
+            get { return (float)udANAN200DIIPAGain20.Value; }
+            set { udANAN200DIIPAGain20.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGain17
+        {
+            get { return (float)udANAN200DIIPAGain17.Value; }
+            set { udANAN200DIIPAGain17.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGain15
+        {
+            get { return (float)udANAN200DIIPAGain15.Value; }
+            set { udANAN200DIIPAGain15.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGain12
+        {
+            get { return (float)udANAN200DIIPAGain12.Value; }
+            set { udANAN200DIIPAGain12.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGain10
+        {
+            get { return (float)udANAN200DIIPAGain10.Value; }
+            set { udANAN200DIIPAGain10.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGain6
+        {
+            get { return (float)udANAN200DIIPAGain6.Value; }
+            set { udANAN200DIIPAGain6.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF0
+        {
+            get { return (float)udANAN200DIIPAGainVHF0.Value; }
+            set { udANAN200DIIPAGainVHF0.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF1
+        {
+            get { return (float)udANAN200DIIPAGainVHF1.Value; }
+            set { udANAN200DIIPAGainVHF1.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF2
+        {
+            get { return (float)udANAN200DIIPAGainVHF2.Value; }
+            set { udANAN200DIIPAGainVHF2.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF3
+        {
+            get { return (float)udANAN200DIIPAGainVHF3.Value; }
+            set { udANAN200DIIPAGainVHF3.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF4
+        {
+            get { return (float)udANAN200DIIPAGainVHF4.Value; }
+            set { udANAN200DIIPAGainVHF4.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF5
+        {
+            get { return (float)udANAN200DIIPAGainVHF5.Value; }
+            set { udANAN200DIIPAGainVHF5.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF6
+        {
+            get { return (float)udANAN200DIIPAGainVHF6.Value; }
+            set { udANAN200DIIPAGainVHF6.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF7
+        {
+            get { return (float)udANAN200DIIPAGainVHF7.Value; }
+            set { udANAN200DIIPAGainVHF7.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF8
+        {
+            get { return (float)udANAN200DIIPAGainVHF8.Value; }
+            set { udANAN200DIIPAGainVHF8.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF9
+        {
+            get { return (float)udANAN200DIIPAGainVHF9.Value; }
+            set { udANAN200DIIPAGainVHF9.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF10
+        {
+            get { return (float)udANAN200DIIPAGainVHF10.Value; }
+            set { udANAN200DIIPAGainVHF10.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF11
+        {
+            get { return (float)udANAN200DIIPAGainVHF11.Value; }
+            set { udANAN200DIIPAGainVHF11.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF12
+        {
+            get { return (float)udANAN200DIIPAGainVHF12.Value; }
+            set { udANAN200DIIPAGainVHF12.Value = (decimal)value; }
+        }
+
+        public float ANAN200DIIPAGainVHF13
+        {
+            get { return (float)udANAN200DIIPAGainVHF13.Value; }
+            set { udANAN200DIIPAGainVHF13.Value = (decimal)value; }
+        }
+
+
+        //PAGain ANAN-500D
+        public float ANAN500DPAGain160
+        {
+            get { return (float)udANAN500DPAGain160.Value; }
+            set { udANAN500DPAGain160.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGain80
+        {
+            get { return (float)udANAN500DPAGain80.Value; }
+            set { udANAN500DPAGain80.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGain60
+        {
+            get { return (float)udANAN500DPAGain60.Value; }
+            set { udANAN500DPAGain60.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGain40
+        {
+            get { return (float)udANAN500DPAGain40.Value; }
+            set { udANAN500DPAGain40.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGain30
+        {
+            get { return (float)udANAN500DPAGain30.Value; }
+            set { udANAN500DPAGain30.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGain20
+        {
+            get { return (float)udANAN500DPAGain20.Value; }
+            set { udANAN500DPAGain20.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGain17
+        {
+            get { return (float)udANAN500DPAGain17.Value; }
+            set { udANAN500DPAGain17.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGain15
+        {
+            get { return (float)udANAN500DPAGain15.Value; }
+            set { udANAN500DPAGain15.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGain12
+        {
+            get { return (float)udANAN500DPAGain12.Value; }
+            set { udANAN500DPAGain12.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGain10
+        {
+            get { return (float)udANAN500DPAGain10.Value; }
+            set { udANAN500DPAGain10.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGain6
+        {
+            get { return (float)udANAN500DPAGain6.Value; }
+            set { udANAN500DPAGain6.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF0
+        {
+            get { return (float)udANAN500DPAGainVHF0.Value; }
+            set { udANAN500DPAGainVHF0.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF1
+        {
+            get { return (float)udANAN500DPAGainVHF1.Value; }
+            set { udANAN500DPAGainVHF1.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF2
+        {
+            get { return (float)udANAN500DPAGainVHF2.Value; }
+            set { udANAN500DPAGainVHF2.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF3
+        {
+            get { return (float)udANAN500DPAGainVHF3.Value; }
+            set { udANAN500DPAGainVHF3.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF4
+        {
+            get { return (float)udANAN500DPAGainVHF4.Value; }
+            set { udANAN500DPAGainVHF4.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF5
+        {
+            get { return (float)udANAN500DPAGainVHF5.Value; }
+            set { udANAN500DPAGainVHF5.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF6
+        {
+            get { return (float)udANAN500DPAGainVHF6.Value; }
+            set { udANAN500DPAGainVHF6.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF7
+        {
+            get { return (float)udANAN500DPAGainVHF7.Value; }
+            set { udANAN500DPAGainVHF7.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF8
+        {
+            get { return (float)udANAN500DPAGainVHF8.Value; }
+            set { udANAN500DPAGainVHF8.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF9
+        {
+            get { return (float)udANAN500DPAGainVHF9.Value; }
+            set { udANAN500DPAGainVHF9.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF10
+        {
+            get { return (float)udANAN500DPAGainVHF10.Value; }
+            set { udANAN500DPAGainVHF10.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF11
+        {
+            get { return (float)udANAN500DPAGainVHF11.Value; }
+            set { udANAN500DPAGainVHF11.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF12
+        {
+            get { return (float)udANAN500DPAGainVHF12.Value; }
+            set { udANAN500DPAGainVHF12.Value = (decimal)value; }
+        }
+
+        public float ANAN500DPAGainVHF13
+        {
+            get { return (float)udANAN500DPAGainVHF13.Value; }
+            set { udANAN500DPAGainVHF13.Value = (decimal)value; }
+        }
+
+        
         public int TunePower
         {
             get { return (int)udTXTunePower.Value; }
@@ -5733,17 +4687,6 @@ namespace Thetis
             }
         }
 
-        public int DSPCWTXBuffer
-        {
-            get { return Int32.Parse(comboDSPCWTXBuf.Text); }
-            set
-            {
-                string temp = value.ToString();
-                if (comboDSPCWTXBuf.Items.Contains(temp))
-                    comboDSPCWTXBuf.SelectedItem = temp;
-            }
-        }
-
         public int DSPDigRXBuffer
         {
             get { return Int32.Parse(comboDSPDigRXBuf.Text); }
@@ -5890,10 +4833,10 @@ namespace Thetis
         // General Tab Event Handlers
         // ======================================================
 
-        private void radGenModelFLEX5000_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (radGenModelFLEX5000.Checked)
-            {
+     //   private void radGenModelFLEX5000_CheckedChanged(object sender, System.EventArgs e)
+      //  {
+            //if (radGenModelFLEX5000.Checked)
+          //  {
                 //comboAudioSoundCard.Text = "Unsupported Card";
                 ////comboAudioSampleRate1.Text = "96000";
 
@@ -5932,11 +4875,11 @@ namespace Thetis
                     MessageBoxIcon.Exclamation);*/
                 // console.PowerEnabled = false;
                 // }
-            }
-            else console.PowerEnabled = true;
+          //  }
+           // else console.PowerEnabled = true;
 
-            bool b = radGenModelFLEX5000.Checked;
-            radPACalAllBands_CheckedChanged(this, EventArgs.Empty);
+           // bool b = radGenModelFLEX5000.Checked;
+           // radPACalAllBands_CheckedChanged(this, EventArgs.Empty);
 
             // grpAudioDetails1.Visible = !b;
             // grpAudioCard.Visible = !b;
@@ -5944,19 +4887,19 @@ namespace Thetis
             // grpAudioMicInGain1.Visible = !b;
             // grpAudioChannels.Visible = !b;
 
-            chkCalExpert.Visible = b;
-            chkCalExpert_CheckedChanged(this, EventArgs.Empty);
-            if (!b)
-            {
-                grpGeneralCalibration.Visible = true;
-                grpGenCalLevel.Visible = true;
-                grpGenCalRXImage.Visible = true;
-            }
+          //  chkCalExpert.Visible = b;
+           // chkCalExpert_CheckedChanged(this, EventArgs.Empty);
+           // if (!b)
+            //{
+            //    grpGeneralCalibration.Visible = true;
+            //    grpGenCalLevel.Visible = true;
+            //    grpGenCalRXImage.Visible = true;
+            //}
 
-            grpPAGainByBand.Visible = true;
-            chkPANewCal.Visible = false;
-            grpImpulseTest.Visible = !b;
-        }
+          //  grpPAGainByBand.Visible = true;
+          //  chkPANewCal.Visible = false;
+           // grpImpulseTest.Visible = !b;
+      //  }
 
         private void radGenModelANAN10_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -5966,7 +4909,7 @@ namespace Thetis
             if (radGenModelANAN10.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-                console.CurrentModel = Model.HERMES;
+               // console.CurrentModel = Model.HERMES;
                 console.CurrentHPSDRModel = HPSDRModel.ANAN10;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
@@ -6044,7 +4987,7 @@ namespace Thetis
             if (radGenModelANAN10E.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-                console.CurrentModel = Model.HERMES;
+                //console.CurrentModel = Model.HERMES;
                 console.CurrentHPSDRModel = HPSDRModel.ANAN10E;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
@@ -6109,7 +5052,7 @@ namespace Thetis
             if (radGenModelANAN100B.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-                console.CurrentModel = Model.HERMES;
+                //console.CurrentModel = Model.HERMES;
                 console.CurrentHPSDRModel = HPSDRModel.ANAN100B;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
@@ -6180,7 +5123,7 @@ namespace Thetis
             if (radGenModelANAN100.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-                console.CurrentModel = Model.HERMES;
+               // console.CurrentModel = Model.HERMES;
                 console.CurrentHPSDRModel = HPSDRModel.ANAN100;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
@@ -6249,7 +5192,7 @@ namespace Thetis
             if (radGenModelANAN100D.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-                console.CurrentModel = Model.HERMES;
+               // console.CurrentModel = Model.HERMES;
                 console.CurrentHPSDRModel = HPSDRModel.ANAN100D;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
@@ -6333,15 +5276,15 @@ namespace Thetis
             }
         }
 
-        private void radGenModelOrion_CheckedChanged(object sender, System.EventArgs e)
+        private void radGenModelANAN200D_CheckedChanged(object sender, System.EventArgs e)
         {
             HPSDRModel old_model = console.CurrentHPSDRModel;
-            console.OrionPresent = radGenModelOrion.Checked;
+            console.ANAN200DPresent = radGenModelANAN200D.Checked;
 
-            if (radGenModelOrion.Checked)
+            if (radGenModelANAN200D.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-                console.CurrentModel = Model.HERMES;
+                //console.CurrentModel = Model.HERMES;
                 console.CurrentHPSDRModel = HPSDRModel.ANAN200D;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
@@ -6403,10 +5346,10 @@ namespace Thetis
                 chkApolloPresent.Location = new Point(25, 100);
 
             }
-            console.OrionPresent = radGenModelOrion.Checked;
+            console.ANAN200DPresent = radGenModelANAN200D.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
-            if (radGenModelOrion.Checked)
+            if (radGenModelANAN200D.Checked)
             {
                 bool power = console.PowerOn;
 
@@ -6424,16 +5367,16 @@ namespace Thetis
             }
         }
 
-        private void radGenModelANAN400D_CheckedChanged(object sender, System.EventArgs e)
+        private void radGenModelANAN200DMKII_CheckedChanged(object sender, System.EventArgs e)
         {
             HPSDRModel old_model = console.CurrentHPSDRModel;
-            console.OrionPresent = radGenModelANAN400D.Checked;
+            console.ANAN200DMKIIPresent = radGenModelANAN200DMKII.Checked;
 
-            if (radGenModelANAN400D.Checked)
+            if (radGenModelANAN200DMKII.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-                console.CurrentModel = Model.HERMES;
-                console.CurrentHPSDRModel = HPSDRModel.ANAN400D;
+                //console.CurrentModel = Model.HERMES;
+                console.CurrentHPSDRModel = HPSDRModel.ANAN200DII;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
                 chkMercuryPresent.Checked = true;
@@ -6494,10 +5437,101 @@ namespace Thetis
                 chkApolloPresent.Location = new Point(25, 100);
 
             }
-            console.OrionMKIIPresent = radGenModelANAN400D.Checked;
+            console.ANAN200DMKIIPresent = radGenModelANAN200DMKII.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
-            if (radGenModelANAN400D.Checked)
+            if (radGenModelANAN200DMKII.Checked)
+            {
+                bool power = console.PowerOn;
+
+                if (power && (old_model != console.CurrentHPSDRModel))
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(100);
+                }
+                cmaster.CMLoadRouterAll(console.CurrentHPSDRModel);
+
+                if (power && (old_model != console.CurrentHPSDRModel))
+                {
+                    console.PowerOn = true;
+                }
+            }
+        }
+
+        private void radGenModelANAN500D_CheckedChanged(object sender, System.EventArgs e)
+        {
+            HPSDRModel old_model = console.CurrentHPSDRModel;
+            console.ANAN500DPresent = radGenModelANAN500D.Checked;
+
+            if (radGenModelANAN500D.Checked)
+            {
+                NetworkIO.fwVersionsChecked = false;
+               // console.CurrentModel = Model.HERMES;
+                console.CurrentHPSDRModel = HPSDRModel.ANAN500D;
+                chkPennyPresent.Checked = false;
+                chkPennyPresent.Enabled = false;
+                chkMercuryPresent.Checked = true;
+                chkMercuryPresent.Enabled = false;
+                chkExcaliburPresent.Checked = false;
+                chkExcaliburPresent.Enabled = false;
+                chkExcaliburPresent.Visible = false;
+                chkPennyLane.Checked = true;
+                chkPennyLane.Enabled = false;
+                radPenny10MHz.Checked = true;
+                rad12288MHzPenny.Checked = true;
+                chkAlexPresent.Enabled = true;
+                chkApolloPresent.Enabled = true;
+                groupBox10MhzClock.Visible = false;
+                groupBox122MHz.Visible = false;
+                groupBoxMicSource.Visible = false;
+                chkGeneralRXOnly.Visible = true;
+                chkHermesStepAttenuator.Enabled = true;
+                groupBoxRXOptions.Text = "ANAN Options";
+                grpMetisAddr.Text = "ANAN Address";
+                grpHermesStepAttenuator.Text = "ANAN Step Attenuator";
+                chkAlexPresent_CheckedChanged(this, EventArgs.Empty);
+                chkAlexAntCtrl_CheckedChanged(this, EventArgs.Empty);
+                chkAutoPACalibrate.Checked = false;
+                chkAutoPACalibrate.Visible = false;
+                chkBypassANANPASettings.Visible = true;
+                grpOrionPAGainByBand.BringToFront();
+
+                labelRXAntControl.Text = " EXT2  EXT1  XVTR";
+                labelATTOnTX.Visible = true;
+                udATTOnTX.Visible = true;
+                console.RX2PreampPresent = true;
+                chkRX2StepAtt_CheckedChanged(this, EventArgs.Empty);
+                chkRxOutOnTx.Text = "BYPASS on Tx";
+                chkEXT1OutOnTx.Text = "Ext 1 on Tx";
+                chkEXT2OutOnTx.Text = "Ext 2 on Tx";
+
+                chkAlexPresent.Parent = grpGeneralHardwareORION;
+                chkAlexPresent.Location = new Point(43, 120);
+                chkApolloPresent.Parent = grpGeneralHardwareORION;
+                chkApolloPresent.Location = new Point(43, 140);
+                cmaster.SetADCSupply(0, 50);
+                NetworkIO.SetRxADC(2);
+
+                radRX1ADC3.Enabled = true;
+                radRX2ADC3.Enabled = true;
+                radRX3ADC3.Enabled = true;
+                radRX4ADC3.Enabled = true;
+                radRX5ADC3.Enabled = true;
+                radRX6ADC3.Enabled = true;
+                radRX7ADC3.Enabled = true;
+            }
+            else
+            {
+                chkAlexPresent.Parent = groupBoxHPSDRHW;
+                chkAlexPresent.Location = new Point(25, 80);
+                chkApolloPresent.Parent = groupBoxHPSDRHW;
+                chkApolloPresent.Location = new Point(25, 100);
+
+            }
+            console.ANAN500DPresent = radGenModelANAN500D.Checked;
+            radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
+
+            if (radGenModelANAN500D.Checked)
             {
                 bool power = console.PowerOn;
 
@@ -6522,7 +5556,7 @@ namespace Thetis
             if (radGenModelHermes.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-                console.CurrentModel = Model.HERMES;
+                //console.CurrentModel = Model.HERMES;
                 console.CurrentHPSDRModel = HPSDRModel.HERMES;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
@@ -6592,7 +5626,7 @@ namespace Thetis
             if (radGenModelHPSDR.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-                console.CurrentModel = Model.HPSDR;
+               // console.CurrentModel = Model.HPSDR;
                 console.CurrentHPSDRModel = HPSDRModel.HPSDR;
                 chkPennyPresent.Enabled = true;
                 chkPennyPresent.Visible = true;
@@ -6705,7 +5739,7 @@ namespace Thetis
 
             if (is_hermes)
             {
-                if (radGenModelOrion.Checked)
+                if (radGenModelANAN200D.Checked || radGenModelANAN200DMKII.Checked || radGenModelANAN500D.Checked)
                 {
                     groupBoxHPSDRHW.Visible = false;
                     grpGeneralHardwareORION.Visible = true;
@@ -6836,7 +5870,8 @@ namespace Thetis
                 }
             }
 
-            if (radGenModelOrion.Checked || radGenModelANAN100D.Checked)
+            if (radGenModelANAN200D.Checked || radGenModelANAN100D.Checked ||
+                radGenModelANAN200DMKII.Checked || radGenModelANAN500D.Checked)
             {
                 if (!tcGeneral.TabPages.Contains(tpADC))
                 {
@@ -6887,7 +5922,7 @@ namespace Thetis
                 }
             }
 
-            if (radGenModelOrion.Checked || radGenModelHermes.Checked || radGenModelANAN100D.Checked)
+            if (radGenModelANAN200D.Checked || radGenModelHermes.Checked || radGenModelANAN100D.Checked)
             {
                 if (!tcGeneral.TabPages.Contains(tpApolloControl))
                 {
@@ -6912,27 +5947,28 @@ namespace Thetis
                 }
             }
 
-            if (console.CurrentHPSDRModel == HPSDRModel.ANAN400D)
+            if (radGenModelANAN200DMKII.Checked || radGenModelANAN500D.Checked)
             {
                 if (!tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
                 {
-                    Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 8);
+                    tcAlexControl.TabPages.Add(tpAlex2FilterControl);
+                    //Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 2);
                 }
-                else
-                {
-                    if (tcAlexControl.TabPages.IndexOf(tpAlex2FilterControl) != 8)
-                    {
-                        tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
-                        Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 8);
-                    }
-                }
+                //else
+                //{
+                //    if (tcAlexControl.TabPages.IndexOf(tpAlex2FilterControl) != 2)
+                //    {
+                //        tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
+                //        Common.TabControlInsert(tcAlexControl, tpAlex2FilterControl, 2);
+                //    }
+                //}
             }
             else 
             {
                 if (tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
                 {
                     tcAlexControl.TabPages.Remove(tpAlex2FilterControl);
-                    tcAlexControl.SelectedIndex = 0;
+                    //tcAlexControl.SelectedIndex = 0;
                 }
             }
 
@@ -6948,81 +5984,6 @@ namespace Thetis
                 grpPennyExtCtrl.Enabled = false;
             }
             console.MaxFreq = (double)udMaxFreq.Value;
-        }
-
-        public void RemoveHPSDRPages()
-        {
-            if (tcGeneral.TabPages.Contains(tpHPSDR))
-            {
-                tcGeneral.TabPages.Remove(tpHPSDR);
-                tcGeneral.SelectedIndex = 0;
-            }
-            if (tcGeneral.TabPages.Contains(tpPennyCtrl))
-            {
-                tcGeneral.TabPages.Remove(tpPennyCtrl);
-                tcGeneral.SelectedIndex = 0;
-            }
-            if (tcGeneral.TabPages.Contains(tpAlexControl))
-            {
-                tcGeneral.TabPages.Remove(tpAlexControl);
-                tcGeneral.SelectedIndex = 0;
-            }
-            /*  if (!tcGeneral.TabPages.Contains(tpRX2))
-              {
-                  Common.TabControlInsert(tcGeneral, tpRX2, 4);
-              }
-              else
-              {
-                  if (tcGeneral.TabPages.IndexOf(tpRX2) != 4)
-                  {
-                      tcGeneral.TabPages.Remove(tpRX2);
-                      Common.TabControlInsert(tcGeneral, tpRX2, 4);
-                  }
-              }*/
-
-            console.MaxFreq = 65.0;
-        }
-
-
-        private void udSoftRockCenterFreq_ValueChanged(object sender, System.EventArgs e)
-        {
-            // console.SoftRockCenterFreq = (double)udSoftRockCenterFreq.Value;
-        }
-
-        private void comboGeneralLPTAddr_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-            //    if (comboGeneralLPTAddr.Text == "" || console.CurrentModel != Model.SDR1000)
-            //        return;
-            //    console.Hdw.LPTAddr = Convert.ToUInt16(comboGeneralLPTAddr.Text, 16);
-        }
-
-        private void comboGeneralLPTAddr_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-        {
-            //if (console.CurrentModel != Model.SDR1000) return;
-            //if (comboGeneralLPTAddr.Text == "") return;
-            //if (e.KeyData != Keys.Enter) return;
-            //if (comboGeneralLPTAddr.Text.Length > 4)
-            //{
-            //    MessageBox.Show("Invalid Parallel Port Address (" + comboGeneralLPTAddr.Text + ")");
-            //    comboGeneralLPTAddr.Text = "378";
-            //    return;
-            //}
-
-            //if (comboGeneralLPTAddr.Text.Any(c => !Char.IsDigit(c) &&
-            //                                      Char.ToLower(c) < 'a' &&
-            //                                      Char.ToLower(c) > 'f'))
-            //{
-            //    MessageBox.Show("Invalid Parallel Port Address (" + comboGeneralLPTAddr.Text + ")");
-            //    comboGeneralLPTAddr.Text = "378";
-            //    return;
-            //}
-
-            //console.Hdw.LPTAddr = Convert.ToUInt16(comboGeneralLPTAddr.Text, 16);
-        }
-
-        private void comboGeneralLPTAddr_LostFocus(object sender, System.EventArgs e)
-        {
-            comboGeneralLPTAddr_KeyDown(sender, new KeyEventArgs(Keys.Enter));
         }
 
         private void chkGeneralRXOnly_CheckedChanged(object sender, System.EventArgs e)
@@ -7048,99 +6009,6 @@ namespace Thetis
             tpTransmit.Enabled = !chkGeneralRXOnly.Checked;
             tpPowerAmplifier.Enabled = !chkGeneralRXOnly.Checked;
             grpTestTXIMD.Enabled = !chkGeneralRXOnly.Checked;
-        }
-
-        private void chkGeneralUSBPresent_CheckedChanged(object sender, System.EventArgs e)
-        {
-            //try
-            //{
-            //    console.USBPresent = chkGeneralUSBPresent.Checked;
-            //    if (chkGeneralUSBPresent.Checked)
-            //    {
-            //        if (!USB.Init(true, chkGeneralPAPresent.Checked))
-            //            chkGeneralUSBPresent.Checked = false;
-            //        else USB.Console = console;
-            //    }
-            //    else
-            //        USB.Exit();
-
-            //    if (console.PowerOn)
-            //    {
-            //        console.PowerOn = false;
-            //        Thread.Sleep(100);
-            //        console.PowerOn = true;
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("A required DLL was not found (Sdr1kUsb.dll).  Please download the\n" +
-            //        "installer from the FlexRadio private download page and try again.",
-            //        "Error: Missing DLL",
-            //        MessageBoxButtons.OK,
-            //        MessageBoxIcon.Error);
-            //    chkGeneralUSBPresent.Checked = false;
-            //}
-        }
-
-        private void chkGeneralPAPresent_CheckedChanged(object sender, System.EventArgs e)
-        {
-            //console.PAPresent = false;
-            //chkGeneralATUPresent.Visible = chkGeneralPAPresent.Checked;
-            //grpPAGainByBand.Visible = true;
-            ////rtxtPACalReq.Visible = chkGeneralPAPresent.Checked;
-
-            //if (!chkGeneralPAPresent.Checked)
-            //    chkGeneralATUPresent.Checked = false;
-            //else if (console.PowerOn)
-            //{
-            //    console.PowerOn = false;
-            //    Thread.Sleep(100);
-            //    console.PowerOn = true;
-            //}
-
-            //if (chkGeneralUSBPresent.Checked)
-            //{
-            //    chkGeneralUSBPresent.Checked = false;
-            //    chkGeneralUSBPresent.Checked = true;
-            //}
-        }
-
-        private void chkGeneralATUPresent_CheckedChanged(object sender, System.EventArgs e)
-        {
-            //console.ATUPresent = chkGeneralATUPresent.Checked;
-        }
-
-        private void chkXVTRPresent_CheckedChanged(object sender, System.EventArgs e)
-        {
-            //console.XVTRPresent = chkGeneralXVTRPresent.Checked;
-            //comboGeneralXVTR.Visible = chkGeneralXVTRPresent.Checked;
-            //if (chkGeneralXVTRPresent.Checked)
-            //{
-            //    if (comboGeneralXVTR.SelectedIndex == (int)XVTRTRMode.POSITIVE)
-            //        comboGeneralXVTR_SelectedIndexChanged(this, EventArgs.Empty);
-            //    else
-            //        comboGeneralXVTR.SelectedIndex = (int)XVTRTRMode.POSITIVE;
-            //}
-        }
-
-        //private void chkGeneralSpurRed_CheckedChanged(object sender, System.EventArgs e)
-        //{
-        //    console.SpurReduction = chkGeneralSpurRed.Checked;
-        //}
-
-        private void udDDSCorrection_ValueChanged(object sender, System.EventArgs e)
-        {
-            // console.DDSClockCorrection = (double)(udDDSCorrection.Value / 1000000);
-        }
-
-        private void udDDSPLLMult_ValueChanged(object sender, System.EventArgs e)
-        {
-            // console.Hdw.PLLMult = (int)udDDSPLLMult.Value;
-        }
-
-        private void udDDSIFFreq_ValueChanged(object sender, System.EventArgs e)
-        {
-            console.IFFreq = (double)udDDSIFFreq.Value * 1e-6;
         }
 
         private void btnGeneralCalFreqStart_Click(object sender, System.EventArgs e)
@@ -7636,79 +6504,21 @@ namespace Thetis
             {
                 force_reset = value;
                 if (value)
+                {
                     comboAudioSampleRate1_SelectedIndexChanged(this, EventArgs.Empty);
+                    comboAudioSampleRateRX2_SelectedIndexChanged(this, EventArgs.Empty);
+                }
             }
         }
-
-        //#if false      
+     
         private void comboAudioSampleRate1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            /*
-            if (comboAudioSampleRate1.SelectedIndex < 0) return;
-
-            int old_rate = console.SampleRate1;
-            int new_rate = Int32.Parse(comboAudioSampleRate1.Text);
-            double bin_width;
-            console.specRX.GetSpecRX(0).SampleRate = new_rate;
-            bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(0).FFTSize;
-            lblDisplayBinWidth.Text = bin_width.ToString("N3");
-            */
-
-            //  bool power = console.PowerOn;
-
-            //if (power && new_rate != old_rate)
-            //{
-            //console.PowerOn = false;
-            //Thread.Sleep(100);
-            //}
-
-            /*
-            console.SampleRate1 = new_rate;
-            int new_size = cmaster.GetBuffSize(new_rate);
-            console.specRX.GetSpecRX(0).BlockSize = new_size;
-            console.BlockSize1 = new_size;
-            */
-
-            //Display.DrawBackground();
-
-            //if (!initializing)
-            //{
-            //    // RadioDSP.SyncStatic();
-
-            //    // for (int i = 0; i < 2; i++)
-            //    // {
-            //    for (int j = 0; j < 2; j++)
-            //    {
-            //        RadioDSPRX dsp_rx = console.radio.GetDSPRX(0, j);
-            //        dsp_rx.Update = false;
-            //        dsp_rx.Force = true;
-            //        dsp_rx.Update = true;
-            //        dsp_rx.Force = false;
-            //    }
-            //    // }
-
-            //    //for (int i = 0; i < 1; i++)
-            //    //{
-            //    //    RadioDSPTX dsp_tx = console.radio.GetDSPTX(i);
-            //    //    dsp_tx.Update = false;
-            //    //    dsp_tx.Force = true;
-            //    //    dsp_tx.Update = true;
-            //    //    dsp_tx.Force = false;
-            //    //}
-            //}
-
-            //if (power && new_rate != old_rate)
-            //{
-            //    console.PowerOn = true;
-            //}
-
-            // ********** BEGIN PROPOSED CODE **********
             if (comboAudioSampleRate1.SelectedIndex < 0) return;
 
             int old_rate = console.SampleRate1;
             int new_rate = Int32.Parse(comboAudioSampleRate1.Text);
             bool was_enabled = true;
-            if (new_rate != old_rate)
+            if (new_rate != old_rate || initializing)
             {
                 // turn OFF the DSP channels so they get flushed out (must do while data is flowing to get slew-down and flush)
                 wdsp.SetChannelState(wdsp.id(0, 1), 0, 0);
@@ -7762,10 +6572,7 @@ namespace Thetis
                 lblDisplayBinWidth.Text = bin_width.ToString("N3");
             }
 
-            // ********** END PROPOSED CODE **********
-
         }
-        //#endif
 
         private void comboAudioSampleRateRX2_SelectedIndexChanged(object sender, System.EventArgs e)
         {
@@ -7773,9 +6580,8 @@ namespace Thetis
 
             int old_rate = console.SampleRateRX2;
             int new_rate = Int32.Parse(comboAudioSampleRateRX2.Text);
-            // BEGIN WCP CODE
             bool was_enabled = console.RX2Enabled;
-            if (new_rate != old_rate)
+            if (new_rate != old_rate || initializing)
             {
                 // turn OFF the DSP channel so it gets flushed out (must do while data is flowing to get slew-down and flush)
                 wdsp.SetChannelState(wdsp.id(2, 0), 0, 1);
@@ -7815,61 +6621,6 @@ namespace Thetis
                 double bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(1).FFTSize;
                 lblRX2DisplayBinWidth.Text = bin_width.ToString("N3");
             }
-            // END WCP CODE
-            /* BEGIN WCP EXCLUDE
-            double bin_width;
-            // console.specRX.GetSpecRX(0).SampleRate = new_rate;
-            console.specRX.GetSpecRX(1).SampleRate = new_rate;
-            // bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(0).FFTSize;
-            //  lblDisplayBinWidth.Text = bin_width.ToString("N3");
-            bin_width = (double)new_rate / (double)console.specRX.GetSpecRX(1).FFTSize;
-            lblRX2DisplayBinWidth.Text = bin_width.ToString("N3");
-
-            //bool power = console.PowerOn;
-
-            //if (power && new_rate != old_rate)
-            //{
-            //    console.PowerOn = false;
-            //    Thread.Sleep(100);
-            //}
-
-            console.SampleRateRX2 = new_rate;
-            int new_size = cmaster.GetBuffSize(new_rate);
-            console.specRX.GetSpecRX(1).BlockSize = new_size;
-            console.BlockSizeRX2 = new_size;
-            END WCP EXCLUDE */
-            //Display.DrawBackground();
-
-            //if (!initializing)
-            //{
-            //    // RadioDSP.SyncStatic();
-
-            //    //  for (int i = 0; i < 2; i++)
-            //    // {
-            //    for (int j = 0; j < 2; j++)
-            //    {
-            //        RadioDSPRX dsp_rx = console.radio.GetDSPRX(1, j);
-            //        dsp_rx.Update = false;
-            //        dsp_rx.Force = true;
-            //        dsp_rx.Update = true;
-            //        dsp_rx.Force = false;
-            //    }
-            //    //  }
-
-            //    //for (int i = 0; i < 1; i++)
-            //    //{
-            //    //    RadioDSPTX dsp_tx = console.radio.GetDSPTX(i);
-            //    //    dsp_tx.Update = false;
-            //    //    dsp_tx.Force = true;
-            //    //    dsp_tx.Update = true;
-            //    //    dsp_tx.Force = false;
-            //    //}
-            //}
-
-            //if (power && new_rate != old_rate)
-            //{
-            //    console.PowerOn = true;
-            //}
         }
 
         private void comboAudioSampleRate2_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -9190,14 +7941,19 @@ namespace Thetis
             console.DSPBufPhoneTX = int.Parse(comboDSPPhoneTXBuf.Text);
         }
 
+        private void comboDSPFMRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPBufFMRX = int.Parse(comboDSPFMRXBuf.Text);
+        }
+
+        private void comboDSPFMTXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPBufFMTX = int.Parse(comboDSPFMTXBuf.Text);
+        }
+
         private void comboDSPCWRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             console.DSPBufCWRX = int.Parse(comboDSPCWRXBuf.Text);
-        }
-
-        private void comboDSPCWTXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-            console.DSPBufCWTX = int.Parse(comboDSPCWTXBuf.Text);
         }
 
         private void comboDSPDigRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -9210,6 +7966,75 @@ namespace Thetis
             console.DSPBufDigTX = int.Parse(comboDSPDigTXBuf.Text);
         }
 
+        private void comboDSPPhoneRXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizePhoneRX = int.Parse(comboDSPPhoneRXFiltSize.Text);
+        }
+
+        private void comboDSPPhoneTXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizePhoneTX = int.Parse(comboDSPPhoneTXFiltSize.Text);
+        }
+
+        private void comboDSPFMRXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizeFMRX = int.Parse(comboDSPFMRXFiltSize.Text);
+        }
+
+        private void comboDSPFMTXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizeFMTX = int.Parse(comboDSPFMTXFiltSize.Text);
+        }
+
+        private void comboDSPCWRXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizeCWRX = int.Parse(comboDSPCWRXFiltSize.Text);
+        }
+
+        private void comboDSPDigRXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizeDigRX = int.Parse(comboDSPDigRXFiltSize.Text);
+        }
+
+        private void comboDSPDigTXFiltSize_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltSizeDigTX = int.Parse(comboDSPDigTXFiltSize.Text);
+        }
+
+        private void comboDSPPhoneRXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypePhoneRX = (DSPFilterType)comboDSPPhoneRXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPPhoneTXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypePhoneTX = (DSPFilterType)comboDSPPhoneTXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPFMRXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypeFMRX = (DSPFilterType)comboDSPFMRXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPFMTXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypeFMTX = (DSPFilterType)comboDSPFMTXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPCWRXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypeCWRX = (DSPFilterType)comboDSPCWRXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPDigRXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypeDigRX = (DSPFilterType)comboDSPDigRXFiltType.SelectedIndex;
+        }
+
+        private void comboDSPDigTXFiltType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPFiltTypeDigTX = (DSPFilterType)comboDSPDigTXFiltType.SelectedIndex;
+        }
 
         #region Image Reject
 
@@ -9796,9 +8621,27 @@ namespace Thetis
 
             comboDSPPhoneRXBuf.Text = (string)dr["Phone_RX_DSP_Buffer"];
             comboDSPPhoneTXBuf.Text = (string)dr["Phone_TX_DSP_Buffer"];
+            comboDSPFMRXBuf.Text = (string)dr["FM_RX_DSP_Buffer"];
+            comboDSPFMTXBuf.Text = (string)dr["FM_TX_DSP_Buffer"];
             comboDSPDigRXBuf.Text = (string)dr["Digi_RX_DSP_Buffer"];
             comboDSPDigTXBuf.Text = (string)dr["Digi_TX_DSP_Buffer"];
             comboDSPCWRXBuf.Text = (string)dr["CW_RX_DSP_Buffer"];
+
+            comboDSPPhoneRXFiltSize.Text = (string)dr["Phone_RX_DSP_Filter_Size"];
+            comboDSPPhoneTXFiltSize.Text = (string)dr["Phone_TX_DSP_Filter_Size"];
+            comboDSPFMRXFiltSize.Text = (string)dr["FM_RX_DSP_Filter_Size"];
+            comboDSPFMTXFiltSize.Text = (string)dr["FM_TX_DSP_Filter_Size"];
+            comboDSPDigRXFiltSize.Text = (string)dr["Digi_RX_DSP_Filter_Size"];
+            comboDSPDigTXFiltSize.Text = (string)dr["Digi_TX_DSP_Filter_Size"];
+            comboDSPCWRXFiltSize.Text = (string)dr["CW_RX_DSP_Filter_Size"];
+
+            comboDSPPhoneRXFiltType.Text = (string)dr["Phone_RX_DSP_Filter_Type"];
+            comboDSPPhoneTXFiltType.Text = (string)dr["Phone_TX_DSP_Filter_Type"];
+            comboDSPFMRXFiltType.Text = (string)dr["FM_RX_DSP_Filter_Type"];
+            comboDSPFMTXFiltType.Text = (string)dr["FM_TX_DSP_Filter_Type"];
+            comboDSPDigRXFiltType.Text = (string)dr["Digi_RX_DSP_Filter_Type"];
+            comboDSPDigTXFiltType.Text = (string)dr["Digi_TX_DSP_Filter_Type"];
+            comboDSPCWRXFiltType.Text = (string)dr["CW_RX_DSP_Filter_Type"];
 
             current_profile = comboTXProfileName.Text;
         }
@@ -9925,18 +8768,34 @@ namespace Thetis
 
             dr["Phone_RX_DSP_Buffer"] = (string)comboDSPPhoneRXBuf.Text;
             dr["Phone_TX_DSP_Buffer"] = (string)comboDSPPhoneTXBuf.Text;
+            dr["FM_RX_DSP_Buffer"] = (string)comboDSPFMRXBuf.Text;
+            dr["FM_TX_DSP_Buffer"] = (string)comboDSPFMTXBuf.Text;
             dr["Digi_RX_DSP_Buffer"] = (string)comboDSPDigRXBuf.Text;
             dr["Digi_TX_DSP_Buffer"] = (string)comboDSPDigTXBuf.Text;
             dr["CW_RX_DSP_Buffer"] = (string)comboDSPCWRXBuf.Text;
 
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Filter_Size"] = (string)comboDSPPhoneRXFiltSize.Text;
+            dr["Phone_TX_DSP_Filter_Size"] = (string)comboDSPPhoneTXFiltSize.Text;
+            dr["FM_RX_DSP_Filter_Size"] = (string)comboDSPFMRXFiltSize.Text;
+            dr["FM_TX_DSP_Filter_Size"] = (string)comboDSPFMTXFiltSize.Text;
+            dr["Digi_RX_DSP_Filter_Size"] = (string)comboDSPDigRXFiltSize.Text;
+            dr["Digi_TX_DSP_Filter_Size"] = (string)comboDSPDigTXFiltSize.Text;
+            dr["CW_RX_DSP_Filter_Size"] = (string)comboDSPCWRXFiltSize.Text;
+
+            dr["Phone_RX_DSP_Filter_Type"] = (string)comboDSPPhoneRXFiltType.Text;
+            dr["Phone_TX_DSP_Filter_Type"] = (string)comboDSPPhoneTXFiltType.Text;
+            dr["FM_RX_DSP_Filter_Type"] = (string)comboDSPFMRXFiltType.Text;
+            dr["FM_TX_DSP_Filter_Type"] = (string)comboDSPFMTXFiltType.Text;
+            dr["Digi_RX_DSP_Filter_Type"] = (string)comboDSPDigRXFiltType.Text;
+            dr["Digi_TX_DSP_Filter_Type"] = (string)comboDSPDigTXFiltType.Text;
+            dr["CW_RX_DSP_Filter_Type"] = (string)comboDSPCWRXFiltType.Text;
+
+            dr["Mic_Input_On"] = (bool)radMicIn.Checked;
+            dr["Mic_Input_Boost"] = (bool)chk20dbMicBoost.Checked;
+            dr["Line_Input_On"] = (bool)radLineIn.Checked;
+            dr["Line_Input_Level"] = udLineInBoost.Value;
+            dr["CESSB_On"] = chkDSPCESSB.Checked;
+            dr["Disable_Pure_Signal"] = chkDisablePureSignal.Checked;
 
             if (!comboTXProfileName.Items.Contains(name))
             {
@@ -10087,7 +8946,7 @@ namespace Thetis
                 "Is a 50 Ohm dummy load connected to the amplifier?\n" +
                 "\n This function is valid only with an external amplifier and Alex (or equivalent) present." +
                 "\n\nFailure to use a dummy load with this routine could cause damage to the amplifier.";
-            if (radGenModelFLEX5000.Checked)
+           // if (radGenModelFLEX5000.Checked)
             {
                 s = "Is a 50 Ohm dummy load connected to the correct antenna port (";
                 switch (FWCAnt.ANT1)
@@ -10276,7 +9135,7 @@ namespace Thetis
                 udANANPAGainVHF13.Value = 56.2M;
             }
 
-            if (radGenModelOrion.Checked && !chkBypassANANPASettings.Checked)
+            if (radGenModelANAN200D.Checked && !chkBypassANANPASettings.Checked)
             {
                 OrionPAGain160 = 49.5f;
                 OrionPAGain80 = 50.5f;
@@ -10336,6 +9195,66 @@ namespace Thetis
                 udPAGainVHF13.Value = 56.2M;
             }
 
+            if (radGenModelANAN200DMKII.Checked)
+            {
+                ANAN200DIIPAGain160 = 50.0f;
+                ANAN200DIIPAGain80 = 50.5f;
+                ANAN200DIIPAGain60 = 50.5f;
+                ANAN200DIIPAGain40 = 50.0f;
+                ANAN200DIIPAGain30 = 49.5f;
+                ANAN200DIIPAGain20 = 48.5f;
+                ANAN200DIIPAGain17 = 48.0f;
+                ANAN200DIIPAGain15 = 47.5f;
+                ANAN200DIIPAGain12 = 46.5f;
+                ANAN200DIIPAGain10 = 42.0f;
+                ANAN200DIIPAGain6 = 43.0f;
+
+                udANAN200DIIPAGainVHF0.Value = 56.2M;
+                udANAN200DIIPAGainVHF1.Value = 56.2M;
+                udANAN200DIIPAGainVHF2.Value = 56.2M;
+                udANAN200DIIPAGainVHF3.Value = 56.2M;
+                udANAN200DIIPAGainVHF4.Value = 56.2M;
+                udANAN200DIIPAGainVHF5.Value = 56.2M;
+                udANAN200DIIPAGainVHF6.Value = 56.2M;
+                udANAN200DIIPAGainVHF7.Value = 56.2M;
+                udANAN200DIIPAGainVHF8.Value = 56.2M;
+                udANAN200DIIPAGainVHF9.Value = 56.2M;
+                udANAN200DIIPAGainVHF10.Value = 56.2M;
+                udANAN200DIIPAGainVHF11.Value = 56.2M;
+                udANAN200DIIPAGainVHF12.Value = 56.2M;
+                udANAN200DIIPAGainVHF13.Value = 56.2M;
+            }
+
+            if (radGenModelANAN500D.Checked)
+            {
+                ANAN500DPAGain160 = 50.0f;
+                ANAN500DPAGain80 = 50.5f;
+                ANAN500DPAGain60 = 50.5f;
+                ANAN500DPAGain40 = 50.0f;
+                ANAN500DPAGain30 = 49.5f;
+                ANAN500DPAGain20 = 48.5f;
+                ANAN500DPAGain17 = 48.0f;
+                ANAN500DPAGain15 = 47.5f;
+                ANAN500DPAGain12 = 46.5f;
+                ANAN500DPAGain10 = 42.0f;
+                ANAN500DPAGain6 = 43.0f;
+
+                udANAN500DPAGainVHF0.Value = 56.2M;
+                udANAN500DPAGainVHF1.Value = 56.2M;
+                udANAN500DPAGainVHF2.Value = 56.2M;
+                udANAN500DPAGainVHF3.Value = 56.2M;
+                udANAN500DPAGainVHF4.Value = 56.2M;
+                udANAN500DPAGainVHF5.Value = 56.2M;
+                udANAN500DPAGainVHF6.Value = 56.2M;
+                udANAN500DPAGainVHF7.Value = 56.2M;
+                udANAN500DPAGainVHF8.Value = 56.2M;
+                udANAN500DPAGainVHF9.Value = 56.2M;
+                udANAN500DPAGainVHF10.Value = 56.2M;
+                udANAN500DPAGainVHF11.Value = 56.2M;
+                udANAN500DPAGainVHF12.Value = 56.2M;
+                udANAN500DPAGainVHF13.Value = 56.2M;
+            }
+            
             if (radGenModelHermes.Checked)
             {
                 HermesPAGain160 = 41.0f;
@@ -11977,26 +10896,6 @@ namespace Thetis
             udGeneralCalFreq1.Value = udGeneralCalFreq1.Value;
         }
 
-        private void udSoftRockCenterFreq_LostFocus(object sender, EventArgs e)
-        {
-            // udSoftRockCenterFreq.Value = udSoftRockCenterFreq.Value;
-        }
-
-        private void udDDSCorrection_LostFocus(object sender, EventArgs e)
-        {
-            // udDDSCorrection.Value = udDDSCorrection.Value;
-        }
-
-        private void udDDSIFFreq_LostFocus(object sender, EventArgs e)
-        {
-            // udDDSIFFreq.Value = udDDSIFFreq.Value;
-        }
-
-        private void udDDSPLLMult_LostFocus(object sender, EventArgs e)
-        {
-            //  udDDSPLLMult.Value = udDDSPLLMult.Value;
-        }
-
         private void udOptClickTuneOffsetDIGL_LostFocus(object sender, EventArgs e)
         {
             //      udOptClickTuneOffsetDIGL.Value = udOptClickTuneOffsetDIGL.Value;
@@ -12006,11 +10905,6 @@ namespace Thetis
         {
             udOptClickTuneOffsetDIGU.Value = udOptClickTuneOffsetDIGU.Value;
         }
-
-        //private void udGeneralX2Delay_LostFocus(object sender, EventArgs e)
-        //{
-        //    udGeneralX2Delay.Value = udGeneralX2Delay.Value;
-        //}
 
         private void udGeneralCalFreq3_LostFocus(object sender, EventArgs e)
         {
@@ -12771,7 +11665,7 @@ namespace Thetis
             udPAGain10.Visible = !b;
             udPAGain6.Visible = !b;
 
-            if (!radGenModelFLEX5000.Checked)
+           // if (!radGenModelFLEX5000.Checked)
             {
                 lblPACalTarget.Visible = !b;
                 udPACalPower.Visible = !b;
@@ -12787,43 +11681,6 @@ namespace Thetis
         private void chkMouseTuneStep_CheckedChanged(object sender, System.EventArgs e)
         {
             console.MouseTuneStep = chkMouseTuneStep.Checked;
-        }
-
-        private void chkCalExpert_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (radGenModelFLEX5000.Checked)
-            {
-                if (chkCalExpert.Checked && chkCalExpert.Focused)
-                {
-                    DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n" +
-                        "experienced PowerSDR users should use.  These controls may allow the user\n" +
-                        "to change important calibration parameters.\n" +
-                        "Are you sure you want to enable Expert mode?",
-                        "Warning: Enable Expert Mode?",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning);
-                    if (dr == DialogResult.No)
-                    {
-                        chkCalExpert.Checked = false;
-                        return;
-                    }
-                }
-
-                bool b = chkCalExpert.Checked;
-                switch (console.CurrentModel)
-                {
-                    case Model.FLEX5000:
-                        grpGeneralCalibration.Visible = b;
-                        grpGenCalLevel.Visible = false;
-                        grpGenCalRXImage.Visible = false;
-                        break;
-                    default:
-                        grpGeneralCalibration.Visible = b;
-                        grpGenCalLevel.Visible = b;
-                        grpGenCalRXImage.Visible = b;
-                        break;
-                }
-            }
         }
 
         public void UpdateCustomTitle()
@@ -13446,7 +12303,7 @@ namespace Thetis
                 // if (console.RX2PreampPresent && !radGenModelANAN100D.Checked) console.comboRX2Preamp.Visible = false;
                 if (chkApolloPresent.Checked) chkApolloPresent.Checked = false;
                 if (radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN10E.Checked || radGenModelANAN100.Checked ||
-                     radGenModelANAN100D.Checked || radGenModelOrion.Checked) NetworkIO.SetHermesFilter(0);
+                     radGenModelANAN100D.Checked || radGenModelANAN200D.Checked) NetworkIO.SetHermesFilter(0);
             }
             else
             {
@@ -14422,7 +13279,7 @@ namespace Thetis
                 lblPenelopeFWVer.Text = "";
             }
 
-            if (console.PowerOn && radGenModelOrion.Checked)
+            if (console.PowerOn && radGenModelANAN200D.Checked)
             {
                 //byte[] ver_bytes = new byte[1];
                 //JanusAudio.GetMetisCodeVersion(ver_bytes);
@@ -15467,26 +14324,26 @@ namespace Thetis
 
         private void tpPennyCtrl_Paint(object sender, PaintEventArgs e)
         {
-            switch (console.CurrentModel)
+            switch (console.CurrentHPSDRModel)
             {
-                case Model.HPSDR:
+                case HPSDRModel.HPSDR:
                     lblHFRxControl.Text = "J6 Receive Pins";
                     lblHFTxControl.Text = "J6 Transmit Pins";
                     lblVHFRxControl.Text = "J6 Receive Pins";
                     lblVHFTxControl.Text = "J6 Transmit Pins";
                     break;
-                case Model.HERMES:
+                default:
                     lblHFRxControl.Text = "J16 Receive Pins";
                     lblHFTxControl.Text = "J16 Transmit Pins";
                     lblVHFRxControl.Text = "J16 Receive Pins";
                     lblVHFTxControl.Text = "J16 Transmit Pins";
                     break;
-                default:
-                    lblHFRxControl.Text = "J6 Receive Pins";
-                    lblHFTxControl.Text = "J6 Transmit Pins";
-                    lblVHFRxControl.Text = "J6 Receive Pins";
-                    lblVHFTxControl.Text = "J6 Transmit Pins";
-                    break;
+                //default:
+                //    lblHFRxControl.Text = "J6 Receive Pins";
+                //    lblHFTxControl.Text = "J6 Transmit Pins";
+                //    lblVHFRxControl.Text = "J6 Receive Pins";
+                //    lblVHFTxControl.Text = "J6 Transmit Pins";
+                //    break;
             }
         }
 
@@ -15863,6 +14720,110 @@ namespace Thetis
         }
 
         private void udAlex6BPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void udAlex21_5HPFStart_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void udAlex21_5HPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex21_5HPFEnd.Value >= udAlex26_5HPFStart.Value)
+            {
+                udAlex26_5HPFStart.Value = udAlex21_5HPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex26_5HPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex26_5HPFStart.Value <= udAlex21_5HPFEnd.Value)
+            {
+                udAlex21_5HPFEnd.Value = udAlex26_5HPFStart.Value - (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex26_5HPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex26_5HPFEnd.Value >= udAlex29_5HPFStart.Value)
+            {
+                udAlex29_5HPFStart.Value = udAlex26_5HPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex29_5HPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex29_5HPFStart.Value <= udAlex26_5HPFEnd.Value)
+            {
+                udAlex26_5HPFEnd.Value = udAlex29_5HPFStart.Value - (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex29_5HPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex29_5HPFEnd.Value >= udAlex213HPFStart.Value)
+            {
+                udAlex213HPFStart.Value = udAlex29_5HPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex213HPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex213HPFStart.Value <= udAlex29_5HPFEnd.Value)
+            {
+                udAlex29_5HPFEnd.Value = udAlex213HPFStart.Value - (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex213HPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex213HPFEnd.Value >= udAlex220HPFStart.Value)
+            {
+                udAlex220HPFStart.Value = udAlex213HPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex220HPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex220HPFStart.Value <= udAlex213HPFEnd.Value)
+            {
+                udAlex213HPFEnd.Value = udAlex220HPFStart.Value - (decimal)0.000001;
+                return;
+            }
+
+        }
+
+        private void udAlex220HPFEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex220HPFEnd.Value >= udAlex26BPFStart.Value)
+            {
+                udAlex26BPFStart.Value = udAlex220HPFEnd.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex26BPFStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (udAlex26BPFStart.Value <= udAlex220HPFEnd.Value)
+            {
+                udAlex220HPFEnd.Value = udAlex26BPFStart.Value - (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void udAlex26BPFEnd_ValueChanged(object sender, EventArgs e)
         {
 
         }
@@ -16473,7 +15434,7 @@ namespace Thetis
 
         public bool RadGenModelANAN100D
         {
-            get { return radGenModelANAN100D.Checked || radGenModelOrion.Checked; }
+            get { return radGenModelANAN100D.Checked || radGenModelANAN200D.Checked; }
         }
 
         public bool RadGenModelHPSDR
@@ -17115,6 +16076,20 @@ namespace Thetis
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;
         }
 
+        private void udDSPSNBThresh1_ValueChanged(object sender, EventArgs e)
+        {
+            wdsp.SetRXASNBAk1(wdsp.id(0, 0), (double)udDSPSNBThresh1.Value);
+            wdsp.SetRXASNBAk1(wdsp.id(0, 1), (double)udDSPSNBThresh1.Value);
+            wdsp.SetRXASNBAk1(wdsp.id(2, 0), (double)udDSPSNBThresh1.Value);
+        }
+
+        private void udDSPSNBThresh2_ValueChanged(object sender, EventArgs e)
+        {
+            wdsp.SetRXASNBAk2(wdsp.id(0, 0), (double)udDSPSNBThresh2.Value);
+            wdsp.SetRXASNBAk2(wdsp.id(0, 1), (double)udDSPSNBThresh2.Value);
+            wdsp.SetRXASNBAk2(wdsp.id(2, 0), (double)udDSPSNBThresh2.Value);
+        }
+
         #region MultiNotchFilter
 
         int numnotches = 0;
@@ -17577,6 +16552,11 @@ namespace Thetis
         private void udTXDisplayAVTime_ValueChanged(object sender, EventArgs e)
         {
             console.specRX.GetSpecRX(cmaster.inid(1, 0)).AvTauWF = 0.001 * (double)udTXDisplayAVTime.Value;
+        }
+
+        private void btnANAN200DIIPAGainReset_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

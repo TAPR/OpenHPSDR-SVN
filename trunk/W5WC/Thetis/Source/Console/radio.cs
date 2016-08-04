@@ -175,6 +175,8 @@ namespace Thetis
         {
             this.AudioSize = rx.audio_size;
             this.DSPMode = rx.dsp_mode;
+            this.FilterSize = rx.filter_size;
+            this.FilterType = rx.filter_type;
             this.SetRXFilter(rx.rx_filter_low, rx.rx_filter_high);
             this.NoiseReduction = rx.noise_reduction;
             this.SetNRVals(rx.nr_taps, rx.nr_delay, rx.nr_gain, rx.nr_leak);
@@ -252,6 +254,8 @@ namespace Thetis
 			//SetRXCorrectIQW(rx_correct_iq_w_real, rx_correct_iq_w_imag);
 			AudioSize = audio_size;			
 			DSPMode = dsp_mode;
+            FilterSize = filter_size;
+            FilterType = filter_type;
 			SetRXFilter(rx_filter_low, rx_filter_high);
             NoiseReduction = noise_reduction;
 			SetNRVals(nr_taps, nr_delay, nr_gain, nr_leak);
@@ -355,8 +359,8 @@ namespace Thetis
 			set { force = value; }
 		}
 
-		private int buffer_size_dsp = 2048;
-		private int buffer_size = 2048;
+		private int buffer_size_dsp = 64;
+		private int buffer_size = 64;
 		public int BufferSize
 		{
 			get { return buffer_size; }
@@ -374,6 +378,44 @@ namespace Thetis
 			}
 		}
 
+        private int filter_size_dsp = 2048;
+        private int filter_size = 2048;
+        public int FilterSize
+        {
+            get { return filter_size; }
+            set
+            {
+                filter_size = value;
+                if (update)
+                {
+                    if (value != filter_size_dsp || force)
+                    {
+                        wdsp.RXASetNC(wdsp.id(thread, subrx), value);
+                        filter_size_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private DSPFilterType filter_type_dsp = DSPFilterType.Linear_Phase;
+        private DSPFilterType filter_type = DSPFilterType.Linear_Phase;
+        public DSPFilterType FilterType
+        {
+            get { return filter_type; }
+            set
+            {
+                filter_type = value;
+                if (update)
+                {
+                    if (value != filter_type_dsp || force)
+                    {
+                        wdsp.RXASetMP(wdsp.id(thread, subrx), Convert.ToBoolean(value));
+                        filter_type_dsp = value;
+                    }
+                }
+            }
+        }
+
 		private int audio_size_dsp = 1024;
 		private int audio_size = 1024;
 		public int AudioSize
@@ -386,6 +428,11 @@ namespace Thetis
 				{
 					if(value != audio_size_dsp || force)
 					{
+                        wdsp.SetInputBuffsize(wdsp.id(thread, subrx), value);
+                       // wdsp.SetInputBuffsize(wdsp.id(0, 1), value);
+                       // wdsp.SetInputBuffsize(wdsp.id(2, 0), value);
+                       // wdsp.SetInputBuffsize(wdsp.id(2, 1), value);
+                       // wdsp.SetInputBuffsize(wdsp.id(1, 0), value);
 						audio_size_dsp = value;
 					}
 				}
@@ -1772,8 +1819,13 @@ namespace Thetis
 
 		private void SyncAll()
 		{		
+			//BufferSize = buffer_size;
+            //audio_size = cmaster.GetBuffSize(48000);
+            //AudioSize = audio_size;			
 			CurrentDSPMode = current_dsp_mode;
 			SetTXFilter(tx_filter_low, tx_filter_high);
+            FilterSize = filter_size;
+            FilterType = filter_type;
 			TXOsc = tx_osc;
 			if(tx_eq_num_bands == 3)
 			{
@@ -1874,8 +1926,8 @@ namespace Thetis
 			set { force = value; }
 		}
 
-		private int buffer_size_dsp = 2048;
-		private int buffer_size = 2048;
+		private int buffer_size_dsp = 128;
+		private int buffer_size = 128;
 		public int BufferSize
 		{
 			get { return buffer_size; }
@@ -1895,23 +1947,63 @@ namespace Thetis
 			}
 		}
 
-		private int audio_size_dsp = 2048;
-		private int audio_size = 2048;
-		public int AudioSize
-		{
-			get { return audio_size; }
-			set
-			{
-				audio_size = value;
-				if(update)
-				{
-					if(value != audio_size_dsp || force)
-					{
-						audio_size_dsp = value;
-					}
-				}
-			}
-		}
+
+        private int filter_size_dsp = 2048;
+        private int filter_size = 2048;
+        public int FilterSize
+        {
+            get { return filter_size; }
+            set
+            {
+                filter_size = value;
+                if (update)
+                {
+                    if (value != filter_size_dsp || force)
+                    {
+                        wdsp.TXASetNC(wdsp.id(thread, 0), value);
+                        filter_size_dsp = value;
+                    }
+                }
+            }
+        }
+
+        private DSPFilterType filter_type_dsp = DSPFilterType.Linear_Phase;
+        private DSPFilterType filter_type = DSPFilterType.Linear_Phase;
+        public DSPFilterType FilterType
+        {
+            get { return filter_type; }
+            set
+            {
+                filter_type = value;
+                if (update)
+                {
+                    if (value != filter_type_dsp || force)
+                    {
+                        wdsp.TXASetMP(wdsp.id(thread, 0), Convert.ToBoolean(value));
+                        filter_type_dsp = value;
+                    }
+                }
+            }
+        }
+
+        //private int audio_size_dsp = 2048;
+        //private int audio_size = 2048;
+        //public int AudioSize
+        //{
+        //    get { return audio_size; }
+        //    set
+        //    {
+        //        audio_size = value;
+        //        if(update)
+        //        {
+        //            if(value != audio_size_dsp || force)
+        //            {
+        //                wdsp.SetInputBuffsize(wdsp.id(thread, 0), value);
+        //                audio_size_dsp = value;
+        //            }
+        //        }
+        //    }
+        //}
 
 		private DSPMode current_dsp_mode_dsp = DSPMode.USB;
 		private DSPMode current_dsp_mode = DSPMode.USB;

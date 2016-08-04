@@ -419,7 +419,7 @@ namespace Thetis
             }
         }
 
-        private Model current_model = Model.FLEX5000;
+        private Model current_model = Model.HERMES;
         public Model CurrentModel
         {
             get { return current_model; }

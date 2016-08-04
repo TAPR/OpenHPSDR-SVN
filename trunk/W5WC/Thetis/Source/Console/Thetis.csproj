@@ -225,6 +225,9 @@
     </Compile>
     <Compile Include="Channel.cs" />
     <Compile Include="cmaster.cs" />
+    <Compile Include="console.Designer.cs">
+      <DependentUpon>console.cs</DependentUpon>
+    </Compile>
     <Compile Include="CW\CWInput.cs" />
     <Compile Include="GlobalMouseHandler.cs" />
     <Compile Include="HPSDR\Alex.cs" />
@@ -241,9 +244,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CAT\CATTester.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CAT\RemoteProfiles.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CAT\SDRSerialPortII.cs">
@@ -300,6 +300,7 @@
     <Compile Include="hiperftimer.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="HPSDR\NetworkIOImports.cs" />
     <Compile Include="HPSDR\specHPSDR.cs" />
     <Compile Include="InputBox.cs">
       <SubType>Form</SubType>
@@ -396,9 +397,6 @@
     <Compile Include="RAForm.designer.cs">
       <DependentUpon>RAForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="release_notes.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="ringbuffer.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -452,7 +450,7 @@
     <Compile Include="xvtr.cs">
       <SubType>Form</SubType>
     </Compile>
-    <None Include="Resources\digital7.ttf" />
+    <EmbeddedResource Include="Resources\digital7.ttf" />
     <None Include="Resources\grabbing.cur" />
     <None Include="Resources\grab.cur" />
     <EmbeddedResource Include="AmpView.resx">
@@ -460,10 +458,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CAT\CATTester.resx">
       <DependentUpon>CATTester.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CAT\RemoteProfiles.resx">
-      <DependentUpon>RemoteProfiles.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ColorButton.resx">

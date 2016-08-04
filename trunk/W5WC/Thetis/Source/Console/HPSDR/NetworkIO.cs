@@ -29,7 +29,7 @@ namespace Thetis
     using System.Net.Sockets;
     using System.Net.NetworkInformation;
 
-    class NetworkIO
+    partial class NetworkIO
     {
         public NetworkIO()
         {
@@ -149,10 +149,10 @@ namespace Thetis
                     break;
             }
 
-            bits = NetworkIO.GetC1Bits();
+            bits = GetC1Bits();
             bits &= off_mask;
             bits |= on_mask;
-            NetworkIO.SetC1Bits(bits);
+            SetC1Bits(bits);
             return result;
         }
 
@@ -162,9 +162,6 @@ namespace Thetis
         {
             return fx2_fw_version;
         }
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetOutputPowerFactor(int i);
 
         public static float swr_protect = 1.0f;
         public static void SetOutputPower(float f)
@@ -183,13 +180,7 @@ namespace Thetis
             SetOutputPowerFactor(i);
         }
 
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void DeInitMetisSockets();
-
-        [DllImport("ChannelMaster.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int nativeInitMetis(String netaddr, String localaddr, int localport);
-
-        // get the name of this PC and, using it, the IP address of the first adapter
+         // get the name of this PC and, using it, the IP address of the first adapter
         //static string strHostName = Dns.GetHostName();
         // public static IPAddress[] addr = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
         // get a socket to send and receive on
@@ -214,7 +205,7 @@ namespace Thetis
         public static int initRadio()
         {
             int rc;
-            System.Console.WriteLine("NetIPAddr: " + Console.getConsole().HPSDRNetworkIPAddr);
+            System.Console.WriteLine("Static IP: " + Console.getConsole().HPSDRNetworkIPAddr);
             int adapterIndex = adapterSelected - 1;
             IPAddress[] addr = null;
             bool cleanup = false;
@@ -288,7 +279,7 @@ namespace Thetis
                 IPAddress hostIP;
                 if (IPAddress.TryParse(EthernetHostIPAddress, out hostIP) && IPAddress.TryParse(HpSdrHwIpAddress, out targetIP))
                 {
-                    System.Console.WriteLine(String.Format("Attempting fast re-connect to host adapter {0}, metis IP {1}", EthernetHostIPAddress, HpSdrHwIpAddress));
+                    System.Console.WriteLine(String.Format("Attempting connect to host adapter {0}, Static IP {1}", EthernetHostIPAddress, HpSdrHwIpAddress));
 
                     if (DiscoverRadioOnPort(ref hpsdrd, hostIP, targetIP))
                     {
@@ -329,7 +320,7 @@ namespace Thetis
                 IPAddress hostIP;
                 if (IPAddress.TryParse(EthernetHostIPAddress, out hostIP) && IPAddress.TryParse(HpSdrHwIpAddress, out targetIP))
                 {
-                    System.Console.WriteLine(String.Format("Attempting fast re-connect to host adapter {0}, metis IP {1}", EthernetHostIPAddress, HpSdrHwIpAddress));
+                    System.Console.WriteLine(String.Format("Attempting fast re-connect to host adapter {0}, IP {1}", EthernetHostIPAddress, HpSdrHwIpAddress));
 
                     if (DiscoverRadioOnPort(ref hpsdrd, hostIP, targetIP))
                     {
@@ -708,144 +699,7 @@ namespace Thetis
             return result;
         }
 
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetWBPacketsPerFrame(int pps);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetWBEnable(int adc, int enable);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SendHighPriority(int enable);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetSampleRate(int id, int rate, int tx);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int getOOO();
-
-        [DllImport("ChannelMaster.dll", EntryPoint = "create_rnet", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void CreateRNet();
-
-        [DllImport("ChannelMaster.dll", EntryPoint = "destroy_rnet", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void DestroyRNet();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetMetisIPAddr();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetMACAddr(byte[] addr_bytes);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetCodeVersion(byte[] addr_bytes);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetMetisBoardID(byte[] addr_bytes);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int StartAudioNative(/*int sample_rate, int samples_per_block,*/ PA19.PaStreamCallback cb); //, int sample_bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int StopAudio();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetC1Bits(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexEnabled(int bit);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexHPFBits(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexLPFBits(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnablePA(int bit);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetPArelay(int bit);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlex2HPFBits(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlex2LPFBits(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableApolloFilter(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableApolloTuner(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableApolloAutoTune(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableEClassModulation(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetEERPWMmin(int min);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetEERPWMmax(int max);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetHermesFilter(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getUserADC0();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getUserADC1();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getUserADC2();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getUserADC3();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetUserOut0(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetUserOut1(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetUserOut2(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetUserOut3(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern bool getUserI01(); // TX Inhibit input sense
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern bool getUserI02();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern bool getUserI03();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern bool getUserI04();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)] // controls PureSignal
-        unsafe public static extern void SetPureSignal(int enable);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)] // sets single receiver
-        unsafe public static extern void EnableRx(int id, int enable);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)] // sets multiple receivers
-        unsafe public static extern void EnableRxs(int Rxs);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)] // sets multiple receivers
-        unsafe public static extern void EnableRxSync(int id, int sync);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int GetC1Bits();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int nativeGetDotDashPTT();  // bit 0 = ptt, bit1 = dash asserted, bit 2 = dot asserted 
-        unsafe public static int GetDotDashPTT()
+         unsafe public static int GetDotDashPTT()
         {
             int bits = nativeGetDotDashPTT();
             if (legacyDotDashPTT)  // old style dot and ptt overloaded on 0x1 bit, new style dot on 0x4, ptt on 0x1 
@@ -857,15 +711,6 @@ namespace Thetis
             }
             return bits;
         }
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetLegacyDotDashPTT(int bit);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetVFOfreq(int id, int freq, int tx);
 
         private static double freq_correction_factor = 1.0;
         public static double FreqCorrectionFactor
@@ -928,156 +773,6 @@ namespace Thetis
             }
         }
      
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetWatchdogTimer(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMicBoost(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetLineIn(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetLineBoost(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexAtten(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMercDither(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMercRandom(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetTxAttenData(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMercTxAtten(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetRX1Preamp(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetRX2Preamp(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableADC1StepAtten(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableADC2StepAtten(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableADC3StepAtten(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetADC1StepAttenData(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetADC2StepAttenData(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetADC3StepAttenData(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMicTipRing(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMicBias(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetMicPTT(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getAndResetADC_Overload();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getHaveSync();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getExciterPower();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getRevPower();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getFwdPower();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern int getHermesDCVoltage();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableCWKeyer(int enable);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWSidetoneVolume(int vol);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWPTTDelay(int delay);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWHangTime(int hang);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWSidetoneFreq(int freq);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWKeyerSpeed(int speed);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWKeyerMode(int mode);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWKeyerWeight(int weight);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void EnableCWKeyerSpacing(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void ReversePaddles(int bits);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWDash(int bit);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWDot(int bit);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWX(int bit);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWIambic(int bit);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWBreakIn(int bit);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetCWSidetone(int bit);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetPennyOCBits(int b);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetSWRProtect(float g);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        unsafe public static extern void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetRxADC(int n);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetADC_cntrl1(int g);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetADC_cntrl1();
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetADC_cntrl2(int g);
-
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetADC_cntrl2();
-
         // Taken from: KISS Konsole
         public static List<NetworkInterface> foundNics = new List<NetworkInterface>();
         public static List<NicProperties> nicProperties = new List<NicProperties>();
@@ -1219,7 +914,7 @@ namespace Thetis
                 socket.Blocking = true;
 
                 IPEndPoint localEndPoint = (IPEndPoint)socket.LocalEndPoint;
-                System.Console.WriteLine("Looking for Metis boards using host adapter IP {0}, port {1}", localEndPoint.Address, localEndPoint.Port);
+                System.Console.WriteLine("Looking for radio using host adapter IP {0}, port {1}", localEndPoint.Address, localEndPoint.Port);
 
                 if (Discovery(ref hpsdrdList, iep, targetIP))
                 {
@@ -1307,10 +1002,10 @@ namespace Thetis
                         recv = socket.ReceiveFrom(data, ref remoteEP);                 // recv has number of bytes we received
                         //string stringData = Encoding.ASCII.GetString(data, 0, recv); // use this to print the received data
 
-                        System.Console.WriteLine("raw Discovery data = " + BitConverter.ToString(data, 0, recv));
+                        System.Console.WriteLine("RAW Discovery data = " + BitConverter.ToString(data, 0, recv));
                         // see what port this came from at the remote end
                         // IPEndPoint remoteIpEndPoint = socket.RemoteEndPoint as IPEndPoint;
-                        //  Console.Write(" Remote Port # = ",remoteIpEndPoint.Port);
+                        // System.Console.WriteLine(" Remote Port # = ", remoteIpEndPoint.Port);
 
                         string junk = Convert.ToString(remoteEP);  // see code in DataLoop
                         string[] words = junk.Split(':');
@@ -1330,17 +1025,17 @@ namespace Thetis
                             (data[3] == 0x0) &&
                             (data[4] == 0x2))
                         {
-                            System.Console.WriteLine("\nFound a Metis/Hermes/Griffin.  Checking whether it qualifies");
+                            System.Console.WriteLine("\nFound a radio on the network.  Checking whether it qualifies");
 
                             // get Metis IP address from the IPEndPoint passed to ReceiveFrom.
                             IPEndPoint ripep = (IPEndPoint)remoteEP;
                             IPAddress receivedIPAddr = ripep.Address;
                             receivedIP = receivedIPAddr.ToString();
                             IPEndPoint localEndPoint = (IPEndPoint)socket.LocalEndPoint;
-                            //System.Console.WriteLine("Looking for Metis boards using host adapter IP {0}, port {1}", localEndPoint.Address, localEndPoint.Port);
+                            System.Console.WriteLine("Looking for radio using host adapter IP {0}, port {1}", localEndPoint.Address, localEndPoint.Port);
 
-                            System.Console.WriteLine("Metis IP from IP Header = " + receivedIP);
-                            System.Console.WriteLine("Metis MAC address from payload = " + MAC);
+                            System.Console.WriteLine("IP from IP Header = " + receivedIP);
+                            System.Console.WriteLine("MAC address from payload = " + MAC);
                             if (!SameSubnet(receivedIPAddr, hostPortIPAddress, hostPortMask))
                             {
                                 // device is NOT on the subnet that this port actually services.  Do NOT add to list!

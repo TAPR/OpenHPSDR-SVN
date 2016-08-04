@@ -68,7 +68,7 @@ namespace Thetis
 		int sound_card_index;
         int region_index;
 		float[] gain_by_band;
-		Model model;
+        HPSDRModel model;
         bool alex_present = false;
         bool mercury_present = false;
         bool penelope_present = false;
@@ -111,8 +111,7 @@ namespace Thetis
 		private System.Windows.Forms.NumericUpDownTS udPAGainByBand80;
 		private System.Windows.Forms.LabelTS lblPAGainByBand160;
         private System.Windows.Forms.NumericUpDownTS udPAGainByBand160;
-		private System.Windows.Forms.GroupBoxTS grpModel;
-		private System.Windows.Forms.RadioButtonTS radGenModelFLEX5000;
+        private System.Windows.Forms.GroupBoxTS grpModel;
         private System.Windows.Forms.GroupBoxTS groupBoxHPSDR_Hardware;
         private System.Windows.Forms.CheckBoxTS chkMercury;
         private System.Windows.Forms.CheckBoxTS chkPenny;
@@ -163,31 +162,31 @@ namespace Thetis
 			gain_by_band[8] = console.SetupForm.PAGain12;
 			gain_by_band[9] = console.SetupForm.PAGain10;
 
-			model = console.CurrentModel;
+			model = console.CurrentHPSDRModel;
 			switch(model)
 			{
-                case Model.HPSDR:
+                case HPSDRModel.HPSDR:
                     radGenModelHPSDR.Checked = true;
                     break;
-                case Model.HERMES:
+                case HPSDRModel.HERMES:
                     radGenModelHermes.Checked = true;
                     break;
-                case Model.ANAN10:
+                case HPSDRModel.ANAN10:
                     radGenModelANAN10.Checked = true;
                     break;
-                case Model.ANAN10E:
+                case HPSDRModel.ANAN10E:
                     radGenModelANAN10E.Checked = true;
                     break;
-                case Model.ANAN100B:
+                case HPSDRModel.ANAN100B:
                     radGenModelANAN100B.Checked = true;
                     break;
-                case Model.ANAN100:
+                case HPSDRModel.ANAN100:
                     radGenModelANAN100.Checked = true;
                     break;
-                case Model.ANAN100D:
+                case HPSDRModel.ANAN100D:
                     radGenModelANAN100D.Checked = true;
                     break;
-                case Model.ANAN200D:
+                case HPSDRModel.ANAN200D:
                     radGenModelOrion.Checked = true;
                     break;
 
@@ -234,7 +233,6 @@ namespace Thetis
             this.radGenModelANAN10 = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelHermes = new System.Windows.Forms.RadioButtonTS();
             this.radGenModelHPSDR = new System.Windows.Forms.RadioButtonTS();
-            this.radGenModelFLEX5000 = new System.Windows.Forms.RadioButtonTS();
             this.groupBox2 = new System.Windows.Forms.GroupBoxTS();
             this.lblPAGainByBand10 = new System.Windows.Forms.LabelTS();
             this.udPAGainByBand10 = new System.Windows.Forms.NumericUpDownTS();
@@ -314,7 +312,6 @@ namespace Thetis
             this.grpModel.Controls.Add(this.radGenModelANAN10);
             this.grpModel.Controls.Add(this.radGenModelHermes);
             this.grpModel.Controls.Add(this.radGenModelHPSDR);
-            this.grpModel.Controls.Add(this.radGenModelFLEX5000);
             this.grpModel.Location = new System.Drawing.Point(256, 24);
             this.grpModel.Name = "grpModel";
             this.grpModel.Size = new System.Drawing.Size(120, 216);
@@ -397,11 +394,13 @@ namespace Thetis
             // radGenModelHermes
             // 
             this.radGenModelHermes.AutoSize = true;
+            this.radGenModelHermes.Checked = true;
             this.radGenModelHermes.Image = null;
             this.radGenModelHermes.Location = new System.Drawing.Point(19, 37);
             this.radGenModelHermes.Name = "radGenModelHermes";
             this.radGenModelHermes.Size = new System.Drawing.Size(71, 17);
             this.radGenModelHermes.TabIndex = 8;
+            this.radGenModelHermes.TabStop = true;
             this.radGenModelHermes.Text = "HERMES";
             this.radGenModelHermes.UseVisualStyleBackColor = true;
             this.radGenModelHermes.CheckedChanged += new System.EventHandler(this.radGenModelHermes_CheckedChanged);
@@ -417,19 +416,6 @@ namespace Thetis
             this.radGenModelHPSDR.Text = "HPSDR";
             this.radGenModelHPSDR.UseVisualStyleBackColor = true;
             this.radGenModelHPSDR.CheckedChanged += new System.EventHandler(this.radGenModelHPSDR_CheckedChanged);
-            // 
-            // radGenModelFLEX5000
-            // 
-            this.radGenModelFLEX5000.Checked = true;
-            this.radGenModelFLEX5000.Image = null;
-            this.radGenModelFLEX5000.Location = new System.Drawing.Point(18, 186);
-            this.radGenModelFLEX5000.Name = "radGenModelFLEX5000";
-            this.radGenModelFLEX5000.Size = new System.Drawing.Size(88, 24);
-            this.radGenModelFLEX5000.TabIndex = 6;
-            this.radGenModelFLEX5000.TabStop = true;
-            this.radGenModelFLEX5000.Text = "FLEX-5000";
-            this.radGenModelFLEX5000.Visible = false;
-            this.radGenModelFLEX5000.CheckedChanged += new System.EventHandler(this.radGenModelFLEX5000_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -1181,7 +1167,7 @@ namespace Thetis
 					grpModel.Visible = true;
 					lblMessage1.Text = "Please select the model of the radio you will be using.";
 					lblMessage2.Text = " ";
-					radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
+					radGenModelHermes_CheckedChanged(this, EventArgs.Empty);
 					pictureBox1.Visible = true;
 					radNo.Visible = false;
 					radYes.Visible = false;
@@ -1445,15 +1431,15 @@ namespace Thetis
 				case Page.MODEL:
 					switch(model)
 					{
-						case Model.FLEX5000:						
-                        case Model.HPSDR:
-                        case Model.HERMES:
-                        case Model.ANAN10:
-                        case Model.ANAN10E:
-                        case Model.ANAN100B:
-                        case Model.ANAN100:
-                        case Model.ANAN100D:
-                        case Model.ANAN200D:
+						//case Model.FLEX5000:						
+                        case HPSDRModel.HPSDR:
+                        case HPSDRModel.HERMES:
+                        case HPSDRModel.ANAN10:
+                        case HPSDRModel.ANAN10E:
+                        case HPSDRModel.ANAN100B:
+                        case HPSDRModel.ANAN100:
+                        case HPSDRModel.ANAN100D:
+                        case HPSDRModel.ANAN200D:
                             CurPage = Page.HPSDR_HARDWARE_SELECT;
                             btnNext.Focus();
                             break;
@@ -1667,15 +1653,15 @@ namespace Thetis
 		{
 			switch(model)
 			{
-				case Model.FLEX5000:
-                    break;
-                case Model.HERMES:
+				//case Model.FLEX5000:
+                   // break;
+                case HPSDRModel.HERMES:
                     console.SetupForm.PennyLanePresent = pennylane_present;
                     console.SetupForm.MercuryPresent = mercury_present;
                     console.SetupForm.AlexPresent = alex_present;
                     console.SetupForm.forceAudioSampleRate1("192000");
                     break;
-                case Model.HPSDR:
+                case HPSDRModel.HPSDR:
                     console.SetupForm.PenelopePresent = penelope_present;
                     console.SetupForm.PennyLanePresent = pennylane_present;
                     console.SetupForm.MercuryPresent = mercury_present;
@@ -1683,39 +1669,39 @@ namespace Thetis
                     console.SetupForm.ExcaliburPresent = excalibur_present;
                     console.SetupForm.forceAudioSampleRate1("192000");
   					break;
-                case Model.ANAN10:
-                case Model.ANAN10E:
+                case HPSDRModel.ANAN10:
+                case HPSDRModel.ANAN10E:
                     console.SetupForm.PennyLanePresent = pennylane_present;
                     console.SetupForm.MercuryPresent = mercury_present;
                     console.SetupForm.AlexPresent = alex_present;
                     console.SetupForm.forceAudioSampleRate1("192000");
                     break;
-                case Model.ANAN100B:
+                case HPSDRModel.ANAN100B:
                     console.SetupForm.PennyLanePresent = pennylane_present;
                     console.SetupForm.MercuryPresent = mercury_present;
                     console.SetupForm.AlexPresent = alex_present;
                     console.SetupForm.forceAudioSampleRate1("192000");
                     break;
-                case Model.ANAN100:
+                case HPSDRModel.ANAN100:
                     console.SetupForm.PennyLanePresent = pennylane_present;
                     console.SetupForm.MercuryPresent = mercury_present;
                     console.SetupForm.AlexPresent = alex_present;
                     console.SetupForm.forceAudioSampleRate1("192000");
                     break;
-                case Model.ANAN100D:
+                case HPSDRModel.ANAN100D:
                     console.SetupForm.PennyLanePresent = pennylane_present;
                     console.SetupForm.MercuryPresent = mercury_present;
                     console.SetupForm.AlexPresent = alex_present;
                     console.SetupForm.forceAudioSampleRate1("192000");
                     break;
-                case Model.ANAN200D:
+                case HPSDRModel.ANAN200D:
                     console.SetupForm.PennyLanePresent = pennylane_present;
                     console.SetupForm.MercuryPresent = mercury_present;
                     console.SetupForm.AlexPresent = alex_present;
                     console.SetupForm.forceAudioSampleRate1("192000");
                     break;
 			}
-            console.SetupForm.CurrentModel = model;            
+            //console.SetupForm.CurrentModel = HPSDRModel.HERMES;            
             console.SetupForm.comboFRSRegion.Text = "United States";
             //console.CurrentRegion = FRSRegion.US;
 
@@ -1805,24 +1791,24 @@ namespace Thetis
 					MessageBoxIcon.Warning);
 		}
 
-		private void radGenModelFLEX5000_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radGenModelFLEX5000.Checked)
-			{
-				if(radGenModelFLEX5000.Text == "FLEX-5000")
-				{
-					model = Model.FLEX5000;
-					//if(grpModel.Visible)
-                    pictureBox1.Image = null; //new Bitmap(GetResource("Thetis.images.flex-5000.jpg"));
-				}
-			}
-		}
+        //private void radGenModelFLEX5000_CheckedChanged(object sender, System.EventArgs e)
+        //{
+        //    if(radGenModelFLEX5000.Checked)
+        //    {
+        //        if(radGenModelFLEX5000.Text == "FLEX-5000")
+        //        {
+        //            model = Model.FLEX5000;
+        //            //if(grpModel.Visible)
+        //            pictureBox1.Image = null; //new Bitmap(GetResource("Thetis.images.flex-5000.jpg"));
+        //        }
+        //    }
+        //}
 
         private void radGenModelHPSDR_CheckedChanged(object sender, System.EventArgs e)
         {
             if (radGenModelHPSDR.Checked)
             {
-                model = Model.HPSDR;
+                model = HPSDRModel.HPSDR;
                 //if (grpModel.Visible)
                 pictureBox1.Image = null;
                 pictureBox1.Visible = false;
@@ -1844,7 +1830,7 @@ namespace Thetis
         {
             if (radGenModelHermes.Checked)
             {
-                model = Model.HERMES;
+                model = HPSDRModel.HERMES;
                 //if (grpModel.Visible)
                 pictureBox1.Image = null;
                 pictureBox1.Visible = false;
@@ -1865,7 +1851,7 @@ namespace Thetis
         {
             if (radGenModelANAN10.Checked)
             {
-                model = Model.ANAN10;
+                model = HPSDRModel.ANAN10;
                 //if (grpModel.Visible)
                 pictureBox1.Image = null;
                 pictureBox1.Visible = false;
@@ -1887,7 +1873,7 @@ namespace Thetis
         {
             if (radGenModelANAN10E.Checked)
             {
-                model = Model.ANAN10E;
+                model = HPSDRModel.ANAN10E;
                 //if (grpModel.Visible)
                 pictureBox1.Image = null;
                 pictureBox1.Visible = false;
@@ -1909,7 +1895,7 @@ namespace Thetis
         {
             if (radGenModelANAN100B.Checked)
             {
-                model = Model.ANAN100B;
+                model = HPSDRModel.ANAN100B;
                 //if (grpModel.Visible)
                 pictureBox1.Image = null;
                 pictureBox1.Visible = false;
@@ -1931,7 +1917,7 @@ namespace Thetis
         {
             if (radGenModelANAN100.Checked)
             {
-                model = Model.ANAN100;
+                model = HPSDRModel.ANAN100;
                 //if (grpModel.Visible)
                 pictureBox1.Image = null;
                 pictureBox1.Visible = false;
@@ -1953,7 +1939,7 @@ namespace Thetis
         {
             if (radGenModelANAN100D.Checked)
             {
-                model = Model.ANAN100D;
+                model = HPSDRModel.ANAN100D;
                 //if (grpModel.Visible)
                 pictureBox1.Image = null;
                 pictureBox1.Visible = false;
@@ -1975,7 +1961,7 @@ namespace Thetis
         {
             if (radGenModelOrion.Checked)
             {
-                model = Model.ANAN200D;
+                model = HPSDRModel.ANAN200D;
                 //if (grpModel.Visible)
                 pictureBox1.Image = null;
                 pictureBox1.Visible = false;

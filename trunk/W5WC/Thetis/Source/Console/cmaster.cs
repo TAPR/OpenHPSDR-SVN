@@ -333,7 +333,8 @@ namespace Thetis
                 {
                     case HPSDRModel.ANAN100D:
                     case HPSDRModel.ANAN200D:
-                    case HPSDRModel.ANAN400D:
+                    case HPSDRModel.ANAN200DII:
+                    case HPSDRModel.ANAN500D:
                         // This ANGELIA table is for test purposes and it routes Rx0 and Rx1 to RX1 and RX2, 
                         //      respectively, (as well as to PureSignal) when transmitting with PureSignal 
                         //      Enabled in Setup.
@@ -421,7 +422,8 @@ namespace Thetis
                 {
                     case HPSDRModel.ANAN100D:
                     case HPSDRModel.ANAN200D:
-                    case HPSDRModel.ANAN400D:
+                    case HPSDRModel.ANAN200DII:
+                    case HPSDRModel.ANAN500D:
                         // control bits are { MOX, Diversity_Enabled, PureSignal_Enabled }
                         int[] Angelia_Function = new int[56] 
                         { 
@@ -644,7 +646,7 @@ namespace Thetis
 
         public static void CMSetTXOutputLevelRun()
         {
-            bool run = Audio.console.CurrentModel != Model.HERMES && !Audio.console.PennyLanePresent;
+            bool run = /* Audio.console.CurrentModel != Model.HERMES && */ !Audio.console.PennyLanePresent;
             cmaster.SetTXFixedGainRun(0, run);
         }
 
