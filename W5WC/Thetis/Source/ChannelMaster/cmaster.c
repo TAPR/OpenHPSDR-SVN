@@ -159,8 +159,8 @@ void create_xmtr()
 			1.0,								// Igain (for fixed gain)
 			1.0,								// Qgain (for fixed gain)
 			0,									// ain4Value
-			50,									// ADC Supply = 5.0V
-			0);									// pointer to GetAIN4Value()
+			50);								// ADC Supply = 5.0V
+
 		// eer
 		pcm->xmtr[i].peer = create_eer (
 			0,									// run

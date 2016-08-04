@@ -424,6 +424,9 @@ namespace Thetis
             // t.Columns.Add("TX", typeof(bool));
 
             object[] data = {
+                               // 0.135700, 0.137799, "2200M CW/DATA",   true,                                
+                               // 0.472000, 0.478999, "630M CW/DATA",    true,
+
 								1.800000, 1.809999, "160M CW/Digital Modes",	true,
 								1.810000, 1.810000, "160M CW QRP",				true,
 								1.810001, 1.842999, "160M CW",					true,
@@ -723,6 +726,91 @@ namespace Thetis
 								47088.100000, 47088.100000, "47GHz Calling Frequency", true,
 								47088.100001, 47088.400000, "47GHz General", true,
 			};
+
+            for (int i = 0; i < data.Length / 4; i++)
+            {
+                DataRow dr = t.NewRow();
+                dr["Low"] = (double)data[i * 4 + 0];
+                dr["High"] = (double)data[i * 4 + 1];
+                dr["Name"] = (string)data[i * 4 + 2];
+                dr["TX"] = (bool)data[i * 4 + 3];
+                t.Rows.Add(dr);
+            }
+            AddBandTextSWB();
+        }
+
+        private static void AddRegionJapanBandText()
+        {            
+            DataTable t = ds.Tables["BandText"];
+
+            object[] data = {
+
+								0.135700, 0.137799, "2200M CW/DATA",   true,                                
+                                0.472000, 0.478999, "630M CW/DATA",    true,
+
+								1.800000, 1.825000, "160M CW",	                true,																
+								1.907500, 1.912500, "160M CW/DATA", 	true,
+
+								3.500000, 3.519999, "80M CW",		    		true,
+								3.520000, 3.534999, "80M CW/DATA",		true,
+								3.535000, 3.575000, "80M CW/SSB/SSTV",			true,
+								3.599000, 3.612000, "75M CW/SSB/SSTV/DATA",		true,
+								3.568000, 3.687000, "75M CW/SSB/SSTV",			true,
+								3.702000, 3.716000, "75M CW/SSB/SSTV",			true,
+								3.745000, 3.770000, "75M CW/SSB/SSTV",			true,
+								3.791000, 3.805000, "75M CW/SSB/SSTV",	        true,
+ 
+								7.000000, 7.029999, "40M CW",			    	true,
+								7.030000, 7.044999, "40M CW/DATA",				true,
+								7.040000, 7.099999, "40M CW/SSB/SSTV",			true,
+								7.100000, 7.200000, "40M All Modes",			true,
+								
+								10.100000, 10.129999, "30M CW",					true,
+								10.130000, 10.150000, "30M CW/DATA",			true,
+
+								14.000000, 14.069999, "20M CW",		        	true,
+								14.070000, 14.099999, "20M CW/DATA",			true,
+								14.100000, 14.100000, "20M IBP Beacon",			true,
+								14.100001, 14.111999, "20M CW/DATA",			true,
+								14.112000, 14.350000, "20M CW/SSB/SSTV",		true,
+																
+								18.068000, 18.099999, "17M CW",					true,
+								18.100000, 18.109999, "17M CW/DATA",			true,
+								18.110000, 18.110000, "17M IBP Beacon",			true,
+								18.110001, 18.168000, "17M CW/SSB/SSTV",		true,
+								
+								21.000000, 21.069999, "15M CW",		        	true,
+								21.070000, 21.124999, "15M CW/DATA",			true,
+								21.125000, 21.149999, "15M CW/SSB/SSTV",		true,
+								21.150000, 21.150000, "15M IBP Beacon",		    true,
+								21.150001, 21.450000, "15M CW/SSB/SSTV",		true,
+								
+								24.890000, 24.909999, "12M CW",					true,
+								24.910000, 24.929999, "12M CW/DATA",			true,
+								24.930000, 24.930000, "12M IBP Beacon",		    true,
+								24.930001, 24.990000, "12M CW/SSB/SSTV",		true,
+								
+								28.000000, 28.069999, "10M CW",					true,
+								28.070000, 28.149999, "10M CW/DATA",			true,
+								28.150000, 28.199999, "10M CW",					true,
+								28.200000, 28.200000, "10M IBP Beacon",	    	true,
+								28.200001, 28.999999, "10M CW/SSB/RTTY/SSTV",	true,
+								29.000000, 29.299999, "10M FM/RTTY/SSTV/DATA",	true,
+								29.300000, 29.509999, "10M Satellite Downlinks", true,
+								29.510000, 29.589999, "10M Repeater Inputs",	true,
+								29.590000, 29.609999, "10M FM/RTTY/SSTV/DATA",	true,
+								29.610000, 29.699999, "10M Repeater Outputs",	true,
+								
+								50.000000, 50.099999, "6M CW",					true,
+								50.100000, 50.199999, "6M CW/SSB/RTTY/SSTV",	true,
+								50.200000, 50.999999, "6M CW/SSB/RTTY/SSTV/DATA", true,
+								51.000000, 51.999999, "6M FM/RTTY/SSTV",	    true,
+								52.000000, 52.299999, "6M VoIP",		        true,
+								52.300000, 52.499999, "6M CW/SSB/RTTY/SSTV",	true,
+								52.500000, 52.899999, "6M WB Data",	            true,
+								52.900000, 54.000000, "6M All Modes",			true,
+								
+				};
 
             for (int i = 0; i < data.Length / 4; i++)
             {
@@ -1681,7 +1769,7 @@ namespace Thetis
 								// 144 - 146 MHz
                                 144.000000, 144.034999, "2M CW & SSB EME",		        true,
                                 144.035000, 144.049999, "2M CW",                        true,
-                                144.050000, 144.005000, "2M CW Calling",                true,
+                                144.050000, 144.050000, "2M CW Calling",                true,
                                 144.050001, 144.149999, "2M CW",                        true,
                                 144.150000, 144.299999, "2M SSB",                       true,
                                 144.300000, 144.300000, "2M SSB Calling",               true,
@@ -2455,6 +2543,76 @@ namespace Thetis
             }
         }
 
+        private static void AddRegionJapanBandStack()
+        {
+            ds.Tables["BandStack"].Clear();
+            DataTable t = ds.Tables["BandStack"];
+
+            object[] data = {
+								"160M", "CWL", "F5", 1.810000, false, 150, 0.0,
+								"160M", "CWU", "F1", 1.835000, false, 150, 0.0,
+								"160M", "USB", "F6", 1.845000, false, 150, 0.0,
+								"80M", "CWL", "F1", 3.501000, false, 150, 0.0,
+								"80M", "LSB", "F6", 3.751000, false, 150, 0.0,
+								"80M", "LSB", "F6", 3.850000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.330500, false, 150, 0.0,
+								"60M", "USB", "F6", 5.346500, false, 150, 0.0,
+								"60M", "USB", "F6", 5.357000, false, 150, 0.0,
+								"60M", "USB", "F6", 5.371500, false, 150, 0.0,                              
+								"60M", "USB", "F6", 5.403500, false, 150, 0.0,
+								"40M", "CWL", "F1", 7.001000, false, 150, 0.0,
+								"40M", "LSB", "F6", 7.152000, false, 150, 0.0,
+								"40M", "LSB", "F6", 7.255000, false, 150, 0.0,
+								"30M", "CWU", "F1", 10.120000, false, 150, 0.0,
+								"30M", "CWU", "F1", 10.130000, false, 150, 0.0,
+								"30M", "CWU", "F5", 10.140000, false, 150, 0.0,
+								"20M", "CWU", "F1", 14.010000, false, 150, 0.0,
+								"20M", "USB", "F6", 14.230000, false, 150, 0.0,
+								"20M", "USB", "F6", 14.336000, false, 150, 0.0,
+								"17M", "CWU", "F1", 18.090000, false, 150, 0.0,
+								"17M", "USB", "F6", 18.125000, false, 150, 0.0,
+								"17M", "USB", "F6", 18.140000, false, 150, 0.0,
+								"15M", "CWU", "F1", 21.001000, false, 150, 0.0,
+								"15M", "USB", "F6", 21.255000, false, 150, 0.0,
+								"15M", "USB", "F6", 21.300000, false, 150, 0.0,
+								"12M", "CWU", "F1", 24.895000, false, 150, 0.0,
+								"12M", "USB", "F6", 24.900000, false, 150, 0.0,
+								"12M", "USB", "F6", 24.910000, false, 150, 0.0,
+								"10M", "CWU", "F1", 28.010000, false, 150, 0.0,
+								"10M", "USB", "F6", 28.300000, false, 150, 0.0,
+								"10M", "USB", "F6", 28.400000, false, 150, 0.0,
+								"6M", "CWU", "F1", 50.010000, false, 150, 0.0,
+								"6M", "USB", "F6", 50.125000, false, 150, 0.0,
+								"6M", "USB", "F6", 50.200000, false, 150, 0.0,								
+								"2M", "CWU", "F1", 144.010000, false, 150, 0.0,
+								"2M", "USB", "F6", 144.200000, false, 150, 0.0,
+								"2M", "USB", "F6", 144.210000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 2.500000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 5.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 10.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 15.000000, false, 150, 0.0,
+								"WWV", "SAM", "F7", 20.000000, false, 150, 0.0,
+								"GEN", "SAM", "F5", 13.845000, false, 150, 0.0,
+								"GEN", "SAM", "F5", 9.550000, false, 150, 0.0,
+                                "GEN", "SAM", "F5", 5.975000, false, 150, 0.0,
+                                "GEN", "SAM", "F5", 3.250000, false, 150, 0.0,
+								"GEN", "SAM", "F4", 0.590000, false, 150, 0.0,
+			};
+
+            for (int i = 0; i < data.Length / 7; i++)
+            {
+                DataRow dr = ds.Tables["BandStack"].NewRow();
+                dr["BandName"] = (string)data[i * 7 + 0];
+                dr["Mode"] = (string)data[i * 7 + 1];
+                dr["Filter"] = (string)data[i * 7 + 2];
+                dr["Freq"] = ((double)data[i * 7 + 3]).ToString("f6");
+                dr["CTUN"] = ((bool)data[i * 7 + 4]);
+                dr["ZoomFactor"] = ((int)data[i * 7 + 5]).ToString("f6");
+                dr["CenterFreq"] = ((double)data[i * 7 + 6]).ToString("f6");
+                ds.Tables["BandStack"].Rows.Add(dr);
+            }
+        }
+        
         private static void AddUK_PlusBandStack()
         {
             ds.Tables["BandStack"].Clear();
@@ -2692,7 +2850,7 @@ namespace Thetis
             t.Columns.Add("VOX_HangTime", typeof(int));
             t.Columns.Add("Tune_Power", typeof(int));
             t.Columns.Add("Tune_Meter_Type", typeof(string));
-            t.Columns.Add("TX_Limit_Slew", typeof(bool));
+            //t.Columns.Add("TX_Limit_Slew", typeof(bool));
             t.Columns.Add("TX_AF_Level", typeof(int));
             t.Columns.Add("AM_Carrier_Level", typeof(int));
             t.Columns.Add("Show_TX_Filter", typeof(bool));
@@ -2721,19 +2879,40 @@ namespace Thetis
             t.Columns.Add("VAC2_Combine_Input_Channels", typeof(bool));
             t.Columns.Add("VAC2_Latency_On", typeof(bool));
             t.Columns.Add("VAC2_Latency_Duration", typeof(int));
+
             t.Columns.Add("Phone_RX_DSP_Buffer", typeof(string));
             t.Columns.Add("Phone_TX_DSP_Buffer", typeof(string));
+            t.Columns.Add("FM_RX_DSP_Buffer", typeof(string));
+            t.Columns.Add("FM_TX_DSP_Buffer", typeof(string));
             t.Columns.Add("Digi_RX_DSP_Buffer", typeof(string));
             t.Columns.Add("Digi_TX_DSP_Buffer", typeof(string));
             t.Columns.Add("CW_RX_DSP_Buffer", typeof(string));
-            t.Columns.Add("Mic_Input_On", typeof(string));
-            t.Columns.Add("Mic_Input_Level", typeof(int));
-            t.Columns.Add("Line_Input_On", typeof(string));
-            t.Columns.Add("Line_Input_Level", typeof(int));
-            t.Columns.Add("Balanced_Line_Input_On", typeof(string));
-            t.Columns.Add("Balanced_Line_Input_Level", typeof(int));
-            t.Columns.Add("FlexWire_Input_On", typeof(string));
-            t.Columns.Add("FlexWire_Input_Level", typeof(int));
+
+            t.Columns.Add("Phone_RX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("Phone_TX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("FM_RX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("FM_TX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("Digi_RX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("Digi_TX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("CW_RX_DSP_Filter_Size", typeof(string));
+
+            t.Columns.Add("Phone_RX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("Phone_TX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("FM_RX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("FM_TX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("Digi_RX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("Digi_TX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("CW_RX_DSP_Filter_Type", typeof(string));
+
+            t.Columns.Add("Mic_Input_On", typeof(bool));
+            t.Columns.Add("Mic_Input_Boost", typeof(bool));
+            t.Columns.Add("Line_Input_On", typeof(bool));
+            t.Columns.Add("Line_Input_Level", typeof(decimal));
+
+            t.Columns.Add("CESSB_On", typeof(bool));
+            t.Columns.Add("Disable_Pure_Signal", typeof(bool));
+            //t.Columns.Add("FlexWire_Input_On", typeof(string));
+            //t.Columns.Add("FlexWire_Input_Level", typeof(int));
 
             #region Default
 
@@ -2782,7 +2961,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -2811,19 +2990,40 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -2876,7 +3076,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -2905,19 +3105,40 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -2973,7 +3194,7 @@ namespace Thetis
             t.Columns.Add("VOX_HangTime", typeof(int));
             t.Columns.Add("Tune_Power", typeof(int));
             t.Columns.Add("Tune_Meter_Type", typeof(string));
-            t.Columns.Add("TX_Limit_Slew", typeof(bool));
+            //t.Columns.Add("TX_Limit_Slew", typeof(bool));
             t.Columns.Add("TX_AF_Level", typeof(int));
             t.Columns.Add("AM_Carrier_Level", typeof(int));
             t.Columns.Add("Show_TX_Filter", typeof(bool));
@@ -3002,19 +3223,40 @@ namespace Thetis
             t.Columns.Add("VAC2_Combine_Input_Channels", typeof(bool));
             t.Columns.Add("VAC2_Latency_On", typeof(bool));
             t.Columns.Add("VAC2_Latency_Duration", typeof(int));
+
             t.Columns.Add("Phone_RX_DSP_Buffer", typeof(string));
             t.Columns.Add("Phone_TX_DSP_Buffer", typeof(string));
+            t.Columns.Add("FM_RX_DSP_Buffer", typeof(string));
+            t.Columns.Add("FM_TX_DSP_Buffer", typeof(string));
             t.Columns.Add("Digi_RX_DSP_Buffer", typeof(string));
             t.Columns.Add("Digi_TX_DSP_Buffer", typeof(string));
             t.Columns.Add("CW_RX_DSP_Buffer", typeof(string));
-            t.Columns.Add("Mic_Input_On", typeof(string));
-            t.Columns.Add("Mic_Input_Level", typeof(int));
-            t.Columns.Add("Line_Input_On", typeof(string));
-            t.Columns.Add("Line_Input_Level", typeof(int));
-            t.Columns.Add("Balanced_Line_Input_On", typeof(string));
-            t.Columns.Add("Balanced_Line_Input_Level", typeof(int));
-            t.Columns.Add("FlexWire_Input_On", typeof(string));
-            t.Columns.Add("FlexWire_Input_Level", typeof(int));
+
+            t.Columns.Add("Phone_RX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("Phone_TX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("FM_RX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("FM_TX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("Digi_RX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("Digi_TX_DSP_Filter_Size", typeof(string));
+            t.Columns.Add("CW_RX_DSP_Filter_Size", typeof(string));
+
+            t.Columns.Add("Phone_RX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("Phone_TX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("FM_RX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("FM_TX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("Digi_RX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("Digi_TX_DSP_Filter_Type", typeof(string));
+            t.Columns.Add("CW_RX_DSP_Filter_Type", typeof(string));
+
+            t.Columns.Add("Mic_Input_On", typeof(bool));
+            t.Columns.Add("Mic_Input_Boost", typeof(bool));
+            t.Columns.Add("Line_Input_On", typeof(bool));
+            t.Columns.Add("Line_Input_Level", typeof(decimal));
+
+            t.Columns.Add("CESSB_On", typeof(bool));
+            t.Columns.Add("Disable_Pure_Signal", typeof(bool));
+            //t.Columns.Add("FlexWire_Input_On", typeof(string));
+            //t.Columns.Add("FlexWire_Input_Level", typeof(int));
 
             #region Default
 
@@ -3063,7 +3305,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3092,19 +3334,39 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -3157,7 +3419,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3186,19 +3448,38 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -3252,7 +3533,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = true;
@@ -3281,19 +3562,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -3347,7 +3646,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = true;
@@ -3376,19 +3675,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -3441,7 +3758,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3470,19 +3787,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -3535,7 +3870,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3564,19 +3899,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -3629,7 +3982,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3658,19 +4011,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -3723,7 +4094,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3752,19 +4123,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -3817,7 +4206,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3846,19 +4235,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -3911,7 +4318,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -3940,19 +4347,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -4005,7 +4430,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4034,19 +4459,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -4099,7 +4542,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4128,19 +4571,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -4193,7 +4654,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4222,19 +4683,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -4287,7 +4766,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4316,19 +4795,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -4381,7 +4878,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4410,19 +4907,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -4475,7 +4990,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4504,19 +5019,37 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
+            //dr["FlexWire_Input_On"] = "0";
+            //dr["FlexWire_Input_Level"] = 0;
 
             t.Rows.Add(dr);
 
@@ -4569,7 +5102,7 @@ namespace Thetis
             dr["VOX_HangTime"] = 250;
             dr["Tune_Power"] = 10;
             dr["Tune_Meter_Type"] = "Fwd Pwr";
-            dr["TX_Limit_Slew"] = false;
+            //dr["TX_Limit_Slew"] = false;
             dr["TX_AF_Level"] = 50;
             dr["AM_Carrier_Level"] = 100;
             dr["Show_TX_Filter"] = false;
@@ -4598,19 +5131,35 @@ namespace Thetis
             dr["VAC2_Combine_Input_Channels"] = false;
             dr["VAC2_Latency_On"] = true;
             dr["VAC2_Latency_Duration"] = 120;
-            dr["Phone_RX_DSP_Buffer"] = "2048";
-            dr["Phone_TX_DSP_Buffer"] = "2048";
-            dr["Digi_RX_DSP_Buffer"] = "2048";
-            dr["Digi_TX_DSP_Buffer"] = "2048";
-            dr["CW_RX_DSP_Buffer"] = "2048";
-            dr["Mic_Input_On"] = "0";
-            dr["Mic_Input_Level"] = 0;
-            dr["Line_Input_On"] = "0";
-            dr["Line_Input_Level"] = 0;
-            dr["Balanced_Line_Input_On"] = "0";
-            dr["Balanced_Line_Input_Level"] = 0;
-            dr["FlexWire_Input_On"] = "0";
-            dr["FlexWire_Input_Level"] = 0;
+            dr["Phone_RX_DSP_Buffer"] = "64";
+            dr["Phone_TX_DSP_Buffer"] = "128";
+            dr["FM_RX_DSP_Buffer"] = "256";
+            dr["FM_TX_DSP_Buffer"] = "128";
+            dr["Digi_RX_DSP_Buffer"] = "64";
+            dr["Digi_TX_DSP_Buffer"] = "128";
+            dr["CW_RX_DSP_Buffer"] = "64";
+
+            dr["Phone_RX_DSP_Filter_Size"] = "2048";
+            dr["Phone_TX_DSP_Filter_Size"] = "2048";
+            dr["FM_RX_DSP_Filter_Size"] = "4096";
+            dr["FM_TX_DSP_Filter_Size"] = "2048";
+            dr["Digi_RX_DSP_Filter_Size"] = "2048";
+            dr["Digi_TX_DSP_Filter_Size"] = "2048";
+            dr["CW_RX_DSP_Filter_Size"] = "2048";
+
+            dr["Phone_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Phone_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["FM_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Digi_TX_DSP_Filter_Type"] = "Linear Phase";
+            dr["CW_RX_DSP_Filter_Type"] = "Linear Phase";
+            dr["Mic_Input_On"] = true;
+            dr["Mic_Input_Boost"] = false;
+            dr["Line_Input_On"] = false;
+            dr["Line_Input_Level"] = 0.0;
+            dr["CESSB_On"] = false;
+            dr["Disable_Pure_Signal"] = true;
 
             t.Rows.Add(dr);
 
@@ -4928,10 +5477,15 @@ namespace Thetis
             {
                 case FRSRegion.Australia:
                 case FRSRegion.US:
-                case FRSRegion.Japan:
                     AddRegion2BandStack();
                     ClearBandText();
                     AddRegion2BandText();
+                    break;
+
+                case FRSRegion.Japan:
+                    AddRegionJapanBandStack();
+                    ClearBandText();
+                    AddRegionJapanBandText();
                     break;
 
                 case FRSRegion.India:

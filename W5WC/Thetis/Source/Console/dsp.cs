@@ -59,7 +59,7 @@ namespace Thetis
         public static extern void SetAllRates(int channel, int in_rate, int dsp_rate, int out_rate);
 
         [DllImport("wdsp.dll", EntryPoint = "SetChannelState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SetChannelState(int channel, int state, int dmode);
+        public static extern void SetChannelState(int channel, int state, int dmode);
 
         [DllImport("wdsp.dll", EntryPoint = "SetChannelTDelayUp", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetChannelTDelayUp(int channel, double time);
@@ -606,6 +606,18 @@ namespace Thetis
 
         [DllImport("wdsp.dll", EntryPoint = "SetRXASNBAOutputBandwidth", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXASNBAOutputBandwidth(int channel, double flow, double fhigh);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXASetMP", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RXASetMP(int channel, bool mp);
+
+        [DllImport("wdsp.dll", EntryPoint = "TXASetMP", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void TXASetMP(int channel, bool mp);
+
+        [DllImport("wdsp.dll", EntryPoint = "RXASetNC", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RXASetNC(int channel, int nc);
+
+        [DllImport("wdsp.dll", EntryPoint = "TXASetNC", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void TXASetNC(int channel, int nc);
 
         #endregion
 

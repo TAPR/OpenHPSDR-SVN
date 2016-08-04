@@ -337,7 +337,8 @@ namespace Thetis
             set
             {
                 radio_volume = value;
-                if (console.CurrentModel == Model.HERMES ||
+                if (//console.CurrentModel == Model.HERMES ||
+                    console.CurrentHPSDRModel != HPSDRModel.HPSDR ||
                                             console.PennyLanePresent ||
                                            (console.PennyPresent && console.CWFWKeyer))
                 {
@@ -1367,7 +1368,7 @@ namespace Thetis
                         //latency = 250;
                     }
                     else if (vac_stereo) num_chan = 2;
-                    vac_rb_reset = true;
+                    VACRBReset = true;
 
                     ivac.SetIVAChostAPIindex(0, host2);
                     ivac.SetIVACinputDEVindex(0, input_dev2);
@@ -1428,7 +1429,7 @@ namespace Thetis
                     }
                     else if (vac2_stereo) num_chan = 2;
                     // ehr end				
-                    vac2_rb_reset = true;
+                    VAC2RBReset = true;
 
                     ivac.SetIVAChostAPIindex(1, host3);
                     ivac.SetIVACinputDEVindex(1, input_dev3);
@@ -1468,8 +1469,8 @@ namespace Thetis
         {
             bool retval = false;
             int rc;
-            phase_buf_l = new float[block_size1];
-            phase_buf_r = new float[block_size1];
+            phase_buf_l = new float[2048];
+            phase_buf_r = new float[2048];
 
             //unsafe
             //{

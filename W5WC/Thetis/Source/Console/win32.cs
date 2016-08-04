@@ -100,7 +100,7 @@ namespace Thetis
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
 
         [DllImport("gdi32.dll")]
-        public static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [In] ref uint pcFonts);
+        public static extern IntPtr AddFontMemResourceEx(byte[] pbFont, int cbFont, IntPtr pdv, out uint pcFonts);
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]

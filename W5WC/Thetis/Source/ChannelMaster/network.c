@@ -139,7 +139,7 @@ int nativeInitMetis(char *netaddr, char *localaddr, int localport) {
 			return rc;
 		}
 		WSA_inited = 1;
-		printf("initWSA ok!");
+		printf("initWSA ok!\n");
 	}
 
 	local.sin_port = htons((u_short)localport);
@@ -174,7 +174,7 @@ int nativeInitMetis(char *netaddr, char *localaddr, int localport) {
 	DestIp = inet_addr(netaddr);
 
 	if (DestIp != 0) {
-		printf("metis_addr: 0x%08x\n", DestIp);
+		printf("destination addr: 0x%08x\n", DestIp);
 		fflush(stdout);
 
 		//add to ARP table
@@ -230,14 +230,14 @@ int SendStopToMetis(void) 	 {
 }
 
 /* returns 0 on sucess, !0 on failure */
-int MetisStartReadThread(void) {
+int StartReadThread(void) {
 	int myrc = 0;
 
 	do {
 
 		if (SendStartToMetis() != 0) {
 			printf("SendStartTo Metis failed ...\n"); fflush(stdout);
-			MetisStopReadThread();
+			StopReadThread();
 			myrc = -3;
 			break;
 		}
@@ -248,7 +248,11 @@ int MetisStartReadThread(void) {
 	return myrc;
 }
 
-void MetisStopReadThread(void) {
+void StopReadThread(void) {
+	PrintTimeHack();
+	printf("- StopReadThread()\n");
+	fflush(stdout);
+
 	SendStopToMetis();
 	//MetisKeepRunning = 0; 
 	DeInitMetisSockets();
@@ -507,7 +511,9 @@ int ReadUDPFrame(unsigned char *bufp) {
 	case 1025: // 60 bytes - High Priority C&C data
 		if (seqnum != (1 + prn->cc_seq_no))  {
 			prn->cc_seq_err += 1;
-			printf("Rx C&C: seq error this: %d last: %d\n", seqnum, prn->cc_seq_no);
+			//PrintTimeHack();
+			//printf("- Rx High Priority C&C: seq error this: %d last: %d\n", seqnum, prn->cc_seq_no);
+			//fflush(stdout);
 		}
 
 		prn->cc_seq_no = seqnum;
@@ -517,7 +523,9 @@ int ReadUDPFrame(unsigned char *bufp) {
 		//mic_samples_buf++;
 		if (seqnum != (1 + prn->tx[0].mic_in_seq_no))  {
 			prn->tx[0].mic_in_seq_err += 1;
-			printf("Rx Mic: seq error this: %d last: %d\n", seqnum, prn->tx[0].mic_in_seq_no);
+			//PrintTimeHack();
+			//printf("- Mic samples: seq error this: %d last: %d\n", seqnum, prn->tx[0].mic_in_seq_no);
+			//fflush(stdout);
 		}
 
 		prn->tx[0].mic_in_seq_no = seqnum;
@@ -615,66 +623,80 @@ int ReadUDPFrame(unsigned char *bufp) {
 
 		break;
 	}
-	case 1035: // 1428 bytes - 24-bit I/Q
+	case 1035: // 1428 bytes - 24-bit DDC0 I/Q data
 		//rx_samples_buf++;
 		if (seqnum != (1 + prn->rx[0].rx_in_seq_no))  {
 			prn->rx[0].rx_in_seq_err += 1;
-			printf("Rx0 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[0].rx_in_seq_no);
+			//PrintTimeHack();
+			//printf("- Rx0 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[0].rx_in_seq_no);
+			//fflush(stdout);
 		}
 
 		prn->rx[0].rx_in_seq_no = seqnum;
 		memcpy(bufp, readbuf + 16, 1428);
 		break;
-	case 1036: // 1428 bytes - 24-bit I/Q
+	case 1036: // 1428 bytes - 24-bit DDC1 I/Q data
 		if (seqnum != (1 + prn->rx[1].rx_in_seq_no))  {
 			prn->rx[1].rx_in_seq_err += 1;
-			printf("Rx1 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[1].rx_in_seq_no);
+			//PrintTimeHack();
+			//printf("- Rx1 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[1].rx_in_seq_no);
+			//fflush(stdout);
 		}
 
 		prn->rx[1].rx_in_seq_no = seqnum;
 		memcpy(bufp, readbuf + 16, 1428);
 		break;
-	case 1037: // 1428 bytes - 24-bit I/Q
+	case 1037: // 1428 bytes - 24-bit DDC2 I/Q data
 		//rx_samples_buf++;
 		if (seqnum != (1 + prn->rx[2].rx_in_seq_no))  {
 			prn->rx[2].rx_in_seq_err += 1;
-			printf("Rx2 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[2].rx_in_seq_no);
+			//PrintTimeHack();
+			//printf("- Rx2 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[2].rx_in_seq_no);
+			//fflush(stdout);
 		}
 
 		prn->rx[2].rx_in_seq_no = seqnum;
 		memcpy(bufp, readbuf + 16, 1428);
 		break;
-	case 1038: // 1428 bytes - 24-bit I/Q
+	case 1038: // 1428 bytes - 24-bit DDC3 I/Q data
 		if (seqnum != (1 + prn->rx[3].rx_in_seq_no))  {
 			prn->rx[3].rx_in_seq_err += 1;
-			printf("Rx3 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[3].rx_in_seq_no);
+			//PrintTimeHack();
+			//printf("- Rx3 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[3].rx_in_seq_no);
+			//fflush(stdout);
 		}
 
 		prn->rx[3].rx_in_seq_no = seqnum;
 		memcpy(bufp, readbuf + 16, 1428);
 		break;
-	case 1039: // 1428 bytes - 24-bit I/Q
+	case 1039: // 1428 bytes - 24-bit DDC4 I/Q data
 		if (seqnum != (1 + prn->rx[4].rx_in_seq_no))  {
 			prn->rx[4].rx_in_seq_err += 1;
-			printf("Rx4 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[4].rx_in_seq_no);
+			//PrintTimeHack();
+			//printf("- Rx4 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[4].rx_in_seq_no);
+			//fflush(stdout);
 		}
 
 		prn->rx[4].rx_in_seq_no = seqnum;
 		memcpy(bufp, readbuf + 16, 1428);
 		break;
-	case 1040: // 1428 bytes - 24-bit I/Q
+	case 1040: // 1428 bytes - 24-bit DDC5 I/Q data
 		if (seqnum != (1 + prn->rx[5].rx_in_seq_no))  {
 			prn->rx[5].rx_in_seq_err += 1;
-			printf("Rx5 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[5].rx_in_seq_no);
+			//PrintTimeHack();
+			//printf("- Rx5 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[5].rx_in_seq_no);
+			//fflush(stdout);
 		}
 
 		prn->rx[5].rx_in_seq_no = seqnum;
 		memcpy(bufp, readbuf + 16, 1428);
 		break;
-	case 1041: // 1428 bytes - 24-bit I/Q
+	case 1041: // 1428 bytes - 24-bit DDC6 I/Q data
 		if (seqnum != (1 + prn->rx[6].rx_in_seq_no))  {
 			prn->rx[6].rx_in_seq_err += 1;
-			printf("Rx6 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[6].rx_in_seq_no);
+			//PrintTimeHack();
+			//printf("- Rx6 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[6].rx_in_seq_no);
+			//fflush(stdout);
 		}
 
 		prn->rx[6].rx_in_seq_no = seqnum;
@@ -687,11 +709,21 @@ int ReadUDPFrame(unsigned char *bufp) {
 	return rc;
 }
 
-void ReadThreadMainLoop() {
+//void 
+//PrintTimeHack() {
+//	GetLocalTime(&lt);
+//	printf("(%02d/%02d %02d:%02d:%02d:%03d) ", lt.wMonth, lt.wDay, lt.wHour, lt.wMinute, lt.wSecond, lt.wMilliseconds);
+//}
+
+void
+ReadThreadMainLoop() {
 	int i, rc, k;
 	double sbuf[500] = { 0 };	// FOR DEBUG ONLY
 	prn->hDataEvent = WSACreateEvent();
 	WSAEventSelect(listenSock, prn->hDataEvent, FD_READ);
+	PrintTimeHack();
+	printf("- ReadThreadMainLoop()\n");
+	fflush(stdout);
 
 	while (io_keep_running != 0) {
 
@@ -756,10 +788,12 @@ void ReadThreadMainLoop() {
 					//Bytes 49,50  User ADC2 [15:0]             
 					//Bytes 51,52  User ADC1 [15:0]            
 					//Bytes 53,54  User ADC0 [15:0]             
-					prn->user_adc3 = prn->ReadBufp[47] << 8 | prn->ReadBufp[48];
-					prn->user_adc2 = prn->ReadBufp[49] << 8 | prn->ReadBufp[50];
-					prn->user_adc1 = prn->ReadBufp[51] << 8 | prn->ReadBufp[52];
+					//prn->user_adc3 = prn->ReadBufp[47] << 8 | prn->ReadBufp[48];
+					//prn->user_adc2 = prn->ReadBufp[49] << 8 | prn->ReadBufp[50];
+					//prn->user_adc1 = prn->ReadBufp[51] << 8 | prn->ReadBufp[52];
 					prn->user_adc0 = prn->ReadBufp[53] << 8 | prn->ReadBufp[54];
+
+					SetAmpProtectADCValue (0, prn->user_adc0);
 
 					//Byte 55 - Bit [0] - User I/O (IO4) 1 = active, 0 = inactive
 					//          Bit [1] - User I/O (IO5) 1 = active, 0 = inactive
@@ -790,7 +824,7 @@ void ReadThreadMainLoop() {
 				case 1033:
 				case 1034:
 					break;
-				case 1035: // Receiver I&Q data
+				case 1035: // DDC I&Q data
 				case 1036:
 				case 1037:
 				case 1038:
@@ -888,7 +922,7 @@ void CmdGeneral() {
 	// Bits - PA, Apollo, Mercury, Clock source
 	packetbuf[58] = 0x01;
 	// Bits - Alex(n) enable, 1 = enable, 0 = disable
-	packetbuf[59] = prbpfilter[0]->enable;
+	packetbuf[59] = prbpfilter->enable | prbpfilter2->enable;
 	// sendto port 1024
 	sendPacket(listenSock, packetbuf, sizeof(packetbuf), 1024);
 
@@ -1007,14 +1041,15 @@ void CmdHighPriority() {
 	packetbuf[1403] = prn->rx[1].preamp << 1 |
 		prn->rx[0].preamp;
 
-	// Alex1 data [7:0]
-	packetbuf[1431] = prbpfilter[1]->bpfilter & 0xff;
+	// Alex1 data 
+	packetbuf[1430] = (prbpfilter2->bpfilter >> 8) & 0xff; //RX1
+	packetbuf[1431] = prbpfilter2->bpfilter & 0xff; //RX1
 
 	// Alex0 data
-	packetbuf[1432] = (prbpfilter[0]->bpfilter >> 24) & 0xff;
-	packetbuf[1433] = (prbpfilter[0]->bpfilter >> 16) & 0xff;
-	packetbuf[1434] = (prbpfilter[0]->bpfilter >> 8) & 0xff;
-	packetbuf[1435] = prbpfilter[0]->bpfilter & 0xff;
+	packetbuf[1432] = (prbpfilter->bpfilter >> 24) & 0xff; // [31:24] TX
+	packetbuf[1433] = (prbpfilter->bpfilter >> 16) & 0xff; // [23:16] TX
+	packetbuf[1434] = (prbpfilter->bpfilter >> 8) & 0xff; // [15:8] RX0
+	packetbuf[1435] = prbpfilter->bpfilter & 0xff; // [7:0] RX0
 
 	// Step Attenuator 2
 	//packetbuf[1441] = prn->adc[2].rx_step_attn;

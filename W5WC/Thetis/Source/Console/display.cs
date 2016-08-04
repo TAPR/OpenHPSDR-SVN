@@ -721,11 +721,11 @@ namespace Thetis
             }
         }
 
-        private static Model current_model = Model.FLEX5000;
-        public static Model CurrentModel
+        private static HPSDRModel current_hpsdr_model = HPSDRModel.HERMES;
+        public static HPSDRModel CurrentHPSDRModel
         {
-            get { return current_model; }
-            set { current_model = value; }
+            get { return current_hpsdr_model; }
+            set { current_hpsdr_model = value; }
         }
 
         private static int display_cursor_x;						// x-coord of the cursor when over the display

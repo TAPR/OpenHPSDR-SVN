@@ -211,7 +211,7 @@ typedef struct _rbpfilter // radio band pass filter
 	union
 	{
 		unsigned bpfilter;
-		struct {
+		struct {                               
 			unsigned _rx_yellow_led:1; // bit 00
 			unsigned _13MHz_HPF    :1; // bit 01
 			unsigned _20MHz_HPF    :1; // bit 02
@@ -219,10 +219,10 @@ typedef struct _rbpfilter // radio band pass filter
 			unsigned _9_5MHz_HPF   :1; // bit 04
 			unsigned _6_5MHz_HPF   :1; // bit 05
 			unsigned _1_5MHz_HPF   :1; // bit 06
-			unsigned               :1; // bit 07
+			unsigned _rx2_gnd      :1; // bit 07
 
-			unsigned _XVTR_Rx_In   :1; // bit 08
-			unsigned _Rx_2_In      :1; // bit 09 EXT1
+			unsigned _XVTR_Rx_In   :1; // bit 08			
+			unsigned _Rx_2_In      :1; // bit 09 EXT1		
 			unsigned _Rx_1_In      :1; // bit 10 EXT2
 			unsigned _Rx_1_Out     :1; // bit 11 K36
 			unsigned _Bypass       :1; // bit 12
@@ -251,7 +251,38 @@ typedef struct _rbpfilter // radio band pass filter
 	};
 }rbpfilter, *RBPFILTER;
 #pragma pack(pop, 1)
-RBPFILTER prbpfilter[MAX_ADC];
+RBPFILTER prbpfilter;
+
+#pragma pack(push, 1)
+typedef struct _rbpfilter2 // radio band pass filter
+{
+	int enable;
+	union
+	{
+		unsigned bpfilter;
+		struct {
+			unsigned _rx_yellow_led : 1; // bit 32
+			unsigned _13MHz_HPF     : 1; // bit 33
+			unsigned _20MHz_HPF     : 1; // bit 34
+			unsigned _6M_preamp     : 1; // bit 35
+			unsigned _9_5MHz_HPF    : 1; // bit 36
+			unsigned _6_5MHz_HPF    : 1; // bit 37
+			unsigned _1_5MHz_HPF    : 1; // bit 38
+			unsigned _rx2_gnd500    : 1; // bit 39
+
+			unsigned _rx2_gnd       : 1; // bit 40			
+			unsigned                : 1; // bit 41 	
+			unsigned                : 1; // bit 42
+			unsigned                : 1; // bit 43 
+			unsigned _Bypass        : 1; // bit 44
+			unsigned                : 1; // bit 45
+			unsigned                : 1; // bit 46
+			unsigned _rx_red_led    : 1; // bit 47
+		};
+	};
+}rbpfilter2, *RBPFILTER2;
+#pragma pack(pop, 1)
+RBPFILTER2 prbpfilter2;
 
 extern __declspec(dllexport) void create_rnet();
 void WriteUDPFrame(int id, char *bufp, int buflen);
@@ -264,11 +295,12 @@ DWORD WINAPI ReadThreadMain(LPVOID);
 DWORD WINAPI KeepAliveMain(LPVOID);
 void ReadThreadMainLoop();
 void KeepAliveLoop();
+void PrintTimeHack();
 
 // IOThread rountines
 int IOThreadStop(void);
-int MetisStartReadThread(void);
-void MetisStopReadThread(void);
+int StartReadThread(void);
+void StopReadThread(void);
 int io_keep_running;
 int IOThreadRunning;   // non zero if IOThread is running
 
@@ -386,7 +418,7 @@ int DotDashMask;
 SOCKET listenSock;
 WSADATA WSAdata;
 int WSAinitialized;
+SYSTEMTIME lt;
 static const double const_1_div_2147483648_ = 1.0 / 2147483648.0;
-
 
 #endif
