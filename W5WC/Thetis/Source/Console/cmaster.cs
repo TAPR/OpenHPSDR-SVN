@@ -221,20 +221,6 @@ namespace Thetis
             }
         }
 
-        // set in console.cs
-        private static int size = 1024;
-        public static int Size
-        {
-            get { return size; }
-            set
-            {
-                size = value;
-                // wdsp.SetEXTDIVBuffsize(0, size);
-                cmaster.CMSetPSInSize(wdsp.id(1, 0));
-                // cmaster.SetSiphonInsize(0, size);
-            }
-        }
-
         private static bool MONmixState = false;
         public static bool MONMixState
         {
@@ -569,11 +555,6 @@ namespace Thetis
             bool run = Audio.console.radio.GetDSPTX(0).TXEERModeRun && Audio.MOX;
            //  wdsp.SetEERSize(id, Audio.OutCount);
             wdsp.SetEERRun(id, run);
-        }
-
-        public static void CMSetPSInSize(int channel)
-        {
-            puresignal.SetPSInSize(channel, size);
         }
 
         public static void CMSetPSMox(int channel)

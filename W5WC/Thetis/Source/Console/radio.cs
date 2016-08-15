@@ -173,7 +173,7 @@ namespace Thetis
 
         public void Copy(RadioDSPRX rx)
         {
-            this.AudioSize = rx.audio_size;
+            //this.AudioSize = rx.audio_size;       // wcp
             this.DSPMode = rx.dsp_mode;
             this.FilterSize = rx.filter_size;
             this.FilterType = rx.filter_type;
@@ -252,7 +252,7 @@ namespace Thetis
 		{
 			//BufferSize = buffer_size;
 			//SetRXCorrectIQW(rx_correct_iq_w_real, rx_correct_iq_w_imag);
-			AudioSize = audio_size;			
+			//AudioSize = audio_size;			// wcp
 			DSPMode = dsp_mode;
             FilterSize = filter_size;
             FilterType = filter_type;
@@ -416,28 +416,28 @@ namespace Thetis
             }
         }
 
-		private int audio_size_dsp = 1024;
-		private int audio_size = 1024;
-		public int AudioSize
-		{
-			get { return audio_size; }
-			set
-			{
-				audio_size = value;
-				if(update)
-				{
-					if(value != audio_size_dsp || force)
-					{
-                        wdsp.SetInputBuffsize(wdsp.id(thread, subrx), value);
-                       // wdsp.SetInputBuffsize(wdsp.id(0, 1), value);
-                       // wdsp.SetInputBuffsize(wdsp.id(2, 0), value);
-                       // wdsp.SetInputBuffsize(wdsp.id(2, 1), value);
-                       // wdsp.SetInputBuffsize(wdsp.id(1, 0), value);
-						audio_size_dsp = value;
-					}
-				}
-			}
-		}
+        //private int audio_size_dsp = 1024;        // wcp
+        //private int audio_size = 1024;
+        //public int AudioSize
+        //{
+        //    get { return audio_size; }
+        //    set
+        //    {
+        //        audio_size = value;
+        //        if(update)
+        //        {
+        //            if(value != audio_size_dsp || force)
+        //            {
+        //                wdsp.SetInputBuffsize(wdsp.id(thread, subrx), value);
+        //               // wdsp.SetInputBuffsize(wdsp.id(0, 1), value);
+        //               // wdsp.SetInputBuffsize(wdsp.id(2, 0), value);
+        //               // wdsp.SetInputBuffsize(wdsp.id(2, 1), value);
+        //               // wdsp.SetInputBuffsize(wdsp.id(1, 0), value);
+        //                audio_size_dsp = value;
+        //            }
+        //        }
+        //    }
+        //}
 
 		private DSPMode dsp_mode_dsp = DSPMode.USB;
 		private DSPMode dsp_mode = DSPMode.USB;
@@ -1819,9 +1819,6 @@ namespace Thetis
 
 		private void SyncAll()
 		{		
-			//BufferSize = buffer_size;
-            //audio_size = cmaster.GetBuffSize(48000);
-            //AudioSize = audio_size;			
 			CurrentDSPMode = current_dsp_mode;
 			SetTXFilter(tx_filter_low, tx_filter_high);
             FilterSize = filter_size;
@@ -1985,25 +1982,6 @@ namespace Thetis
                 }
             }
         }
-
-        //private int audio_size_dsp = 2048;
-        //private int audio_size = 2048;
-        //public int AudioSize
-        //{
-        //    get { return audio_size; }
-        //    set
-        //    {
-        //        audio_size = value;
-        //        if(update)
-        //        {
-        //            if(value != audio_size_dsp || force)
-        //            {
-        //                wdsp.SetInputBuffsize(wdsp.id(thread, 0), value);
-        //                audio_size_dsp = value;
-        //            }
-        //        }
-        //    }
-        //}
 
 		private DSPMode current_dsp_mode_dsp = DSPMode.USB;
 		private DSPMode current_dsp_mode = DSPMode.USB;
