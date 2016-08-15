@@ -480,9 +480,15 @@ void scheck(CALCC a)
 	double v, dx, out;
 	int intm1 = a->ints - 1;
 	a->binfo[6] = 0x0000;
-	if (a->cm[0] != a->cm[0]) a->binfo[6] |= 0x0001;
-	if ((a->cm[4 * intm1 + 0] == 0.0) && (a->cm[4 * intm1 + 1] == 0.0) &&
-		(a->cm[4 * intm1 + 2] == 0.0) && (a->cm[4 * intm1 + 3] == 0.0)) a->binfo[6] |= 0x0002;
+	for (i = 0; i < 4 * a->ints; i++)
+	{
+		if (isnan (a->cm[i])) a->binfo[6] |= 0x0001;
+		if (isnan (a->cc[i])) a->binfo[6] |= 0x0001;
+		if (isnan (a->cs[i])) a->binfo[6] |= 0x0001;
+	}
+	for (i = 0; i < a->ints; i++)
+		if ((a->cm[4 * i + 0] == 0.0) && (a->cm[4 * i + 1] == 0.0) &&
+			(a->cm[4 * i + 2] == 0.0) && (a->cm[4 * i + 3] == 0.0)) a->binfo[6] |= 0x0002;
 	for (i = 0; i < a->ints; i++)
 	{
 		for (j = 0; j < 4; j++)
@@ -919,16 +925,6 @@ void SetPSRunCal (int channel, int run)
 	EnterCriticalSection (&txa[channel].calcc.cs_update);
 	a = txa[channel].calcc.p;
 	a->runcal = run;
-	LeaveCriticalSection (&txa[channel].calcc.cs_update);
-}
-
-PORT
-void SetPSInSize (int channel, int size)
-{
-	CALCC a;
-	EnterCriticalSection (&txa[channel].calcc.cs_update);
-	a = txa[channel].calcc.p;
-	a->size = size;
 	LeaveCriticalSection (&txa[channel].calcc.cs_update);
 }
 

@@ -458,9 +458,6 @@ namespace Thetis
         [DllImport("wdsp.dll", EntryPoint = "SetPSRunCal", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetPSRunCal(int channel, bool run);
 
-        [DllImport("wdsp.dll", EntryPoint = "SetPSInSize", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetPSInSize(int channel, int size);
-
         [DllImport("wdsp.dll", EntryPoint = "SetPSMox", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetPSMox(int channel, bool mox);
 

@@ -19126,12 +19126,12 @@ namespace Thetis
             {
                 block_size1 = value;
                 Audio.BlockSize = value;
-                radio.GetDSPRX(0, 0).AudioSize = value;
-                radio.GetDSPRX(0, 1).AudioSize = value;
+                // radio.GetDSPRX(0, 0).AudioSize = value;      // wcp
+                // radio.GetDSPRX(0, 1).AudioSize = value;      // wcp
                 // radio.GetDSPRX(1, 0).AudioSize = value;
                 // radio.GetDSPRX(1, 1).AudioSize = value;
                 // wdsp.SetEXTDIVBuffsize(0, value);
-                cmaster.Size = value;
+                // cmaster.Size = value;  // wcp
             }
         }
 
@@ -19145,8 +19145,8 @@ namespace Thetis
                 Audio.BlockSizeRX2 = value;
                 // radio.GetDSPRX(0, 0).AudioSize = value;
                 // radio.GetDSPRX(0, 1).AudioSize = value;
-                radio.GetDSPRX(1, 0).AudioSize = value;
-                radio.GetDSPRX(1, 1).AudioSize = value;
+                // radio.GetDSPRX(1, 0).AudioSize = value;      // wcp
+                // radio.GetDSPRX(1, 1).AudioSize = value;      // wcp
                 //wdsp.SetEXTDIVBuffsize(1, value);
                 // cmaster.Size = value;
             }
