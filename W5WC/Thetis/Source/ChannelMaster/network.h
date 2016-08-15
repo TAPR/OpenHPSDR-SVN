@@ -338,9 +338,9 @@ int MicPTT;
 int Merc3Preamp;
 int Merc4Preamp;
 int MercRandom;
-int enable_ADC1_step_att;
-int enable_ADC2_step_att;
-int enable_ADC3_step_att;
+//int enable_ADC1_step_att;
+//int enable_ADC2_step_att;
+//int enable_ADC3_step_att;
 int adc1_step_att_data;
 int adc2_step_att_data;
 int adc3_step_att_data;
@@ -393,7 +393,6 @@ int FwdPower;
 int ApolloFilt;
 int ApolloTuner;
 int ApolloATU;
-int HermesFilt;
 
 int ADC_Overload; // Single ADC
 int ADC1_Overload;

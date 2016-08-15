@@ -56,8 +56,8 @@ namespace Thetis
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetC1Bits(int bits);
 
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetAlexEnabled(int bit);
+        //[DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
+        //public static extern void SetAlexEnabled(int bit);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetAlexHPFBits(int bits);
@@ -95,8 +95,8 @@ namespace Thetis
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEERPWMmax(int max);
 
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetHermesFilter(int bits);
+        //[DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
+        //public static extern void SetHermesFilter(int bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int getUserADC0();
@@ -194,14 +194,14 @@ namespace Thetis
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRX2Preamp(int bits);
 
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void EnableADC1StepAtten(int bits);
+        //[DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
+        //public static extern void EnableADC1StepAtten(int bits);
 
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void EnableADC2StepAtten(int bits);
+        //[DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
+        //public static extern void EnableADC2StepAtten(int bits);
 
-        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void EnableADC3StepAtten(int bits);
+        //[DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
+        //public static extern void EnableADC3StepAtten(int bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetADC1StepAttenData(int bits);

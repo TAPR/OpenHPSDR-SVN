@@ -861,7 +861,7 @@ ReadThreadMainLoop() {
 	}
 }
 
-void CmdGeneral() {
+void CmdGeneral() { // port 1024
 
 	char packetbuf[60];
 	memset(packetbuf, 0, sizeof(packetbuf)); // fill the frame with 0x00
@@ -928,7 +928,7 @@ void CmdGeneral() {
 
 }
 
-void CmdHighPriority() {
+void CmdHighPriority() { // port 1027
 
 	char packetbuf[BUFLEN];
 	memset(packetbuf, 0, sizeof(packetbuf)); // fill the frame with 0x00
@@ -1063,7 +1063,7 @@ void CmdHighPriority() {
 
 }
 
-void CmdRx() {
+void CmdRx() { // port 1025
 
 	char packetbuf[BUFLEN];
 	memset(packetbuf, 0, sizeof(packetbuf)); // fill the frame with 0x00
@@ -1180,7 +1180,7 @@ void CmdRx() {
 	// CmdHighPriority();
 }
 
-void CmdTx() {
+void CmdTx() { // port 1026
 	char packetbuf[60];
 	memset(packetbuf, 0, sizeof(packetbuf)); // fill the frame with 0x00
 

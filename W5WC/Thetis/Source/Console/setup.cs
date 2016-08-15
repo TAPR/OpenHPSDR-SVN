@@ -316,6 +316,7 @@ namespace Thetis
             checkHPSDRDefaults(this, e);
             chkAlexPresent_CheckedChanged(this, e);
             chkApolloPresent_CheckedChanged(this, e);
+            chkAlexAntCtrl_CheckedChanged(this, e);
 
             for (int i = 0; i < 2; i++)
                 for (int j = 0; j < 2; j++)
@@ -1060,7 +1061,7 @@ namespace Thetis
             EventArgs e = EventArgs.Empty;
 
             // General Tab
-            chkAlexAntCtrl_CheckedChanged(this, e);
+          //  chkAlexAntCtrl_CheckedChanged(this, e);
             //comboGeneralLPTAddr_SelectedIndexChanged(this, e);
             udGeneralLPTDelay_ValueChanged(this, e);
             chkGeneralRXOnly_CheckedChanged(this, e);
@@ -1107,6 +1108,15 @@ namespace Thetis
             udVAC2GainTX_ValueChanged(this, e);
             chkVAC2UseRX2_CheckedChanged(this, e);
             chkAudioRX2toVAC_CheckedChanged(this, e);
+            chkAudioLatencyManual2_CheckedChanged(this, e);
+            chkAudioLatencyManual2_Out_CheckedChanged(this, e);
+            chkAudioLatencyPAInManual_CheckedChanged(this, e);
+            chkAudioLatencyPAOutManual_CheckedChanged(this, e);
+            chkVAC2LatencyManual_CheckedChanged(this, e);
+            chkVAC2LatencyOutManual_CheckedChanged(this, e);
+            chkVAC2LatencyPAInManual_CheckedChanged(this, e);
+            chkVAC2LatencyPAOutManual_CheckedChanged(this, e);
+
             // Calibration Tab
             udTXDisplayCalOffset_ValueChanged(this, e);
             udHPSDRFreqCorrectFactor_ValueChanged(this, e);
@@ -12302,8 +12312,8 @@ namespace Thetis
                 console.chkSR.Enabled = true;
                 // if (console.RX2PreampPresent && !radGenModelANAN100D.Checked) console.comboRX2Preamp.Visible = false;
                 if (chkApolloPresent.Checked) chkApolloPresent.Checked = false;
-                if (radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN10E.Checked || radGenModelANAN100.Checked ||
-                     radGenModelANAN100D.Checked || radGenModelANAN200D.Checked) NetworkIO.SetHermesFilter(0);
+              //  if (radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN10E.Checked || radGenModelANAN100.Checked ||
+                   //  radGenModelANAN100D.Checked || radGenModelANAN200D.Checked) NetworkIO.SetHermesFilter(0);
             }
             else
             {
@@ -14353,11 +14363,11 @@ namespace Thetis
             {
                 if (chkAlexPresent.Checked) chkAlexPresent.Checked = false;
 
-                NetworkIO.SetHermesFilter(1);
+              //  NetworkIO.SetHermesFilter(1);
                 chkApolloFilter_CheckedChanged(this, EventArgs.Empty);
                 chkApolloTuner_CheckedChanged(this, EventArgs.Empty);
             }
-            else NetworkIO.SetHermesFilter(0);
+          //  else NetworkIO.SetHermesFilter(0);
 
             console.ApolloPresent = chkApolloPresent.Checked;
         }

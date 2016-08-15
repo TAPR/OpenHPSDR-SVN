@@ -8047,7 +8047,7 @@ namespace Thetis
 
         public void SetAlexHPF(double freq)
         {
-            if (chkPower.Checked && alexpresent)
+            if (alexpresent && !initializing)
             {
                 if (mox && disable_hpf_on_tx)
                 {
@@ -8162,7 +8162,7 @@ namespace Thetis
 
         public void SetAlex2HPF(double freq)
         {
-            if (chkPower.Checked && alexpresent)
+            if (alexpresent && !initializing)
             {
                 // JanusAudio.SetAlexManEnable(0x01);
 
@@ -8272,7 +8272,7 @@ namespace Thetis
 
         public void SetAlexLPF(double freq)
         {
-            if (chkPower.Checked && alexpresent)
+            if (alexpresent && !initializing)
             {
                 if ((decimal)freq >= SetupForm.udAlex20mLPFStart.Value && // 30/20m LPF
                           (decimal)freq <= SetupForm.udAlex20mLPFEnd.Value)
@@ -8333,7 +8333,7 @@ namespace Thetis
 
         public void SetAlex2LPF(double freq)
         {
-            if (chkPower.Checked && alexpresent)
+            if (alexpresent && !initializing)
             {
                 if ((decimal)freq >= SetupForm.udAlex220mLPFStart.Value && // 30/20m LPF
                           (decimal)freq <= SetupForm.udAlex220mLPFEnd.Value)
@@ -11429,14 +11429,14 @@ namespace Thetis
                     lblPreamp.Text = "S-ATT";
                     udRX1StepAttData.BringToFront();
                     udRX1StepAttData_ValueChanged(this, EventArgs.Empty);
-                    NetworkIO.EnableADC1StepAtten(1);
+                   // NetworkIO.EnableADC1StepAtten(1);
                 }
                 else
                 {
                     lblPreamp.Text = "ATT";
                     comboPreamp.BringToFront();
                     comboPreamp_SelectedIndexChanged(this, EventArgs.Empty);
-                    NetworkIO.EnableADC1StepAtten(1);
+                  //  NetworkIO.EnableADC1StepAtten(1);
 
                     if (AlexPresent)
                         NetworkIO.SetAlexAtten(alex_atten); // normal up alex attenuator setting
@@ -11560,7 +11560,7 @@ namespace Thetis
                 rx2_attenuator_data = value;
                 if (rx2_step_att_present)
                 {
-                    NetworkIO.EnableADC2StepAtten(1);
+                   // NetworkIO.EnableADC2StepAtten(1);
                     NetworkIO.SetADC2StepAttenData(rx2_attenuator_data);
                 }
 
@@ -14885,7 +14885,7 @@ namespace Thetis
                 else
                 {
                     //rx2_step_att_present = false;
-                    NetworkIO.EnableADC2StepAtten(0);
+                   // NetworkIO.EnableADC2StepAtten(0);
                     comboRX2Preamp.Hide();
                     udRX2StepAttData.Hide();
                     lblRX2Preamp.Visible = false;
@@ -17885,12 +17885,12 @@ namespace Thetis
             set
             {
                 disable_6m_lna_on_rx = value;
-                if (chkPower.Checked)
-                {
+               // if (chkPower.Checked)
+               // {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
                     txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-                }
+               // }
             }
         }
 
@@ -17901,11 +17901,11 @@ namespace Thetis
             set
             {
                 disable_6m_lna_on_tx = value;
-                if (chkPower.Checked)
-                {
+               // if (chkPower.Checked)
+               // {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
-                }
+               // }
             }
         }
 
@@ -17916,11 +17916,11 @@ namespace Thetis
             set
             {
                 disable_hpf_on_tx = value;
-                if (chkPower.Checked)
-                {
+              //  if (chkPower.Checked)
+               // {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
-                }
+               // }
             }
         }
 
@@ -17931,12 +17931,12 @@ namespace Thetis
             set
             {
                 alex_hpf_bypass = value;
-                if (chkPower.Checked)
-                {
+              //  if (chkPower.Checked)
+              //  {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
                     txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-                }
+               // }
             }
         }
 
@@ -17947,12 +17947,12 @@ namespace Thetis
             set
             {
                 alex2_hpf_bypass = value;
-                if (chkPower.Checked)
-                {
+              //  if (chkPower.Checked)
+              //  {
                     double freq = Double.Parse(txtVFOBFreq.Text);
                     SetAlex2HPF(freq);
                     txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-                }
+               // }
             }
         }
 
@@ -17963,11 +17963,11 @@ namespace Thetis
             set
             {
                 alex1_5bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+             //   if (chkPower.Checked)
+             //   {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
-                }
+             //   }
             }
         }
 
@@ -17978,11 +17978,11 @@ namespace Thetis
             set
             {
                 alex21_5bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+              //  if (chkPower.Checked)
+              //  {
                     double freq = Double.Parse(txtVFOBFreq.Text);
                     SetAlex2HPF(freq);
-                }
+             //   }
             }
         }
 
@@ -17993,11 +17993,11 @@ namespace Thetis
             set
             {
                 alex6_5bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+            //    if (chkPower.Checked)
+             //   {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
-                }
+            //    }
             }
         }
 
@@ -18008,11 +18008,11 @@ namespace Thetis
             set
             {
                 alex26_5bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+            //    if (chkPower.Checked)
+             //   {
                     double freq = Double.Parse(txtVFOBFreq.Text);
                     SetAlex2HPF(freq);
-                }
+             //   }
             }
         }
 
@@ -18023,11 +18023,11 @@ namespace Thetis
             set
             {
                 alex9_5bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+              //  if (chkPower.Checked)
+              //  {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
-                }
+              //  }
             }
         }
 
@@ -18038,11 +18038,11 @@ namespace Thetis
             set
             {
                 alex29_5bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+            //    if (chkPower.Checked)
+             //   {
                     double freq = Double.Parse(txtVFOBFreq.Text);
                     SetAlex2HPF(freq);
-                }
+             //   }
             }
         }
 
@@ -18053,11 +18053,11 @@ namespace Thetis
             set
             {
                 alex13bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+            //    if (chkPower.Checked)
+             //   {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
-                }
+             //   }
             }
         }
 
@@ -18068,11 +18068,11 @@ namespace Thetis
             set
             {
                 alex213bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+             //   if (chkPower.Checked)
+            //    {
                     double freq = Double.Parse(txtVFOBFreq.Text);
                     SetAlex2HPF(freq);
-                }
+             //   }
             }
         }
 
@@ -18083,11 +18083,11 @@ namespace Thetis
             set
             {
                 alex20bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+             //   if (chkPower.Checked)
+              //  {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
-                }
+             //   }
             }
         }
 
@@ -18098,11 +18098,11 @@ namespace Thetis
             set
             {
                 alex220bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+              //  if (chkPower.Checked)
+             //   {
                     double freq = Double.Parse(txtVFOBFreq.Text);
                     SetAlex2HPF(freq);
-                }
+              //  }
             }
         }
 
@@ -18113,12 +18113,12 @@ namespace Thetis
             set
             {
                 alex6bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+             //   if (chkPower.Checked)
+              //  {
                     double freq = Double.Parse(txtVFOAFreq.Text);
                     SetAlexHPF(freq);
                     txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-                }
+              //  }
             }
         }
 
@@ -18129,11 +18129,11 @@ namespace Thetis
             set
             {
                 alex26bphpf_bypass = value;
-                if (chkPower.Checked)
-                {
+             //   if (chkPower.Checked)
+            //    {
                     double freq = Double.Parse(txtVFOBFreq.Text);
                     SetAlex2HPF(freq);
-                }
+              //  }
             }
         }
 
@@ -18382,14 +18382,14 @@ namespace Thetis
 
                     if (comboMeterTXMode.SelectedIndex < 0)
                         comboMeterTXMode.SelectedIndex = 0;
-                    if (chkPower.Checked)
-                    {
+                  //  if (chkPower.Checked)
+                   // {
                         SetAlexHPF(fwc_dds_freq);
                         SetAlexLPF(tx_dds_freq_mhz);
 
-                        // SetAlex2HPF(rx2_dds_freq_mhz);
-                        // SetAlex2LPF(rx2_dds_freq_mhz);
-                    }
+                        SetAlex2HPF(rx2_dds_freq_mhz);
+                        //SetAlex2LPF(rx2_dds_freq_mhz);
+                  //  }
 
                 }
                 else
@@ -18516,13 +18516,13 @@ namespace Thetis
                     if (!rx1_step_att_present)
                     {
                         NetworkIO.SetADC1StepAttenData(rx1_att_value);
-                        NetworkIO.EnableADC1StepAtten(1);
+                       // NetworkIO.EnableADC1StepAtten(1);
                     }
                 }
                 else
                 {
                     NetworkIO.SetRX1Preamp(merc_preamp);
-                    NetworkIO.EnableADC1StepAtten(0);
+                   // NetworkIO.EnableADC1StepAtten(0);
                 }
 
                 NetworkIO.SetAlexAtten(alex_atten);
@@ -18625,7 +18625,7 @@ namespace Thetis
                     current_hpsdr_model == HPSDRModel.ANAN200DII ||
                     current_hpsdr_model == HPSDRModel.ANAN500D)
                 {
-                    NetworkIO.EnableADC2StepAtten(1);
+                   // NetworkIO.EnableADC2StepAtten(1);
                     NetworkIO.SetADC2StepAttenData(rx2_att_value);
                 }
 
@@ -27435,16 +27435,18 @@ namespace Thetis
                     //if (penny_ext_ctrl_enabled)
                     // Penny.getPenny().UpdateExtCtrl(lo_band, lo_bandb, mox);
 
-                    if (alex_ant_ctrl_enabled)
-                        Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, true);
+                   // if (alex_ant_ctrl_enabled)
+                       // Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, true);
+                    Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, alex_ant_ctrl_enabled, true);
                 }
                 else
                 {
                     // if (penny_ext_ctrl_enabled)
                     // Penny.getPenny().UpdateExtCtrl(tx_band, rx2_band, mox);
 
-                    if (alex_ant_ctrl_enabled)
-                        Alex.getAlex().UpdateAlexAntSelection(tx_band, mox, false);
+                   // if (alex_ant_ctrl_enabled)
+                       // Alex.getAlex().UpdateAlexAntSelection(tx_band, mox, false);
+                    Alex.getAlex().UpdateAlexAntSelection(tx_band, mox, alex_ant_ctrl_enabled, false);
                 }
 
                 // Hdw.TransmitRelay = true;
@@ -27508,16 +27510,18 @@ namespace Thetis
                     // if (penny_ext_ctrl_enabled)
                     // Penny.getPenny().UpdateExtCtrl(lo_band, lo_bandb, mox);
 
-                    if (alex_ant_ctrl_enabled)
-                        Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, true);
+                   // if (alex_ant_ctrl_enabled)
+                      //  Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, true);
+                    Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, alex_ant_ctrl_enabled, true);
                 }
                 else
                 {
                     // if (penny_ext_ctrl_enabled)
                     // Penny.getPenny().UpdateExtCtrl(rx1_band, rx2_band, mox);
 
-                    if (alex_ant_ctrl_enabled)
-                        Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox, false);
+                   // if (alex_ant_ctrl_enabled)
+                       // Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox, false);
+                    Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox, alex_ant_ctrl_enabled, false);
                 }
 
             }
@@ -29646,8 +29650,8 @@ namespace Thetis
             Band lo_band = Band.FIRST;
             Band lo_bandb = Band.FIRST;
 
-            if (chkPower.Checked)
-            {
+          //  if (chkPower.Checked)
+          //  {
                 lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
                 lo_bandb = BandByFreq(XVTRForm.TranslateFreq(VFOBFreq), rx2_xvtr_index, false, current_region);
                 if (penny_ext_ctrl_enabled)
@@ -29661,18 +29665,21 @@ namespace Thetis
                     // if (penny_ext_ctrl_enabled)
                     // Penny.getPenny().UpdateExtCtrl(lo_band, lo_bandb, mox);
 
-                    if (alex_ant_ctrl_enabled)
-                        Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, true);
+                  //  if (alex_ant_ctrl_enabled)
+                      //  Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, true);
+                    Alex.getAlex().UpdateAlexAntSelection(lo_band, mox, alex_ant_ctrl_enabled, true);
+                    
                 }
                 else
                 {
                     // if (penny_ext_ctrl_enabled)
                     //  Penny.getPenny().UpdateExtCtrl(RX1Band, RX2Band, mox);
 
-                    if (alex_ant_ctrl_enabled)
-                        Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox, false);
+                   // if (alex_ant_ctrl_enabled)
+                      //  Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox, false);
+                    Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox, alex_ant_ctrl_enabled, false);
                 }
-            }
+           // }
 
             if (tx_band != old_tx_band)
             {
