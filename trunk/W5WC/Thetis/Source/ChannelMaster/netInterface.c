@@ -290,7 +290,7 @@ void SetPArelay(int bit) {
 }
 
 PORT
-void SetC1Bits(int bits) {
+void SetC1Bits(int bits) { // for HPSDR
 	C1Mask = bits;
 	return;
 }
@@ -445,15 +445,6 @@ void EnableApolloAutoTune(int bits) {
 		ApolloATU = 0x10;
 	else
 		ApolloATU = 0;
-	return;
-}
-
-PORT
-void SetHermesFilter(int bits) {
-	if (bits != 0)
-		HermesFilt = 0x20;
-	else
-		HermesFilt = 0;
 	return;
 }
 
@@ -706,17 +697,17 @@ void SetADC1StepAttenData(int data) {
 	return;
 }
 
-PORT
-void EnableADC1StepAtten(int bits) {
-	if (bits != 0) {
-		enable_ADC1_step_att = 0x20;
-	}
-	else {
-		enable_ADC1_step_att = 0;
-	}
-
-	return;
-}
+//PORT
+//void EnableADC1StepAtten(int bits) {
+//	if (bits != 0) {
+//		enable_ADC1_step_att = 0x20;
+//	}
+//	else {
+//		enable_ADC1_step_att = 0;
+//	}
+//
+//	return;
+//}
 
 PORT
 void SetADC2StepAttenData(int data) {
@@ -731,16 +722,16 @@ void SetADC2StepAttenData(int data) {
 	return;
 }
 
-PORT
-void EnableADC2StepAtten(int bits) {
-	if (bits != 0) {
-		enable_ADC2_step_att = 0x20;
-	}
-	else {
-		enable_ADC2_step_att = 0;
-	}
-	return;
-}
+//PORT
+//void EnableADC2StepAtten(int bits) {
+//	if (bits != 0) {
+//		enable_ADC2_step_att = 0x20;
+//	}
+//	else {
+//		enable_ADC2_step_att = 0;
+//	}
+//	return;
+//}
 
 PORT
 void SetADC3StepAttenData(int data) {
@@ -755,16 +746,16 @@ void SetADC3StepAttenData(int data) {
 	return;
 }
 
-PORT
-void EnableADC3StepAtten(int bits) {
-	if (bits != 0) {
-		enable_ADC3_step_att = 0x20;
-	}
-	else {
-		enable_ADC3_step_att = 0;
-	}
-	return;
-}
+//PORT
+//void EnableADC3StepAtten(int bits) {
+//	if (bits != 0) {
+//		enable_ADC3_step_att = 0x20;
+//	}
+//	else {
+//		enable_ADC3_step_att = 0;
+//	}
+//	return;
+//}
 
 PORT
 void ReversePaddles(int bits) {
