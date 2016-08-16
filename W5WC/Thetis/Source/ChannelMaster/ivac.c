@@ -531,9 +531,9 @@ PORT void SetIVACInLatency(int id, double lat, int reset)
 	if (a->in_latency != lat)
 	{
 		a->in_latency = lat;
+	}
 		if (reset)
 		SetRingBufferSize(id);
-	}
 }
 
 PORT void SetIVACOutLatency(int id, double lat, int reset)
@@ -543,9 +543,9 @@ PORT void SetIVACOutLatency(int id, double lat, int reset)
 	if (a->out_latency != lat)
 	{
 		a->out_latency = lat;
+	}
 		if (reset)
 			SetRingBufferSize(id);
-	}
 }
 
 PORT void SetIVACPAInLatency(int id, double lat, int reset)
@@ -555,9 +555,9 @@ PORT void SetIVACPAInLatency(int id, double lat, int reset)
 	if (a->pa_in_latency != lat)
 	{
 		a->pa_in_latency = lat;
+	}
 		if (reset)
 			SetRingBufferSize(id);
-	}
 }
 
 PORT void SetIVACPAOutLatency(int id, double lat, int reset)
@@ -567,9 +567,9 @@ PORT void SetIVACPAOutLatency(int id, double lat, int reset)
 	if (a->pa_out_latency != lat)
 	{
 		a->pa_out_latency = lat;
+	}
 		if (reset)
 			SetRingBufferSize(id);
-	}
 }
 
 PORT void SetIVACvox(int id, int vox)
