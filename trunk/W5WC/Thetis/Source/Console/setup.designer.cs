@@ -837,7 +837,7 @@
             this.rad6BPFled = new System.Windows.Forms.RadioButtonTS();
             this.udAlex13HPFStart = new System.Windows.Forms.NumericUpDownTS();
             this.labelTS132 = new System.Windows.Forms.LabelTS();
-            this.labelTS116 = new System.Windows.Forms.LabelTS();
+            this.labelAlex1FilterHPF = new System.Windows.Forms.LabelTS();
             this.udAlex6BPFStart = new System.Windows.Forms.NumericUpDownTS();
             this.labelTS127 = new System.Windows.Forms.LabelTS();
             this.udAlex6BPFEnd = new System.Windows.Forms.NumericUpDownTS();
@@ -13815,7 +13815,7 @@
             this.panelAlex1HPFControl.Controls.Add(this.panelTS5);
             this.panelAlex1HPFControl.Controls.Add(this.udAlex13HPFStart);
             this.panelAlex1HPFControl.Controls.Add(this.labelTS132);
-            this.panelAlex1HPFControl.Controls.Add(this.labelTS116);
+            this.panelAlex1HPFControl.Controls.Add(this.labelAlex1FilterHPF);
             this.panelAlex1HPFControl.Controls.Add(this.udAlex6BPFStart);
             this.panelAlex1HPFControl.Controls.Add(this.labelTS127);
             this.panelAlex1HPFControl.Controls.Add(this.udAlex6BPFEnd);
@@ -14377,16 +14377,16 @@
             this.labelTS132.Text = "6m BPF/LNA";
             this.labelTS132.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // labelTS116
+            // labelAlex1FilterHPF
             // 
-            this.labelTS116.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTS116.Image = null;
-            this.labelTS116.Location = new System.Drawing.Point(153, 0);
-            this.labelTS116.Name = "labelTS116";
-            this.labelTS116.Size = new System.Drawing.Size(56, 16);
-            this.labelTS116.TabIndex = 66;
-            this.labelTS116.Text = "HPF";
-            this.labelTS116.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelAlex1FilterHPF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAlex1FilterHPF.Image = null;
+            this.labelAlex1FilterHPF.Location = new System.Drawing.Point(153, 0);
+            this.labelAlex1FilterHPF.Name = "labelAlex1FilterHPF";
+            this.labelAlex1FilterHPF.Size = new System.Drawing.Size(56, 16);
+            this.labelAlex1FilterHPF.TabIndex = 66;
+            this.labelAlex1FilterHPF.Text = "HPF";
+            this.labelAlex1FilterHPF.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // udAlex6BPFStart
             // 
@@ -46434,7 +46434,7 @@
         private RadioButtonTS radioButtonTS3;
         private RadioButtonTS radioButtonTS4;
         private LabelTS labelTS117;
-        private LabelTS labelTS116;
+        private LabelTS labelAlex1FilterHPF;
         private LabelTS labelTS126;
         private LabelTS labelTS125;
         private LabelTS labelTS124;

@@ -5438,6 +5438,9 @@ namespace Thetis
                 radRX5ADC3.Enabled = true;
                 radRX6ADC3.Enabled = true;
                 radRX7ADC3.Enabled = true;
+
+                radGenModelANAN200DMKII.Visible = true;
+                radGenModelANAN500D.Visible = true;
             }
             else
             {
@@ -5529,6 +5532,9 @@ namespace Thetis
                 radRX5ADC3.Enabled = true;
                 radRX6ADC3.Enabled = true;
                 radRX7ADC3.Enabled = true;
+
+                radGenModelANAN200DMKII.Visible = true;
+                radGenModelANAN500D.Visible = true;
             }
             else
             {
@@ -5780,6 +5786,18 @@ namespace Thetis
                 panelAlexRXXVRTControl.Visible = false;
                 labelAlexFilterActive.Location = new Point(298, 0);
             }
+            else if (radGenModelANAN200DMKII.Checked || radGenModelANAN500D.Checked)
+            {
+                chkRxOutOnTx.Enabled = true;
+                chkEXT1OutOnTx.Enabled = true;
+                chkEXT2OutOnTx.Enabled = true;
+                panelAlex1HPFControl.Visible = true;
+                tpAlexFilterControl.Text = "BPF1/LPF";
+                tpAlex2FilterControl.Text = "BPF2";
+                labelAlex1FilterHPF.Text = "BPF1";
+                panelAlexRXXVRTControl.Visible = true;
+                labelAlexFilterActive.Location = new Point(275, 0);
+            }
             else
             {
                 chkRxOutOnTx.Enabled = true;
@@ -5787,6 +5805,7 @@ namespace Thetis
                 chkEXT2OutOnTx.Enabled = true;
                 panelAlex1HPFControl.Visible = true;
                 tpAlexFilterControl.Text = "HPF/LPF";
+                labelAlex1FilterHPF.Text = "HPF";
                 panelAlexRXXVRTControl.Visible = true;
                 labelAlexFilterActive.Location = new Point(275, 0);
             }
@@ -12009,7 +12028,8 @@ namespace Thetis
                         grpPAGainByBand.Visible = true;
                         break;
                     case Keys.O:
-                        //radSigGenTXOutput.Visible = true;
+                        radGenModelANAN200DMKII.Visible = true;
+                        radGenModelANAN500D.Visible = true;
                         break;
                     case Keys.P:
                         chkAutoPACalibrate.Visible = true;

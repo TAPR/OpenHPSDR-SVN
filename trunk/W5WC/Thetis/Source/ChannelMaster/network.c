@@ -1032,7 +1032,7 @@ void CmdHighPriority() { // port 1027
 	packetbuf[345] = prn->tx[0].drive_level;
 
 	// Open Collector Ouputs
-	packetbuf[1401] = prn->oc_output & 0x7f;
+	packetbuf[1401] = (prn->oc_output << 1) & 0xfe;
 
 	// User Outputs DB9 pins 1-4
 	//packetbuf[1402] = // ToDo
