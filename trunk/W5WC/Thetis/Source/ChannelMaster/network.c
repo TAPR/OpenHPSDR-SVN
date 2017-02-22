@@ -26,15 +26,7 @@
 #endif
 
 #include "network.h" 
-
-//#include <windows.h> 
-//#include <winsock2.h>
-//#include <ws2tcpip.h>
-//#include <wspiapi.h>
 #include <Iphlpapi.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
 #pragma comment(lib, "IPHLPAPI.lib")
 #pragma comment(lib, "ws2_32.lib")
@@ -63,14 +55,15 @@ int rxreads_bf = 0;
 
 /* returns 0 on success, non zero on failure */
 int initWSA(void) {
-	/* int addrs[10];  */
+	WSADATA data;
+	WORD wVersionRequested = 0x202;
+
 	if (WSAinitialized) {
 		WSACleanup();
-		//return 0;
 	}
 
 	WSAinitialized = 1;
-	if (WSAStartup(MAKEWORD(2, 2), &WSAdata) != 0) {
+	if (WSAStartup(wVersionRequested, &data) != 0) {
 		printf("Failed. Error Code : %d", WSAGetLastError());
 		return 1;
 	}
@@ -106,16 +99,12 @@ int recvfrom_withtimeout(SOCKET s, char *buf, int buflen, int flags, struct sock
 u_long MetisAddr = 0;
 struct sockaddr_in MetisSockAddr;
 int WSA_inited = 0;
-//WSADATA wsaData;
-//struct addrinfo *result = NULL;
-//struct addrinfo hints;
 struct fd_set readfds, writefds;
 
 PORT
-void DeInitMetisSockets(void) {
-	//shutdown(listenSock, SD_BOTH); 	
+void DeInitMetisSockets(void) { 	
 	closesocket(listenSock);
-	listenSock = (SOCKET)0;
+	listenSock = INVALID_SOCKET; 
 	WSACleanup();
 	WSA_inited = 0;
 	WSAinitialized = 0;
@@ -132,44 +121,50 @@ int nativeInitMetis(char *netaddr, char *localaddr, int localport) {
 	int rc;
 	int sndbufsize;
 	struct sockaddr_in local = { 0 };
+	//isWindows8Point1 = 0;
+	//LADDR = inet_addr(localaddr);
+	//LPORT = htons((u_short)localport);
+	//SYSTEM_INFO systemInfo;
+	//GetSystemInfo(&systemInfo);
+	//systemInfo.dwAllocationGranularity;
 
-	if (!WSA_inited) {
-		rc = initWSA();
-		if (rc != 0) {
-			return rc;
+		if (!WSA_inited) {
+			rc = initWSA();
+			if (rc != 0) {
+				return rc;
+			}
+			WSA_inited = 1;
+			printf("initWSA ok!\n");
 		}
-		WSA_inited = 1;
-		printf("initWSA ok!\n");
-	}
 
-	local.sin_port = htons((u_short)localport);
-	local.sin_family = AF_INET;
-	local.sin_addr.s_addr = inet_addr(localaddr);
+		local.sin_port = htons((u_short)localport);
+		local.sin_family = AF_INET;
+		local.sin_addr.s_addr = inet_addr(localaddr);
 
-	if ((listenSock = socket(AF_INET, SOCK_DGRAM, 0)) == INVALID_SOCKET) {
-		printf("createSocket Error: socket failed %ld\n", WSAGetLastError());
-		WSACleanup();
-		return INVALID_SOCKET;
-	}
+		if ((listenSock = socket(AF_INET, SOCK_DGRAM, 0)) == INVALID_SOCKET) {
+			printf("createSocket Error: socket failed %ld\n", WSAGetLastError());
+			WSACleanup();
+			return INVALID_SOCKET;
+		}
 
-	// bind to the local address
-	bind(listenSock, (SOCKADDR *)&local, sizeof(local));
+		// bind to the local address
+		bind(listenSock, (SOCKADDR *)&local, sizeof(local));
 
-	MetisAddr = inet_addr(netaddr);
+		MetisAddr = inet_addr(netaddr);
 
-	fflush(stdout);
+		fflush(stdout);
 
-	sndbufsize = 0xffff;
-	rc = setsockopt(listenSock, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int));
-	if (rc == SOCKET_ERROR) {
-		printf("CreateSockets Warning: setsockopt SO_SNDBUF failed!\n");
-	}
+		sndbufsize = 0xffff;
+		rc = setsockopt(listenSock, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int));
+		if (rc == SOCKET_ERROR) {
+			printf("CreateSockets Warning: setsockopt SO_SNDBUF failed!\n");
+		}
 
-	sndbufsize = 0xffff;
-	rc = setsockopt(listenSock, SOL_SOCKET, SO_RCVBUF, (const char *)&sndbufsize, sizeof(int));
-	if (rc == SOCKET_ERROR) {
-		printf("CreateSockets Warning: setsockopt SO_RCVBUF failed!\n");
-	}
+		sndbufsize = 0xffff;
+		rc = setsockopt(listenSock, SOL_SOCKET, SO_RCVBUF, (const char *)&sndbufsize, sizeof(int));
+		if (rc == SOCKET_ERROR) {
+			printf("CreateSockets Warning: setsockopt SO_RCVBUF failed!\n");
+		}
 
 	DestIp = inet_addr(netaddr);
 
@@ -512,8 +507,8 @@ int ReadUDPFrame(unsigned char *bufp) {
 		if (seqnum != (1 + prn->cc_seq_no))  {
 			prn->cc_seq_err += 1;
 			//PrintTimeHack();
-			//printf("- Rx High Priority C&C: seq error this: %d last: %d\n", seqnum, prn->cc_seq_no);
-			//fflush(stdout);
+			printf("- Rx High Priority C&C: seq error this: %d last: %d\n", seqnum, prn->cc_seq_no);
+			fflush(stdout);
 		}
 
 		prn->cc_seq_no = seqnum;
@@ -524,8 +519,8 @@ int ReadUDPFrame(unsigned char *bufp) {
 		if (seqnum != (1 + prn->tx[0].mic_in_seq_no))  {
 			prn->tx[0].mic_in_seq_err += 1;
 			//PrintTimeHack();
-			//printf("- Mic samples: seq error this: %d last: %d\n", seqnum, prn->tx[0].mic_in_seq_no);
-			//fflush(stdout);
+			printf("- Mic samples: seq error this: %d last: %d\n", seqnum, prn->tx[0].mic_in_seq_no);
+			fflush(stdout);
 		}
 
 		prn->tx[0].mic_in_seq_no = seqnum;
@@ -628,8 +623,8 @@ int ReadUDPFrame(unsigned char *bufp) {
 		if (seqnum != (1 + prn->rx[0].rx_in_seq_no))  {
 			prn->rx[0].rx_in_seq_err += 1;
 			//PrintTimeHack();
-			//printf("- Rx0 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[0].rx_in_seq_no);
-			//fflush(stdout);
+			printf("- Rx0 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[0].rx_in_seq_no);
+			fflush(stdout);
 		}
 
 		prn->rx[0].rx_in_seq_no = seqnum;
@@ -639,8 +634,8 @@ int ReadUDPFrame(unsigned char *bufp) {
 		if (seqnum != (1 + prn->rx[1].rx_in_seq_no))  {
 			prn->rx[1].rx_in_seq_err += 1;
 			//PrintTimeHack();
-			//printf("- Rx1 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[1].rx_in_seq_no);
-			//fflush(stdout);
+			printf("- Rx1 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[1].rx_in_seq_no);
+			fflush(stdout);
 		}
 
 		prn->rx[1].rx_in_seq_no = seqnum;
@@ -651,8 +646,8 @@ int ReadUDPFrame(unsigned char *bufp) {
 		if (seqnum != (1 + prn->rx[2].rx_in_seq_no))  {
 			prn->rx[2].rx_in_seq_err += 1;
 			//PrintTimeHack();
-			//printf("- Rx2 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[2].rx_in_seq_no);
-			//fflush(stdout);
+			printf("- Rx2 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[2].rx_in_seq_no);
+			fflush(stdout);
 		}
 
 		prn->rx[2].rx_in_seq_no = seqnum;
@@ -662,8 +657,8 @@ int ReadUDPFrame(unsigned char *bufp) {
 		if (seqnum != (1 + prn->rx[3].rx_in_seq_no))  {
 			prn->rx[3].rx_in_seq_err += 1;
 			//PrintTimeHack();
-			//printf("- Rx3 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[3].rx_in_seq_no);
-			//fflush(stdout);
+			printf("- Rx3 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[3].rx_in_seq_no);
+			fflush(stdout);
 		}
 
 		prn->rx[3].rx_in_seq_no = seqnum;
@@ -673,8 +668,8 @@ int ReadUDPFrame(unsigned char *bufp) {
 		if (seqnum != (1 + prn->rx[4].rx_in_seq_no))  {
 			prn->rx[4].rx_in_seq_err += 1;
 			//PrintTimeHack();
-			//printf("- Rx4 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[4].rx_in_seq_no);
-			//fflush(stdout);
+			printf("- Rx4 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[4].rx_in_seq_no);
+			fflush(stdout);
 		}
 
 		prn->rx[4].rx_in_seq_no = seqnum;
@@ -684,8 +679,8 @@ int ReadUDPFrame(unsigned char *bufp) {
 		if (seqnum != (1 + prn->rx[5].rx_in_seq_no))  {
 			prn->rx[5].rx_in_seq_err += 1;
 			//PrintTimeHack();
-			//printf("- Rx5 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[5].rx_in_seq_no);
-			//fflush(stdout);
+			printf("- Rx5 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[5].rx_in_seq_no);
+			fflush(stdout);
 		}
 
 		prn->rx[5].rx_in_seq_no = seqnum;
@@ -695,8 +690,8 @@ int ReadUDPFrame(unsigned char *bufp) {
 		if (seqnum != (1 + prn->rx[6].rx_in_seq_no))  {
 			prn->rx[6].rx_in_seq_err += 1;
 			//PrintTimeHack();
-			//printf("- Rx6 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[6].rx_in_seq_no);
-			//fflush(stdout);
+			printf("- Rx6 I/Q: seq error this: %d last: %d\n", seqnum, prn->rx[6].rx_in_seq_no);
+			fflush(stdout);
 		}
 
 		prn->rx[6].rx_in_seq_no = seqnum;
@@ -709,155 +704,149 @@ int ReadUDPFrame(unsigned char *bufp) {
 	return rc;
 }
 
-//void 
-//PrintTimeHack() {
-//	GetLocalTime(&lt);
-//	printf("(%02d/%02d %02d:%02d:%02d:%03d) ", lt.wMonth, lt.wDay, lt.wHour, lt.wMinute, lt.wSecond, lt.wMilliseconds);
-//}
-
 void
 ReadThreadMainLoop() {
 	int i, rc, k;
 	double sbuf[500] = { 0 };	// FOR DEBUG ONLY
+
 	prn->hDataEvent = WSACreateEvent();
-	WSAEventSelect(listenSock, prn->hDataEvent, FD_READ);
-	PrintTimeHack();
-	printf("- ReadThreadMainLoop()\n");
-	fflush(stdout);
+		WSAEventSelect(listenSock, prn->hDataEvent, FD_READ);
+		PrintTimeHack();
+		printf("- ReadThreadMainLoop()\n");
+		fflush(stdout);
 
 	while (io_keep_running != 0) {
-
-		DWORD retVal = WSAWaitForMultipleEvents(1, &prn->hDataEvent, FALSE, 1000, FALSE);
-		if ((retVal == WSA_WAIT_FAILED) || (retVal == WSA_WAIT_TIMEOUT))
-		{
-			HaveSync = 0; //send console LOS
-			SendStopToMetis();
-			memset(prn->RxReadBufp, 0, 238);
-			memset(prn->TxReadBufp, 0, 720);
-			Inbound(0, 238, prn->RxReadBufp);
-			Inbound(1, 238, prn->RxReadBufp);
-			Inbound(inid(1, 0), 720, prn->TxReadBufp);
-			continue;
-		}
-		else
-		{
-			WSAEnumNetworkEvents(listenSock, prn->hDataEvent, &prn->wsaProcessEvents);
-			if (prn->wsaProcessEvents.lNetworkEvents & FD_READ)
+			DWORD retVal = WSAWaitForMultipleEvents(1, &prn->hDataEvent, FALSE, 1000, FALSE);
+			if ((retVal == WSA_WAIT_FAILED) || (retVal == WSA_WAIT_TIMEOUT))
 			{
-				if (prn->wsaProcessEvents.iErrorCode[FD_READ_BIT] != 0)
+				HaveSync = 0; //send console LOS
+				SendStopToMetis();
+				memset(prn->RxReadBufp, 0, prn->rx[0].spp);
+				memset(prn->TxReadBufp, 0, prn->mic.spp);
+				Inbound(inid(0, 0), prn->rx[0].spp, prn->RxReadBufp);
+				Inbound(inid(0, 1), prn->rx[1].spp, prn->RxReadBufp);
+				Inbound(inid(1, 0), prn->mic.spp, prn->TxReadBufp);
+				continue;
+			}
+			else
+			{
+				WSAEnumNetworkEvents(listenSock, prn->hDataEvent, &prn->wsaProcessEvents);
+				if (prn->wsaProcessEvents.lNetworkEvents & FD_READ)
 				{
-					printf("FD_READ failed with error %d\n",
-						prn->wsaProcessEvents.iErrorCode[FD_READ_BIT]);
-					break;
-				}
-
-				rc = ReadUDPFrame(prn->ReadBufp);
-
-				switch (rc)
-				{
-				case 1025:
-					//Byte 0 - Bit [0] - PTT  1 = active, 0 = inactive
-					//         Bit [1] - Dot  1 = active, 0 = inactive
-					//         Bit [2] - Dash 1 = active, 0 = inactive
-					prn->ptt_in = prn->ReadBufp[0] & 0x1;
-					prn->dot_in = prn->ReadBufp[0] & 0x2;
-					prn->dash_in = prn->ReadBufp[0] & 0x4;
-
-					//Byte 1 - Bit [0] - ADC0  Overload 1 = active, 0 = inactive
-					//		    Bit [1] - ADC1  Overload 1 = active, 0 = inactive
-					//         Bit [2] - ADC2  Overload 1 = active, 0 = inactive  * ADC2-7 set to 0 for Angelia
-					//         Bit [3] - ADC3  Overload 1 = active, 0 = inactive
-					//         Bit [4] - ADC4  Overload 1 = active, 0 = inactive
-					//         Bit [5] - ADC5  Overload 1 = active, 0 = inactive
-					//         Bit [6] - ADC6  Overload 1 = active, 0 = inactive
-					//         Bit [7] - ADC7  Overload 1 = active, 0 = inactive
-					for (i = 0; i < MAX_ADC; i++)
-						prn->adc[i].adc_overload = ((prn->ReadBufp[1] >> i) & 0x1) != 0;
-
-					//Bytes 2,3      Exciter Power [15:0]     * 12 bits sign extended to 16
-					//Bytes 10,11    FWD Power [15:0]           ditto
-					//Bytes 18,19    REV Power [15:0]           ditto
-					prn->tx[0].exciter_power = prn->ReadBufp[2] << 8 | prn->ReadBufp[3];
-					prn->tx[0].fwd_power = prn->ReadBufp[10] << 8 | prn->ReadBufp[11];
-					prn->tx[0].rev_power = prn->ReadBufp[18] << 8 | prn->ReadBufp[19];
-
-					//Bytes 45,46  Supply Volts [15:0]          
-					prn->supply_volts = prn->ReadBufp[45] << 8 | prn->ReadBufp[46];
-
-					//Bytes 47,48  User ADC3 [15:0]            
-					//Bytes 49,50  User ADC2 [15:0]             
-					//Bytes 51,52  User ADC1 [15:0]            
-					//Bytes 53,54  User ADC0 [15:0]             
-					//prn->user_adc3 = prn->ReadBufp[47] << 8 | prn->ReadBufp[48];
-					//prn->user_adc2 = prn->ReadBufp[49] << 8 | prn->ReadBufp[50];
-					//prn->user_adc1 = prn->ReadBufp[51] << 8 | prn->ReadBufp[52];
-					prn->user_adc0 = prn->ReadBufp[53] << 8 | prn->ReadBufp[54];
-
-					SetAmpProtectADCValue (0, prn->user_adc0);
-
-					//Byte 55 - Bit [0] - User I/O (IO4) 1 = active, 0 = inactive
-					//          Bit [1] - User I/O (IO5) 1 = active, 0 = inactive
-					//          Bit [2] - User I/O (IO6) 1 = active, 0 = inactive
-					//          Bit [3] - User I/O (IO8) 1 = active, 0 = inactive
-					prn->user_io = prn->ReadBufp[55];
-
-					break;
-				case 1026: // 1440 bytes 16-bit mic samples
-					for (i = 0, k = 0; i < 720; i++, k += 2)
+					if (prn->wsaProcessEvents.iErrorCode[FD_READ_BIT] != 0)
 					{
-						// prn->TxReadBufp[2 * i] = ((prn->ReadBufp[k + 0] & 0xff) | 
-						// 	(prn->ReadBufp[k + 1] << 8)) / 32768.0;
-						prn->TxReadBufp[2 * i] = const_1_div_2147483648_ *
-							(double)(prn->ReadBufp[k + 0] << 24 |
-							prn->ReadBufp[k + 1] << 16);
-						prn->TxReadBufp[2 * i + 1] = 0.0;
-					}
-					//WriteAudio(10.0, 48000, 720, prn->TxReadBufp,3);
-					Inbound(inid(1, 0), 720, prn->TxReadBufp);
-					break;
-				case 1027: // 1024 bytes 16bit raw ADC data, handled in ReadUDPFrame()
-				case 1028:
-				case 1029:
-				case 1030:
-				case 1031:
-				case 1032:
-				case 1033:
-				case 1034:
-					break;
-				case 1035: // DDC I&Q data
-				case 1036:
-				case 1037:
-				case 1038:
-				case 1039:
-				case 1040:
-				case 1041:
-					for (i = 0, k = 0; i < 238; i++, k += 6) //240
-					{
-						prn->RxReadBufp[2 * i + 0] = const_1_div_2147483648_ *
-							(double)(prn->ReadBufp[k + 0] << 24 |
-							prn->ReadBufp[k + 1] << 16 |
-							prn->ReadBufp[k + 2] << 8);
-
-						prn->RxReadBufp[2 * i + 1] = const_1_div_2147483648_ *
-							(double)(prn->ReadBufp[k + 3] << 24 |
-							prn->ReadBufp[k + 4] << 16 |
-							prn->ReadBufp[k + 5] << 8);
+						printf("FD_READ failed with error %d\n",
+							prn->wsaProcessEvents.iErrorCode[FD_READ_BIT]);
+						break;
 					}
 
-					// sbuf[] USED FOR DEBUG ONLY
-					for (i = 0; i < 2 * 238; i++)
-						sbuf[i] = prn->RxReadBufp[i];
+					rc = ReadUDPFrame(prn->ReadBufp);
 
-					xrouter(0, 0, rc, 238, prn->RxReadBufp);
-					//Inbound (1, 238, prn->RxReadBufp);
-					break;
-					//default:
-					//	memset(RxReadBufp, 0, 240);
-					//	Inbound (0, 240, RxReadBufp);
-					//	break;
+					switch (rc)
+					{
+					case 1025:
+						//Byte 0 - Bit [0] - PTT  1 = active, 0 = inactive
+						//         Bit [1] - Dot  1 = active, 0 = inactive
+						//         Bit [2] - Dash 1 = active, 0 = inactive
+						prn->ptt_in = prn->ReadBufp[0] & 0x1;
+						prn->dot_in = prn->ReadBufp[0] & 0x2;
+						prn->dash_in = prn->ReadBufp[0] & 0x4;
+
+						//Byte 1 - Bit [0] - ADC0  Overload 1 = active, 0 = inactive
+						//		    Bit [1] - ADC1  Overload 1 = active, 0 = inactive
+						//         Bit [2] - ADC2  Overload 1 = active, 0 = inactive  * ADC2-7 set to 0 for Angelia
+						//         Bit [3] - ADC3  Overload 1 = active, 0 = inactive
+						//         Bit [4] - ADC4  Overload 1 = active, 0 = inactive
+						//         Bit [5] - ADC5  Overload 1 = active, 0 = inactive
+						//         Bit [6] - ADC6  Overload 1 = active, 0 = inactive
+						//         Bit [7] - ADC7  Overload 1 = active, 0 = inactive
+						for (i = 0; i < MAX_ADC; i++)
+							prn->adc[i].adc_overload = ((prn->ReadBufp[1] >> i) & 0x1) != 0;
+
+						//Bytes 2,3      Exciter Power [15:0]     * 12 bits sign extended to 16
+						//Bytes 10,11    FWD Power [15:0]           ditto
+						//Bytes 18,19    REV Power [15:0]           ditto
+						prn->tx[0].exciter_power = prn->ReadBufp[2] << 8 | prn->ReadBufp[3];
+						prn->tx[0].fwd_power = prn->ReadBufp[10] << 8 | prn->ReadBufp[11];
+						prn->tx[0].rev_power = prn->ReadBufp[18] << 8 | prn->ReadBufp[19];
+
+						//Bytes 45,46  Supply Volts [15:0]          
+						prn->supply_volts = prn->ReadBufp[45] << 8 | prn->ReadBufp[46];
+
+						//Bytes 47,48  User ADC3 [15:0]            
+						//Bytes 49,50  User ADC2 [15:0]             
+						//Bytes 51,52  User ADC1 [15:0]            
+						//Bytes 53,54  User ADC0 [15:0]             
+						//prn->user_adc3 = prn->ReadBufp[47] << 8 | prn->ReadBufp[48];
+						//prn->user_adc2 = prn->ReadBufp[49] << 8 | prn->ReadBufp[50];
+						//prn->user_adc1 = prn->ReadBufp[51] << 8 | prn->ReadBufp[52];
+						prn->user_adc0 = prn->ReadBufp[53] << 8 | prn->ReadBufp[54];
+
+						SetAmpProtectADCValue(0, prn->user_adc0);
+
+						//Byte 55 - Bit [0] - User I/O (IO4) 1 = active, 0 = inactive
+						//          Bit [1] - User I/O (IO5) 1 = active, 0 = inactive
+						//          Bit [2] - User I/O (IO6) 1 = active, 0 = inactive
+						//          Bit [3] - User I/O (IO8) 1 = active, 0 = inactive
+						prn->user_io = prn->ReadBufp[55];
+
+						break;
+					case 1026: // 1440 bytes 16-bit mic samples
+						for (i = 0, k = 0; i < prn->mic.spp; i++, k += 2)
+						{
+							// prn->TxReadBufp[2 * i] = ((prn->ReadBufp[k + 0] & 0xff) | 
+							// 	(prn->ReadBufp[k + 1] << 8)) / 32768.0;
+							prn->TxReadBufp[2 * i] = const_1_div_2147483648_ *
+								(double)(prn->ReadBufp[k + 0] << 24 |
+								prn->ReadBufp[k + 1] << 16);
+							prn->TxReadBufp[2 * i + 1] = 0.0;
+						}
+						//WriteAudio(10.0, 48000, 720, prn->TxReadBufp,3);
+						Inbound(inid(1, 0), prn->mic.spp, prn->TxReadBufp);
+						break;
+					case 1027: // 1024 bytes 16bit raw ADC data, handled in ReadUDPFrame()
+					case 1028:
+					case 1029:
+					case 1030:
+					case 1031:
+					case 1032:
+					case 1033:
+					case 1034:
+						break;
+					case 1035: // DDC I&Q data
+					case 1036:
+					case 1037:
+					case 1038:
+					case 1039:
+					case 1040:
+					case 1041:
+						for (i = 0, k = 0; i < prn->rx[0].spp; i++, k += 6)
+						{
+							prn->RxReadBufp[2 * i + 0] = const_1_div_2147483648_ *
+								(double)(prn->ReadBufp[k + 0] << 24 |
+								prn->ReadBufp[k + 1] << 16 |
+								prn->ReadBufp[k + 2] << 8);
+
+							prn->RxReadBufp[2 * i + 1] = const_1_div_2147483648_ *
+								(double)(prn->ReadBufp[k + 3] << 24 |
+								prn->ReadBufp[k + 4] << 16 |
+								prn->ReadBufp[k + 5] << 8);
+						}
+
+						// sbuf[] USED FOR DEBUG ONLY
+						for (i = 0; i < 2 * prn->rx[0].spp; i++)
+							sbuf[i] = prn->RxReadBufp[i];
+
+						xrouter(0, 0, rc, prn->rx[0].spp, prn->RxReadBufp);
+						//Inbound (1, 238, prn->RxReadBufp);
+						break;
+						//default:
+						//	memset(RxReadBufp, 0, 240);
+						//	Inbound (0, 240, RxReadBufp);
+						//	break;
+					}
 				}
 			}
-		}
 	}
 }
 
@@ -901,7 +890,7 @@ void CmdGeneral() { // port 1024
 	packetbuf[25] = prn->wb_samples_per_packet & 0xff;
 	// Wideband sample size 16-bits
 	packetbuf[26] = prn->wb_sample_size;
-	// Wideband update rate 20 fps
+	// Wideband update rate in milliseconds
 	packetbuf[27] = prn->wb_update_rate;
 	// Wideband packets per frame, default = 32
 	packetbuf[28] = prn->wb_packets_per_frame;
@@ -1253,11 +1242,10 @@ void sendOutbound(int id, double* out) {
 	// convert from complex to byte
 	// big-endian
 	EnterCriticalSection(&prn->udpOUT);
-
 	if (id == 1)
 	{
-		// 24-bit mic audio out
-		for (i = 0; i < 480; i++)
+		// 24-bit TX out (IQ samples)
+		for (i = 0; i < 2 * prn->tx[0].spp; i++)
 		{
 			itemp = out[i] >= 0.0 ? (int)floor(out[i] * 8388607.0 + 0.5) :
 				(int)ceil(out[i] * 8388607.0 - 0.5);
@@ -1265,22 +1253,21 @@ void sendOutbound(int id, double* out) {
 			prn->OutBufp[i * 3 + 1] = (char)((itemp >> 8) & 0xff);
 			prn->OutBufp[i * 3 + 2] = (char)(itemp & 0xff);
 		}
-
+		WriteUDPFrame(id, prn->OutBufp, 6 * prn->tx[0].spp);
 	}
 	else
 	{
-		// 16-bit receiver audio out
+		// 16-bit receiver audio out (LR samples)
 		// WriteAudio(30.0, 48000, 360, out, 3);
-		for (i = 0; i < 720; i++)
+		for (i = 0; i < 2 * prn->audio[0].spp; i++)
 		{
 			temp = out[i] >= 0.0 ? (short)floor(out[i] * 32767.0 + 0.5) :
 				(short)ceil(out[i] * 32767.0 - 0.5);
 			prn->OutBufp[i * 2] = (char)((temp >> 8) & 0xff);
 			prn->OutBufp[i * 2 + 1] = (char)(temp & 0xff);
 		}
+		WriteUDPFrame(id, prn->OutBufp, 4 * prn->audio[0].spp);
 	}
-
-	WriteUDPFrame(id, prn->OutBufp, 1440);
 	LeaveCriticalSection(&prn->udpOUT);
 }
 
@@ -1352,20 +1339,18 @@ void KeepAliveLoop(void)
 	if (prn->hTimer == NULL)
 	{
 		printf("CreateWaitableTimer failed (%d)\n", GetLastError());
-		//return 1;
 	}
 	else
 	{
-		if (!SetWaitableTimer(prn->hTimer, &prn->liDueTime, 300, NULL, NULL, 0))
+		if (!SetWaitableTimer(prn->hTimer, &prn->liDueTime, 500, NULL, NULL, 0))
 		{
 			printf("SetWaitableTimer failed (%d)\n", GetLastError());
-			//return 2;
 		}
 
 		while (io_keep_running)
 		{
 			WaitForSingleObject(prn->hTimer, INFINITE);
-			if (prn->run) CmdGeneral();
+			if (prn->run && prn->wdt) CmdGeneral();
 		}
 
 		CancelWaitableTimer(prn->hTimer);
@@ -1413,5 +1398,3 @@ DWORD WINAPI KeepAliveMain(LPVOID n) {
 
 	return 0;//NULL;
 }
-
-

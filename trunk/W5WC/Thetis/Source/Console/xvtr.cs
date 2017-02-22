@@ -5097,7 +5097,8 @@ namespace Thetis
 
         public bool GetDisablePA(int index)
         {
-            return disable_pa[index].Checked;
+            if (index < 0) return false;
+            else return disable_pa[index].Checked;
         }
 
 		#endregion

@@ -161,7 +161,7 @@ PORT void destroy_ivac(int id)
 PORT void xvacIN(int id, double* in_tx)
 {
 	IVAC a = pvac[id];
-	if (a->run)
+	if (a->run && !a->vac_bypass)
 	{
 		if ((int)ringbuffer_read_space(a->rb_vacIN) >= 2 * a->mic_size)
 		{		// copy data from rings into buffers
@@ -663,7 +663,7 @@ void SetRingBufferSize(int id)
 {
 	IVAC a = pvac[id];
 
-	int rb_vacIN_size = 2 * a->vac_rate * a->in_latency;
+	int rb_vacIN_size = (int)(2 * a->vac_rate * a->in_latency);
 	if (a->vac_size * 2 > rb_vacIN_size)
 		rb_vacIN_size = 2 * a->vac_size;
 	else if (rb_vacIN_size % a->vac_size > 0)
@@ -672,7 +672,7 @@ void SetRingBufferSize(int id)
 			(rb_vacIN_size % a->vac_size);
 	}
 
-	int rb_vacOUT_size = 2 * a->vac_rate * a->out_latency;
+	int rb_vacOUT_size = (int)(2 * a->vac_rate * a->out_latency);
 	if (a->vac_size * 2 > rb_vacOUT_size)
 		rb_vacOUT_size = 2 * a->vac_size;
 	else if (rb_vacOUT_size % a->vac_size > 0)
@@ -685,14 +685,14 @@ void SetRingBufferSize(int id)
 	{
 		ringbuffer_free(a->rb_vacIN);
 		a->rb_vacIN = 0;
-		a->rb_vacIN = ringbuffer_create(rb_vacIN_size);
+		a->rb_vacIN = ringbuffer_create(2 * rb_vacIN_size); //W4WMT here we account for two samples per frame in Thetis
 		ringbuffer_restart(a->rb_vacIN, 2 * a->vac_size);
 	}
 	if (a->rb_vacOUT != 0)
 	{
 		ringbuffer_free(a->rb_vacOUT);
 		a->rb_vacOUT = 0;
-		a->rb_vacOUT = ringbuffer_create(rb_vacOUT_size);
+		a->rb_vacOUT = ringbuffer_create(2 * rb_vacOUT_size); //W4WMT here we account for two samples per frame in Thetis
 		ringbuffer_restart(a->rb_vacOUT, a->iq_type ? 2 * a->iq_size : 2 * a->vac_size);
 	}
 }

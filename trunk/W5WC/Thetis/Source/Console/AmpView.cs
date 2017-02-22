@@ -20,23 +20,24 @@ namespace Thetis
         }
 
         GCHandle hx, hym, hyc, hys, hcm, hcc, hcs;
-        const int ints = 16;
-        const int spi = 256;
+        const int max_ints = 16;
+        const int max_samps = 4096;
         const int np = 512;
-        double[] x  = new double[ints * spi];
-        double[] ym = new double[ints * spi];
-        double[] yc = new double[ints * spi];
-        double[] ys = new double[ints * spi];
-        double[] cm = new double[4 * ints];
-        double[] cc = new double[4 * ints];
-        double[] cs = new double[4 * ints];
-        double[] t  = new double[ints + 1];
+        double[] x  = new double[max_samps];
+        double[] ym = new double[max_samps];
+        double[] yc = new double[max_samps];
+        double[] ys = new double[max_samps];
+        double[] cm = new double[4 * max_ints];
+        double[] cc = new double[4 * max_ints];
+        double[] cs = new double[4 * max_ints];
+        double[] t  = new double[max_ints + 1];
         int skip = 1;
         bool showgain = false;
-
+        private static Object intslock = new Object();
 
         private void AmpView_Load(object sender, EventArgs e)
         {
+            PSForm.ampv.ClientSize = new System.Drawing.Size(560, 445); //
             Common.RestoreForm(this, "AmpView", false);
             hx  = GCHandle.Alloc(x,  GCHandleType.Pinned);
             hym = GCHandle.Alloc(ym, GCHandleType.Pinned);
@@ -45,9 +46,9 @@ namespace Thetis
             hcm = GCHandle.Alloc(cm, GCHandleType.Pinned);
             hcc = GCHandle.Alloc(cc, GCHandleType.Pinned);
             hcs = GCHandle.Alloc(cs, GCHandleType.Pinned);
-            double delta = 1.0 / (double)ints;
+            double delta = 1.0 / (double)psform.Ints;
             t[0] = 0.0;
-            for (int i = 1; i <= ints; i++)
+            for (int i = 1; i <= psform.Ints; i++)
                 t[i] = t[i - 1] + delta;
             EventArgs ex = EventArgs.Empty;
             chkAVShowGain_CheckedChanged(this, ex);
@@ -78,6 +79,10 @@ namespace Thetis
             double qym, qyc, qys, phs;
             double phs_base;
             int k;
+            double dt = 1.0 / (double)psform.Ints;
+            t[0] = 0.0;
+            for (int i = 1; i <= psform.Ints; i++)
+                t[i] = t[i - 1] + dt;
             chart1.Series["Ref"].Points.Clear();
             chart1.Series["MagCorr"].Points.Clear();
             chart1.Series["PhsCorr"].Points.Clear();
@@ -96,14 +101,14 @@ namespace Thetis
                 chart1.Series["Ref"].Points.AddXY(1.0, 1.0);
             }
             chart1.Series["MagCorr"].Points.AddXY(0.0, 0.0);
-            k = ints - 1;
-            dx = t[ints] - t[ints - 1];
+            k = psform.Ints - 1;
+            dx = t[psform.Ints] - t[psform.Ints - 1];
             qyc = cc[4 * k + 0] + dx * (cc[4 * k + 1] + dx * (cc[4 * k + 2] + dx * cc[4 * k + 3]));
             qys = cs[4 * k + 0] + dx * (cs[4 * k + 1] + dx * (cs[4 * k + 2] + dx * cs[4 * k + 3]));
             phs_base = 180.0 / Math.PI * Math.Atan2(qys, qyc);
             for (int i = 1; i <= np; i++)
             {
-                if ((k = (int)(qx * ints)) > ints - 1) k = ints - 1;
+                if ((k = (int)(qx * psform.Ints)) > psform.Ints - 1) k = psform.Ints - 1;
                 dx = qx - t[k];
                 qym = cm[4 * k + 0] + dx * (cm[4 * k + 1] + dx * (cm[4 * k + 2] + dx * cm[4 * k + 3]));
                 qyc = cc[4 * k + 0] + dx * (cc[4 * k + 1] + dx * (cc[4 * k + 2] + dx * cc[4 * k + 3]));
@@ -117,9 +122,9 @@ namespace Thetis
                     chart1.Series["PhsCorr"].Points.AddXY(qx, phs);
                 qx += delta;
             }
-            k = ints * spi - 1;
+            k = psform.Ints * psform.Spi - 1;
             phs_base = 180.0 / Math.PI * Math.Atan2(yc[k], ys[k]);
-            for (int i = 0; i < ints * spi; i += skip)
+            for (int i = 0; i < psform.Ints * psform.Spi; i += skip)
             {
                 if (!showgain)
                     chart1.Series["MagAmp"].Points.AddXY(ym[i] * x[i], x[i]);
@@ -146,7 +151,10 @@ namespace Thetis
                 hcm.AddrOfPinnedObject(), 
                 hcc.AddrOfPinnedObject(), 
                 hcs.AddrOfPinnedObject());
-            disp_data();
+            lock (intslock)
+            {
+                disp_data();
+            }
             if (psform.DismissAmpv)
             {
                 Common.SaveForm(this, "AmpView");

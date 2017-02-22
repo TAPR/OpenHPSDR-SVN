@@ -60,6 +60,9 @@ void InboundBlock (int id, int nsamples, double** data)
 		Inbound(0, nsamples, data[0]);
 		Inbound(1, nsamples, data[1]);
 		break;
+	case 3: // send synchronous only to first software receiver
+		Inbound(0, nsamples, data[0]);
+		break;
 	}
 }
 

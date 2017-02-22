@@ -31,9 +31,10 @@ namespace Thetis
         private int gcolor = (0xFF << 24) | (0xFF << 8);
         private static bool autoON = false;
         private static bool singlecalON = false;
+        private static bool restoreON = false;
+        private static bool OFF = true;
         private int oldCalCount = 0;
-        private int alpha, red, green, blue;
-        private int splashcount = 0;
+        private int red, green, blue;
         private int aastate = 0;
         private static double PShwpeak;
         private static double GetPSpeakval;
@@ -46,6 +47,8 @@ namespace Thetis
         private int save_singlecalON = 0;
         private int deltadB = 0;
 
+        private static int cmdstate = 0;
+        private static bool topmost = false;
         #endregion
 
         #region properties
@@ -67,7 +70,49 @@ namespace Thetis
             set
             {
                 psenabled = value;
-                if (!psenabled) ResetPureSignal();
+                if (psenabled)
+                {
+                    // Set the system to supply feedback.
+                    console.UpdateReceivers(console.RX2Enabled);
+                    NetworkIO.SetPureSignal(1);
+                    console.UpdateRXADCCtrl();
+                    console.UpdateAAudioMixerStates();
+                    unsafe { cmaster.LoadRouterControlBit((void*)0, 0, 0, 1); }
+                    console.radio.GetDSPTX(0).PSRunCal = true;
+                }
+                else
+                {
+                    // Set the system to turn-off feedback.
+                    console.UpdateReceivers(console.RX2Enabled);
+                    NetworkIO.SetPureSignal(0);
+                    console.UpdateRXADCCtrl();
+                    console.UpdateAAudioMixerStates();
+                    unsafe { cmaster.LoadRouterControlBit((void*)0, 0, 0, 0); }
+                    console.radio.GetDSPTX(0).PSRunCal = false;
+                }
+               // console.EnableDup();
+                if (console.path_Illustrator != null)
+                    console.path_Illustrator.pi_Changed();
+            }
+        }
+
+        private static bool autocal_enabled = false;
+        public bool AutoCalEnabled
+        {
+            get { return autocal_enabled; }
+            set
+            {
+                autocal_enabled = value;
+                if (autocal_enabled)
+                {
+                    autoON = true;
+                    console.PSState = true;
+                }
+                else
+                {
+                    OFF = true;
+                    console.PSState = false;
+                }
             }
         }
 
@@ -112,21 +157,38 @@ namespace Thetis
             }
         }
 
+        private int ints = 16;
+        public int Ints
+        {
+            get { return ints; }
+            set
+            {
+                ints = value;
+            }
+        }
+
+        private int spi = 256;
+        public int Spi
+        {
+            get { return spi; }
+            set
+            {
+                spi = value;
+            }
+        }
+
         #endregion
 
         #region event handlers
 
         private void PSForm_Load(object sender, EventArgs e)
         {
-            this.KeyPreview = true;     // needed to use KeyDown event
-            if (autoON == true)
-                btnPSAutoCalibrate.BackColor = Color.FromArgb(gcolor);
             if (ttgenON == true)
                 btnPSTwoToneGen.BackColor = Color.FromArgb(gcolor);
-            btnPSTwoToneGen.Enabled = !mox;
             fixed (double* ptr = &PShwpeak)
                 puresignal.GetPSHWPeak(txachannel, ptr);
             PSpeak.Text = PShwpeak.ToString();
+            btnPSAdvanced_Click(this, e);
         }
 
         private void PSForm_Closing(object sender, FormClosingEventArgs e)
@@ -138,6 +200,8 @@ namespace Thetis
                 ampv.Close();
                 ampv = null;
             }
+            advancedON = true;
+            btnPSAdvanced_Click(this, e);
             this.Hide();
             e.Cancel = true;
             Common.SaveForm(this, "PureSignal");
@@ -161,40 +225,18 @@ namespace Thetis
             }
         }
 
-        private void btnPSInformation_Click(object sender, EventArgs e)
-        {
-            string CurrentAppPath = Environment.CurrentDirectory;
-            System.Diagnostics.Process.Start(CurrentAppPath + "\\PureSignal.pdf");
-        }
-
-        private void btnPSAutoCalibrate_Click(object sender, EventArgs e)
-        {
-            if (autoON == false)
-            {
-                btnPSAutoCalibrate.BackColor = Color.FromArgb(gcolor);
-                autoON = true;
-                singlecalON = false;
-                puresignal.SetPSControl(txachannel, 0, 0, 1, 0);
-            }
-            else
-            {
-                puresignal.SetPSControl(txachannel, 1, 0, 0, 0);
-                btnPSAutoCalibrate.BackColor = SystemColors.Control;
-                autoON = false;
-            }
-        }
-
         private void btnPSCalibrate_Click(object sender, EventArgs e)
         {
-            btnPSAutoCalibrate.BackColor = SystemColors.Control;
+            console.ForcePureSignalAutoCalDisable();
             singlecalON = true;
-            autoON = false;
-            puresignal.SetPSControl(txachannel, 0, 1, 0, 0);
+            console.PSState = false;
         }
 
         private void btnPSReset_Click(object sender, EventArgs e)
         {
-            ResetPureSignal();
+            console.ForcePureSignalAutoCalDisable();
+            if (!OFF) OFF = true;
+            console.PSState = false;
         }
 
         private void udPSMoxDelay_ValueChanged(object sender, EventArgs e)
@@ -245,38 +287,19 @@ namespace Thetis
             openfile1.RestoreDirectory = true;
             if (openfile1.ShowDialog() == DialogResult.OK)
             {
+                console.ForcePureSignalAutoCalDisable();
+                OFF = false;
                 puresignal.PSRestoreCorr(txachannel, openfile1.FileName);
-                btnPSAutoCalibrate.BackColor = SystemColors.Control;
-                singlecalON = false;
-                autoON = false;
-            }
-        }
-
-        private void splashtrans(int ct, int ct0, int ct1, int a0, int r0, int g0, int b0, int a1, int r1, int g1, int b1)
-        {
-            if ((ct0 <= ct) && (ct <= ct1))
-            {
-                int ict = ct - ct0;
-                double splashfrac = (double)ict / (double)(ct1 - ct0 + 1);
-                int ax = (int)(a0 + (a1 - a0) * splashfrac);
-                int rx = (int)(r0 + (r1 - r0) * splashfrac);
-                int gx = (int)(g0 + (g1 - g0) * splashfrac);
-                int bx = (int)(b0 + (b1 - b0) * splashfrac);
-                lblPSWelcome.ForeColor = Color.FromArgb((ax << 24) | (rx << 16) | (gx << 8) | bx);
+                restoreON = true;
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            splashtrans(splashcount,   0,  10, 255, 255, 255, 255, 255, 255, 220,   0);
-            splashtrans(splashcount,  10,  20, 255, 255, 220,   0, 255, 255,  20,   0);
-            splashtrans(splashcount,  20, 120, 255, 255,  20,   0, 255,   0,   0,   0);
-            if (splashcount > 120)
-            {
-                lblPSWelcome.Visible = false;
-                lblPSWarning.Visible = true;
-            }
-            if (splashcount < 1000) splashcount++;
+            if (this.TopMost != topmost) 
+                this.TopMost  = topmost;
+            if(autocal_enabled)
+                console.TxtLeftForeColor = Color.FromArgb(0, 255, 0);
             puresignal.getinfo(txachannel);
             lblPSInfo0.Text = puresignal.Info[0].ToString();
             lblPSInfo1.Text = puresignal.Info[1].ToString();
@@ -288,22 +311,33 @@ namespace Thetis
 
             if (puresignal.Info[14] == 1)
             {
-                lblPSInfoCO.BackColor = Color.FromArgb(gcolor);
-                btnPSSave.Enabled = true;
+                if (puresignal.Info[4] > 90)
+                    lblPSInfoCO.BackColor = Color.FromArgb(0, 255, 0);
+                else
+                    lblPSInfoCO.BackColor = Color.FromArgb(255, 255, 0);
+                if (autocal_enabled)
+                    if (puresignal.Info[4] > 90)
+                        console.TxtRightBackColor = Color.FromArgb(0, 255, 0);
+                    else
+                        console.TxtRightBackColor = Color.FromArgb(255, 255, 0);
+                btnPSSave.Enabled = true;                           // enable Save capability
                 btnPSSave.BackColor = SystemColors.Control;
             }
             else
             {
                 lblPSInfoCO.BackColor = Color.Black;
+                if (autocal_enabled)
+                    console.TxtRightBackColor = Color.Black;
+                btnPSSave.Enabled = false;
                 btnPSSave.Enabled = false;
                 btnPSSave.BackColor = SystemColors.ButtonShadow;
             }
             lblPSInfo15.Text = puresignal.Info[15].ToString();
-            if ((alpha -= 5) < 0) alpha = 0;
+
             if (puresignal.Info[5] != oldCalCount)
             {
                 oldCalCount = puresignal.Info[5];
-                alpha = 255;
+
                 if (puresignal.Info[4] > 181)
                 {
                     red = 0; green = 0; blue = 255;
@@ -321,16 +355,104 @@ namespace Thetis
                     red = 255; green = 000; blue = 000;
                 }
             }
-            lblPSInfoFB.BackColor = Color.FromArgb((alpha << 24) | (red << 16) | (green << 8) | blue);
+            red = Math.Max(0, red - 5);
+            green = Math.Max(0, green - 5);
+            blue = Math.Max(0, blue - 5);
+            Color FBColor = Color.FromArgb(red, green, blue);
+            lblPSInfoFB.BackColor = FBColor;
+            if (autocal_enabled) 
+                console.TxtCenterBackColor = FBColor;
             lblPSfb2.Text = puresignal.Info[4].ToString();
 
-            if (!psenabled)
-                lblDisabled.Visible = true;
-            else
-                lblDisabled.Visible = false;
             fixed (double* ptr = &GetPSpeakval)
                 puresignal.GetPSMaxTX(txachannel, ptr);
             GetPSpeak.Text = GetPSpeakval.ToString();
+
+            // Command State-Machine
+            switch (cmdstate)
+            {
+                case 0:     // OFF
+                    puresignal.SetPSControl(txachannel, 1, 0, 0, 0);
+                    if (PSEnabled) PSEnabled = false;
+                    btnPSCalibrate.BackColor = SystemColors.Control;
+                    if (restoreON)
+                        cmdstate = 7;
+                    else if (autoON)
+                        cmdstate = 1;
+                    else if (singlecalON)
+                        cmdstate = 3;
+                    OFF = false;
+                    break;
+                case 1:     // Turn-ON Auto-Calibrate Mode
+                    puresignal.SetPSControl(txachannel, 1, 0, 1, 0);
+                    if (!PSEnabled) PSEnabled = true;
+                    btnPSCalibrate.BackColor = SystemColors.Control;
+                    cmdstate = 2;
+                    break;
+                case 2:     // Auto-Calibrate Mode
+                    if (OFF)
+                        cmdstate = 6;
+                    else if (restoreON)
+                        cmdstate = 7;
+                    else if (singlecalON)
+                        cmdstate = 3;
+                    break;
+                case 3:     // Turn-ON Single-Calibrate Mode
+                    autoON = false;
+                    puresignal.SetPSControl(txachannel, 1, 1, 0, 0);
+                    if (!PSEnabled) PSEnabled = true;
+                    btnPSCalibrate.BackColor = Color.FromArgb(gcolor);
+                    cmdstate = 4;
+                    break;
+                case 4:     // Single-Calibrate Mode
+                    singlecalON = false;
+                    if (OFF)
+                        cmdstate = 6;
+                    else if (restoreON)
+                        cmdstate = 7;
+                    else if (autoON)
+                        cmdstate = 1;
+                    else if (puresignal.Info[14] == 1)
+                        cmdstate = 5;
+                    break;
+                case 5:     // Stay-ON
+                    if (PSEnabled) PSEnabled = false;
+                    btnPSCalibrate.BackColor = SystemColors.Control;
+                    if (OFF)
+                        cmdstate = 6;
+                    else if (restoreON)
+                        cmdstate = 7;
+                    else if (autoON)
+                        cmdstate = 1;
+                    else if (singlecalON)
+                        cmdstate = 3;
+                    break;
+                case 6:     // Turn-OFF
+                    autoON = false;
+                    puresignal.SetPSControl(txachannel, 1, 0, 0, 0);
+                    if (!PSEnabled) PSEnabled = true;
+                    btnPSCalibrate.BackColor = SystemColors.Control;
+                    OFF = false;
+                    if (restoreON)
+                        cmdstate = 7;
+                    else if (autoON)
+                        cmdstate = 1;
+                    else if (singlecalON)
+                        cmdstate = 3;
+                    else if (puresignal.Info[14] == 0 && puresignal.Info[15] == 0)
+                        cmdstate = 0;
+                    break;
+                case 7:     // Initiate Restored Correction
+                    autoON = false;
+                    puresignal.SetPSControl(txachannel, 0, 0, 0, 1);
+                    if (!PSEnabled) PSEnabled = true;
+                    btnPSCalibrate.BackColor = SystemColors.Control;
+                    restoreON = false;
+                    if (puresignal.Info[15]==8)
+                        cmdstate = 5;
+                    break;
+            }
+
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -356,10 +478,10 @@ namespace Thetis
                         else
                             ddB = 31.1;
                         deltadB = Convert.ToInt32(ddB);
-                        if (autoON) save_autoON = 1;
-                        else        save_autoON = 0;
-                        if (singlecalON) save_singlecalON = 1;
-                        else             save_singlecalON = 0;
+                        if (cmdstate == 2) save_autoON = 1;
+                        else               save_autoON = 0;
+                        if (cmdstate == 4) save_singlecalON = 1;
+                        else               save_singlecalON = 0;
                         puresignal.SetPSControl(txachannel, 1, 0, 0, 0);
                     }
                     break;
@@ -375,20 +497,6 @@ namespace Thetis
                     puresignal.SetPSControl(txachannel, 0, save_singlecalON, save_autoON, 0);
                     break;
             }
-        }
-
-        private void PS_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-        {
-            if (e.Control == true && e.Alt == true)
-                switch (e.KeyCode)
-                {
-                    case Keys.I:
-                        grpPSInfo.Visible = true;
-                        break;
-                    case Keys.N:
-                        grpPSInfo.Visible = false;
-                        break;
-                }
         }
 
         private void PSpeak_TextChanged(object sender, EventArgs e)
@@ -415,6 +523,81 @@ namespace Thetis
             cmaster.PSLoopback = checkLoopback.Checked;
         }
 
+        private void chkPSPin_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPSPin.Checked)
+                puresignal.SetPSPinMode(txachannel, 1);
+            else
+                puresignal.SetPSPinMode(txachannel, 0);
+        }
+
+        private void chkPSMap_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPSMap.Checked)
+                puresignal.SetPSMapMode(txachannel, 1);
+            else
+                puresignal.SetPSMapMode(txachannel, 0);
+        }
+
+        private void chkPSStbl_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPSStbl.Checked)
+                puresignal.SetPSStabilize(txachannel, 1);
+            else
+                puresignal.SetPSStabilize(txachannel, 0);
+        }
+
+        private void comboPSTint_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboPSTint.SelectedIndex)
+            {
+                case 0:
+                    puresignal.SetPSIntsAndSpi(txachannel, 16, 256);
+                    ints = 16;
+                    spi = 256;
+                    btnPSSave.Enabled = btnPSRestore.Enabled = true;
+                    break;
+                case 1:
+                    puresignal.SetPSIntsAndSpi(txachannel, 8, 512);
+                    ints = 8;
+                    spi = 512;
+                    btnPSSave.Enabled = btnPSRestore.Enabled = false;
+                    break;
+                case 2:
+                    puresignal.SetPSIntsAndSpi(txachannel, 4, 1024);
+                    ints = 4;
+                    spi = 1024;
+                    btnPSSave.Enabled = btnPSRestore.Enabled = false;
+                    break;
+                default:
+                    puresignal.SetPSIntsAndSpi(txachannel, 16, 256);
+                    ints = 16;
+                    spi = 256;
+                    btnPSSave.Enabled = btnPSRestore.Enabled = true;
+                    break;
+            }
+        }
+
+        private bool advancedON = true;
+        private void btnPSAdvanced_Click(object sender, EventArgs e)
+        {
+            if (advancedON)
+            {
+                advancedON = false;
+                console.psform.ClientSize = new System.Drawing.Size(560, 60);
+            }
+            else
+            {
+                advancedON = true;
+                console.psform.ClientSize = new System.Drawing.Size(560, 300);
+            }
+        }
+
+        private void chkPSOnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            topmost = chkPSOnTop.Checked;
+        }
+
         #endregion
 
         #region methods
@@ -438,17 +621,15 @@ namespace Thetis
             udPSMoxDelay_ValueChanged(this, e);
             chkPSRelaxPtol_CheckedChanged(this, e);
             chkPSAutoAttenuate_CheckedChanged(this, e);
-        }
-
-        public void ResetPureSignal()
-        {
-            btnPSAutoCalibrate.BackColor = SystemColors.Control;
-            singlecalON = false;
-            autoON = false;
-            puresignal.SetPSControl(txachannel, 1, 0, 0, 0);
+            chkPSPin_CheckedChanged(this, e);
+            chkPSMap_CheckedChanged(this, e);
+            chkPSStbl_CheckedChanged(this, e);
+            comboPSTint_SelectedIndexChanged(this, e);
+            chkPSOnTop_CheckedChanged(this, e);
         }
 
         #endregion
+
     }
 
     unsafe static class puresignal
@@ -517,6 +698,18 @@ namespace Thetis
 
         [DllImport("wdsp.dll", EntryPoint = "SetPSFeedbackRate", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetPSFeedbackRate(int channel, int rate);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetPSPinMode", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetPSPinMode(int channel, int pin);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetPSMapMode", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetPSMapMode(int channel, int map);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetPSStabilize", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetPSStabilize(int channel, int stbl);
+
+        [DllImport("wdsp.dll", EntryPoint = "SetPSIntsAndSpi", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetPSIntsAndSpi(int channel, int ints, int spi);
 
         #endregion
 

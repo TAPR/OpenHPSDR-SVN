@@ -18,6 +18,9 @@ namespace Thetis
         public static extern void SetWBPacketsPerFrame(int pps);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetWBUpdateRate(int ur);
+
+        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetWBEnable(int adc, int enable);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -48,16 +51,13 @@ namespace Thetis
         public static extern void GetMetisBoardID(byte[] addr_bytes);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int StartAudioNative(/*int sample_rate, int samples_per_block,*/ PA19.PaStreamCallback cb); //, int sample_bits);
+        public static extern int StartAudioNative( PA19.PaStreamCallback cb);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int StopAudio();
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetC1Bits(int bits);
-
-        //[DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        //public static extern void SetAlexEnabled(int bit);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetAlexHPFBits(int bits);
@@ -66,13 +66,16 @@ namespace Thetis
         public static extern void SetAlexLPFBits(int bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void EnablePA(int bit);
+        public static extern void DisablePA(int bit);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetPArelay(int bit);
+        public static extern void SetTRXrelay(int bit);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetAlex2HPFBits(int bits);
+       
+        [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetBPF2Gnd(int bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetAlex2LPFBits(int bits);
@@ -94,9 +97,6 @@ namespace Thetis
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEERPWMmax(int max);
-
-        //[DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        //public static extern void SetHermesFilter(int bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int getUserADC0();
@@ -156,7 +156,7 @@ namespace Thetis
         public static extern void SetLegacyDotDashPTT(int bit);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
+        public static extern void SetPttOut(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetVFOfreq(int id, int freq, int tx);
@@ -177,10 +177,10 @@ namespace Thetis
         public static extern void SetAlexAtten(int bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetMercDither(int bits);
+        public static extern void SetADCDither(int bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetMercRandom(int bits);
+        public static extern void SetADCRandom(int bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTxAttenData(int bits);
@@ -193,15 +193,6 @@ namespace Thetis
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRX2Preamp(int bits);
-
-        //[DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        //public static extern void EnableADC1StepAtten(int bits);
-
-        //[DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        //public static extern void EnableADC2StepAtten(int bits);
-
-        //[DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        //public static extern void EnableADC3StepAtten(int bits);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetADC1StepAttenData(int bits);
@@ -288,14 +279,14 @@ namespace Thetis
         public static extern void SetCWSidetone(int bit);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetPennyOCBits(int b);
+        public static extern void SetOCBits(int b);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetSWRProtect(float g);
+        public static extern void SetAntBits(int rx_ant, int tx_ant, int rx_out, bool tx);
 
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out);
-
+        public static extern void SetMKIIBPF(int bpf);
+        
         [DllImport("ChannelMaster.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRxADC(int n);
 

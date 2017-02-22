@@ -28,16 +28,137 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.contextMenuStripWideBand = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.canceltoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.wbAvgtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wbUpdatetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wbUpdatetoolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.wbFrameSizetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wbFrameSizetoolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.panelwbDisplay = new System.Windows.Forms.PanelTS();
             this.wbdisplay = new Thetis.wbDisplay();
+            this.contextMenuStripWideBand.SuspendLayout();
             this.panelwbDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wbdisplay)).BeginInit();
             this.SuspendLayout();
+            // 
+            // contextMenuStripWideBand
+            // 
+            this.contextMenuStripWideBand.BackColor = System.Drawing.Color.Black;
+            this.contextMenuStripWideBand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.contextMenuStripWideBand.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contextMenuStripWideBand.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.canceltoolStripMenuItem1,
+            this.toolStripSeparator1,
+            this.wbAvgtoolStripMenuItem,
+            this.wbUpdatetoolStripMenuItem,
+            this.wbFrameSizetoolStripMenuItem});
+            this.contextMenuStripWideBand.Name = "contextMenuStripWideBand";
+            this.contextMenuStripWideBand.ShowCheckMargin = true;
+            this.contextMenuStripWideBand.ShowImageMargin = false;
+            this.contextMenuStripWideBand.Size = new System.Drawing.Size(136, 98);
+            this.contextMenuStripWideBand.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.ContextMenuStrip_Closing);
+            this.contextMenuStripWideBand.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripWideBand_Opening);
+            // 
+            // canceltoolStripMenuItem1
+            // 
+            this.canceltoolStripMenuItem1.BackColor = System.Drawing.Color.Black;
+            this.canceltoolStripMenuItem1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.canceltoolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            this.canceltoolStripMenuItem1.Name = "canceltoolStripMenuItem1";
+            this.canceltoolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
+            this.canceltoolStripMenuItem1.Text = "Cancel";
+            this.canceltoolStripMenuItem1.MouseEnter += new System.EventHandler(this.ToolStripMenuItem_MouseEnter);
+            this.canceltoolStripMenuItem1.MouseLeave += new System.EventHandler(this.ToolStripMenuItem_MouseLeave);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(132, 6);
+            // 
+            // wbAvgtoolStripMenuItem
+            // 
+            this.wbAvgtoolStripMenuItem.BackColor = System.Drawing.Color.Black;
+            this.wbAvgtoolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.wbAvgtoolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.wbAvgtoolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.wbAvgtoolStripMenuItem.ForeColor = System.Drawing.Color.Goldenrod;
+            this.wbAvgtoolStripMenuItem.Name = "wbAvgtoolStripMenuItem";
+            this.wbAvgtoolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.wbAvgtoolStripMenuItem.Text = "Average";
+            this.wbAvgtoolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.wbAvgtoolStripMenuItem.Click += new System.EventHandler(this.wbAvgtoolStripMenuItem_Click);
+            this.wbAvgtoolStripMenuItem.MouseEnter += new System.EventHandler(this.ToolStripMenuItem_MouseEnter);
+            this.wbAvgtoolStripMenuItem.MouseLeave += new System.EventHandler(this.ToolStripMenuItem_MouseLeave);
+            // 
+            // wbUpdatetoolStripMenuItem
+            // 
+            this.wbUpdatetoolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.wbUpdatetoolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wbUpdatetoolStripComboBox});
+            this.wbUpdatetoolStripMenuItem.ForeColor = System.Drawing.Color.Goldenrod;
+            this.wbUpdatetoolStripMenuItem.Name = "wbUpdatetoolStripMenuItem";
+            this.wbUpdatetoolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.wbUpdatetoolStripMenuItem.Text = "Update Rate";
+            this.wbUpdatetoolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.wbUpdatetoolStripMenuItem.MouseEnter += new System.EventHandler(this.ToolStripMenuItem_MouseEnter);
+            this.wbUpdatetoolStripMenuItem.MouseLeave += new System.EventHandler(this.ToolStripMenuItem_MouseLeave);
+            // 
+            // wbUpdatetoolStripComboBox
+            // 
+            this.wbUpdatetoolStripComboBox.AutoSize = false;
+            this.wbUpdatetoolStripComboBox.DropDownWidth = 20;
+            this.wbUpdatetoolStripComboBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.wbUpdatetoolStripComboBox.Items.AddRange(new object[] {
+            "10",
+            "15",
+            "20",
+            "25",
+            "30",
+            "35",
+            "40",
+            "45",
+            "50",
+            "55",
+            "60"});
+            this.wbUpdatetoolStripComboBox.Name = "wbUpdatetoolStripComboBox";
+            this.wbUpdatetoolStripComboBox.Size = new System.Drawing.Size(40, 21);
+            this.wbUpdatetoolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.wbUpdatetoolStripComboBox_SelectedIndexChanged);
+            this.wbUpdatetoolStripComboBox.MouseEnter += new System.EventHandler(this.ToolStripMenuItem_MouseEnter);
+            this.wbUpdatetoolStripComboBox.MouseLeave += new System.EventHandler(this.ToolStripMenuItem_MouseLeave);
+            // 
+            // wbFrameSizetoolStripMenuItem
+            // 
+            this.wbFrameSizetoolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wbFrameSizetoolStripComboBox});
+            this.wbFrameSizetoolStripMenuItem.ForeColor = System.Drawing.Color.Goldenrod;
+            this.wbFrameSizetoolStripMenuItem.Name = "wbFrameSizetoolStripMenuItem";
+            this.wbFrameSizetoolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.wbFrameSizetoolStripMenuItem.Text = "Frame Size";
+            this.wbFrameSizetoolStripMenuItem.MouseEnter += new System.EventHandler(this.ToolStripMenuItem_MouseEnter);
+            this.wbFrameSizetoolStripMenuItem.MouseLeave += new System.EventHandler(this.ToolStripMenuItem_MouseLeave);
+            // 
+            // wbFrameSizetoolStripComboBox
+            // 
+            this.wbFrameSizetoolStripComboBox.AutoSize = false;
+            this.wbFrameSizetoolStripComboBox.DropDownWidth = 50;
+            this.wbFrameSizetoolStripComboBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.wbFrameSizetoolStripComboBox.Items.AddRange(new object[] {
+            "8",
+            "32"});
+            this.wbFrameSizetoolStripComboBox.Name = "wbFrameSizetoolStripComboBox";
+            this.wbFrameSizetoolStripComboBox.Size = new System.Drawing.Size(40, 21);
+            this.wbFrameSizetoolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.wbFrameSizetoolStripComboBox_SelectedIndexChanged);
+            this.wbFrameSizetoolStripComboBox.MouseEnter += new System.EventHandler(this.ToolStripMenuItem_MouseEnter);
+            this.wbFrameSizetoolStripComboBox.MouseLeave += new System.EventHandler(this.ToolStripMenuItem_MouseLeave);
             // 
             // panelwbDisplay
             // 
             this.panelwbDisplay.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.panelwbDisplay.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.panelwbDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelwbDisplay.BackColor = System.Drawing.Color.Transparent;
             this.panelwbDisplay.Controls.Add(this.wbdisplay);
             this.panelwbDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -59,6 +180,7 @@
             this.wbdisplay.ClickTuneFilter = true;
             this.wbdisplay.ColorSheme = Thetis.ColorSheme.enhanced;
             this.wbdisplay.cOnsole = null;
+            this.wbdisplay.ContextMenuStrip = this.contextMenuStripWideBand;
             this.wbdisplay.CurrentClickTuneMode = Thetis.ClickTuneMode.Off;
             this.wbdisplay.CurrentDisplayMode = Thetis.DisplayMode.PANADAPTER;
             this.wbdisplay.CurrentModel = Thetis.Model.HERMES;
@@ -77,9 +199,8 @@
             this.wbdisplay.DisplayLabelAlign = Thetis.DisplayLabelAlignment.LEFT;
             this.wbdisplay.DisplayLineWidth = 1F;
             this.wbdisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wbdisplay.FFTSize = 4096;
+            this.wbdisplay.FFTSize = 16384; //65536; // 131072; //262144; // 16384;
             this.wbdisplay.FilterRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.wbdisplay.FrameRate = 15;
             this.wbdisplay.FREQ = 0D;
             this.wbdisplay.FreqDiff = 0;
             this.wbdisplay.FreqRulerPosition = 1F;
@@ -149,6 +270,7 @@
             this.wbdisplay.WaterfallUpdatePeriod = 100;
             this.wbdisplay.WindowType = 6;
             this.wbdisplay.ZoomSlider = 0D;
+            this.wbdisplay.Resize += new System.EventHandler(this.wbdisplay_Resize);
             // 
             // wideband
             // 
@@ -160,6 +282,7 @@
             this.Text = "wideband";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.wideband_FormClosing);
             this.Resize += new System.EventHandler(this.wideband_Resize);
+            this.contextMenuStripWideBand.ResumeLayout(false);
             this.panelwbDisplay.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.wbdisplay)).EndInit();
             this.ResumeLayout(false);
@@ -170,5 +293,13 @@
 
         private System.Windows.Forms.PanelTS panelwbDisplay;
         private wbDisplay wbdisplay;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripWideBand;
+        private System.Windows.Forms.ToolStripMenuItem canceltoolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem wbAvgtoolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wbUpdatetoolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox wbUpdatetoolStripComboBox;
+        private System.Windows.Forms.ToolStripMenuItem wbFrameSizetoolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox wbFrameSizetoolStripComboBox;
     }
 }

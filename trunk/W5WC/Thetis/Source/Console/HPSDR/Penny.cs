@@ -90,7 +90,7 @@ namespace Thetis
 		{
 			if ( !enable ) 
 			{
-				NetworkIO.SetPennyOCBits(0); 
+				NetworkIO.SetOCBits(0); 
 			}
 			else 
 			{
@@ -98,6 +98,7 @@ namespace Thetis
 			}
 		}
 
+        public int RxABitMask = 0xf; // 4x3 split
         public bool SplitPins = false;
         public bool VFOTBX = false;
 		public void UpdateExtCtrl(Band band, Band bandb, bool tx) 
@@ -115,7 +116,7 @@ namespace Thetis
             int idx = (int)band - (int)Band.B160M;
             int idxb = (int)bandb - (int)Band.B160M;
 			int bits; 
-			if ( idx < 0 || idx > 26) 
+			if ( (idx < 0 || idx > 26) || (idxb < 0 || idxb > 26) )
 			{ 
 				bits = 0; 
 			} 
@@ -123,7 +124,7 @@ namespace Thetis
 			{
                 if (SplitPins)
                 {
-                    bits = tx ? (TXABitMasks[idx] & 0xf) | TXBBitMasks[idxb] : (RXABitMasks[idx] & 0xf) | RXBBitMasks[idxb];
+                    bits = tx ? (TXABitMasks[idx] & RxABitMask) | TXBBitMasks[idxb] : (RXABitMasks[idx] & RxABitMask) | RXBBitMasks[idxb];
                 }
                 else
                 {
@@ -135,7 +136,7 @@ namespace Thetis
                 }
 			}
             System.Console.WriteLine("Bits: " + bits + " Band: " + (int)band + " Band: " + (int)bandb); 
-			NetworkIO.SetPennyOCBits(bits);
+			NetworkIO.SetOCBits(bits);
 		}
 	}
 }

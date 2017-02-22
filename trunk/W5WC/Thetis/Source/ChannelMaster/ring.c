@@ -50,6 +50,7 @@ ringbuffer_create (size_t sz)
 	rb->size_mask -= 1;
 	rb->write_ptr = 0;
 	rb->read_ptr = 0;
+	rb->write_flag = 0; //W4WMT set this flag after writes & reset it after reads
 	if ((rb->buf = (double *) malloc (rb->size * sizeof(double))) == NULL) {
 		free (rb);
 		return NULL;
@@ -73,6 +74,7 @@ ringbuffer_reset_size (ringbuffer_t * rb, size_t sz)
     rb->size_mask -= 1;
     rb->read_ptr = 0;
     rb->write_ptr = 0;
+	rb->write_flag = 0;
 }
 
 void
@@ -80,6 +82,7 @@ ringbuffer_reset (ringbuffer_t * rb)
 {
     rb->read_ptr = 0;
     rb->write_ptr = 0;
+	rb->write_flag = 0;
 	memset(rb->buf, 0, rb->size);
 }
 
@@ -104,14 +107,18 @@ size_t
 ringbuffer_read_space (const ringbuffer_t * rb)
 {
 	size_t w, r;
+	int	wf;
 
 	w = rb->write_ptr;
 	r = rb->read_ptr;
+	wf = rb->write_flag;
 
 	if (w > r) {
 		return w - r;
+	} else if (w < r) {
+		return (w - r + rb->size);
 	} else {
-		return (w - r + rb->size) & rb->size_mask;
+		return (wf ? rb->size : 0);
 	}
 }
 
@@ -119,16 +126,18 @@ size_t
 ringbuffer_write_space (const ringbuffer_t * rb)
 {
 	size_t w, r;
+	int	wf;
 
 	w = rb->write_ptr;
 	r = rb->read_ptr;
+	wf = rb->write_flag;
 
 	if (w > r) {
-		return ((r - w + rb->size) & rb->size_mask) - 1;
+		return (r - w + rb->size);
 	} else if (w < r) {
-		return (r - w) - 1;
+		return (r - w);
 	} else {
-		return rb->size - 1;
+		return (wf ? 0 : rb->size);
 	}
 }
 
@@ -163,6 +172,8 @@ ringbuffer_write (ringbuffer_t * rb, const double *src, size_t cnt)
 		memcpy (&(rb->buf[rb->write_ptr]), src + n1, n2 * sizeof(double));
 		rb->write_ptr = (rb->write_ptr + n2) & rb->size_mask;
 	}
+	
+	rb->write_flag = 1;
 
 	return to_write;
 }
@@ -197,6 +208,8 @@ ringbuffer_read (ringbuffer_t * rb, double *dest, size_t cnt)
 		memcpy (dest + n1, &(rb->buf[rb->read_ptr]), n2 * sizeof(double));
 		rb->read_ptr = (rb->read_ptr + n2) & rb->size_mask;
 	}
+	
+	rb->write_flag = 0;
 
 	return to_read;
 }

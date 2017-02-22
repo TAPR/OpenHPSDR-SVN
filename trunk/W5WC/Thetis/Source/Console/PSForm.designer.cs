@@ -31,18 +31,20 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PSForm));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lblPSWelcome = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.btnPSAdvanced = new System.Windows.Forms.ButtonTS();
+            this.comboPSTint = new System.Windows.Forms.ComboBoxTS();
+            this.chkPSStbl = new System.Windows.Forms.CheckBoxTS();
+            this.chkPSMap = new System.Windows.Forms.CheckBoxTS();
+            this.chkPSPin = new System.Windows.Forms.CheckBoxTS();
+            this.chkPSAutoAttenuate = new System.Windows.Forms.CheckBoxTS();
+            this.btnPSAmpView = new System.Windows.Forms.ButtonTS();
             this.chkPSRelaxPtol = new System.Windows.Forms.CheckBoxTS();
-            this.lblDisabled = new System.Windows.Forms.LabelTS();
             this.btnPSTwoToneGen = new System.Windows.Forms.ButtonTS();
             this.labelTS8 = new System.Windows.Forms.LabelTS();
             this.lblPSInfoFB = new System.Windows.Forms.LabelTS();
             this.lblPSInfoCO = new System.Windows.Forms.LabelTS();
-            this.lblPSWarning = new System.Windows.Forms.LabelTS();
             this.labelTS9 = new System.Windows.Forms.LabelTS();
-            this.btnPSAutoCalibrate = new System.Windows.Forms.ButtonTS();
-            this.btnPSInformation = new System.Windows.Forms.ButtonTS();
-            this.grpLincorSave = new System.Windows.Forms.GroupBoxTS();
             this.btnPSSave = new System.Windows.Forms.ButtonTS();
             this.btnPSRestore = new System.Windows.Forms.ButtonTS();
             this.labelTS4 = new System.Windows.Forms.LabelTS();
@@ -77,10 +79,8 @@
             this.btnPSCalibrate = new System.Windows.Forms.ButtonTS();
             this.labelTS140 = new System.Windows.Forms.LabelTS();
             this.udPSCalWait = new System.Windows.Forms.NumericUpDownTS();
-            this.btnPSAmpView = new System.Windows.Forms.ButtonTS();
-            this.chkPSAutoAttenuate = new System.Windows.Forms.CheckBoxTS();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.grpLincorSave.SuspendLayout();
+            this.lblPSTint = new System.Windows.Forms.LabelTS();
+            this.chkPSOnTop = new System.Windows.Forms.CheckBoxTS();
             ((System.ComponentModel.ISupportInitialize)(this.udPSMoxDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPSPhnum)).BeginInit();
             this.grpPSInfo.SuspendLayout();
@@ -93,16 +93,110 @@
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // lblPSWelcome
+            // timer2
             // 
-            this.lblPSWelcome.AutoSize = true;
-            this.lblPSWelcome.Font = new System.Drawing.Font("Cambria", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPSWelcome.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblPSWelcome.Location = new System.Drawing.Point(31, 9);
-            this.lblPSWelcome.Name = "lblPSWelcome";
-            this.lblPSWelcome.Size = new System.Drawing.Size(349, 37);
-            this.lblPSWelcome.TabIndex = 33;
-            this.lblPSWelcome.Text = "Welcome to PureSignal";
+            this.timer2.Enabled = true;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // btnPSAdvanced
+            // 
+            this.btnPSAdvanced.Image = null;
+            this.btnPSAdvanced.Location = new System.Drawing.Point(245, 12);
+            this.btnPSAdvanced.Name = "btnPSAdvanced";
+            this.btnPSAdvanced.Size = new System.Drawing.Size(71, 20);
+            this.btnPSAdvanced.TabIndex = 46;
+            this.btnPSAdvanced.Text = "Advanced";
+            this.btnPSAdvanced.UseVisualStyleBackColor = true;
+            this.btnPSAdvanced.Click += new System.EventHandler(this.btnPSAdvanced_Click);
+            // 
+            // comboPSTint
+            // 
+            this.comboPSTint.ForeColor = System.Drawing.Color.Black;
+            this.comboPSTint.FormattingEnabled = true;
+            this.comboPSTint.Items.AddRange(new object[] {
+            "0.5",
+            "1.1",
+            "2.5"});
+            this.comboPSTint.Location = new System.Drawing.Point(490, 126);
+            this.comboPSTint.Name = "comboPSTint";
+            this.comboPSTint.Size = new System.Drawing.Size(57, 21);
+            this.comboPSTint.TabIndex = 45;
+            this.comboPSTint.Text = "0.5";
+            this.comboPSTint.SelectedIndexChanged += new System.EventHandler(this.comboPSTint_SelectedIndexChanged);
+            // 
+            // chkPSStbl
+            // 
+            this.chkPSStbl.AutoSize = true;
+            this.chkPSStbl.Checked = true;
+            this.chkPSStbl.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPSStbl.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.chkPSStbl.Image = null;
+            this.chkPSStbl.Location = new System.Drawing.Point(434, 108);
+            this.chkPSStbl.Name = "chkPSStbl";
+            this.chkPSStbl.Size = new System.Drawing.Size(53, 17);
+            this.chkPSStbl.TabIndex = 44;
+            this.chkPSStbl.Text = "STBL";
+            this.chkPSStbl.UseVisualStyleBackColor = true;
+            this.chkPSStbl.CheckedChanged += new System.EventHandler(this.chkPSStbl_CheckedChanged);
+            // 
+            // chkPSMap
+            // 
+            this.chkPSMap.AutoSize = true;
+            this.chkPSMap.Checked = true;
+            this.chkPSMap.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPSMap.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.chkPSMap.Image = null;
+            this.chkPSMap.Location = new System.Drawing.Point(434, 85);
+            this.chkPSMap.Name = "chkPSMap";
+            this.chkPSMap.Size = new System.Drawing.Size(49, 17);
+            this.chkPSMap.TabIndex = 43;
+            this.chkPSMap.Text = "MAP";
+            this.chkPSMap.UseVisualStyleBackColor = true;
+            this.chkPSMap.CheckedChanged += new System.EventHandler(this.chkPSMap_CheckedChanged);
+            // 
+            // chkPSPin
+            // 
+            this.chkPSPin.AutoSize = true;
+            this.chkPSPin.Checked = true;
+            this.chkPSPin.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPSPin.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.chkPSPin.Image = null;
+            this.chkPSPin.Location = new System.Drawing.Point(434, 62);
+            this.chkPSPin.Name = "chkPSPin";
+            this.chkPSPin.Size = new System.Drawing.Size(44, 17);
+            this.chkPSPin.TabIndex = 42;
+            this.chkPSPin.Text = "PIN";
+            this.chkPSPin.UseVisualStyleBackColor = true;
+            this.chkPSPin.CheckedChanged += new System.EventHandler(this.chkPSPin_CheckedChanged);
+            // 
+            // chkPSAutoAttenuate
+            // 
+            this.chkPSAutoAttenuate.AutoSize = true;
+            this.chkPSAutoAttenuate.Checked = true;
+            this.chkPSAutoAttenuate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPSAutoAttenuate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkPSAutoAttenuate.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.chkPSAutoAttenuate.Image = null;
+            this.chkPSAutoAttenuate.Location = new System.Drawing.Point(184, 62);
+            this.chkPSAutoAttenuate.Name = "chkPSAutoAttenuate";
+            this.chkPSAutoAttenuate.Size = new System.Drawing.Size(97, 17);
+            this.chkPSAutoAttenuate.TabIndex = 41;
+            this.chkPSAutoAttenuate.Text = "Auto-Attenuate";
+            this.chkPSAutoAttenuate.UseVisualStyleBackColor = true;
+            this.chkPSAutoAttenuate.CheckedChanged += new System.EventHandler(this.chkPSAutoAttenuate_CheckedChanged);
+            // 
+            // btnPSAmpView
+            // 
+            this.btnPSAmpView.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPSAmpView.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnPSAmpView.Image = null;
+            this.btnPSAmpView.Location = new System.Drawing.Point(168, 12);
+            this.btnPSAmpView.Name = "btnPSAmpView";
+            this.btnPSAmpView.Size = new System.Drawing.Size(71, 20);
+            this.btnPSAmpView.TabIndex = 40;
+            this.btnPSAmpView.Text = "AmpView";
+            this.btnPSAmpView.UseVisualStyleBackColor = false;
+            this.btnPSAmpView.Click += new System.EventHandler(this.btnPSAmpView_Click);
             // 
             // chkPSRelaxPtol
             // 
@@ -110,7 +204,7 @@
             this.chkPSRelaxPtol.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPSRelaxPtol.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.chkPSRelaxPtol.Image = null;
-            this.chkPSRelaxPtol.Location = new System.Drawing.Point(38, 368);
+            this.chkPSRelaxPtol.Location = new System.Drawing.Point(184, 85);
             this.chkPSRelaxPtol.Name = "chkPSRelaxPtol";
             this.chkPSRelaxPtol.Size = new System.Drawing.Size(104, 17);
             this.chkPSRelaxPtol.TabIndex = 39;
@@ -118,28 +212,16 @@
             this.chkPSRelaxPtol.UseVisualStyleBackColor = true;
             this.chkPSRelaxPtol.CheckedChanged += new System.EventHandler(this.chkPSRelaxPtol_CheckedChanged);
             // 
-            // lblDisabled
-            // 
-            this.lblDisabled.AutoSize = true;
-            this.lblDisabled.Font = new System.Drawing.Font("Cambria", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDisabled.ForeColor = System.Drawing.Color.Crimson;
-            this.lblDisabled.Image = null;
-            this.lblDisabled.Location = new System.Drawing.Point(153, 80);
-            this.lblDisabled.Name = "lblDisabled";
-            this.lblDisabled.Size = new System.Drawing.Size(238, 19);
-            this.lblDisabled.TabIndex = 38;
-            this.lblDisabled.Text = "PureSignal is Disabled in Setup!";
-            // 
             // btnPSTwoToneGen
             // 
             this.btnPSTwoToneGen.BackColor = System.Drawing.SystemColors.Control;
             this.btnPSTwoToneGen.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnPSTwoToneGen.Image = null;
-            this.btnPSTwoToneGen.Location = new System.Drawing.Point(461, 246);
+            this.btnPSTwoToneGen.Location = new System.Drawing.Point(14, 12);
             this.btnPSTwoToneGen.Name = "btnPSTwoToneGen";
-            this.btnPSTwoToneGen.Size = new System.Drawing.Size(95, 23);
+            this.btnPSTwoToneGen.Size = new System.Drawing.Size(71, 20);
             this.btnPSTwoToneGen.TabIndex = 37;
-            this.btnPSTwoToneGen.Text = "Two-tone Gen";
+            this.btnPSTwoToneGen.Text = "Two-tone";
             this.btnPSTwoToneGen.UseVisualStyleBackColor = false;
             this.btnPSTwoToneGen.Click += new System.EventHandler(this.btnPSTwoToneGen_Click);
             // 
@@ -148,7 +230,7 @@
             this.labelTS8.AutoSize = true;
             this.labelTS8.ForeColor = System.Drawing.Color.White;
             this.labelTS8.Image = null;
-            this.labelTS8.Location = new System.Drawing.Point(459, 205);
+            this.labelTS8.Location = new System.Drawing.Point(32, 40);
             this.labelTS8.Name = "labelTS8";
             this.labelTS8.Size = new System.Drawing.Size(84, 13);
             this.labelTS8.TabIndex = 10;
@@ -160,9 +242,9 @@
             this.lblPSInfoFB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblPSInfoFB.ForeColor = System.Drawing.Color.Black;
             this.lblPSInfoFB.Image = null;
-            this.lblPSInfoFB.Location = new System.Drawing.Point(418, 200);
+            this.lblPSInfoFB.Location = new System.Drawing.Point(14, 41);
             this.lblPSInfoFB.Name = "lblPSInfoFB";
-            this.lblPSInfoFB.Size = new System.Drawing.Size(25, 25);
+            this.lblPSInfoFB.Size = new System.Drawing.Size(12, 12);
             this.lblPSInfoFB.TabIndex = 11;
             // 
             // lblPSInfoCO
@@ -171,80 +253,30 @@
             this.lblPSInfoCO.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblPSInfoCO.ForeColor = System.Drawing.Color.Black;
             this.lblPSInfoCO.Image = null;
-            this.lblPSInfoCO.Location = new System.Drawing.Point(38, 200);
+            this.lblPSInfoCO.Location = new System.Drawing.Point(168, 41);
             this.lblPSInfoCO.Name = "lblPSInfoCO";
-            this.lblPSInfoCO.Size = new System.Drawing.Size(25, 25);
+            this.lblPSInfoCO.Size = new System.Drawing.Size(12, 12);
             this.lblPSInfoCO.TabIndex = 13;
-            // 
-            // lblPSWarning
-            // 
-            this.lblPSWarning.AutoSize = true;
-            this.lblPSWarning.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPSWarning.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblPSWarning.Image = null;
-            this.lblPSWarning.Location = new System.Drawing.Point(35, 21);
-            this.lblPSWarning.Name = "lblPSWarning";
-            this.lblPSWarning.Size = new System.Drawing.Size(376, 30);
-            this.lblPSWarning.TabIndex = 36;
-            this.lblPSWarning.Text = "PureSignal requires special hardware setup and caution in use.\r\nIf you are not fa" +
-    "miliar with this technology, click \'Information\'.";
-            this.lblPSWarning.Visible = false;
             // 
             // labelTS9
             // 
             this.labelTS9.AutoSize = true;
             this.labelTS9.ForeColor = System.Drawing.Color.White;
             this.labelTS9.Image = null;
-            this.labelTS9.Location = new System.Drawing.Point(79, 205);
+            this.labelTS9.Location = new System.Drawing.Point(186, 40);
             this.labelTS9.Name = "labelTS9";
             this.labelTS9.Size = new System.Drawing.Size(55, 13);
             this.labelTS9.TabIndex = 12;
             this.labelTS9.Text = "Correcting";
-            // 
-            // btnPSAutoCalibrate
-            // 
-            this.btnPSAutoCalibrate.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPSAutoCalibrate.Image = null;
-            this.btnPSAutoCalibrate.Location = new System.Drawing.Point(38, 80);
-            this.btnPSAutoCalibrate.Name = "btnPSAutoCalibrate";
-            this.btnPSAutoCalibrate.Size = new System.Drawing.Size(95, 23);
-            this.btnPSAutoCalibrate.TabIndex = 35;
-            this.btnPSAutoCalibrate.Text = "AutoCalibrate";
-            this.btnPSAutoCalibrate.UseVisualStyleBackColor = false;
-            this.btnPSAutoCalibrate.Click += new System.EventHandler(this.btnPSAutoCalibrate_Click);
-            // 
-            // btnPSInformation
-            // 
-            this.btnPSInformation.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPSInformation.Image = null;
-            this.btnPSInformation.Location = new System.Drawing.Point(461, 28);
-            this.btnPSInformation.Name = "btnPSInformation";
-            this.btnPSInformation.Size = new System.Drawing.Size(95, 23);
-            this.btnPSInformation.TabIndex = 34;
-            this.btnPSInformation.Text = "Information";
-            this.btnPSInformation.UseVisualStyleBackColor = false;
-            this.btnPSInformation.Click += new System.EventHandler(this.btnPSInformation_Click);
-            // 
-            // grpLincorSave
-            // 
-            this.grpLincorSave.Controls.Add(this.btnPSSave);
-            this.grpLincorSave.Controls.Add(this.btnPSRestore);
-            this.grpLincorSave.ForeColor = System.Drawing.Color.White;
-            this.grpLincorSave.Location = new System.Drawing.Point(418, 290);
-            this.grpLincorSave.Name = "grpLincorSave";
-            this.grpLincorSave.Size = new System.Drawing.Size(176, 95);
-            this.grpLincorSave.TabIndex = 32;
-            this.grpLincorSave.TabStop = false;
-            this.grpLincorSave.Text = "Correction Save / Restore";
             // 
             // btnPSSave
             // 
             this.btnPSSave.BackColor = System.Drawing.SystemColors.Control;
             this.btnPSSave.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnPSSave.Image = null;
-            this.btnPSSave.Location = new System.Drawing.Point(43, 22);
+            this.btnPSSave.Location = new System.Drawing.Point(322, 12);
             this.btnPSSave.Name = "btnPSSave";
-            this.btnPSSave.Size = new System.Drawing.Size(95, 23);
+            this.btnPSSave.Size = new System.Drawing.Size(71, 20);
             this.btnPSSave.TabIndex = 4;
             this.btnPSSave.Text = "Save";
             this.btnPSSave.UseVisualStyleBackColor = false;
@@ -255,9 +287,9 @@
             this.btnPSRestore.BackColor = System.Drawing.SystemColors.Control;
             this.btnPSRestore.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnPSRestore.Image = null;
-            this.btnPSRestore.Location = new System.Drawing.Point(43, 62);
+            this.btnPSRestore.Location = new System.Drawing.Point(399, 12);
             this.btnPSRestore.Name = "btnPSRestore";
-            this.btnPSRestore.Size = new System.Drawing.Size(95, 23);
+            this.btnPSRestore.Size = new System.Drawing.Size(71, 20);
             this.btnPSRestore.TabIndex = 0;
             this.btnPSRestore.Text = "Restore";
             this.btnPSRestore.UseVisualStyleBackColor = false;
@@ -268,7 +300,7 @@
             this.labelTS4.AutoSize = true;
             this.labelTS4.ForeColor = System.Drawing.Color.White;
             this.labelTS4.Image = null;
-            this.labelTS4.Location = new System.Drawing.Point(415, 85);
+            this.labelTS4.Location = new System.Drawing.Point(11, 63);
             this.labelTS4.Name = "labelTS4";
             this.labelTS4.Size = new System.Drawing.Size(82, 13);
             this.labelTS4.TabIndex = 30;
@@ -282,7 +314,7 @@
             0,
             0,
             65536});
-            this.udPSMoxDelay.Location = new System.Drawing.Point(528, 83);
+            this.udPSMoxDelay.Location = new System.Drawing.Point(99, 61);
             this.udPSMoxDelay.Maximum = new decimal(new int[] {
             10,
             0,
@@ -294,10 +326,10 @@
             0,
             65536});
             this.udPSMoxDelay.Name = "udPSMoxDelay";
-            this.udPSMoxDelay.Size = new System.Drawing.Size(66, 20);
+            this.udPSMoxDelay.Size = new System.Drawing.Size(51, 20);
             this.udPSMoxDelay.TabIndex = 29;
             this.udPSMoxDelay.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             65536});
@@ -308,11 +340,11 @@
             this.labelTS2.AutoSize = true;
             this.labelTS2.ForeColor = System.Drawing.Color.White;
             this.labelTS2.Image = null;
-            this.labelTS2.Location = new System.Drawing.Point(415, 165);
+            this.labelTS2.Location = new System.Drawing.Point(11, 117);
             this.labelTS2.Name = "labelTS2";
-            this.labelTS2.Size = new System.Drawing.Size(96, 13);
+            this.labelTS2.Size = new System.Drawing.Size(80, 13);
             this.labelTS2.TabIndex = 26;
-            this.labelTS2.Text = "Amplifier Delay (ns)";
+            this.labelTS2.Text = "AMP Delay (ns)";
             // 
             // udPSPhnum
             // 
@@ -321,7 +353,7 @@
             0,
             0,
             0});
-            this.udPSPhnum.Location = new System.Drawing.Point(528, 163);
+            this.udPSPhnum.Location = new System.Drawing.Point(99, 115);
             this.udPSPhnum.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -333,10 +365,10 @@
             0,
             0});
             this.udPSPhnum.Name = "udPSPhnum";
-            this.udPSPhnum.Size = new System.Drawing.Size(66, 20);
+            this.udPSPhnum.Size = new System.Drawing.Size(51, 20);
             this.udPSPhnum.TabIndex = 25;
             this.udPSPhnum.Value = new decimal(new int[] {
-            0,
+            150,
             0,
             0,
             0});
@@ -368,13 +400,12 @@
             this.grpPSInfo.Controls.Add(this.labelTS142);
             this.grpPSInfo.Controls.Add(this.labelTS141);
             this.grpPSInfo.ForeColor = System.Drawing.Color.White;
-            this.grpPSInfo.Location = new System.Drawing.Point(164, 125);
+            this.grpPSInfo.Location = new System.Drawing.Point(14, 145);
             this.grpPSInfo.Name = "grpPSInfo";
-            this.grpPSInfo.Size = new System.Drawing.Size(226, 260);
+            this.grpPSInfo.Size = new System.Drawing.Size(356, 148);
             this.grpPSInfo.TabIndex = 21;
             this.grpPSInfo.TabStop = false;
             this.grpPSInfo.Text = "Calibration Information";
-            this.grpPSInfo.Visible = false;
             // 
             // checkLoopback
             // 
@@ -382,7 +413,7 @@
             this.checkLoopback.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkLoopback.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.checkLoopback.Image = null;
-            this.checkLoopback.Location = new System.Drawing.Point(9, 227);
+            this.checkLoopback.Location = new System.Drawing.Point(9, 121);
             this.checkLoopback.Name = "checkLoopback";
             this.checkLoopback.Size = new System.Drawing.Size(125, 17);
             this.checkLoopback.TabIndex = 40;
@@ -397,7 +428,7 @@
             this.lblPSInfo5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblPSInfo5.ForeColor = System.Drawing.Color.Black;
             this.lblPSInfo5.Image = null;
-            this.lblPSInfo5.Location = new System.Drawing.Point(72, 168);
+            this.lblPSInfo5.Location = new System.Drawing.Point(194, 72);
             this.lblPSInfo5.Name = "lblPSInfo5";
             this.lblPSInfo5.Size = new System.Drawing.Size(2, 15);
             this.lblPSInfo5.TabIndex = 21;
@@ -406,7 +437,7 @@
             // 
             this.labelTS13.AutoSize = true;
             this.labelTS13.Image = null;
-            this.labelTS13.Location = new System.Drawing.Point(6, 168);
+            this.labelTS13.Location = new System.Drawing.Point(128, 72);
             this.labelTS13.Name = "labelTS13";
             this.labelTS13.Size = new System.Drawing.Size(40, 13);
             this.labelTS13.TabIndex = 20;
@@ -419,7 +450,7 @@
             this.lblPSInfo13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblPSInfo13.ForeColor = System.Drawing.Color.Black;
             this.lblPSInfo13.Image = null;
-            this.lblPSInfo13.Location = new System.Drawing.Point(72, 144);
+            this.lblPSInfo13.Location = new System.Drawing.Point(194, 48);
             this.lblPSInfo13.Name = "lblPSInfo13";
             this.lblPSInfo13.Size = new System.Drawing.Size(2, 15);
             this.lblPSInfo13.TabIndex = 19;
@@ -428,7 +459,7 @@
             // 
             this.labelTS11.AutoSize = true;
             this.labelTS11.Image = null;
-            this.labelTS11.Location = new System.Drawing.Point(6, 144);
+            this.labelTS11.Location = new System.Drawing.Point(128, 48);
             this.labelTS11.Name = "labelTS11";
             this.labelTS11.Size = new System.Drawing.Size(37, 13);
             this.labelTS11.TabIndex = 18;
@@ -441,7 +472,7 @@
             this.lblPSInfo6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblPSInfo6.ForeColor = System.Drawing.Color.Black;
             this.lblPSInfo6.Image = null;
-            this.lblPSInfo6.Location = new System.Drawing.Point(72, 120);
+            this.lblPSInfo6.Location = new System.Drawing.Point(194, 24);
             this.lblPSInfo6.Name = "lblPSInfo6";
             this.lblPSInfo6.Size = new System.Drawing.Size(2, 15);
             this.lblPSInfo6.TabIndex = 17;
@@ -450,7 +481,7 @@
             // 
             this.labelTS7.AutoSize = true;
             this.labelTS7.Image = null;
-            this.labelTS7.Location = new System.Drawing.Point(6, 120);
+            this.labelTS7.Location = new System.Drawing.Point(128, 24);
             this.labelTS7.Name = "labelTS7";
             this.labelTS7.Size = new System.Drawing.Size(41, 13);
             this.labelTS7.TabIndex = 16;
@@ -459,7 +490,7 @@
             // GetPSpeak
             // 
             this.GetPSpeak.BackColor = System.Drawing.Color.Bisque;
-            this.GetPSpeak.Location = new System.Drawing.Point(163, 69);
+            this.GetPSpeak.Location = new System.Drawing.Point(287, 69);
             this.GetPSpeak.Name = "GetPSpeak";
             this.GetPSpeak.Size = new System.Drawing.Size(57, 20);
             this.GetPSpeak.TabIndex = 15;
@@ -468,7 +499,7 @@
             // 
             this.labelTS3.AutoSize = true;
             this.labelTS3.Image = null;
-            this.labelTS3.Location = new System.Drawing.Point(126, 72);
+            this.labelTS3.Location = new System.Drawing.Point(250, 72);
             this.labelTS3.Name = "labelTS3";
             this.labelTS3.Size = new System.Drawing.Size(37, 13);
             this.labelTS3.TabIndex = 14;
@@ -477,7 +508,7 @@
             // PSpeak
             // 
             this.PSpeak.BackColor = System.Drawing.Color.Bisque;
-            this.PSpeak.Location = new System.Drawing.Point(163, 93);
+            this.PSpeak.Location = new System.Drawing.Point(287, 93);
             this.PSpeak.Name = "PSpeak";
             this.PSpeak.Size = new System.Drawing.Size(57, 20);
             this.PSpeak.TabIndex = 13;
@@ -487,7 +518,7 @@
             // 
             this.labelTS5.AutoSize = true;
             this.labelTS5.Image = null;
-            this.labelTS5.Location = new System.Drawing.Point(126, 96);
+            this.labelTS5.Location = new System.Drawing.Point(250, 96);
             this.labelTS5.Name = "labelTS5";
             this.labelTS5.Size = new System.Drawing.Size(36, 13);
             this.labelTS5.TabIndex = 12;
@@ -500,7 +531,7 @@
             this.lblPSfb2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblPSfb2.ForeColor = System.Drawing.Color.Black;
             this.lblPSfb2.Image = null;
-            this.lblPSfb2.Location = new System.Drawing.Point(185, 48);
+            this.lblPSfb2.Location = new System.Drawing.Point(309, 48);
             this.lblPSfb2.Name = "lblPSfb2";
             this.lblPSfb2.Size = new System.Drawing.Size(2, 15);
             this.lblPSfb2.TabIndex = 11;
@@ -509,7 +540,7 @@
             // 
             this.labelTS1.AutoSize = true;
             this.labelTS1.Image = null;
-            this.labelTS1.Location = new System.Drawing.Point(126, 48);
+            this.labelTS1.Location = new System.Drawing.Point(250, 48);
             this.labelTS1.Name = "labelTS1";
             this.labelTS1.Size = new System.Drawing.Size(40, 13);
             this.labelTS1.TabIndex = 10;
@@ -522,7 +553,7 @@
             this.lblPSInfo15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblPSInfo15.ForeColor = System.Drawing.Color.Black;
             this.lblPSInfo15.Image = null;
-            this.lblPSInfo15.Location = new System.Drawing.Point(185, 24);
+            this.lblPSInfo15.Location = new System.Drawing.Point(309, 24);
             this.lblPSInfo15.Name = "lblPSInfo15";
             this.lblPSInfo15.Size = new System.Drawing.Size(2, 15);
             this.lblPSInfo15.TabIndex = 9;
@@ -531,7 +562,7 @@
             // 
             this.labelTS146.AutoSize = true;
             this.labelTS146.Image = null;
-            this.labelTS146.Location = new System.Drawing.Point(126, 24);
+            this.labelTS146.Location = new System.Drawing.Point(250, 24);
             this.labelTS146.Name = "labelTS146";
             this.labelTS146.Size = new System.Drawing.Size(30, 13);
             this.labelTS146.TabIndex = 8;
@@ -629,9 +660,9 @@
             // 
             this.btnPSReset.BackColor = System.Drawing.SystemColors.Control;
             this.btnPSReset.Image = null;
-            this.btnPSReset.Location = new System.Drawing.Point(38, 160);
+            this.btnPSReset.Location = new System.Drawing.Point(476, 12);
             this.btnPSReset.Name = "btnPSReset";
-            this.btnPSReset.Size = new System.Drawing.Size(95, 23);
+            this.btnPSReset.Size = new System.Drawing.Size(71, 20);
             this.btnPSReset.TabIndex = 20;
             this.btnPSReset.Text = "OFF";
             this.btnPSReset.UseVisualStyleBackColor = false;
@@ -641,11 +672,11 @@
             // 
             this.btnPSCalibrate.BackColor = System.Drawing.SystemColors.Control;
             this.btnPSCalibrate.Image = null;
-            this.btnPSCalibrate.Location = new System.Drawing.Point(38, 120);
+            this.btnPSCalibrate.Location = new System.Drawing.Point(91, 12);
             this.btnPSCalibrate.Name = "btnPSCalibrate";
-            this.btnPSCalibrate.Size = new System.Drawing.Size(95, 23);
+            this.btnPSCalibrate.Size = new System.Drawing.Size(71, 20);
             this.btnPSCalibrate.TabIndex = 19;
-            this.btnPSCalibrate.Text = "Single Calibrate";
+            this.btnPSCalibrate.Text = "Single Cal";
             this.btnPSCalibrate.UseVisualStyleBackColor = false;
             this.btnPSCalibrate.Click += new System.EventHandler(this.btnPSCalibrate_Click);
             // 
@@ -654,11 +685,11 @@
             this.labelTS140.AutoSize = true;
             this.labelTS140.ForeColor = System.Drawing.Color.White;
             this.labelTS140.Image = null;
-            this.labelTS140.Location = new System.Drawing.Point(415, 125);
+            this.labelTS140.Location = new System.Drawing.Point(11, 90);
             this.labelTS140.Name = "labelTS140";
-            this.labelTS140.Size = new System.Drawing.Size(107, 13);
+            this.labelTS140.Size = new System.Drawing.Size(78, 13);
             this.labelTS140.TabIndex = 17;
-            this.labelTS140.Text = "Calibration Wait (sec)";
+            this.labelTS140.Text = "CAL Wait (sec)";
             // 
             // udPSCalWait
             // 
@@ -668,7 +699,7 @@
             0,
             0,
             65536});
-            this.udPSCalWait.Location = new System.Drawing.Point(528, 123);
+            this.udPSCalWait.Location = new System.Drawing.Point(99, 88);
             this.udPSCalWait.Maximum = new decimal(new int[] {
             100,
             0,
@@ -680,69 +711,62 @@
             0,
             0});
             this.udPSCalWait.Name = "udPSCalWait";
-            this.udPSCalWait.Size = new System.Drawing.Size(66, 20);
+            this.udPSCalWait.Size = new System.Drawing.Size(51, 20);
             this.udPSCalWait.TabIndex = 16;
             this.udPSCalWait.Value = new decimal(new int[] {
-            10,
             0,
             0,
-            65536});
+            0,
+            0});
             this.udPSCalWait.ValueChanged += new System.EventHandler(this.udPSCalWait_ValueChanged);
             // 
-            // btnPSAmpView
+            // lblPSTint
             // 
-            this.btnPSAmpView.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPSAmpView.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnPSAmpView.Image = null;
-            this.btnPSAmpView.Location = new System.Drawing.Point(38, 246);
-            this.btnPSAmpView.Name = "btnPSAmpView";
-            this.btnPSAmpView.Size = new System.Drawing.Size(95, 23);
-            this.btnPSAmpView.TabIndex = 40;
-            this.btnPSAmpView.Text = "AmpView";
-            this.btnPSAmpView.UseVisualStyleBackColor = false;
-            this.btnPSAmpView.Click += new System.EventHandler(this.btnPSAmpView_Click);
+            this.lblPSTint.AutoSize = true;
+            this.lblPSTint.ForeColor = System.Drawing.Color.White;
+            this.lblPSTint.Image = null;
+            this.lblPSTint.Location = new System.Drawing.Point(431, 130);
+            this.lblPSTint.Name = "lblPSTint";
+            this.lblPSTint.Size = new System.Drawing.Size(54, 13);
+            this.lblPSTint.TabIndex = 47;
+            this.lblPSTint.Text = "TINT (dB)";
             // 
-            // chkPSAutoAttenuate
+            // chkPSOnTop
             // 
-            this.chkPSAutoAttenuate.AutoSize = true;
-            this.chkPSAutoAttenuate.Checked = true;
-            this.chkPSAutoAttenuate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPSAutoAttenuate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPSAutoAttenuate.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.chkPSAutoAttenuate.Image = null;
-            this.chkPSAutoAttenuate.Location = new System.Drawing.Point(38, 318);
-            this.chkPSAutoAttenuate.Name = "chkPSAutoAttenuate";
-            this.chkPSAutoAttenuate.Size = new System.Drawing.Size(97, 17);
-            this.chkPSAutoAttenuate.TabIndex = 41;
-            this.chkPSAutoAttenuate.Text = "Auto-Attenuate";
-            this.chkPSAutoAttenuate.UseVisualStyleBackColor = true;
-            this.chkPSAutoAttenuate.CheckedChanged += new System.EventHandler(this.chkPSAutoAttenuate_CheckedChanged);
-            // 
-            // timer2
-            // 
-            this.timer2.Enabled = true;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            this.chkPSOnTop.AutoSize = true;
+            this.chkPSOnTop.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkPSOnTop.Image = null;
+            this.chkPSOnTop.Location = new System.Drawing.Point(434, 266);
+            this.chkPSOnTop.Name = "chkPSOnTop";
+            this.chkPSOnTop.Size = new System.Drawing.Size(98, 17);
+            this.chkPSOnTop.TabIndex = 48;
+            this.chkPSOnTop.Text = "Always On Top";
+            this.chkPSOnTop.UseVisualStyleBackColor = true;
+            this.chkPSOnTop.CheckedChanged += new System.EventHandler(this.chkPSOnTop_CheckedChanged);
             // 
             // PSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(627, 397);
+            this.ClientSize = new System.Drawing.Size(560, 303);
+            this.Controls.Add(this.chkPSOnTop);
+            this.Controls.Add(this.lblPSTint);
+            this.Controls.Add(this.btnPSRestore);
+            this.Controls.Add(this.btnPSSave);
+            this.Controls.Add(this.btnPSAdvanced);
+            this.Controls.Add(this.comboPSTint);
+            this.Controls.Add(this.chkPSStbl);
+            this.Controls.Add(this.chkPSMap);
+            this.Controls.Add(this.chkPSPin);
             this.Controls.Add(this.chkPSAutoAttenuate);
             this.Controls.Add(this.btnPSAmpView);
             this.Controls.Add(this.chkPSRelaxPtol);
-            this.Controls.Add(this.lblDisabled);
             this.Controls.Add(this.btnPSTwoToneGen);
             this.Controls.Add(this.labelTS8);
             this.Controls.Add(this.lblPSInfoFB);
             this.Controls.Add(this.lblPSInfoCO);
-            this.Controls.Add(this.lblPSWarning);
             this.Controls.Add(this.labelTS9);
-            this.Controls.Add(this.btnPSAutoCalibrate);
-            this.Controls.Add(this.btnPSInformation);
-            this.Controls.Add(this.lblPSWelcome);
-            this.Controls.Add(this.grpLincorSave);
             this.Controls.Add(this.labelTS4);
             this.Controls.Add(this.udPSMoxDelay);
             this.Controls.Add(this.labelTS2);
@@ -755,11 +779,9 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PSForm";
-            this.Text = "PureSignal 1.0";
+            this.Text = "PureSignal 2.0";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PSForm_Closing);
             this.Load += new System.EventHandler(this.PSForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PS_KeyDown);
-            this.grpLincorSave.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udPSMoxDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPSPhnum)).EndInit();
             this.grpPSInfo.ResumeLayout(false);
@@ -792,21 +814,15 @@
         private System.Windows.Forms.NumericUpDownTS udPSPhnum;
         private System.Windows.Forms.LabelTS labelTS4;
         private System.Windows.Forms.NumericUpDownTS udPSMoxDelay;
-        private System.Windows.Forms.GroupBoxTS grpLincorSave;
         private System.Windows.Forms.ButtonTS btnPSSave;
         private System.Windows.Forms.ButtonTS btnPSRestore;
         private System.Windows.Forms.LabelTS lblPSInfoFB;
         private System.Windows.Forms.LabelTS labelTS8;
         private System.Windows.Forms.LabelTS lblPSInfoCO;
         private System.Windows.Forms.LabelTS labelTS9;
-        private System.Windows.Forms.Label lblPSWelcome;
-        private System.Windows.Forms.ButtonTS btnPSInformation;
-        private System.Windows.Forms.ButtonTS btnPSAutoCalibrate;
-        private System.Windows.Forms.LabelTS lblPSWarning;
         private System.Windows.Forms.ButtonTS btnPSTwoToneGen;
         private System.Windows.Forms.LabelTS lblPSfb2;
         private System.Windows.Forms.LabelTS labelTS1;
-        private System.Windows.Forms.LabelTS lblDisabled;
         private System.Windows.Forms.LabelTS labelTS5;
         private System.Windows.Forms.TextBoxTS PSpeak;
         private System.Windows.Forms.TextBoxTS GetPSpeak;
@@ -822,5 +838,12 @@
         private System.Windows.Forms.LabelTS lblPSInfo6;
         private System.Windows.Forms.LabelTS labelTS7;
         private System.Windows.Forms.CheckBoxTS checkLoopback;
+        private System.Windows.Forms.CheckBoxTS chkPSPin;
+        private System.Windows.Forms.CheckBoxTS chkPSMap;
+        private System.Windows.Forms.CheckBoxTS chkPSStbl;
+        private System.Windows.Forms.ComboBoxTS comboPSTint;
+        private System.Windows.Forms.ButtonTS btnPSAdvanced;
+        private System.Windows.Forms.LabelTS lblPSTint;
+        private System.Windows.Forms.CheckBoxTS chkPSOnTop;
     }
 }

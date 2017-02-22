@@ -32,7 +32,7 @@ void start_cmthread (int id)
 	SetThreadPriority(handle, THREAD_PRIORITY_HIGHEST);
 }
 
-void create_cmbuffs (int id, int accept, int max_insize, int outsize)
+void create_cmbuffs (int id, int accept, int max_insize, int max_outsize, int outsize)
 {
 	CMB a = (CMB) malloc0 (sizeof(cmb));
 	pcm->pcbuff[id] = pcm->pdbuff[id] = pcm->pebuff[id] = pcm->pfbuff[id] = a;
@@ -40,9 +40,10 @@ void create_cmbuffs (int id, int accept, int max_insize, int outsize)
 	a->accept = accept;
 	a->run = 1;
 	a->max_in_size = max_insize;
+	a->max_outsize = max_outsize;
 	a->r1_outsize = outsize;
-	if (a->r1_outsize > a->max_in_size)
-		a->r1_size = a->r1_outsize;
+	if (a->max_outsize > a->max_in_size)
+		a->r1_size = a->max_outsize;
 	else
 		a->r1_size = a->max_in_size;
 	a->r1_active_buffsize = CMB_MULT * a->r1_size;
