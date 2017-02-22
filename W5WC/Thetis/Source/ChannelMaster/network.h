@@ -19,21 +19,23 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 */
+#pragma once
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ws2tcpip.h>
+#include <Mswsock.h>
+#include <VersionHelpers.h>
+#include "analyzer.h"
+#include "cmcomm.h"
 
 #define MAX_ADC					(3)
 #define MAX_RX_STREAMS			(12)
 #define MAX_TX_STREAMS			(3)
+#define MAX_AUDIO_STREAMS		(2)
 #define MAX_SYNC_RX             (2)
 #define CACHE_ALIGN __declspec (align(16))
-
-#include <winsock2.h>
-#include <ws2tcpip.h>
-
-#include "analyzer.h"
-#include "cmcomm.h"
-
-#ifndef _network_h
-#define _network_h
 
 typedef struct CACHE_ALIGN _radionet
 {
@@ -111,14 +113,14 @@ typedef struct CACHE_ALIGN _radionet
 		{
 			unsigned char mode_control;
 			struct {
-				unsigned char eer              :1, // bit 00
-                              cw_enable        :1, // bit 01
-                              rev_paddle       :1, // bit 02
-                              iambic           :1, // bit 03
-                              sidetone         :1, // bit 04
-                              mode_b           :1, // bit 05
-                              strict_spacing   :1, // bit 06
-                              break_in         :1; // bit 07
+				unsigned char eer : 1, // bit 00
+				cw_enable         : 1, // bit 01
+				rev_paddle        : 1, // bit 02
+				iambic            : 1, // bit 03
+				sidetone          : 1, // bit 04
+			    mode_b            : 1, // bit 05
+				strict_spacing    : 1, // bit 06
+			    break_in          : 1; // bit 07
 			};
 		};
 #pragma pack(pop, 1)
@@ -132,18 +134,19 @@ typedef struct CACHE_ALIGN _radionet
 		{
 			unsigned char mic_control;
 			struct {
-				unsigned char line_in     :1; // bit 00
-                unsigned char mic_boost   :1; // bit 01
-                unsigned char mic_ptt     :1; // bit 02
-                unsigned char mic_trs     :1; // bit 03
-                unsigned char mic_bias    :1; // bit 04
-                unsigned char             :1; // bit 05
-                unsigned char             :1; // bit 06
-                unsigned char             :1; // bit 07
+				unsigned char line_in   : 1; // bit 00
+				unsigned char mic_boost : 1; // bit 01
+				unsigned char mic_ptt   : 1; // bit 02
+				unsigned char mic_trs   : 1; // bit 03
+				unsigned char mic_bias  : 1; // bit 04
+				unsigned char           : 1; // bit 05
+				unsigned char           : 1; // bit 06
+				unsigned char           : 1; // bit 07
 			};
 		};
 #pragma pack(pop, 1)
-	}mic;
+		int spp;							// I-samples per network packet
+	} mic;
 
 	struct _rx
 	{
@@ -160,7 +163,7 @@ typedef struct CACHE_ALIGN _radionet
 		unsigned int rx_out_seq_no;
 		unsigned _int64 time_stamp;
 		unsigned int bits_per_sample;
-		unsigned int IQ_samples_per_frame;
+		int spp;							// IQ-samples per network packet
 	} rx[MAX_RX_STREAMS];
 
 	struct _tx
@@ -169,9 +172,9 @@ typedef struct CACHE_ALIGN _radionet
 		int frequency;
 		int sampling_rate;
 		int cwx;
-	    int dash;
-	    int dot;
-	    int ptt_out;
+		int dash;
+		int dot;
+		int ptt_out;
 		int drive_level;
 		int exciter_power;
 		int fwd_power;
@@ -183,7 +186,13 @@ typedef struct CACHE_ALIGN _radionet
 		unsigned int mic_in_seq_no;
 		unsigned int mic_in_seq_err;
 		unsigned int mic_out_seq_no;
+		int spp;							// IQ-samples per network packet
 	} tx[MAX_TX_STREAMS];
+
+	struct _audio
+	{
+		int spp;							// LR-samples per network packet
+	} audio[MAX_AUDIO_STREAMS];
 
 	struct _discovery
 	{
@@ -211,42 +220,42 @@ typedef struct _rbpfilter // radio band pass filter
 	union
 	{
 		unsigned bpfilter;
-		struct {                               
-			unsigned _rx_yellow_led:1; // bit 00
-			unsigned _13MHz_HPF    :1; // bit 01
-			unsigned _20MHz_HPF    :1; // bit 02
-			unsigned _6M_preamp    :1; // bit 03
-			unsigned _9_5MHz_HPF   :1; // bit 04
-			unsigned _6_5MHz_HPF   :1; // bit 05
-			unsigned _1_5MHz_HPF   :1; // bit 06
-			unsigned _rx2_gnd      :1; // bit 07
+		struct {
+			unsigned _rx_yellow_led : 1; // bit 00
+			unsigned _13MHz_HPF     : 1; // bit 01
+			unsigned _20MHz_HPF     : 1; // bit 02
+			unsigned _6M_preamp     : 1; // bit 03
+			unsigned _9_5MHz_HPF    : 1; // bit 04
+			unsigned _6_5MHz_HPF    : 1; // bit 05
+			unsigned _1_5MHz_HPF    : 1; // bit 06
+			unsigned                : 1; // bit 07
 
-			unsigned _XVTR_Rx_In   :1; // bit 08			
-			unsigned _Rx_2_In      :1; // bit 09 EXT1		
-			unsigned _Rx_1_In      :1; // bit 10 EXT2
-			unsigned _Rx_1_Out     :1; // bit 11 K36
-			unsigned _Bypass       :1; // bit 12
-			unsigned _20_dB_Atten  :1; // bit 13
-			unsigned _10_dB_Atten  :1; // bit 14
-			unsigned _rx_red_led   :1; // bit 15
+			unsigned _XVTR_Rx_In    : 1; // bit 08			
+			unsigned _Rx_2_In       : 1; // bit 09 EXT1		
+			unsigned _Rx_1_In       : 1; // bit 10 EXT2
+			unsigned _Rx_1_Out      : 1; // bit 11 K36 RL17
+			unsigned _Bypass        : 1; // bit 12
+			unsigned _20_dB_Atten   : 1; // bit 13
+			unsigned _10_dB_Atten   : 1; // bit 14 (RX MASTER IN SEL RL22)
+			unsigned _rx_red_led    : 1; // bit 15
 
-			unsigned               :1; // bit 16
-			unsigned               :1; // bit 17
-			unsigned               :1; // bit 18
-			unsigned _tx_yellow_led:1; // bit 19
-			unsigned _30_20_LPF    :1; // bit 20
-			unsigned _60_40_LPF    :1; // bit 21
-			unsigned _80_LPF       :1; // bit 22
-			unsigned _160_LPF      :1; // bit 23
+			unsigned                : 1; // bit 16
+			unsigned                : 1; // bit 17
+			unsigned _trx_status    : 1; // bit 18
+			unsigned _tx_yellow_led : 1; // bit 19
+			unsigned _30_20_LPF     : 1; // bit 20
+			unsigned _60_40_LPF     : 1; // bit 21
+			unsigned _80_LPF        : 1; // bit 22
+			unsigned _160_LPF       : 1; // bit 23
 
-			unsigned _ANT_1        :1; // bit 24
-			unsigned _ANT_2        :1; // bit 25
-			unsigned _ANT_3        :1; // bit 26
-			unsigned _TR_Relay     :1; // bit 27
-			unsigned _tx_red_led   :1; // bit 28
-			unsigned _6_LPF        :1; // bit 29
-			unsigned _12_10_LPF    :1; // bit 30
-			unsigned _17_15_LPF    :1; // bit 31
+			unsigned _ANT_1         : 1; // bit 24
+			unsigned _ANT_2         : 1; // bit 25
+			unsigned _ANT_3         : 1; // bit 26
+			unsigned _TR_Relay      : 1; // bit 27
+			unsigned _tx_red_led    : 1; // bit 28
+			unsigned _6_LPF         : 1; // bit 29
+			unsigned _12_10_LPF     : 1; // bit 30
+			unsigned _17_15_LPF     : 1; // bit 31
 		};
 	};
 }rbpfilter, *RBPFILTER;
@@ -261,23 +270,23 @@ typedef struct _rbpfilter2 // radio band pass filter
 	{
 		unsigned bpfilter;
 		struct {
-			unsigned _rx_yellow_led : 1; // bit 32
-			unsigned _13MHz_HPF     : 1; // bit 33
-			unsigned _20MHz_HPF     : 1; // bit 34
-			unsigned _6M_preamp     : 1; // bit 35
-			unsigned _9_5MHz_HPF    : 1; // bit 36
-			unsigned _6_5MHz_HPF    : 1; // bit 37
-			unsigned _1_5MHz_HPF    : 1; // bit 38
-			unsigned _rx2_gnd500    : 1; // bit 39
+			unsigned _rx_yellow_led : 1; // bit 
+			unsigned _13MHz_HPF     : 1; // bit 
+			unsigned _20MHz_HPF     : 1; // bit 
+			unsigned _6M_preamp     : 1; // bit 
+			unsigned _9_5MHz_HPF    : 1; // bit 
+			unsigned _6_5MHz_HPF    : 1; // bit 
+			unsigned _1_5MHz_HPF    : 1; // bit 
+			unsigned                : 1; // bit 
 
-			unsigned _rx2_gnd       : 1; // bit 40			
-			unsigned                : 1; // bit 41 	
-			unsigned                : 1; // bit 42
-			unsigned                : 1; // bit 43 
-			unsigned _Bypass        : 1; // bit 44
-			unsigned                : 1; // bit 45
-			unsigned                : 1; // bit 46
-			unsigned _rx_red_led    : 1; // bit 47
+			unsigned  _rx2_gnd      : 1; // bit 		
+			unsigned                : 1; // bit 	
+			unsigned                : 1; // bit 
+			unsigned                : 1; // bit 
+			unsigned _Bypass        : 1; // bit 
+			unsigned                : 1; // bit 
+			unsigned                : 1; // bit 
+			unsigned _rx_red_led    : 1; // bit 
 		};
 	};
 }rbpfilter2, *RBPFILTER2;
@@ -296,6 +305,12 @@ DWORD WINAPI KeepAliveMain(LPVOID);
 void ReadThreadMainLoop();
 void KeepAliveLoop();
 void PrintTimeHack();
+
+void InitWinsock();
+void CreateRIOSocket();
+void Bind(SOCKET s, const unsigned short port);
+void PostRIORecvs(const DWORD recvBufferSize, const DWORD pendingRecvs);
+void InitializeRIO(SOCKET s);
 
 // IOThread rountines
 int IOThreadStop(void);
@@ -338,9 +353,6 @@ int MicPTT;
 int Merc3Preamp;
 int Merc4Preamp;
 int MercRandom;
-//int enable_ADC1_step_att;
-//int enable_ADC2_step_att;
-//int enable_ADC3_step_att;
 int adc1_step_att_data;
 int adc2_step_att_data;
 int adc3_step_att_data;
@@ -383,6 +395,7 @@ int Alex3LPFMask;
 int Alex4HPFMask;
 int Alex4LPFMask;
 
+int mkiibpf;
 int AlexRxAnt;
 int AlexTxAnt;
 int AlexRxOut;
@@ -413,11 +426,7 @@ int HermesDCV;
 int CandCAddrMask;
 int CandCFwdPowerBit;
 int DotDashMask;
-
-SOCKET listenSock;
-WSADATA WSAdata;
 int WSAinitialized;
+SOCKET listenSock;
 SYSTEMTIME lt;
 static const double const_1_div_2147483648_ = 1.0 / 2147483648.0;
-
-#endif

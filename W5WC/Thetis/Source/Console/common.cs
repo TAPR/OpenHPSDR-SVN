@@ -30,8 +30,10 @@
     using System.Diagnostics;
     using System.Drawing;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Windows.Forms;
-using System.IO.Ports;
+    using System.Linq;
+    using System.IO.Ports;
 
 namespace Thetis
 {
@@ -41,8 +43,10 @@ namespace Thetis
 		{
 			if(c.Controls.Count > 0)
 			{
-				foreach(Control c2 in c.Controls)
-					ControlList(c2, ref a);
+                foreach (Control c2 in c.Controls)
+                {
+                    ControlList(c2, ref a);
+                }
 			}
 
 			if(c.GetType() == typeof(CheckBoxTS) || c.GetType() == typeof(CheckBoxTS) ||
@@ -53,9 +57,10 @@ namespace Thetis
 				c.GetType() == typeof(TrackBarTS) || c.GetType() == typeof(TrackBar) ||
 				c.GetType() == typeof(ColorButton))
 				a.Add(c);
-		}
 
-		public static void SaveForm(Form form, string tablename)
+		}
+        
+        public static void SaveForm(Form form, string tablename)
 		{
 			ArrayList a = new ArrayList();
 			ArrayList temp = new ArrayList();

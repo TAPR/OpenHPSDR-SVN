@@ -35,15 +35,8 @@ int(__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop,
 {
 	DWORD dwWaitResult;
 	int myrc = 0;
-	//int nchannels = 2 * nreceivers + 2;
 
 	HaveSync = 1;
-	//SampleBits = sample_bits;
-
-	//IQConversionDivisor = (double)8388607.0;  // (2**23)-1
-	//if ( SampleBits == 16 ) {
-	//	IQConversionDivisor = (double)32767.0;
-	//}
 
 	// make sure we're not already opened
 	if (IOThreadRunning) {
@@ -268,23 +261,25 @@ int getHermesDCVoltage() {
 }
 
 PORT
-void SetXmitBit(int xmit) {
+void SetPttOut(int xmit) {
 
 	if (prn->tx[0].ptt_out != xmit)
 	{
 		prn->tx[0].ptt_out = xmit & 0x1;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 }
 
 PORT
-void SetPArelay(int bit) {
+void SetTRXrelay(int bit) {
 
 	if (prbpfilter->_TR_Relay != bit)
 	{
+		if (!prn->tx[0].pa) // disable PA
 		prbpfilter->_TR_Relay = bit & 0x1;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		prbpfilter->_trx_status = prbpfilter->_TR_Relay; // TXRX_STATUS
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 }
@@ -299,17 +294,17 @@ PORT
 void EnableEClassModulation(int bit) {
 	if (prn->cw.eer != bit) {
 		prn->cw.eer = bit;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdRx();
 	}
 }
 
 PORT
-void SetPennyOCBits(int b) {
+void SetOCBits(int b) {
 	if (prn->oc_output != b)
 	{
 		prn->oc_output = b;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 }
@@ -317,49 +312,69 @@ void SetPennyOCBits(int b) {
 PORT
 void SetAlexAtten(int bits) {
 
+	if (mkiibpf) return;
+
 	if ((prbpfilter->_20_dB_Atten | prbpfilter->_10_dB_Atten) != bits)
 	{
 		prbpfilter->_20_dB_Atten = (bits & 0x2) == 0x2;
 		prbpfilter->_10_dB_Atten = bits & 0x1;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 	return;
 }
 
 PORT
-void SetMercDither(int bits) {
+void SetADCDither(int bits) {
 
 	if (prn->adc[0].dither != bits) {
 		prn->adc[0].dither = prn->adc[1].dither = prn->adc[2].dither = bits;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdRx();
 	}
 	return;
 }
 
 PORT
-void SetMercRandom(int bits) {
+void SetADCRandom(int bits) {
 
 	if (prn->adc[0].random != bits) {
 		prn->adc[0].random = prn->adc[1].random = prn->adc[2].random = bits;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdRx();
 	}
 	return;
 }
 
 PORT
-void SetAlexAntBits(int rx_only_ant, int trx_ant, int rx_out) {
+void SetAntBits(int rx_only_ant, int trx_ant, int rx_out, char tx) {
 
-	prbpfilter->_Rx_1_Out = (rx_out & 0x01) != 0;
-	prbpfilter->_Rx_1_In = (rx_only_ant & (0x01 | 0x02)) == 0x01;
-	prbpfilter->_Rx_2_In = (rx_only_ant & (0x01 | 0x02)) == 0x02;
-	prbpfilter->_XVTR_Rx_In = (rx_only_ant & (0x01 | 0x02)) == (0x01 | 0x02);
+	if (mkiibpf)
+	{
+		if (rx_only_ant == 1 || tx) // set rx bypass only if Ext2 enabled
+		{
+			prbpfilter->_Rx_1_Out = (rx_out & 0x01) != 0; // RX BYPASS OUT RL17
+			prbpfilter->_10_dB_Atten = 0; // RX MASTER IN SEL RL22
+		}
+		else
+		{
+			prbpfilter->_Rx_1_Out = 0; // RX BYPASS OUT RL17
+			prbpfilter->_10_dB_Atten = rx_out & 0x1; // RX MASTER IN SEL RL22
+		}
+	}
+	else
+	{
+		prbpfilter->_Rx_1_Out = (rx_out & 0x01) != 0; // RX BYPASS OUT RL17
+	}
+
+	prbpfilter->_Rx_1_In = (rx_only_ant & (0x01 | 0x02)) == 0x01; // Ext2
+	prbpfilter->_Rx_2_In = (rx_only_ant & (0x01 | 0x02)) == 0x02; // Ext1
+	prbpfilter->_XVTR_Rx_In = (rx_only_ant & (0x01 | 0x02)) == (0x01 | 0x02); // XVTR
+
 	prbpfilter->_ANT_1 = (trx_ant & (0x01 | 0x02)) == 0x01;
 	prbpfilter->_ANT_2 = (trx_ant & (0x01 | 0x02)) == 0x02;
 	prbpfilter->_ANT_3 = (trx_ant & (0x01 | 0x02)) == (0x01 | 0x02);
-	if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+	if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 		CmdHighPriority();
 	return;
 }
@@ -371,7 +386,7 @@ void SetVFOfreq(int id, int freq, int tx) {
 		if (prn != NULL && prn->tx[id].frequency != freq)
 		{
 			prn->tx[id].frequency = freq;
-			if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+			if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 				CmdHighPriority();
 		}
 	}
@@ -380,7 +395,7 @@ void SetVFOfreq(int id, int freq, int tx) {
 		if (prn != NULL && prn->rx[id].frequency != freq)
 		{
 			prn->rx[id].frequency = freq;
-			if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+			if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 				CmdHighPriority();
 		}
 	}
@@ -389,12 +404,11 @@ void SetVFOfreq(int id, int freq, int tx) {
 
 PORT
 void SetOutputPowerFactor(int u) {
-	//OutputPowerFactor = (unsigned int)(u & 0xff);
 
 	if (prn->tx[0].drive_level = u)
 	{
 		prn->tx[0].drive_level = u;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 }
@@ -404,7 +418,7 @@ void SetMicBoost(int bits) {
 
 	if (prn->mic.mic_boost != bits) {
 		prn->mic.mic_boost = bits;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 	return;
@@ -414,7 +428,7 @@ PORT
 void SetLineIn(int bits) {
 	if (prn->mic.line_in != bits) {
 		prn->mic.line_in = bits;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -458,7 +472,7 @@ void SetAlexHPFBits(int bits) {
 		prbpfilter->_1_5MHz_HPF = (bits & 0x10) != 0;
 		prbpfilter->_Bypass = (bits & 0x20) != 0;
 		prbpfilter->_6M_preamp = (bits & 0x40) != 0;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 
@@ -467,11 +481,9 @@ void SetAlexHPFBits(int bits) {
 }
 
 PORT
-void EnablePA(int bit) {
+void DisablePA(int bit) {
 	if (prn->tx[0].pa != bit) {
 		prn->tx[0].pa = bit;
-		if (listenSock != (SOCKET)0)
-			CmdGeneral();
 	}
 	return;
 }
@@ -486,11 +498,23 @@ void SetAlex2HPFBits(int bits) {
 		prbpfilter2->_1_5MHz_HPF = (bits & 0x10) != 0;
 		prbpfilter2->_Bypass = (bits & 0x20) != 0;
 		prbpfilter2->_6M_preamp = (bits & 0x40) != 0;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 
 	Alex2HPFMask = bits;
+	return;
+}
+
+PORT
+void SetBPF2Gnd(int bits) {
+
+	if ((prbpfilter2->_rx2_gnd) != bits)
+	{
+		prbpfilter2->_rx2_gnd = (bits & 0x1) != 0;
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
+			CmdHighPriority();
+	}
 	return;
 }
 
@@ -516,7 +540,7 @@ void SetAlexLPFBits(int bits) {
 		prbpfilter->_6_LPF = (bits & 0x10) != 0;
 		prbpfilter->_12_10_LPF = (bits & 0x20) != 0;
 		prbpfilter->_17_15_LPF = (bits & 0x40) != 0;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 
@@ -548,7 +572,7 @@ void SetRX1Preamp(int bits) {
 	if (prn->rx[0].preamp != bits)
 	{
 		prn->rx[0].preamp = bits;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 	return;
@@ -560,7 +584,7 @@ void SetRX2Preamp(int bits) {
 	if (prn->rx[1].preamp != bits)
 	{
 		prn->rx[1].preamp = bits;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 
@@ -572,7 +596,7 @@ void SetMicTipRing(int bits) {
 
 	if (prn->mic.mic_trs != bits) {
 		prn->mic.mic_trs = bits;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -583,7 +607,7 @@ PORT
 void SetMicBias(int bits) {
 	if (prn->mic.mic_bias != bits) {
 		prn->mic.mic_bias = bits;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -595,7 +619,7 @@ void SetMicPTT(int bits) {
 
 	if (prn->mic.mic_ptt != bits) {
 		prn->mic.mic_ptt = bits;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -607,7 +631,7 @@ void SetLineBoost(int bits) {
 
 	if (prn->mic.line_in_gain != bits) {
 		prn->mic.line_in_gain = bits;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -631,8 +655,9 @@ void SetPureSignal(int bit) {
 	if (prn->puresignal_run != bit)
 	{
 		prn->puresignal_run = bit & 0x1;
-		if (listenSock != (SOCKET)0)
-			CmdRx();
+		if (listenSock != INVALID_SOCKET)
+			// CmdRx();
+			CmdHighPriority();
 	}
 
 	return;
@@ -691,23 +716,11 @@ void SetADC1StepAttenData(int data) {
 	if (prn->adc[0].rx_step_attn != data)
 	{
 		prn->adc[0].rx_step_attn = data;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 	return;
 }
-
-//PORT
-//void EnableADC1StepAtten(int bits) {
-//	if (bits != 0) {
-//		enable_ADC1_step_att = 0x20;
-//	}
-//	else {
-//		enable_ADC1_step_att = 0;
-//	}
-//
-//	return;
-//}
 
 PORT
 void SetADC2StepAttenData(int data) {
@@ -715,23 +728,12 @@ void SetADC2StepAttenData(int data) {
 	if (prn->adc[1].rx_step_attn != data)
 	{
 		prn->adc[1].rx_step_attn = data;
-		if (listenSock != (SOCKET)0 && prn->sendHighPriority != 0)
+		if (listenSock != INVALID_SOCKET && prn->sendHighPriority != 0)
 			CmdHighPriority();
 	}
 
 	return;
 }
-
-//PORT
-//void EnableADC2StepAtten(int bits) {
-//	if (bits != 0) {
-//		enable_ADC2_step_att = 0x20;
-//	}
-//	else {
-//		enable_ADC2_step_att = 0;
-//	}
-//	return;
-//}
 
 PORT
 void SetADC3StepAttenData(int data) {
@@ -739,30 +741,19 @@ void SetADC3StepAttenData(int data) {
 	if (prn->adc[2].rx_step_attn != data)
 	{
 		prn->adc[2].rx_step_attn = data;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdHighPriority();
 	}
 
 	return;
 }
 
-//PORT
-//void EnableADC3StepAtten(int bits) {
-//	if (bits != 0) {
-//		enable_ADC3_step_att = 0x20;
-//	}
-//	else {
-//		enable_ADC3_step_att = 0;
-//	}
-//	return;
-//}
-
 PORT
 void ReversePaddles(int bits) {
 
 	if (prn->cw.rev_paddle != bits) {
 		prn->cw.rev_paddle = bits;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -774,7 +765,7 @@ void SetCWKeyerSpeed(int speed) {
 
 	if (prn->cw.keyer_speed != speed) {
 		prn->cw.keyer_speed = speed;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -784,7 +775,7 @@ PORT
 void SetCWKeyerMode(int mode) {
 	if (prn->cw.mode_b != mode) {
 		prn->cw.mode_b = mode;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -794,7 +785,7 @@ PORT
 void SetCWKeyerWeight(int weight) {
 	if (prn->cw.keyer_weight != weight) {
 		prn->cw.keyer_weight = weight;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 }
@@ -804,7 +795,7 @@ void EnableCWKeyerSpacing(int bits) {
 
 	if (prn->cw.strict_spacing != bits) {
 		prn->cw.strict_spacing = bits;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -819,7 +810,7 @@ void SetADC_cntrl1(int bits) {
 		prn->rx[1].rx_adc = (bits >> 2) & 0x3;
 		prn->rx[2].rx_adc = (bits >> 4) & 0x3;
 		prn->rx[3].rx_adc = (bits >> 6) & 0x3;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdRx();
 	}
 
@@ -838,7 +829,7 @@ void SetADC_cntrl2(int bits) {
 		prn->rx[4].rx_adc = bits & 0x3;
 		prn->rx[5].rx_adc = (bits >> 2) & 0x3;
 		prn->rx[6].rx_adc = (bits >> 4) & 0x3;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdRx();
 	}
 
@@ -859,7 +850,7 @@ void SetTxAttenData(int bits) {
 		for (i = 0; i < MAX_ADC; i++) {
 			prn->adc[i].tx_step_attn = bits;
 		}
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -871,7 +862,7 @@ void EnableCWKeyer(int enable) {
 
 	if (prn->cw.cw_enable != enable) {
 		prn->cw.cw_enable = enable;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -883,7 +874,7 @@ void SetCWSidetoneVolume(int vol) {
 
 	if (prn->cw.sidetone_level != vol) {
 		prn->cw.sidetone_level = vol;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -894,7 +885,7 @@ void SetCWPTTDelay(int delay) {
 
 	if (prn->cw.rf_delay != delay) {
 		prn->cw.rf_delay = delay;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -905,7 +896,7 @@ void SetCWHangTime(int time) {
 
 	if (prn->cw.hang_delay != time) {
 		prn->cw.hang_delay = time;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -915,7 +906,7 @@ PORT
 void SetCWSidetoneFreq(int freq) {
 	if (prn->cw.sidetone_freq != freq) {
 		prn->cw.sidetone_freq = freq;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 
@@ -926,7 +917,7 @@ void SetEERPWMmin(int min) {
 	if (prn->tx[0].epwm_min != min)
 	{
 		prn->tx[0].epwm_min = min;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdGeneral();
 	}
 }
@@ -936,7 +927,7 @@ void SetEERPWMmax(int max) {
 	if (prn->tx[0].epwm_max != max)
 	{
 		prn->tx[0].epwm_max = max;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdGeneral();
 	}
 }
@@ -949,7 +940,7 @@ void SetCWSidetone(int enable) {
 
 	if (prn->cw.sidetone != enable) {
 		prn->cw.sidetone = enable;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 }
@@ -959,7 +950,7 @@ void SetCWIambic(int enable) {
 
 	if (prn->cw.iambic != enable) {
 		prn->cw.iambic = enable;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 }
@@ -969,7 +960,7 @@ void SetCWBreakIn(int enable) {
 
 	if (prn->cw.break_in != enable) {
 		prn->cw.break_in = enable;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdTx();
 	}
 }
@@ -979,7 +970,7 @@ void SetCWDash(int bit) {
 
 	if (prn->tx[0].dash != bit) {
 		prn->tx[0].dash = bit;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdHighPriority();
 	}
 }
@@ -988,7 +979,7 @@ PORT
 void SetCWDot(int bit) {
 	if (prn->tx[0].dot != bit) {
 		prn->tx[0].dot = bit;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdHighPriority();
 	}
 }
@@ -997,7 +988,7 @@ PORT
 void SetCWX(int bit) {
 	if (prn->tx[0].cwx != bit) {
 		prn->tx[0].cwx = bit;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdHighPriority();
 	}
 }
@@ -1021,13 +1012,6 @@ int getControlByteIn(int n) {
 }
 
 PORT
-void SetSWRProtect(float g) {
-	swr_protect = g;
-	if (swr_protect == 0.0f) swr_protect = 0.3f;
-	return;
-}
-
-PORT
 void SetLegacyDotDashPTT(int bit) {
 	if (bit) {
 		CandCAddrMask = 0xfc;
@@ -1046,7 +1030,7 @@ void EnableRx(int id, int enable) {
 	if (prn->rx[id].enable != enable)
 	{
 		prn->rx[id].enable = enable & 0x1;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdRx();
 	}
 }
@@ -1066,7 +1050,7 @@ void EnableRxs(int rxs) {
 		{
 			prn->rx[i].enable = (rxs >> i) & 0x1;
 		}
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdRx();
 	}
 
@@ -1078,7 +1062,7 @@ void EnableRxSync(int id, int sync)
 	if (prn->rx[id].sync != sync)
 	{
 		prn->rx[id].sync = sync & 0xff;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdRx();
 	}
 }
@@ -1111,7 +1095,7 @@ void SetSampleRate(int id, int rate)
 			break;
 		}
 
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdRx();
 	}
 
@@ -1123,7 +1107,7 @@ void SetRxADC(int n) {
 	if (prn->num_adc != n)
 	{
 		prn->num_adc = n;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdRx();
 	}
 
@@ -1134,7 +1118,15 @@ PORT
 void SetWBPacketsPerFrame(int ppf)
 {
 	prn->wb_packets_per_frame = ppf;
-	if (listenSock != (SOCKET)0)
+	if (listenSock != INVALID_SOCKET)
+		CmdGeneral();
+}
+
+PORT
+void SetWBUpdateRate(int ur)
+{
+	prn->wb_update_rate = ur;
+	if (listenSock != INVALID_SOCKET)
 		CmdGeneral();
 }
 
@@ -1143,7 +1135,7 @@ void SetWBEnable(int adc, int enable)
 {
 	if (enable) InterlockedBitTestAndSet(&prn->wb_enable, adc);
 	else        InterlockedBitTestAndReset(&prn->wb_enable, adc);
-	if (listenSock != (SOCKET)0)
+	if (listenSock != INVALID_SOCKET)
 		CmdGeneral();
 }
 
@@ -1152,7 +1144,7 @@ void SendHighPriority(int send) {
 	if (send)
 	{
 		prn->sendHighPriority = 1;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdHighPriority();
 	}
 	else prn->sendHighPriority = 0;
@@ -1164,9 +1156,15 @@ void SetWatchdogTimer(int enable)
 	if (prn->wdt != enable)
 	{
 		prn->wdt = enable;
-		if (listenSock != (SOCKET)0)
+		if (listenSock != INVALID_SOCKET)
 			CmdGeneral();
 	}
+}
+
+PORT
+void SetMKIIBPF(int bpf)
+{
+	mkiibpf = bpf;
 }
 
 PORT
@@ -1202,6 +1200,7 @@ void create_rnet() {
 
 	prn->mic.mic_control = 0;
 	prn->mic.line_in_gain = 0;
+	prn->mic.spp = 64; // 64;	720;					// I-samples per packet
 
 	for (i = 0; i < 2; i++)
 		prn->syncrxbuff[i] = (double *)calloc(1, 2 * sizeof(double) * 120);
@@ -1211,7 +1210,7 @@ void create_rnet() {
 	prn->wb_enable = 0;
 	prn->wb_samples_per_packet = 512;
 	prn->wb_sample_size = 16;
-	prn->wb_update_rate = 20;
+	prn->wb_update_rate = 70;
 	prn->wb_packets_per_frame = 32;
 	for (i = 0; i < MAX_ADC; i++) {
 		prn->adc[i].id = i;
@@ -1239,7 +1238,7 @@ void create_rnet() {
 		prn->rx[i].rx_in_seq_err = 0;
 		prn->rx[i].time_stamp = 0;
 		prn->rx[i].bits_per_sample = 0;
-		prn->rx[i].IQ_samples_per_frame = 0;
+		prn->rx[i].spp = 238;				// IQ-samples per packet
 	}
 
 	for (i = 0; i < MAX_TX_STREAMS; i++) {
@@ -1258,6 +1257,12 @@ void create_rnet() {
 		prn->tx[i].mic_in_seq_no = 0;
 		prn->tx[i].mic_in_seq_err = 0;
 		prn->tx[i].mic_out_seq_no = 0;
+		prn->tx[i].spp = 240;				// IQ-samples per packet
+	}
+
+	for (i = 0; i < MAX_AUDIO_STREAMS; i++)
+	{
+		prn->audio[i].spp = 64; // 64;	360;			// LR-samples per packet
 	}
 
 	prn->puresignal_run = 0;
@@ -1288,8 +1293,8 @@ void create_rnet() {
 	prn->hKeepAliveThread = NULL;
 	prn->hTimer = NULL;
 
-	create_obbuffs(0, 1, 2048, 360);	// last parameter is number of samples per packet
-	create_obbuffs(1, 1, 2048, 240);
+	create_obbuffs(0, 1, 2048, prn->audio[0].spp);	// last parameter is number of samples per packet
+	create_obbuffs(1, 1, 2048, prn->tx[0].spp);
 	InitializeCriticalSectionAndSpinCount(&prn->udpOUT, 2500);
 	InitializeCriticalSectionAndSpinCount(&prn->rcvpkt, 2500);
 	InitializeCriticalSectionAndSpinCount(&prn->sndpkt, 2500);

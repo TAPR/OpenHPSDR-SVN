@@ -744,51 +744,50 @@ namespace Thetis
             DataTable t = ds.Tables["BandText"];
 
             object[] data = {
-
 								0.135700, 0.137799, "2200M CW/DATA",   true,                                
                                 0.472000, 0.478999, "630M CW/DATA",    true,
 
 								1.800000, 1.825000, "160M CW",	                true,																
-								1.907500, 1.912500, "160M CW/DATA", 	true,
+                                1.907500, 1.912499, "160M CW/DATA", 	true,
 
 								3.500000, 3.519999, "80M CW",		    		true,
 								3.520000, 3.534999, "80M CW/DATA",		true,
-								3.535000, 3.575000, "80M CW/SSB/SSTV",			true,
-								3.599000, 3.612000, "75M CW/SSB/SSTV/DATA",		true,
-								3.568000, 3.687000, "75M CW/SSB/SSTV",			true,
-								3.702000, 3.716000, "75M CW/SSB/SSTV",			true,
-								3.745000, 3.770000, "75M CW/SSB/SSTV",			true,
-								3.791000, 3.805000, "75M CW/SSB/SSTV",	        true,
+                                3.535000, 3.574999, "80M CW/SSB/SSTV",			true,
+                                3.599000, 3.611999, "75M CW/SSB/SSTV/DATA",		true,
+                                3.680000, 3.686999, "75M CW/SSB/SSTV",			true,
+                                3.702000, 3.715999, "75M CW/SSB/SSTV",			true,
+                                3.745000, 3.769999, "75M CW/SSB/SSTV",			true,
+                                3.791000, 3.804999, "75M CW/SSB/SSTV",	        true,
  
 								7.000000, 7.029999, "40M CW",			    	true,
 								7.030000, 7.044999, "40M CW/DATA",				true,
-								7.040000, 7.099999, "40M CW/SSB/SSTV",			true,
-								7.100000, 7.200000, "40M All Modes",			true,
+                                7.045000, 7.099999, "40M CW/SSB/SSTV",			true,
+                                7.100000, 7.199999, "40M All Modes",			true,
 								
 								10.100000, 10.129999, "30M CW",					true,
-								10.130000, 10.150000, "30M CW/DATA",			true,
+                                10.130000, 10.149999, "30M CW/DATA",			true,
 
 								14.000000, 14.069999, "20M CW",		        	true,
 								14.070000, 14.099999, "20M CW/DATA",			true,
 								14.100000, 14.100000, "20M IBP Beacon",			true,
 								14.100001, 14.111999, "20M CW/DATA",			true,
-								14.112000, 14.350000, "20M CW/SSB/SSTV",		true,
+                                14.112000, 14.349999, "20M CW/SSB/SSTV",		true,
 																
 								18.068000, 18.099999, "17M CW",					true,
 								18.100000, 18.109999, "17M CW/DATA",			true,
 								18.110000, 18.110000, "17M IBP Beacon",			true,
-								18.110001, 18.168000, "17M CW/SSB/SSTV",		true,
+                                18.110001, 18.167999, "17M CW/SSB/SSTV",		true,
 								
 								21.000000, 21.069999, "15M CW",		        	true,
 								21.070000, 21.124999, "15M CW/DATA",			true,
 								21.125000, 21.149999, "15M CW/SSB/SSTV",		true,
 								21.150000, 21.150000, "15M IBP Beacon",		    true,
-								21.150001, 21.450000, "15M CW/SSB/SSTV",		true,
+								21.150001, 21.449999, "15M CW/SSB/SSTV",	true,
 								
 								24.890000, 24.909999, "12M CW",					true,
 								24.910000, 24.929999, "12M CW/DATA",			true,
 								24.930000, 24.930000, "12M IBP Beacon",		    true,
-								24.930001, 24.990000, "12M CW/SSB/SSTV",		true,
+                                24.930001, 24.989999, "12M CW/SSB/SSTV",		true,
 								
 								28.000000, 28.069999, "10M CW",					true,
 								28.070000, 28.149999, "10M CW/DATA",			true,
@@ -808,8 +807,7 @@ namespace Thetis
 								52.000000, 52.299999, "6M VoIP",		        true,
 								52.300000, 52.499999, "6M CW/SSB/RTTY/SSTV",	true,
 								52.500000, 52.899999, "6M WB Data",	            true,
-								52.900000, 54.000000, "6M All Modes",			true,
-								
+                                52.900000, 53.999999, "6M All Modes",			true,							
 				};
 
             for (int i = 0; i < data.Length / 4; i++)

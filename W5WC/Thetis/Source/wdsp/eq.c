@@ -346,6 +346,7 @@ void SetRXAGrphEQ10 (int channel, int *rxeq)
 		a->G[i] = (double)rxeq[i];
 	a->ctfmode = 0;
 	impulse = eq_impulse (a->nc, a->nfreqs, a->F, a->G, a->samplerate, 1.0 / (2.0 * a->size), a->ctfmode, a->wintype);
+	// print_impulse ("rxeq.txt", a->nc, impulse, 1, 0);
 	setImpulse_fircore (a->p, impulse, 1);
 	_aligned_free (impulse);
 }

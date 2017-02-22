@@ -243,7 +243,7 @@ namespace Thetis
 
 			if ( !alex_enabled ) 
 			{ 
-				NetworkIO.SetAlexAntBits(0, 0, 0); 
+				NetworkIO.SetAntBits(0, 0, 0, false); 
 				return;
 			}
             
@@ -311,7 +311,7 @@ namespace Thetis
             //    init_update = false;
             //    Thread.Sleep(10);
             //}
-			NetworkIO.SetAlexAntBits(rx_only_ant, trx_ant, rx_out);
+			NetworkIO.SetAntBits(rx_only_ant, trx_ant, rx_out, tx);
             System.Console.WriteLine("Ant Rx Only {0} , Tx Ant {1}, Rx Out {2}", rx_only_ant.ToString(), trx_ant.ToString(), rx_out.ToString());
 
 			// don't allow changing antenna selections when mox is activated 

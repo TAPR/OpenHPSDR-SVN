@@ -212,6 +212,7 @@ void create_cmaster()
 			i,															// stream number
 			1,															// 'accept' data
 			pcm->cmMAXInbound[i],										// maximum input size
+			getbuffsize (pcm->cmMAXInRate),								// maximum output size
 			pcm->xcm_insize[i]);										// ring outsize = xcmaster() insize	
 		pcm->in[i] = (double *) malloc0 (getbuffsize (pcm->cmMAXInRate) * sizeof (complex));// input buffer
 	}

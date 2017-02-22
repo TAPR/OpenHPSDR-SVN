@@ -319,8 +319,8 @@ namespace Thetis
                 {
                     case HPSDRModel.ANAN100D:
                     case HPSDRModel.ANAN200D:
-                    case HPSDRModel.ANAN200DII:
-                    case HPSDRModel.ANAN500D:
+                    case HPSDRModel.ORIONMKII:
+                    case HPSDRModel.ANAN8000D:
                         // This ANGELIA table is for test purposes and it routes Rx0 and Rx1 to RX1 and RX2, 
                         //      respectively, (as well as to PureSignal) when transmitting with PureSignal 
                         //      Enabled in Setup.
@@ -408,8 +408,8 @@ namespace Thetis
                 {
                     case HPSDRModel.ANAN100D:
                     case HPSDRModel.ANAN200D:
-                    case HPSDRModel.ANAN200DII:
-                    case HPSDRModel.ANAN500D:
+                    case HPSDRModel.ORIONMKII:
+                    case HPSDRModel.ANAN8000D:
                         // control bits are { MOX, Diversity_Enabled, PureSignal_Enabled }
                         int[] Angelia_Function = new int[56] 
                         { 
@@ -450,15 +450,19 @@ namespace Thetis
                     case HPSDRModel.ANAN100:
                     case HPSDRModel.ANAN100B:
                     case HPSDRModel.ANAN10E:
-                        int[] HermesE_Function = new int[16]
+                        int[] HermesE_Function = new int[32]
                         {
-                            1, 1, 2, 2, 1, 2, 2, 2,     // Rx0, port 1035
-                            1, 1, 0, 0, 1, 0, 0, 0      // Rx1, port 1036
+                            1, 1, 2, 2, 1, 2, 2, 2,     // Rx0, port 1035, Call 0
+                            0, 0, 0, 0, 0, 2, 0, 2,     // Rx0, port 1035, Call 1
+                            1, 1, 0, 0, 1, 0, 0, 0,     // Rx1, port 1036, Call 0
+                            0, 0, 0, 0, 0, 0, 0, 0      // Rx1, port 1036, Call 1
                         };
-                        int[] HermesE_Callid = new int[16]
+                        int[] HermesE_Callid = new int[32]
                         {
-                            0, 0, 0, 0, 0, 1, 0, 1,     // Rx0, port 1035
-                            1, 1, 1, 1, 1, 1, 1, 1      // Rx1, port 1036
+                            0, 0, 0, 0, 0, 1, 0, 1,     // Rx0, port 1035, Call 0
+                            0, 0, 0, 0, 0, 3, 0, 3,     // Rx0, port 1035, Call 1
+                            1, 1, 1, 1, 1, 1, 1, 1,     // Rx1, port 1036, Call 0
+                            1, 1, 1, 1, 1, 1, 1, 1      // Rx1, port 1036, Call 1
                         };
                         int[] HermesE_nstreams = new int[2]
                         {
@@ -466,7 +470,7 @@ namespace Thetis
                             1                           // Rx1, port 1036
                         };
                         fixed (int* pstreams = &HermesE_nstreams[0], pfunction = &HermesE_Function[0], pcallid = &HermesE_Callid[0])
-                            LoadRouterAll((void*)0, 0, 2, 1, 8, pstreams, pfunction, pcallid);
+                            LoadRouterAll((void*)0, 0, 2, 2, 8, pstreams, pfunction, pcallid);
                         break;
                     case HPSDRModel.HPSDR:
 

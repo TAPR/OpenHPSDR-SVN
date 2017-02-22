@@ -89,8 +89,8 @@ namespace Thetis
             CurrentModel = Model.HERMES;
             comboGeneralProcessPriority.Text = "Normal";
             comboOptFilterWidthMode.Text = "Linear";
-          //  comboAudioSampleRate1.SelectedIndex = 0;
-          //  comboAudioSampleRateRX2.SelectedIndex = 0;
+            //  comboAudioSampleRate1.SelectedIndex = 0;
+            //  comboAudioSampleRateRX2.SelectedIndex = 0;
             comboAudioSampleRate1.Text = "192000";
             comboAudioSampleRateRX2.Text = "192000";
             comboAudioSampleRate2.Text = "48000";
@@ -350,6 +350,8 @@ namespace Thetis
 
             openFileDialog1.Filter = "Thetis Database Files (*.xml) | *.xml";
 
+            AddHPSDRPages();
+
             if (chkKWAI.Checked)
                 AllowFreqBroadcast = true;
             else
@@ -378,9 +380,9 @@ namespace Thetis
 
         private void InitGeneralTab()
         {
-             chkGeneralRXOnly.Checked = console.RXOnly;
-             chkGeneralDisablePTT.Checked = console.DisablePTT;
-         }
+            chkGeneralRXOnly.Checked = console.RXOnly;
+            chkGeneralDisablePTT.Checked = console.DisablePTT;
+        }
 
         private void InitAudioTab()
         {
@@ -659,6 +661,11 @@ namespace Thetis
                     ControlList(c2, ref a);
             }
 
+            //if (c.Name.StartsWith("rad"))
+            //{
+            //    Debug.WriteLine(c.Name);
+            //}
+
             if (c.GetType() == typeof(CheckBoxTS) || c.GetType() == typeof(CheckBox) ||
                 c.GetType() == typeof(ComboBoxTS) || c.GetType() == typeof(ComboBox) ||
                 c.GetType() == typeof(NumericUpDownTS) || c.GetType() == typeof(NumericUpDown) ||
@@ -744,6 +751,7 @@ namespace Thetis
             //ArrayList controls = new ArrayList();	// list of controls to restore
             foreach (Control c in temp)
             {
+
                 if (c.GetType() == typeof(CheckBoxTS))			// the control is a CheckBoxTS
                     checkbox_list.Add(c);
                 else if (c.GetType() == typeof(ComboBoxTS))		// the control is a ComboBoxTS
@@ -801,8 +809,9 @@ namespace Thetis
                             c.Checked = bool.Parse(val);	// restore value
                             i = checkbox_list.Count + 1;
                         }
-                        if (i == checkbox_list.Count)
-                            MessageBox.Show("Control not found: " + name);
+                        if (i == checkbox_list.Count - 1)
+                            // MessageBox.Show("Control not found: " + name);
+                            Debug.WriteLine("Control not found: " + name);
                     }
                 }
                 else if (s.StartsWith("combo"))	// control is a ComboBox
@@ -826,8 +835,9 @@ namespace Thetis
                             }
                             i = combobox_list.Count + 1;
                         }
-                        if (i == combobox_list.Count)
-                            MessageBox.Show("Control not found: " + name);
+                        if (i == combobox_list.Count - 1)
+                            // MessageBox.Show("Control not found: " + name);
+                            Debug.WriteLine("Control not found: " + name);
                     }
                 }
                 else if (s.StartsWith("ud"))
@@ -844,12 +854,14 @@ namespace Thetis
                             c.Value = num;			// restore value
                             i = numericupdown_list.Count + 1;
                         }
-                        if (i == numericupdown_list.Count)
-                            MessageBox.Show("Control not found: " + name);
+                        if (i == numericupdown_list.Count - 1)
+                            // MessageBox.Show("Control not found: " + name);
+                            Debug.WriteLine("Control not found: " + name);
                     }
                 }
                 else if (s.StartsWith("rad"))
                 {	// look through each control to find the matching name
+
                     for (int i = 0; i < radiobutton_list.Count; i++)
                     {
                         RadioButtonTS c = (RadioButtonTS)radiobutton_list[i];
@@ -858,8 +870,9 @@ namespace Thetis
                             c.Checked = bool.Parse(val);	// restore value
                             i = radiobutton_list.Count + 1;
                         }
-                        if (i == radiobutton_list.Count)
-                            MessageBox.Show("Control not found: " + name);
+                        if (i == radiobutton_list.Count - 1)
+                            //MessageBox.Show("Control not found: " + name);
+                            Debug.WriteLine("Control not found: " + name);
                     }
                 }
                 else if (s.StartsWith("txt"))
@@ -872,8 +885,9 @@ namespace Thetis
                             c.Text = val;	// restore value
                             i = textbox_list.Count + 1;
                         }
-                        if (i == textbox_list.Count)
-                            MessageBox.Show("Control not found: " + name);
+                        if (i == textbox_list.Count - 1)
+                            // MessageBox.Show("Control not found: " + name);
+                            Debug.WriteLine("Control not found: " + name);
                     }
                 }
                 else if (s.StartsWith("tb"))
@@ -887,8 +901,9 @@ namespace Thetis
                             c.Value = Int32.Parse(val);
                             i = trackbar_list.Count + 1;
                         }
-                        if (i == trackbar_list.Count)
-                            MessageBox.Show("Control not found: " + name);
+                        if (i == trackbar_list.Count - 1)
+                            //MessageBox.Show("Control not found: " + name);
+                            Debug.WriteLine("Control not found: " + name);
                     }
                 }
                 else if (s.StartsWith("clrbtn"))
@@ -910,8 +925,9 @@ namespace Thetis
                                 c.Color = Color.FromArgb(A, R, G, B);
                                 i = colorbutton_list.Count + 1;
                             }
-                            if (i == colorbutton_list.Count)
-                                MessageBox.Show("Control not found: " + name);
+                            if (i == colorbutton_list.Count - 1)
+                                //MessageBox.Show("Control not found: " + name);
+                                Debug.WriteLine("Control not found: " + name);
                         }
                     }
                 }
@@ -1061,18 +1077,18 @@ namespace Thetis
             EventArgs e = EventArgs.Empty;
 
             // General Tab
-          //  chkAlexAntCtrl_CheckedChanged(this, e);
+            //  chkAlexAntCtrl_CheckedChanged(this, e);
             //comboGeneralLPTAddr_SelectedIndexChanged(this, e);
             udGeneralLPTDelay_ValueChanged(this, e);
             chkGeneralRXOnly_CheckedChanged(this, e);
             //chkGeneralUSBPresent_CheckedChanged(this, e);
-           // chkGeneralPAPresent_CheckedChanged(this, e);
-           // chkGeneralATUPresent_CheckedChanged(this, e);
-           // chkXVTRPresent_CheckedChanged(this, e);
+            // chkGeneralPAPresent_CheckedChanged(this, e);
+            // chkGeneralATUPresent_CheckedChanged(this, e);
+            // chkXVTRPresent_CheckedChanged(this, e);
             comboGeneralXVTR_SelectedIndexChanged(this, e);
-           // udDDSCorrection_ValueChanged(this, e);
+            // udDDSCorrection_ValueChanged(this, e);
             //udDDSPLLMult_ValueChanged(this, e);
-           // udDDSIFFreq_ValueChanged(this, e);
+            // udDDSIFFreq_ValueChanged(this, e);
             // chkGeneralSpurRed_CheckedChanged(this, e);
             chkGeneralDisablePTT_CheckedChanged(this, e);
             //chkGeneralSoftwareGainCorr_CheckedChanged(this, e);
@@ -1086,7 +1102,6 @@ namespace Thetis
             radOrionPTTOff_CheckedChanged(this, e);
             radOrionMicTip_CheckedChanged(this, e);
             radOrionBiasOn_CheckedChanged(this, e);
-            chkDisablePureSignal_CheckedChanged(this, e);
             chkNetworkWDT_CheckedChanged(this, e);
 
             // Audio Tab
@@ -1333,7 +1348,6 @@ namespace Thetis
             udMoxDelay_ValueChanged(this, e);
             udCWKeyUpDelay_ValueChanged(this, e);
             console.psform.ForcePS();
-            chkDisablePureSignal_CheckedChanged(this, e);
 
             // APF
 
@@ -1365,7 +1379,7 @@ namespace Thetis
             udDSPRX2DollyF1_ValueChanged(this, e);
 
             //ADC assignment
-            radRXADC_CheckedChanged(this, e);
+            radDDCADC_CheckedChanged(this, e);
         }
 
         public string[] GetTXProfileStrings()
@@ -1574,7 +1588,6 @@ namespace Thetis
             dr["Line_Input_Level"] = udLineInBoost.Value;
 
             dr["CESSB_On"] = chkDSPCESSB.Checked;
-            dr["Disable_Pure_Signal"] = chkDisablePureSignal.Checked;
         }
 
         public void UpdateWaterfallBandInfo()
@@ -1707,13 +1720,6 @@ namespace Thetis
             {
                 chkDSPRX2APFEnable.Enabled = value;
             }
-        }
-
-        private bool psDisabled = true;
-        public bool PureSignalDisabled
-        {
-            get { return psDisabled; }
-            set { psDisabled = value; }
         }
 
         public float RX6mGainOffset
@@ -2622,7 +2628,7 @@ namespace Thetis
             }
         }
 
- 
+
         public bool VOXEnable
         {
             get
@@ -2985,12 +2991,6 @@ namespace Thetis
             set { chkDSPCESSB.Checked = value; }
         }
 
-        public bool DisablePureSignal
-        {
-            get { return chkDisablePureSignal.Checked; }
-            set { chkDisablePureSignal.Checked = value; }
-        }
-
         public bool AlexPresent
         {
             get { return chkAlexPresent.Checked; }
@@ -3026,6 +3026,109 @@ namespace Thetis
         //    get { return chkPTTOutDelay.Checked; }
         //    set { chkPTTOutDelay.Checked = value; }
         //}
+
+
+        public double BPF1_1_5Start
+        {
+            get { return (double)ud1_5BPF1Start.Value; }
+        }
+
+        public double BPF1_1_5End
+        {
+            get { return (double)ud1_5BPF1End.Value; }
+        }
+
+        public double BPF1_6_5Start
+        {
+            get { return (double)ud6_5BPF1Start.Value; }
+        }
+
+        public double BPF1_6_5End
+        {
+            get { return (double)ud6_5BPF1End.Value; }
+        }
+
+        public double BPF1_9_5Start
+        {
+            get { return (double)ud9_5BPF1Start.Value; }
+        }
+
+        public double BPF1_9_5End
+        {
+            get { return (double)ud9_5BPF1End.Value; }
+        }
+
+        public double BPF1_13Start
+        {
+            get { return (double)ud13BPF1Start.Value; }
+        }
+
+        public double BPF1_13End
+        {
+            get { return (double)ud13BPF1End.Value; }
+        }
+
+        public double BPF1_20Start
+        {
+            get { return (double)ud20BPF1Start.Value; }
+        }
+
+        public double BPF1_20End
+        {
+            get { return (double)ud20BPF1End.Value; }
+        }
+
+        public double BPF1_6Start
+        {
+            get { return (double)ud6BPF1Start.Value; }
+        }
+
+        public double BPF1_6End
+        {
+            get { return (double)ud6BPF1End.Value; }
+        }
+
+
+        public bool BPF1_1_5led
+        {
+            set { rad1_5BPF1led.Checked = value; }
+        }
+
+        public bool BPF1_6_5led
+        {
+            set { rad6_5BPF1led.Checked = value; }
+        }
+
+        public bool BPF1_9_5led
+        {
+            set { rad9_5BPF1led.Checked = value; }
+        }
+
+        public bool BPF1_13led
+        {
+            set { rad13BPF1led.Checked = value; }
+        }
+
+        public bool BPF1_20led
+        {
+            set { rad20BPF1led.Checked = value; }
+        }
+
+        public bool BPF1_6led
+        {
+            set { rad6BPF1led.Checked = value; }
+        }
+
+        public bool BPBPF1led
+        {
+            set { radBPBPF1led.Checked = value; }
+        }
+
+        public bool BPF1BPTXled
+        {
+            set { radBPF1BPTXled.Checked = value; }
+        }
+
 
         // PAGain for HPSDR
         public float PAGain160
@@ -4077,310 +4180,310 @@ namespace Thetis
             set { udOrionPAGainVHF13.Value = (decimal)value; }
         }
 
-        //PAGain ANAN-200DMKII
-        public float ANAN200DIIPAGain160
+        //PAGain ORION MKII
+        public float ORIONMKIIPAGain160
         {
-            get { return (float)udANAN200DIIPAGain160.Value; }
-            set { udANAN200DIIPAGain160.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGain160.Value; }
+            set { udORIONMKIIPAGain160.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGain80
+        public float ORIONMKIIPAGain80
         {
-            get { return (float)udANAN200DIIPAGain80.Value; }
-            set { udANAN200DIIPAGain80.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGain80.Value; }
+            set { udORIONMKIIPAGain80.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGain60
+        public float ORIONMKIIPAGain60
         {
-            get { return (float)udANAN200DIIPAGain60.Value; }
-            set { udANAN200DIIPAGain60.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGain60.Value; }
+            set { udORIONMKIIPAGain60.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGain40
+        public float ORIONMKIIPAGain40
         {
-            get { return (float)udANAN200DIIPAGain40.Value; }
-            set { udANAN200DIIPAGain40.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGain40.Value; }
+            set { udORIONMKIIPAGain40.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGain30
+        public float ORIONMKIIPAGain30
         {
-            get { return (float)udANAN200DIIPAGain30.Value; }
-            set { udANAN200DIIPAGain30.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGain30.Value; }
+            set { udORIONMKIIPAGain30.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGain20
+        public float ORIONMKIIPAGain20
         {
-            get { return (float)udANAN200DIIPAGain20.Value; }
-            set { udANAN200DIIPAGain20.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGain20.Value; }
+            set { udORIONMKIIPAGain20.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGain17
+        public float ORIONMKIIPAGain17
         {
-            get { return (float)udANAN200DIIPAGain17.Value; }
-            set { udANAN200DIIPAGain17.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGain17.Value; }
+            set { udORIONMKIIPAGain17.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGain15
+        public float ORIONMKIIPAGain15
         {
-            get { return (float)udANAN200DIIPAGain15.Value; }
-            set { udANAN200DIIPAGain15.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGain15.Value; }
+            set { udORIONMKIIPAGain15.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGain12
+        public float ORIONMKIIPAGain12
         {
-            get { return (float)udANAN200DIIPAGain12.Value; }
-            set { udANAN200DIIPAGain12.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGain12.Value; }
+            set { udORIONMKIIPAGain12.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGain10
+        public float ORIONMKIIPAGain10
         {
-            get { return (float)udANAN200DIIPAGain10.Value; }
-            set { udANAN200DIIPAGain10.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGain10.Value; }
+            set { udORIONMKIIPAGain10.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGain6
+        public float ORIONMKIIPAGain6
         {
-            get { return (float)udANAN200DIIPAGain6.Value; }
-            set { udANAN200DIIPAGain6.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGain6.Value; }
+            set { udORIONMKIIPAGain6.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF0
+        public float ORIONMKIIPAGainVHF0
         {
-            get { return (float)udANAN200DIIPAGainVHF0.Value; }
-            set { udANAN200DIIPAGainVHF0.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF0.Value; }
+            set { udORIONMKIIPAGainVHF0.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF1
+        public float ORIONMKIIPAGainVHF1
         {
-            get { return (float)udANAN200DIIPAGainVHF1.Value; }
-            set { udANAN200DIIPAGainVHF1.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF1.Value; }
+            set { udORIONMKIIPAGainVHF1.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF2
+        public float ORIONMKIIPAGainVHF2
         {
-            get { return (float)udANAN200DIIPAGainVHF2.Value; }
-            set { udANAN200DIIPAGainVHF2.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF2.Value; }
+            set { udORIONMKIIPAGainVHF2.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF3
+        public float ORIONMKIIPAGainVHF3
         {
-            get { return (float)udANAN200DIIPAGainVHF3.Value; }
-            set { udANAN200DIIPAGainVHF3.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF3.Value; }
+            set { udORIONMKIIPAGainVHF3.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF4
+        public float ORIONMKIIPAGainVHF4
         {
-            get { return (float)udANAN200DIIPAGainVHF4.Value; }
-            set { udANAN200DIIPAGainVHF4.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF4.Value; }
+            set { udORIONMKIIPAGainVHF4.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF5
+        public float ORIONMKIIPAGainVHF5
         {
-            get { return (float)udANAN200DIIPAGainVHF5.Value; }
-            set { udANAN200DIIPAGainVHF5.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF5.Value; }
+            set { udORIONMKIIPAGainVHF5.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF6
+        public float ORIONMKIIPAGainVHF6
         {
-            get { return (float)udANAN200DIIPAGainVHF6.Value; }
-            set { udANAN200DIIPAGainVHF6.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF6.Value; }
+            set { udORIONMKIIPAGainVHF6.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF7
+        public float ORIONMKIIPAGainVHF7
         {
-            get { return (float)udANAN200DIIPAGainVHF7.Value; }
-            set { udANAN200DIIPAGainVHF7.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF7.Value; }
+            set { udORIONMKIIPAGainVHF7.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF8
+        public float ORIONMKIIPAGainVHF8
         {
-            get { return (float)udANAN200DIIPAGainVHF8.Value; }
-            set { udANAN200DIIPAGainVHF8.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF8.Value; }
+            set { udORIONMKIIPAGainVHF8.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF9
+        public float ORIONMKIIPAGainVHF9
         {
-            get { return (float)udANAN200DIIPAGainVHF9.Value; }
-            set { udANAN200DIIPAGainVHF9.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF9.Value; }
+            set { udORIONMKIIPAGainVHF9.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF10
+        public float ORIONMKIIPAGainVHF10
         {
-            get { return (float)udANAN200DIIPAGainVHF10.Value; }
-            set { udANAN200DIIPAGainVHF10.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF10.Value; }
+            set { udORIONMKIIPAGainVHF10.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF11
+        public float ORIONMKIIPAGainVHF11
         {
-            get { return (float)udANAN200DIIPAGainVHF11.Value; }
-            set { udANAN200DIIPAGainVHF11.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF11.Value; }
+            set { udORIONMKIIPAGainVHF11.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF12
+        public float ORIONMKIIPAGainVHF12
         {
-            get { return (float)udANAN200DIIPAGainVHF12.Value; }
-            set { udANAN200DIIPAGainVHF12.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF12.Value; }
+            set { udORIONMKIIPAGainVHF12.Value = (decimal)value; }
         }
 
-        public float ANAN200DIIPAGainVHF13
+        public float ORIONMKIIPAGainVHF13
         {
-            get { return (float)udANAN200DIIPAGainVHF13.Value; }
-            set { udANAN200DIIPAGainVHF13.Value = (decimal)value; }
+            get { return (float)udORIONMKIIPAGainVHF13.Value; }
+            set { udORIONMKIIPAGainVHF13.Value = (decimal)value; }
         }
 
 
-        //PAGain ANAN-500D
-        public float ANAN500DPAGain160
+        //PAGain ANAN-8000DLE
+        public float ANAN8000DPAGain160
         {
-            get { return (float)udANAN500DPAGain160.Value; }
-            set { udANAN500DPAGain160.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGain160.Value; }
+            set { udANAN8000DPAGain160.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGain80
+        public float ANAN8000DPAGain80
         {
-            get { return (float)udANAN500DPAGain80.Value; }
-            set { udANAN500DPAGain80.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGain80.Value; }
+            set { udANAN8000DPAGain80.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGain60
+        public float ANAN8000DPAGain60
         {
-            get { return (float)udANAN500DPAGain60.Value; }
-            set { udANAN500DPAGain60.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGain60.Value; }
+            set { udANAN8000DPAGain60.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGain40
+        public float ANAN8000DPAGain40
         {
-            get { return (float)udANAN500DPAGain40.Value; }
-            set { udANAN500DPAGain40.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGain40.Value; }
+            set { udANAN8000DPAGain40.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGain30
+        public float ANAN8000DPAGain30
         {
-            get { return (float)udANAN500DPAGain30.Value; }
-            set { udANAN500DPAGain30.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGain30.Value; }
+            set { udANAN8000DPAGain30.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGain20
+        public float ANAN8000DPAGain20
         {
-            get { return (float)udANAN500DPAGain20.Value; }
-            set { udANAN500DPAGain20.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGain20.Value; }
+            set { udANAN8000DPAGain20.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGain17
+        public float ANAN8000DPAGain17
         {
-            get { return (float)udANAN500DPAGain17.Value; }
-            set { udANAN500DPAGain17.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGain17.Value; }
+            set { udANAN8000DPAGain17.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGain15
+        public float ANAN8000DPAGain15
         {
-            get { return (float)udANAN500DPAGain15.Value; }
-            set { udANAN500DPAGain15.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGain15.Value; }
+            set { udANAN8000DPAGain15.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGain12
+        public float ANAN8000DPAGain12
         {
-            get { return (float)udANAN500DPAGain12.Value; }
-            set { udANAN500DPAGain12.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGain12.Value; }
+            set { udANAN8000DPAGain12.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGain10
+        public float ANAN8000DPAGain10
         {
-            get { return (float)udANAN500DPAGain10.Value; }
-            set { udANAN500DPAGain10.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGain10.Value; }
+            set { udANAN8000DPAGain10.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGain6
+        public float ANAN8000DPAGain6
         {
-            get { return (float)udANAN500DPAGain6.Value; }
-            set { udANAN500DPAGain6.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGain6.Value; }
+            set { udANAN8000DPAGain6.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF0
+        public float ANAN8000DPAGainVHF0
         {
-            get { return (float)udANAN500DPAGainVHF0.Value; }
-            set { udANAN500DPAGainVHF0.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF0.Value; }
+            set { udANAN8000DPAGainVHF0.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF1
+        public float ANAN8000DPAGainVHF1
         {
-            get { return (float)udANAN500DPAGainVHF1.Value; }
-            set { udANAN500DPAGainVHF1.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF1.Value; }
+            set { udANAN8000DPAGainVHF1.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF2
+        public float ANAN8000DPAGainVHF2
         {
-            get { return (float)udANAN500DPAGainVHF2.Value; }
-            set { udANAN500DPAGainVHF2.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF2.Value; }
+            set { udANAN8000DPAGainVHF2.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF3
+        public float ANAN8000DPAGainVHF3
         {
-            get { return (float)udANAN500DPAGainVHF3.Value; }
-            set { udANAN500DPAGainVHF3.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF3.Value; }
+            set { udANAN8000DPAGainVHF3.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF4
+        public float ANAN8000DPAGainVHF4
         {
-            get { return (float)udANAN500DPAGainVHF4.Value; }
-            set { udANAN500DPAGainVHF4.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF4.Value; }
+            set { udANAN8000DPAGainVHF4.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF5
+        public float ANAN8000DPAGainVHF5
         {
-            get { return (float)udANAN500DPAGainVHF5.Value; }
-            set { udANAN500DPAGainVHF5.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF5.Value; }
+            set { udANAN8000DPAGainVHF5.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF6
+        public float ANAN8000DPAGainVHF6
         {
-            get { return (float)udANAN500DPAGainVHF6.Value; }
-            set { udANAN500DPAGainVHF6.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF6.Value; }
+            set { udANAN8000DPAGainVHF6.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF7
+        public float ANAN8000DPAGainVHF7
         {
-            get { return (float)udANAN500DPAGainVHF7.Value; }
-            set { udANAN500DPAGainVHF7.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF7.Value; }
+            set { udANAN8000DPAGainVHF7.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF8
+        public float ANAN8000DPAGainVHF8
         {
-            get { return (float)udANAN500DPAGainVHF8.Value; }
-            set { udANAN500DPAGainVHF8.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF8.Value; }
+            set { udANAN8000DPAGainVHF8.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF9
+        public float ANAN8000DPAGainVHF9
         {
-            get { return (float)udANAN500DPAGainVHF9.Value; }
-            set { udANAN500DPAGainVHF9.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF9.Value; }
+            set { udANAN8000DPAGainVHF9.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF10
+        public float ANAN8000DPAGainVHF10
         {
-            get { return (float)udANAN500DPAGainVHF10.Value; }
-            set { udANAN500DPAGainVHF10.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF10.Value; }
+            set { udANAN8000DPAGainVHF10.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF11
+        public float ANAN8000DPAGainVHF11
         {
-            get { return (float)udANAN500DPAGainVHF11.Value; }
-            set { udANAN500DPAGainVHF11.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF11.Value; }
+            set { udANAN8000DPAGainVHF11.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF12
+        public float ANAN8000DPAGainVHF12
         {
-            get { return (float)udANAN500DPAGainVHF12.Value; }
-            set { udANAN500DPAGainVHF12.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF12.Value; }
+            set { udANAN8000DPAGainVHF12.Value = (decimal)value; }
         }
 
-        public float ANAN500DPAGainVHF13
+        public float ANAN8000DPAGainVHF13
         {
-            get { return (float)udANAN500DPAGainVHF13.Value; }
-            set { udANAN500DPAGainVHF13.Value = (decimal)value; }
+            get { return (float)udANAN8000DPAGainVHF13.Value; }
+            set { udANAN8000DPAGainVHF13.Value = (decimal)value; }
         }
 
-        
+
         public int TunePower
         {
             get { return (int)udTXTunePower.Value; }
@@ -4843,73 +4946,73 @@ namespace Thetis
         // General Tab Event Handlers
         // ======================================================
 
-     //   private void radGenModelFLEX5000_CheckedChanged(object sender, System.EventArgs e)
-      //  {
-            //if (radGenModelFLEX5000.Checked)
-          //  {
-                //comboAudioSoundCard.Text = "Unsupported Card";
-                ////comboAudioSampleRate1.Text = "96000";
+        //   private void radGenModelFLEX5000_CheckedChanged(object sender, System.EventArgs e)
+        //  {
+        //if (radGenModelFLEX5000.Checked)
+        //  {
+        //comboAudioSoundCard.Text = "Unsupported Card";
+        ////comboAudioSampleRate1.Text = "96000";
 
-                //foreach (PADeviceInfo p in comboAudioDriver1.Items)
-                //{
-                //    if (p.Name == "ASIO")
-                //    {
-                //        comboAudioDriver1.SelectedItem = p;
-                //        break;
-                //    }
-                //}
+        //foreach (PADeviceInfo p in comboAudioDriver1.Items)
+        //{
+        //    if (p.Name == "ASIO")
+        //    {
+        //        comboAudioDriver1.SelectedItem = p;
+        //        break;
+        //    }
+        //}
 
-                //foreach (PADeviceInfo dev in comboAudioInput1.Items)
-                //{
-                //    if (dev.Name.ToLower().IndexOf("flex") >= 0)
-                //    {
-                //        comboAudioInput1.Text = dev.Name;
-                //        comboAudioOutput1.Text = dev.Name;
-                //        break;
-                //    }
-                //}
+        //foreach (PADeviceInfo dev in comboAudioInput1.Items)
+        //{
+        //    if (dev.Name.ToLower().IndexOf("flex") >= 0)
+        //    {
+        //        comboAudioInput1.Text = dev.Name;
+        //        comboAudioOutput1.Text = dev.Name;
+        //        break;
+        //    }
+        //}
 
-                //  comboAudioMixer1.Text = "None";
+        //  comboAudioMixer1.Text = "None";
 
-                // if (comboAudioInput1.Text.ToLower().IndexOf("flex") < 0)
-                // {
-                /*MessageBox.Show("FLEX-5000 hardware not found.  Please check " +
-                    "the following:\n" +
-                    "\t1. Verify that the unit has power and is running (note blue LED).\n" +
-                    "\t2. Verify FireWire cable is securely plugged in on both ends.\n" +
-                    "\t3. Verify that the driver is installed properly and the device shows up as FLEX 5000 in the device manager.\n" +
-                    "Note that after correcting any of these issues, you must restart PowerSDR for the changes to take effect.\n" +
-                    "For more support, see our website at www.flex-radio.com or email support@flex-radio.com.",
-                    "Hardware Not Found",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);*/
-                // console.PowerEnabled = false;
-                // }
-          //  }
-           // else console.PowerEnabled = true;
+        // if (comboAudioInput1.Text.ToLower().IndexOf("flex") < 0)
+        // {
+        /*MessageBox.Show("FLEX-5000 hardware not found.  Please check " +
+            "the following:\n" +
+            "\t1. Verify that the unit has power and is running (note blue LED).\n" +
+            "\t2. Verify FireWire cable is securely plugged in on both ends.\n" +
+            "\t3. Verify that the driver is installed properly and the device shows up as FLEX 5000 in the device manager.\n" +
+            "Note that after correcting any of these issues, you must restart PowerSDR for the changes to take effect.\n" +
+            "For more support, see our website at www.flex-radio.com or email support@flex-radio.com.",
+            "Hardware Not Found",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Exclamation);*/
+        // console.PowerEnabled = false;
+        // }
+        //  }
+        // else console.PowerEnabled = true;
 
-           // bool b = radGenModelFLEX5000.Checked;
-           // radPACalAllBands_CheckedChanged(this, EventArgs.Empty);
+        // bool b = radGenModelFLEX5000.Checked;
+        // radPACalAllBands_CheckedChanged(this, EventArgs.Empty);
 
-            // grpAudioDetails1.Visible = !b;
-            // grpAudioCard.Visible = !b;
-            // grpAudioLineInGain1.Visible = !b;
-            // grpAudioMicInGain1.Visible = !b;
-            // grpAudioChannels.Visible = !b;
+        // grpAudioDetails1.Visible = !b;
+        // grpAudioCard.Visible = !b;
+        // grpAudioLineInGain1.Visible = !b;
+        // grpAudioMicInGain1.Visible = !b;
+        // grpAudioChannels.Visible = !b;
 
-          //  chkCalExpert.Visible = b;
-           // chkCalExpert_CheckedChanged(this, EventArgs.Empty);
-           // if (!b)
-            //{
-            //    grpGeneralCalibration.Visible = true;
-            //    grpGenCalLevel.Visible = true;
-            //    grpGenCalRXImage.Visible = true;
-            //}
+        //  chkCalExpert.Visible = b;
+        // chkCalExpert_CheckedChanged(this, EventArgs.Empty);
+        // if (!b)
+        //{
+        //    grpGeneralCalibration.Visible = true;
+        //    grpGenCalLevel.Visible = true;
+        //    grpGenCalRXImage.Visible = true;
+        //}
 
-          //  grpPAGainByBand.Visible = true;
-          //  chkPANewCal.Visible = false;
-           // grpImpulseTest.Visible = !b;
-      //  }
+        //  grpPAGainByBand.Visible = true;
+        //  chkPANewCal.Visible = false;
+        // grpImpulseTest.Visible = !b;
+        //  }
 
         private void radGenModelANAN10_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -4919,7 +5022,7 @@ namespace Thetis
             if (radGenModelANAN10.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-               // console.CurrentModel = Model.HERMES;
+                // console.CurrentModel = Model.HERMES;
                 console.CurrentHPSDRModel = HPSDRModel.ANAN10;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
@@ -4958,10 +5061,13 @@ namespace Thetis
                 chkAutoPACalibrate.Visible = false;
                 grpANAN10PAGainByBand.BringToFront();
                 labelRXAntControl.Text = "  RX1   RX2    XVTR";
+                chkEXT2OutOnTx.Visible = false;
                 labelATTOnTX.Visible = true;
                 udATTOnTX.Visible = true;
                 // console.RX2PreampPresent = false;
                 groupBoxHPSDRHW.Visible = false;
+                chkDisableRXOut.Visible = false;
+                chkBPF2Gnd.Visible = false;
                 console.RX2PreampPresent = false;
                 cmaster.SetADCSupply(0, 33);
                 NetworkIO.SetRxADC(1);
@@ -5026,9 +5132,12 @@ namespace Thetis
                 chkAutoPACalibrate.Visible = false;
                 grpANAN10PAGainByBand.BringToFront();
                 labelRXAntControl.Text = "  RX1   RX2    XVTR";
+                chkEXT2OutOnTx.Visible = false;
                 labelATTOnTX.Visible = true;
                 udATTOnTX.Visible = true;
                 groupBoxHPSDRHW.Visible = false;
+                chkDisableRXOut.Visible = false;
+                chkBPF2Gnd.Visible = false;
                 console.RX2PreampPresent = false;
                 cmaster.SetADCSupply(0, 33);
                 NetworkIO.SetRxADC(1);
@@ -5102,7 +5211,10 @@ namespace Thetis
                 chkRxOutOnTx.Text = "BYPASS on Tx";
                 chkEXT1OutOnTx.Text = "Ext 1 on Tx";
                 chkEXT2OutOnTx.Text = "Ext 2 on Tx";
+                chkEXT2OutOnTx.Visible = true;
                 groupBoxHPSDRHW.Visible = false;
+                chkDisableRXOut.Visible = true;
+                chkBPF2Gnd.Visible = false;
                 cmaster.SetADCSupply(0, 33);
                 NetworkIO.SetRxADC(1);
             }
@@ -5133,7 +5245,7 @@ namespace Thetis
             if (radGenModelANAN100.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-               // console.CurrentModel = Model.HERMES;
+                // console.CurrentModel = Model.HERMES;
                 console.CurrentHPSDRModel = HPSDRModel.ANAN100;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
@@ -5170,7 +5282,10 @@ namespace Thetis
                 chkRxOutOnTx.Text = "BYPASS on Tx";
                 chkEXT1OutOnTx.Text = "Ext 1 on Tx";
                 chkEXT2OutOnTx.Text = "Ext 2 on Tx";
+                chkEXT2OutOnTx.Visible = true;
                 groupBoxHPSDRHW.Visible = false;
+                chkDisableRXOut.Visible = true;
+                chkBPF2Gnd.Visible = false;
                 cmaster.SetADCSupply(0, 33);
                 NetworkIO.SetRxADC(1);
             }
@@ -5202,7 +5317,7 @@ namespace Thetis
             if (radGenModelANAN100D.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-               // console.CurrentModel = Model.HERMES;
+                // console.CurrentModel = Model.HERMES;
                 console.CurrentHPSDRModel = HPSDRModel.ANAN100D;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
@@ -5246,24 +5361,27 @@ namespace Thetis
                 chkRxOutOnTx.Text = "BYPASS on Tx";
                 chkEXT1OutOnTx.Text = "Ext 1 on Tx";
                 chkEXT2OutOnTx.Text = "Ext 2 on Tx";
+                chkEXT2OutOnTx.Visible = true;
                 groupBoxHPSDRHW.Visible = true;
+                chkDisableRXOut.Visible = true;
+                chkBPF2Gnd.Visible = false;
                 cmaster.SetADCSupply(0, 33);
                 NetworkIO.SetRxADC(2);
 
-                radRX1ADC3.Enabled = false;
-                radRX2ADC3.Enabled = false;
-                radRX3ADC3.Enabled = false;
-                radRX4ADC3.Enabled = false;
-                radRX5ADC3.Enabled = false;
-                radRX6ADC3.Enabled = false;
-                radRX7ADC3.Enabled = false;
-                if (radRX1ADC3.Checked) radRX1ADC1.Checked = true;
-                if (radRX2ADC3.Checked) radRX2ADC2.Checked = true;
-                if (radRX3ADC3.Checked) radRX3ADC1.Checked = true;
-                if (radRX4ADC3.Checked) radRX4ADC1.Checked = true;
-                if (radRX5ADC3.Checked) radRX5ADC1.Checked = true;
-                if (radRX6ADC3.Checked) radRX6ADC1.Checked = true;
-                if (radRX7ADC3.Checked) radRX7ADC1.Checked = true;
+                radDDC0ADC2.Enabled = false;
+                radDDC1ADC2.Enabled = false;
+                radDDC2ADC2.Enabled = false;
+                radDDC3ADC2.Enabled = false;
+                radDDC4ADC2.Enabled = false;
+                radDDC5ADC2.Enabled = false;
+                radDDC6ADC2.Enabled = false;
+                if (radDDC0ADC2.Checked) radDDC0ADC0.Checked = true;
+                if (radDDC1ADC2.Checked) radDDC1ADC1.Checked = true;
+                if (radDDC2ADC2.Checked) radDDC2ADC0.Checked = true;
+                if (radDDC3ADC2.Checked) radDDC3ADC0.Checked = true;
+                if (radDDC4ADC2.Checked) radDDC4ADC0.Checked = true;
+                if (radDDC5ADC2.Checked) radDDC5ADC0.Checked = true;
+                if (radDDC6ADC2.Checked) radDDC6ADC0.Checked = true;
             }
             console.ANAN100DPresent = radGenModelANAN100D.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
@@ -5322,6 +5440,8 @@ namespace Thetis
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 chkBypassANANPASettings.Visible = true;
+                chkDisableRXOut.Visible = true;
+                chkBPF2Gnd.Visible = false;
                 grpOrionPAGainByBand.BringToFront();
 
                 labelRXAntControl.Text = " EXT2  EXT1  XVTR";
@@ -5332,6 +5452,7 @@ namespace Thetis
                 chkRxOutOnTx.Text = "BYPASS on Tx";
                 chkEXT1OutOnTx.Text = "Ext 1 on Tx";
                 chkEXT2OutOnTx.Text = "Ext 2 on Tx";
+                chkEXT2OutOnTx.Visible = true;
 
                 chkAlexPresent.Parent = grpGeneralHardwareORION;
                 chkAlexPresent.Location = new Point(43, 120);
@@ -5340,13 +5461,13 @@ namespace Thetis
                 cmaster.SetADCSupply(0, 50);
                 NetworkIO.SetRxADC(2);
 
-                radRX1ADC3.Enabled = true;
-                radRX2ADC3.Enabled = true;
-                radRX3ADC3.Enabled = true;
-                radRX4ADC3.Enabled = true;
-                radRX5ADC3.Enabled = true;
-                radRX6ADC3.Enabled = true;
-                radRX7ADC3.Enabled = true;
+                radDDC0ADC2.Enabled = true;
+                radDDC1ADC2.Enabled = true;
+                radDDC2ADC2.Enabled = true;
+                radDDC3ADC2.Enabled = true;
+                radDDC4ADC2.Enabled = true;
+                radDDC5ADC2.Enabled = true;
+                radDDC6ADC2.Enabled = true;
             }
             else
             {
@@ -5377,16 +5498,16 @@ namespace Thetis
             }
         }
 
-        private void radGenModelANAN200DMKII_CheckedChanged(object sender, System.EventArgs e)
+        private void radGenModelORIONMKII_CheckedChanged(object sender, System.EventArgs e)
         {
             HPSDRModel old_model = console.CurrentHPSDRModel;
-            console.ANAN200DMKIIPresent = radGenModelANAN200DMKII.Checked;
+            console.ORIONMKIIPresent = radGenModelORIONMKII.Checked;
 
-            if (radGenModelANAN200DMKII.Checked)
+            if (radGenModelORIONMKII.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
                 //console.CurrentModel = Model.HERMES;
-                console.CurrentHPSDRModel = HPSDRModel.ANAN200DII;
+                console.CurrentHPSDRModel = HPSDRModel.ORIONMKII;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
                 chkMercuryPresent.Checked = true;
@@ -5413,16 +5534,19 @@ namespace Thetis
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 chkBypassANANPASettings.Visible = true;
-                grpOrionPAGainByBand.BringToFront();
+                chkDisableRXOut.Visible = false;
+                chkBPF2Gnd.Visible = true;
+                grpORIONMKIIPAGainByBand.BringToFront();
 
-                labelRXAntControl.Text = " EXT2  EXT1  XVTR";
+                labelRXAntControl.Text = "  BYPS  EXT1  XVTR";
                 labelATTOnTX.Visible = true;
                 udATTOnTX.Visible = true;
                 console.RX2PreampPresent = true;
                 chkRX2StepAtt_CheckedChanged(this, EventArgs.Empty);
                 chkRxOutOnTx.Text = "BYPASS on Tx";
                 chkEXT1OutOnTx.Text = "Ext 1 on Tx";
-                chkEXT2OutOnTx.Text = "Ext 2 on Tx";
+                //chkEXT2OutOnTx.Text = "Ext 2 on Tx";
+                chkEXT2OutOnTx.Visible = false;
 
                 chkAlexPresent.Parent = grpGeneralHardwareORION;
                 chkAlexPresent.Location = new Point(43, 120);
@@ -5431,16 +5555,16 @@ namespace Thetis
                 cmaster.SetADCSupply(0, 50);
                 NetworkIO.SetRxADC(2);
 
-                radRX1ADC3.Enabled = true;
-                radRX2ADC3.Enabled = true;
-                radRX3ADC3.Enabled = true;
-                radRX4ADC3.Enabled = true;
-                radRX5ADC3.Enabled = true;
-                radRX6ADC3.Enabled = true;
-                radRX7ADC3.Enabled = true;
+                radDDC0ADC2.Enabled = true;
+                radDDC1ADC2.Enabled = true;
+                radDDC2ADC2.Enabled = true;
+                radDDC3ADC2.Enabled = true;
+                radDDC4ADC2.Enabled = true;
+                radDDC5ADC2.Enabled = true;
+                radDDC6ADC2.Enabled = true;
 
-                radGenModelANAN200DMKII.Visible = true;
-                radGenModelANAN500D.Visible = true;
+                radGenModelORIONMKII.Visible = true;
+               // radGenModelANAN8000D.Visible = true;
             }
             else
             {
@@ -5450,10 +5574,10 @@ namespace Thetis
                 chkApolloPresent.Location = new Point(25, 100);
 
             }
-            console.ANAN200DMKIIPresent = radGenModelANAN200DMKII.Checked;
+            console.ORIONMKIIPresent = radGenModelORIONMKII.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
-            if (radGenModelANAN200DMKII.Checked)
+            if (radGenModelORIONMKII.Checked)
             {
                 bool power = console.PowerOn;
 
@@ -5471,16 +5595,16 @@ namespace Thetis
             }
         }
 
-        private void radGenModelANAN500D_CheckedChanged(object sender, System.EventArgs e)
+        private void radGenModelANAN8000D_CheckedChanged(object sender, System.EventArgs e)
         {
             HPSDRModel old_model = console.CurrentHPSDRModel;
-            console.ANAN500DPresent = radGenModelANAN500D.Checked;
+            console.ANAN8000DPresent = radGenModelANAN8000D.Checked;
 
-            if (radGenModelANAN500D.Checked)
+            if (radGenModelANAN8000D.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-               // console.CurrentModel = Model.HERMES;
-                console.CurrentHPSDRModel = HPSDRModel.ANAN500D;
+                // console.CurrentModel = Model.HERMES;
+                console.CurrentHPSDRModel = HPSDRModel.ANAN8000D;
                 chkPennyPresent.Checked = false;
                 chkPennyPresent.Enabled = false;
                 chkMercuryPresent.Checked = true;
@@ -5507,34 +5631,51 @@ namespace Thetis
                 chkAutoPACalibrate.Checked = false;
                 chkAutoPACalibrate.Visible = false;
                 chkBypassANANPASettings.Visible = true;
-                grpOrionPAGainByBand.BringToFront();
+                grpANAN8000DPAGainByBand.BringToFront();
 
-                labelRXAntControl.Text = " EXT2  EXT1  XVTR";
+                labelRXAntControl.Text = "  BYPS  EXT1  XVTR";
                 labelATTOnTX.Visible = true;
                 udATTOnTX.Visible = true;
                 console.RX2PreampPresent = true;
                 chkRX2StepAtt_CheckedChanged(this, EventArgs.Empty);
                 chkRxOutOnTx.Text = "BYPASS on Tx";
                 chkEXT1OutOnTx.Text = "Ext 1 on Tx";
-                chkEXT2OutOnTx.Text = "Ext 2 on Tx";
+                // chkEXT2OutOnTx.Text = "Ext 2 on Tx";
+                chkEXT2OutOnTx.Visible = false;
 
                 chkAlexPresent.Parent = grpGeneralHardwareORION;
                 chkAlexPresent.Location = new Point(43, 120);
                 chkApolloPresent.Parent = grpGeneralHardwareORION;
                 chkApolloPresent.Location = new Point(43, 140);
+
+                panelAlex1HPFControl.Visible = false;
+                panelBPFControl.Visible = true;
+
+                chkDisable6mLNAonRX.Parent = panelBPFControl;
+                chkDisable6mLNAonRX.Location = new Point(16, 208);
+                chkDisable6mLNAonTX.Parent = panelBPFControl;
+                chkDisable6mLNAonTX.Location = new Point(63, 208);
+
+                chkAlexHPFBypass.Parent = panelBPFControl;
+                chkAlexHPFBypass.Location = new Point(140, 185);
+                chkDisableHPFonTX.Parent = panelBPFControl;
+                chkDisableHPFonTX.Location = new Point(140, 213);
+
                 cmaster.SetADCSupply(0, 50);
                 NetworkIO.SetRxADC(2);
 
-                radRX1ADC3.Enabled = true;
-                radRX2ADC3.Enabled = true;
-                radRX3ADC3.Enabled = true;
-                radRX4ADC3.Enabled = true;
-                radRX5ADC3.Enabled = true;
-                radRX6ADC3.Enabled = true;
-                radRX7ADC3.Enabled = true;
+                radDDC0ADC2.Enabled = true;
+                radDDC1ADC2.Enabled = true;
+                radDDC2ADC2.Enabled = true;
+                radDDC3ADC2.Enabled = true;
+                radDDC4ADC2.Enabled = true;
+                radDDC5ADC2.Enabled = true;
+                radDDC6ADC2.Enabled = true;
 
-                radGenModelANAN200DMKII.Visible = true;
-                radGenModelANAN500D.Visible = true;
+              //  radGenModelORIONMKII.Visible = true;
+              //  radGenModelANAN8000D.Visible = true;
+                chkDisableRXOut.Visible = false;
+                chkBPF2Gnd.Visible = true;
             }
             else
             {
@@ -5543,11 +5684,25 @@ namespace Thetis
                 chkApolloPresent.Parent = groupBoxHPSDRHW;
                 chkApolloPresent.Location = new Point(25, 100);
 
+                panelBPFControl.Visible = false;
+                panelAlex1HPFControl.Visible = true;
+
+                chkDisable6mLNAonRX.Parent = panelAlex1HPFControl;
+                chkDisable6mLNAonRX.Location = new Point(16, 208);
+                chkDisable6mLNAonTX.Parent = panelAlex1HPFControl;
+                chkDisable6mLNAonTX.Location = new Point(63, 208);
+
+                chkAlexHPFBypass.Parent = panelAlex1HPFControl;
+                chkAlexHPFBypass.Location = new Point(140, 185);
+                chkDisableHPFonTX.Parent = panelAlex1HPFControl;
+                chkDisableHPFonTX.Location = new Point(140, 213);
+                panelAlex1HPFControl.Visible = false;
+
             }
-            console.ANAN500DPresent = radGenModelANAN500D.Checked;
+            console.ANAN8000DPresent = radGenModelANAN8000D.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
-            if (radGenModelANAN500D.Checked)
+            if (radGenModelANAN8000D.Checked)
             {
                 bool power = console.PowerOn;
 
@@ -5611,7 +5766,10 @@ namespace Thetis
                 chkRxOutOnTx.Text = "RX 1 OUT on Tx";
                 chkEXT1OutOnTx.Text = "RX 2 IN on Tx";
                 chkEXT2OutOnTx.Text = "RX 1 IN on Tx";
+                chkEXT2OutOnTx.Visible = true;
                 groupBoxHPSDRHW.Visible = true;
+                chkDisableRXOut.Visible = false;
+                chkBPF2Gnd.Visible = false;
                 cmaster.SetADCSupply(0, 33);
                 NetworkIO.SetRxADC(1);
             }
@@ -5642,7 +5800,7 @@ namespace Thetis
             if (radGenModelHPSDR.Checked)
             {
                 NetworkIO.fwVersionsChecked = false;
-               // console.CurrentModel = Model.HPSDR;
+                // console.CurrentModel = Model.HPSDR;
                 console.CurrentHPSDRModel = HPSDRModel.HPSDR;
                 chkPennyPresent.Enabled = true;
                 chkPennyPresent.Visible = true;
@@ -5677,7 +5835,10 @@ namespace Thetis
                 chkRxOutOnTx.Text = "RX 1 OUT on Tx";
                 chkEXT1OutOnTx.Text = "RX 2 IN on Tx";
                 chkEXT2OutOnTx.Text = "RX 1 IN on Tx";
+                chkEXT2OutOnTx.Visible = true;
                 groupBoxHPSDRHW.Visible = true;
+                chkDisableRXOut.Visible = false;
+                chkBPF2Gnd.Visible = false;
                 NetworkIO.SetRxADC(1);
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, false);
@@ -5716,7 +5877,8 @@ namespace Thetis
             // add or remove setup pages for HPSDR stuff 
             //
             bool b = is_hermes;
-            AddHPSDRPages();
+            if (!initializing)
+                AddHPSDRPages();
 
             // force setting of audio card 
             // comboAudioSampleRate1.Text = "192000"; 
@@ -5755,7 +5917,7 @@ namespace Thetis
 
             if (is_hermes)
             {
-                if (radGenModelANAN200D.Checked || radGenModelANAN200DMKII.Checked || radGenModelANAN500D.Checked)
+                if (radGenModelANAN200D.Checked || radGenModelORIONMKII.Checked || radGenModelANAN8000D.Checked)
                 {
                     groupBoxHPSDRHW.Visible = false;
                     grpGeneralHardwareORION.Visible = true;
@@ -5773,6 +5935,10 @@ namespace Thetis
             chkCalExpert.Enabled = false;
             grpHPSDRFreqCalDbg.Visible = true;
 
+            if (radGenModelORIONMKII.Checked || radGenModelANAN8000D.Checked)
+                console.MKIIBPFPresent = true;
+            else console.MKIIBPFPresent = false;
+
             if (radGenModelANAN10.Checked || radGenModelANAN10E.Checked)
             {
                 chkRxOutOnTx.Checked = false;
@@ -5786,12 +5952,13 @@ namespace Thetis
                 panelAlexRXXVRTControl.Visible = false;
                 labelAlexFilterActive.Location = new Point(298, 0);
             }
-            else if (radGenModelANAN200DMKII.Checked || radGenModelANAN500D.Checked)
+            else if (radGenModelORIONMKII.Checked || radGenModelANAN8000D.Checked)
             {
                 chkRxOutOnTx.Enabled = true;
                 chkEXT1OutOnTx.Enabled = true;
-                chkEXT2OutOnTx.Enabled = true;
-                panelAlex1HPFControl.Visible = true;
+                chkEXT2OutOnTx.Checked = false;
+                chkEXT2OutOnTx.Visible = false;
+                // panelAlex1HPFControl.Visible = true;
                 tpAlexFilterControl.Text = "BPF1/LPF";
                 tpAlex2FilterControl.Text = "BPF2";
                 labelAlex1FilterHPF.Text = "BPF1";
@@ -5833,7 +6000,7 @@ namespace Thetis
                 console.diversityForm != null)
                 console.diversityForm.Dispose();
 
-            console.EnableDup();
+            // console.EnableDup();
 
             if (console.path_Illustrator != null)
                 console.path_Illustrator.pi_Changed();
@@ -5900,7 +6067,7 @@ namespace Thetis
             }
 
             if (radGenModelANAN200D.Checked || radGenModelANAN100D.Checked ||
-                radGenModelANAN200DMKII.Checked || radGenModelANAN500D.Checked)
+                radGenModelORIONMKII.Checked || radGenModelANAN8000D.Checked)
             {
                 if (!tcGeneral.TabPages.Contains(tpADC))
                 {
@@ -5976,7 +6143,7 @@ namespace Thetis
                 }
             }
 
-            if (radGenModelANAN200DMKII.Checked || radGenModelANAN500D.Checked)
+            if (radGenModelORIONMKII.Checked || radGenModelANAN8000D.Checked)
             {
                 if (!tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
                 {
@@ -5992,7 +6159,7 @@ namespace Thetis
                 //    }
                 //}
             }
-            else 
+            else
             {
                 if (tcAlexControl.TabPages.Contains(tpAlex2FilterControl))
                 {
@@ -6539,7 +6706,7 @@ namespace Thetis
                 }
             }
         }
-     
+
         private void comboAudioSampleRate1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboAudioSampleRate1.SelectedIndex < 0) return;
@@ -8824,7 +8991,6 @@ namespace Thetis
             dr["Line_Input_On"] = (bool)radLineIn.Checked;
             dr["Line_Input_Level"] = udLineInBoost.Value;
             dr["CESSB_On"] = chkDSPCESSB.Checked;
-            dr["Disable_Pure_Signal"] = chkDisablePureSignal.Checked;
 
             if (!comboTXProfileName.Items.Contains(name))
             {
@@ -8975,7 +9141,7 @@ namespace Thetis
                 "Is a 50 Ohm dummy load connected to the amplifier?\n" +
                 "\n This function is valid only with an external amplifier and Alex (or equivalent) present." +
                 "\n\nFailure to use a dummy load with this routine could cause damage to the amplifier.";
-           // if (radGenModelFLEX5000.Checked)
+            // if (radGenModelFLEX5000.Checked)
             {
                 s = "Is a 50 Ohm dummy load connected to the correct antenna port (";
                 switch (FWCAnt.ANT1)
@@ -9224,66 +9390,66 @@ namespace Thetis
                 udPAGainVHF13.Value = 56.2M;
             }
 
-            if (radGenModelANAN200DMKII.Checked)
+            if (radGenModelORIONMKII.Checked)
             {
-                ANAN200DIIPAGain160 = 50.0f;
-                ANAN200DIIPAGain80 = 50.5f;
-                ANAN200DIIPAGain60 = 50.5f;
-                ANAN200DIIPAGain40 = 50.0f;
-                ANAN200DIIPAGain30 = 49.5f;
-                ANAN200DIIPAGain20 = 48.5f;
-                ANAN200DIIPAGain17 = 48.0f;
-                ANAN200DIIPAGain15 = 47.5f;
-                ANAN200DIIPAGain12 = 46.5f;
-                ANAN200DIIPAGain10 = 42.0f;
-                ANAN200DIIPAGain6 = 43.0f;
+                ORIONMKIIPAGain160 = 50.0f;
+                ORIONMKIIPAGain80 = 50.5f;
+                ORIONMKIIPAGain60 = 50.5f;
+                ORIONMKIIPAGain40 = 50.0f;
+                ORIONMKIIPAGain30 = 49.5f;
+                ORIONMKIIPAGain20 = 48.5f;
+                ORIONMKIIPAGain17 = 48.0f;
+                ORIONMKIIPAGain15 = 47.5f;
+                ORIONMKIIPAGain12 = 46.5f;
+                ORIONMKIIPAGain10 = 42.0f;
+                ORIONMKIIPAGain6 = 43.0f;
 
-                udANAN200DIIPAGainVHF0.Value = 56.2M;
-                udANAN200DIIPAGainVHF1.Value = 56.2M;
-                udANAN200DIIPAGainVHF2.Value = 56.2M;
-                udANAN200DIIPAGainVHF3.Value = 56.2M;
-                udANAN200DIIPAGainVHF4.Value = 56.2M;
-                udANAN200DIIPAGainVHF5.Value = 56.2M;
-                udANAN200DIIPAGainVHF6.Value = 56.2M;
-                udANAN200DIIPAGainVHF7.Value = 56.2M;
-                udANAN200DIIPAGainVHF8.Value = 56.2M;
-                udANAN200DIIPAGainVHF9.Value = 56.2M;
-                udANAN200DIIPAGainVHF10.Value = 56.2M;
-                udANAN200DIIPAGainVHF11.Value = 56.2M;
-                udANAN200DIIPAGainVHF12.Value = 56.2M;
-                udANAN200DIIPAGainVHF13.Value = 56.2M;
+                udORIONMKIIPAGainVHF0.Value = 56.2M;
+                udORIONMKIIPAGainVHF1.Value = 56.2M;
+                udORIONMKIIPAGainVHF2.Value = 56.2M;
+                udORIONMKIIPAGainVHF3.Value = 56.2M;
+                udORIONMKIIPAGainVHF4.Value = 56.2M;
+                udORIONMKIIPAGainVHF5.Value = 56.2M;
+                udORIONMKIIPAGainVHF6.Value = 56.2M;
+                udORIONMKIIPAGainVHF7.Value = 56.2M;
+                udORIONMKIIPAGainVHF8.Value = 56.2M;
+                udORIONMKIIPAGainVHF9.Value = 56.2M;
+                udORIONMKIIPAGainVHF10.Value = 56.2M;
+                udORIONMKIIPAGainVHF11.Value = 56.2M;
+                udORIONMKIIPAGainVHF12.Value = 56.2M;
+                udORIONMKIIPAGainVHF13.Value = 56.2M;
             }
 
-            if (radGenModelANAN500D.Checked)
+            if (radGenModelANAN8000D.Checked)
             {
-                ANAN500DPAGain160 = 50.0f;
-                ANAN500DPAGain80 = 50.5f;
-                ANAN500DPAGain60 = 50.5f;
-                ANAN500DPAGain40 = 50.0f;
-                ANAN500DPAGain30 = 49.5f;
-                ANAN500DPAGain20 = 48.5f;
-                ANAN500DPAGain17 = 48.0f;
-                ANAN500DPAGain15 = 47.5f;
-                ANAN500DPAGain12 = 46.5f;
-                ANAN500DPAGain10 = 42.0f;
-                ANAN500DPAGain6 = 43.0f;
+                ANAN8000DPAGain160 = 50.0f;
+                ANAN8000DPAGain80 = 50.5f;
+                ANAN8000DPAGain60 = 50.5f;
+                ANAN8000DPAGain40 = 50.0f;
+                ANAN8000DPAGain30 = 49.5f;
+                ANAN8000DPAGain20 = 48.5f;
+                ANAN8000DPAGain17 = 48.0f;
+                ANAN8000DPAGain15 = 47.5f;
+                ANAN8000DPAGain12 = 46.5f;
+                ANAN8000DPAGain10 = 42.0f;
+                ANAN8000DPAGain6 = 43.0f;
 
-                udANAN500DPAGainVHF0.Value = 56.2M;
-                udANAN500DPAGainVHF1.Value = 56.2M;
-                udANAN500DPAGainVHF2.Value = 56.2M;
-                udANAN500DPAGainVHF3.Value = 56.2M;
-                udANAN500DPAGainVHF4.Value = 56.2M;
-                udANAN500DPAGainVHF5.Value = 56.2M;
-                udANAN500DPAGainVHF6.Value = 56.2M;
-                udANAN500DPAGainVHF7.Value = 56.2M;
-                udANAN500DPAGainVHF8.Value = 56.2M;
-                udANAN500DPAGainVHF9.Value = 56.2M;
-                udANAN500DPAGainVHF10.Value = 56.2M;
-                udANAN500DPAGainVHF11.Value = 56.2M;
-                udANAN500DPAGainVHF12.Value = 56.2M;
-                udANAN500DPAGainVHF13.Value = 56.2M;
+                udANAN8000DPAGainVHF0.Value = 56.2M;
+                udANAN8000DPAGainVHF1.Value = 56.2M;
+                udANAN8000DPAGainVHF2.Value = 56.2M;
+                udANAN8000DPAGainVHF3.Value = 56.2M;
+                udANAN8000DPAGainVHF4.Value = 56.2M;
+                udANAN8000DPAGainVHF5.Value = 56.2M;
+                udANAN8000DPAGainVHF6.Value = 56.2M;
+                udANAN8000DPAGainVHF7.Value = 56.2M;
+                udANAN8000DPAGainVHF8.Value = 56.2M;
+                udANAN8000DPAGainVHF9.Value = 56.2M;
+                udANAN8000DPAGainVHF10.Value = 56.2M;
+                udANAN8000DPAGainVHF11.Value = 56.2M;
+                udANAN8000DPAGainVHF12.Value = 56.2M;
+                udANAN8000DPAGainVHF13.Value = 56.2M;
             }
-            
+
             if (radGenModelHermes.Checked)
             {
                 HermesPAGain160 = 41.0f;
@@ -11694,7 +11860,7 @@ namespace Thetis
             udPAGain10.Visible = !b;
             udPAGain6.Visible = !b;
 
-           // if (!radGenModelFLEX5000.Checked)
+            // if (!radGenModelFLEX5000.Checked)
             {
                 lblPACalTarget.Visible = !b;
                 udPACalPower.Visible = !b;
@@ -11710,6 +11876,11 @@ namespace Thetis
         private void chkMouseTuneStep_CheckedChanged(object sender, System.EventArgs e)
         {
             console.MouseTuneStep = chkMouseTuneStep.Checked;
+        }
+
+        private void chkWheelReverse_CheckedChanged(object sender, EventArgs e)
+        {
+            console.WheelReverse = chkWheelReverse.Checked;
         }
 
         public void UpdateCustomTitle()
@@ -12028,8 +12199,8 @@ namespace Thetis
                         grpPAGainByBand.Visible = true;
                         break;
                     case Keys.O:
-                        radGenModelANAN200DMKII.Visible = true;
-                        radGenModelANAN500D.Visible = true;
+                        radGenModelORIONMKII.Visible = true;
+                        //radGenModelANAN8000D.Visible = true;
                         break;
                     case Keys.P:
                         chkAutoPACalibrate.Visible = true;
@@ -12141,6 +12312,18 @@ namespace Thetis
         {
             clrbtnSubRXFilter_Changed(this, EventArgs.Empty);
             toolTip1.SetToolTip(tbMultiRXFilterAlpha, tbMultiRXFilterAlpha.Value.ToString());
+        }
+
+        public static Color DisplayGrayLineColor = Color.FromArgb(70, Color.Black); // ke9ns add default value
+        public void clrbtnGrayLine_Changed(object sender, EventArgs e)
+        {
+            DisplayGrayLineColor = Color.FromArgb(tbGrayLineAlpha.Value, clrbtnGrayLine.Color);
+
+        }
+
+        public void tbGrayLineAlpha_Scroll(object sender, EventArgs e)
+        {
+            clrbtnGrayLine_Changed(this, EventArgs.Empty);
         }
 
         private void chkWheelTuneVFOB_CheckedChanged(object sender, EventArgs e)
@@ -12332,8 +12515,8 @@ namespace Thetis
                 console.chkSR.Enabled = true;
                 // if (console.RX2PreampPresent && !radGenModelANAN100D.Checked) console.comboRX2Preamp.Visible = false;
                 if (chkApolloPresent.Checked) chkApolloPresent.Checked = false;
-              //  if (radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN10E.Checked || radGenModelANAN100.Checked ||
-                   //  radGenModelANAN100D.Checked || radGenModelANAN200D.Checked) NetworkIO.SetHermesFilter(0);
+                //  if (radGenModelHermes.Checked || radGenModelANAN10.Checked || radGenModelANAN10E.Checked || radGenModelANAN100.Checked ||
+                //  radGenModelANAN100D.Checked || radGenModelANAN200D.Checked) NetworkIO.SetHermesFilter(0);
             }
             else
             {
@@ -12450,6 +12633,36 @@ namespace Thetis
             }
         }
 
+
+        public byte BandBBitMask = 0x70; // 4x3 split
+        private void UpdateOCBits()
+        {
+            chkPenOCrcv160_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit160_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCrcv80_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit80_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCrcv60_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit60_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCrcv40_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit40_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCrcv30_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit30_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCrcv20_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit20_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCrcv17_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit17_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCrcv15_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit15_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCrcv12_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit12_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCrcv10_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit10_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCrcv6_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit6_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCrcv2_CheckedChanged(this, EventArgs.Empty);
+            chkPenOCxmit2_CheckedChanged(this, EventArgs.Empty);
+        }
+
         private void chkPenOCrcv160_CheckedChanged(object sender, System.EventArgs e)
         {
             int val = 0;
@@ -12462,7 +12675,7 @@ namespace Thetis
             if (chkPenOCrcv1607.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B160M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B160M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B160M, (byte)(val & BandBBitMask), false); // 000 xxxx 0x70  000 0xxx 0x78
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12478,7 +12691,7 @@ namespace Thetis
             if (chkPenOCxmit1607.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B160M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B160M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B160M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12494,7 +12707,7 @@ namespace Thetis
             if (chkPenOCrcv807.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B80M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B80M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B80M, (byte)(val & BandBBitMask), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12510,7 +12723,7 @@ namespace Thetis
             if (chkPenOCxmit807.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B80M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B80M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B80M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12526,7 +12739,7 @@ namespace Thetis
             if (chkPenOCrcv607.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B60M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B60M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B60M, (byte)(val & BandBBitMask), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12542,7 +12755,7 @@ namespace Thetis
             if (chkPenOCxmit607.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B60M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B60M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B60M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12559,7 +12772,7 @@ namespace Thetis
             if (chkPenOCrcv407.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B40M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B40M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B40M, (byte)(val & BandBBitMask), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12576,7 +12789,7 @@ namespace Thetis
             if (chkPenOCxmit407.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B40M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B40M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B40M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12593,7 +12806,7 @@ namespace Thetis
             if (chkPenOCrcv307.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B30M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B30M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B30M, (byte)(val & BandBBitMask), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12610,7 +12823,7 @@ namespace Thetis
             if (chkPenOCxmit307.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B30M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B30M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B30M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12627,7 +12840,7 @@ namespace Thetis
             if (chkPenOCrcv207.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B20M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B20M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B20M, (byte)(val & BandBBitMask), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12644,7 +12857,7 @@ namespace Thetis
             if (chkPenOCxmit207.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B20M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B20M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B20M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12661,7 +12874,7 @@ namespace Thetis
             if (chkPenOCrcv177.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B17M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B17M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B17M, (byte)(val & BandBBitMask), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12678,7 +12891,7 @@ namespace Thetis
             if (chkPenOCxmit177.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B17M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B17M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B17M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12695,7 +12908,7 @@ namespace Thetis
             if (chkPenOCrcv157.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B15M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B15M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B15M, (byte)(val & BandBBitMask), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12711,7 +12924,7 @@ namespace Thetis
             if (chkPenOCxmit157.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B15M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B15M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B15M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
 
         }
@@ -12730,7 +12943,7 @@ namespace Thetis
             if (chkPenOCrcv127.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B12M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B12M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B12M, (byte)(val & BandBBitMask), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12747,7 +12960,7 @@ namespace Thetis
             if (chkPenOCxmit127.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B12M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B12M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B12M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12764,7 +12977,7 @@ namespace Thetis
             if (chkPenOCrcv107.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B10M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B10M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B10M, (byte)(val & BandBBitMask), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12781,7 +12994,7 @@ namespace Thetis
             if (chkPenOCxmit107.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B10M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B10M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B10M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12799,7 +13012,7 @@ namespace Thetis
             if (chkPenOCrcv67.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B6M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B6M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B6M, (byte)(val & BandBBitMask), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12816,7 +13029,7 @@ namespace Thetis
             if (chkPenOCxmit67.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B6M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B6M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B6M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12833,7 +13046,7 @@ namespace Thetis
             if (chkPenOCrcv27.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B2M, (byte)val, false);
-            Penny.getPenny().setBandBBitMask(Band.B2M, (byte)(val & 0x70), false); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B2M, (byte)(val & BandBBitMask), false); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12850,7 +13063,7 @@ namespace Thetis
             if (chkPenOCxmit27.Checked) val += 1 << 6;
 
             Penny.getPenny().setBandABitMask(Band.B2M, (byte)val, true);
-            Penny.getPenny().setBandBBitMask(Band.B2M, (byte)(val & 0x70), true); // 0000xxx
+            Penny.getPenny().setBandBBitMask(Band.B2M, (byte)(val & BandBBitMask), true); // 0000xxx
             console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;  // need side effect of this to push change to native code 
         }
 
@@ -12881,13 +13094,13 @@ namespace Thetis
         private void chkMercDither_CheckedChanged(object sender, System.EventArgs e)
         {
             int v = chkMercDither.Checked ? 1 : 0;
-            NetworkIO.SetMercDither(v);
+            NetworkIO.SetADCDither(v);
         }
 
         private void chkMercRandom_CheckedChanged(object sender, System.EventArgs e)
         {
             int v = chkMercRandom.Checked ? 1 : 0;
-            NetworkIO.SetMercRandom(v);
+            NetworkIO.SetADCRandom(v);
         }
 
         private RadioButtonTS[][] AlexRxAntButtons = null;
@@ -13170,11 +13383,11 @@ namespace Thetis
             }
 
             Alex.getAlex().setRxOnlyAnt(band, (byte)ant);
- 
+
             if (console.path_Illustrator != null)
                 console.path_Illustrator.pi_Changed();
 
-           console.AlexAntCtrlEnabled = true; // need side effect of prop set to push data down to C code 
+            console.AlexAntCtrlEnabled = true; // need side effect of prop set to push data down to C code 
 
             return;
         }
@@ -14383,11 +14596,11 @@ namespace Thetis
             {
                 if (chkAlexPresent.Checked) chkAlexPresent.Checked = false;
 
-              //  NetworkIO.SetHermesFilter(1);
+                //  NetworkIO.SetHermesFilter(1);
                 chkApolloFilter_CheckedChanged(this, EventArgs.Empty);
                 chkApolloTuner_CheckedChanged(this, EventArgs.Empty);
             }
-          //  else NetworkIO.SetHermesFilter(0);
+            //  else NetworkIO.SetHermesFilter(0);
 
             console.ApolloPresent = chkApolloPresent.Checked;
         }
@@ -15046,35 +15259,6 @@ namespace Thetis
             udPA140W.Value = 140;
         }
 
-        private void chkDisablePureSignal_CheckedChanged(object sender, EventArgs e)
-        {
-            console.psform.PSEnabled = !chkDisablePureSignal.Checked;
-            if (chkDisablePureSignal.Checked)
-            {
-                psDisabled = true;
-                NetworkIO.SetPureSignal(0);
-                console.UpdateReceivers(console.RX2Enabled);
-                console.UpdateAAudioMixerStates();
-                unsafe { cmaster.LoadRouterControlBit((void*)0, 0, 0, 0); }
-                console.radio.GetDSPTX(0).PSRunCal = false;
-            }
-            else
-            {
-                NetworkIO.SetPureSignal(1);
-                console.UpdateAAudioMixerStates();
-                console.UpdateReceivers(console.RX2Enabled);
-                unsafe { cmaster.LoadRouterControlBit((void*)0, 0, 0, 1); }
-                console.radio.GetDSPTX(0).PSRunCal = true;
-            }
-
-            if (!chkDisablePureSignal.Checked)
-                psDisabled = false;
-
-            console.EnableDup();
-            if (console.path_Illustrator != null)
-                console.path_Illustrator.pi_Changed();
-        }
-
         private void comboDSPRxWindow_SelectedIndexChanged(object sender, EventArgs e)
         {
             int wintype = comboDSPRxWindow.SelectedIndex;
@@ -15349,107 +15533,107 @@ namespace Thetis
 
         public bool RadRX1ADC1
         {
-            get { return radRX1ADC1.Checked; }
+            get { return radDDC0ADC0.Checked; }
         }
 
         public bool RadRX1ADC2
         {
-            get { return radRX1ADC2.Checked; }
+            get { return radDDC0ADC1.Checked; }
         }
 
         public bool RadRX1ADC3
         {
-            get { return radRX1ADC3.Checked; }
+            get { return radDDC0ADC2.Checked; }
         }
 
         public bool RadRX2ADC1
         {
-            get { return radRX2ADC1.Checked; }
+            get { return radDDC1ADC0.Checked; }
         }
 
         public bool RadRX2ADC2
         {
-            get { return radRX2ADC2.Checked; }
+            get { return radDDC1ADC1.Checked; }
         }
 
         public bool RadRX2ADC3
         {
-            get { return radRX2ADC3.Checked; }
+            get { return radDDC1ADC2.Checked; }
         }
 
         public bool RadRX3ADC1
         {
-            get { return radRX3ADC1.Checked; }
+            get { return radDDC2ADC0.Checked; }
         }
 
         public bool RadRX3ADC2
         {
-            get { return radRX3ADC2.Checked; }
+            get { return radDDC2ADC1.Checked; }
         }
 
         public bool RadRX3ADC3
         {
-            get { return radRX3ADC3.Checked; }
+            get { return radDDC2ADC2.Checked; }
         }
 
         public bool RadRX4ADC1
         {
-            get { return radRX4ADC1.Checked; }
+            get { return radDDC3ADC0.Checked; }
         }
 
         public bool RadRX4ADC2
         {
-            get { return radRX4ADC2.Checked; }
+            get { return radDDC3ADC1.Checked; }
         }
 
         public bool RadRX4ADC3
         {
-            get { return radRX4ADC3.Checked; }
+            get { return radDDC3ADC2.Checked; }
         }
 
         public bool RadRX5ADC1
         {
-            get { return radRX5ADC1.Checked; }
+            get { return radDDC4ADC0.Checked; }
         }
 
         public bool RadRX5ADC2
         {
-            get { return radRX5ADC2.Checked; }
+            get { return radDDC4ADC1.Checked; }
         }
 
         public bool RadRX5ADC3
         {
-            get { return radRX5ADC3.Checked; }
+            get { return radDDC4ADC2.Checked; }
         }
 
         public bool RadRX6ADC1
         {
-            get { return radRX6ADC1.Checked; }
+            get { return radDDC5ADC0.Checked; }
         }
 
         public bool RadRX6ADC2
         {
-            get { return radRX6ADC2.Checked; }
+            get { return radDDC5ADC1.Checked; }
         }
 
         public bool RadRX6ADC3
         {
-            get { return radRX6ADC3.Checked; }
+            get { return radDDC5ADC2.Checked; }
         }
 
         public bool RadRX7ADC1
         {
-            get { return radRX7ADC1.Checked; }
+            get { return radDDC6ADC0.Checked; }
         }
 
         public bool RadRX7ADC2
         {
-            get { return radRX7ADC2.Checked; }
+            get { return radDDC6ADC1.Checked; }
         }
 
         public bool RadRX7ADC3
         {
-            get { return radRX7ADC3.Checked; }
+            get { return radDDC6ADC2.Checked; }
         }
 
         public bool RadGenModelANAN10
@@ -15518,43 +15702,43 @@ namespace Thetis
 
         // end of Path_Illustrator Properties support
 
-        private void radRXADC_CheckedChanged(object sender, EventArgs e)
+        private void radDDCADC_CheckedChanged(object sender, EventArgs e)
         {
             int val = 0;
 
-            //RX1 ADC control: bits 1 & 0
-            if (radRX1ADC1.Checked) val += 0; //bits 1 & 0 set to 00 => RX1 to ADC1
-            if (radRX1ADC2.Checked) val += 1 << 0; //bits 1 & 0 set to 01 => RX1 to ADC2
-            if (radRX1ADC3.Checked) val += 1 << 1; //bits 1 & 0 set to 10 => RX1 to ADC3
-            //RX2 ADC control: bits 3 & 2
-            if (radRX2ADC1.Checked) val += 0; // bits 3 & 2 set to 00 => RX2 to ADC1
-            if (radRX2ADC2.Checked) val += 1 << 2; // bits 3 & 2 set to 01 => RX2 to ADC2
-            if (radRX2ADC3.Checked) val += 1 << 3; // bits 3 & 2 set to 10 => RX2 to ADC3
-            //RX3 ADC control: bits 5 & 4
-            if (radRX3ADC1.Checked) val += 0; // bits 5 & 4 set to 00 => RX3 to ADC1
-            if (radRX3ADC2.Checked) val += 1 << 4; // bits 5 & 4 set to 01 => RX3 to ADC2
-            if (radRX3ADC3.Checked) val += 1 << 5; // bits 5 & 4 set to 10 => RX3 to ADC3
-            //RX4 ADC control: bits 7 & 6
-            if (radRX4ADC1.Checked) val += 0; // bits 7 & 6 set to 00 => RX4 to ADC1
-            if (radRX4ADC2.Checked) val += 1 << 6; // bits 7 & 6 set to 01 => RX4 to ADC2
-            if (radRX4ADC3.Checked) val += 1 << 7;  // bits 7 & 6 set to 10 => RX4 to ADC3
+            //DDC0 ADC control: bits 1 & 0
+            if (radDDC0ADC0.Checked) val += 0; //bits 1 & 0 set to 00 => DDC0 to ADC0
+            if (radDDC0ADC1.Checked) val += 1 << 0; //bits 1 & 0 set to 01 => DDC0 to ADC1
+            if (radDDC0ADC2.Checked) val += 1 << 1; //bits 1 & 0 set to 10 => DDC0 to ADC2
+            //DDC1 ADC control: bits 3 & 2
+            if (radDDC1ADC0.Checked) val += 0; // bits 3 & 2 set to 00 => DDC1 to ADC0
+            if (radDDC1ADC1.Checked) val += 1 << 2; // bits 3 & 2 set to 01 => DDC1 to ADC1
+            if (radDDC1ADC2.Checked) val += 1 << 3; // bits 3 & 2 set to 10 => DDC1 to ADC2
+            //DDC2 ADC control: bits 5 & 4
+            if (radDDC2ADC0.Checked) val += 0; // bits 5 & 4 set to 00 => DDC2 to ADC0
+            if (radDDC2ADC1.Checked) val += 1 << 4; // bits 5 & 4 set to 01 => DDC2 to ADC1
+            if (radDDC2ADC2.Checked) val += 1 << 5; // bits 5 & 4 set to 10 => DDC2 to ADC2
+            //DDC3 ADC control: bits 7 & 6
+            if (radDDC3ADC0.Checked) val += 0; // bits 7 & 6 set to 00 => DDC3 to ADC0
+            if (radDDC3ADC1.Checked) val += 1 << 6; // bits 7 & 6 set to 01 => DDC3 to ADC1
+            if (radDDC3ADC2.Checked) val += 1 << 7;  // bits 7 & 6 set to 10 => DDC3 to ADC2
 
             console.RXADCCtrl1 = val;
             // JanusAudio.SetADC_cntrl1(val);
             val = 0;
 
-            //RX5 ADC control: bits 1 & 0
-            if (radRX5ADC1.Checked) val += 0; //bits 1 & 0 set to 00 => RX5 to ADC1
-            if (radRX5ADC2.Checked) val += 1 << 0; //bits 1 & 0 set to 01 => RX5 to ADC2
-            if (radRX5ADC3.Checked) val += 1 << 1; //bits 1 & 0 set to 10 => RX5 to ADC3
-            //RX6 ADC control: bits 3 & 2
-            if (radRX6ADC1.Checked) val += 0; // bits 3 & 2 set to 00 => RX6 to ADC1
-            if (radRX6ADC2.Checked) val += 1 << 2; // bits 3 & 2 set to 01 => RX6 to ADC2
-            if (radRX6ADC3.Checked) val += 1 << 3; // bits 3 & 2 set to 10 => RX6 to ADC3
-            //RX7 ADC control: bits 5 & 4
-            if (radRX7ADC1.Checked) val += 0; // bits 5 & 4 set to 00 => RX7 to ADC1
-            if (radRX7ADC2.Checked) val += 1 << 4; // bits 5 & 4 set to 01 => RX7 to ADC2
-            if (radRX7ADC3.Checked) val += 1 << 5; // bits 5 & 4 set to 10 => RX7 to ADC3
+            //DDC4 ADC control: bits 1 & 0
+            if (radDDC4ADC0.Checked) val += 0; //bits 1 & 0 set to 00 => DDC4 to ADC0
+            if (radDDC4ADC1.Checked) val += 1 << 0; //bits 1 & 0 set to 01 => DDC4 to ADC1
+            if (radDDC4ADC2.Checked) val += 1 << 1; //bits 1 & 0 set to 10 => DDC4 to ADC2
+            //DDC5 ADC control: bits 3 & 2
+            if (radDDC5ADC0.Checked) val += 0; // bits 3 & 2 set to 00 => DDC5 to ADC0
+            if (radDDC5ADC1.Checked) val += 1 << 2; // bits 3 & 2 set to 01 => DDC5 to ADC1
+            if (radDDC5ADC2.Checked) val += 1 << 3; // bits 3 & 2 set to 10 => DDC5 to ADC2
+            //DDC6 ADC control: bits 5 & 4
+            if (radDDC6ADC0.Checked) val += 0; // bits 5 & 4 set to 00 => DDC6 to ADC0
+            if (radDDC6ADC1.Checked) val += 1 << 4; // bits 5 & 4 set to 01 => DDC6 to ADC1
+            if (radDDC6ADC2.Checked) val += 1 << 5; // bits 5 & 4 set to 10 => DDC6 to ADC2
 
             console.RXADCCtrl2 = val;
             // JanusAudio.SetADC_cntrl2(val);
@@ -16103,7 +16287,34 @@ namespace Thetis
         private void chkSplitPins_CheckedChanged(object sender, EventArgs e)
         {
             Penny.getPenny().SplitPins = chkSplitPins.Checked;
-            console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;
+            if (chkSplitPins.Checked)
+            {
+                radSplitPins4x3_CheckedChanged(this, EventArgs.Empty);
+                radSplitPins3x4_CheckedChanged(this, EventArgs.Empty);
+            }
+            else console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;
+        }
+
+        private void radSplitPins4x3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radSplitPins4x3.Checked && chkSplitPins.Checked)
+            {
+                BandBBitMask = 0x70;
+                Penny.getPenny().RxABitMask = 0xf;
+                UpdateOCBits();
+                // console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;
+            }
+        }
+
+        private void radSplitPins3x4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radSplitPins3x4.Checked && chkSplitPins.Checked)
+            {
+                BandBBitMask = 0x78;
+                Penny.getPenny().RxABitMask = 0x7;
+                UpdateOCBits();
+                // console.PennyExtCtrlEnabled = chkPennyExtCtrl.Checked;
+            }
         }
 
         private void udDSPSNBThresh1_ValueChanged(object sender, EventArgs e)
@@ -16584,10 +16795,142 @@ namespace Thetis
             console.specRX.GetSpecRX(cmaster.inid(1, 0)).AvTauWF = 0.001 * (double)udTXDisplayAVTime.Value;
         }
 
-        private void btnANAN200DIIPAGainReset_Click(object sender, EventArgs e)
+        private void chkBPF2Gnd_CheckedChanged(object sender, EventArgs e)
+        {
+            console.BPF2Gnd = chkBPF2Gnd.Checked;
+        }
+
+        private void ud1_5BPF1Start_ValueChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void ud1_5BPF1End_ValueChanged(object sender, EventArgs e)
+        {
+            if (ud1_5BPF1End.Value >= ud6_5BPF1Start.Value)
+            {
+                ud6_5BPF1Start.Value = ud1_5BPF1End.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void ud6_5BPF1Start_ValueChanged(object sender, EventArgs e)
+        {
+            if (ud6_5BPF1Start.Value <= ud1_5BPF1End.Value)
+            {
+                ud1_5BPF1End.Value = ud6_5BPF1Start.Value - (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void ud6_5BPF1End_ValueChanged(object sender, EventArgs e)
+        {
+            if (ud6_5BPF1End.Value >= ud9_5BPF1Start.Value)
+            {
+                ud9_5BPF1Start.Value = ud6_5BPF1End.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void ud9_5BPF1Start_ValueChanged(object sender, EventArgs e)
+        {
+            if (ud9_5BPF1Start.Value <= ud6_5BPF1End.Value)
+            {
+                ud6_5BPF1End.Value = ud9_5BPF1Start.Value - (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void ud9_5BPF1End_ValueChanged(object sender, EventArgs e)
+        {
+            if (ud9_5BPF1End.Value >= ud13BPF1Start.Value)
+            {
+                ud13BPF1Start.Value = ud9_5BPF1End.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void ud13BPF1Start_ValueChanged(object sender, EventArgs e)
+        {
+            if (ud13BPF1Start.Value <= ud9_5BPF1End.Value)
+            {
+                ud9_5BPF1End.Value = ud13BPF1Start.Value - (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void ud13BPF1End_ValueChanged(object sender, EventArgs e)
+        {
+            if (ud13BPF1End.Value >= ud20BPF1Start.Value)
+            {
+                ud20BPF1Start.Value = ud13BPF1End.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void ud20BPF1Start_ValueChanged(object sender, EventArgs e)
+        {
+            if (ud20BPF1Start.Value <= ud13BPF1End.Value)
+            {
+                ud13BPF1End.Value = ud20BPF1Start.Value - (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void ud20BPF1End_ValueChanged(object sender, EventArgs e)
+        {
+            if (ud20BPF1End.Value >= ud6BPF1Start.Value)
+            {
+                ud6BPF1Start.Value = ud20BPF1End.Value + (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void ud6BPF1Start_ValueChanged(object sender, EventArgs e)
+        {
+            if (ud6BPF1Start.Value <= ud20BPF1End.Value)
+            {
+                ud20BPF1End.Value = ud6BPF1Start.Value - (decimal)0.000001;
+                return;
+            }
+        }
+
+        private void ud6BPF1End_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkBPF1_1_5BP_CheckedChanged(object sender, EventArgs e)
+        {
+            console.BPF1_1_5BPBypass = chkBPF1_1_5BP.Checked;
+        }
+
+        private void chkBPF1_6_5BP_CheckedChanged(object sender, EventArgs e)
+        {
+            console.BPF1_6_5BPBypass = chkBPF1_6_5BP.Checked;
+        }
+
+        private void chkBPF1_9_5BP_CheckedChanged(object sender, EventArgs e)
+        {
+            console.BPF1_9_5BPBypass = chkBPF1_9_5BP.Checked;
+        }
+
+        private void chkBPF1_13BP_CheckedChanged(object sender, EventArgs e)
+        {
+            console.BPF1_13BPBypass = chkBPF1_13BP.Checked;
+        }
+
+        private void chkBPF1_20BP_CheckedChanged(object sender, EventArgs e)
+        {
+            console.BPF1_20BPBypass = chkBPF1_20BP.Checked;
+        }
+
+        private void chkBPF1_6BP_CheckedChanged(object sender, EventArgs e)
+        {
+            console.BPF1_6BPBypass = chkBPF1_6BP.Checked;
+        }
+
+
     }
 
     #region PADeviceInfo Helper Class

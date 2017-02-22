@@ -10,7 +10,7 @@
         private System.Windows.Forms.TextBoxTS txtVFOAFreq;
         private System.Windows.Forms.TextBoxTS txtVFOABand;
         private System.Windows.Forms.TextBoxTS txtVFOBFreq;
-        private System.Windows.Forms.PictureBox picDisplay;
+        public System.Windows.Forms.PictureBox picDisplay;
         private System.Windows.Forms.GroupBoxTS grpVFOA;
         private System.Windows.Forms.GroupBoxTS grpVFOB;
         private System.Windows.Forms.TextBoxTS txtVFOBBand;
@@ -53,7 +53,7 @@
         private System.Windows.Forms.ButtonTS btnVFOSwap;
         private System.Windows.Forms.ButtonTS btnVFOBtoA;
         private System.Windows.Forms.ButtonTS btnVFOAtoB;
-        private System.Windows.Forms.CheckBoxTS chkVFOSplit;
+        public System.Windows.Forms.CheckBoxTS chkVFOSplit;
         private System.Windows.Forms.CheckBoxTS chkDisplayAVG;
         private System.Windows.Forms.TextBoxTS txtMultiText;
         private System.Windows.Forms.Timer timer_cpu_meter;
@@ -494,6 +494,7 @@
         private ToolStripMenuItem wBToolStripMenuItem;
         private ToolStripMenuItem pIToolStripMenuItem;
         public PictureBox picWaterfall;
+        public ToolStripMenuItem spotterMenu;
 
         #endregion
 
@@ -719,15 +720,18 @@
             this.cWXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eSCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collapseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spotterMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.displayControlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topControlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bandControlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modeControlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dSPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NR2ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ANFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NB2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SNBtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BINToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MultiRXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RX1AVGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -807,9 +811,11 @@
             this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
             this.dSPToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.nR2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NR2StripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.aNF2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nB2ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.nBRX2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SNBtoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bIN2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RX2AVGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RX2PeakToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1300,6 +1306,7 @@
             this.chkFWCATUBypass.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkFWCATUBypass.Name = "chkFWCATUBypass";
             this.toolTip1.SetToolTip(this.chkFWCATUBypass, resources.GetString("chkFWCATUBypass.ToolTip"));
+            this.chkFWCATUBypass.CheckedChanged += new System.EventHandler(this.chkFWCATUBypass_CheckedChanged);
             this.chkFWCATUBypass.Click += new System.EventHandler(this.chkFWCATUBypass_Click);
             // 
             // chkFWCATU
@@ -3406,6 +3413,7 @@
             this.cWXToolStripMenuItem,
             this.eSCToolStripMenuItem,
             this.collapseToolStripMenuItem,
+            this.spotterMenu,
             this.displayControlsToolStripMenuItem,
             this.dSPToolStripMenuItem,
             this.bandToolStripMenuItem,
@@ -3475,6 +3483,13 @@
             resources.ApplyResources(this.collapseToolStripMenuItem, "collapseToolStripMenuItem");
             this.collapseToolStripMenuItem.Click += new System.EventHandler(this.CollapseToolStripMenuItem_Click);
             // 
+            // spotterMenu
+            // 
+            this.spotterMenu.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.spotterMenu.Name = "spotterMenu";
+            resources.ApplyResources(this.spotterMenu, "spotterMenu");
+            this.spotterMenu.Click += new System.EventHandler(this.spotterMenu_Click);
+            // 
             // displayControlsToolStripMenuItem
             // 
             this.displayControlsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -3508,9 +3523,11 @@
             // 
             this.dSPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NRToolStripMenuItem,
+            this.NR2ToolStripMenuItem1,
             this.ANFToolStripMenuItem,
             this.NBToolStripMenuItem,
             this.NB2ToolStripMenuItem,
+            this.SNBtoolStripMenuItem,
             this.BINToolStripMenuItem,
             this.MultiRXToolStripMenuItem,
             this.RX1AVGToolStripMenuItem,
@@ -3524,6 +3541,12 @@
             this.NRToolStripMenuItem.Name = "NRToolStripMenuItem";
             resources.ApplyResources(this.NRToolStripMenuItem, "NRToolStripMenuItem");
             this.NRToolStripMenuItem.Click += new System.EventHandler(this.mnuDSP_Click);
+            // 
+            // NR2ToolStripMenuItem1
+            // 
+            this.NR2ToolStripMenuItem1.Name = "NR2ToolStripMenuItem1";
+            resources.ApplyResources(this.NR2ToolStripMenuItem1, "NR2ToolStripMenuItem1");
+            this.NR2ToolStripMenuItem1.Click += new System.EventHandler(this.mnuDSP_Click);
             // 
             // ANFToolStripMenuItem
             // 
@@ -3542,6 +3565,12 @@
             this.NB2ToolStripMenuItem.Name = "NB2ToolStripMenuItem";
             resources.ApplyResources(this.NB2ToolStripMenuItem, "NB2ToolStripMenuItem");
             this.NB2ToolStripMenuItem.Click += new System.EventHandler(this.mnuDSP_Click);
+            // 
+            // SNBtoolStripMenuItem
+            // 
+            this.SNBtoolStripMenuItem.Name = "SNBtoolStripMenuItem";
+            resources.ApplyResources(this.SNBtoolStripMenuItem, "SNBtoolStripMenuItem");
+            this.SNBtoolStripMenuItem.Click += new System.EventHandler(this.mnuDSP_Click);
             // 
             // BINToolStripMenuItem
             // 
@@ -4083,9 +4112,11 @@
             // 
             this.dSPToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nR2ToolStripMenuItem,
+            this.NR2StripMenuItem2,
             this.aNF2ToolStripMenuItem,
             this.nB2ToolStripMenuItem1,
             this.nBRX2ToolStripMenuItem,
+            this.SNBtoolStripMenuItem1,
             this.bIN2ToolStripMenuItem,
             this.RX2AVGToolStripMenuItem,
             this.RX2PeakToolStripMenuItem});
@@ -4097,6 +4128,12 @@
             this.nR2ToolStripMenuItem.Name = "nR2ToolStripMenuItem";
             resources.ApplyResources(this.nR2ToolStripMenuItem, "nR2ToolStripMenuItem");
             this.nR2ToolStripMenuItem.Click += new System.EventHandler(this.mnuDSPRX2_Click);
+            // 
+            // NR2StripMenuItem2
+            // 
+            this.NR2StripMenuItem2.Name = "NR2StripMenuItem2";
+            resources.ApplyResources(this.NR2StripMenuItem2, "NR2StripMenuItem2");
+            this.NR2StripMenuItem2.Click += new System.EventHandler(this.mnuDSPRX2_Click);
             // 
             // aNF2ToolStripMenuItem
             // 
@@ -4115,6 +4152,12 @@
             this.nBRX2ToolStripMenuItem.Name = "nBRX2ToolStripMenuItem";
             resources.ApplyResources(this.nBRX2ToolStripMenuItem, "nBRX2ToolStripMenuItem");
             this.nBRX2ToolStripMenuItem.Click += new System.EventHandler(this.mnuDSPRX2_Click);
+            // 
+            // SNBtoolStripMenuItem1
+            // 
+            this.SNBtoolStripMenuItem1.Name = "SNBtoolStripMenuItem1";
+            resources.ApplyResources(this.SNBtoolStripMenuItem1, "SNBtoolStripMenuItem1");
+            this.SNBtoolStripMenuItem1.Click += new System.EventHandler(this.mnuDSPRX2_Click);
             // 
             // bIN2ToolStripMenuItem
             // 
@@ -4222,6 +4265,7 @@
             this.panelOptions.Controls.Add(this.chkMOX);
             this.panelOptions.Controls.Add(this.chkTUN);
             this.panelOptions.Controls.Add(this.chkSR);
+            this.panelOptions.Controls.Add(this.chkFWCATUBypass);
             this.panelOptions.Controls.Add(this.comboTuneMode);
             this.panelOptions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelOptions.Name = "panelOptions";
@@ -4726,13 +4770,12 @@
             this.panelDSP.BackColor = System.Drawing.Color.Transparent;
             this.panelDSP.Controls.Add(this.btnTNFAdd);
             this.panelDSP.Controls.Add(this.chkMUT);
-            this.panelDSP.Controls.Add(this.chkTNF);
             this.panelDSP.Controls.Add(this.chkNR);
             this.panelDSP.Controls.Add(this.chkDSPNB2);
             this.panelDSP.Controls.Add(this.chkBIN);
             this.panelDSP.Controls.Add(this.chkNB);
             this.panelDSP.Controls.Add(this.chkANF);
-            this.panelDSP.Controls.Add(this.chkFWCATUBypass);
+            this.panelDSP.Controls.Add(this.chkTNF);
             this.panelDSP.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelDSP.Name = "panelDSP";
             // 
@@ -4814,9 +4857,9 @@
             this.panelSoundControls.Controls.Add(this.lblAGC);
             this.panelSoundControls.Controls.Add(this.lblRF);
             this.panelSoundControls.Controls.Add(this.lblPWR);
+            this.panelSoundControls.Controls.Add(this.lblPreamp);
             this.panelSoundControls.Controls.Add(this.comboPreamp);
             this.panelSoundControls.Controls.Add(this.udRX1StepAttData);
-            this.panelSoundControls.Controls.Add(this.lblPreamp);
             this.panelSoundControls.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelSoundControls.Name = "panelSoundControls";
             // 
@@ -6027,6 +6070,11 @@
 
         }
         #endregion
+
+        private ToolStripMenuItem NR2ToolStripMenuItem1;
+        private ToolStripMenuItem SNBtoolStripMenuItem;
+        private ToolStripMenuItem NR2StripMenuItem2;
+        private ToolStripMenuItem SNBtoolStripMenuItem1;
 
     }
 }

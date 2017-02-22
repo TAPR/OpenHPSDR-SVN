@@ -1016,13 +1016,13 @@
             this.tpADC.TabIndex = 11;
             this.tpADC.Text = "ADC";
             // 
-            // grpRX7ADC
+            // grpDDC6ADC
             // 
             this.grpRX7ADC.Controls.Add(this.radRX7ADC3);
             this.grpRX7ADC.Controls.Add(this.radRX7ADC2);
             this.grpRX7ADC.Controls.Add(this.radRX7ADC1);
             this.grpRX7ADC.Location = new System.Drawing.Point(491, 26);
-            this.grpRX7ADC.Name = "grpRX7ADC";
+            this.grpRX7ADC.Name = "grpDDC6ADC";
             this.grpRX7ADC.Size = new System.Drawing.Size(73, 149);
             this.grpRX7ADC.TabIndex = 13;
             this.grpRX7ADC.TabStop = false;
@@ -1063,13 +1063,13 @@
             this.radRX7ADC1.Text = "ADC1";
             this.radRX7ADC1.UseVisualStyleBackColor = true;
             // 
-            // grpRX6ADC
+            // grpDDC5ADC
             // 
             this.grpRX6ADC.Controls.Add(this.radRX6ADC3);
             this.grpRX6ADC.Controls.Add(this.radRX6ADC2);
             this.grpRX6ADC.Controls.Add(this.radRX6ADC1);
             this.grpRX6ADC.Location = new System.Drawing.Point(412, 26);
-            this.grpRX6ADC.Name = "grpRX6ADC";
+            this.grpRX6ADC.Name = "grpDDC5ADC";
             this.grpRX6ADC.Size = new System.Drawing.Size(73, 149);
             this.grpRX6ADC.TabIndex = 12;
             this.grpRX6ADC.TabStop = false;
@@ -1110,13 +1110,13 @@
             this.radRX6ADC1.Text = "ADC1";
             this.radRX6ADC1.UseVisualStyleBackColor = true;
             // 
-            // grpRX5ADC
+            // grpDDC4ADC
             // 
             this.grpRX5ADC.Controls.Add(this.radRX5ADC3);
             this.grpRX5ADC.Controls.Add(this.radRX5ADC2);
             this.grpRX5ADC.Controls.Add(this.radRX5ADC1);
             this.grpRX5ADC.Location = new System.Drawing.Point(333, 26);
-            this.grpRX5ADC.Name = "grpRX5ADC";
+            this.grpRX5ADC.Name = "grpDDC4ADC";
             this.grpRX5ADC.Size = new System.Drawing.Size(73, 149);
             this.grpRX5ADC.TabIndex = 11;
             this.grpRX5ADC.TabStop = false;
@@ -1157,13 +1157,13 @@
             this.radRX5ADC1.Text = "ADC1";
             this.radRX5ADC1.UseVisualStyleBackColor = true;
             // 
-            // grpRX4ADC
+            // grpDDC3ADC
             // 
             this.grpRX4ADC.Controls.Add(this.radRX4ADC3);
             this.grpRX4ADC.Controls.Add(this.radRX4ADC2);
             this.grpRX4ADC.Controls.Add(this.radRX4ADC1);
             this.grpRX4ADC.Location = new System.Drawing.Point(254, 26);
-            this.grpRX4ADC.Name = "grpRX4ADC";
+            this.grpRX4ADC.Name = "grpDDC3ADC";
             this.grpRX4ADC.Size = new System.Drawing.Size(73, 149);
             this.grpRX4ADC.TabIndex = 10;
             this.grpRX4ADC.TabStop = false;
@@ -1204,14 +1204,14 @@
             this.radRX4ADC1.Text = "ADC1";
             this.radRX4ADC1.UseVisualStyleBackColor = true;
             // 
-            // grpRX3ADC
+            // grpDDC2ADC
             // 
             this.grpRX3ADC.AutoSize = true;
             this.grpRX3ADC.Controls.Add(this.radRX3ADC3);
             this.grpRX3ADC.Controls.Add(this.radRX3ADC2);
             this.grpRX3ADC.Controls.Add(this.radRX3ADC1);
             this.grpRX3ADC.Location = new System.Drawing.Point(175, 26);
-            this.grpRX3ADC.Name = "grpRX3ADC";
+            this.grpRX3ADC.Name = "grpDDC2ADC";
             this.grpRX3ADC.Size = new System.Drawing.Size(73, 149);
             this.grpRX3ADC.TabIndex = 9;
             this.grpRX3ADC.TabStop = false;
@@ -1252,13 +1252,13 @@
             this.radRX3ADC1.Text = "ADC1";
             this.radRX3ADC1.UseVisualStyleBackColor = true;
             // 
-            // grpRX2ADC
+            // grpDDC1ADC
             // 
             this.grpRX2ADC.Controls.Add(this.radRX2ADC3);
             this.grpRX2ADC.Controls.Add(this.radRX2ADC2);
             this.grpRX2ADC.Controls.Add(this.radRX2ADC1);
             this.grpRX2ADC.Location = new System.Drawing.Point(96, 26);
-            this.grpRX2ADC.Name = "grpRX2ADC";
+            this.grpRX2ADC.Name = "grpDDC1ADC";
             this.grpRX2ADC.Size = new System.Drawing.Size(73, 149);
             this.grpRX2ADC.TabIndex = 8;
             this.grpRX2ADC.TabStop = false;
@@ -1305,7 +1305,7 @@
             this.grpRX1ADC.Controls.Add(this.radRX1ADC2);
             this.grpRX1ADC.Controls.Add(this.radRX1ADC1);
             this.grpRX1ADC.Location = new System.Drawing.Point(15, 26);
-            this.grpRX1ADC.Name = "grpRX1ADC";
+            this.grpRX1ADC.Name = "grpDDC0ADC";
             this.grpRX1ADC.Size = new System.Drawing.Size(73, 149);
             this.grpRX1ADC.TabIndex = 7;
             this.grpRX1ADC.TabStop = false;

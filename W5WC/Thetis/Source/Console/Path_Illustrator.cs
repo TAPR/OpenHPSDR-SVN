@@ -1232,7 +1232,8 @@ namespace Thetis
             bool_RX1_MUTE = console.MUT;
             bool_RX2_MUTE = console.MUT2;
             bool_duplex = Display.DisplayDuplex;
-            bool_PureSignal = !console.SetupForm.PureSignalDisabled;
+            // bool_PureSignal = !console.SetupForm.PureSignalDisabled;
+            bool_PureSignal = console.psform.PSEnabled;
             bool_diversity = console.Diversity2;
             bool_DUAL_MERCURY_ALEX = cb_DUAL_MERCURY_ALEX.Checked;
 

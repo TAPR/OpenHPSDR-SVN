@@ -32,6 +32,7 @@ typedef struct _ringbuffer {
     double	*buf;
     volatile size_t write_ptr;
     volatile size_t read_ptr;
+	volatile int	write_flag; //W4WMT added flag to distinguish between full/empty when pointers are equal
     size_t	 size;
     size_t  size_mask;
 }

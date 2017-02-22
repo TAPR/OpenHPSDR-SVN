@@ -28,11 +28,12 @@ warren@wpratt.com
 #define _cmbuffs_h
 #include "comm.h"
 
-#define CMB_MULT		(10)					// @ heavy CPU load, get dropouts with value of (3)
+#define CMB_MULT		(3)						
 typedef struct _cmb
 {
 	int   id;
 	int   max_in_size;							// max input number of complex samples
+	int   max_outsize;							// max output number of complex samples
 	int   r1_outsize;							// number of complex samples taken out of the ring for processing 
 
 	int   r1_size;								// size of a single maximum sized transfer
@@ -49,7 +50,7 @@ typedef struct _cmb
 	CRITICAL_SECTION csIN;						// used to block input while parameters are updated or buffers flushed
 } cmb, *CMB;
 
-extern void create_cmbuffs (int id, int accept, int max_insize, int outsize);
+extern void create_cmbuffs (int id, int accept, int max_insize, int max_outsize, int outsize);
 
 extern void destroy_cmbuffs (int id);
 
